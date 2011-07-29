@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Event" table="ivory_event">
+        <field name="instance" type="string" length="100" />
+        <field name="eventName" column="event_name" type="string" length="50" />
+        <field name="handle" type="string" length="1000" />
+        <field name="capture" type="boolean" nullable="true" />
+    </mapped-superclass>
+
+</doctrine-mapping>

@@ -1,0 +1,266 @@
+<?php
+
+namespace Ivory\GoogleMapBundle\DependencyInjection;
+
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+
+/**
+ * Ivory google map configuration
+ *
+ * @author GeLo <geloen.eric@gmail.com>
+ */
+class Configuration implements ConfigurationInterface
+{
+    /**
+     * @inheritdoc
+     */
+    public function getConfigTreeBuilder()
+    {
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('ivory_google_map');
+
+        $this->addMapSection($rootNode);
+        $this->addCoordinateSection($rootNode);
+        $this->addMarkerSection($rootNode);
+        $this->addBoundSection($rootNode);
+        $this->addInfoWindowSection($rootNode);
+        $this->addPolylineSection($rootNode);
+        $this->addPolygonSection($rootNode);
+        $this->addRectangleSection($rootNode);
+        $this->addCircleSection($rootNode);
+        $this->addGroundOverlaySection($rootNode);
+        
+        $this->addTwigSection($rootNode);
+        
+        return $treeBuilder;
+    }
+
+    /**
+     * Add the map section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMapSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('map_')->end()
+                        ->scalarNode('html_container')->defaultValue('map_canvas')->end()
+                        ->scalarNode('auto_zoom')->defaultFalse()->end()
+                        ->scalarNode('type')->defaultValue('roadmap')->end()
+                        ->scalarNode('zoom')->defaultValue(10)->end()
+                        ->scalarNode('width')->defaultValue('300px')->end()
+                        ->scalarNode('height')->defaultValue('300px')->end()
+                        ->arrayNode('map_options')
+                            ->useAttributeAsKey('map_options')->prototype('scalar')->end()
+                        ->end()
+                        ->arrayNode('stylesheet_options')
+                            ->useAttributeAsKey('stylesheet_options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the coordinate section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addCoordinateSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('coordinate')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('latitude')->defaultValue(0)->end()
+                        ->scalarNode('longitude')->defaultValue(0)->end()
+                        ->scalarNode('no_wrap')->defaultTrue()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the marker section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMarkerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('marker')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('marker_')->end()
+                        ->scalarNode('icon')->defaultNull()->end()
+                        ->scalarNode('shadow')->defaultNull()->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('map_options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the bound section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addBoundSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('bound')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('bound_')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the info window section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addInfoWindowSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('info_window')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('info_window_')->end()
+                        ->scalarNode('content')->defaultValue('<p>Default content</p>')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                        ->scalarNode('open')->defaultTrue()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the polyline section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addPolylineSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('polyline')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('polyline_')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the polygon section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addPolygonSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('polygon')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('polygon_')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the rectangle section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addRectangleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('rectangle')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('rectangle_')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the circle section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addCircleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('circle')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('circle_')->end()
+                        ->scalarNode('radius')->defaultValue(1)->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the ground overlay section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addGroundOverlaySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('ground_overlay')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('ground_overlay_')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the twig section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addTwigSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('twig')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('enabled')->defaultTrue()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+}

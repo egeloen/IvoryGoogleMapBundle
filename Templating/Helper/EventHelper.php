@@ -1,0 +1,75 @@
+<?php
+
+namespace Ivory\GoogleMapBundle\Templating\Helper;
+
+use Ivory\GoogleMapBundle\Model\Event;
+
+/**
+ * Event helper allows easy rendering
+ *
+ * @author GeLo <geloen.eric@gmail.com>
+ */
+class EventHelper
+{   
+    /**
+     * Renders the javascript dom event
+     *
+     * @param Ivory\GoogleMapBundle\Model\Event $domEvent
+     * @return string HTML output 
+     */
+    public function renderDomEvent(Event $domEvent)
+    {
+        return sprintf('google.maps.event.addDomListener(%s, "%s", %s, %s);'.PHP_EOL,
+            $domEvent->getInstance(),
+            $domEvent->getEventName(),
+            $domEvent->getHandle(),
+            $domEvent->isCapture()
+        );
+    }
+    
+    /**
+     * Renders the javascript dom event once
+     *
+     * @param Ivory\GoogleMapBundle\Model\Event $domEventOnce
+     * @return string HTML output 
+     */
+    public function renderDomEventOnce(Event $domEventOnce)
+    {
+        return sprintf('google.maps.event.addDomListenerOnce(%s, "%s", %s, %s);'.PHP_EOL,
+            $domEventOnce->getInstance(),
+            $domEventOnce->getEventName(),
+            $domEventOnce->getHandle(),
+            $domEventOnce->isCapture()
+        );
+    }
+    
+    /**
+     * Renders the javascript event
+     *
+     * @param Ivory\GoogleMapBundle\Model\Event $event
+     * @return string HTML output 
+     */
+    public function renderEvent(Event $event)
+    {
+        return sprintf('google.maps.event.addListener(%s, "%s", %s);'.PHP_EOL,
+            $event->getInstance(),
+            $event->getEventName(),
+            $event->getHandle()
+        );
+    }
+    
+    /**
+     * Renders the javascript event once
+     *
+     * @param Ivory\GoogleMapBundle\Model\Event $eventOnce
+     * @return string HTML output 
+     */
+    public function renderEventOnce(Event $eventOnce)
+    {
+        return sprintf('google.maps.event.addListenerOnce(%s, "%s", %s);'.PHP_EOL,
+            $eventOnce->getInstance(),
+            $eventOnce->getEventName(),
+            $eventOnce->getHandle()
+        );
+    }
+}
