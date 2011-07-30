@@ -73,11 +73,38 @@ class GroundOverlay extends AbstractAsset
     /**
      * Sets the ground overlay bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Bound $bound
+     * Available prototype:
+     * 
+     * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
+     * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
+     * public function setBound(integer $southWestLatitude, integer $southWestLongitude, integer $northEastLatitude, integer $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
-    public function setBound(Bound $bound)
+    public function setBound()
     {
-        $this->bound = $bound;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && ($args[0] instanceof Bound))
+            $this->bound = $args[0];
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate) && isset($args[1]) && ($args[1] instanceof Coordinate))
+        {
+            $this->bound->setSouthWest($args[0]);
+            $this->bound->setNorthEast($args[1]);
+        }
+        else if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]) && isset($args[2]) && is_int($args[2]) && isset($args[3]) && is_int($args[3]))
+        {
+            $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
+            $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
+            
+            if(isset($args[4]) && is_bool($args[4]))
+            {
+                $this->bound->getSouthWest()->setNoWrap($args[4]);
+                
+                if(isset($args[5]) && is_bool($args[5]))
+                    $this->bound->getNorthEast()->setNoWrap($args[5]);
+            }
+        }
+        else
+            throw new \InvalidArgumentException();
     }
 
     /**
