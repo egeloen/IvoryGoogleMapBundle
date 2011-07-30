@@ -1,4 +1,4 @@
-Provides a google map integration for your Symfony2 Project.
+Provides an Overlay Google Map integration for your Symfony2 Project.
 
 Documentation
 -------------
