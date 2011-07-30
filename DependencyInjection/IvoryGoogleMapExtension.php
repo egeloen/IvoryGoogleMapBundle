@@ -189,6 +189,9 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.circle.class', $config['circle']['class']);
         $container->setParameter('ivory_google_map.circle.helper', $config['circle']['helper']);
         $container->setParameter('ivory_google_map.circle.prefix_javascript_variable', $config['circle']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.circle.center.longitude', $config['circle']['center']['longitude']);
+        $container->setParameter('ivory_google_map.circle.center.latitude', $config['circle']['center']['latitude']);
+        $container->setParameter('ivory_google_map.circle.center.no_wrap', $config['circle']['center']['no_wrap']);
         $container->setParameter('ivory_google_map.circle.radius', $config['circle']['radius']);
         $container->setParameter('ivory_google_map.circle.options', $config['circle']['options']);
     }

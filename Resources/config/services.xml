@@ -160,6 +160,12 @@
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.circle.prefix_javascript_variable%</argument>
             </call>
+            
+            <call method="setCenter">
+                <argument>%ivory_google_map.map.center.longitude%</argument>
+                <argument>%ivory_google_map.map.center.latitude%</argument>
+                <argument>%ivory_google_map.map.center.no_wrap%</argument>
+            </call>
 
             <call method="setRadius">
                 <argument>%ivory_google_map.circle.radius%</argument>
