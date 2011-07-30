@@ -106,6 +106,12 @@
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.info_window.prefix_javascript_variable%</argument>
             </call>
+            
+            <call method="setPosition">
+                <argument>%ivory_google_map.info_window.position.latitude%</argument>
+                <argument>%ivory_google_map.info_window.position.longitude%</argument>
+                <argument>%ivory_google_map.info_window.position.no_wrap%</argument>
+            </call>
 
             <call method="setContent">
                 <argument>%ivory_google_map.info_window.content%</argument>
