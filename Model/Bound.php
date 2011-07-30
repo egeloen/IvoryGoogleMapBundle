@@ -29,6 +29,15 @@ class Bound extends AbstractAsset
         
         $this->setPrefixJavascriptVariable('bound_');
     }
+    
+    /**
+     * Reset the bound to the initial state
+     */
+    public function reset()
+    {   
+        $this->southWest = null;
+        $this->northEast = null;
+    }
 
     /**
      * Gets the south west bound
