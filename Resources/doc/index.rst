@@ -116,6 +116,86 @@ List of available services
      */
     $bound = $this->get('ivory_google_map.bound');
 
+Usage
+=====
+
+Map
+~~~
+
+By default, for rendering a map, the bundle uses a center and a zoom.
+You can set the map center and the zoom like that:
+
+::
+
+    $map->setCenter($latitude, $longitude);
+    $map->setOption('zoom', 10);
+
+If you want the map zooms automatically on the different elements added on it, you just have to enable the auto zoom like that:
+
+::
+
+    $map->setAutoZoom(true);
+
+If you want the map zooms on a bound, you must enable the auto zoom like above and configure the map bound like that:
+
+::
+
+    $map->setAutoZoom(true);
+    $map->setBound(south_west_latitude, south_west_longitude, north_east_latitude, north_east_longitude);
+
+All the other google map options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#MapOptions are configurable like that:
+
+::
+
+    $map->setMapOption('option', 'value');
+    $map->setMapOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+You can add stylesheet options to the map like that:
+
+::
+
+    $map->setStylesheetOption('option', 'value');
+    $map->setStylesheetOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Marker
+~~~~~~
+
+Info window
+~~~~~~~~~~~
+
+Circle
+~~~~~~
+
+Rectangle
+~~~~~~~~~
+
+Polygon
+~~~~~~~
+
+Polyline
+~~~~~~~~
+
+Ground overlay
+~~~~~~~~~~~~~~
+
+Event manager
+~~~~~~~~~~~~~
+
+Event
+~~~~~
+
+Coordinate
+~~~~~~~~~~
+
+Bound
+~~~~~~~~~~
+
 Configuration
 =============
 
