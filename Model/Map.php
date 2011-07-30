@@ -157,7 +157,7 @@ class Map extends AbstractAsset
      * Available prototype:
      * 
      * public function setCenter(Ivory\GoogleMapBundle\Model\Coordinate $center)
-     * public function setCenter(integer $longitude, integer $latitude, boolean $noWrap = true)
+     * public function setCenter(integer $latitude, integer $longitude, boolean $noWrap = true)
      */
     public function setCenter()
     {
@@ -194,7 +194,7 @@ class Map extends AbstractAsset
      * 
      * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
      * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
-     * public function setBound(integer $southWestLongitude, integer $southWestLatitude, integer $northEastLongitude, integer $northEastLatitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
+     * public function setBound(integer $southWestLatitude, integer $southWestLongitude, integer $northEastLatitude, integer $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
     {
