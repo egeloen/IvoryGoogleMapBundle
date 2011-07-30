@@ -95,6 +95,9 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.marker.class', $config['marker']['class']);
         $container->setParameter('ivory_google_map.marker.helper', $config['marker']['helper']);
         $container->setParameter('ivory_google_map.marker.prefix_javascript_variable', $config['marker']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.marker.position.latitude', $config['marker']['position']['latitude']);
+        $container->setParameter('ivory_google_map.marker.position.longitude', $config['marker']['position']['longitude']);
+        $container->setParameter('ivory_google_map.marker.position.no_wrap', $config['marker']['position']['no_wrap']);
         $container->setParameter('ivory_google_map.marker.icon', $config['marker']['icon']);
         $container->setParameter('ivory_google_map.marker.shadow', $config['marker']['shadow']);
         $container->setParameter('ivory_google_map.marker.options', $config['marker']['options']);

@@ -81,6 +81,12 @@
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.marker.prefix_javascript_variable%</argument>
             </call>
+            
+            <call method="setPosition">
+                <argument>%ivory_google_map.marker.position.latitude%</argument>
+                <argument>%ivory_google_map.marker.position.longitude%</argument>
+                <argument>%ivory_google_map.marker.position.no_wrap%</argument>
+            </call>
 
             <call method="setIcon">
                 <argument>%ivory_google_map.marker.icon%</argument>
