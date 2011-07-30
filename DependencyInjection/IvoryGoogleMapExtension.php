@@ -55,6 +55,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadMap(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.map.class', $config['map']['class']);
+        $container->setParameter('ivory_google_map.map.helper', $config['map']['helper']);
         $container->setParameter('ivory_google_map.map.prefix_javascript_variable', $config['map']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.map.html_container', $config['map']['html_container']);
         $container->setParameter('ivory_google_map.map.auto_zoom', $config['map']['auto_zoom']);
@@ -77,6 +78,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadCoordinate(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.coordinate.class', $config['coordinate']['class']);
+        $container->setParameter('ivory_google_map.coordinate.helper', $config['coordinate']['helper']);
         $container->setParameter('ivory_google_map.coordinate.latitude', $config['coordinate']['latitude']);
         $container->setParameter('ivory_google_map.coordinate.longitude', $config['coordinate']['longitude']);
         $container->setParameter('ivory_google_map.coordinate.no_wrap', $config['coordinate']['no_wrap']);
@@ -91,6 +93,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadMarker(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.marker.class', $config['marker']['class']);
+        $container->setParameter('ivory_google_map.marker.helper', $config['marker']['helper']);
         $container->setParameter('ivory_google_map.marker.prefix_javascript_variable', $config['marker']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.marker.icon', $config['marker']['icon']);
         $container->setParameter('ivory_google_map.marker.shadow', $config['marker']['shadow']);
@@ -106,6 +109,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadBound(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.bound.class', $config['bound']['class']);
+        $container->setParameter('ivory_google_map.bound.helper', $config['bound']['helper']);
         $container->setParameter('ivory_google_map.bound.prefix_javascript_variable', $config['bound']['prefix_javascript_variable']);
     }
     
@@ -118,6 +122,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadInfoWindow(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.info_window.class', $config['info_window']['class']);
+        $container->setParameter('ivory_google_map.info_window.helper', $config['info_window']['helper']);
         $container->setParameter('ivory_google_map.info_window.prefix_javascript_variable', $config['info_window']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.info_window.content', $config['info_window']['content']);
         $container->setParameter('ivory_google_map.info_window.options', $config['info_window']['options']);
@@ -133,6 +138,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadPolyline(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.polyline.class', $config['polyline']['class']);
+        $container->setParameter('ivory_google_map.polyline.helper', $config['polyline']['helper']);
         $container->setParameter('ivory_google_map.polyline.prefix_javascript_variable', $config['polyline']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.polyline.options', $config['polyline']['options']);
     }
@@ -146,6 +152,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadPolygon(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.polygon.class', $config['polygon']['class']);
+        $container->setParameter('ivory_google_map.polygon.helper', $config['polygon']['helper']);
         $container->setParameter('ivory_google_map.polygon.prefix_javascript_variable', $config['polygon']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.polygon.options', $config['polygon']['options']);
     }
@@ -159,6 +166,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadRectangle(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.rectangle.class', $config['rectangle']['class']);
+        $container->setParameter('ivory_google_map.rectangle.helper', $config['rectangle']['helper']);
         $container->setParameter('ivory_google_map.rectangle.prefix_javascript_variable', $config['rectangle']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.rectangle.options', $config['rectangle']['options']);
     }
@@ -172,6 +180,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadCircle(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.circle.class', $config['circle']['class']);
+        $container->setParameter('ivory_google_map.circle.helper', $config['circle']['helper']);
         $container->setParameter('ivory_google_map.circle.prefix_javascript_variable', $config['circle']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.circle.radius', $config['circle']['radius']);
         $container->setParameter('ivory_google_map.circle.options', $config['circle']['options']);
@@ -186,6 +195,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadGroundOverlay(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.ground_overlay.class', $config['ground_overlay']['class']);
+        $container->setParameter('ivory_google_map.ground_overlay.helper', $config['ground_overlay']['helper']);
         $container->setParameter('ivory_google_map.ground_overlay.prefix_javascript_variable', $config['ground_overlay']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
     }
@@ -209,6 +219,7 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadEvent(array $config, ContainerBuilder $container)
     {
+        $container->setParameter('ivory_google_map.event.helper', $config['event']['helper']);
         $container->setParameter('ivory_google_map.event.class', $config['event']['class']);
     }
 }
