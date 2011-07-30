@@ -175,6 +175,12 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.rectangle.class', $config['rectangle']['class']);
         $container->setParameter('ivory_google_map.rectangle.helper', $config['rectangle']['helper']);
         $container->setParameter('ivory_google_map.rectangle.prefix_javascript_variable', $config['rectangle']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.rectangle.bound.south_west.latitude', $config['rectangle']['bound']['south_west']['latitude']);
+        $container->setParameter('ivory_google_map.rectangle.bound.south_west.longitude', $config['rectangle']['bound']['south_west']['longitude']);
+        $container->setParameter('ivory_google_map.rectangle.bound.south_west.no_wrap', $config['rectangle']['bound']['south_west']['no_wrap']);
+        $container->setParameter('ivory_google_map.rectangle.bound.north_east.latitude', $config['rectangle']['bound']['north_east']['latitude']);
+        $container->setParameter('ivory_google_map.rectangle.bound.north_east.longitude', $config['rectangle']['bound']['north_east']['longitude']);
+        $container->setParameter('ivory_google_map.rectangle.bound.north_east.no_wrap', $config['rectangle']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.rectangle.options', $config['rectangle']['options']);
     }
     
