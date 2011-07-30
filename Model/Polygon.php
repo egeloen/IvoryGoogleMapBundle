@@ -44,11 +44,26 @@ class Polygon extends AbstractAsset
     /**
      * Add a coordinate to the polygon
      *
-     * @param Ivory\GoogleMapBundle\Model\Coordinate $coordinate
+     * Available prototype:
+     * 
+     * public function addCoordinate(Ivory\GoogleMapBundle\Model\Coordinate $coordinate)
+     * public function addCoordinate(integer $latitude, integer $longitude, boolean $noWrap = true)
      */
-    public function addCoordinate(Coordinate $coordinate)
+    public function addCoordinate()
     {
-        $this->coordinates[] = $coordinate;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        {
+            if(isset($args[2]) && is_bool($args[2]))
+                $this->coordinates[] = new Coordinate($args[0], $args[1], $args[2]);
+            else
+                $this->coordinates[] = new Coordinate($args[0], $args[1]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
+            $this->coordinates[] = $args[0];
+        else
+            throw new \InvalidArgumentException();
     }
 
     /**
