@@ -32,6 +32,8 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.prefix_javascript_variable', $config['map']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.map.html_container', $config['map']['html_container']);
         $container->setParameter('ivory_google_map.map.auto_zoom', $config['map']['auto_zoom']);
+        $container->setParameter('ivory_google_map.map.center.longitude', $config['map']['center']['longitude']);
+        $container->setParameter('ivory_google_map.map.center.latitude', $config['map']['center']['latitude']);
         $container->setParameter('ivory_google_map.map.type', $config['map']['type']);
         $container->setParameter('ivory_google_map.map.zoom', $config['map']['zoom']);
         $container->setParameter('ivory_google_map.map.width', $config['map']['width']);

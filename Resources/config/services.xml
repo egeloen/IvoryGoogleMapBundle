@@ -45,6 +45,11 @@
             <call method="setAutoZoom">
                 <argument>%ivory_google_map.map.auto_zoom%</argument>
             </call>
+            
+            <call method="setCenter">
+                <argument>%ivory_google_map.map.center.longitude%</argument>
+                <argument>%ivory_google_map.map.center.latitude%</argument>
+            </call>
 
             <call method="setMapOption">
                 <argument>mapTypeId</argument>
