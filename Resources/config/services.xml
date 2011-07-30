@@ -6,17 +6,6 @@
 
     <parameters>
 
-        <parameter key="ivory_google_map.model.map.class">Ivory\GoogleMapBundle\Model\Map</parameter>
-        <parameter key="ivory_google_map.model.coordinate.class">Ivory\GoogleMapBundle\Model\Coordinate</parameter>
-        <parameter key="ivory_google_map.model.bound.class">Ivory\GoogleMapBundle\Model\Bound</parameter>
-        <parameter key="ivory_google_map.model.marker.class">Ivory\GoogleMapBundle\Model\Marker</parameter>
-        <parameter key="ivory_google_map.model.info_window.class">Ivory\GoogleMapBundle\Model\InfoWindow</parameter>
-        <parameter key="ivory_google_map.model.polyline.class">Ivory\GoogleMapBundle\Model\Polyline</parameter>
-        <parameter key="ivory_google_map.model.polygon.class">Ivory\GoogleMapBundle\Model\Polygon</parameter>
-        <parameter key="ivory_google_map.model.rectangle.class">Ivory\GoogleMapBundle\Model\Rectangle</parameter>
-        <parameter key="ivory_google_map.model.circle.class">Ivory\GoogleMapBundle\Model\Circle</parameter>
-        <parameter key="ivory_google_map.model.ground_overlay.class">Ivory\GoogleMapBundle\Model\GroundOverlay</parameter>
-
         <parameter key="ivory_google_map.templating.helper.map.class">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
         <parameter key="ivory_google_map.templating.helper.coordinate.class">Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper</parameter>
         <parameter key="ivory_google_map.templating.helper.bound.class">Ivory\GoogleMapBundle\Templating\Helper\BoundHelper</parameter>
@@ -33,7 +22,7 @@
 
     <services>
 
-        <service id="ivory_google_map.map" class="%ivory_google_map.model.map.class%" scope="prototype">
+        <service id="ivory_google_map.map" class="%ivory_google_map.map.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.map.prefix_javascript_variable%</argument>
             </call>
@@ -80,7 +69,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.coordinate" class="%ivory_google_map.model.coordinate.class%" scope="prototype">
+        <service id="ivory_google_map.coordinate" class="%ivory_google_map.coordinate.class%" scope="prototype">
             <call method="setLatitude">
                 <argument>%ivory_google_map.coordinate.latitude%</argument>
             </call>
@@ -94,13 +83,13 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.bound" class="%ivory_google_map.model.bound.class%" scope="prototype">
+        <service id="ivory_google_map.bound" class="%ivory_google_map.bound.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.bound.prefix_javascript_variable%</argument>
             </call>
         </service>
 
-        <service id="ivory_google_map.marker" class="%ivory_google_map.model.marker.class%" scope="prototype">
+        <service id="ivory_google_map.marker" class="%ivory_google_map.marker.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.marker.prefix_javascript_variable%</argument>
             </call>
@@ -118,7 +107,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.info_window" class="%ivory_google_map.model.info_window.class%" scope="prototype">
+        <service id="ivory_google_map.info_window" class="%ivory_google_map.info_window.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.info_window.prefix_javascript_variable%</argument>
             </call>
@@ -136,7 +125,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.polyline" class="%ivory_google_map.model.polyline.class%" scope="prototype">
+        <service id="ivory_google_map.polyline" class="%ivory_google_map.polyline.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.polyline.prefix_javascript_variable%</argument>
             </call>
@@ -146,7 +135,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.polygon" class="%ivory_google_map.model.polygon.class%" scope="prototype">
+        <service id="ivory_google_map.polygon" class="%ivory_google_map.polygon.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.polygon.prefix_javascript_variable%</argument>
             </call>
@@ -156,7 +145,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.rectangle" class="%ivory_google_map.model.rectangle.class%" scope="prototype">
+        <service id="ivory_google_map.rectangle" class="%ivory_google_map.rectangle.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.rectangle.prefix_javascript_variable%</argument>
             </call>
@@ -166,7 +155,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.circle" class="%ivory_google_map.model.circle.class%" scope="prototype">
+        <service id="ivory_google_map.circle" class="%ivory_google_map.circle.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.circle.prefix_javascript_variable%</argument>
             </call>
@@ -180,7 +169,7 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.ground_overlay" class="%ivory_google_map.model.ground_overlay.class%" scope="prototype">
+        <service id="ivory_google_map.ground_overlay" class="%ivory_google_map.ground_overlay.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.ground_overlay.prefix_javascript_variable%</argument>
             </call>
