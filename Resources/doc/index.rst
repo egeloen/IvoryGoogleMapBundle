@@ -4,7 +4,7 @@ Installation
 ============
 
 Add IvoryGoogleMapBundle to your vendor/bundles/ directory
--------------------------------------------------------
+----------------------------------------------------------
 
 Using the vendors script
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,7 +38,7 @@ Add the Ivory namespace to your autoloader
     );
 
 Add the GoogleMapBundle to your application kernel
------------------------------------------------
+--------------------------------------------------
 
 ::
 
@@ -142,7 +142,7 @@ Usage
 =====
 
 Map
-~~~
+---
 
 By default, for rendering a map, the bundle uses a center and a zoom.
 You can set the map center and the zoom like that:
@@ -186,7 +186,7 @@ You can add stylesheet options to the map like that:
     ));
 
 Marker
-~~~~~~
+------
 
 By default, a marker is positionned at the center of the world map (latitude: 0, longitude, 0).
 You can set the marker position like that:
@@ -213,41 +213,41 @@ All the other google map marker options available at http://code.google.com/apis
     ));
 
 Add a marker to a map
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
     $map->addMarker($marker);
 
 Info window
-~~~~~~~~~~~
+-----------
 
 Circle
-~~~~~~
+------
 
 Rectangle
-~~~~~~~~~
+---------
 
 Polygon
-~~~~~~~
+-------
 
 Polyline
-~~~~~~~~
+--------
 
 Ground overlay
-~~~~~~~~~~~~~~
+--------------
 
 Event manager
-~~~~~~~~~~~~~
+-------------
 
 Event
-~~~~~
+-----
 
 Coordinate
-~~~~~~~~~~
+----------
 
 Bound
-~~~~~~~~~~
+-----
 
 Configuration
 =============
