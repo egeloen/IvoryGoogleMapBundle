@@ -59,6 +59,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('longitude')->defaultValue(0)->end()
                                 ->scalarNode('latitude')->defaultValue(0)->end()
+                                ->scalarNode('no_wrap')->defaultTrue()->end()
                             ->end()
                         ->end()
                         ->scalarNode('type')->defaultValue('roadmap')->end()
