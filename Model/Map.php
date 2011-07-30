@@ -139,6 +139,9 @@ class Map extends AbstractAsset
     public function setAutoZoom($autoZoom)
     {
         $this->autoZoom = $autoZoom;
+        
+        if($autoZoom)
+            $this->bound->reset();
     }
 
     /**
