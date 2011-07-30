@@ -67,6 +67,10 @@
             <call method="setStylesheetOptions">
                 <argument>%ivory_google_map.map.stylesheet_options%</argument>
             </call>
+            
+            <call method="setEventManager">
+                <argument type="service" id="ivory_google_map.event_manager" />
+            </call>
         </service>
 
         <service id="ivory_google_map.coordinate" class="%ivory_google_map.coordinate.class%" scope="prototype">
@@ -178,6 +182,8 @@
                 <argument>%ivory_google_map.ground_overlay.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
 
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.templating.helper.map.class%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />

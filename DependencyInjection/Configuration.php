@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
         $this->addRectangleSection($rootNode);
         $this->addCircleSection($rootNode);
         $this->addGroundOverlaySection($rootNode);
+        $this->addEventManagerSection($rootNode);
         
         $this->addTwigSection($rootNode);
         
@@ -258,6 +259,23 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the event manager section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addEventManagerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('event_manager')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\EventManager')->end()
                     ->end()
                 ->end()
             ->end();
