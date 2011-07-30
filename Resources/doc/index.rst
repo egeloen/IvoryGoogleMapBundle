@@ -51,7 +51,279 @@ Add the GoogleMapBundle to your application kernel
         );
     }
 
-Usage
-=====
+List of available services
+==========================
 
-In progress
+::
+
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Map
+     */
+    $map = $this->get('ivory_google_map.map');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Marker
+     */
+    $marker = $this->get('ivory_google_map.marker');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\InfoWindow
+     */
+    $infoWindow = $this->get('ivory_google_map.info_window');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Circle
+     */
+    $circle = $this->get('ivory_google_map.circle');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Rectangle
+     */
+    $rectangle = $this->get('ivory_google_map.rectangle');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Polygon
+     */
+    $polygon = $this->get('ivory_google_map.polygon');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Polyline
+     */
+    $polyline = $this->get('ivory_google_map.polyline');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\GroundOverlay
+     */
+    $ground_overlay = $this->get('ivory_google_map.ground_overlay');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\EventManager
+     */
+    $event_manager = $this->get('ivory_google_map.event_manager');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Event
+     */
+    $event = $this->get('ivory_google_map.event');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Coordinate
+     */
+    $coordinate = $this->get('ivory_google_map.coordinate');
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Bound
+     */
+    $bound = $this->get('ivory_google_map.bound');
+
+Configuration
+=============
+
+By default, the bundle doesn't need any configuration.
+But, if you wish, it is configurable.
+
+Map
+---
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        map:
+            class: "Ivory\GoogleMapBundle\Model\Map"
+            helper: "Ivory\GoogleMapBundle\Templating\Helper\MapHelper"
+            prefix_javascript_variable: "map_"
+            html_container: "map_canvas"
+            auto_zoom: false
+            center:
+                latitude: 0
+                longitude: 0
+                no_wrap: true
+            type: "roadmap"
+            zoom: 10
+            width: "300px"
+            height: "300px"
+            map_options:
+                option: value
+            stylesheet_options:
+                option: value
+
+Marker
+------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        marker:
+            class: Ivory\GoogleMapBundle\Model\Marker
+            helper: Ivory\GoogleMapBundle\Templating\Helper\MarkerHelper
+            prefix_javascript_variable: "marker_"
+            position:
+                latitude: 0
+                longitude: 0
+                no_wrap: true
+            icon: "icon_url"
+            shadow: "shadow_url"
+            options:
+                option: value
+
+Info window
+-----------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        info_window:
+            class: Ivory\GoogleMapBundle\Model\InfoWindow
+            helper: Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper
+            prefix_javascript_variable: "info_window_"
+            position:
+                latitude: 0
+                longitude: 0
+                no_wrap: true
+            content: "<p>Default content</p>"
+            open: true
+            options:
+                option: value
+
+Circle
+------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        circle:
+            class: Ivory\GoogleMapBundle\Model\Circle
+            helper: Ivory\GoogleMapBundle\Templating\Helper\CircleHelper
+            prefix_javascript_variable: "circle_"
+            center:
+                latitude: 0
+                longitude: 0
+                no_wrap: true
+            radius: 1
+            options:
+                option: value
+
+Rectangle
+---------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        rectangle:
+            class: Ivory\GoogleMapBundle\Model\Rectangle
+            helper: Ivory\GoogleMapBundle\Templating\Helper\RectangleHelper
+            prefix_javascript_variable: "rectangle_"
+            bound:
+                south_west:
+                    longitude: 0
+                    latitude: 0
+                    no_wrap: true
+                north_east:
+                    longitude: 0
+                    latitude: 0
+                    no_wrap: true
+            options:
+                option: value
+
+Polygon
+-------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        polygon:
+            class: Ivory\GoogleMapBundle\Model\Polygon
+            helper: Ivory\GoogleMapBundle\Templating\Helper\PolygonHelper
+            prefix_javascript_variable: "polygon_"
+            options:
+                option: value
+
+Polyline
+--------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        polyline:
+            class: Ivory\GoogleMapBundle\Model\Polyline
+            helper: Ivory\GoogleMapBundle\Templating\Helper\PolylineHelper
+            prefix_javascript_variable: "polyline_"
+            options:
+                option: value
+
+Ground overlay
+--------------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        ground_overlay:
+            class: Ivory\GoogleMapBundle\Model\GroundOverlay
+            helper: Ivory\GoogleMapBundle\Templating\Helper\GroundOverlayHelper
+            prefix_javascript_variable: "ground_overlay_"
+            bound:
+                south_west:
+                    longitude: 0
+                    latitude: 0
+                    no_wrap: true
+                north_east:
+                    longitude: 0
+                    latitude: 0
+                    no_wrap: true
+            options:
+                option: value
+
+Event manager
+-------------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        event_manager:
+            class: Ivory\GoogleMapBundle\Model\EventManager
+
+Event
+-----
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        event:
+            class: Ivory\GoogleMapBundle\Model\Event
+            helper: Ivory\GoogleMapBundle\Templating\Helper\EventHelper
+
+Coordinate
+----------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        coordinate:
+            class: Ivory\GoogleMapBundle\Model\Coordinate
+            helper: Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper
+            latitude: 0
+            longitude: 0
+            no_wrap: true
+
+Bound
+-----
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        bound:
+            class: Ivory\GoogleMapBundle\Model\Bound
+            helper: Ivory\GoogleMapBundle\Templating\Helper\BoundHelper
+            prefix_javascript_variable: "bound_"
