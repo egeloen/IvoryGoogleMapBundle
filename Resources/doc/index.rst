@@ -166,6 +166,37 @@ You can add stylesheet options to the map like that:
 Marker
 ~~~~~~
 
+By default, a marker is positionned at the center of the world map (latitude: 0, longitude, 0).
+You can set the marker position like that:
+
+::
+
+    $marker->setPosition($latitude, $longitude);
+
+The icon and the shadow marker are configuable like that:
+
+::
+
+    $marker->setIcon('icon_url');
+    $marker->setShadow('shadow_url');
+
+All the other google map marker options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions are configurable like that:
+
+::
+
+    $map->setOption('option', 'value');
+    $map->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Add a marker to a map
+---------------------
+
+::
+
+    $map->addMarker($marker);
+
 Info window
 ~~~~~~~~~~~
 
