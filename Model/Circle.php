@@ -50,12 +50,28 @@ class Circle extends AbstractAsset
 
     /**
      * Sets the circle center
-     *
-     * @param Ivory\GoogleMapBundle\Model\Coordinate $center 
+     * 
+     * Available prototype:
+     * 
+     * public function setCenter(Ivory\GoogleMapBundle\Model\Coordinate $center)
+     * public function setCenter(integer $latitude, integer $longitude, boolean $noWrap = true)
      */
-    public function setCenter(Coordinate $center)
+    public function setCenter()
     {
-        $this->center = $center;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        {
+            $this->center->setLatitude($args[0]);
+            $this->center->setLongitude($args[1]);
+            
+            if(isset($args[2]) && is_bool($args[2]))
+                $this->center->setNoWrap($args[2]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
+            $this->center = $args[0];
+        else
+            throw new \InvalidArgumentException();
     }
 
     /**
