@@ -189,6 +189,15 @@
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.ground_overlay.prefix_javascript_variable%</argument>
             </call>
+            
+            <call method="setBound">
+                <argument>%ivory_google_map.ground_overlay.bound.south_west.latitude%</argument>
+                <argument>%ivory_google_map.ground_overlay.bound.south_west.longitude%</argument>
+                <argument>%ivory_google_map.ground_overlay.bound.north_east.latitude%</argument>
+                <argument>%ivory_google_map.ground_overlay.bound.north_east.longitude%</argument>
+                <argument>%ivory_google_map.ground_overlay.bound.south_west.no_wrap%</argument>
+                <argument>%ivory_google_map.ground_overlay.bound.north_east.no_wrap%</argument>
+            </call>
 
             <call method="setOptions">
                 <argument>%ivory_google_map.ground_overlay.options%</argument>

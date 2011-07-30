@@ -213,6 +213,12 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.ground_overlay.class', $config['ground_overlay']['class']);
         $container->setParameter('ivory_google_map.ground_overlay.helper', $config['ground_overlay']['helper']);
         $container->setParameter('ivory_google_map.ground_overlay.prefix_javascript_variable', $config['ground_overlay']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.latitude', $config['ground_overlay']['bound']['south_west']['latitude']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.longitude', $config['ground_overlay']['bound']['south_west']['longitude']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.no_wrap', $config['ground_overlay']['bound']['south_west']['no_wrap']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.latitude', $config['ground_overlay']['bound']['north_east']['latitude']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.longitude', $config['ground_overlay']['bound']['north_east']['longitude']);
+        $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.no_wrap', $config['ground_overlay']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
     }
     
