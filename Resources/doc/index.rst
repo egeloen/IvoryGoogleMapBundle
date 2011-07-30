@@ -60,57 +60,79 @@ List of available services
      * @var Ivory\GoogleMapBundle\Model\Map
      */
     $map = $this->get('ivory_google_map.map');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Marker
      */
     $marker = $this->get('ivory_google_map.marker');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\InfoWindow
      */
     $infoWindow = $this->get('ivory_google_map.info_window');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Circle
      */
     $circle = $this->get('ivory_google_map.circle');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Rectangle
      */
     $rectangle = $this->get('ivory_google_map.rectangle');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Polygon
      */
     $polygon = $this->get('ivory_google_map.polygon');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Polyline
      */
     $polyline = $this->get('ivory_google_map.polyline');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\GroundOverlay
      */
     $ground_overlay = $this->get('ivory_google_map.ground_overlay');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\EventManager
      */
     $event_manager = $this->get('ivory_google_map.event_manager');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Event
      */
     $event = $this->get('ivory_google_map.event');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Coordinate
      */
     $coordinate = $this->get('ivory_google_map.coordinate');
-    
+
+::
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Bound
      */
