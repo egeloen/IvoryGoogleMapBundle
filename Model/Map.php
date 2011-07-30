@@ -157,7 +157,7 @@ class Map extends AbstractAsset
      * Available prototype:
      * 
      * public function setCenter(Ivory\GoogleMapBundle\Model\Coordinate $center)
-     * public function setCenter(integer $longitude, integer $latitude)
+     * public function setCenter(integer $longitude, integer $latitude, boolean $noWrap = true)
      */
     public function setCenter()
     {
@@ -167,6 +167,9 @@ class Map extends AbstractAsset
         {
             $this->center->setLatitude($args[0]);
             $this->center->setLongitude($args[1]);
+            
+            if(isset($args[2]) && is_bool($args[2]))
+                $this->center->setNoWrap($args[2]);
         }
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->center = $args[0];
