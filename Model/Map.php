@@ -194,7 +194,7 @@ class Map extends AbstractAsset
      * 
      * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
      * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
-     * public function setBound(integer $southWestLongitude, integer $southWestLatitude, integer $northEastLongitude, integer $northEastLatitude)
+     * public function setBound(integer $southWestLongitude, integer $southWestLatitude, integer $northEastLongitude, integer $northEastLatitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
     {
@@ -211,6 +211,14 @@ class Map extends AbstractAsset
         {
             $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
             $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
+            
+            if(isset($args[4]) && is_bool($args[4]))
+            {
+                $this->bound->getSouthWest()->setNoWrap($args[4]);
+                
+                if(isset($args[5]) && is_bool($args[5]))
+                    $this->bound->getNorthEast()->setNoWrap($args[5]);
+            }
         }
         else
             throw new \InvalidArgumentException();
