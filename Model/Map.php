@@ -312,6 +312,16 @@ class Map extends AbstractAsset
     {
         return $this->eventManager;
     }
+    
+    /**
+     * Sets the map event manager
+     *
+     * @param Ivory\GoogleMapBundle\Model\EventManager $eventManager 
+     */
+    public function setEventManager(EventManager $eventManager)
+    {
+        $this->eventManager = $eventManager;
+    }
 
     /**
      * Gets the map markers
