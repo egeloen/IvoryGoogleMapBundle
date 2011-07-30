@@ -184,6 +184,8 @@
         </service>
         
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
+        
+        <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype" />
 
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.templating.helper.map.class%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />

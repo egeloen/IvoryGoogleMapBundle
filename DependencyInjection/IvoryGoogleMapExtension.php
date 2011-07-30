@@ -40,6 +40,7 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadCircle($config, $container);
         $this->loadGroundOverlay($config, $container);
         $this->loadEventManager($config, $container);
+        $this->loadEvent($config, $container);
 
         if($config['twig']['enabled'])
             $loader->load('twig.xml');
@@ -198,5 +199,16 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadEventManager(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.event_manager.class', $config['event_manager']['class']);
+    }
+    
+    /**
+     * Loads event configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadEvent(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.event.class', $config['event']['class']);
     }
 }
