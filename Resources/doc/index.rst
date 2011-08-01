@@ -352,6 +352,13 @@ All the other google map polygon options available at http://code.google.com/api
         'option2' => 'value2'
     ));
 
+Add a polygon on a map
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $map->addPolygon($polygon);
+
 Polyline
 --------
 
