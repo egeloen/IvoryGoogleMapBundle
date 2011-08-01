@@ -54,7 +54,7 @@ class Bound extends AbstractAsset
      *
      * @param Ivory\GoogleMapBundle\Model\Coordinate $southWest
      */
-    public function setSouthWest(Coordinate $southWest)
+    public function setSouthWest(Coordinate $southWest = null)
     {
         $this->southWest = $southWest;
     }
@@ -74,7 +74,7 @@ class Bound extends AbstractAsset
      *
      * @param Ivory\GoogleMapBundle\Model\Coordinate $northEast
      */
-    public function setNorthEast(Coordinate $northEast)
+    public function setNorthEast(Coordinate $northEast = null)
     {
         $this->northEast = $northEast;
     }
