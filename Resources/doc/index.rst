@@ -389,6 +389,46 @@ Add a polyline on a map
 Ground overlay
 --------------
 
+A ground overlay displays a picture which is delimited by a bound. By default, this bound has the following values:
+
+::
+
+    South west:
+        latitude: -1
+        longitude: -1
+    North east:
+        latitude: 1
+        longitude: 1
+
+You can set this values like that:
+
+::
+
+    $groundOverlay->setBound(south_west_latitude, south_west_longitude, north_east_latitude, north_east_longitude);
+
+For setting the ground overlay, you just need to do that:
+
+::
+
+    $groundOverlay->setUrl('picture_url');
+
+All the other google map ground overlay options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlayOptions are configurable like that:
+
+::
+
+    $groundOverlay->setOption('option', 'value');
+    $groundOverlay->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Add a ground overlay on a map
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $map->addGroundOverlay($groundOverlay);
+
 Event manager
 -------------
 
