@@ -30,8 +30,8 @@ class Rectangle extends AbstractAsset
         $this->setPrefixJavascriptVariable('rectangle_');
 
         $this->bound = new Bound();
-        $this->bound->setNorthEast(new Coordinate());
-        $this->bound->setSouthWest(new Coordinate());
+        $this->bound->setNorthEast(new Coordinate(-1, -1));
+        $this->bound->setSouthWest(new Coordinate(1, 1));
     }
 
     /**
