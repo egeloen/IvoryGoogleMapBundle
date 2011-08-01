@@ -336,7 +336,7 @@ Polygon
 -------
 
 A polygon is described by a succession of coordinates.
-For adding a coordinate to the polygon, you just nedd to do that:
+For adding a coordinate to the polygon, you just need to do that:
 
 ::
 
@@ -361,6 +361,30 @@ Add a polygon on a map
 
 Polyline
 --------
+
+A polyline, like a polygon, is described by a succession of coordinates.
+For adding a coordinate to the polyline, you just need to do that:
+
+::
+
+    $polyline->addCoordinate(latitude, longitude);
+
+All the other google map polyline options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#PolylineOptions are configurable like that:
+
+::
+
+    $polyline->setOption('option', 'value');
+    $polyline->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Add a polyline on a map
+~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $map->addPolyline($polyline);
 
 Ground overlay
 --------------
