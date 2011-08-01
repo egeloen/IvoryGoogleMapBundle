@@ -990,6 +990,70 @@ Doctrine mapping
 Event manager
 -------------
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/EventManager.php
+    use Ivory\GoogleMapBundle\Entity\EventManager as BaseEventManager;
+    use Doctrine\Common\Collections\ArrayCollection;
+
+    class EventManager extends BaseEventManager
+    {
+        /**
+         * @var integer Event manager ID
+         */
+        protected $id;
+
+        /**
+         * Create an event manager
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Initialize the array collection
+            $this->domEvents = new ArrayCollection();
+            $this->domEventsOnce = new ArrayCollection();
+            $this->events = new ArrayCollection();
+            $this->eventsOnce = new ArrayCollection();
+        }
+
+        /**
+         * Gets the event manager ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/config/doctrine/EventManager.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\EventManager">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <many-to-many field="domEvents" target-entity="..\..\Entity\Event" />
+            <many-to-many field="domEventsOnce" target-entity="..\..\Entity\Event" />
+            <many-to-many field="events" target-entity="..\..\Entity\Event" />
+            <many-to-many field="eventsOnce" target-entity="..\..\Entity\Event" />
+        </entity>
+
+    </doctrine-mapping>
+
 Event
 -----
 
