@@ -364,6 +364,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Event')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\EventHelper')->end()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
                     ->end()
                 ->end()
             ->end();

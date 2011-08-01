@@ -243,5 +243,6 @@ class IvoryGoogleMapExtension extends Extension
     {
         $container->setParameter('ivory_google_map.event.helper', $config['event']['helper']);
         $container->setParameter('ivory_google_map.event.class', $config['event']['class']);
+        $container->setParameter('ivory_google_map.event.prefix_javascript_variable', $config['event']['prefix_javascript_variable']);
     }
 }
