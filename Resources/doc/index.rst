@@ -934,6 +934,59 @@ Doctrine mapping
 Bound
 -----
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Bound.php
+    use Ivory\GoogleMapBundle\Entity\Bound as BaseBound;
+
+    class Bound extends BaseBound
+    {
+        /**
+         * @var integer Bound ID
+         */
+        protected $id;
+
+        /**
+         * Create a bound
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+        }
+
+        /**
+         * Gets the bound ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/config/doctrine/Bound.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Bound">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+        </entity>
+
+    </doctrine-mapping>
+
 Event manager
 -------------
 
