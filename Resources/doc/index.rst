@@ -245,17 +245,17 @@ All the other google map info window options available at http://code.google.com
         'option2' => 'value2'
     ));
 
-Link an info window to a map
+Add an info window on a map
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you link an info window to a map, you need to position the info window on a map like that:
+If you add an info window to a map, you need to position the info window on a map like that:
 
 ::
 
     $infoWindow->setPosition(latitude, longitude);
     $map->addInfoWindow($infoWindow);
 
-Link an info window to a marker
+Add an info window on a marker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -264,6 +264,36 @@ Link an info window to a marker
 
 Circle
 ------
+
+By default, a circle is potionned at the center of the world map (latitude: 0, longitude: 0) with a radius of 1 meter.
+You can set the position of the circle like that:
+
+::
+
+    $circle->setCenter(latitude, longitude);
+
+The radius of the circle can be set like that:
+
+::
+
+    $circle->setRadius(radius);
+
+All the other google map circle options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#CircleOptions are configurable like that:
+
+::
+
+    $map->setOption('option', 'value');
+    $map->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Add a circle on a map
+~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $map->addCircle($circle);
 
 Rectangle
 ---------
