@@ -222,6 +222,46 @@ Add a marker to a map
 Info window
 -----------
 
+By default, an info window is not positionned and it is open.
+The content of an info window is some HTML which is configurable like that:
+
+::
+
+    $infoWindow->setContent('<p>Default content</p>');
+
+If you want the info window is not open when the map is rendering, you just need to set the open property to false:
+
+::
+
+    $infoWindow->setOpen(false);
+
+All the other google map info window options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#InfoWindowOptions are configurable like that:
+
+::
+
+    $map->setOption('option', 'value');
+    $map->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
+Link an info window to a map
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you link an info window to a map, you need to position the info window on a map like that:
+
+::
+
+    $infoWindow->setPosition(latitude, longitude);
+    $map->addInfoWindow($infoWindow);
+
+Link an info window to a marker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $marker->setInfoWindow($infoWindow);
+
 Circle
 ------
 
