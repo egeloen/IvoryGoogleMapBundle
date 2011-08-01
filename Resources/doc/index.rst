@@ -742,7 +742,7 @@ If you want, you can disable it with the following configuration:
 
 ::
 
-    icory_google_map:
+    ivory_google_map:
         twig:
             enabled: false
 
