@@ -188,7 +188,7 @@ You can add stylesheet options to the map like that:
 Marker
 ------
 
-By default, a marker is positionned at the center of the world map (latitude: 0, longitude, 0).
+By default, a marker is positionned at the center of the world map (latitude: 0, longitude: 0).
 You can set the marker position like that:
 
 ::
