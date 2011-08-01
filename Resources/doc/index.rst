@@ -206,8 +206,8 @@ All the other google map marker options available at http://code.google.com/apis
 
 ::
 
-    $map->setOption('option', 'value');
-    $map->setOptions(array(
+    $marker->setOption('option', 'value');
+    $marker->setOptions(array(
         'option1' => 'value1',
         'option2' => 'value2'
     ));
@@ -239,8 +239,8 @@ All the other google map info window options available at http://code.google.com
 
 ::
 
-    $map->setOption('option', 'value');
-    $map->setOptions(array(
+    $infoWindow->setOption('option', 'value');
+    $infoWindow->setOptions(array(
         'option1' => 'value1',
         'option2' => 'value2'
     ));
@@ -282,8 +282,8 @@ All the other google map circle options available at http://code.google.com/apis
 
 ::
 
-    $map->setOption('option', 'value');
-    $map->setOptions(array(
+    $circle->setOption('option', 'value');
+    $circle->setOptions(array(
         'option1' => 'value1',
         'option2' => 'value2'
     ));
@@ -315,6 +315,16 @@ You can set this values like that:
 
     $rectangle->setBound(south_west_latitude, south_west_longitude, north_east_latitude, north_east_longitude);
 
+All the other google map rectangle options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#RectangleOptions are configurable like that:
+
+::
+
+    $rectangle->setOption('option', 'value');
+    $rectangle->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
+
 Add a rectangle on a map
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -324,6 +334,23 @@ Add a rectangle on a map
 
 Polygon
 -------
+
+A polygon is described by a succession of coordinates.
+For adding a coordinate to the polygon, you just nedd to do that:
+
+::
+
+    $polygon->addCoordinate(latitude, longitude);
+
+All the other google map polygon options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#PolygonOptions are configurable like that:
+
+::
+
+    $polygon->setOption('option', 'value');
+    $polygon->setOptions(array(
+        'option1' => 'value1',
+        'option2' => 'value2'
+    ));
 
 Polyline
 --------
