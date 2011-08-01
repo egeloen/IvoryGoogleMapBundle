@@ -5,11 +5,11 @@ Documentation
 
 The documentation is available in the bundle:
 
-    Resources/doc/index.rst
+https://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/index.rst
 
 License
 -------
 
 This bundle is under the MIT license. See the complete license in the bundle:
 
-    Resources/meta/LICENSE
+https://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/meta/LICENSE
