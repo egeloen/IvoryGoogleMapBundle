@@ -730,3 +730,72 @@ Bound
             class: Ivory\GoogleMapBundle\Model\Bound
             helper: Ivory\GoogleMapBundle\Templating\Helper\BoundHelper
             prefix_javascript_variable: "bound_"
+
+Twig
+====
+
+Configuration
+-------------
+
+By default, the twig extension is activate.
+If you want, you can disable it with the following configuration:
+
+::
+
+    icory_google_map:
+        twig:
+            enabled: false
+
+Render a map with twig
+----------------------
+
+Three twig functions are delivered with the bundle. One for rendering the map container, one for the rendering the map javascripts & one for rendering the map stylesheets.
+
+Map container
+~~~~~~~~~~~~~
+
+For rendering the map container, use:
+
+::
+
+    {{ google_map_container(map) }}
+
+This method will render the following HTML:
+
+::
+
+    <div id="map_html_container"></div>
+
+Map javascripts
+~~~~~~~~~~~~~~~
+
+For rendering the map javascripts, use:
+
+::
+
+    {{ google_map_js(map) }}
+
+This method will render an HTML javascript block which provides all the map needs to be rendered. This block looks like:
+
+::
+
+    <script type="text/javascript">
+        ...
+    </script>
+
+Map stylesheets
+~~~~~~~~~~~~~~~
+
+For rendering the map stylesheets, use:
+
+::
+
+    {{ google_map_css(map) }}
+
+This method will render an HTML stylesheet block with all the values specified in the ``stylesheetOptions`` of the map. This block looks like:
+
+::
+
+    <style type="text/css">
+        ...
+    </style>
