@@ -816,7 +816,7 @@ Class definition
 ~~~~~~~~~~~~~~~~
 
 A map needs a coordinate (center) or a bound to be correctly rendering. So you need to persist one or both with the map.
-If you want to persist linked events, you need to persist the event manager too.
+If you want to persist linked events, you need to persist the event manager & the event too.
 
 ::
 
@@ -1057,6 +1057,59 @@ Doctrine mapping
 
 Event
 -----
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Event.php
+    use Ivory\GoogleMapBundle\Entity\Event as BaseEvent;
+
+    class Event extends BaseEvent
+    {
+        /**
+         * @var integer Event ID
+         */
+        protected $id;
+
+        /**
+         * Create an event
+         */
+        public function __construct($instance, $eventName, $handle, $capture = false)
+        {
+            // Call parent constructor
+            parent::__construct($instance, $eventName, $handle, $capture);
+        }
+
+        /**
+         * Gets the event ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/config/doctrine/Event.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Event">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+        </entity>
+
+    </doctrine-mapping>
 
 Marker
 ------
