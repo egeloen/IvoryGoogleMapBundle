@@ -433,7 +433,7 @@ Event manager
 -------------
 
 An event manager is just an implementation class which allow you to register events easily.
-The explanation below uses event which is explain in the next section.
+The explanation below uses ``event`` which is explain in the next section.
 
 Map events
 ~~~~~~~~~~
@@ -467,6 +467,41 @@ To register a DOM event which will be trigger just one time, you just need to do
 
 Event
 -----
+
+Firstly, an event is described by an instance which trigger it.
+This instance can be get on any IvoryGoogleMap object which extend ``Ivory\GoogleMapBundle\Model\AbstractAsset`` by calling the ``getJavascriptVariable`` method.
+To set this value, you just need to do that:
+
+::
+
+    $event->setInstance('instance');
+
+Secondly, an event is described by an event name which charaterize the event.
+All the event name are available at http://code.google.com/apis/maps/documentation/javascript/events.html#UIEvents
+To set this value, you just need to do that:
+
+::
+
+    $event->setEventName('event_name');
+
+Thirdly, an event wrap or call a javascript method.
+If you want to wrap a javascript method, you just need to define you method like that:
+
+::
+
+    $event->setHandler('function(){ ... }');
+
+If you want to call a specific javascript method already define, you just need to do that:
+
+::
+
+    $event->setHandler('specific_method');
+
+Finnaly, if you use an event like a DOM event, you can set a capture flag like that:
+
+::
+
+    $event->setCapture(true);
 
 Coordinate
 ----------
