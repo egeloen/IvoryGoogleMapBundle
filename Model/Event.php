@@ -8,7 +8,7 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapsEventListener
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Event 
+class Event extends AbstractAsset
 {
     /**
      * @var string Event object instance
@@ -40,6 +40,10 @@ class Event
      */
     public function __construct($instance, $eventName, $handle, $capture = false)
     {
+        parent::__construct();
+        
+        $this->setPrefixJavascriptVariable('event_');
+        
         $this->instance = $instance;
         $this->eventName = $eventName;
         $this->handle = $handle;
