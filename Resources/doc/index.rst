@@ -432,6 +432,39 @@ Add a ground overlay on a map
 Event manager
 -------------
 
+An event manager is just an implementation class which allow you to register events easily.
+The explanation below uses event which is explain in the next section.
+
+Map events
+~~~~~~~~~~
+
+To register a google map event which will be trigger all time, you just need to do that:
+
+::
+
+    $map->getEventManager()->addEvent($event);
+
+To register a google map event which will be trigger just one time, you just need to do that:
+
+::
+
+    $map->getEventManager()->addEventOnce($event);
+
+DOM events
+~~~~~~~~~~
+
+To register a DOM event which will be trigger all time, you just need to do that:
+
+::
+
+    $map->getEventManager()->addDomEvent($event);
+
+To register a DOM event which will be trigger just one time, you just need to do that:
+
+::
+
+    $map->getEventManager()->addDomEventOnce($event);
+
 Event
 -----
 
