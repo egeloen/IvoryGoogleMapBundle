@@ -19,7 +19,8 @@ class EventHelper
      */
     public function renderDomEvent(Event $domEvent)
     {
-        return sprintf('google.maps.event.addDomListener(%s, "%s", %s, %s);'.PHP_EOL,
+        return sprintf('%s = google.maps.event.addDomListener(%s, "%s", %s, %s);'.PHP_EOL,
+            $domEvent->getJavascriptVariable(),
             $domEvent->getInstance(),
             $domEvent->getEventName(),
             $domEvent->getHandle(),
@@ -35,7 +36,8 @@ class EventHelper
      */
     public function renderDomEventOnce(Event $domEventOnce)
     {
-        return sprintf('google.maps.event.addDomListenerOnce(%s, "%s", %s, %s);'.PHP_EOL,
+        return sprintf('%s = google.maps.event.addDomListenerOnce(%s, "%s", %s, %s);'.PHP_EOL,
+            $domEventOnce->getJavascriptVariable(),
             $domEventOnce->getInstance(),
             $domEventOnce->getEventName(),
             $domEventOnce->getHandle(),
@@ -51,7 +53,8 @@ class EventHelper
      */
     public function renderEvent(Event $event)
     {
-        return sprintf('google.maps.event.addListener(%s, "%s", %s);'.PHP_EOL,
+        return sprintf('%s = google.maps.event.addListener(%s, "%s", %s);'.PHP_EOL,
+            $event->getJavascriptVariable(),
             $event->getInstance(),
             $event->getEventName(),
             $event->getHandle()
@@ -66,7 +69,8 @@ class EventHelper
      */
     public function renderEventOnce(Event $eventOnce)
     {
-        return sprintf('google.maps.event.addListenerOnce(%s, "%s", %s);'.PHP_EOL,
+        return sprintf('%s = google.maps.event.addListenerOnce(%s, "%s", %s);'.PHP_EOL,
+            $eventOnce->getJavascriptVariable(),
             $eventOnce->getInstance(),
             $eventOnce->getEventName(),
             $eventOnce->getHandle()
