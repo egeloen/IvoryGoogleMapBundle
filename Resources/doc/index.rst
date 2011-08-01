@@ -517,6 +517,7 @@ Bound
 ~~~~~
 
 A bound is described by two coordinates which describe the south west & the north east.
+If the south west & north east coordinates are equal to null, the bound will be rendered without limit and this only usage will be to extend some other google map object.
 
 Configuration
 =============
