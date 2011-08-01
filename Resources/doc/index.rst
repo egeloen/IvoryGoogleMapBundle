@@ -503,11 +503,20 @@ Finnaly, if you use an event like a DOM event, you can set a capture flag like t
 
     $event->setCapture(true);
 
+Coordinate & Bound
+------------------
+
+A coordinate & a bound are basic objects which are wrapped in many other objects.
+
 Coordinate
-----------
+~~~~~~~~~~
+
+A coordinate is described by a latitude, a longitude & a no wrap boolean.
 
 Bound
------
+~~~~~
+
+A bound is described by two coordinates which describe the south west & the north east.
 
 Configuration
 =============
