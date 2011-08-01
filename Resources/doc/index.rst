@@ -878,6 +878,59 @@ Doctrine mapping
 Coordinate
 ----------
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Coordinate.php
+    use Ivory\GoogleMapBundle\Entity\Coordinate as BaseCoordinate;
+
+    class Coordinate extends BaseCoordinate
+    {
+        /**
+         * @var integer Coordinate ID
+         */
+        protected $id;
+
+        /**
+         * Create a coordinate
+         */
+        public function __construct($latitude = 0, $longitude = 0, $noWrap = true)
+        {
+            // Call parent constructor
+            parent::__construct($latitude, $longitude, $noWrap);
+        }
+
+        /**
+         * Gets the coordinate ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/config/doctrine/Coordinate.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Coordinate">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+        </entity>
+
+    </doctrine-mapping>
+
 Bound
 -----
 
