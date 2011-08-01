@@ -803,4 +803,107 @@ This method will render an HTML stylesheet block with all the values specified i
 ORM
 ===
 
-Documentation in progress
+The bundle is delivered with a full ORM support. All the entities has been pre-configured except for the ID & the association.
+You will say : "WHY ?!". Simply because if you would like to just persist a part of the entites, you can.
+
+So, for using ORM support, you need to override each entities you need.
+
+Map
+---
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+A map needs a coordinate (center) or a bound to be correctly rendering. So you need to persist one or both with the map.
+If you want to persist linked events, you need to persist the event manager too.
+
+::
+
+    // src/YourBundle/Entity/Map.php
+    use Ivory\GoogleMapBundle\Entity\Map as BaseMap;
+
+    class Map extends BaseMap
+    {
+        /**
+         * @var integer Map ID
+         */
+        protected $id;
+
+        /**
+         * Create a map
+         */
+        public function __construct()
+        {
+            // Call the parent constructor
+            parent::__construct();
+
+            // Link map to a center entity or a bound entity
+            $this->center = new Coordinate();
+            $this->bound = new Bound();
+
+            // Link map to the event manager entity (Optional)
+            $this->eventManager = new EventManager();
+        }
+
+        /**
+         * Gets the map ID
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/config/doctrine/Map.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="...\...\Entity\Map">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="center" target-entity="..\..\Entity\Coordinate" />
+            <one-to-one field="bound" target-entity="..\..\Entity\Bound" />
+            <one-to-one field="eventManager" target-entity="..\..\Entity\EventManager" />
+        </entity>
+
+    </doctrine-mapping>
+
+Coordinate
+----------
+
+Bound
+-----
+
+Event manager
+-------------
+
+Event
+-----
+
+Marker
+------
+
+Info window
+-----------
+
+Circle
+------
+
+Rectangle
+---------
+
+Polygon
+-------
+
+Polyline
+--------
+
+Ground overlay
+--------------
