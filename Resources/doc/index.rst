@@ -298,6 +298,30 @@ Add a circle on a map
 Rectangle
 ---------
 
+A rectangle is delimited by a bound. By default, this bound has the following values:
+
+::
+
+    South west:
+        latitude: -1
+        longitude: -1
+    North east:
+        latitude: 1
+        longitude: 1
+
+You can set this values like that:
+
+::
+
+    $rectangle->setBound(south_west_latitude, south_west_longitude, north_east_latitude, north_east_longitude);
+
+Add a rectangle on a map
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    $map->addRectangle($rectangle);
+
 Polygon
 -------
 
