@@ -659,6 +659,7 @@ Event
         event:
             class: Ivory\GoogleMapBundle\Model\Event
             helper: Ivory\GoogleMapBundle\Templating\Helper\EventHelper
+            prefix_javascript_variable: "event_"
 
 Coordinate
 ----------
