@@ -142,10 +142,7 @@ class MapHelper
         $html[] = $this->renderGroundOverlays($map);
 
         if($map->isAutoZoom())
-        {
             $html[] = $this->renderBound($map);
-            $html[] = $this->renderFitBound($map);
-        }
         else
             $html[] = $this->renderCenter($map);
         
@@ -199,34 +196,17 @@ class MapHelper
     {
         $html = array();
         
-        if(!$map->getBound()->isEmpty())
-        {
-            $html[] = $this->boundHelper->render($map->getBound());
-            
-            foreach($map->getBound()->getExtends() as $extend)
-                $html[] = $this->boundHelper->renderExtend($map->getBound(), $extend);
-        }
+        $html[] = $this->boundHelper->render($map->getBound());
+        
+        if($map->getBound()->hasExtends())
+            $html[] = $this->boundHelper->renderExtends($map->getBound());
+        
+        $html[] = sprintf('%s.fitBounds(%s);'.PHP_EOL,
+            $map->getJavascriptVariable(),
+            $map->getBound()->getJavascriptVariable()
+        );
         
         return implode('', $html);
-    }
-
-    /**
-     * Renders the map javascript fit bound
-     *
-     * @param Ivory\GoogleMapBundle\Model\Map $map
-     * @return string HTML output
-     */
-    protected function renderFitBound(Map $map)
-    {
-        $html = '';
-        
-        if(!$map->getBound()->isEmpty())
-            $html = sprintf('%s.fitBounds(%s);'.PHP_EOL,
-                $map->getJavascriptVariable(),
-                $map->getBound()->getJavascriptVariable()
-            );
-        
-        return $html;
     }
 
     /**
