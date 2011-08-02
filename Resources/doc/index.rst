@@ -1201,7 +1201,7 @@ Class definition
             // Call parent constructor
             parent::__construct();
 
-            // Link marker to a position entity
+            // Link info window to a position entity
             $this->position = new Coordinate();
         }
 
@@ -1261,7 +1261,7 @@ Class definition
             // Call parent constructor
             parent::__construct();
 
-            // Link marker to a center entity
+            // Link circle to a center entity
             $this->center = new Coordinate();
         }
 
@@ -1297,6 +1297,63 @@ Doctrine mapping
 
 Rectangle
 ---------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Rectangle.php
+    use Ivory\GoogleMapBundle\Entity\Rectangle as BaseRectangle;
+
+    class Rectangle extends BaseRectangle
+    {
+        /**
+         * @var integer Rectangle ID
+         */
+        protected $id;
+
+        /**
+         * Create an rectangle
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Link rectangle to a bound entity
+            $this->bound = new Bound();
+        }
+
+        /**
+         * Gets the rectangle ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Rectangle.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Rectangle">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="bound" target-entity="..\..\Entity\Bound" />
+        </entity>
+
+    </doctrine-mapping>
 
 Polygon
 -------
