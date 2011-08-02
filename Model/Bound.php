@@ -120,9 +120,9 @@ class Bound extends AbstractAsset
     /**
      * Add a google map object for bound extend it
      *
-     * @param Ivory\GoogleMapBundle\Model\AbstractAsset $extend 
+     * @param mixed $extend 
      */
-    public function extend(AbstractAsset $extend)
+    public function extend($extend)
     {
         $this->extends[] = $extend;
     }
