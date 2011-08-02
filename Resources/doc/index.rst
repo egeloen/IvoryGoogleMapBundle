@@ -817,11 +817,13 @@ Class definition
 
 A map needs a coordinate (center) or a bound to be correctly rendering. So you need to persist one or both with the map.
 If you want to persist linked events, you need to persist the event manager & the event too.
+If you want to persist markers, you need to persist them too.
 
 ::
 
     // src/YourBundle/Entity/Map.php
     use Ivory\GoogleMapBundle\Entity\Map as BaseMap;
+    use Doctrine\Common\Collections\ArrayCollection;
 
     class Map extends BaseMap
     {
@@ -844,6 +846,9 @@ If you want to persist linked events, you need to persist the event manager & th
 
             // Link map to the event manager entity (Optional)
             $this->eventManager = new EventManager();
+
+            // Initialize the array collection
+            $this->markers = new ArrayCollection();
         }
 
         /**
@@ -872,6 +877,7 @@ Doctrine mapping
             <one-to-one field="center" target-entity="..\..\Entity\Coordinate" />
             <one-to-one field="bound" target-entity="..\..\Entity\Bound" />
             <one-to-one field="eventManager" target-entity="..\..\Entity\EventManager" />
+            <one-to-one field="markers" target-entity="..\..\Entity\Marker" />
         </entity>
 
     </doctrine-mapping>
