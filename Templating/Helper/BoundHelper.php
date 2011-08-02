@@ -35,7 +35,7 @@ class BoundHelper
      */
     public function render(Bound $bound)
     {
-        if(($bound->getSouthWest() !== null) && ($bound->getNorthEast() !== null))
+        if($bound->hasCoordinates())
             return sprintf('var %s = new google.maps.LatLngBounds(%s, %s);'.PHP_EOL,
                 $bound->getJavascriptVariable(),
                 $this->coordinateHelper->render($bound->getSouthWest()),
@@ -54,31 +54,34 @@ class BoundHelper
      * @param mixed $extend
      * @return string HTML output
      */
-    public function renderExtend(Bound $bound, $extend)
+    public function renderExtends(Bound $bound)
     {
-        $html = '';
+        $html = array();
 
-        if(($extend instanceof Model\Marker) || ($extend instanceof Model\InfoWindow))
-            $html = sprintf('%s.extend(%s.getPosition());'.PHP_EOL,
-                $bound->getJavascriptVariable(),
-                $extend->getJavascriptVariable()
-            );
-        else if(($extend instanceof Model\Polyline) || ($extend instanceof Model\Polygon))
-            $html = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
-                $extend->getJavascriptVariable(),
-                $bound->getJavascriptVariable()
-            );
-        else if(($extend instanceof Model\Rectangle) || ($extend instanceof Model\GroundOverlay))
-            $html = sprintf('%s.union(%s);'.PHP_EOL,
-                $bound->getJavascriptVariable(),
-                $extend->getBound()->getJavascriptVariable()
-            );
-        else if($extend instanceof Model\Circle)
-            $html = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
-                $bound->getJavascriptVariable(),
-                $extend->getJavascriptVariable()
-            );
+        foreach($bound->getExtends() as $extend)
+        {
+            if(($extend instanceof Model\Marker) || ($extend instanceof Model\InfoWindow))
+                $html[] = sprintf('%s.extend(%s.getPosition());'.PHP_EOL,
+                    $bound->getJavascriptVariable(),
+                    $extend->getJavascriptVariable()
+                );
+            else if(($extend instanceof Model\Polyline) || ($extend instanceof Model\Polygon))
+                $html[] = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
+                    $extend->getJavascriptVariable(),
+                    $bound->getJavascriptVariable()
+                );
+            else if(($extend instanceof Model\Rectangle) || ($extend instanceof Model\GroundOverlay))
+                $html[] = sprintf('%s.union(%s);'.PHP_EOL,
+                    $bound->getJavascriptVariable(),
+                    $extend->getBound()->getJavascriptVariable()
+                );
+            else if($extend instanceof Model\Circle)
+                $html[] = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
+                    $bound->getJavascriptVariable(),
+                    $extend->getJavascriptVariable()
+                );
+        }
 
-        return $html;
+        return implode('', $html);
     }
 }
