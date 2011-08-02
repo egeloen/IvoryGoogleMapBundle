@@ -36,6 +36,26 @@ class Bound extends AbstractAsset
     }
     
     /**
+     * Checks if the bound has coordinates
+     *
+     * @return boolean TRUE if the bound has coordinates else FALSE
+     */
+    public function hasCoordinates()
+    {
+        return !is_null($this->southWest) && !is_null($this->northEast);
+    }
+    
+    /**
+     * Checks if the bound extends something
+     *
+     * @return boolean TRUE if the bound extends somethind else FALSE
+     */
+    public function hasExtends()
+    {
+        return !empty($this->extends);
+    }
+    
+    /**
      * Reset the bound to the initial state
      */
     public function reset()
@@ -44,16 +64,6 @@ class Bound extends AbstractAsset
         $this->northEast = null;
         
         $this->extends = array();
-    }
-    
-    /**
-     * Checks if the bound is empty
-     *
-     * @return boolen TRUE if the bound is empty else FALSE
-     */
-    public function isEmpty()
-    {
-        return is_null($this->southWest) && is_null($this->northEast) && empty($this->extends);
     }
 
     /**
