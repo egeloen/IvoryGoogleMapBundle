@@ -1479,3 +1479,60 @@ Doctrine mapping
 
 Ground overlay
 --------------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/GroundOverlay.php
+    use Ivory\GoogleMapBundle\Entity\GroundOverlay as BaseGroundOverlay;
+
+    class GroundOverlay extends BaseGroundOverlay
+    {
+        /**
+         * @var integer Ground overlay ID
+         */
+        protected $id;
+
+        /**
+         * Create an ground overlay
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Link ground overlay to a bound
+            $this->bound = new Bound();
+        }
+
+        /**
+         * Gets the ground overlay ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/GroundOverlay.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\GroundOverlay">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="bound" target-entity="..\..\Entity\Bound" />
+        </entity>
+
+    </doctrine-mapping>
