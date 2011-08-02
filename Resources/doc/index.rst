@@ -1419,5 +1419,63 @@ Doctrine mapping
 Polyline
 --------
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Polyline.php
+    use Ivory\GoogleMapBundle\Entity\Polyline as BasePolyline;
+    use Doctrine\Common\Collections\ArrayCollection;
+
+    class Polyline extends BasePolyline
+    {
+        /**
+         * @var integer Polyline ID
+         */
+        protected $id;
+
+        /**
+         * Create an polyline
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Initialize the array collection
+            $this->coordinates = new ArrayCollection();
+        }
+
+        /**
+         * Gets the polyline ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Polyline.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Polyline">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <many-to-many field="coordinates" target-entity="..\..\Entity\Coordinate" />
+        </entity>
+
+    </doctrine-mapping>
+
 Ground overlay
 --------------
