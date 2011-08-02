@@ -817,7 +817,7 @@ Class definition
 
 A map needs a coordinate (center) or a bound to be correctly rendering. So you need to persist one or both with the map.
 If you want to persist linked events, you need to persist the event manager & the event too.
-If you want to persist markers, you need to persist them too.
+All the others options are persistable if you need them.
 
 ::
 
@@ -1002,6 +1002,8 @@ Doctrine mapping
             <id name="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
+            <one-to-one field="southWest" target-entity="..\..\Entity\Coordinate" nullable="true" />
+            <one-to-one field="northEast" target-entity="..\..\Entity\Coordinate" nullable="true" />
         </entity>
 
     </doctrine-mapping>
