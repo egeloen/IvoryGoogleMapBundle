@@ -152,10 +152,31 @@ You can set the map center and the zoom like that:
     $map->setCenter($latitude, $longitude);
     $map->setOption('zoom', 10);
 
-If you want the map zooms automatically on the different elements added on it, you just have to enable the auto zoom like that:
+If you want the map zooms automatically on the different elements added on it, you just have to enable the auto zoom before you add each objects like that:
 
 ::
 
+    $map->setAutoZoom(true);
+
+    // Add your objects
+    $map->addMarker($marker);
+    $map->addPolyline($polyline);
+    ...
+
+If you want the map zooms on specific elements added on it, you need to disable the auto zoom, add your specific element, add your specific element to the map bound extends & enable the autozoom.
+In this example, the map will auto zoom on the marker but not on the polyline.
+
+::
+
+    // Disable the auto zoom (By default the auto zoom is disable)
+    $map->setAutoZoom(false);
+
+    // Add you element
+    $map->addPolyline($polyline)
+    $map->addMarker($marker);
+    $map->getBound()->extend($marker);
+
+    // Enable the autozoom
     $map->setAutoZoom(true);
 
 If you want the map zooms on a bound, you must enable the auto zoom like above and configure the map bound like that:
