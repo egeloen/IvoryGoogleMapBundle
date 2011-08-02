@@ -19,6 +19,11 @@ class Bound extends AbstractAsset
      * @var Ivory\GoogleMapBundle\Model\Coordinate North east bound
      */
     protected $northEast = null;
+    
+    /**
+     * @var array Google map objects that bound extends
+     */
+    protected $extends = array();
 
     /**
      * Create a bound
@@ -37,6 +42,8 @@ class Bound extends AbstractAsset
     {   
         $this->southWest = null;
         $this->northEast = null;
+        
+        $this->extends = array();
     }
 
     /**
@@ -77,5 +84,36 @@ class Bound extends AbstractAsset
     public function setNorthEast(Coordinate $northEast = null)
     {
         $this->northEast = $northEast;
+    }
+    
+    /**
+     * Gets the google map objects that bound extends
+     *
+     * @return array
+     */
+    public function getExtends()
+    {
+        return $this->extends;
+    }
+    
+    /**
+     * Sets the google map objects that bound extends
+     *
+     * @param array $extends 
+     */
+    public function setExtends($extends)
+    {
+        foreach($extends as $extend)
+            $this->extend($extend);
+    }
+    
+    /**
+     * Add a google map object for bound extend it
+     *
+     * @param Ivory\GoogleMapBundle\Model\AbstractAsset $extend 
+     */
+    public function extend(AbstractAsset $extend)
+    {
+        $this->extends[] = $extend;
     }
 }
