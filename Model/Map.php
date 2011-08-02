@@ -355,6 +355,9 @@ class Map extends AbstractAsset
     public function addMarker(Marker $marker)
     {
         $this->markers[] = $marker;
+        
+        if($this->autoZoom)
+            $this->bound->extend($marker);
     }
 
     /**
@@ -375,6 +378,9 @@ class Map extends AbstractAsset
     public function addInfoWindow(InfoWindow $infoWindow)
     {
         $this->infoWindows[] = $infoWindow;
+        
+        if($this->autoZoom)
+            $this->bound->extend($infoWindow);
     }
 
     /**
@@ -395,6 +401,9 @@ class Map extends AbstractAsset
     public function addPolyline(Polyline $polyline)
     {
         $this->polylines[] = $polyline;
+        
+        if($this->autoZoom)
+            $this->bound->extend($polyline);
     }
 
     /**
@@ -415,6 +424,9 @@ class Map extends AbstractAsset
     public function addPolygon(Polygon $polygon)
     {
         $this->polygons[] = $polygon;
+        
+        if($this->autoZoom)
+            $this->bound->extend($polygon);
     }
 
     /**
@@ -435,6 +447,9 @@ class Map extends AbstractAsset
     public function addRectangle(Rectangle $rectangle)
     {
         $this->rectangles[] = $rectangle;
+        
+        if($this->autoZoom)
+            $this->bound->extend($rectangle);
     }
 
     /**
@@ -455,6 +470,9 @@ class Map extends AbstractAsset
     public function addCircle(Circle $circle)
     {
         $this->circles[] = $circle;
+        
+        if($this->autoZoom)
+            $this->bound->extend($circle);
     }
 
     /**
@@ -475,5 +493,8 @@ class Map extends AbstractAsset
     public function addGroundOverlay(GroundOverlay $groundOverlay)
     {
         $this->groundOverlays[] = $groundOverlay;
+        
+        if($this->autoZoom)
+            $this->bound->extend($groundOverlay);
     }
 }
