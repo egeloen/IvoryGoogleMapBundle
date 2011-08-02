@@ -860,7 +860,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/config/doctrine/Map.orm.xml
+    // src/YourBundle/Resources/config/doctrine/Map.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -919,7 +919,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/config/doctrine/Coordinate.orm.xml
+    // src/YourBundle/Resources/config/doctrine/Coordinate.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -975,7 +975,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/config/doctrine/Bound.orm.xml
+    // src/YourBundle/Resources/config/doctrine/Bound.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -1038,7 +1038,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/config/doctrine/EventManager.orm.xml
+    // src/YourBundle/Resources/config/doctrine/EventManager.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -1098,7 +1098,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/config/doctrine/Event.orm.xml
+    // src/YourBundle/Resources/config/doctrine/Event.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -1113,6 +1113,67 @@ Doctrine mapping
 
 Marker
 ------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Marker.php
+    use Ivory\GoogleMapBundle\Entity\Marker as BaseMarker;
+
+    class Marker extends BaseMarker
+    {
+        /**
+         * @var integer Event ID
+         */
+        protected $id;
+
+        /**
+         * Create an marker
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Link marker to a position entity
+            $this->position = new Coordinate();
+
+            // Link a marker to an info window entity
+            $this->infoWindow = new InfoWindow();
+        }
+
+        /**
+         * Gets the marker ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Marker.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Marker">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="position" target-entity="..\..\Entity\Coordinate" />
+            <one-to-one field="infoWindow" target-entity="..\..\Entity\InfoWindow" />
+        </entity>
+
+    </doctrine-mapping>
 
 Info window
 -----------
