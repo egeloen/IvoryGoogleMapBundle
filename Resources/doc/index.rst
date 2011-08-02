@@ -1238,6 +1238,63 @@ Doctrine mapping
 Circle
 ------
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Circle.php
+    use Ivory\GoogleMapBundle\Entity\Circle as BaseCircle;
+
+    class Circle extends BaseCircle
+    {
+        /**
+         * @var integer Circle ID
+         */
+        protected $id;
+
+        /**
+         * Create an circle
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Link marker to a center entity
+            $this->center = new Coordinate();
+        }
+
+        /**
+         * Gets the circle ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Circle.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Circle">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="center" target-entity="..\..\Entity\Coordinate" />
+        </entity>
+
+    </doctrine-mapping>
+
 Rectangle
 ---------
 
