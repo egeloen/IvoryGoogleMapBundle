@@ -51,37 +51,34 @@ class BoundHelper
      * Renders the bound's extend of a marker
      *
      * @param Ivory\GoogleMapBundle\Model\Bound $bound
-     * @param array $elements
+     * @param mixed $extend
      * @return string HTML output
      */
-    public function renderExtend(Bound $bound, $elements)
+    public function renderExtend(Bound $bound, $extend)
     {
-        $html = array();
+        $html = '';
 
-        foreach($elements as $element)
-        {
-            if(($element instanceof Model\Marker) || ($element instanceof Model\InfoWindow))
-                $html[] = sprintf('%s.extend(%s.getPosition());'.PHP_EOL,
-                    $bound->getJavascriptVariable(),
-                    $element->getJavascriptVariable()
-                );
-            else if(($element instanceof Model\Polyline) || ($element instanceof Model\Polygon))
-                $html[] = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
-                    $element->getJavascriptVariable(),
-                    $bound->getJavascriptVariable()
-                );
-            else if(($element instanceof Model\Rectangle) || ($element instanceof Model\GroundOverlay))
-                $html[] = sprintf('%s.union(%s);'.PHP_EOL,
-                    $bound->getJavascriptVariable(),
-                    $element->getBound()->getJavascriptVariable()
-                );
-            else if($element instanceof Model\Circle)
-                $html[] = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
-                    $bound->getJavascriptVariable(),
-                    $element->getJavascriptVariable()
-                );
-        }
+        if(($extend instanceof Model\Marker) || ($extend instanceof Model\InfoWindow))
+            $html = sprintf('%s.extend(%s.getPosition());'.PHP_EOL,
+                $bound->getJavascriptVariable(),
+                $extend->getJavascriptVariable()
+            );
+        else if(($extend instanceof Model\Polyline) || ($extend instanceof Model\Polygon))
+            $html = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
+                $extend->getJavascriptVariable(),
+                $bound->getJavascriptVariable()
+            );
+        else if(($extend instanceof Model\Rectangle) || ($extend instanceof Model\GroundOverlay))
+            $html = sprintf('%s.union(%s);'.PHP_EOL,
+                $bound->getJavascriptVariable(),
+                $extend->getBound()->getJavascriptVariable()
+            );
+        else if($extend instanceof Model\Circle)
+            $html = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
+                $bound->getJavascriptVariable(),
+                $extend->getJavascriptVariable()
+            );
 
-        return implode('', $html);
+        return $html;
     }
 }
