@@ -850,6 +850,11 @@ If you want to persist markers, you need to persist them too.
             // Initialize the array collection
             $this->markers = new ArrayCollection();
             $this->infoWindows = new ArrayCollection();
+            $this->polylines = new ArrayCollection();
+            $this->polygons = new ArrayCollection();
+            $this->rectangles = new ArrayCollection();
+            $this->circles = new ArrayCollection();
+            $this->groundOverlays = new ArrayCollection();
         }
 
         /**
@@ -880,6 +885,11 @@ Doctrine mapping
             <one-to-one field="eventManager" target-entity="..\..\Entity\EventManager" />
             <many-to-many field="markers" target-entity="..\..\Entity\Marker" />
             <many-to-many field="infoWindows" target-entity="..\..\Entity\InfoWindow" />
+            <many-to-many field="polylines" target-entity="..\..\Entity\Polyline" />
+            <many-to-many field="polygons" target-entity="..\..\Entity\Polygon" />
+            <many-to-many field="rectangles" target-entity="..\..\Entity\Rectangle" />
+            <many-to-many field="circles" target-entity="..\..\Entity\Circle" />
+            <many-to-many field="groundOverlays" target-entity="..\..\Entity\GroundOverlay" />
         </entity>
 
     </doctrine-mapping>
