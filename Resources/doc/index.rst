@@ -849,6 +849,7 @@ If you want to persist markers, you need to persist them too.
 
             // Initialize the array collection
             $this->markers = new ArrayCollection();
+            $this->infoWindows = new ArrayCollection();
         }
 
         /**
@@ -877,7 +878,8 @@ Doctrine mapping
             <one-to-one field="center" target-entity="..\..\Entity\Coordinate" />
             <one-to-one field="bound" target-entity="..\..\Entity\Bound" />
             <one-to-one field="eventManager" target-entity="..\..\Entity\EventManager" />
-            <one-to-one field="markers" target-entity="..\..\Entity\Marker" />
+            <many-to-many field="markers" target-entity="..\..\Entity\Marker" />
+            <many-to-many field="infoWindows" target-entity="..\..\Entity\InfoWindow" />
         </entity>
 
     </doctrine-mapping>
