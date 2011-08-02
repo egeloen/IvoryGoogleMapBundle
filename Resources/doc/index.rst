@@ -1178,6 +1178,63 @@ Doctrine mapping
 Info window
 -----------
 
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/InfoWindow.php
+    use Ivory\GoogleMapBundle\Entity\InfoWindow as BaseInfoWindow;
+
+    class InfoWindow extends BaseInfoWindow
+    {
+        /**
+         * @var integer Info window ID
+         */
+        protected $id;
+
+        /**
+         * Create an info window
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+
+            // Link marker to a position entity
+            $this->position = new Coordinate();
+        }
+
+        /**
+         * Gets the info window ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/InfoWindow.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\InfoWindow">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="position" target-entity="..\..\Entity\Coordinate" />
+        </entity>
+
+    </doctrine-mapping>
+
 Circle
 ------
 
