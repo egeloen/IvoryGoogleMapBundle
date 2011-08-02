@@ -113,6 +113,8 @@ class Bound extends AbstractAsset
      */
     public function setExtends($extends)
     {
+        $this->reset();
+        
         foreach($extends as $extend)
             $this->extend($extend);
     }
