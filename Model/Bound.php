@@ -45,6 +45,16 @@ class Bound extends AbstractAsset
         
         $this->extends = array();
     }
+    
+    /**
+     * Checks if the bound is empty
+     *
+     * @return boolen TRUE if the bound is empty else FALSE
+     */
+    public function isEmpty()
+    {
+        return is_null($this->southWest) && is_null($this->northEast) && empty($this->extends);
+    }
 
     /**
      * Gets the south west bound
