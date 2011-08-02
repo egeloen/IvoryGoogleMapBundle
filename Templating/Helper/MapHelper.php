@@ -133,10 +133,6 @@ class MapHelper
         $html[] = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.PHP_EOL;
         $html[] = '<script type="text/javascript">'.PHP_EOL;
         $html[] = $this->renderMap($map);
-
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->render($map->getBound());
-
         $html[] = $this->renderMarkers($map);
         $html[] = $this->renderInfoWindows($map);
         $html[] = $this->renderPolylines($map);
@@ -146,7 +142,10 @@ class MapHelper
         $html[] = $this->renderGroundOverlays($map);
 
         if($map->isAutoZoom())
+        {
+            $html[] = $this->renderBound($map);
             $html[] = $this->renderFitBound($map);
+        }
         else
             $html[] = $this->renderCenter($map);
         
@@ -189,6 +188,27 @@ class MapHelper
             $this->coordinateHelper->render($map->getCenter())
         );
     }
+    
+    /**
+     * Renders the map javascript bound
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @return string HTML output
+     */
+    protected function renderBound(Map $map)
+    {
+        $html = array();
+        
+        if(!$map->getBound()->isEmpty())
+        {
+            $html[] = $this->boundHelper->render($map->getBound());
+            
+            foreach($map->getBound()->getExtends() as $extend)
+                $html[] = $this->boundHelper->renderExtend($map->getBound(), $extend);
+        }
+        
+        return implode('', $html);
+    }
 
     /**
      * Renders the map javascript fit bound
@@ -198,10 +218,15 @@ class MapHelper
      */
     protected function renderFitBound(Map $map)
     {
-        return sprintf('%s.fitBounds(%s);'.PHP_EOL,
-            $map->getJavascriptVariable(),
-            $map->getBound()->getJavascriptVariable()
-        );
+        $html = '';
+        
+        if(!$map->getBound()->isEmpty())
+            $html = sprintf('%s.fitBounds(%s);'.PHP_EOL,
+                $map->getJavascriptVariable(),
+                $map->getBound()->getJavascriptVariable()
+            );
+        
+        return $html;
     }
 
     /**
@@ -216,9 +241,6 @@ class MapHelper
 
         foreach($map->getMarkers() as $marker)
             $html[] = $this->markerHelper->render($marker, $map);
-
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getMarkers());
 
         return implode('', $html);
     }
@@ -241,9 +263,6 @@ class MapHelper
                 $html[] = $this->infoWindowHelper->renderOpen($infoWindow, $map);
         }
 
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getInfoWindows());
-
         return implode('', $html);
     }
 
@@ -259,9 +278,6 @@ class MapHelper
 
         foreach($map->getPolylines() as $polyline)
             $html[] = $this->polylineHelper->render($polyline, $map);
-
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getPolylines());
 
         return implode('', $html);
     }
@@ -279,9 +295,6 @@ class MapHelper
         foreach($map->getPolygons() as $polygon)
             $html[] = $this->polygonHelper->render($polygon, $map);
 
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getPolygons());
-
         return implode('', $html);
     }
 
@@ -297,9 +310,6 @@ class MapHelper
 
         foreach($map->getRectangles() as $rectangle)
             $html[] = $this->rectangleHelper->render($rectangle, $map);
-
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getRectangles());
 
         return implode('', $html);
     }
@@ -317,9 +327,6 @@ class MapHelper
         foreach($map->getCircles() as $circle)
             $html[] = $this->circleHelper->render($circle, $map);
 
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getCircles());
-
         return implode('', $html);
     }
 
@@ -335,9 +342,6 @@ class MapHelper
 
         foreach($map->getGroundOverlays() as $groundOverlay)
             $html[] = $this->groundOverlayHelper->render($groundOverlay, $map);
-
-        if($map->isAutoZoom())
-            $html[] = $this->boundHelper->renderExtend($map->getBound(), $map->getGroundOverlays());
 
         return implode('', $html);
     }
