@@ -21,7 +21,7 @@ class Marker extends AbstractAsset
     protected $icon = null;
 
     /**
-     * @var string Marker shadow
+     * @var string|Ivory\GoogleMapBundle\Model\MarkerImage Marker shadow
      */
     protected $shadow = null;
 
@@ -97,7 +97,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker icon
      *
-     * @return string
+     * @return string|Ivory\GoogleMapBundle\Model\MarkerImage
      */
     public function getIcon()
     {
@@ -127,7 +127,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker shadow
      *
-     * @return string
+     * @return string|Ivory\GoogleMapBundle\Model\MarkerImage
      */
     public function getShadow()
     {
@@ -137,7 +137,7 @@ class Marker extends AbstractAsset
     /**
      * Sets the marker shadow
      *
-     * @param string $shadow
+     * @param string|Ivory\GoogleMapBundle\Model\MarkerImage $shadow
      */
     public function setShadow($shadow)
     {
