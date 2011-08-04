@@ -253,6 +253,10 @@ The shadow is configurable like that:
 
     $marker->setShadow('shadow_url');
 
+::
+
+    $marker->setShadow($markerImage);
+
 All the other google map marker options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions are configurable like that:
 
 ::
