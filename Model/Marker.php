@@ -16,12 +16,12 @@ class Marker extends AbstractAsset
     protected $position = null;
 
     /**
-     * @var string|Ivory\GoogleMapBundle\Model\MarkerImage Marker icon
+     * @var Ivory\GoogleMapBundle\Model\MarkerImage Marker icon
      */
     protected $icon = null;
 
     /**
-     * @var string|Ivory\GoogleMapBundle\Model\MarkerImage Marker shadow
+     * @var Ivory\GoogleMapBundle\Model\MarkerImage Marker shadow
      */
     protected $shadow = null;
 
@@ -97,7 +97,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker icon
      *
-     * @return string|Ivory\GoogleMapBundle\Model\MarkerImage
+     * @return Ivory\GoogleMapBundle\Model\MarkerImage
      */
     public function getIcon()
     {
@@ -107,11 +107,26 @@ class Marker extends AbstractAsset
     /**
      * Sets the marker icon
      *
-     * @param string\Ivory\GoogleMapBundle\Model\MarkerImage $icon
+     * Available prototype:
+     * 
+     * public function setIcon(string $url);
+     * public function setIcon(Ivory\GoogleMapBundle\Model\MarkerImage $markerImage)
      */
-    public function setIcon($icon)
+    public function setIcon()
     {
-        $this->icon = $icon;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            if($this->icon === null)
+                $this->icon = new MarkerImage();
+            
+            $this->icon->setUrl($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
+            $this->icon = $args[0];
+        else
+            throw new \InvalidArgumentException();
     }
     
     /**
@@ -127,7 +142,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker shadow
      *
-     * @return string|Ivory\GoogleMapBundle\Model\MarkerImage
+     * @return Ivory\GoogleMapBundle\Model\MarkerImage
      */
     public function getShadow()
     {
@@ -137,11 +152,26 @@ class Marker extends AbstractAsset
     /**
      * Sets the marker shadow
      *
-     * @param string|Ivory\GoogleMapBundle\Model\MarkerImage $shadow
+     * Available prototype:
+     * 
+     * public function setShadow(string $url);
+     * public function setShadow(Ivory\GoogleMapBundle\Model\MarkerImage $markerImage)
      */
     public function setShadow($shadow)
     {
-        $this->shadow = $shadow;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            if($this->shadow === null)
+                $this->shadow = new MarkerImage();
+            
+            $this->shadow->setUrl($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
+            $this->shadow = $args[0];
+        else
+            throw new \InvalidArgumentException();
     }
 
     /**
