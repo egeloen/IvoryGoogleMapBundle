@@ -58,7 +58,7 @@ class MarkerImageHelper
         if($markerImage->hasScaledSize())
             $html .= ', '.$this->sizeHelper->render($markerImage->getScaledSize());
         
-        $html .= ');';
+        $html .= ');'.PHP_EOL;
         
         return $html;
     }
