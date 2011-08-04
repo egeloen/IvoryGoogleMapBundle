@@ -72,7 +72,15 @@ class MarkerHelper
         }
 
         if($marker->hasShadow())
-            $markerOptions['shadow'] = $marker->getShadow();
+        {
+            if($marker->getShadow() instanceof MarkerImage)
+            {
+                $html[] = $this->markerImageHelper->render($marker->getShadow());
+                $markerJSONOptions .= ', "shadow":'.$marker->getShadow()->getJavascriptVariable();
+            }
+            else
+                $markerOptions['shadow'] = $marker->getShadow();
+        }
 
         if(!empty($markerOptions))
             $markerJSONOptions .= ','.substr(json_encode($markerOptions), 1);
