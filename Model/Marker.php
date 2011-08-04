@@ -83,6 +83,16 @@ class Marker extends AbstractAsset
         else
             throw new \InvalidArgumentException();
     }
+    
+    /**
+     * Checks if the marker has an icon
+     *
+     * @return boolean TRUE if the marker has an icon else FALSE
+     */
+    public function hasIcon()
+    {
+        return !is_null($this->icon);
+    }
 
     /**
      * Gets the marker icon
@@ -102,6 +112,16 @@ class Marker extends AbstractAsset
     public function setIcon($icon)
     {
         $this->icon = $icon;
+    }
+    
+    /**
+     * Checks if the marker has a shadow
+     *
+     * @return boolean TRUE if the marker has a shadow else FALSE
+     */
+    public function hasShadow()
+    {
+        return !is_null($this->shadow);
     }
 
     /**
