@@ -47,6 +47,16 @@ class Size
     }
     
     /**
+     * Checks if the size has units
+     *
+     * @return boolean TRUE if the size has units else FALSE
+     */
+    public function hasUnits()
+    {
+        return !is_null($this->widthUnit) && !is_null($this->heightUnit);
+    }
+    
+    /**
      * Gets the width size
      *
      * @return double
