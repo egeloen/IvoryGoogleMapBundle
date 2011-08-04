@@ -16,7 +16,7 @@ class Marker extends AbstractAsset
     protected $position = null;
 
     /**
-     * @var string Marker icon
+     * @var string|Ivory\GoogleMapBundle\Model\MarkerImage Marker icon
      */
     protected $icon = null;
 
@@ -97,7 +97,7 @@ class Marker extends AbstractAsset
     /**
      * Sets the marker icon
      *
-     * @param string $icon
+     * @param string\Ivory\GoogleMapBundle\Model\MarkerImage $icon
      */
     public function setIcon($icon)
     {
