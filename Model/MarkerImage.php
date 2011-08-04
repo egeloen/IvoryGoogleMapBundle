@@ -237,6 +237,8 @@ class MarkerImage extends AbstractAsset
      */
     public function setSize()
     {
+        $args = func_get_args();
+        
         if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
         {
             if($this->size === null)
