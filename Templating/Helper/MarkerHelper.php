@@ -3,6 +3,7 @@
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
 use Ivory\GoogleMapBundle\Model\Marker;
+use Ivory\GoogleMapBundle\Model\MarkerImage;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
