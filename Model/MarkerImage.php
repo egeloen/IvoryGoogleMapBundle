@@ -66,6 +66,16 @@ class MarkerImage extends AbstractAsset
     }
     
     /**
+     * Checks if the marker image has an anchor
+     *
+     * @return boolean TRUE if the marker image has an anchor else FALSE
+     */
+    public function hasAnchor()
+    {
+        return !is_null($this->anchor);
+    }
+    
+    /**
      * Gets the anchor of the marker image
      *
      * @return Ivory\GoogleMapBundle\Model\Point
@@ -83,6 +93,16 @@ class MarkerImage extends AbstractAsset
     public function setAnchor(Point $anchor)
     {
         $this->anchor = $anchor;
+    }
+    
+    /**
+     * Checks if the marker image has an origin
+     *
+     * @return boolean TRUE if the marker image has an origin else FALSE
+     */
+    public function hasOrigin()
+    {
+        return !is_null($this->origin);
     }
     
     /**
@@ -106,6 +126,16 @@ class MarkerImage extends AbstractAsset
     }
     
     /**
+     * Checks if the marker image has a scaled size else FALSE
+     *
+     * @return boolean TRUE if the marker image has a scaled size else FALSE
+     */
+    public function hasScaledSize()
+    {
+        return !is_null($this->scaledSize);
+    }
+    
+    /**
      * Gets the scaled size of the marker image
      *
      * @return Ivory\GoogleMapBundle\Model\Size
@@ -123,6 +153,16 @@ class MarkerImage extends AbstractAsset
     public function setScaledSize(Size $scaledSize)
     {
         $this->scaledSize = $scaledSize;
+    }
+    
+    /**
+     * Checks if the marker image has a size
+     *
+     * @return boolean TRUE if the marker image has a size else FALSE
+     */
+    public function hasSize()
+    {
+        return !is_null($this->size);
     }
     
     /**
