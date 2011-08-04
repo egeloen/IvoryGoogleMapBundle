@@ -65,6 +65,9 @@ class InfoWindow extends AbstractAsset
         
         if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
         {
+            if($this->position === null)
+                $this->position = new Coordinate();
+            
             $this->position->setLatitude($args[0]);
             $this->position->setLongitude($args[1]);
             
