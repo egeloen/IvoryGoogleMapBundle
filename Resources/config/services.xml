@@ -204,6 +204,44 @@
             </call>
         </service>
         
+        <service id="ivory_google_map.point" class="%ivory_google_map.point.class%" scope="prototype">
+            <call method="setX">
+                <argument>%ivory_google_map.point.x%</argument>
+            </call>
+            
+            <call method="setY">
+                <argument>%ivory_google_map.point.y%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.size" class="%ivory_google_map.size.class%" scope="prototype">
+            <call method="setWidth">
+                <argument>%ivory_google_map.size.width%</argument>
+            </call>
+            
+            <call method="setHeight">
+                <argument>%ivory_google_map.size.height%</argument>
+            </call>
+            
+            <call method="setWidthUnit">
+                <argument>%ivory_google_map.size.width_unit%</argument>
+            </call>
+            
+            <call method="setHeightUnit">
+                <argument>%ivory_google_map.size.height_unit%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.marker_image" class="%ivory_google_map.marker_image.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.marker_image.prefix_javascript_variable%</argument>
+            </call>
+            
+            <call method="setUrl">
+                <argument>%ivory_google_map.marker_image.url%</argument>
+            </call>
+        </service>
+        
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
         
         <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype">
@@ -234,6 +272,7 @@
         <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
+            <argument type="service" id="ivory_google_map.helper.marker_image" />
         </service>
 
         <service id="ivory_google_map.helper.info_window" class="%ivory_google_map.info_window.helper%" public="false">
@@ -261,6 +300,15 @@
         <service id="ivory_google_map.helper.ground_overlay" class="%ivory_google_map.ground_overlay.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.bound" />
         </service>
+        
+        <service id="ivory_google_map.helper.marker_image" class="%ivory_google_map.marker_image.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.point" />
+            <argument type="service" id="ivory_google_map.helper.size" />
+        </service>
+        
+        <service id="ivory_google_map.helper.point" class="%ivory_google_map.point.helper%" public="false" />
+        
+        <service id="ivory_google_map.helper.size" class="%ivory_google_map.size.helper%" public="false" />
 
     </services>
 

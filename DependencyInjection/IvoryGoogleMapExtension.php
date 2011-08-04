@@ -39,6 +39,9 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadRectangle($config, $container);
         $this->loadCircle($config, $container);
         $this->loadGroundOverlay($config, $container);
+        $this->loadPoint($config, $container);
+        $this->loadSize($config, $container);
+        $this->loadMarkerImage($config, $container);
         $this->loadEventManager($config, $container);
         $this->loadEvent($config, $container);
 
@@ -220,6 +223,50 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.longitude', $config['ground_overlay']['bound']['north_east']['longitude']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.no_wrap', $config['ground_overlay']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
+    }
+    
+    /**
+     * Loads point configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadPoint(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.point.class', $config['point']['class']);
+        $container->setParameter('ivory_google_map.point.helper', $config['point']['helper']);
+        $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
+        $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
+    }
+    
+    /**
+     * Loads size configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadSize(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.size.class', $config['size']['class']);
+        $container->setParameter('ivory_google_map.size.helper', $config['size']['helper']);
+        $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
+        $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
+        $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
+        $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+    }
+    
+    /**
+     * Loads marker image configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMarkerImage(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.marker_image.class', $config['marker_image']['class']);
+        $container->setParameter('ivory_google_map.marker_image.helper', $config['marker_image']['helper']);
+        $container->setParameter('ivory_google_map.marker_image.prefix_javascript_variable', $config['marker_image']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
     }
     
     /**

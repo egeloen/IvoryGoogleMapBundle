@@ -31,6 +31,9 @@ class Configuration implements ConfigurationInterface
         $this->addRectangleSection($rootNode);
         $this->addCircleSection($rootNode);
         $this->addGroundOverlaySection($rootNode);
+        $this->addPointSection($rootNode);
+        $this->addSizeSection($rootNode);
+        $this->addMarkerImageSection($rootNode);
         $this->addEventManagerSection($rootNode);
         $this->addEventSection($rootNode);
         
@@ -328,6 +331,68 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the point section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addPointSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('point')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Point')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\PointHelper')->end()
+                        ->scalarNode('x')->defaultValue(0)->end()
+                        ->scalarNode('y')->defaultValue(0)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the size section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addSizeSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('size')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Size')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\SizeHelper')->end()
+                        ->scalarNode('width')->defaultValue(0)->end()
+                        ->scalarNode('height')->defaultValue(0)->end()
+                        ->scalarNode('width_unit')->defaultValue(null)->end()
+                        ->scalarNode('height_unit')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the marker image section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMarkerImageSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('marker_image')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\MarkerImage')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper')->end()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('marker_image_')->end()
+                        ->scalarNode('url')->defaultValue(null)->end()
                     ->end()
                 ->end()
             ->end();
