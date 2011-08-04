@@ -41,25 +41,37 @@ class MarkerImageHelper
      */
     public function render(MarkerImage $markerImage)
     {
-        $html = sprintf('var %s = new google.maps.MarkerImage("%s"',
+        $html = array();
+        
+        $html[] = sprintf('var %s = new google.maps.MarkerImage("%s");'.PHP_EOL,
             $markerImage->getJavascriptVariable(),
             $markerImage->getUrl()
         );
         
         if($markerImage->hasSize())
-            $html .= ', '.$this->sizeHelper->render($markerImage->getSize());
+            $html[] = sprintf('%s.size = %s;'.PHP_EOL,
+                $markerImage->getJavascriptVariable(),
+                $this->sizeHelper->render($markerImage->getSize())
+            );
         
         if($markerImage->hasOrigin())
-            $html .= ', '.$this->pointHelper->render($markerImage->getOrigin());
+            $html[] = sprintf('%s.origin = %s;'.PHP_EOL,
+                $markerImage->getJavascriptVariable(),
+                $this->pointHelper->render($markerImage->getOrigin())
+            );
         
         if($markerImage->hasAnchor())
-            $html .= ', '.$this->pointHelper->render($markerImage->getAnchor());
+            $html[] = sprintf('%s.anchor = %s;'.PHP_EOL,
+                $markerImage->getJavascriptVariable(),
+                $this->pointHelper->render($markerImage->getAnchor())
+            );
         
         if($markerImage->hasScaledSize())
-            $html .= ', '.$this->sizeHelper->render($markerImage->getScaledSize());
+            $html[] = sprintf('%s.scaledSize = %s;'.PHP_EOL,
+                $markerImage->getJavascriptVariable(),
+                $this->sizeHelper->render($markerImage->getScaledSize())
+            );
         
-        $html .= ');'.PHP_EOL;
-        
-        return $html;
+        return implode('', $html);
     }
 }
