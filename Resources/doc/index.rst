@@ -592,8 +592,8 @@ Finnaly, if you use an event like a DOM event, you can set a capture flag like t
 
     $event->setCapture(true);
 
-Coordinate & Bound
-------------------
+Coordinate, Bound, Point & Size
+-------------------------------
 
 A coordinate & a bound are basic objects which are wrapped in many other objects.
 
@@ -607,6 +607,16 @@ Bound
 
 A bound is described by two coordinates which describe the south west & the north east.
 If the south west & north east coordinates are equal to null, the bound will be rendered without limit and this only usage will be to extend some other google map object.
+
+Point
+~~~~~
+
+A point is described by two point in the space (x, y).
+
+Size
+~~~~
+
+A size is described by a width & an height. Additionnaly, you can specify a width & height unit.
 
 Configuration
 =============
@@ -1138,6 +1148,118 @@ Doctrine mapping
 
     </doctrine-mapping>
 
+Point
+----------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Point.php
+    use Ivory\GoogleMapBundle\Entity\Point as BasePoint;
+
+    class Point extends BasePoint
+    {
+        /**
+         * @var integer Point ID
+         */
+        protected $id;
+
+        /**
+         * Create a point
+         */
+        public function __construct($x = 0, $y = 0)
+        {
+            // Call parent constructor
+            parent::__construct($x, $y);
+        }
+
+        /**
+         * Gets the point ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Point.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Point">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+        </entity>
+
+    </doctrine-mapping>
+
+Size
+----------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/Size.php
+    use Ivory\GoogleMapBundle\Entity\Size as BaseSize;
+
+    class Size extends BaseSize
+    {
+        /**
+         * @var integer Size ID
+         */
+        protected $id;
+
+        /**
+         * Create a size
+         */
+        public function __construct($width = 0, $height = 0, $widthUnit = null, $heightUnit = null)
+        {
+            // Call parent constructor
+            parent::__construct($width, $height, $widthUnit, $heightUnit);
+        }
+
+        /**
+         * Gets the size ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Size.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\Size">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+        </entity>
+
+    </doctrine-mapping>
+
 Event manager
 -------------
 
@@ -1321,6 +1443,66 @@ Doctrine mapping
             </id>
             <one-to-one field="position" target-entity="..\..\Entity\Coordinate" />
             <one-to-one field="infoWindow" target-entity="..\..\Entity\InfoWindow" />
+        </entity>
+
+    </doctrine-mapping>
+
+Marker image
+------------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/MarkerImage.php
+    use Ivory\GoogleMapBundle\Entity\MarkerImage as BaseMarkerImage;
+
+    class MarkerImage extends BaseMarkerImage
+    {
+        /**
+         * @var integer Marker image ID
+         */
+        protected $id;
+
+        /**
+         * Create a marker image
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+        }
+
+        /**
+         * Gets the marker image ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/Marker.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\MarkerImage">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
+            <one-to-one field="anchor" target-entity="..\..\Entity\Point" />
+            <one-to-one field="origin" target-entity="..\..\Entity\Point" />
+            <one-to-one field="size" target-entity="..\..\Entity\Size" />
+            <one-to-one field="scaledSize" target-entity="..\..\Entity\Size" />
         </entity>
 
     </doctrine-mapping>
