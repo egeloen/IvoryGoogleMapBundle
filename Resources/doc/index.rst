@@ -71,6 +71,13 @@ List of available services
 ::
 
     /**
+     * @var Ivory\GoogleMapBundle\Model\MarkerImage
+     */
+    $bound = $this->get('ivory_google_map.marker_image');
+
+::
+
+    /**
      * @var Ivory\GoogleMapBundle\Model\InfoWindow
      */
     $infoWindow = $this->get('ivory_google_map.info_window');
@@ -137,6 +144,20 @@ List of available services
      * @var Ivory\GoogleMapBundle\Model\Bound
      */
     $bound = $this->get('ivory_google_map.bound');
+
+::
+
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Point
+     */
+    $bound = $this->get('ivory_google_map.point');
+
+::
+
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Size
+     */
+    $bound = $this->get('ivory_google_map.size');
 
 Usage
 =====
@@ -216,11 +237,20 @@ You can set the marker position like that:
 
     $marker->setPosition($latitude, $longitude);
 
-The icon and the shadow marker are configuable like that:
+The icon marker is configuable like that:
 
 ::
 
     $marker->setIcon('icon_url');
+
+::
+
+    $marker->setIcon($markerImage);
+
+The shadow is configurable like that:
+
+::
+
     $marker->setShadow('shadow_url');
 
 All the other google map marker options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions are configurable like that:
@@ -239,6 +269,40 @@ Add a marker to a map
 ::
 
     $map->addMarker($marker);
+
+
+Marker image
+------------
+
+By default, a marker image has no property. At least, you must specify an image url like that:
+
+::
+
+    $markerImage->setUrl("marker_image_url");
+
+You can set the anchor like that:
+
+::
+
+    $markerImage->setAnchor(x, y);
+
+You can set the origin like that:
+
+::
+
+    $markerImage->setOrigin(x, y);
+
+You can set the size like that:
+
+::
+
+    $markerImage->setSize(width, height);
+
+You can set the scaled size like that:
+
+::
+
+    $markerImage->setScaledSize(width, height);
 
 Info window
 -----------
@@ -592,6 +656,19 @@ Marker
             options:
                 option: value
 
+Marker image
+------------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        marker_image:
+            class: Ivory\GoogleMapBundle\Model\MarkerImage
+            helper: Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper
+            prefix_javascript_variable: "marker_image_"
+            url: "marker_image_url"
+
 Info window
 -----------
 
@@ -752,6 +829,34 @@ Bound
             class: Ivory\GoogleMapBundle\Model\Bound
             helper: Ivory\GoogleMapBundle\Templating\Helper\BoundHelper
             prefix_javascript_variable: "bound_"
+
+Point
+-----
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        point:
+            class: Ivory\GoogleMapBundle\Model\Point
+            helper: Ivory\GoogleMapBundle\Templating\Helper\PointHelper
+            x: 0
+            y: 0
+
+Size
+-----
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        size:
+            class: Ivory\GoogleMapBundle\Model\Size
+            helper: Ivory\GoogleMapBundle\Templating\Helper\SizeHelper
+            width: 0
+            height: 0
+            width_unit: null
+            height_unit: null
 
 Twig
 ====
