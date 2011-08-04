@@ -62,24 +62,14 @@ class MarkerHelper
 
         if($marker->hasIcon())
         {
-            if($marker->getIcon() instanceof MarkerImage)
-            {
-                $html[] = $this->markerImageHelper->render($marker->getIcon());
-                $markerJSONOptions .= ', "icon":'.$marker->getIcon()->getJavascriptVariable();
-            }
-            else
-                $markerOptions['icon'] = $marker->getIcon();
+            $html[] = $this->markerImageHelper->render($marker->getIcon());
+            $markerJSONOptions .= ', "icon":'.$marker->getIcon()->getJavascriptVariable();
         }
 
         if($marker->hasShadow())
         {
-            if($marker->getShadow() instanceof MarkerImage)
-            {
-                $html[] = $this->markerImageHelper->render($marker->getShadow());
-                $markerJSONOptions .= ', "shadow":'.$marker->getShadow()->getJavascriptVariable();
-            }
-            else
-                $markerOptions['shadow'] = $marker->getShadow();
+            $html[] = $this->markerImageHelper->render($marker->getShadow());
+            $markerJSONOptions .= ', "shadow":'.$marker->getShadow()->getJavascriptVariable();
         }
 
         if(!empty($markerOptions))
