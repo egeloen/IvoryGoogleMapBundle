@@ -23,20 +23,15 @@ class MarkerHelper
     protected $infoWindowHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\EventHelper
-     */
-    protected $eventHelper;
-
-    /**
      * Constructs a marker helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper $infoWindowHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, EventHelper $eventHelper)
+    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->infoWindowHelper = $infoWindowHelper;
-        $this->eventHelper = $eventHelper;
     }
     
     /**
