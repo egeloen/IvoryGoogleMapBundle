@@ -157,7 +157,7 @@ class Marker extends AbstractAsset
      * public function setShadow(string $url);
      * public function setShadow(Ivory\GoogleMapBundle\Model\MarkerImage $markerImage)
      */
-    public function setShadow($shadow)
+    public function setShadow()
     {
         $args = func_get_args();
         
