@@ -21,17 +21,24 @@ class MarkerHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper
      */
     protected $infoWindowHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper
+     */
+    protected $markerImageHelper;
 
     /**
      * Constructs a marker helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper $infoWindowHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper $markerImageHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper)
+    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->infoWindowHelper = $infoWindowHelper;
+        $this->markerImageHelper = $markerImageHelper;
     }
     
     /**
@@ -43,18 +50,23 @@ class MarkerHelper
      */
     public function render(Marker $marker, Map $map)
     {
-        $markerOptions = $marker->getOptions();
-
-        if($marker->hasIcon())
-            $markerOptions['icon'] = $marker->getIcon();
-
-        if($marker->hasShadow())
-            $markerOptions['shadow'] = $marker->getShadow();
-
         $markerJSONOptions = sprintf('{"map":%s,"position":%s',
             $map->getJavascriptVariable(),
             $this->coordinateHelper->render($marker->getPosition())
         );
+        
+        $markerOptions = $marker->getOptions();
+
+        if($marker->hasIcon())
+        {
+            if($marker->getIcon() instanceof MarkerImage)
+                $markerJSONOptions .= ', "icon":'.$this->markerImageHelper->render($marker->getIcon());
+            else
+                $markerOptions['icon'] = $marker->getIcon();
+        }
+
+        if($marker->hasShadow())
+            $markerOptions['shadow'] = $marker->getShadow();
 
         if(!empty($markerOptions))
             $markerJSONOptions .= ','.substr(json_encode($markerOptions), 1);
