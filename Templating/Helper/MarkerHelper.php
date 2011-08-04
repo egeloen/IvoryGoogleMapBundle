@@ -50,10 +50,10 @@ class MarkerHelper
     {
         $markerOptions = $marker->getOptions();
 
-        if($marker->getIcon() !== null)
+        if($marker->hasIcon())
             $markerOptions['icon'] = $marker->getIcon();
 
-        if($marker->getShadow() !== null)
+        if($marker->hasShadow())
             $markerOptions['shadow'] = $marker->getShadow();
 
         $markerJSONOptions = sprintf('{"map":%s,"position":%s',
