@@ -665,8 +665,6 @@ Marker
                 latitude: 0
                 longitude: 0
                 no_wrap: true
-            icon: "icon_url"
-            shadow: "shadow_url"
             options:
                 option: value
 
