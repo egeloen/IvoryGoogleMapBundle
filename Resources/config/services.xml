@@ -89,14 +89,6 @@
                 <argument>%ivory_google_map.marker.position.no_wrap%</argument>
             </call>
 
-            <call method="setIcon">
-                <argument>%ivory_google_map.marker.icon%</argument>
-            </call>
-            
-            <call method="setShadow">
-                <argument>%ivory_google_map.marker.shadow%</argument>
-            </call>
-
             <call method="setOptions">
                 <argument>%ivory_google_map.marker.options%</argument>
             </call>

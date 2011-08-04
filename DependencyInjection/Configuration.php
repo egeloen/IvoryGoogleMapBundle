@@ -122,8 +122,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('no_wrap')->defaultTrue()->end()
                             ->end()
                         ->end()
-                        ->scalarNode('icon')->defaultNull()->end()
-                        ->scalarNode('shadow')->defaultNull()->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('map_options')->prototype('scalar')->end()
                         ->end()
