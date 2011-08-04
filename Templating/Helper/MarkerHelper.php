@@ -50,6 +50,8 @@ class MarkerHelper
      */
     public function render(Marker $marker, Map $map)
     {
+        $html = array();
+        
         $markerJSONOptions = sprintf('{"map":%s,"position":%s',
             $map->getJavascriptVariable(),
             $this->coordinateHelper->render($marker->getPosition())
@@ -60,7 +62,10 @@ class MarkerHelper
         if($marker->hasIcon())
         {
             if($marker->getIcon() instanceof MarkerImage)
-                $markerJSONOptions .= ', "icon":'.$this->markerImageHelper->render($marker->getIcon());
+            {
+                $html[] = $this->markerImageHelper->render($marker->getIcon());
+                $markerJSONOptions .= ', "icon":'.$marker->getIcon()->getJavascriptVariable();
+            }
             else
                 $markerOptions['icon'] = $marker->getIcon();
         }
@@ -72,8 +77,6 @@ class MarkerHelper
             $markerJSONOptions .= ','.substr(json_encode($markerOptions), 1);
         else
             $markerJSONOptions .= '}';
-
-        $html = array();
 
         $html[] = sprintf('var %s = new google.maps.Marker(%s);'.PHP_EOL,
             $marker->getJavascriptVariable(),
