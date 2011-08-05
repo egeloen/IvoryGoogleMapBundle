@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Coordinate" table="ivory_coordinate">
+    <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Size" table="ivory_size">
         <field name="width" type="float" />
         <field name="height" type="float" />
         <field name="widthUnit" column="width_unit" type="string" length="20" nullable="true" />
