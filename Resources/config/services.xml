@@ -234,6 +234,16 @@
             </call>
         </service>
         
+        <service id="ivory_google_map.marker_shape" class="%ivory_google_map.marker_shape.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.marker_shape.prefix_javascript_variable%</argument>
+            </call>
+            
+            <call method="setType">
+                <argument>%ivory_google_map.marker_shape.type%</argument>
+            </call>
+        </service>
+        
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
         
         <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype">
