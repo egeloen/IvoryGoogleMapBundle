@@ -32,22 +32,12 @@ class Event extends AbstractAsset
     
     /**
      * Create an event
-     *
-     * @param string $instance
-     * @param string $eventName
-     * @param string $handle
-     * @param boolean $capture 
      */
-    public function __construct($instance, $eventName, $handle, $capture = false)
+    public function __construct()
     {
         parent::__construct();
         
         $this->setPrefixJavascriptVariable('event_');
-        
-        $this->instance = $instance;
-        $this->eventName = $eventName;
-        $this->handle = $handle;
-        $this->capture = $capture;
     }
     
     /**

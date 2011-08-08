@@ -14,8 +14,8 @@ class Event extends BaseEvent
     /**
      * Create an event
      */
-    public function __construct($instance, $eventName, $handle, $capture = false)
+    public function __construct()
     {
-        parent::__construct($instance, $eventName, $handle, $capture);
+        parent::__construct();
     }
 }
