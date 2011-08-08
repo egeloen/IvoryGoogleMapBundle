@@ -244,7 +244,7 @@ You can set the marker position like that:
 
     $marker->setPosition($latitude, $longitude);
 
-The icon marker is configuable like that:
+The icon is configuable like that:
 
 ::
 
@@ -263,6 +263,16 @@ The shadow is configurable like that:
 ::
 
     $marker->setShadow($markerImage);
+
+The shape is configurable like that:
+
+::
+
+    $marker->setShape($type, $coordinates);
+
+::
+
+    $marker->setShape($markerShape);
 
 All the other google map marker options available at http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions are configurable like that:
 
@@ -314,6 +324,29 @@ You can set the scaled size like that:
 ::
 
     $markerImage->setScaledSize(width, height);
+
+Marker shape
+------------
+
+By default, a marker shape has a ``poly`` type and has no coordinates. At least, you must specify an array of coordinates
+
+::
+
+    $markerShape->setCoordinates(array(0, 1, 0, 2, ...));
+
+If you want you can add coordinate one by one like that:
+
+::
+
+    $markerShape->addCoordinate(0);
+    $markerShape->addCoordinate(1);
+    $markerShape->addCoordinate(0);
+
+You can set the marker shape type like that:
+
+::
+
+    $markerShape->setType($type);
 
 Info window
 -----------
@@ -687,6 +720,19 @@ Marker image
             helper: Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper
             prefix_javascript_variable: "marker_image_"
             url: "marker_image_url"
+
+Marker shape
+------------
+
+::
+
+    # app/config/config.yml
+    ivory_google_map:
+        marker_shape:
+            class: Ivory\GoogleMapBundle\Model\MarkerShape
+            helper: Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper
+            prefix_javascript_variable: "marker_shape_"
+            type: "poly"
 
 Info window
 -----------
@@ -1419,6 +1465,15 @@ Class definition
 
             // Link a marker to an info window entity
             $this->infoWindow = new InfoWindow();
+
+            // Link marker to an icon
+            $this->icon = new MarkerImage();
+
+            // Link marker to a shadow
+            $this->shadow = new MarkerImage();
+           
+            // Link marker to a shape
+            $this->shape = new MarkerShape();
         }
 
         /**
@@ -1448,6 +1503,9 @@ Doctrine mapping
             </id>
             <one-to-one field="position" target-entity="..\..\Entity\Coordinate" />
             <one-to-one field="infoWindow" target-entity="..\..\Entity\InfoWindow" />
+            <one-to-one field="icon" target-entity="..\..\Entity\MarkerImage" />
+            <one-to-one field="shadow" target-entity="..\..\Entity\MarkerImage" />
+            <one-to-one field="shape" target-entity="..\..\Entity\MarkerShape" />
         </entity>
 
     </doctrine-mapping>
@@ -1495,7 +1553,7 @@ Doctrine mapping
 
 ::
 
-    // src/YourBundle/Resources/config/doctrine/Marker.orm.xml
+    // src/YourBundle/Resources/config/doctrine/MarkerImage.orm.xml
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
@@ -1508,6 +1566,62 @@ Doctrine mapping
             <one-to-one field="origin" target-entity="..\..\Entity\Point" />
             <one-to-one field="size" target-entity="..\..\Entity\Size" />
             <one-to-one field="scaledSize" target-entity="..\..\Entity\Size" />
+        </entity>
+
+    </doctrine-mapping>
+
+Marker shape
+------------
+
+Class definition
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Entity/MarkerShape.php
+    use Ivory\GoogleMapBundle\Entity\MarkerShape as BaseMarkerShape;
+
+    class MarkerShape extends BaseMarkerShape
+    {
+        /**
+         * @var integer Marker shape ID
+         */
+        protected $id;
+
+        /**
+         * Create a marker shape
+         */
+        public function __construct()
+        {
+            // Call parent constructor
+            parent::__construct();
+        }
+
+        /**
+         * Gets the marker shape ID
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+    }
+
+Doctrine mapping
+~~~~~~~~~~~~~~~~
+
+::
+
+    // src/YourBundle/Resources/config/doctrine/MarkerShape.orm.xml
+    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+        <entity name="..\..\Entity\MarkerShape">
+            <id name="id" type="integer">
+                <generator strategy="AUTO" />
+            </id>
         </entity>
 
     </doctrine-mapping>
