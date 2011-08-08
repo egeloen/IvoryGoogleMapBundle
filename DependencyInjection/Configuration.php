@@ -411,6 +411,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\MarkerShape')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
+                        ->scalarNode('type')->defaultValue('poly')->end()
                     ->end()
                 ->end()
             ->end();
