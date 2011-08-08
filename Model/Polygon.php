@@ -40,6 +40,16 @@ class Polygon extends AbstractAsset
     {
         return $this->coordinates;
     }
+    
+    /**
+     * Sets the polygon coordinates
+     *
+     * @param array $coordinates 
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+    }
 
     /**
      * Add a coordinate to the polygon

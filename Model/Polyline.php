@@ -40,6 +40,16 @@ class Polyline extends AbstractAsset
     {
         return $this->coordinates;
     }
+    
+    /**
+     * Sets the polyline coordinates
+     *
+     * @param array $coordinates 
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+    }
 
     /**
      * Add a coordinate to the polyline
