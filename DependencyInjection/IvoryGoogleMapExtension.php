@@ -42,6 +42,7 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadPoint($config, $container);
         $this->loadSize($config, $container);
         $this->loadMarkerImage($config, $container);
+        $this->loadMarkerShape($config, $container);
         $this->loadEventManager($config, $container);
         $this->loadEvent($config, $container);
 
@@ -265,6 +266,19 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.marker_image.helper', $config['marker_image']['helper']);
         $container->setParameter('ivory_google_map.marker_image.prefix_javascript_variable', $config['marker_image']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
+    }
+    
+    /**
+     * Loads marker shape configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMarkerShape(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.marker_shape.class', $config['marker_shape']['class']);
+        $container->setParameter('ivory_google_map.marker_shape.helper', $config['marker_shape']['helper']);
+        $container->setParameter('ivory_google_map.marker_shape.prefix_javascript_variable', $config['marker_shape']['prefix_javascript_variable']);
     }
     
     /**

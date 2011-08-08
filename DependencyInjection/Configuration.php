@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
         $this->addPointSection($rootNode);
         $this->addSizeSection($rootNode);
         $this->addMarkerImageSection($rootNode);
+        $this->addMarkerShapeSection($rootNode);
         $this->addEventManagerSection($rootNode);
         $this->addEventSection($rootNode);
         
@@ -391,6 +392,25 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_image_')->end()
                         ->scalarNode('url')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the marker shape section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMarkerShapeSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('marker_shape')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\MarkerShape')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper')->end()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
                     ->end()
                 ->end()
             ->end();
