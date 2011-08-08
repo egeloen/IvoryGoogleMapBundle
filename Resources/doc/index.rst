@@ -73,7 +73,14 @@ List of available services
     /**
      * @var Ivory\GoogleMapBundle\Model\MarkerImage
      */
-    $bound = $this->get('ivory_google_map.marker_image');
+    $markerImage = $this->get('ivory_google_map.marker_image');
+
+::
+
+    /**
+     * @var Ivory\GoogleMapBundle\Model\MarkerShape
+     */
+    $markerShape = $this->get('ivory_google_map.marker_shape');
 
 ::
 
@@ -150,14 +157,14 @@ List of available services
     /**
      * @var Ivory\GoogleMapBundle\Model\Point
      */
-    $bound = $this->get('ivory_google_map.point');
+    $point = $this->get('ivory_google_map.point');
 
 ::
 
     /**
      * @var Ivory\GoogleMapBundle\Model\Size
      */
-    $bound = $this->get('ivory_google_map.size');
+    $size = $this->get('ivory_google_map.size');
 
 Usage
 =====
