@@ -265,6 +265,7 @@
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
             <argument type="service" id="ivory_google_map.helper.marker_image" />
+            <argument type="service" id="ivory_google_map.helper.marker_shape" />
         </service>
 
         <service id="ivory_google_map.helper.info_window" class="%ivory_google_map.info_window.helper%" public="false">
@@ -297,6 +298,8 @@
             <argument type="service" id="ivory_google_map.helper.point" />
             <argument type="service" id="ivory_google_map.helper.size" />
         </service>
+        
+        <service id="ivory_google_map.helper.marker_shape" class="%ivory_google_map.marker_shape.helper%" public="false" />
         
         <service id="ivory_google_map.helper.point" class="%ivory_google_map.point.helper%" public="false" />
         
