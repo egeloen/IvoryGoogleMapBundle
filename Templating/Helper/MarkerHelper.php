@@ -27,6 +27,11 @@ class MarkerHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper
      */
     protected $markerImageHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper
+     */
+    protected $markerShapeHelper;
 
     /**
      * Constructs a marker helper
@@ -34,12 +39,14 @@ class MarkerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper $infoWindowHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper $markerImageHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper $markerShapeHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper)
+    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper, MarkerShapeHelper $markerShapeHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->infoWindowHelper = $infoWindowHelper;
         $this->markerImageHelper = $markerImageHelper;
+        $this->markerShapeHelper = $markerShapeHelper;
     }
     
     /**
@@ -70,6 +77,12 @@ class MarkerHelper
         {
             $html[] = $this->markerImageHelper->render($marker->getShadow());
             $markerJSONOptions .= ', "shadow":'.$marker->getShadow()->getJavascriptVariable();
+        }
+        
+        if($marker->hasShape())
+        {
+            $html[] = $this->markerShapeHelper->render($marker->getShape());
+            $markerJSONOptions .= ', "shape":'.$marker->getShape()->getJavascriptVariable();
         }
 
         if(!empty($markerOptions))
