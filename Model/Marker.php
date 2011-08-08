@@ -24,6 +24,11 @@ class Marker extends AbstractAsset
      * @var Ivory\GoogleMapBundle\Model\MarkerImage Marker shadow
      */
     protected $shadow = null;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\MarkerShape Marker shape
+     */
+    protected $shape = null;
 
     /**
      * @var array Marker options
@@ -170,6 +175,52 @@ class Marker extends AbstractAsset
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
             $this->shadow = $args[0];
+        else
+            throw new \InvalidArgumentException();
+    }
+    
+    /**
+     * Checks if the marker has a shape
+     *
+     * @return boolean TRUE if the marker has a shape else FALSE
+     */
+    public function hasShape()
+    {
+        return !is_null($this->shape);
+    }
+    
+    /**
+     * Gets the marker shape
+     *
+     * @return Ivory\GoogleMapBundle\Model\MarkerShape
+     */
+    public function getShape()
+    {
+        return $this->shape;
+    }
+    
+    /**
+     * Sets the marker shape
+     * 
+     * Available prototype:
+     * 
+     * public function setShape(Ivory\GoogleMapBundle\Model\MarkerShape $shape)
+     * public function setShape(string $type, array $coordinates)
+     */
+    public function setShape()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]) && isset($args[1]) && is_array($args[1]))
+        {
+            if($this->shape === null)
+                $this->shape = new MarkerShape();
+            
+            $this->shape->setType($args[0]);
+            $this->shape->setCoordinates($args[1]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof MarkerShape))
+            $this->shape = $args[0];
         else
             throw new \InvalidArgumentException();
     }
