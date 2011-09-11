@@ -57,13 +57,13 @@ class InfoWindow extends AbstractAsset
      * Available prototype:
      * 
      * public function setPosition(Ivory\GoogleMapBundle\Model\Coordinate $position)
-     * public function setPosition(integer $latitude, integer $longitude, boolean $noWrap = true)
+     * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->position === null)
                 $this->position = new Coordinate();

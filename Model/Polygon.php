@@ -57,13 +57,13 @@ class Polygon extends AbstractAsset
      * Available prototype:
      * 
      * public function addCoordinate(Ivory\GoogleMapBundle\Model\Coordinate $coordinate)
-     * public function addCoordinate(integer $latitude, integer $longitude, boolean $noWrap = true)
+     * public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function addCoordinate()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if(isset($args[2]) && is_bool($args[2]))
                 $this->coordinates[] = new Coordinate($args[0], $args[1], $args[2]);

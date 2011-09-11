@@ -51,7 +51,7 @@ class Rectangle extends AbstractAsset
      * 
      * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
      * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
-     * public function setBound(integer $southWestLatitude, integer $southWestLongitude, integer $northEastLatitude, integer $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
+     * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
     {
@@ -64,18 +64,16 @@ class Rectangle extends AbstractAsset
             $this->bound->setSouthWest($args[0]);
             $this->bound->setNorthEast($args[1]);
         }
-        else if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]) && isset($args[2]) && is_int($args[2]) && isset($args[3]) && is_int($args[3]))
+        else if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]) && isset($args[2]) && is_numeric($args[2]) && isset($args[3]) && is_numeric($args[3]))
         {
             $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
             $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
             
             if(isset($args[4]) && is_bool($args[4]))
-            {
                 $this->bound->getSouthWest()->setNoWrap($args[4]);
-                
-                if(isset($args[5]) && is_bool($args[5]))
-                    $this->bound->getNorthEast()->setNoWrap($args[5]);
-            }
+
+            if(isset($args[5]) && is_bool($args[5]))
+                $this->bound->getNorthEast()->setNoWrap($args[5]);
         }
         else
             throw new \InvalidArgumentException();

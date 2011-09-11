@@ -90,14 +90,14 @@ class MarkerImage extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setAnchor(integer x, integer y)
+     * public function setAnchor(double x, double y)
      * public function setAnchor(Ivory\GoogleMapBundle\Model\Point $anchor)
      */
     public function setAnchor()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->anchor === null)
                 $this->anchor = new Point();
@@ -136,14 +136,14 @@ class MarkerImage extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setOrigin(integer x, integer y)
+     * public function setOrigin(double x, double y)
      * public function setOrigin(Ivory\GoogleMapBundle\Model\Point $anchor)
      */
     public function setOrigin()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->origin === null)
                 $this->origin = new Point();
@@ -182,12 +182,12 @@ class MarkerImage extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setScaledSize(integer $width, integer $height, string $widthUnit = null, string $heightUnit = null)
+     * public function setScaledSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
      * public function setScaledSize(Size $scaledSize)
      */
     public function setScaledSize()
     {
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->scaledSize === null)
                 $this->scaledSize = new Size($args[0], $args[1]);
@@ -195,11 +195,11 @@ class MarkerImage extends AbstractAsset
             $this->scaledSize->setWidth($args[0]);
             $this->scaledSize->setHeight($args[1]);
             
-            if(isset($args[2]) && is_string($args[2]) && isset($args[3]) && is_string($args[3]))
-            {
+            if(isset($args[2]) && is_string($args[2]))
                 $this->scaledSize->setWidthUnit($args[2]);
+            
+            if(isset($args[3]) && is_string($args[3]))
                 $this->scaledSize->setHeightUnit($args[3]);
-            }
         }
         else if(isset($args[0]) && ($args[0] instanceof Size))
             $this->scaledSize = $scaledSize;
@@ -232,14 +232,14 @@ class MarkerImage extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setSize(integer $width, integer $height, string $widthUnit = null, string $heightUnit = null)
+     * public function setSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
      * public function setSize(Size $scaledSize)
      */
     public function setSize()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && is_int($args[0]) && isset($args[1]) && is_int($args[1]))
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->size === null)
                 $this->size = new Size($args[0], $args[1]);
@@ -247,11 +247,11 @@ class MarkerImage extends AbstractAsset
             $this->size->setWidth($args[0]);
             $this->size->setHeight($args[1]);
             
-            if(isset($args[2]) && is_string($args[2]) && isset($args[3]) && is_string($args[3]))
-            {
+            if(isset($args[2]) && is_string($args[2]))
                 $this->size->setWidthUnit($args[2]);
+            
+            if(isset($args[3]) && is_string($args[3]))
                 $this->size->setHeightUnit($args[3]);
-            }
         }
         else if(isset($args[0]) && ($args[0] instanceof Size))
             $this->size = $scaledSize;
