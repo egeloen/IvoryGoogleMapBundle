@@ -178,7 +178,7 @@ You can set the map center and the zoom like that:
 ::
 
     $map->setCenter($latitude, $longitude);
-    $map->setOption('zoom', 10);
+    $map->setMapOption('zoom', 10);
 
 If you want the map zooms automatically on the different elements added on it, you just have to enable the auto zoom before you add each objects like that:
 
