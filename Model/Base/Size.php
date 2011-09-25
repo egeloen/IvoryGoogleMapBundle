@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Size which describes a google map size
@@ -40,10 +40,11 @@ class Size
      */
     public function __construct($width, $height, $widthUnit = null, $heightUnit = null)
     {
-        $this->width = $width;
-        $this->height = $height;
-        $this->widthUnit = $widthUnit;
-        $this->heightUnit = $heightUnit;
+        $this->setWidth($width);
+        $this->setHeight($height);
+        
+        $this->setWidthUnit($widthUnit);
+        $this->setHeightUnit($heightUnit);
     }
     
     /**
@@ -73,7 +74,10 @@ class Size
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        if(is_numeric($width))
+            $this->width = $width;
+        else
+            throw new \InvalidArgumentException('The width of a size must be a numeric value.');
     }
     
     /**
@@ -93,7 +97,10 @@ class Size
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        if(is_numeric($height))
+            $this->height = $height;
+        else
+            throw new \InvalidArgumentException('The height of a size must be a numeric value.');
     }
     
     /**
@@ -113,7 +120,10 @@ class Size
      */
     public function setWidthUnit($widthUnit)
     {
-        $this->widthUnit = $widthUnit;
+        if(is_string($widthUnit))
+            $this->widthUnit = $widthUnit;
+        else
+            throw new \InvalidArgumentException('The width unit of a size must be a string value.');
     }
     
     /**
@@ -133,6 +143,9 @@ class Size
      */
     public function setHeightUnit($heightUnit)
     {
-        $this->heightUnit = $heightUnit;
+        if(is_string($heightUnit))
+            $this->heightUnit = $heightUnit;
+        else
+            throw new \InvalidArgumentException('The height unit of a size must be a string value.');
     }
 }
