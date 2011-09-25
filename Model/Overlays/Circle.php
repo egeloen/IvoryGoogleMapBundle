@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Circle which describes a google map circle
@@ -8,10 +10,10 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Circle
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Circle extends AbstractAsset
+class Circle extends AbstractAsset implements IExtendable
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate Circle center
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Circle center
      */
     protected $center = null;
 
@@ -41,7 +43,7 @@ class Circle extends AbstractAsset
     /**
      * Gets the circle center
      *
-     * @return Ivory\GoogleMapBundle\Model\Coordinate
+     * @return Ivory\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getCenter()
     {
@@ -53,7 +55,7 @@ class Circle extends AbstractAsset
      * 
      * Available prototype:
      * 
-     * public function setCenter(Ivory\GoogleMapBundle\Model\Coordinate $center)
+     * public function setCenter(Ivory\GoogleMapBundle\Model\Base\Coordinate $center)
      * public function setCenter(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setCenter()
@@ -71,7 +73,11 @@ class Circle extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->center = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The center setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setCenter(Ivory\GoogleMapBundle\Model\Base\Coordinate $center)', 
+                ' - public function setCenter(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
 
     /**
@@ -91,7 +97,10 @@ class Circle extends AbstractAsset
      */
     public function setRadius($radius)
     {
-        $this->radius = $radius;
+        if(is_numeric($radius))
+            $this->radius = $radius;
+        else
+            throw new \InvalidArgumentException('The radius of a circle must be a numeric value.');
     }
 
     /**
@@ -111,10 +120,8 @@ class Circle extends AbstractAsset
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
+        foreach($options as $options => $value)
+            $this->setOption($option, $value);
     }
 
     /**
@@ -125,7 +132,10 @@ class Circle extends AbstractAsset
      */
     public function getOption($option)
     {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
+        if(is_string($option))
+            return isset($this->options[$option]) ? $this->options[$option] : null;
+        else
+            throw new \InvalidArgumentException('The option property of a circle must be a string value.');
     }
 
     /**
@@ -136,6 +146,9 @@ class Circle extends AbstractAsset
      */
     public function setOption($option, $value)
     {
-        $this->options[$option] = $value;
+        if(is_string($option))
+            $this->options[$option] = $value;
+        else
+            throw new \InvalidArgumentException('The option property of a circle must be a string value.');
     }
 }
