@@ -36,7 +36,7 @@ class Map extends AbstractAsset
      */
     protected $mapOptions = array(
         'mapTypeId' => 'roadmap',
-        'zoom'      => 10
+        'zoom'      => 3
     );
 
     /**

@@ -67,7 +67,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('type')->defaultValue('roadmap')->end()
-                        ->scalarNode('zoom')->defaultValue(10)->end()
+                        ->scalarNode('zoom')->defaultValue(3)->end()
                         ->scalarNode('width')->defaultValue('300px')->end()
                         ->scalarNode('height')->defaultValue('300px')->end()
                         ->arrayNode('map_options')
