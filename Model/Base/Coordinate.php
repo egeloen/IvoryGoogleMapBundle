@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Coordinate which describes a google map coordinate
@@ -34,9 +34,9 @@ class Coordinate
      */
     public function __construct($latitude = 0, $longitude = 0, $noWrap = true)
     {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-        $this->noWrap = $noWrap;
+        $this->setLatitude($latitude);
+        $this->setLongitude($longitude);
+        $this->setNoWrap($noWrap);
     }
 
     /**
@@ -56,7 +56,10 @@ class Coordinate
      */
     public function setLatitude($latitude)
     {
-        $this->latitude = $latitude;
+        if(is_numeric($latitude))
+            $this->latitude = $latitude;
+        else
+            throw new \InvalidArgumentException('The latitude of a coordinate must be a numeric value.');
     }
 
     /**
@@ -76,7 +79,10 @@ class Coordinate
      */
     public function setLongitude($longitude)
     {
-        $this->longitude = $longitude;
+        if(is_numeric($longitude))
+            $this->longitude = $longitude;
+        else
+            throw new \InvalidArgumentException('The longitude of a coordinate must be a numeric value.');
     }
 
     /**
@@ -96,6 +102,9 @@ class Coordinate
      */
     public function setNoWrap($noWrap)
     {
-        $this->noWrap = $noWrap;
+        if(is_bool($noWrap))
+            $this->noWrap = $noWrap;
+        else
+            throw new \InvalidArgumentException('The no wrap coordinate property must be a boolean value.');
     }
 }
