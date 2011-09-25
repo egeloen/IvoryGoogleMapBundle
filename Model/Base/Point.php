@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Point which describes a google map point
@@ -21,12 +21,15 @@ class Point
     protected $y = 0;
     
     /**
-     * Create a point
+     * Creates a point
+     *
+     * @param double $x X coordinate
+     * @param double $y Y coordinate
      */
     public function __construct($x = 0, $y = 0)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->setX($x);
+        $this->setY($y);
     }
     
     /**
@@ -46,7 +49,10 @@ class Point
      */
     public function setX($x)
     {
-        $this->x = $x;
+        if(is_numeric($x))
+            $this->x = $x;
+        else
+            throw new \InvalidArgumentException('The x coordinate of a point must be a numeric value.');
     }
     
     /**
@@ -66,6 +72,9 @@ class Point
      */
     public function setY($y)
     {
-        $this->y = $y;
+        if(is_numeric($y))
+            $this->y = $y;
+        else
+            throw new \InvalidArgumentException('The y coordinate of a point must be a numeric value.');
     }
 }
