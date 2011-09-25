@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Base;
+
+use Ivory\GoogleMapBundle\Model\Overlays\IExtendable;
 
 /**
  * Bound wich describes a google map bound
@@ -11,12 +13,12 @@ namespace Ivory\GoogleMapBundle\Model;
 class Bound extends AbstractAsset
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate South west bound
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate South west bound
      */
     protected $southWest = null;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate North east bound
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate North east bound
      */
     protected $northEast = null;
     
@@ -69,7 +71,7 @@ class Bound extends AbstractAsset
     /**
      * Gets the south west bound
      *
-     * @return Ivory\GoogleMapBundle\Model\Coordinate
+     * @return Ivory\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getSouthWest()
     {
@@ -79,7 +81,7 @@ class Bound extends AbstractAsset
     /**
      * Sets the south west bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Coordinate $southWest
+     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest
      */
     public function setSouthWest(Coordinate $southWest = null)
     {
@@ -89,7 +91,7 @@ class Bound extends AbstractAsset
     /**
      * Gets the north east bound
      *
-     * @return Ivory\GoogleMapBundle\Model\Coordinate
+     * @return Ivory\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getNorthEast()
     {
@@ -99,7 +101,7 @@ class Bound extends AbstractAsset
     /**
      * Sets the north east bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Coordinate $northEast
+     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast
      */
     public function setNorthEast(Coordinate $northEast = null)
     {
@@ -130,11 +132,11 @@ class Bound extends AbstractAsset
     }
     
     /**
-     * Add a google map object for bound extend it
+     * Add an overlay google map extendable object for bound extend it
      *
-     * @param mixed $extend 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\IExtendable $extend 
      */
-    public function extend($extend)
+    public function extend(IExtendable $extend)
     {
         $this->extends[] = $extend;
     }
