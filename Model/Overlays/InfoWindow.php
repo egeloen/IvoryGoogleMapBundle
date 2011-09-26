@@ -51,7 +51,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      *
      * Available prototype:
      * 
-     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)
+     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position = null)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
@@ -69,8 +69,10 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
             if(isset($args[2]) && is_bool($args[2]))
                 $this->position->setNoWrap($args[2]);
         }
-        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->position = $args[0];
+        else if(!isset($args[0]))
+            $this->position = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The position setter arguments is invalid.',
