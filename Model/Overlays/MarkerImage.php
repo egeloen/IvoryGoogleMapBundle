@@ -1,6 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Point;
+use Ivory\GoogleMapBundle\Model\Base\Size;
 
 /**
  * Marker image which describes a google map marker image
@@ -16,22 +19,22 @@ class MarkerImage extends AbstractAsset
     protected $url = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Point Anchor of the marker image
+     * @var Ivory\GoogleMapBundle\Model\Base\Point Anchor of the marker image
      */
     protected $anchor = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Point Origin of the marker image
+     * @var Ivory\GoogleMapBundle\Model\Base\Point Origin of the marker image
      */
     protected $origin = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Size Scaled size of the marker image
+     * @var Ivory\GoogleMapBundle\Model\Base\Size Scaled size of the marker image
      */
     protected $scaledSize = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Size Size of the marker image
+     * @var Ivory\GoogleMapBundle\Model\Base\Size Size of the marker image
      */
     protected $size = null;
     
@@ -62,7 +65,10 @@ class MarkerImage extends AbstractAsset
      */
     public function setUrl($url)
     {
-        $this->url = $url;
+        if(is_string($url))
+            $this->url = $url;
+        else
+            throw new \InvalidArgumentException('The url of a maker image must be a string value.');
     }
     
     /**
@@ -78,7 +84,7 @@ class MarkerImage extends AbstractAsset
     /**
      * Gets the anchor of the marker image
      *
-     * @return Ivory\GoogleMapBundle\Model\Point
+     * @return Ivory\GoogleMapBundle\Model\Base\Point
      */
     public function getAnchor()
     {
@@ -91,7 +97,7 @@ class MarkerImage extends AbstractAsset
      * Available prototype:
      * 
      * public function setAnchor(double x, double y)
-     * public function setAnchor(Ivory\GoogleMapBundle\Model\Point $anchor)
+     * public function setAnchor(Ivory\GoogleMapBundle\Model\Base\Point $anchor)
      */
     public function setAnchor()
     {
@@ -108,7 +114,11 @@ class MarkerImage extends AbstractAsset
         else if($args[0] instanceof Point)
             $this->anchor = $anchor;
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The anchor setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setAnchor(double x, double y)',
+                ' - public function setAnchor(Ivory\GoogleMapBundle\Model\Base\Point $anchor)'));
     }
     
     /**
@@ -124,7 +134,7 @@ class MarkerImage extends AbstractAsset
     /**
      * Gets the origin of the marker image
      *
-     * @return Ivory\GoogleMapBundle\Model\Point
+     * @return Ivory\GoogleMapBundle\Model\Base\Point
      */
     public function getOrigin()
     {
@@ -137,7 +147,7 @@ class MarkerImage extends AbstractAsset
      * Available prototype:
      * 
      * public function setOrigin(double x, double y)
-     * public function setOrigin(Ivory\GoogleMapBundle\Model\Point $anchor)
+     * public function setOrigin(Ivory\GoogleMapBundle\Model\Base\Point $origin)
      */
     public function setOrigin()
     {
@@ -154,7 +164,11 @@ class MarkerImage extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Point))
             $this->origin = $anchor;
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The anchor setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setOrigin(double x, double y)',
+                ' - public function setOrigin(Ivory\GoogleMapBundle\Model\Base\Point $origin)'));
     }
     
     /**
@@ -170,7 +184,7 @@ class MarkerImage extends AbstractAsset
     /**
      * Gets the scaled size of the marker image
      *
-     * @return Ivory\GoogleMapBundle\Model\Size
+     * @return Ivory\GoogleMapBundle\Model\Base\Size
      */
     public function getScaledSize()
     {
@@ -183,7 +197,7 @@ class MarkerImage extends AbstractAsset
      * Available prototype:
      * 
      * public function setScaledSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
-     * public function setScaledSize(Size $scaledSize)
+     * public function setScaledSize(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)
      */
     public function setScaledSize()
     {
@@ -204,7 +218,11 @@ class MarkerImage extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Size))
             $this->scaledSize = $scaledSize;
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The anchor setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setScaledSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)',
+                ' - public function setScaledSize(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)'));
     }
     
     /**
@@ -220,7 +238,7 @@ class MarkerImage extends AbstractAsset
     /**
      * Gets the size of the marker image
      *
-     * @return Ivory\GoogleMapBundle\Model\Size
+     * @return Ivory\GoogleMapBundle\Model\Base\Size
      */
     public function getSize()
     {
@@ -233,7 +251,7 @@ class MarkerImage extends AbstractAsset
      * Available prototype:
      * 
      * public function setSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
-     * public function setSize(Size $scaledSize)
+     * public function setSize(Ivory\GoogleMapBundle\Model\Base\Size $size)
      */
     public function setSize()
     {
@@ -256,6 +274,10 @@ class MarkerImage extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Size))
             $this->size = $scaledSize;
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The anchor setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)',
+                ' - public function setSize(Ivory\GoogleMapBundle\Model\Base\Size $size)'));
     }
 }
