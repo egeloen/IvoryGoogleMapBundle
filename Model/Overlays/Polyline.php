@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Polyline which describes a google map polyline
@@ -30,6 +32,14 @@ class Polyline extends AbstractAsset
         
         $this->setPrefixJavascriptVariable('polyline_');
     }
+    
+    /**
+     * Reset the coordinates
+     */
+    protected function resetCoordinates()
+    {
+        $this->coordinates = array();
+    }
 
     /**
      * Gets the polyline coordinates
@@ -48,7 +58,10 @@ class Polyline extends AbstractAsset
      */
     public function setCoordinates($coordinates)
     {
-        $this->coordinates = $coordinates;
+        $this->resetCoordinates();
+        
+        foreach($this->coordinates as $coordinate)
+            $this->addCoordinate($coordinate);
     }
 
     /**
@@ -56,7 +69,7 @@ class Polyline extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function addCoordinate(Ivory\GoogleMapBundle\Model\Coordinate $coordinate)
+     * public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)
      * public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function addCoordinate()
@@ -73,7 +86,11 @@ class Polyline extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->coordinates[] = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The coordinate adder arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)',
+                ' - public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
 
     /**
@@ -93,10 +110,8 @@ class Polyline extends AbstractAsset
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
+        foreach($options as $option => $value)
+            $this->setOption($option, $value);
     }
 
     /**
@@ -107,7 +122,10 @@ class Polyline extends AbstractAsset
      */
     public function getOption($option)
     {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
+        if(is_string($option))
+            return isset($this->options[$option]) ? $this->options[$option] : null;
+        else
+            throw new \InvalidArgumentException('The option property of a polyline must be a string value.');
     }
 
     /**
@@ -118,6 +136,9 @@ class Polyline extends AbstractAsset
      */
     public function setOption($option, $value)
     {
-        $this->options[$option] = $value;
+        if(is_string($option))
+            $this->options[$option] = $value;
+        else
+            throw new \InvalidArgumentException('The option property of a polyline must be a string value.');
     }
 }
