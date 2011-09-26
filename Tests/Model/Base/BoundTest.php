@@ -2,6 +2,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Base;
 
+use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractJavascriptVariableAssetTest;
+
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
@@ -12,7 +14,7 @@ use Ivory\GoogleMapBundle\Model\Overlays;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class BoundTest extends \PHPUnit_Framework_TestCase
+class BoundTest extends AbstractJavascriptVariableAssetTest
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Bound Tested bound
@@ -28,11 +30,18 @@ class BoundTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * @override
+     */
+    public function testJavascriptVariable() 
+    {
+        $this->assertEquals(substr(self::$bound->getJavascriptVariable(), 0, 6), 'bound_');
+    }
+    
+    /**
      * Checks the bound default value
      */
     public function testDefaultValues()
     {
-        $this->assertEquals(substr(self::$bound->getJavascriptVariable(), 0, 6), 'bound_');
         $this->assertFalse(self::$bound->hasCoordinates());
         $this->assertNull(self::$bound->getNorthEast());
         $this->assertNull(self::$bound->getSouthWest());
