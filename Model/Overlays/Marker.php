@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Marker which describes a google map marker
@@ -8,25 +10,25 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Marker extends AbstractAsset
+class Marker extends AbstractAsset implements IExtendable
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate Marker position
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Marker position
      */
     protected $position = null;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\MarkerImage Marker icon
+     * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerImage Marker icon
      */
     protected $icon = null;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\MarkerImage Marker shadow
+     * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerImage Marker shadow
      */
     protected $shadow = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\MarkerShape Marker shape
+     * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerShape Marker shape
      */
     protected $shape = null;
 
@@ -37,7 +39,7 @@ class Marker extends AbstractAsset
     protected $options = array();
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\InfoWindow
+     * @var Ivory\GoogleMapBundle\Model\Overlays\InfoWindow Info window at the marker position
      */
     protected $infoWindow = null;
 
@@ -56,7 +58,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker position
      *
-     * @return Ivory\GoogleMapBundle\Model\Coordinate
+     * @return Ivory\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getPosition()
     {
@@ -68,7 +70,7 @@ class Marker extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setPosition(Ivory\GoogleMapBundle\Model\Coordinate $position)
+     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
@@ -86,7 +88,11 @@ class Marker extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->position = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The position setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
+                ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
     
     /**
@@ -102,7 +108,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker icon
      *
-     * @return Ivory\GoogleMapBundle\Model\MarkerImage
+     * @return Ivory\GoogleMapBundle\Model\Overlays\MarkerImage
      */
     public function getIcon()
     {
@@ -114,8 +120,8 @@ class Marker extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setIcon(string $url);
-     * public function setIcon(Ivory\GoogleMapBundle\Model\MarkerImage $markerImage)
+     * public function setIcon(string $url)
+     * public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)
      */
     public function setIcon()
     {
@@ -131,7 +137,11 @@ class Marker extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
             $this->icon = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The icon setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setIcon(string $url)',
+                ' - public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)'));
     }
     
     /**
@@ -147,7 +157,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker shadow
      *
-     * @return Ivory\GoogleMapBundle\Model\MarkerImage
+     * @return Ivory\GoogleMapBundle\Model\Overlays\MarkerImage
      */
     public function getShadow()
     {
@@ -159,8 +169,8 @@ class Marker extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setShadow(string $url);
-     * public function setShadow(Ivory\GoogleMapBundle\Model\MarkerImage $markerImage)
+     * public function setShadow(string $url)
+     * public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)
      */
     public function setShadow()
     {
@@ -176,7 +186,11 @@ class Marker extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
             $this->shadow = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The shadow setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setShadow(string $url)',
+                ' - public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)'));
     }
     
     /**
@@ -192,7 +206,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the marker shape
      *
-     * @return Ivory\GoogleMapBundle\Model\MarkerShape
+     * @return Ivory\GoogleMapBundle\Model\Overlays\MarkerShape
      */
     public function getShape()
     {
@@ -204,7 +218,7 @@ class Marker extends AbstractAsset
      * 
      * Available prototype:
      * 
-     * public function setShape(Ivory\GoogleMapBundle\Model\MarkerShape $shape)
+     * public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape)
      * public function setShape(string $type, array $coordinates)
      */
     public function setShape()
@@ -222,7 +236,11 @@ class Marker extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof MarkerShape))
             $this->shape = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The shape setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape)',
+                ' - public function setShape(string $type, array $coordinates)'));
     }
 
     /**
@@ -242,10 +260,8 @@ class Marker extends AbstractAsset
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
+        foreach($options as $option => $value)
+            $this->setOption($option, $value);
     }
 
     /**
@@ -256,7 +272,10 @@ class Marker extends AbstractAsset
      */
     public function getOption($option)
     {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
+        if(is_string($option))
+            return isset($this->options[$option]) ? $this->options[$option] : null;
+        else
+            throw new \InvalidArgumentException('The option property of a marker must be a string value.');
     }
 
     /**
@@ -267,7 +286,10 @@ class Marker extends AbstractAsset
      */
     public function setOption($option, $value)
     {
-        $this->options[$option] = $value;
+        if(is_string($option))
+            $this->options[$option] = $value;
+        else
+            throw new \InvalidArgumentException('The option property of a marker must be a string value.');
     }
     
     /**
@@ -283,7 +305,7 @@ class Marker extends AbstractAsset
     /**
      * Gets the info window
      *
-     * @return \Ivory\GoogleMapBundle\Model\InfoWindow
+     * @return \Ivory\GoogleMapBundle\Model\Overlays\InfoWindow
      */
     public function getInfoWindow()
     {
@@ -293,7 +315,7 @@ class Marker extends AbstractAsset
     /**
      * Sets the info window
      *
-     * @param Ivory\GoogleMapBundle\Model\InfoWindow $infoWindow
+     * @param Ivory\GoogleMapBundle\Model\Overlays\InfoWindow $infoWindow
      */
     public function setInfoWindow(InfoWindow $infoWindow)
     {
