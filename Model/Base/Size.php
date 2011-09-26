@@ -13,12 +13,12 @@ class Size
     /**
      * @var double Width size
      */
-    protected $width = null;
+    protected $width = 1;
     
     /**
      * @var double Height size
      */
-    protected $height = null;
+    protected $height = 1;
     
     /**
      * @var string Width unit size
@@ -38,7 +38,7 @@ class Size
      * @param string $widthUnit
      * @param string $heightUnit 
      */
-    public function __construct($width, $height, $widthUnit = null, $heightUnit = null)
+    public function __construct($width = 1, $height = 1, $widthUnit = null, $heightUnit = null)
     {
         $this->setWidth($width);
         $this->setHeight($height);
