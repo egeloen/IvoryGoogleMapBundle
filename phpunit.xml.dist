@@ -2,7 +2,6 @@
 <phpunit bootstrap="./Tests/bootstrap.php">
     <php>
         <!-- <server name="SYMFONY" value="/path/to/symfony" /> -->
-        <!-- <server name="BUNDLE" value="/path/to/bundle" /> -->
     </php>
     <testsuites>
         <testsuite name="IvoryGoogleMapBundle Test Suite">
