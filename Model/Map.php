@@ -2,6 +2,9 @@
 
 namespace Ivory\GoogleMapBundle\Model;
 
+use Ivory\GoogleMapBundle\Model\Base;
+use Ivory\GoogleMapBundle\Model\Overlays;
+
 /**
  * Map wich describes a google map
  * 
@@ -21,12 +24,12 @@ class Map extends AbstractAsset
     protected $autoZoom = false;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate Map center
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Map center
      */
     protected $center = null;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\Bound Map bound
+     * @var Ivory\GoogleMapBundle\Model\Base\Bound Map bound
      */
     protected $bound = null;
 
@@ -96,8 +99,8 @@ class Map extends AbstractAsset
         
         $this->setPrefixJavascriptVariable('map_');
 
-        $this->center = new Coordinate();
-        $this->bound = new Bound();
+        $this->center = new Base\Coordinate();
+        $this->bound = new Base\Bound();
         $this->eventManager = new EventManager();
     }
 
@@ -144,7 +147,7 @@ class Map extends AbstractAsset
     /**
      * Gets the map center
      *
-     * @return Ivroy\GoogleMapBundle\Model\Coordinate
+     * @return Ivroy\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getCenter()
     {
@@ -156,7 +159,7 @@ class Map extends AbstractAsset
      * 
      * Available prototype:
      * 
-     * public function setCenter(Ivory\GoogleMapBundle\Model\Coordinate $center)
+     * public function setCenter(Ivory\GoogleMapBundle\Model\Base\Coordinate $center)
      * public function setCenter(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setCenter()
@@ -171,16 +174,20 @@ class Map extends AbstractAsset
             if(isset($args[2]) && is_bool($args[2]))
                 $this->center->setNoWrap($args[2]);
         }
-        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
+        else if(isset($args[0]) && ($args[0] instanceof Base\Coordinate))
             $this->center = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The center setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setCenter(Ivory\GoogleMapBundle\Model\Base\Coordinate $center)',
+                ' - public function setCenter(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
     
     /**
      * Gets the map bound
      *
-     * @return Ivory\GoogleMapBundle\Model\Bound
+     * @return Ivory\GoogleMapBundle\Model\Base\Bound
      */
     public function getBound()
     {
@@ -192,17 +199,17 @@ class Map extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
-     * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
+     * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)
+     * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && ($args[0] instanceof Bound))
+        if(isset($args[0]) && ($args[0] instanceof Base\Bound))
             $this->bound = $args[0];
-        else if(isset($args[0]) && ($args[0] instanceof Coordinate) && isset($args[1]) && ($args[1] instanceof Coordinate))
+        else if(isset($args[0]) && ($args[0] instanceof Base\Coordinate) && isset($args[1]) && ($args[1] instanceof Base\Coordinate))
         {
             $this->bound->setSouthWest($args[0]);
             $this->bound->setNorthEast($args[1]);
@@ -219,7 +226,12 @@ class Map extends AbstractAsset
                 $this->bound->getNorthEast()->setNoWrap($args[5]);
         }
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The bound setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)',
+                ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
+                ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
     }
 
     /**
@@ -239,10 +251,8 @@ class Map extends AbstractAsset
      */
     public function setMapOptions(array $mapOptions)
     {
-        $this->mapOptions = array_merge(
-            $this->mapOptions,
-            $mapOptions
-        );
+        foreach($mapOptions as $mapOption => $value)
+            $this->setMapOption($mapOption, $value);
     }
 
     /**
@@ -253,7 +263,10 @@ class Map extends AbstractAsset
      */
     public function getMapOption($mapOption)
     {
-        return isset($this->mapOptions[$mapOption]) ? $this->mapOptions[$mapOption] : null;
+        if(is_string($mapOption))
+            return isset($this->options[$mapOption]) ? $this->options[$mapOption] : null;
+        else
+            throw new \InvalidArgumentException('The map option property of a map must be a string value.');
     }
 
     /**
@@ -264,7 +277,10 @@ class Map extends AbstractAsset
      */
     public function setMapOption($mapOption, $value)
     {
-        $this->mapOptions[$mapOption] = $value;
+        if(is_string($mapOption))
+            $this->options[$mapOption] = $value;
+        else
+            throw new \InvalidArgumentException('The map option property of a map must be a string value.');
     }
 
     /**
@@ -284,10 +300,8 @@ class Map extends AbstractAsset
      */
     public function setStylesheetOptions(array $stylesheetOptions)
     {
-        $this->stylesheetOptions = array_merge(
-            $this->stylesheetOptions,
-            $stylesheetOptions
-        );
+        foreach($stylesheetOptions as $stylesheetOption => $value)
+            $this->setStylesheetOption($stylesheetOption, $value);
     }
 
     /**
@@ -298,7 +312,10 @@ class Map extends AbstractAsset
      */
     public function getStylesheetOption($stylesheetOption)
     {
-        return isset($this->stylesheetOptions[$stylesheetOption]) ? $this->stylesheetOptions[$stylesheetOption] : null;
+        if(is_string($stylesheetOption))
+            return isset($this->stylesheetOptions[$stylesheetOption]) ? $this->stylesheetOptions[$stylesheetOption] : null;
+        else
+            throw new \InvalidArgumentException('The stylesheet option property of a map must be a string value.');
     }
 
     /**
@@ -309,7 +326,10 @@ class Map extends AbstractAsset
      */
     public function setStylesheetOption($stylesheetOption, $value)
     {
-        $this->stylesheetOptions[$stylesheetOption] = $value;
+        if(is_string($stylesheetOption))
+            $this->stylesheetOptions[$stylesheetOption] = $value;
+        else
+            throw new \InvalidArgumentException('The stylesheet option property of a map must be a string value.');
     }
     
     /**
@@ -345,9 +365,9 @@ class Map extends AbstractAsset
     /**
      * Add a map marker
      *
-     * @param Ivory\GoogleMapBundle\Model\Marker $marker
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Marker $marker
      */
-    public function addMarker(Marker $marker)
+    public function addMarker(Overlays\Marker $marker)
     {
         $this->markers[] = $marker;
         
@@ -368,9 +388,9 @@ class Map extends AbstractAsset
     /**
      * Add a map info window
      *
-     * @param Ivory\GoogleMapBundle\Model\InfoWindow $infoWindow
+     * @param Ivory\GoogleMapBundle\Model\Overlays\InfoWindow $infoWindow
      */
-    public function addInfoWindow(InfoWindow $infoWindow)
+    public function addInfoWindow(Overlays\InfoWindow $infoWindow)
     {
         $this->infoWindows[] = $infoWindow;
         
@@ -381,7 +401,7 @@ class Map extends AbstractAsset
     /**
      * Gets the map polylines
      *
-     * @return Ivory\GoogleMapBundle\Model\Polyline
+     * @return Ivory\GoogleMapBundle\Model\Overlays\Polyline
      */
     public function getPolylines()
     {
@@ -391,9 +411,9 @@ class Map extends AbstractAsset
     /**
      * Add a map polyline
      *
-     * @param Ivory\GoogleMapBundle\Model\Polyline $polyline
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Polyline $polyline
      */
-    public function addPolyline(Polyline $polyline)
+    public function addPolyline(Overlays\Polyline $polyline)
     {
         $this->polylines[] = $polyline;
         
@@ -414,9 +434,9 @@ class Map extends AbstractAsset
     /**
      * Add a map polygon
      *
-     * @param Ivory\GoogleMapBundle\Model\Polygon $polygon
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Polygon $polygon
      */
-    public function addPolygon(Polygon $polygon)
+    public function addPolygon(Overlays\Polygon $polygon)
     {
         $this->polygons[] = $polygon;
         
@@ -437,9 +457,9 @@ class Map extends AbstractAsset
     /**
      * Add a map rectangle to the map
      *
-     * @param Ivory\GoogleMapBundle\Model\Rectangle $rectangle
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Rectangle $rectangle
      */
-    public function addRectangle(Rectangle $rectangle)
+    public function addRectangle(Overlays\Rectangle $rectangle)
     {
         $this->rectangles[] = $rectangle;
         
@@ -460,9 +480,9 @@ class Map extends AbstractAsset
     /**
      * Add a circle to the map
      *
-     * @param Ivory\GoogleMapBundle\Model\Circle $circle
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Circle $circle
      */
-    public function addCircle(Circle $circle)
+    public function addCircle(Overlays\Circle $circle)
     {
         $this->circles[] = $circle;
         
@@ -483,9 +503,9 @@ class Map extends AbstractAsset
     /**
      * Add a ground overlay to the map
      *
-     * @param Ivory\GoogleMapBundle\Model\GroupOverlay $groundOverlay
+     * @param Ivory\GoogleMapBundle\Model\Overlays\GroupOverlay $groundOverlay
      */
-    public function addGroundOverlay(GroundOverlay $groundOverlay)
+    public function addGroundOverlay(Overlays\GroundOverlay $groundOverlay)
     {
         $this->groundOverlays[] = $groundOverlay;
         
