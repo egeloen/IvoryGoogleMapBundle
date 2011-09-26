@@ -37,17 +37,6 @@ class Bound extends AbstractJavascriptVariableAsset
     }
     
     /**
-     * Reset the bound to the initial state
-     */
-    public function reset()
-    {   
-        $this->southWest = null;
-        $this->northEast = null;
-        
-        $this->extends = array();
-    }
-    
-    /**
      * Checks if the bound has coordinates
      *
      * @return boolean TRUE if the bound has coordinates else FALSE
@@ -72,7 +61,7 @@ class Bound extends AbstractJavascriptVariableAsset
      *
      * Available prototype:
      * 
-     * public function setSouthWest(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest)
+     * public function setSouthWest(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest = null)
      * public function setSouthWest(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setSouthWest()
@@ -90,8 +79,10 @@ class Bound extends AbstractJavascriptVariableAsset
             if(isset($args[2]) && is_bool($args[2]))
                 $this->southWest->setNoWrap($args[2]);
         }
-        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->southWest = $args[0];
+        else if(!isset($args[0]))
+            $this->southWest = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The south west setter arguments is invalid.',
@@ -115,7 +106,7 @@ class Bound extends AbstractJavascriptVariableAsset
      *
      * Available prototype:
      * 
-     * public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
+     * public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast = null)
      * public function setNorthEast(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setNorthEast()
@@ -133,8 +124,10 @@ class Bound extends AbstractJavascriptVariableAsset
             if(isset($args[2]) && is_bool($args[2]))
                 $this->northEast->setNoWrap($args[2]);
         }
-        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->northEast = $args[0];
+        else if(!isset($args[0]))
+            $this->northEast = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The north east setter arguments is invalid.',
@@ -170,7 +163,7 @@ class Bound extends AbstractJavascriptVariableAsset
      */
     public function setExtends($extends)
     {
-        $this->reset();
+        $this->extends = array();
         
         foreach($extends as $extend)
             $this->extend($extend);

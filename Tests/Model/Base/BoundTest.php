@@ -65,6 +65,9 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$bound->getNorthEast()->getLongitude(), 2.1);
         $this->assertFalse(self::$bound->getNorthEast()->isNoWrap());
         
+        self::$bound->setNorthEast(null);
+        $this->assertNull(self::$bound->getNorthEast());
+        
         $this->setExpectedException('InvalidArgumentException');
         self::$bound->setNorthEast('foo');
     }
@@ -84,6 +87,9 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$bound->getSouthWest()->getLatitude(), 2.1);
         $this->assertEquals(self::$bound->getSouthWest()->getLongitude(), 2.1);
         $this->assertFalse(self::$bound->getSouthWest()->isNoWrap());
+        
+        self::$bound->setSouthWest(null);
+        $this->assertNull(self::$bound->getSouthWest());
         
         $this->setExpectedException('InvalidArgumentException');
         self::$bound->setSouthWest('foo');
