@@ -63,7 +63,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      *
      * Available prototype:
      * 
-     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)
+     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position = null)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
@@ -80,8 +80,10 @@ class Marker extends AbstractOptionsAsset implements IExtendable
         }
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->position = $args[0];
+        else if(!isset($args[0]))
+            $this->position = null;
         else
-            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The position setter arguments is invalid.',
                 'The available prototypes are :',
                 ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
@@ -113,8 +115,8 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      *
      * Available prototype:
      * 
-     * public function setIcon(string $url)
-     * public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)
+     * public function setIcon(string $url = null)
+     * public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage = null)
      */
     public function setIcon()
     {
@@ -128,7 +130,14 @@ class Marker extends AbstractOptionsAsset implements IExtendable
             $this->icon->setUrl($args[0]);
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
-            $this->icon = $args[0];
+        {
+            if(!is_null($args[0]->getUrl()))
+                $this->icon = $args[0];
+            else
+                throw new \InvalidArgumentException('A marker image icon must have an url.');
+        }
+        else if(!isset($args[0]))
+            $this->icon = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The icon setter arguments is invalid.',
@@ -162,8 +171,8 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      *
      * Available prototype:
      * 
-     * public function setShadow(string $url)
-     * public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)
+     * public function setShadow(string $url = null)
+     * public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage = null)
      */
     public function setShadow()
     {
@@ -177,7 +186,14 @@ class Marker extends AbstractOptionsAsset implements IExtendable
             $this->shadow->setUrl($args[0]);
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
-            $this->shadow = $args[0];
+        {
+            if(!is_null($args[0]->getUrl()))
+                $this->shadow = $args[0];
+            else
+                throw new \InvalidArgumentException('A marker image shadow must have an url.');
+        }
+        else if(!isset($args[0]))
+            $this->shadow = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The shadow setter arguments is invalid.',
@@ -211,7 +227,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * 
      * Available prototype:
      * 
-     * public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape)
+     * public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape = null)
      * public function setShape(string $type, array $coordinates)
      */
     public function setShape()
@@ -227,7 +243,14 @@ class Marker extends AbstractOptionsAsset implements IExtendable
             $this->shape->setCoordinates($args[1]);
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerShape))
-            $this->shape = $args[0];
+        {
+            if($args[0]->hasCoordinates())
+                $this->shape = $args[0];
+            else
+                throw new \InvalidArgumentException('A marker shape must have coordinates.');
+        }
+        else if(!isset($args[0]))
+            $this->shape = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The shape setter arguments is invalid.',
