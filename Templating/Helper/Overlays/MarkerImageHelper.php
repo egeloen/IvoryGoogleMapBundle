@@ -1,6 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+
+use Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper;
 
 use Ivory\GoogleMapBundle\Model\Overlays\MarkerImage;
 
@@ -12,20 +15,20 @@ use Ivory\GoogleMapBundle\Model\Overlays\MarkerImage;
 class MarkerImageHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\PointHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper
      */
     protected $pointHelper = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\SizeHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper
      */
     protected $sizeHelper = null;
     
     /**
      * Create a marker image helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\PointHelper $pointHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\SizeHelper $sizeHelper 
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper $pointHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper $sizeHelper 
      */
     public function __construct(PointHelper $pointHelper, SizeHelper $sizeHelper)
     {

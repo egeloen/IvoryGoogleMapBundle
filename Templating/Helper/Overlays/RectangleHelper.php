@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+
+use Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper;
 
 use Ivory\GoogleMapBundle\Model\Overlays\Rectangle;
 use Ivory\GoogleMapBundle\Model\Map;
@@ -13,14 +15,14 @@ use Ivory\GoogleMapBundle\Model\Map;
 class RectangleHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\BoundHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper
      */
     protected $boundHelper;
 
     /**
      * Create a rectangle helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\BoundHelper $boundHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      */
     public function __construct(BoundHelper $boundHelper)
     {

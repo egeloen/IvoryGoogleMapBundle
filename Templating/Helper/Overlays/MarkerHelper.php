@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+
+use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;
 
 use Ivory\GoogleMapBundle\Model\Overlays\Marker;
 use Ivory\GoogleMapBundle\Model\Map;
@@ -13,32 +15,32 @@ use Ivory\GoogleMapBundle\Model\Map;
 class MarkerHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper
      */
     protected $infoWindowHelper;
     
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper
      */
     protected $markerImageHelper;
     
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper
      */
     protected $markerShapeHelper;
 
     /**
      * Constructs a marker helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper $infoWindowHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerImageHelper $markerImageHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerShapeHelper $markerShapeHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper $markerImageHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper $markerShapeHelper
      */
     public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper, MarkerShapeHelper $markerShapeHelper)
     {

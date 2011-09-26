@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Base;
 
 use Ivory\GoogleMapBundle\Model\Base\Point;
 

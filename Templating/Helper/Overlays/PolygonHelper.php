@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+
+use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;
 
 use Ivory\GoogleMapBundle\Model\Overlays\Polygon;
 use Ivory\GoogleMapBundle\Model\Map;
@@ -13,14 +15,14 @@ use Ivory\GoogleMapBundle\Model\Map;
 class PolygonHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
 
     /**
      * Create a polygon helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
      */
     public function __construct(CoordinateHelper $coordinateHelper)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
 
 use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape;
 

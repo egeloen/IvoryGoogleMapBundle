@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Templating\Helper\Base;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Overlays;
@@ -13,14 +13,14 @@ use Ivory\GoogleMapBundle\Model\Overlays;
 class BoundHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
 
     /**
      * Construct a bound helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
      */
     public function __construct(CoordinateHelper $coordinateHelper)
     {

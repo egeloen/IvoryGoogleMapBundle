@@ -2,6 +2,9 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
+use Ivory\GoogleMapBundle\Templating\Helper\Base;
+use Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -12,47 +15,47 @@ use Ivory\GoogleMapBundle\Model\Map;
 class MapHelper
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\MarkerHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper
      */
     protected $markerHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\BoundHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper
      */
     protected $boundHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper
      */
     protected $infoWindowHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\PolylineHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper
      */
     protected $polylineHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\PolygonHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolygonHelper
      */
     protected $polygonHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\RectangleHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\RectangleHelper
      */
     protected $rectangleHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\CircleHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper
      */
     protected $circleHelper;
 
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\GroundOverlayHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper
      */
     protected $groundOverlayHelper;
     
@@ -64,16 +67,16 @@ class MapHelper
     /**
      * Constructs a map helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\CoordinateHelper $coordinateHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\MarkerHelper $markerHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\BoundHelper $boundHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\InfoWindowHelper $infoWindowHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\PolylineHelper $polylineHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\CircleHelper $circleHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\GroundOverlayHelper $groundOverlayHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper $markerHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper $polylineHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper, MarkerHelper $markerHelper, BoundHelper $boundHelper, InfoWindowHelper $infoWindowHelper, PolylineHelper $polylineHelper, PolygonHelper $polygonHelper, RectangleHelper $rectangleHelper, CircleHelper $circleHelper, GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->markerHelper = $markerHelper;
