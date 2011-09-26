@@ -1,6 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
+use Ivory\GoogleMapBundle\Model\Base\Bound;
 
 /**
  * Ground overlay which describes a google map ground overlay
@@ -8,7 +11,7 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlay
  * @author GeLo <geloen.eric@gmail.com>
  */
-class GroundOverlay extends AbstractAsset
+class GroundOverlay extends AbstractAsset implements IExtendable
 {
     /**
      * @var string Group Overlay image url
@@ -16,7 +19,7 @@ class GroundOverlay extends AbstractAsset
     protected $url = null;
 
     /**
-     * @var Ivory\GoogleMapBundle\Model\Bound Ground overlay bound
+     * @var Ivory\GoogleMapBundle\Model\Base\Bound Ground overlay bound
      */
     protected $bound = null;
 
@@ -57,13 +60,16 @@ class GroundOverlay extends AbstractAsset
      */
     public function setUrl($url)
     {
-        $this->url = $url;
+        if(is_string($url))
+            $this->url = $url;
+        else
+            throw new \InvalidArgumentException('The url of a ground overlay must be a string value.');
     }
 
     /**
      * Gets the ground overlay bound
      *
-     * @return Ivory\GoogleMapBundle\Model\Bound
+     * @return Ivory\GoogleMapBundle\Model\Base\Bound
      */
     public function getBound()
     {
@@ -75,8 +81,8 @@ class GroundOverlay extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
-     * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
+     * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)
+     * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
@@ -102,51 +108,11 @@ class GroundOverlay extends AbstractAsset
                 $this->bound->getNorthEast()->setNoWrap($args[5]);
         }
         else
-            throw new \InvalidArgumentException();
-    }
-
-    /**
-     * Gets the ground overlay options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the ground overlay options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
-    }
-
-    /**
-     * Get a specific ground overlay option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
-    }
-
-    /**
-     * Sets a specific ground overlay option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        $this->options[$option] = $value;
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The bound setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)',
+                ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
+                ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
     }
 }
