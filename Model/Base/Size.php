@@ -120,7 +120,7 @@ class Size
      */
     public function setWidthUnit($widthUnit)
     {
-        if(is_string($widthUnit))
+        if(($widthUnit === null) || is_string($widthUnit))
             $this->widthUnit = $widthUnit;
         else
             throw new \InvalidArgumentException('The width unit of a size must be a string value.');
@@ -143,7 +143,7 @@ class Size
      */
     public function setHeightUnit($heightUnit)
     {
-        if(is_string($heightUnit))
+        if(($heightUnit === null) || is_string($heightUnit))
             $this->heightUnit = $heightUnit;
         else
             throw new \InvalidArgumentException('The height unit of a size must be a string value.');
