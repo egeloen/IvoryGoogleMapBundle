@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Circle;
+use Ivory\GoogleMapBundle\Model\Overlays\Circle;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -30,7 +30,7 @@ class CircleHelper
     /**
      * Renders the map javascript circle
      *
-     * @param Ivory\GoogleMapBundle\Model\Circle $circle
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Circle $circle
      * @param Ivory\GoogleMapBundle\Model\Map $map
      */
     public function render(Circle $circle, Map $map)

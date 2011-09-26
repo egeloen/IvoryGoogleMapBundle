@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Polygon;
+use Ivory\GoogleMapBundle\Model\Overlays\Polygon;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -30,7 +30,7 @@ class PolygonHelper
     /**
      * Renders the polygon
      *
-     * @param Ivory\GoogleMapBundle\Model\Polygon $polygon
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Polygon $polygon
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */

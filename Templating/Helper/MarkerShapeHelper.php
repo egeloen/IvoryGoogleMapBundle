@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\MarkerShape;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape;
 
 /**
  * Marker shape helper allows easy rendering
@@ -14,7 +14,7 @@ class MarkerShapeHelper
     /**
      * Renders the marker shape
      *
-     * @param Ivory\GoogleMapBundle\Model\MarkerShape $markerShape
+     * @param Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $markerShape
      * @return string HTML output
      */
     public function render(MarkerShape $markerShape)

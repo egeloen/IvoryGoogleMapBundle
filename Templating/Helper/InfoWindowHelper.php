@@ -2,9 +2,8 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Symfony\Bundle\TwigBundle\TwigEngine;
-use Ivory\GoogleMapBundle\Model\InfoWindow;
-use Ivory\GoogleMapBundle\Model\Marker;
+use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
+use Ivory\GoogleMapBundle\Model\Overlays\Marker;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -32,7 +31,7 @@ class InfoWindowHelper
     /**
      * Renders the info window
      *
-     * @param Ivory\GoogleMapBundle\Model\InfoWindow $infoWindow
+     * @param Ivory\GoogleMapBundle\Model\Overlays\InfoWindow $infoWindow
      * @param boolean $renderPosition TRUE if the position is rendered else FALSE
      * @return string HTML output
      */
@@ -61,9 +60,9 @@ class InfoWindowHelper
     /**
      * Renders the info window open
      *
-     * @param Ivory\GoogleMapBundle\Model\InfoWindow $infoWindow
-     * @param Ivory\GoogleMapBundle\Model\Marker $marker
+     * @param Ivory\GoogleMapBundle\Model\Overlays\InfoWindow $infoWindow
      * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Marker $marker
      * @return string HTML output
      */
     public function renderOpen(InfoWindow $infoWindow, Map $map, Marker $marker = null)

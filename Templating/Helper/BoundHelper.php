@@ -2,8 +2,8 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Bound;
-use Ivory\GoogleMapBundle\Model;
+use Ivory\GoogleMapBundle\Model\Base\Bound;
+use Ivory\GoogleMapBundle\Model\Overlays;
 
 /**
  * Bound helper allows easy rendering
@@ -30,7 +30,7 @@ class BoundHelper
     /**
      * Renders the bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Bound $bound
+     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound
      * @return string HTML output
      */
     public function render(Bound $bound)
@@ -50,8 +50,7 @@ class BoundHelper
     /**
      * Renders the bound's extend of a marker
      *
-     * @param Ivory\GoogleMapBundle\Model\Bound $bound
-     * @param mixed $extend
+     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound
      * @return string HTML output
      */
     public function renderExtends(Bound $bound)
@@ -60,22 +59,22 @@ class BoundHelper
 
         foreach($bound->getExtends() as $extend)
         {
-            if(($extend instanceof Model\Marker) || ($extend instanceof Model\InfoWindow))
+            if(($extend instanceof Overlays\Marker) || ($extend instanceof Overlays\InfoWindow))
                 $html[] = sprintf('%s.extend(%s.getPosition());'.PHP_EOL,
                     $bound->getJavascriptVariable(),
                     $extend->getJavascriptVariable()
                 );
-            else if(($extend instanceof Model\Polyline) || ($extend instanceof Model\Polygon))
+            else if(($extend instanceof Overlays\Polyline) || ($extend instanceof Overlays\Polygon))
                 $html[] = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
                     $extend->getJavascriptVariable(),
                     $bound->getJavascriptVariable()
                 );
-            else if(($extend instanceof Model\Rectangle) || ($extend instanceof Model\GroundOverlay))
+            else if(($extend instanceof Overlays\Rectangle) || ($extend instanceof Overlays\GroundOverlay))
                 $html[] = sprintf('%s.union(%s);'.PHP_EOL,
                     $bound->getJavascriptVariable(),
                     $extend->getBound()->getJavascriptVariable()
                 );
-            else if($extend instanceof Model\Circle)
+            else if($extend instanceof Overlays\Circle)
                 $html[] = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
                     $bound->getJavascriptVariable(),
                     $extend->getJavascriptVariable()

@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Coordinate;
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Coordinate helper allows easy rendering
@@ -14,7 +14,7 @@ class CoordinateHelper
     /**
      * Renders the coordinate
      *
-     * @param Ivory\GoogleMapBundle\Model\Coordinate $coordinate
+     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate
      * @return string HTML output
      */
     public function render(Coordinate $coordinate)

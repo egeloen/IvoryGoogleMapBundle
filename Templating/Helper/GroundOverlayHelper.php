@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\GroundOverlay;
+use Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -30,7 +30,7 @@ class GroundOverlayHelper
     /**
      * Renders the map javascript ground overlay
      *
-     * @param Ivory\GoogleMapBundle\Model\GroundOverlay $groundOverlay
+     * @param Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay $groundOverlay
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */

@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Size;
+use Ivory\GoogleMapBundle\Model\Base\Size;
 
 /**
  * Size helper allows easy rendering

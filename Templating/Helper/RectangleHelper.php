@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Rectangle;
+use Ivory\GoogleMapBundle\Model\Overlays\Rectangle;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -30,7 +30,7 @@ class RectangleHelper
     /**
      * Renders the rectangle
      *
-     * @param Ivory\GoogleMapBundle\Model\Rectangle $rectangle
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Rectangle $rectangle
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */

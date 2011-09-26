@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Point;
+use Ivory\GoogleMapBundle\Model\Base\Point;
 
 /**
  * Point helper allows easy rendering

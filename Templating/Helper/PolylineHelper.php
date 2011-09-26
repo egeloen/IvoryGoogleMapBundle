@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Polyline;
+use Ivory\GoogleMapBundle\Model\Overlays\Polyline;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -30,7 +30,7 @@ class PolylineHelper
     /**
      * Renders the polyline
      *
-     * @param Ivory\GoogleMapBundle\Model\Polyline $polyline
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Polyline $polyline
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */

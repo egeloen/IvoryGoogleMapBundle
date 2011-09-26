@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\MarkerImage;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerImage;
 
 /**
  * Marker image helper allows easy rendering
@@ -36,7 +36,7 @@ class MarkerImageHelper
     /**
      * Renders the marker image
      *
-     * @param Ivory\GoogleMapBundle\Model\MarkerImage $markerImage
+     * @param Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage
      * @return string HTML output
      */
     public function render(MarkerImage $markerImage)

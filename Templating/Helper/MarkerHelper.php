@@ -2,8 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
-use Ivory\GoogleMapBundle\Model\Marker;
-use Ivory\GoogleMapBundle\Model\MarkerImage;
+use Ivory\GoogleMapBundle\Model\Overlays\Marker;
 use Ivory\GoogleMapBundle\Model\Map;
 
 /**
@@ -52,8 +51,8 @@ class MarkerHelper
     /**
      * Renders the marker
      *
-     * @param string $googleMapJavascriptVariable
-     * @param Ivory\GoogleMapBundle\Model\Marker $marker
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Marker $marker
+     * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
     public function render(Marker $marker, Map $map)
