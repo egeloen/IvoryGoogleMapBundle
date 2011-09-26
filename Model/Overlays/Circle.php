@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Circle
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Circle extends AbstractAsset implements IExtendable
+class Circle extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Circle center
@@ -23,18 +24,10 @@ class Circle extends AbstractAsset implements IExtendable
     protected $radius = 1;
 
     /**
-     * @var array Circle options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#CircleOptions
-     */
-    protected $options = array();
-
-    /**
      * Create a circle
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('circle_');
 
         $this->center = new Coordinate();
@@ -101,54 +94,5 @@ class Circle extends AbstractAsset implements IExtendable
             $this->radius = $radius;
         else
             throw new \InvalidArgumentException('The radius of a circle must be a numeric value.');
-    }
-
-    /**
-     * Gets the circle options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the circle options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Gets a specific circle option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a circle must be a string value.');
-    }
-
-    /**
-     * Sets a specific circle option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a circle must be a string value.');
     }
 }

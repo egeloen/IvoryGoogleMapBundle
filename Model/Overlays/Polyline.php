@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Polyline
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Polyline extends AbstractAsset implements IExtendable
+class Polyline extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var array Coordinates of the polyline
@@ -18,18 +19,10 @@ class Polyline extends AbstractAsset implements IExtendable
     protected $coordinates = array();
 
     /**
-     * @var array Polyline options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#PolylineOptions
-     */
-    protected $options = array();
-
-    /**
      * Create a polyline
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('polyline_');
     }
     
@@ -91,54 +84,5 @@ class Polyline extends AbstractAsset implements IExtendable
                 'The available prototypes are :',
                 ' - public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)',
                 ' - public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)'));
-    }
-
-    /**
-     * Gets the polyline options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the polyline options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Gets a specific polyline option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a polyline must be a string value.');
-    }
-
-    /**
-     * Sets a specific polyline option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a polyline must be a string value.');
     }
 }

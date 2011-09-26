@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 
@@ -11,7 +12,7 @@ use Ivory\GoogleMapBundle\Model\Base\Bound;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlay
  * @author GeLo <geloen.eric@gmail.com>
  */
-class GroundOverlay extends AbstractAsset implements IExtendable
+class GroundOverlay extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var string Group Overlay image url
@@ -24,18 +25,10 @@ class GroundOverlay extends AbstractAsset implements IExtendable
     protected $bound = null;
 
     /**
-     * @var array Ground overlay options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#GroundOverlayOptions
-     */
-    protected $options = array();
-
-    /**
      * Create a ground overlay
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('ground_overlay_');
         
         $this->bound = new Bound();
@@ -119,54 +112,5 @@ class GroundOverlay extends AbstractAsset implements IExtendable
                 ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)',
                 ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
-    }
-    
-    /**
-     * Gets the ground overlay options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the ground overlay options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Gets a specific ground overlay option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a ground overlay must be a string value.');
-    }
-
-    /**
-     * Sets a specific ground overlay option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a ground overlay must be a string value.');
     }
 }

@@ -2,13 +2,15 @@
 
 namespace Ivory\GoogleMapBundle\Model;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
+
 /**
  * Event which describes a google map event
  *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapsEventListener
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Event extends AbstractAsset
+class Event extends AbstractJavascriptVariableAsset
 {
     /**
      * @var string Event object instance
@@ -35,8 +37,6 @@ class Event extends AbstractAsset
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('event_');
     }
     

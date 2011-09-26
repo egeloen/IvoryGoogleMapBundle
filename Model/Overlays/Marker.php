@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Marker extends AbstractAsset implements IExtendable
+class Marker extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Marker position
@@ -33,12 +34,6 @@ class Marker extends AbstractAsset implements IExtendable
     protected $shape = null;
 
     /**
-     * @var array Marker options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerOptions
-     */
-    protected $options = array();
-
-    /**
      * @var Ivory\GoogleMapBundle\Model\Overlays\InfoWindow Info window at the marker position
      */
     protected $infoWindow = null;
@@ -48,8 +43,6 @@ class Marker extends AbstractAsset implements IExtendable
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('marker_');
         
         $this->position = new Coordinate();
@@ -241,55 +234,6 @@ class Marker extends AbstractAsset implements IExtendable
                 'The available prototypes are :',
                 ' - public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape)',
                 ' - public function setShape(string $type, array $coordinates)'));
-    }
-
-    /**
-     * Gets the marker options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the marker options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Gets a specific marker option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a marker must be a string value.');
-    }
-
-    /**
-     * Sets a specific marker option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a marker must be a string value.');
     }
     
     /**

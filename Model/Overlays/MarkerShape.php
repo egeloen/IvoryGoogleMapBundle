@@ -2,13 +2,15 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
+
 /**
  * Marker shape which describes a google map marker shape
  * 
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerShape
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MarkerShape extends AbstractAsset
+class MarkerShape extends AbstractJavascriptVariableAsset
 {
     /**
      * @var string Maker shape type (circle | poly | rect)
@@ -25,8 +27,6 @@ class MarkerShape extends AbstractAsset
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('marker_shape_');
     }
     

@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Rectangle extends AbstractAsset implements IExtendable
+class Rectangle extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Bound Rectangle bound
@@ -18,18 +19,10 @@ class Rectangle extends AbstractAsset implements IExtendable
     protected $bound = null;
 
     /**
-     * @var array Rectangle options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#RectangleOptions
-     */
-    protected $options = array();
-
-    /**
      * Create a rectangle
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('rectangle_');
 
         $this->bound = new Bound();
@@ -85,54 +78,5 @@ class Rectangle extends AbstractAsset implements IExtendable
                 ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)',
                 ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
-    }
-
-    /**
-     * Gets the rectangle options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the rectangle options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Gets a specific rectangle option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a rectangle must be a string value.');
-    }
-
-    /**
-     * Sets a specific rectangle option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a rectangle must be a string value.');
     }
 }

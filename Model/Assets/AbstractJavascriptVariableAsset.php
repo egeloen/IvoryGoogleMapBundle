@@ -1,26 +1,18 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Assets;
 
 /**
  * Allow easy generation of unique javascript variable for any class model that required it
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-abstract class AbstractAsset
+abstract class AbstractJavascriptVariableAsset
 {
     /**
      * @var string Javascript variable which describes the asset
      */
-    protected $javascriptVariable;
-    
-    /**
-     * Create an asset
-     */
-    public function __construct()
-    {
-        $this->javascriptVariable = null;
-    }
+    protected $javascriptVariable = null;
 
     /**
      * Sets the prefix javascript variable off the javascript variable
@@ -58,3 +50,6 @@ abstract class AbstractAsset
             throw new \InvalidArgumentException('The javascript variable must be a string value.');
     }
 }
+
+
+?>

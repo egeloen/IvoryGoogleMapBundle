@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Overlays;
 
@@ -11,7 +12,7 @@ use Ivory\GoogleMapBundle\Model\Overlays;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Map
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Map extends AbstractAsset
+class Map extends AbstractJavascriptVariableAsset
 {   
     /**
      * @var string HTML container ID
@@ -95,8 +96,6 @@ class Map extends AbstractAsset
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('map_');
 
         $this->center = new Base\Coordinate();

@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Polygon
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Polygon extends AbstractAsset implements IExtendable
+class Polygon extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var array Coordinates of the polygone
@@ -18,18 +19,10 @@ class Polygon extends AbstractAsset implements IExtendable
     protected $coordinates = array();
 
     /**
-     * @var array Polygon options
-     * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#PolygonOptions
-     */
-    protected $options = array();
-
-    /**
      * Create a polygon
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('polygon_');
     }
     
@@ -91,54 +84,5 @@ class Polygon extends AbstractAsset implements IExtendable
                 'The available prototypes are :',
                 ' - public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)',
                 ' - public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)'));
-    }
-
-    /**
-     * Gets the polygon options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Sets the polygon options
-     *
-     * @param array $options
-     */
-    public function setOptions(array $options)
-    {
-        foreach($options as $option => $value)
-            $this->setOption($option, $value);
-    }
-
-    /**
-     * Get a specific polygon option
-     *
-     * @param string $option
-     * @return mixed
-     */
-    public function getOption($option)
-    {
-        if(is_string($option))
-            return isset($this->options[$option]) ? $this->options[$option] : null;
-        else
-            throw new \InvalidArgumentException('The option property of a polygon must be a string value.');
-    }
-
-    /**
-     * Sets a sepcific polygon option
-     *
-     * @param string $option
-     * @param mixed $value
-     */
-    public function setOption($option, $value)
-    {
-        if(is_string($option))
-            $this->options[$option] = $value;
-        else
-            throw new \InvalidArgumentException('The option property of a polygon must be a string value.');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Base;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Overlays\IExtendable;
 
 /**
@@ -10,7 +11,7 @@ use Ivory\GoogleMapBundle\Model\Overlays\IExtendable;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#LatLngBounds
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Bound extends AbstractAsset
+class Bound extends AbstractJavascriptVariableAsset
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate South west bound
@@ -32,19 +33,7 @@ class Bound extends AbstractAsset
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('bound_');
-    }
-    
-    /**
-     * Checks if the bound has coordinates
-     *
-     * @return boolean TRUE if the bound has coordinates else FALSE
-     */
-    public function hasCoordinates()
-    {
-        return !is_null($this->southWest) && !is_null($this->northEast);
     }
     
     /**
@@ -56,6 +45,16 @@ class Bound extends AbstractAsset
         $this->northEast = null;
         
         $this->extends = array();
+    }
+    
+    /**
+     * Checks if the bound has coordinates
+     *
+     * @return boolean TRUE if the bound has coordinates else FALSE
+     */
+    public function hasCoordinates()
+    {
+        return !is_null($this->southWest) && !is_null($this->northEast);
     }
 
     /**

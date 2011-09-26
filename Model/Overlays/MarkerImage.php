@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Base\Point;
 use Ivory\GoogleMapBundle\Model\Base\Size;
 
@@ -11,7 +12,7 @@ use Ivory\GoogleMapBundle\Model\Base\Size;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerImage
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MarkerImage extends AbstractAsset
+class MarkerImage extends AbstractJavascriptVariableAsset
 {
     /**
      * @var string URL of the marker image
@@ -43,8 +44,6 @@ class MarkerImage extends AbstractAsset
      */
     public function __construct()
     {
-        parent::__construct();
-        
         $this->setPrefixJavascriptVariable('marker_image_');
     }
     
