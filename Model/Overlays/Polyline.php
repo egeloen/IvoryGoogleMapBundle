@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Polyline
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Polyline extends AbstractAsset
+class Polyline extends AbstractAsset implements IExtendable
 {
     /**
      * @var array Coordinates of the polyline

@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Rectangle extends AbstractAsset
+class Rectangle extends AbstractAsset implements IExtendable
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Bound Rectangle bound

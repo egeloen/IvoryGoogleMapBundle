@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Polygon
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Polygon extends AbstractAsset
+class Polygon extends AbstractAsset implements IExtendable
 {
     /**
      * @var array Coordinates of the polygone
