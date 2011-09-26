@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Circle as BaseCircle;
+use Ivory\GoogleMapBundle\Model\Overlays\Circle as BaseCircle;
 
 /**
  * Circle entity which describes a google map circle

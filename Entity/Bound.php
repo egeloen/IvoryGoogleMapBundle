@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Bound as BaseBound;
+use Ivory\GoogleMapBundle\Model\Base\Bound as BaseBound;
 
 /**
  * Bound entity wich describes a google map bound

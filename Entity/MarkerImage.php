@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\MarkerImage as BaseMarkerImage;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerImage as BaseMarkerImage;
 
 /**
  * Marker image entity which describes a google map marker image

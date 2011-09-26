@@ -3,7 +3,6 @@
 namespace Ivory\GoogleMapBundle\Entity;
 
 use Ivory\GoogleMapBundle\Model\Map as BaseMap;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Map entity wich describes a google map

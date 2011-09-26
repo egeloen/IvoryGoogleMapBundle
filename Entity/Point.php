@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Point as BasePoint;
+use Ivory\GoogleMapBundle\Model\Base\Point as BasePoint;
 
 /**
  * Point entity which describes a google map point

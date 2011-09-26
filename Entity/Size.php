@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Size as BaseSize;
+use Ivory\GoogleMapBundle\Model\Base\Size as BaseSize;
 
 /**
  * Size entity which describes a google map size

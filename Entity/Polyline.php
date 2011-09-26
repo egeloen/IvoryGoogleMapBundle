@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Polyline as BasePolyline;
+use Ivory\GoogleMapBundle\Model\Overlays\Polyline as BasePolyline;
 
 /**
  * Polyline entity which describes a google map polyline

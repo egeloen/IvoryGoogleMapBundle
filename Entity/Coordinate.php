@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Coordinate as BaseCoordinate;
+use Ivory\GoogleMapBundle\Model\Base\Coordinate as BaseCoordinate;
 
 /**
  * Coordinate entity which describes a google map coordinate

@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Rectangle as BaseRectangle;
+use Ivory\GoogleMapBundle\Model\Overlays\Rectangle as BaseRectangle;
 
 /**
  * Rectangle entity which describes a google map rectangle

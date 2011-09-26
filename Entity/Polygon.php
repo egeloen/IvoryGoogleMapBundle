@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Polygon as BasePolygon;
+use Ivory\GoogleMapBundle\Model\Overlays\Polygon as BasePolygon;
 
 /**
  * Polygon entity which describes a google map polygon

@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\InfoWindow as BaseInfoWindow;
+use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow as BaseInfoWindow;
 
 /**
  * Info window entity which describes a google map info window

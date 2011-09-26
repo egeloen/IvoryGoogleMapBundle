@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\MarkerShape as BaseMarkerShape;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape as BaseMarkerShape;
 
 /**
  * Marker shape entity which describes a google map marker shape
