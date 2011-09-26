@@ -1,6 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Bound;
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Rectangle which describes a google map rectangle
@@ -10,7 +13,7 @@ namespace Ivory\GoogleMapBundle\Model;
 class Rectangle extends AbstractAsset
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Bound Rectangle bound
+     * @var Ivory\GoogleMapBundle\Model\Base\Bound Rectangle bound
      */
     protected $bound = null;
 
@@ -49,8 +52,8 @@ class Rectangle extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setBound(Ivory\GoogleMapBundle\Model\Bound $bound)
-     * public function setBount(Ivory\GoogleMapBundle\Model\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Coordinate $northEast)
+     * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)
+     * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
     public function setBound()
@@ -76,7 +79,12 @@ class Rectangle extends AbstractAsset
                 $this->bound->getNorthEast()->setNoWrap($args[5]);
         }
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The bound setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)',
+                ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
+                ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
     }
 
     /**
@@ -96,10 +104,8 @@ class Rectangle extends AbstractAsset
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
+        foreach($options as $option => $value)
+            $this->setOption($option, $value);
     }
 
     /**
@@ -110,7 +116,10 @@ class Rectangle extends AbstractAsset
      */
     public function getOption($option)
     {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
+        if(is_string($option))
+            return isset($this->options[$option]) ? $this->options[$option] : null;
+        else
+            throw new \InvalidArgumentException('The option property of a rectangle must be a string value.');
     }
 
     /**
@@ -121,6 +130,9 @@ class Rectangle extends AbstractAsset
      */
     public function setOption($option, $value)
     {
-        $this->options[$option] = $value;
+        if(is_string($option))
+            $this->options[$option] = $value;
+        else
+            throw new \InvalidArgumentException('The option property of a rectangle must be a string value.');
     }
 }
