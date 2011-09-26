@@ -33,6 +33,7 @@ class BoundTest extends \PHPUnit_Framework_TestCase
     public function testDefaultValues()
     {
         $this->assertEquals(substr(self::$bound->getJavascriptVariable(), 0, 6), 'bound_');
+        $this->assertFalse(self::$bound->hasCoordinates());
         $this->assertNull(self::$bound->getNorthEast());
         $this->assertNull(self::$bound->getSouthWest());
         $this->assertFalse(self::$bound->hasExtends());
