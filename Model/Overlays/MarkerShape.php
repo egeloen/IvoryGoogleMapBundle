@@ -66,6 +66,16 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Cheks if the marker shape has coordinates
+     *
+     * @return boolean TRUE if the marker shape has coordinates else FALSE
+     */
+    public function hasCoordinates()
+    {
+        return !empty($this->coordinates);
+    }
+    
+    /**
      * Gets the marker shape coordinates
      *
      * @return array
