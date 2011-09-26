@@ -120,7 +120,7 @@ class Circle extends AbstractAsset implements IExtendable
      */
     public function setOptions(array $options)
     {
-        foreach($options as $options => $value)
+        foreach($options as $option => $value)
             $this->setOption($option, $value);
     }
 
