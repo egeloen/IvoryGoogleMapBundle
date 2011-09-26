@@ -57,7 +57,10 @@ class Event extends AbstractAsset
      */
     public function setInstance($instance)
     {
-        $this->instance = $instance;
+        if(is_string($instance))
+            $this->instance = $instance;
+        else
+            throw new \InvalidArgumentException('The instance of an event must be a string value.');
     }
     
     /**
@@ -77,7 +80,10 @@ class Event extends AbstractAsset
      */
     public function setEventName($eventName)
     {
-        $this->eventName = $eventName;
+        if(is_string($eventName))
+            $this->eventName = $eventName;
+        else
+            throw new \InvalidArgumentException('The event name of an event must be a string value.');
     }
     
     /**
@@ -97,7 +103,10 @@ class Event extends AbstractAsset
      */
     public function setHandle($handle)
     {
-        $this->handle = $handle;
+        if(is_string($handle))
+            $this->handle = $handle;
+        else
+            throw new \InvalidArgumentException('The handle of an event must be a string value.');
     }
     
     /**
@@ -117,6 +126,9 @@ class Event extends AbstractAsset
      */
     public function setCapture($capture)
     {
-        $this->capture = $capture;
+        if(is_bool($capture))
+            $this->capture = $capture;
+        else
+            throw new \InvalidArgumentException('The capture property of an event must be a boolean value.');
     }
 }
