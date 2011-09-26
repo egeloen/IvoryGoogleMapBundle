@@ -94,7 +94,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
             break;
 
             case 'poly':
-                if((count($coordinates) % 2) == 0)
+                if((count($coordinates) > 0) && ((count($coordinates) % 2) == 0))
                 {
                     foreach($coordinates as $coordinate)
                     {
@@ -132,14 +132,17 @@ class MarkerShape extends AbstractJavascriptVariableAsset
      *
      * @param integer $coordinate
      */
-    public function addCoordinate($coordinate)
+    public function addPolyCoordinate($x, $y)
     {
         if($this->type == 'poly')
         {
-            if(is_numeric($coordinate))
-                $this->coordinates[] = $coordinate;
+            if(is_numeric($x) && is_numeric($y))
+            {
+                $this->coordinates[] = $x;
+                $this->coordinates[] = $y;
+            }
             else
-                throw new \InvalidArgumentException('A coordinate of a poly marker shape must be a numeric value.');
+                throw new \InvalidArgumentException('The x & y coordinates of a poly marker shape must be numeric values.');
         }
         else
             throw new \InvalidArgumentException('This method can only be use with a marker shape which has type poly.');
