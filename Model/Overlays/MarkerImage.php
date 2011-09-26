@@ -96,7 +96,7 @@ class MarkerImage extends AbstractJavascriptVariableAsset
      * Available prototype:
      * 
      * public function setAnchor(double x, double y)
-     * public function setAnchor(Ivory\GoogleMapBundle\Model\Base\Point $anchor)
+     * public function setAnchor(Ivory\GoogleMapBundle\Model\Base\Point $anchor = null)
      */
     public function setAnchor()
     {
@@ -111,7 +111,9 @@ class MarkerImage extends AbstractJavascriptVariableAsset
             $this->anchor->setY($args[1]);
         }
         else if($args[0] instanceof Point)
-            $this->anchor = $anchor;
+            $this->anchor = $args[0];
+        else if(!isset($args[0]))
+            $this->anchor = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The anchor setter arguments is invalid.',
@@ -146,7 +148,7 @@ class MarkerImage extends AbstractJavascriptVariableAsset
      * Available prototype:
      * 
      * public function setOrigin(double x, double y)
-     * public function setOrigin(Ivory\GoogleMapBundle\Model\Base\Point $origin)
+     * public function setOrigin(Ivory\GoogleMapBundle\Model\Base\Point $origin = null)
      */
     public function setOrigin()
     {
@@ -161,7 +163,9 @@ class MarkerImage extends AbstractJavascriptVariableAsset
             $this->origin->setY($args[1]);
         }
         else if(isset($args[0]) && ($args[0] instanceof Point))
-            $this->origin = $anchor;
+            $this->origin = $args[0];
+        else if(!isset($args[0]))
+            $this->origin = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The anchor setter arguments is invalid.',
@@ -196,14 +200,16 @@ class MarkerImage extends AbstractJavascriptVariableAsset
      * Available prototype:
      * 
      * public function setScaledSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
-     * public function setScaledSize(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)
+     * public function setScaledSize(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize = null)
      */
     public function setScaledSize()
     {
+        $args = func_get_args();
+        
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->scaledSize === null)
-                $this->scaledSize = new Size($args[0], $args[1]);
+                $this->scaledSize = new Size();
             
             $this->scaledSize->setWidth($args[0]);
             $this->scaledSize->setHeight($args[1]);
@@ -215,7 +221,9 @@ class MarkerImage extends AbstractJavascriptVariableAsset
                 $this->scaledSize->setHeightUnit($args[3]);
         }
         else if(isset($args[0]) && ($args[0] instanceof Size))
-            $this->scaledSize = $scaledSize;
+            $this->scaledSize = $args[0];
+        else if(!isset($args[0]))
+            $this->scaledSize = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The anchor setter arguments is invalid.',
@@ -250,7 +258,7 @@ class MarkerImage extends AbstractJavascriptVariableAsset
      * Available prototype:
      * 
      * public function setSize(double $width, double $height, string $widthUnit = null, string $heightUnit = null)
-     * public function setSize(Ivory\GoogleMapBundle\Model\Base\Size $size)
+     * public function setSize(Ivory\GoogleMapBundle\Model\Base\Size $size = null)
      */
     public function setSize()
     {
@@ -271,7 +279,9 @@ class MarkerImage extends AbstractJavascriptVariableAsset
                 $this->size->setHeightUnit($args[3]);
         }
         else if(isset($args[0]) && ($args[0] instanceof Size))
-            $this->size = $scaledSize;
+            $this->size = $args[0];
+        else if(!isset($args[0]))
+            $this->size = null;
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The anchor setter arguments is invalid.',
