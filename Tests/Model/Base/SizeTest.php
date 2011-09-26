@@ -68,6 +68,9 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         self::$size->setWidthUnit('px');
         $this->assertEquals(self::$size->getWidthUnit(), 'px');
         
+        self::$size->setWidthUnit(null);
+        $this->assertNull(self::$size->getWidthUnit());
+        
         $this->setExpectedException('InvalidArgumentException');
         self::$size->setWidthUnit(1);
     }
@@ -79,6 +82,9 @@ class SizeTest extends \PHPUnit_Framework_TestCase
     {
         self::$size->setHeightUnit('px');
         $this->assertEquals(self::$size->getHeightUnit(), 'px');
+        
+        self::$size->setHeightUnit(null);
+        $this->assertNull(self::$size->getHeightUnit());
         
         $this->setExpectedException('InvalidArgumentException');
         self::$size->setHeightUnit(1);
