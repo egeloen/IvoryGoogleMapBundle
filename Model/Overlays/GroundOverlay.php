@@ -90,7 +90,12 @@ class GroundOverlay extends AbstractAsset implements IExtendable
         $args = func_get_args();
         
         if(isset($args[0]) && ($args[0] instanceof Bound))
-            $this->bound = $args[0];
+        {
+            if($args[0]->hasCoordinates())
+                $this->bound = $args[0];
+            else
+                throw new \InvalidArgumentException('A ground overlay bound must have a south west & a north east coordinate.');
+        }
         else if(isset($args[0]) && ($args[0] instanceof Coordinate) && isset($args[1]) && ($args[1] instanceof Coordinate))
         {
             $this->bound->setSouthWest($args[0]);
