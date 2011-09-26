@@ -69,7 +69,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
             if(isset($args[2]) && is_bool($args[2]))
                 $this->position->setNoWrap($args[2]);
         }
-        else if(isset($args[0]) && ($args[0] instanceof Coordinate))
+        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
             $this->position = $args[0];
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
