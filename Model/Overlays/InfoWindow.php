@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
+
+use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Info window which describes a google map info window
@@ -8,10 +10,10 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#InfoWindow
  * @author GeLo <geloen.eric@gmail.com>
  */
-class InfoWindow extends AbstractAsset
+class InfoWindow extends AbstractAsset implements IExtendable
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Coordinate Info window position
+     * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Info window position
      */
     protected $position = null;
 
@@ -44,7 +46,7 @@ class InfoWindow extends AbstractAsset
     /**
      * Gets the infow window position
      *
-     * @return Ivory\GoogleMapBundle\Model\Coordinate
+     * @return Ivory\GoogleMapBundle\Model\Base\Coordinate
      */
     public function getPosition()
     {
@@ -56,7 +58,7 @@ class InfoWindow extends AbstractAsset
      *
      * Available prototype:
      * 
-     * public function setPosition(Ivory\GoogleMapBundle\Model\Coordinate $position)
+     * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
@@ -77,7 +79,11 @@ class InfoWindow extends AbstractAsset
         else if(isset($args[0]) && ($args[0] instanceof Coordinate))
             $this->position = $args[0];
         else
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The position setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
+                ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
 
     /**
@@ -97,7 +103,10 @@ class InfoWindow extends AbstractAsset
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        if(is_string($content))
+            $this->content = $content;
+        else
+            throw new \InvalidArgumentException('The content of an info window must be a string value.');
     }
 
     /**
@@ -117,10 +126,8 @@ class InfoWindow extends AbstractAsset
      */
     public function setOptions(array $options)
     {
-        $this->options = array_merge(
-            $this->options,
-            $options
-        );
+        foreach($options as $option => $value)
+            $this->setOption($option, $value);
     }
 
     /**
@@ -131,7 +138,10 @@ class InfoWindow extends AbstractAsset
      */
     public function getOption($option)
     {
-        return isset($this->options[$option]) ? $this->options[$option] : null;
+        if(is_string($option))
+            return isset($this->options[$option]) ? $this->options[$option] : null;
+        else
+            throw new \InvalidArgumentException('The option property of an info window must be a string value.');
     }
 
     /**
@@ -142,7 +152,10 @@ class InfoWindow extends AbstractAsset
      */
     public function setOption($option, $value)
     {
-        $this->options[$option] = $value;
+        if(is_string($option))
+            $this->options[$option] = $value;
+        else
+            throw new \InvalidArgumentException('The option property of an info window must be a string value.');
     }
     
     /**
@@ -162,6 +175,9 @@ class InfoWindow extends AbstractAsset
      */
     public function setOpen($open)
     {
-        $this->open = $open;
+        if(is_bool($open))
+            $this->open = $open;
+        else
+            throw new \InvalidArgumentException('The open property of a circle must be a boolean value.');
     }
 }
