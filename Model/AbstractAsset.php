@@ -29,7 +29,10 @@ abstract class AbstractAsset
      */
     public function setPrefixJavascriptVariable($prefixJavascriptVariable)
     {
-        $this->javascriptVariable = uniqid($prefixJavascriptVariable);
+        if(is_string($prefixJavascriptVariable))
+            $this->javascriptVariable = uniqid($prefixJavascriptVariable);
+        else
+            throw new \InvalidArgumentException('The prefix of a javascript variable must be a string value.');
     }
 
     /**
@@ -49,6 +52,9 @@ abstract class AbstractAsset
      */
     public function setJavascriptVariable($javascriptVariable)
     {
-        $this->javascriptVariable = $javascriptVariable;
+        if(is_string($javascriptVariable))
+            $this->javascriptVariable = $javascriptVariable;
+        else
+            throw new \InvalidArgumentException('The javascript variable must be a string value.');
     }
 }
