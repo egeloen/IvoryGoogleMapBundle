@@ -48,7 +48,7 @@ class PointTest extends \PHPUnit_Framework_TestCase
     /**
      * Checks the y getter & setter
      */
-    public function testLongitude()
+    public function testY()
     {
         self::$point->setY(1.1);
         $this->assertEquals(self::$point->getY(), 1.1);
