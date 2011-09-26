@@ -48,16 +48,6 @@ class Bound extends AbstractAsset
     }
     
     /**
-     * Checks if the bound extends something
-     *
-     * @return boolean TRUE if the bound extends somethind else FALSE
-     */
-    public function hasExtends()
-    {
-        return !empty($this->extends);
-    }
-    
-    /**
      * Reset the bound to the initial state
      */
     public function reset()
@@ -81,11 +71,34 @@ class Bound extends AbstractAsset
     /**
      * Sets the south west bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest
+     * Available prototype:
+     * 
+     * public function setSouthWest(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest)
+     * public function setSouthWest(double $latitude, double $longitude, boolean $noWrap = true)
      */
-    public function setSouthWest(Coordinate $southWest = null)
+    public function setSouthWest()
     {
-        $this->southWest = $southWest;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
+        {
+            if($this->southWest === null)
+                $this->southWest = new Coordinate();
+            
+            $this->southWest->setLatitude($args[0]);
+            $this->southWest->setLongitude($args[1]);
+            
+            if(isset($args[2]) && is_bool($args[2]))
+                $this->southWest->setNoWrap($args[2]);
+        }
+        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
+            $this->southWest = $args[0];
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The south west setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setSouthWest(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest)',
+                ' - public function setSouthWest(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
 
     /**
@@ -101,11 +114,44 @@ class Bound extends AbstractAsset
     /**
      * Sets the north east bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast
+     * Available prototype:
+     * 
+     * public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
+     * public function setNorthEast(double $latitude, double $longitude, boolean $noWrap = true)
      */
-    public function setNorthEast(Coordinate $northEast = null)
+    public function setNorthEast()
     {
-        $this->northEast = $northEast;
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
+        {
+            if($this->northEast === null)
+                $this->northEast = new Coordinate();
+            
+            $this->northEast->setLatitude($args[0]);
+            $this->northEast->setLongitude($args[1]);
+            
+            if(isset($args[2]) && is_bool($args[2]))
+                $this->northEast->setNoWrap($args[2]);
+        }
+        else if(isset($args[0]) && (($args[0] instanceof Coordinate) || ($args[0] === null)))
+            $this->northEast = $args[0];
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The north east setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
+                ' - public function setNorthEast(double $latitude, double $longitude, boolean $noWrap = true)'));
+    }
+    
+    /**
+     * Checks if the bound extends something
+     *
+     * @return boolean TRUE if the bound extends somethind else FALSE
+     */
+    public function hasExtends()
+    {
+        return !empty($this->extends);
     }
     
     /**
