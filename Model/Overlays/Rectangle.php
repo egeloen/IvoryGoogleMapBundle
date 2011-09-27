@@ -26,8 +26,8 @@ class Rectangle extends AbstractOptionsAsset implements IExtendable
         $this->setPrefixJavascriptVariable('rectangle_');
 
         $this->bound = new Bound();
-        $this->bound->setNorthEast(new Coordinate(-1, -1));
-        $this->bound->setSouthWest(new Coordinate(1, 1));
+        $this->bound->setNorthEast(new Coordinate(1, 1));
+        $this->bound->setSouthWest(new Coordinate(-1, -1));
     }
 
     /**
@@ -54,7 +54,12 @@ class Rectangle extends AbstractOptionsAsset implements IExtendable
         $args = func_get_args();
         
         if(isset($args[0]) && ($args[0] instanceof Bound))
-            $this->bound = $args[0];
+        {
+            if($args[0]->hasCoordinates())
+                $this->bound = $args[0];
+            else
+                throw new \InvalidArgumentException('A rectangle bound must have a south west & a north east coordinate.');
+        }
         else if(isset($args[0]) && ($args[0] instanceof Coordinate) && isset($args[1]) && ($args[1] instanceof Coordinate))
         {
             $this->bound->setSouthWest($args[0]);
