@@ -107,6 +107,6 @@ class EventManager
      */
     public function addEventOnce(Event $eventOnce)
     {
-        $this->EventsOnce[] = $eventOnce;
+        $this->eventsOnce[] = $eventOnce;
     }
 }
