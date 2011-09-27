@@ -27,11 +27,13 @@ class Polygon extends AbstractOptionsAsset implements IExtendable
     }
     
     /**
-     * Reset the coordinates
+     * Checks if polygon has coordinates
+     *
+     * @return boolean TRUE if the polygon has coordinates else FALSE
      */
-    protected function resetCoordinates()
+    public function hasCoordinates()
     {
-        $this->coordinates = array();
+        return !empty($this->coordinates);
     }
 
     /**
@@ -51,9 +53,9 @@ class Polygon extends AbstractOptionsAsset implements IExtendable
      */
     public function setCoordinates($coordinates)
     {
-        $this->resetCoordinates();
+        $this->coordinates = array();
         
-        foreach($this->coordinates as $coordinate)
+        foreach($coordinates as $coordinate)
             $this->addCoordinate($coordinate);
     }
 
