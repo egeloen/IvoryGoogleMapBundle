@@ -27,11 +27,13 @@ class Polyline extends AbstractOptionsAsset implements IExtendable
     }
     
     /**
-     * Reset the coordinates
+     * Checks if the polyline has coordinates
+     *
+     * @return boolean TRUE if the polyline has coordinates else FALSE
      */
-    protected function resetCoordinates()
+    public function hasCoordinates()
     {
-        $this->coordinates = array();
+        return !empty($this->coordinates);
     }
 
     /**
@@ -51,9 +53,9 @@ class Polyline extends AbstractOptionsAsset implements IExtendable
      */
     public function setCoordinates($coordinates)
     {
-        $this->resetCoordinates();
+        $this->coordinates = array();
         
-        foreach($this->coordinates as $coordinate)
+        foreach($coordinates as $coordinate)
             $this->addCoordinate($coordinate);
     }
 
