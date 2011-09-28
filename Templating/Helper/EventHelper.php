@@ -24,7 +24,7 @@ class EventHelper
             $domEvent->getInstance(),
             $domEvent->getEventName(),
             $domEvent->getHandle(),
-            $domEvent->isCapture()
+            json_encode($domEvent->isCapture())
         );
     }
     
@@ -41,7 +41,7 @@ class EventHelper
             $domEventOnce->getInstance(),
             $domEventOnce->getEventName(),
             $domEventOnce->getHandle(),
-            $domEventOnce->isCapture()
+            json_encode($domEventOnce->isCapture())
         );
     }
     
