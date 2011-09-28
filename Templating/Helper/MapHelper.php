@@ -98,7 +98,7 @@ class MapHelper
      */
     public function renderContainer(Map $map)
     {
-        return sprintf('<div id="%s"></div>', $map->getHtmlContainerId());
+        return sprintf('<div id="%s"></div>'.PHP_EOL, $map->getHtmlContainerId());
     }
 
     /**
@@ -150,7 +150,7 @@ class MapHelper
             $html[] = $this->renderCenter($map);
         
         $html[] = $this->renderEvents($map);
-        $html[] = '</script>';
+        $html[] = '</script>'.PHP_EOL;
         
         return implode('', $html);
     }
@@ -161,7 +161,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderMap(Map $map)
+    public function renderMap(Map $map)
     {
         $options = $map->getMapOptions();
 
@@ -181,7 +181,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderCenter(Map $map)
+    public function renderCenter(Map $map)
     {
         return sprintf('%s.setCenter(%s);'.PHP_EOL,
             $map->getJavascriptVariable(),
@@ -195,7 +195,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderBound(Map $map)
+    public function renderBound(Map $map)
     {
         $html = array();
         
@@ -218,7 +218,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderMarkers(Map $map)
+    public function renderMarkers(Map $map)
     {
         $html = array();
 
@@ -234,7 +234,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderInfoWindows(Map $map)
+    public function renderInfoWindows(Map $map)
     {
         $html = array();
 
@@ -255,7 +255,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderPolylines(Map $map)
+    public function renderPolylines(Map $map)
     {
         $html = array();
 
@@ -271,7 +271,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderPolygons(Map $map)
+    public function renderPolygons(Map $map)
     {
         $html = array();
 
@@ -287,7 +287,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderRectangles(Map $map)
+    public function renderRectangles(Map $map)
     {
         $html = array();
 
@@ -303,7 +303,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderCircles(Map $map)
+    public function renderCircles(Map $map)
     {
         $html = array();
 
@@ -319,7 +319,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderGroundOverlays(Map $map)
+    public function renderGroundOverlays(Map $map)
     {
         $html = array();
 
@@ -335,7 +335,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */
-    protected function renderEvents(Map $map)
+    public function renderEvents(Map $map)
     {
         $html = array();
         
