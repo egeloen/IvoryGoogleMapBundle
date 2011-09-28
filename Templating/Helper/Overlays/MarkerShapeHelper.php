@@ -19,7 +19,7 @@ class MarkerShapeHelper
      */
     public function render(MarkerShape $markerShape)
     {
-        return sprintf('var %s = %s;'.PHP_EOL,
+        return sprintf('var %s = new google.maps.MarkerShape(%s);'.PHP_EOL,
             $markerShape->getJavascriptVariable(),
             json_encode(array(
                 'type' => $markerShape->getType(),
