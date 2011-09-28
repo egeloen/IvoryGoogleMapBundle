@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Tests\Templating\Helper\Base;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper;
 use Ivory\GoogleMapBundle\Model\Base\Size;

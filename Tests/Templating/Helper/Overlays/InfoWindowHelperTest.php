@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Tests\Templating\Helper\Overlays;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;

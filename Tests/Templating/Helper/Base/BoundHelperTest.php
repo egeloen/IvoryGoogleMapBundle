@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Tests\Templating\Helper\Base;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;
