@@ -22,7 +22,7 @@ class CoordinateHelper
         return sprintf('new google.maps.LatLng(%s, %s, %s)',
             $coordinate->getLatitude(),
             $coordinate->getLongitude(),
-            $coordinate->isNoWrap()
+            json_encode($coordinate->isNoWrap())
         );
     }
 }
