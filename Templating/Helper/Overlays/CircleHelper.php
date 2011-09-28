@@ -38,8 +38,8 @@ class CircleHelper
     public function render(Circle $circle, Map $map)
     {
         $circleOptions = array_merge(
-            $circle->getOptions(),
-            array('radius' => $circle->getRadius())
+            array('radius' => $circle->getRadius()),
+            $circle->getOptions()
         );
 
         $circleJSONOptions = sprintf('{"map":%s,"center":%s,',
