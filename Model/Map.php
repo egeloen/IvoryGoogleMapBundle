@@ -120,7 +120,10 @@ class Map extends AbstractJavascriptVariableAsset
      */
     public function setHtmlContainerId($htmlContainerId)
     {
-        $this->htmlContainerId = $htmlContainerId;
+        if(is_string($htmlContainerId))
+            $this->htmlContainerId = $htmlContainerId;
+        else
+            throw new \InvalidArgumentException('The html container id of a map must be a string value.');
     }
 
     /**
@@ -140,7 +143,10 @@ class Map extends AbstractJavascriptVariableAsset
      */
     public function setAutoZoom($autoZoom)
     {
-        $this->autoZoom = $autoZoom;
+        if(is_bool($autoZoom))
+            $this->autoZoom = $autoZoom;
+        else
+            throw new \InvalidArgumentException('The auto zoom of a map must be a boolean value.');
     }
 
     /**
@@ -215,8 +221,8 @@ class Map extends AbstractJavascriptVariableAsset
         }
         else if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]) && isset($args[2]) && is_numeric($args[2]) && isset($args[3]) && is_numeric($args[3]))
         {
-            $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
-            $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
+            $this->bound->setSouthWest(new Base\Coordinate($args[0], $args[1]));
+            $this->bound->setNorthEast(new Base\Coordinate($args[2], $args[3]));
             
             if(isset($args[4]) && is_bool($args[4]))
                 $this->bound->getSouthWest()->setNoWrap($args[4]);
@@ -263,7 +269,7 @@ class Map extends AbstractJavascriptVariableAsset
     public function getMapOption($mapOption)
     {
         if(is_string($mapOption))
-            return isset($this->options[$mapOption]) ? $this->options[$mapOption] : null;
+            return isset($this->mapOptions[$mapOption]) ? $this->mapOptions[$mapOption] : null;
         else
             throw new \InvalidArgumentException('The map option property of a map must be a string value.');
     }
@@ -277,7 +283,7 @@ class Map extends AbstractJavascriptVariableAsset
     public function setMapOption($mapOption, $value)
     {
         if(is_string($mapOption))
-            $this->options[$mapOption] = $value;
+            $this->mapOptions[$mapOption] = $value;
         else
             throw new \InvalidArgumentException('The map option property of a map must be a string value.');
     }
