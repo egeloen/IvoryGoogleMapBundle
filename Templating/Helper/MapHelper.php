@@ -135,7 +135,7 @@ class MapHelper
 
         $html[] = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.PHP_EOL;
         $html[] = '<script type="text/javascript">'.PHP_EOL;
-        $html[] = $this->renderMap($map);
+        $html[] = $this->renderMap($map, false);
         $html[] = $this->renderMarkers($map);
         $html[] = $this->renderInfoWindows($map);
         $html[] = $this->renderPolylines($map);
@@ -159,20 +159,28 @@ class MapHelper
      * Renders the map javascript variable
      *
      * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @param boolean $renderCenter TRUE if the center setter is rendered else FALSE
      * @return string HTML output
      */
-    public function renderMap(Map $map)
+    public function renderMap(Map $map, $renderCenter = true)
     {
+        $html = array();
+        
         $options = $map->getMapOptions();
 
         if($map->isAutoZoom() && isset($options['zoom']))
             unset($options['zoom']);
         
-        return sprintf('var %s = new google.maps.Map(document.getElementById("%s"), %s);'.PHP_EOL,
+        $html[] = sprintf('var %s = new google.maps.Map(document.getElementById("%s"), %s);'.PHP_EOL,
             $map->getJavascriptVariable(),
             $map->getHtmlContainerId(),
             json_encode($options)
         );
+        
+        if($renderCenter)
+            $html[] = $this->renderCenter($map);
+        
+        return implode('', $html);
     }
 
     /**
