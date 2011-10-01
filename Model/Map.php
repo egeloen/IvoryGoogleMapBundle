@@ -39,7 +39,7 @@ class Map extends AbstractJavascriptVariableAsset
      * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapOptions
      */
     protected $mapOptions = array(
-        'mapTypeId' => 'roadmap',
+        'mapTypeId' => MapTypeId::ROADMAP,
         'zoom'      => 3
     );
 
