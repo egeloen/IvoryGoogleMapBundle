@@ -4,6 +4,7 @@ namespace Ivory\GoogleMapBundle\Model;
 
 use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Base;
+use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
 
 /**
@@ -50,6 +51,8 @@ class Map extends AbstractJavascriptVariableAsset
         'width'  => '300px',
         'height' => '300px'
     );
+    
+    protected $mapTypeControl = null;
     
     /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
@@ -335,6 +338,49 @@ class Map extends AbstractJavascriptVariableAsset
             $this->stylesheetOptions[$stylesheetOption] = $value;
         else
             throw new \InvalidArgumentException('The stylesheet option property of a map must be a string value.');
+    }
+    
+    /**
+     * Gets the map type control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\MapTypeControl
+     */
+    public function getMapTypeControl()
+    {
+        return $this->mapTypeControl;
+    }
+    
+    /**
+     * Sets the map type control
+     * 
+     * Available prototype :
+     * 
+     * public function setMapTypeControl(Ivory\GoogleMapBundle\Model\Controls\MapTypeControl $mapTypeControl = null)
+     * public function setMaptypeControl(array $mapTypeIds, string $controlPosition, string $mapTypeControlStyle)
+     */
+    public function setMapTypeControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_array($args[0]) && isset($args[1]) && is_string($args[1]) && isset($args[2]) && is_string($args[2]))
+        {
+            if($this->mapTypeControl === null)
+                $this->mapTypeControl = new Controls\MapTypeControl();
+            
+            $this->mapTypeControl->setMapTypeIds($args[0]);
+            $this->mapTypeControl->setControlPosition($args[1]);
+            $this->mapTypeControl->setMapTypeControlStyle($args[2]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\MapTypeControl))
+            $this->mapTypeControl = $args[0];
+        else if(!isset($args[0]))
+            $this->mapTypeControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The map type control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setMapTypeControl(Ivory\GoogleMapBundle\Model\Controls\MapTypeControl $mapTypeControl = null)',
+                ' - public function setMaptypeControl(array $mapTypeIds, string $controlPosition, string $mapTypeControlStyle)'));
     }
     
     /**

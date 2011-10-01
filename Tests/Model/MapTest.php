@@ -6,6 +6,7 @@ use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractJavascriptVariableAssetTest
 
 use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
+use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
 
 /**
@@ -57,6 +58,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
             'width' => '300px',
             'height' => '300px'
         ));
+        $this->assertNull(self::$map->getMapTypeControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -195,6 +197,32 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->getStylesheetOption(0);
+    }
+    
+    /**
+     * Checks the map type control getter & setter
+     */
+    public function testMapTypeControl()
+    {
+        $mapTypeControlTest = new Controls\MapTypeControl();
+        $mapTypeControlTest->setMapTypeIds(array(Model\MapTypeId::ROADMAP));
+        $mapTypeControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        $mapTypeControlTest->setMapTypeControlStyle(Controls\MapTypeControlStyle::HORIZONTAL_BAR);
+        self::$map->setMapTypeControl($mapTypeControlTest);
+        $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeIds(), array('roadmap'));
+        $this->assertEquals(self::$map->getMapTypeControl()->getControlPosition(), 'bottom_center');
+        $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeControlStyle(), 'horizontal_bar');
+        
+        self::$map->setMapTypeControl(array(Model\MapTypeId::SATELLITE), Controls\ControlPosition::BOTTOM_LEFT, Controls\MapTypeControlStyle::DROPDOWN_MENU);
+        $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeIds(), array('satellite'));
+        $this->assertEquals(self::$map->getMapTypeControl()->getControlPosition(), 'bottom_left');
+        $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeControlStyle(), 'dropdown_menu');
+        
+        self::$map->setMapTypeControl(null);
+        $this->assertNull(self::$map->getMapTypeControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setMapTypeControl('foo');
     }
     
     /**
