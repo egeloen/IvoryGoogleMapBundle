@@ -4,10 +4,12 @@ namespace Ivory\GoogleMapBundle\Tests\Templating\Helper;
 
 use Ivory\GoogleMapBundle\Templating\Helper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base as BaseHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Controls as ControlsHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays as OverlaysHelper;
 
 use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
+use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
 
 /**
@@ -30,6 +32,11 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         self::$mapHelper = new Helper\MapHelper(
             new BaseHelper\CoordinateHelper(),
             new Helper\MapTypeIdHelper(),
+            new ControlsHelper\MapTypeControlHelper(
+                new Helper\MapTypeIdHelper(),
+                new ControlsHelper\ControlPositionHelper(),
+                new ControlsHelper\MapTypeControlStyleHelper()
+            ),
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
                 new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
@@ -116,11 +123,13 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         
         $mapTest->setMapOption('mapTypeId', 'satellite');
         $mapTest->setMapOption('zoom', 5);
+        $mapTest->setMapTypeControl(array(Model\MapTypeId::ROADMAP), Controls\ControlPosition::BOTTOM_CENTER, Controls\MapTypeControlStyle::DROPDOWN_MENU);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"zoom":5});'.PHP_EOL
         );
         
+        $mapTest->setMapTypeControl(null);
         $mapTest->setAutoZoom(true);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
