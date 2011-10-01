@@ -22,4 +22,19 @@ class MapTypeId
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
+    
+    /**
+     * Gets the available map type ids
+     *
+     * @return array
+     */
+    public static function getMapTypeIds()
+    {
+        return array(
+            self::HYBRID,
+            self::ROADMAP,
+            self::SATELLITE,
+            self::TERRAIN
+        );
+    }
 }
