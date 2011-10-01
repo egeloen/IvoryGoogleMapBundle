@@ -24,7 +24,7 @@ class MapTypeControl
     /**
      * @var string Control position
      */
-    protected $controlPosition = ControlPosition::TOP_LEFT;
+    protected $controlPosition = ControlPosition::TOP_RIGHT;
     
     /**
      * @var string Map type control style

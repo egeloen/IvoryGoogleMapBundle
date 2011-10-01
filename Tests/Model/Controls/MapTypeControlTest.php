@@ -33,7 +33,7 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     public function testDefaultValues()
     {
         $this->assertEquals(self::$mapTypeControl->getMapTypeIds(), array('roadmap', 'satellite'));
-        $this->assertEquals(self::$mapTypeControl->getControlPosition(), 'top_left');
+        $this->assertEquals(self::$mapTypeControl->getControlPosition(), 'top_right');
         $this->assertEquals(self::$mapTypeControl->getMapTypeControlStyle(), 'default');
     }
     
