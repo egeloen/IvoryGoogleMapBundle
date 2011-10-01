@@ -30,6 +30,7 @@ class IvoryGoogleMapExtension extends Extension
             $loader->load($file);
 
         $this->loadMap($config, $container);
+        $this->loadMapTypeId($config, $container);
         $this->loadCoordinate($config, $container);
         $this->loadMarker($config, $container);
         $this->loadBound($config, $container);
@@ -72,6 +73,17 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.height', $config['map']['height']);
         $container->setParameter('ivory_google_map.map.map_options', $config['map']['map_options']);
         $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);
+    }
+    
+    /**
+     * Loads map type id configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMapTypeId(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.map_type_id.helper', $config['map_type_id']['helper']);
     }
     
     /**

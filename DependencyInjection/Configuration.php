@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('ivory_google_map');
 
         $this->addMapSection($rootNode);
+        $this->addMapTypeIdSection($rootNode);
         $this->addCoordinateSection($rootNode);
         $this->addMarkerSection($rootNode);
         $this->addBoundSection($rootNode);
@@ -76,6 +77,23 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('stylesheet_options')
                             ->useAttributeAsKey('stylesheet_options')->prototype('scalar')->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the map type id section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMapTypeIdSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map_type_id')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper')->end()
                     ->end()
                 ->end()
             ->end();
