@@ -29,6 +29,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapHelper = new Helper\MapHelper(
             new BaseHelper\CoordinateHelper(),
+            new Helper\MapTypeIdHelper(),
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
                 new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
@@ -99,7 +100,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$mapHelper->renderJavascripts($mapTest),
             '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.PHP_EOL.
             '<script type="text/javascript">'.PHP_EOL.
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":"satellite","zoom":5});'.PHP_EOL.
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL.
             $mapTest->getJavascriptVariable().'.setCenter(new google.maps.LatLng(1.1, 2.1, true));'.PHP_EOL.
             '</script>'.PHP_EOL
         );
@@ -117,13 +118,13 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setMapOption('zoom', 5);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":"satellite","zoom":5});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL
         );
         
         $mapTest->setAutoZoom(true);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":"satellite"});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE});'.PHP_EOL
         );
     }
     
