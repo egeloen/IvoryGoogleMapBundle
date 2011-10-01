@@ -2,6 +2,8 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
+use Ivory\GoogleMapBundle\Model\MapTypeId;
+
 /**
  * Map type ID helper
  *
@@ -19,19 +21,19 @@ class MapTypeIdHelper
     {
         switch($mapTypeId) 
         {
-            case 'hybrid':
+            case MapTypeId::HYBRID:
                 return 'google.maps.MapTypeId.HYBRID';
             break;
         
-            case 'roadmap':
+            case MapTypeId::ROADMAP:
                 return 'google.maps.MapTypeId.ROADMAP';
             break;
         
-            case 'satellite':
+            case MapTypeId::SATELLITE:
                 return 'google.maps.MapTypeId.SATELLITE';
             break;
         
-            case 'terrain':
+            case MapTypeId::TERRAIN:
                 return 'google.maps.MapTypeId.TERRAIN';
             break;
 
