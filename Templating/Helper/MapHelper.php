@@ -18,6 +18,11 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper
+     */
+    protected $mapTypeIdHelper;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper
@@ -68,6 +73,7 @@ class MapHelper
      * Constructs a map helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper $mapTypeIdHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper $markerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
@@ -76,9 +82,10 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
+        $this->mapTypeIdHelper = $mapTypeIdHelper;
         $this->markerHelper = $markerHelper;
         $this->boundHelper = $boundHelper;
         $this->infoWindowHelper = $infoWindowHelper;
@@ -165,15 +172,23 @@ class MapHelper
     {
         $html = array();
         
-        $options = $map->getMapOptions();
+        $mapOptions = $map->getMapOptions();
+        
+        $mapJSONOptions = '{"mapTypeId":'.$this->mapTypeIdHelper->render($mapOptions['mapTypeId']);
+        unset($mapOptions['mapTypeId']);
 
-        if($map->isAutoZoom() && isset($options['zoom']))
-            unset($options['zoom']);
+        if($map->isAutoZoom() && isset($mapOptions['zoom']))
+            unset($mapOptions['zoom']);
+        
+        if(!empty($mapOptions))
+            $mapJSONOptions .= ','.substr(json_encode($mapOptions), 1);
+        else
+            $mapJSONOptions .= '}';
         
         $html[] = sprintf('var %s = new google.maps.Map(document.getElementById("%s"), %s);'.PHP_EOL,
             $map->getJavascriptVariable(),
             $map->getHtmlContainerId(),
-            json_encode($options)
+            $mapJSONOptions
         );
         
         return implode('', $html);
