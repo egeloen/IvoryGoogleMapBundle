@@ -29,21 +29,30 @@ class IvoryGoogleMapExtension extends Extension
         foreach(array('services.xml') as $file)
             $loader->load($file);
 
+        // Map sections
         $this->loadMap($config, $container);
         $this->loadMapTypeId($config, $container);
+        
+        // Base sections
         $this->loadCoordinate($config, $container);
-        $this->loadMarker($config, $container);
         $this->loadBound($config, $container);
+        $this->loadPoint($config, $container);
+        $this->loadSize($config, $container);
+        
+        // Marker sections
+        $this->loadMarker($config, $container);
+        $this->loadMarkerImage($config, $container);
+        $this->loadMarkerShape($config, $container);
+        
+        // Overlay sections
         $this->loadInfoWindow($config, $container);
         $this->loadPolyline($config, $container);
         $this->loadPolygon($config, $container);
         $this->loadRectangle($config, $container);
         $this->loadCircle($config, $container);
         $this->loadGroundOverlay($config, $container);
-        $this->loadPoint($config, $container);
-        $this->loadSize($config, $container);
-        $this->loadMarkerImage($config, $container);
-        $this->loadMarkerShape($config, $container);
+        
+        // Event sections
         $this->loadEventManager($config, $container);
         $this->loadEvent($config, $container);
 
@@ -102,6 +111,49 @@ class IvoryGoogleMapExtension extends Extension
     }
     
     /**
+     * Loads bound configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadBound(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.bound.class', $config['bound']['class']);
+        $container->setParameter('ivory_google_map.bound.helper', $config['bound']['helper']);
+        $container->setParameter('ivory_google_map.bound.prefix_javascript_variable', $config['bound']['prefix_javascript_variable']);
+    }
+    
+    /**
+     * Loads point configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadPoint(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.point.class', $config['point']['class']);
+        $container->setParameter('ivory_google_map.point.helper', $config['point']['helper']);
+        $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
+        $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
+    }
+    
+    /**
+     * Loads size configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadSize(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.size.class', $config['size']['class']);
+        $container->setParameter('ivory_google_map.size.helper', $config['size']['helper']);
+        $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
+        $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
+        $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
+        $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+    }
+    
+    /**
      * Loads marker configuration
      *
      * @param array $config
@@ -119,16 +171,31 @@ class IvoryGoogleMapExtension extends Extension
     }
     
     /**
-     * Loads bound configuration
+     * Loads marker image configuration
      *
      * @param array $config
      * @param ContainerBuilder $container 
      */
-    protected function loadBound(array $config, ContainerBuilder $container)
+    protected function loadMarkerImage(array $config, ContainerBuilder $container)
     {
-        $container->setParameter('ivory_google_map.bound.class', $config['bound']['class']);
-        $container->setParameter('ivory_google_map.bound.helper', $config['bound']['helper']);
-        $container->setParameter('ivory_google_map.bound.prefix_javascript_variable', $config['bound']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.marker_image.class', $config['marker_image']['class']);
+        $container->setParameter('ivory_google_map.marker_image.helper', $config['marker_image']['helper']);
+        $container->setParameter('ivory_google_map.marker_image.prefix_javascript_variable', $config['marker_image']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
+    }
+    
+    /**
+     * Loads marker shape configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMarkerShape(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.marker_shape.class', $config['marker_shape']['class']);
+        $container->setParameter('ivory_google_map.marker_shape.helper', $config['marker_shape']['helper']);
+        $container->setParameter('ivory_google_map.marker_shape.prefix_javascript_variable', $config['marker_shape']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.marker_shape.type', $config['marker_shape']['type']);
     }
     
     /**
@@ -234,64 +301,6 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.longitude', $config['ground_overlay']['bound']['north_east']['longitude']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.no_wrap', $config['ground_overlay']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
-    }
-    
-    /**
-     * Loads point configuration
-     *
-     * @param array $config
-     * @param ContainerBuilder $container 
-     */
-    protected function loadPoint(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ivory_google_map.point.class', $config['point']['class']);
-        $container->setParameter('ivory_google_map.point.helper', $config['point']['helper']);
-        $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
-        $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
-    }
-    
-    /**
-     * Loads size configuration
-     *
-     * @param array $config
-     * @param ContainerBuilder $container 
-     */
-    protected function loadSize(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ivory_google_map.size.class', $config['size']['class']);
-        $container->setParameter('ivory_google_map.size.helper', $config['size']['helper']);
-        $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
-        $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
-        $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
-        $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
-    }
-    
-    /**
-     * Loads marker image configuration
-     *
-     * @param array $config
-     * @param ContainerBuilder $container 
-     */
-    protected function loadMarkerImage(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ivory_google_map.marker_image.class', $config['marker_image']['class']);
-        $container->setParameter('ivory_google_map.marker_image.helper', $config['marker_image']['helper']);
-        $container->setParameter('ivory_google_map.marker_image.prefix_javascript_variable', $config['marker_image']['prefix_javascript_variable']);
-        $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
-    }
-    
-    /**
-     * Loads marker shape configuration
-     *
-     * @param array $config
-     * @param ContainerBuilder $container 
-     */
-    protected function loadMarkerShape(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('ivory_google_map.marker_shape.class', $config['marker_shape']['class']);
-        $container->setParameter('ivory_google_map.marker_shape.helper', $config['marker_shape']['helper']);
-        $container->setParameter('ivory_google_map.marker_shape.prefix_javascript_variable', $config['marker_shape']['prefix_javascript_variable']);
-        $container->setParameter('ivory_google_map.marker_shape.type', $config['marker_shape']['type']);
     }
     
     /**

@@ -6,6 +6,7 @@
 
     <services>
 
+        <!-- Map services -->
         <service id="ivory_google_map.map" class="%ivory_google_map.map.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.map.prefix_javascript_variable%</argument>
@@ -57,7 +58,22 @@
                 <argument type="service" id="ivory_google_map.event_manager" />
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+            <argument type="service" id="ivory_google_map.helper.map_type_id" />
+            <argument type="service" id="ivory_google_map.helper.marker" />
+            <argument type="service" id="ivory_google_map.helper.bound" />
+            <argument type="service" id="ivory_google_map.helper.info_window" />
+            <argument type="service" id="ivory_google_map.helper.polyline" />
+            <argument type="service" id="ivory_google_map.helper.polygon" />
+            <argument type="service" id="ivory_google_map.helper.rectangle" />
+            <argument type="service" id="ivory_google_map.helper.circle" />
+            <argument type="service" id="ivory_google_map.helper.ground_overlay" />
+            <argument type="service" id="ivory_google_map.helper.event" />
+        </service>
 
+        <!-- Coordinate service -->
         <service id="ivory_google_map.coordinate" class="%ivory_google_map.coordinate.class%" scope="prototype">
             <call method="setLatitude">
                 <argument>%ivory_google_map.coordinate.latitude%</argument>
@@ -71,13 +87,58 @@
                 <argument>%ivory_google_map.coordinate.no_wrap%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.coordinate" class="%ivory_google_map.coordinate.helper%" public="false" />
 
+        <!-- Bound service -->
         <service id="ivory_google_map.bound" class="%ivory_google_map.bound.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.bound.prefix_javascript_variable%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.bound" class="%ivory_google_map.bound.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
+        
+        <!-- Map type ID service -->
+        <service id="ivory_google_map.helper.map_type_id" class="%ivory_google_map.map_type_id.helper%" public="false" />
+        
+        <!-- Point service -->
+        <service id="ivory_google_map.point" class="%ivory_google_map.point.class%" scope="prototype">
+            <call method="setX">
+                <argument>%ivory_google_map.point.x%</argument>
+            </call>
+            
+            <call method="setY">
+                <argument>%ivory_google_map.point.y%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.point" class="%ivory_google_map.point.helper%" public="false" />
+        
+        <!-- Size service -->
+        <service id="ivory_google_map.size" class="%ivory_google_map.size.class%" scope="prototype">
+            <call method="setWidth">
+                <argument>%ivory_google_map.size.width%</argument>
+            </call>
+            
+            <call method="setHeight">
+                <argument>%ivory_google_map.size.height%</argument>
+            </call>
+            
+            <call method="setWidthUnit">
+                <argument>%ivory_google_map.size.width_unit%</argument>
+            </call>
+            
+            <call method="setHeightUnit">
+                <argument>%ivory_google_map.size.height_unit%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.size" class="%ivory_google_map.size.helper%" public="false" />
 
+        <!-- Marker service -->
         <service id="ivory_google_map.marker" class="%ivory_google_map.marker.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.marker.prefix_javascript_variable%</argument>
@@ -93,7 +154,44 @@
                 <argument>%ivory_google_map.marker.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+            <argument type="service" id="ivory_google_map.helper.info_window" />
+            <argument type="service" id="ivory_google_map.helper.marker_image" />
+            <argument type="service" id="ivory_google_map.helper.marker_shape" />
+        </service>
+        
+        <!-- Marker image service -->
+        <service id="ivory_google_map.marker_image" class="%ivory_google_map.marker_image.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.marker_image.prefix_javascript_variable%</argument>
+            </call>
+            
+            <call method="setUrl">
+                <argument>%ivory_google_map.marker_image.url%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.marker_image" class="%ivory_google_map.marker_image.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.point" />
+            <argument type="service" id="ivory_google_map.helper.size" />
+        </service>
+        
+        <!-- Marker shape service -->
+        <service id="ivory_google_map.marker_shape" class="%ivory_google_map.marker_shape.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.marker_shape.prefix_javascript_variable%</argument>
+            </call>
+            
+            <call method="setType">
+                <argument>%ivory_google_map.marker_shape.type%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.marker_shape" class="%ivory_google_map.marker_shape.helper%" public="false" />
 
+        <!-- Info window service -->
         <service id="ivory_google_map.info_window" class="%ivory_google_map.info_window.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.info_window.prefix_javascript_variable%</argument>
@@ -117,7 +215,12 @@
                 <argument>%ivory_google_map.info_window.open%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.info_window" class="%ivory_google_map.info_window.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
 
+        <!-- Polyline service -->
         <service id="ivory_google_map.polyline" class="%ivory_google_map.polyline.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.polyline.prefix_javascript_variable%</argument>
@@ -127,7 +230,12 @@
                 <argument>%ivory_google_map.polyline.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.polyline" class="%ivory_google_map.polyline.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
 
+        <!-- Polygon service -->
         <service id="ivory_google_map.polygon" class="%ivory_google_map.polygon.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.polygon.prefix_javascript_variable%</argument>
@@ -137,7 +245,12 @@
                 <argument>%ivory_google_map.polygon.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.polygon" class="%ivory_google_map.polygon.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
 
+        <!-- Rectangle service -->
         <service id="ivory_google_map.rectangle" class="%ivory_google_map.rectangle.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.rectangle.prefix_javascript_variable%</argument>
@@ -156,7 +269,12 @@
                 <argument>%ivory_google_map.rectangle.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.rectangle" class="%ivory_google_map.rectangle.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.bound" />
+        </service>
 
+        <!-- Circle service -->
         <service id="ivory_google_map.circle" class="%ivory_google_map.circle.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.circle.prefix_javascript_variable%</argument>
@@ -176,7 +294,12 @@
                 <argument>%ivory_google_map.circle.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.circle" class="%ivory_google_map.circle.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
 
+        <!-- Ground overlay service -->
         <service id="ivory_google_map.ground_overlay" class="%ivory_google_map.ground_overlay.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.ground_overlay.prefix_javascript_variable%</argument>
@@ -196,127 +319,21 @@
             </call>
         </service>
         
-        <service id="ivory_google_map.point" class="%ivory_google_map.point.class%" scope="prototype">
-            <call method="setX">
-                <argument>%ivory_google_map.point.x%</argument>
-            </call>
-            
-            <call method="setY">
-                <argument>%ivory_google_map.point.y%</argument>
-            </call>
+        <service id="ivory_google_map.helper.ground_overlay" class="%ivory_google_map.ground_overlay.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.bound" />
         </service>
         
-        <service id="ivory_google_map.size" class="%ivory_google_map.size.class%" scope="prototype">
-            <call method="setWidth">
-                <argument>%ivory_google_map.size.width%</argument>
-            </call>
-            
-            <call method="setHeight">
-                <argument>%ivory_google_map.size.height%</argument>
-            </call>
-            
-            <call method="setWidthUnit">
-                <argument>%ivory_google_map.size.width_unit%</argument>
-            </call>
-            
-            <call method="setHeightUnit">
-                <argument>%ivory_google_map.size.height_unit%</argument>
-            </call>
-        </service>
-        
-        <service id="ivory_google_map.marker_image" class="%ivory_google_map.marker_image.class%" scope="prototype">
-            <call method="setPrefixJavascriptVariable">
-                <argument>%ivory_google_map.marker_image.prefix_javascript_variable%</argument>
-            </call>
-            
-            <call method="setUrl">
-                <argument>%ivory_google_map.marker_image.url%</argument>
-            </call>
-        </service>
-        
-        <service id="ivory_google_map.marker_shape" class="%ivory_google_map.marker_shape.class%" scope="prototype">
-            <call method="setPrefixJavascriptVariable">
-                <argument>%ivory_google_map.marker_shape.prefix_javascript_variable%</argument>
-            </call>
-            
-            <call method="setType">
-                <argument>%ivory_google_map.marker_shape.type%</argument>
-            </call>
-        </service>
-        
+        <!-- Event manager service -->
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
         
+        <!-- Event service -->
         <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.event.prefix_javascript_variable%</argument>
             </call>
         </service>
-
-        <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-            <argument type="service" id="ivory_google_map.helper.map_type_id" />
-            <argument type="service" id="ivory_google_map.helper.marker" />
-            <argument type="service" id="ivory_google_map.helper.bound" />
-            <argument type="service" id="ivory_google_map.helper.info_window" />
-            <argument type="service" id="ivory_google_map.helper.polyline" />
-            <argument type="service" id="ivory_google_map.helper.polygon" />
-            <argument type="service" id="ivory_google_map.helper.rectangle" />
-            <argument type="service" id="ivory_google_map.helper.circle" />
-            <argument type="service" id="ivory_google_map.helper.ground_overlay" />
-            <argument type="service" id="ivory_google_map.helper.event" />
-        </service>
-
-        <service id="ivory_google_map.helper.coordinate" class="%ivory_google_map.coordinate.helper%" public="false" />
         
-        <service id="ivory_google_map.helper.bound" class="%ivory_google_map.bound.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
-        
-        <service id="ivory_google_map.helper.map_type_id" class="%ivory_google_map.map_type_id.helper%" public="false" />
-
-        <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-            <argument type="service" id="ivory_google_map.helper.info_window" />
-            <argument type="service" id="ivory_google_map.helper.marker_image" />
-            <argument type="service" id="ivory_google_map.helper.marker_shape" />
-        </service>
-
-        <service id="ivory_google_map.helper.info_window" class="%ivory_google_map.info_window.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
-
         <service id="ivory_google_map.helper.event" class="%ivory_google_map.event.helper%" public="false" />
-
-        <service id="ivory_google_map.helper.polyline" class="%ivory_google_map.polyline.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
-
-        <service id="ivory_google_map.helper.polygon" class="%ivory_google_map.polygon.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
-
-        <service id="ivory_google_map.helper.rectangle" class="%ivory_google_map.rectangle.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.bound" />
-        </service>
-
-        <service id="ivory_google_map.helper.circle" class="%ivory_google_map.circle.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
-
-        <service id="ivory_google_map.helper.ground_overlay" class="%ivory_google_map.ground_overlay.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.bound" />
-        </service>
-        
-        <service id="ivory_google_map.helper.marker_image" class="%ivory_google_map.marker_image.helper%" public="false">
-            <argument type="service" id="ivory_google_map.helper.point" />
-            <argument type="service" id="ivory_google_map.helper.size" />
-        </service>
-        
-        <service id="ivory_google_map.helper.marker_shape" class="%ivory_google_map.marker_shape.helper%" public="false" />
-        
-        <service id="ivory_google_map.helper.point" class="%ivory_google_map.point.helper%" public="false" />
-        
-        <service id="ivory_google_map.helper.size" class="%ivory_google_map.size.helper%" public="false" />
 
     </services>
 
