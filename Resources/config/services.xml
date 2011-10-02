@@ -62,6 +62,7 @@
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.map_type_id" />
+            <argument type="service" id="ivory_google_map.helper.map_type_control" />
             <argument type="service" id="ivory_google_map.helper.marker" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
@@ -72,6 +73,9 @@
             <argument type="service" id="ivory_google_map.helper.ground_overlay" />
             <argument type="service" id="ivory_google_map.helper.event" />
         </service>
+        
+        <!-- Map type ID service -->
+        <service id="ivory_google_map.helper.map_type_id" class="%ivory_google_map.map_type_id.helper%" public="false" />
 
         <!-- Coordinate service -->
         <service id="ivory_google_map.coordinate" class="%ivory_google_map.coordinate.class%" scope="prototype">
@@ -100,9 +104,6 @@
         <service id="ivory_google_map.helper.bound" class="%ivory_google_map.bound.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
         </service>
-        
-        <!-- Map type ID service -->
-        <service id="ivory_google_map.helper.map_type_id" class="%ivory_google_map.map_type_id.helper%" public="false" />
         
         <!-- Point service -->
         <service id="ivory_google_map.point" class="%ivory_google_map.point.class%" scope="prototype">
@@ -137,7 +138,34 @@
         </service>
         
         <service id="ivory_google_map.helper.size" class="%ivory_google_map.size.helper%" public="false" />
-
+        
+        <!-- Map type control service -->
+        <service id="ivory_google_map.map_type_control" class="%ivory_google_map.map_type_control.class%" scope="prototype">
+            <call method="setMapTypeIds">
+                <argument>%ivory_google_map.map_type_control.map_type_ids%</argument>
+            </call>
+            
+            <call method="setControlPosition">
+                <argument>%ivory_google_map.map_type_control.control_position%</argument>
+            </call>
+            
+            <call method="setMapTypeControlStyle">
+                <argument>%ivory_google_map.map_type_control.map_type_control_style%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.map_type_control" class="%ivory_google_map.map_type_control.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.map_type_id" />
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+            <argument type="service" id="ivory_google_map.helper.map_type_control_style" />
+        </service>
+        
+        <!-- Control Position service -->
+        <service id="ivory_google_map.helper.control_position" class="%ivory_google_map.control_position.helper%" public="false" />
+        
+        <!-- Map type control style service -->
+        <service id="ivory_google_map.helper.map_type_control_style" class="%ivory_google_map.map_type_control_style.helper%" public="false" />
+        
         <!-- Marker service -->
         <service id="ivory_google_map.marker" class="%ivory_google_map.marker.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">

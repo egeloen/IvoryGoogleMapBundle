@@ -39,6 +39,11 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadPoint($config, $container);
         $this->loadSize($config, $container);
         
+        // Control sections
+        $this->loadMapTypeControl($config, $container);
+        $this->loadControlPosition($config, $container);
+        $this->loadMapTypeControlStyle($config, $container);
+        
         // Marker sections
         $this->loadMarker($config, $container);
         $this->loadMarkerImage($config, $container);
@@ -151,6 +156,43 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
         $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
         $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+    }
+    
+    /**
+     * Loads map type control configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMapTypeControl(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.map_type_control.class', $config['map_type_control']['class']);
+        $container->setParameter('ivory_google_map.map_type_control.helper', $config['map_type_control']['helper']);
+        $container->setParameter('ivory_google_map.map_type_control.map_type_ids', $config['map_type_control']['map_type_ids']);
+        $container->setParameter('ivory_google_map.map_type_control.control_position', $config['map_type_control']['control_position']);
+        $container->setParameter('ivory_google_map.map_type_control.map_type_control_style', $config['map_type_control']['map_type_control_style']);
+    }
+    
+    /**
+     * Loads control position configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadControlPosition(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.control_position.helper', $config['control_position']['helper']);
+    }
+    
+    /**
+     * Loads map type control_style configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadMapTypeControlStyle(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.map_type_control_style.helper', $config['map_type_control_style']['helper']);
     }
     
     /**

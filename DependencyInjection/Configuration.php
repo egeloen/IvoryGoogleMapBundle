@@ -7,6 +7,8 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 use Ivory\GoogleMapBundle\Model\MapTypeId;
+use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
 
 /**
  * Ivory google map configuration
@@ -32,6 +34,11 @@ class Configuration implements ConfigurationInterface
         $this->addBoundSection($rootNode);
         $this->addPointSection($rootNode);
         $this->addSizeSection($rootNode);
+        
+        // Control sections
+        $this->addMapTypeControlSection($rootNode);
+        $this->addControlPositionSection($rootNode);
+        $this->addMapTypeControlStyleSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -188,6 +195,61 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('height')->defaultValue(1)->end()
                         ->scalarNode('width_unit')->defaultValue(null)->end()
                         ->scalarNode('height_unit')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the map type control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMapTypeControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map_type_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\MapTypeControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper')->end()
+                        ->scalarNode('map_type_ids')->defaultValue(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE))->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_RIGHT)->end()
+                        ->scalarNode('map_type_control_style')->defaultValue(MapTypeControlStyle::DEFAULT_)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the control position section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addControlPositionSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('control_position')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the map type control style section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addMapTypeControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map_type_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlStyleHelper')->end()
                     ->end()
                 ->end()
             ->end();
