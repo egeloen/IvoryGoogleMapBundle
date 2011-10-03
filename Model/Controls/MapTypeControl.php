@@ -87,7 +87,7 @@ class MapTypeControl
         if(in_array($controlPosition, ControlPosition::getControlPositions()))
             $this->controlPosition = $controlPosition;
         else
-            throw new \InvalidArgumentException(sprintf('The control position of a map type control can only be : %s.'), implode(', ', ControlPosition::getControlPositions()));
+            throw new \InvalidArgumentException(sprintf('The control position of a map type control can only be : %s.', implode(', ', ControlPosition::getControlPositions())));
     }
     
     /**

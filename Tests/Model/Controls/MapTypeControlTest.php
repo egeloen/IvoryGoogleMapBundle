@@ -49,6 +49,9 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
         self::$mapTypeControl->addMapTypeId(MapTypeId::SATELLITE);
         $this->assertTrue(in_array('satellite', self::$mapTypeControl->getMapTypeIds()));
         $this->assertEquals(count(self::$mapTypeControl->getMapTypeIds()), 2);
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$mapTypeControl->addMapTypeId('foo');
     }
     
     /**
@@ -58,6 +61,9 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$mapTypeControl->getControlPosition(), 'bottom_center');
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$mapTypeControl->setControlPosition('foo');
     }
     
     /**
@@ -67,5 +73,8 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControl->setMapTypeControlStyle(MapTypeControlStyle::DROPDOWN_MENU);
         $this->assertEquals(self::$mapTypeControl->getMapTypeControlStyle(), 'dropdown_menu');
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$mapTypeControl->setMapTypeControlStyle('foo');
     }
 }
