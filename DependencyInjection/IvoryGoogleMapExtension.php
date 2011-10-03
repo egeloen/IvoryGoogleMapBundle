@@ -43,6 +43,7 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadMapTypeControl($config, $container);
         $this->loadControlPosition($config, $container);
         $this->loadMapTypeControlStyle($config, $container);
+        $this->loadOverviewMapControl($config, $container);
         
         // Marker sections
         $this->loadMarker($config, $container);
@@ -193,6 +194,19 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadMapTypeControlStyle(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.map_type_control_style.helper', $config['map_type_control_style']['helper']);
+    }
+    
+    /**
+     * Loads overview map control configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadOverviewMapControl(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.overview_map_control.class', $config['overview_map_control']['class']);
+        $container->setParameter('ivory_google_map.overview_map_control.helper', $config['overview_map_control']['helper']);
+        $container->setParameter('ivory_google_map.overview_map_control.opened', $config['overview_map_control']['opened']);
     }
     
     /**

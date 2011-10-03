@@ -63,6 +63,7 @@
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.map_type_id" />
             <argument type="service" id="ivory_google_map.helper.map_type_control" />
+            <argument type="service" id="ivory_google_map.helper.overview_map_control" />
             <argument type="service" id="ivory_google_map.helper.marker" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
@@ -159,6 +160,15 @@
             <argument type="service" id="ivory_google_map.helper.control_position" />
             <argument type="service" id="ivory_google_map.helper.map_type_control_style" />
         </service>
+        
+        <!-- Overview map control service -->
+        <service id="ivory_google_map.overview_map_control" class="%ivory_google_map.overview_map_control.class%" scope="prototype">
+            <call method="setOpened">
+                <argument>%ivory_google_map.overview_map_control.opened%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.overview_map_control" class="%ivory_google_map.overview_map_control.helper%" public="false" />
         
         <!-- Control Position service -->
         <service id="ivory_google_map.helper.control_position" class="%ivory_google_map.control_position.helper%" public="false" />

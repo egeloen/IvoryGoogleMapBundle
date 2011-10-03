@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
         $this->addMapTypeControlSection($rootNode);
         $this->addControlPositionSection($rootNode);
         $this->addMapTypeControlStyleSection($rootNode);
+        $this->addOverviewMapControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -250,6 +251,25 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('map_type_control_style')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlStyleHelper')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the overview map control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addOverviewMapControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('overview_map_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper')->end()
+                        ->scalarNode('opened')->defaultFalse()->end()
                     ->end()
                 ->end()
             ->end();
