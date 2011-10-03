@@ -37,6 +37,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
                 new ControlsHelper\ControlPositionHelper(),
                 new ControlsHelper\MapTypeControlStyleHelper()
             ),
+            new ControlsHelper\OverviewMapControlHelper(),
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
                 new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
@@ -124,12 +125,14 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setMapOption('mapTypeId', 'satellite');
         $mapTest->setMapOption('zoom', 5);
         $mapTest->setMapTypeControl(array(Model\MapTypeId::ROADMAP), Controls\ControlPosition::BOTTOM_CENTER, Controls\MapTypeControlStyle::DROPDOWN_MENU);
+        $mapTest->setOverviewMapControl(true);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"zoom":5});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"overviewMapControlOptions":{"opened":true},"zoom":5});'.PHP_EOL
         );
         
         $mapTest->setMapTypeControl(null);
+        $mapTest->setOverviewMapControl(null);
         $mapTest->setAutoZoom(true);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),

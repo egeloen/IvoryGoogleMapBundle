@@ -29,6 +29,11 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper
      */
     protected $mapTypeControlHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper
+     */
+    protected $overviewMapControl;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper
@@ -81,6 +86,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper $mapTypeIdHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper $mapTypeControlHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper $overviewMapControl
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper $markerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
@@ -89,11 +95,12 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
         $this->mapTypeControlHelper = $mapTypeControlHelper;
+        $this->overviewMapControl = $overviewMapControlHelper;
         $this->markerHelper = $markerHelper;
         $this->boundHelper = $boundHelper;
         $this->infoWindowHelper = $infoWindowHelper;
@@ -187,6 +194,9 @@ class MapHelper
         
         if(!is_null($map->getMapTypeControl()))
             $mapJSONOptions .= ',"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
+        
+        if(!is_null($map->getOverviewMapControl()))
+            $mapJSONOptions .= ',"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))
             unset($mapOptions['zoom']);
