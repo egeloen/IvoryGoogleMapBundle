@@ -127,6 +127,18 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         
         $mapTest->setMapOption('mapTypeId', 'satellite');
         $mapTest->setMapOption('zoom', 5);
+        
+        $this->assertEquals(self::$mapHelper->renderMap($mapTest),
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL
+        );
+        
+        $mapTest->setAutoZoom(true);
+        
+        $this->assertEquals(self::$mapHelper->renderMap($mapTest),
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE});'.PHP_EOL
+        );
+        
+        $mapTest->setAutoZoom(false);
         $mapTest->setMapTypeControl(array(Model\MapTypeId::ROADMAP), Controls\ControlPosition::BOTTOM_CENTER, Controls\MapTypeControlStyle::DROPDOWN_MENU);
         $mapTest->setOverviewMapControl(true);
         $mapTest->setPanControl(Controls\ControlPosition::BOTTOM_CENTER);
@@ -135,13 +147,12 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":true,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"overviewMapControl":true,"overviewMapControlOptions":{"opened":true},"panControl":true,"panControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"zoom":5});'.PHP_EOL
         );
         
-        $mapTest->setMapTypeControl(null);
-        $mapTest->setOverviewMapControl(null);
-        $mapTest->setPanControl(null);
-        $mapTest->setAutoZoom(true);
+        $mapTest->setMapOption('mapTypeControl', false);
+        $mapTest->setMapOption('overviewMapControl', false);
+        $mapTest->setMapOption('panControl', false);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":false,"overviewMapControl":false,"panControl":false,"zoom":5});'.PHP_EOL
         );
     }
     

@@ -203,6 +203,8 @@ class MapHelper
         {
             if(!isset($mapOptions['mapTypeControl']) || (isset($mapOptions['mapTypeControl']) && $mapOptions['mapTypeControl']))
                 $mapJSONOptions .= ',"mapTypeControl":true,"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
+            else if(isset($mapOptions['mapTypeControl']) && !$mapOptions['mapTypeControl'])
+                $mapJSONOptions .= ',"mapTypeControl":false';
             
             if(isset($mapOptions['mapTypeControl']))
                 unset($mapOptions['mapTypeControl']);
@@ -212,6 +214,8 @@ class MapHelper
         {
             if(!isset($mapOptions['overviewMapControl']) || (isset($mapOptions['overviewMapControl']) && $mapOptions['overviewMapControl']))
                 $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());
+            else if(isset($mapOptions['overviewMapControl']) && !$mapOptions['overviewMapControl'])
+                $mapJSONOptions .= ',"overviewMapControl":false';
             
             if(isset($mapOptions['overviewMapControl']))
                 unset($mapOptions['overviewMapControl']);
@@ -221,6 +225,8 @@ class MapHelper
         {
             if(!isset($mapOptions['panControl']) || (isset($mapOptions['panControl']) && $mapOptions['panControl']))
                 $mapJSONOptions .= ',"panControl":true,"panControlOptions":'.$this->panControlHelper->render($map->getPanControl());
+            else if(isset($mapOptions['panControl']) && !$mapOptions['panControl'])
+                $mapJSONOptions .= ',"panControl":false';
             
             if(isset($mapOptions['panControl']))
                 unset($mapOptions['panControl']);
