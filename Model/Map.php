@@ -52,7 +52,15 @@ class Map extends AbstractJavascriptVariableAsset
         'height' => '300px'
     );
     
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\MapTypeControl Map type control
+     */
     protected $mapTypeControl = null;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl Overview map control
+     */
+    protected $overviewMapControl = null;
     
     /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
@@ -381,6 +389,47 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setMapTypeControl(Ivory\GoogleMapBundle\Model\Controls\MapTypeControl $mapTypeControl = null)',
                 ' - public function setMaptypeControl(array $mapTypeIds, string $controlPosition, string $mapTypeControlStyle)'));
+    }
+    
+    /**
+     * Gets the overview map control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl
+     */
+    public function getOverviewMapControl()
+    {
+        return $this->overviewMapControl;
+    }
+    
+    /**
+     * Sets the overview map control
+     * 
+     * Available prototype :
+     * 
+     * - public function setOverviewMapControl(Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl $overviewMapControl = null)
+     * - public function setOverviewMapControl(boolean $opened)
+     */
+    public function setOverviewMapControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_bool($args[0]))
+        {
+            if($this->overviewMapControl === null)
+                $this->overviewMapControl = new Controls\OverviewMapControl();
+            
+            $this->overviewMapControl->setOpened($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0]) instanceof Controls\OverviewMapControl)
+            $this->overviewMapControl = $args[0];
+        else if(!isset($args[0]))
+            $this->overviewMapControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The overview map control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setOverviewMapControl(Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl $overviewMapControl = null)',
+                ' - public function setOverviewMapControl(boolean $opened)'));
     }
     
     /**

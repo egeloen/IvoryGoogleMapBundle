@@ -59,6 +59,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
             'height' => '300px'
         ));
         $this->assertNull(self::$map->getMapTypeControl());
+        $this->assertNull(self::$map->getOverviewMapControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -223,6 +224,26 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setMapTypeControl('foo');
+    }
+    
+    /**
+     * Checks the overview map control getter & setter
+     */
+    public function testOverviewMapControl()
+    {
+        $overviewMapControlTest = new Controls\OverviewMapControl();
+        $overviewMapControlTest->setOpened(true);
+        self::$map->setOverviewMapControl($overviewMapControlTest);
+        $this->assertTrue(self::$map->getOverviewMapControl()->isOpened());
+        
+        self::$map->setOverviewMapControl(false);
+        $this->assertFalse(self::$map->getOverviewMapControl()->isOpened());
+        
+        self::$map->setOverviewMapControl(null);
+        $this->assertNull(self::$map->getOverviewMapControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setOverviewMapControl('foo');
     }
     
     /**
