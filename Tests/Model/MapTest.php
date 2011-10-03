@@ -60,6 +60,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         ));
         $this->assertNull(self::$map->getMapTypeControl());
         $this->assertNull(self::$map->getOverviewMapControl());
+        $this->assertNull(self::$map->getPanControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -244,6 +245,26 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setOverviewMapControl('foo');
+    }
+    
+    /**
+     * Checks the map pan control getter & setter
+     */
+    public function testPanControl()
+    {
+        $panControlTest = new Controls\PanControl();
+        $panControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        self::$map->setPanControl($panControlTest);
+        $this->assertEquals(self::$map->getPanControl()->getControlPosition(), 'bottom_center');
+        
+        self::$map->setPanControl(Controls\ControlPosition::BOTTOM_LEFT);
+        $this->assertEquals(self::$map->getPanControl()->getControlPosition(), 'bottom_left');
+        
+        self::$map->setPanControl(null);
+        $this->assertNull(self::$map->getPanControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setPanControl('foo');
     }
     
     /**

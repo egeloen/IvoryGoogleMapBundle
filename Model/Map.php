@@ -63,6 +63,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $overviewMapControl = null;
     
     /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\PanControl Map pan control
+     */
+    protected $panControl = null;
+    
+    /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
      */
     protected $eventManager = null;
@@ -430,6 +435,47 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setOverviewMapControl(Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl $overviewMapControl = null)',
                 ' - public function setOverviewMapControl(boolean $opened)'));
+    }
+    
+    /**
+     * Gets the map pan control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\PanControl
+     */
+    public function getPanControl()
+    {
+        return $this->panControl;
+    }
+    
+    /**
+     * Sets the map pan control
+     * 
+     * Available prototype :
+     * 
+     * - public function setPanControl(Ivory\GoogleMapBundle\Model\Controls\PanControl $panControl = null)
+     * - public function setPanControl(string $controlPosition)
+     */
+    public function setPanControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            if($this->panControl === null)
+                $this->panControl = new Controls\PanControl();
+            
+            $this->panControl->setControlPosition($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\PanControl))
+            $this->panControl = $args[0];
+        else if(!isset($args[0]))
+            $this->panControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The pan control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setPanControl(Ivory\GoogleMapBundle\Model\Controls\PanControl $panControl = null)',
+                ' - public function setPanControl(string $controlPosition)'));
     }
     
     /**
