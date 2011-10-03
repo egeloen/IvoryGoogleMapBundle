@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
         $this->addControlPositionSection($rootNode);
         $this->addMapTypeControlStyleSection($rootNode);
         $this->addOverviewMapControlSection($rootNode);
+        $this->addPanControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -270,6 +271,25 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper')->end()
                         ->scalarNode('opened')->defaultFalse()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the pan control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addPanControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('pan_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\PanControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper')->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
             ->end();
