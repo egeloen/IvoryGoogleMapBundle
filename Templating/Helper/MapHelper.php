@@ -193,10 +193,22 @@ class MapHelper
         unset($mapOptions['mapTypeId']);
         
         if(!is_null($map->getMapTypeControl()))
-            $mapJSONOptions .= ',"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
+        {
+            if(!isset($mapOptions['mapTypeControl']) || (isset($mapOptions['mapTypeControl']) && $mapOptions['mapTypeControl']))
+                $mapJSONOptions .= ',"mapTypeControl":true,"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
+            
+            if(isset($mapOptions['mapTypeControl']))
+                unset($mapOptions['mapTypeControl']);
+        }
         
         if(!is_null($map->getOverviewMapControl()))
-            $mapJSONOptions .= ',"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());
+        {
+            if(!isset($mapOptions['overviewMapControl']) || (isset($mapOptions['overviewMapControl']) && $mapOptions['overviewMapControl']))
+                $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());
+            
+            if(isset($mapOptions['overviewMapControl']))
+                unset($mapOptions['overviewMapControl']);
+        }
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))
             unset($mapOptions['zoom']);
