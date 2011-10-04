@@ -11,6 +11,9 @@ use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
  */
 class ControlPositionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Checks the disable constuctor
+     */
     public function testConstruct()
     {
         $this->setExpectedException('Exception');
