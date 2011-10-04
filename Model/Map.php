@@ -73,6 +73,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $rotateControl = null;
     
     /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\ScaleControl Map scale control
+     */
+    protected $scaleControl = null;
+    
+    /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
      */
     protected $eventManager = null;
@@ -522,6 +527,48 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setRotateControl(Ivory\GoogleMapBundle\Model\Controls\RotateControl $rotateControl = null)',
                 ' - public function setRotateControl(string $controlPosition)'));
+    }
+    
+    /**
+     * Gets the map scale control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\ScaleControl
+     */
+    public function getScaleControl()
+    {
+        return $this->scaleControl;
+    }
+    
+    /**
+     * Sets the map scale control
+     * 
+     * Available prototype :
+     * 
+     * - public function setScaleControl(Ivory\GoogleMapBundle\Model\Controls\ScaleControl $scaleControl = null)
+     * - public function setScaleControl(string $controlPosition, string $scaleControlStyle)
+     */
+    public function setScaleControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]) && isset($args[1]) && is_string($args[1]))
+        {
+            if($this->scaleControl === null)
+                $this->scaleControl = new Controls\ScaleControl();
+            
+            $this->scaleControl->setControlPosition($args[0]);
+            $this->scaleControl->setScaleControlStyle($args[1]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\ScaleControl))
+            $this->scaleControl = $args[0];
+        else if(!isset($args[0]))
+            $this->scaleControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The scale control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setScaleControl(Ivory\GoogleMapBundle\Model\Controls\ScaleControl $scaleControl = null)',
+                ' - public function setScaleControl(string $controlPosition, string $scaleControlStyle)'));
     }
     
     /**

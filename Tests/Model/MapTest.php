@@ -62,6 +62,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$map->getOverviewMapControl());
         $this->assertNull(self::$map->getPanControl());
         $this->assertNull(self::$map->getRotateControl());
+        $this->assertNull(self::$map->getScaleControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -286,6 +287,29 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setRotateControl('foo');
+    }
+    
+    /**
+     * Checks the map scale control getter & setter
+     */
+    public function testScaleControl()
+    {
+        $scaleControlTest = new Controls\ScaleControl();
+        $scaleControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        $scaleControlTest->setScaleControlStyle(Controls\ScaleControlStyle::DEFAULT_);
+        self::$map->setScaleControl($scaleControlTest);
+        $this->assertEquals(self::$map->getScaleControl()->getControlPosition(), 'bottom_center');
+        $this->assertEquals(self::$map->getScaleControl()->getScaleControlStyle(), 'default');
+        
+        self::$map->setScaleControl(Controls\ControlPosition::BOTTOM_LEFT, Controls\ScaleControlStyle::DEFAULT_);
+        $this->assertEquals(self::$map->getScaleControl()->getControlPosition(), 'bottom_left');
+        $this->assertEquals(self::$map->getScaleControl()->getScaleControlStyle(), 'default');
+        
+        self::$map->setScaleControl(null);
+        $this->assertNull(self::$map->getScaleControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setScaleControl('foo');
     }
     
     /**
