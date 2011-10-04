@@ -26,7 +26,8 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         self::$markerHelper = new OverlaysHelper\MarkerHelper(
-            new BaseHelper\CoordinateHelper(), 
+            new BaseHelper\CoordinateHelper(),
+            new OverlaysHelper\AnimationHelper(),
             new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()), 
             new OverlaysHelper\MarkerImageHelper(new BaseHelper\PointHelper(), new BaseHelper\SizeHelper()), 
             new OverlaysHelper\MarkerShapeHelper()
@@ -42,6 +43,8 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
         
         $markerTest = new Overlays\Marker();
         $markerTest->setPosition(new Base\Coordinate(1.1, 2.1, true));
+        
+        $markerTest->setAnimation(Overlays\Animation::BOUNCE);
         
         $iconTest = new Overlays\MarkerImage();
         $iconTest->setUrl('url');
@@ -67,7 +70,7 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
             'var '.$markerTest->getIcon()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShadow()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShape()->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"poly","coords":[1,2,3,4]});'.PHP_EOL.
-            'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().'});'.PHP_EOL.
+            'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "animation":google.maps.Animation.BOUNCE, "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().'});'.PHP_EOL.
             'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL.
             $markerTest->getInfoWindow()->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');'.PHP_EOL
         );
@@ -81,7 +84,7 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
             'var '.$markerTest->getIcon()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShadow()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShape()->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"poly","coords":[1,2,3,4]});'.PHP_EOL.
-            'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().',"option1":"value1","option2":"value2"});'.PHP_EOL.
+            'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "animation":google.maps.Animation.BOUNCE, "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().',"option1":"value1","option2":"value2"});'.PHP_EOL.
             'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL.
             $markerTest->getInfoWindow()->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');'.PHP_EOL
         );

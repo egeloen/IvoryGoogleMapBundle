@@ -57,6 +57,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             ),
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
+                new OverlaysHelper\AnimationHelper(),
                 new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
                 new OverlaysHelper\MarkerImageHelper(new BaseHelper\PointHelper(), new BaseHelper\SizeHelper()),
                 new OverlaysHelper\MarkerShapeHelper()

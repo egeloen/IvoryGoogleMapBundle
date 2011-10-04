@@ -18,6 +18,11 @@ class MarkerHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper
+     */
+    protected $animationHelper;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper
@@ -38,13 +43,15 @@ class MarkerHelper
      * Constructs a marker helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper $animationHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper $markerImageHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper $markerShapeHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper, MarkerShapeHelper $markerShapeHelper)
+    public function __construct(CoordinateHelper $coordinateHelper, AnimationHelper $animationHelper, InfoWindowHelper $infoWindowHelper, MarkerImageHelper $markerImageHelper, MarkerShapeHelper $markerShapeHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
+        $this->animationHelper = $animationHelper;
         $this->infoWindowHelper = $infoWindowHelper;
         $this->markerImageHelper = $markerImageHelper;
         $this->markerShapeHelper = $markerShapeHelper;
@@ -67,6 +74,9 @@ class MarkerHelper
         );
         
         $markerOptions = $marker->getOptions();
+        
+        if($marker->hasAnimation())
+            $markerJSONOptions .= ', "animation":'.$this->animationHelper->render($marker->getAnimation());
 
         if($marker->hasIcon())
         {
