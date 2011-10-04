@@ -9,6 +9,7 @@ use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
 /**
  * Map type control options describes a google map type control options
  *
+ * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapTypeControlOptions
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MapTypeControl
