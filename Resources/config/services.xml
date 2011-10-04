@@ -271,6 +271,7 @@
         
         <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
+            <argument type="service" id="ivory_google_map.helper.animation" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
             <argument type="service" id="ivory_google_map.helper.marker_image" />
             <argument type="service" id="ivory_google_map.helper.marker_shape" />
