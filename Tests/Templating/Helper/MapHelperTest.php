@@ -58,12 +58,18 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
                 new OverlaysHelper\AnimationHelper(),
-                new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
+                new OverlaysHelper\InfoWindowHelper(
+                    new BaseHelper\CoordinateHelper(),
+                    new BaseHelper\SizeHelper()
+                ),
                 new OverlaysHelper\MarkerImageHelper(new BaseHelper\PointHelper(), new BaseHelper\SizeHelper()),
                 new OverlaysHelper\MarkerShapeHelper()
             ),
             new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper()),
-            new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
+            new OverlaysHelper\InfoWindowHelper(
+                new BaseHelper\CoordinateHelper(),
+                new BaseHelper\SizeHelper()
+            ),
             new OverlaysHelper\PolylineHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\PolygonHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\RectangleHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),

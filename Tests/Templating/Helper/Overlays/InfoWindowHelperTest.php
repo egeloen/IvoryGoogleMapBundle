@@ -4,6 +4,8 @@ namespace Ivory\GoogleMapBundle\Tests\Templating\Helper\Overlays;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper;
+
 use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 use Ivory\GoogleMapBundle\Model\Overlays\Marker;
@@ -26,7 +28,7 @@ class InfoWindowHelperTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        self::$infoWindowHelper = new InfoWindowHelper(new CoordinateHelper());
+        self::$infoWindowHelper = new InfoWindowHelper(new CoordinateHelper(), new SizeHelper());
     }
     
     /**
@@ -36,6 +38,7 @@ class InfoWindowHelperTest extends \PHPUnit_Framework_TestCase
     {
         $infoWindowTest = new InfoWindow();
         $infoWindowTest->setPosition(new Coordinate(1.1, 2.1, true));
+        $infoWindowTest->setPixelOffset(3, 4, 'px', 'px');
         $infoWindowTest->setContent('content');
         $infoWindowTest->setOpen(true);
         $infoWindowTest->setOptions(array(
@@ -43,8 +46,8 @@ class InfoWindowHelperTest extends \PHPUnit_Framework_TestCase
             'option2' => 'value2'
         ));
         
-        $this->assertEquals(self::$infoWindowHelper->render($infoWindowTest, false), 'var '.$infoWindowTest->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content","option1":"value1","option2":"value2"});'.PHP_EOL);
-        $this->assertEquals(self::$infoWindowHelper->render($infoWindowTest, true), 'var '.$infoWindowTest->getJavascriptVariable().' = new google.maps.InfoWindow({"position":new google.maps.LatLng(1.1, 2.1, true),"content":"content","option1":"value1","option2":"value2"});'.PHP_EOL);
+        $this->assertEquals(self::$infoWindowHelper->render($infoWindowTest, false), 'var '.$infoWindowTest->getJavascriptVariable().' = new google.maps.InfoWindow({"pixelOffset":new google.maps.Size(3, 4, "px", "px"),"content":"content","option1":"value1","option2":"value2"});'.PHP_EOL);
+        $this->assertEquals(self::$infoWindowHelper->render($infoWindowTest, true), 'var '.$infoWindowTest->getJavascriptVariable().' = new google.maps.InfoWindow({"position":new google.maps.LatLng(1.1, 2.1, true),"pixelOffset":new google.maps.Size(3, 4, "px", "px"),"content":"content","option1":"value1","option2":"value2"});'.PHP_EOL);
     }
     
     /**

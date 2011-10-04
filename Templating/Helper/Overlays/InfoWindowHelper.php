@@ -3,6 +3,7 @@
 namespace Ivory\GoogleMapBundle\Templating\Helper\Overlays;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper;
 
 use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
 use Ivory\GoogleMapBundle\Model\Overlays\Marker;
@@ -19,15 +20,22 @@ class InfoWindowHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper = null;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper
+     */
+    protected $sizeHelper = null;
 
     /**
      * Create an info window helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper $coordinateHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper $sizeHelper
      */
-    public function __construct(CoordinateHelper $coordinateHelper)
+    public function __construct(CoordinateHelper $coordinateHelper, SizeHelper $sizeHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
+        $this->sizeHelper = $sizeHelper;
     }
 
     /**
@@ -45,6 +53,9 @@ class InfoWindowHelper
             );
         else
             $infoWindowJSONOptions = '{';
+        
+        if(!is_null($infoWindow->getPixelOffset()))
+            $infoWindowJSONOptions .= '"pixelOffset":'.$this->sizeHelper->render($infoWindow->getPixelOffset()).',';
         
         $infoWindowOptions = array_merge(
             array('content' => $infoWindow->getContent()),
