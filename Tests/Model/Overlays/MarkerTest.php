@@ -6,6 +6,7 @@ use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractOptionsAssetTest;
 
 use Ivory\GoogleMapBundle\Model\Overlays\Marker;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
+use Ivory\GoogleMapBundle\Model\Overlays\Animation;
 use Ivory\GoogleMapBundle\Model\Overlays\MarkerImage;
 use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape;
 use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
@@ -44,6 +45,9 @@ class MarkerTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getPosition()->getLongitude(), 0);
         $this->assertTrue(self::$object->getPosition()->isNoWrap());
         
+        $this->assertFalse(self::$object->hasAnimation());
+        $this->assertNull(self::$object->getAnimation());
+        
         $this->assertFalse(self::$object->hasIcon());
         $this->assertNull(self::$object->getIcon());
         
@@ -78,6 +82,21 @@ class MarkerTest extends AbstractOptionsAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setPosition('foo');
+    }
+    
+    /**
+     * Checks the animation getter & setter
+     */
+    public function testAnimation()
+    {
+        self::$object->setAnimation(Animation::BOUNCE);
+        $this->assertEquals(self::$object->getAnimation(), 'bounce');
+        
+        self::$object->setAnimation(null);
+        $this->assertNull(self::$object->getAnimation());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$object->setAnimation('foo');
     }
     
     /**

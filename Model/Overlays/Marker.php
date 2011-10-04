@@ -17,6 +17,11 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Marker position
      */
     protected $position = null;
+    
+    /**
+     * @var string Marker animation
+     */
+    protected $animation = null;
 
     /**
      * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerImage Marker icon
@@ -88,6 +93,39 @@ class Marker extends AbstractOptionsAsset implements IExtendable
                 'The available prototypes are :',
                 ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
                 ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
+    }
+    
+    /**
+     * Checks if the marker has an animation
+     *
+     * @return boolean TRUE if the marker has an animation else FALSE
+     */
+    public function hasAnimation()
+    {
+        return !is_null($this->animation);
+    }
+    
+    /**
+     * Gets the marker animation
+     *
+     * @return string
+     */
+    public function getAnimation()
+    {
+        return $this->animation;
+    }
+    
+    /**
+     * Sets the marker animation
+     *
+     * @param string $animation
+     */
+    public function setAnimation($animation = null)
+    {
+        if(in_array($animation, Animation::getAnimations()) || ($animation === null))
+            $this->animation = $animation;
+        else
+            throw new \InvalidArgumentException(sprintf('The animation of a marker can only be : ', implode(', ', Animation::getAnimations())));
     }
     
     /**
