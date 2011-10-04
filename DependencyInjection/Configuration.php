@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
         $this->addMapTypeControlStyleSection($rootNode);
         $this->addOverviewMapControlSection($rootNode);
         $this->addPanControlSection($rootNode);
+        $this->addRotateControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -289,6 +290,25 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\PanControl')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper')->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the rotate control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addRotateControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('rotate_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\RotateControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
