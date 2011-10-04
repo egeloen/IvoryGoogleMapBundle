@@ -52,6 +52,7 @@ class Configuration implements ConfigurationInterface
         
         // Marker sections
         $this->addMarkerSection($rootNode);
+        $this->addAnimationSection($rootNode);
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
         
@@ -439,6 +440,23 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('options')
                             ->useAttributeAsKey('map_options')->prototype('scalar')->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the animation section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addAnimationSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('animation')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper')->end()
                     ->end()
                 ->end()
             ->end();

@@ -276,6 +276,9 @@
             <argument type="service" id="ivory_google_map.helper.marker_shape" />
         </service>
         
+        <!-- Animation service -->
+        <service id="ivory_google_map.helper.animation" class="%ivory_google_map.animation.helper%" public="false" />
+        
         <!-- Marker image service -->
         <service id="ivory_google_map.marker_image" class="%ivory_google_map.marker_image.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">

@@ -54,6 +54,7 @@ class IvoryGoogleMapExtension extends Extension
         
         // Marker sections
         $this->loadMarker($config, $container);
+        $this->loadAnimation($config, $container);
         $this->loadMarkerImage($config, $container);
         $this->loadMarkerShape($config, $container);
         
@@ -320,6 +321,17 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.marker.position.longitude', $config['marker']['position']['longitude']);
         $container->setParameter('ivory_google_map.marker.position.no_wrap', $config['marker']['position']['no_wrap']);
         $container->setParameter('ivory_google_map.marker.options', $config['marker']['options']);
+    }
+    
+    /**
+     * Loads animation configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadAnimation(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.animation.helper', $config['animation']['helper']);
     }
     
     /**
