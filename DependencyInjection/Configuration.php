@@ -45,6 +45,7 @@ class Configuration implements ConfigurationInterface
         $this->addRotateControlSection($rootNode);
         $this->addScaleControlStyleSection($rootNode);
         $this->addScaleControlSection($rootNode);
+        $this->addStreetViewControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -350,6 +351,25 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::BOTTOM_LEFT)->end()
                         ->scalarNode('scale_control_style')->defaultValue(ScaleControlStyle::DEFAULT_)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the street view control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addStreetViewControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('street_view_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\StreetViewControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper')->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
             ->end();

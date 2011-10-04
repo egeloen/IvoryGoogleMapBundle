@@ -67,6 +67,7 @@
             <argument type="service" id="ivory_google_map.helper.pan_control" />
             <argument type="service" id="ivory_google_map.helper.rotate_control" />
             <argument type="service" id="ivory_google_map.helper.scale_control" />
+            <argument type="service" id="ivory_google_map.helper.street_view_control" />
             <argument type="service" id="ivory_google_map.helper.marker" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
@@ -209,6 +210,17 @@
         <service id="ivory_google_map.helper.scale_control" class="%ivory_google_map.scale_control.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.control_position" />
             <argument type="service" id="ivory_google_map.helper.scale_control_style" />
+        </service>
+        
+        <!-- Street view control service -->
+        <service id="ivory_google_map.street_view_control" class="%ivory_google_map.street_view_control.class%" scope="prototype">
+            <call method="setControlPosition">
+                <argument>%ivory_google_map.street_view_control.control_position%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.street_view_control" class="%ivory_google_map.street_view_control.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.control_position" />
         </service>
         
         <!-- Control Position service -->
