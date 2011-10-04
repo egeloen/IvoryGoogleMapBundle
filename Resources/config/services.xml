@@ -336,6 +336,7 @@
         
         <service id="ivory_google_map.helper.info_window" class="%ivory_google_map.info_window.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
+            <argument type="service" id="ivory_google_map.helper.size" />
         </service>
 
         <!-- Polyline service -->
