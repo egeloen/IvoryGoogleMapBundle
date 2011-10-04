@@ -83,6 +83,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $streetViewControl = null;
     
     /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\ZoomControl Map zoom control
+     */
+    protected $zoomControl = null;
+    
+    /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
      */
     protected $eventManager = null;
@@ -615,6 +620,48 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setStreetViewControl(Ivory\GoogleMapBundle\Model\Controls\StreetViewControl $streetViewControl = null)',
                 ' - public function setStreetViewControl(string $controlPosition)'));
+    }
+    
+    /**
+     * Gets the map zoom control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\ZoomControl
+     */
+    public function getZoomControl()
+    {
+        return $this->zoomControl;
+    }
+    
+    /**
+     * Sets the map zoom control
+     * 
+     * Available type :
+     * 
+     * - public function setZoomControl(Ivory\GoogleMapBundle\Model\Controls\ZoomControl $zoomControl = null)
+     * - public function setZoomControl(string $controlPosition, string $zoomControlStyle)
+     */
+    public function setZoomControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]) && isset($args[1]) && is_string($args[1]))
+        {
+            if($this->zoomControl === null)
+                $this->zoomControl = new Controls\ZoomControl();
+            
+            $this->zoomControl->setControlPosition($args[0]);
+            $this->zoomControl->setZoomControlStyle($args[1]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\ZoomControl))
+            $this->zoomControl = $args[0];
+        else if(!isset($args[0]))
+            $this->zoomControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The zoom control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setZoomControl(Ivory\GoogleMapBundle\Model\Controls\ZoomControl $zoomControl = null)',
+                ' - public function setZoomControl(string $controlPosition, string $zoomControlStyle)'));
     }
     
     /**

@@ -64,6 +64,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$map->getRotateControl());
         $this->assertNull(self::$map->getScaleControl());
         $this->assertNull(self::$map->getStreetViewControl());
+        $this->assertNull(self::$map->getZoomControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -316,7 +317,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     /**
      * Checks the map street view control getter & setter
      */
-    public function setStreetViewControl()
+    public function testStreetViewControl()
     {
         $streetViewControlTest = new Controls\StreetViewControl();
         $streetViewControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
@@ -331,6 +332,29 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setStreetViewControl('foo');
+    }
+    
+    /**
+     * Checks the map zoom control getter & setter
+     */
+    public function testZoomControl()
+    {
+        $zoomControlTest = new Controls\ZoomControl();
+        $zoomControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        $zoomControlTest->setZoomControlStyle(Controls\ZoomControlStyle::SMALL);
+        self::$map->setZoomControl($zoomControlTest);
+        $this->assertEquals(self::$map->getZoomControl()->getControlPosition(), 'bottom_center');
+        $this->assertEquals(self::$map->getZoomControl()->getZoomControlStyle(), 'small');
+        
+        self::$map->setZoomControl(Controls\ControlPosition::BOTTOM_LEFT, Controls\ZoomControlStyle::LARGE);
+        $this->assertEquals(self::$map->getZoomControl()->getControlPosition(), 'bottom_left');
+        $this->assertEquals(self::$map->getZoomControl()->getZoomControlStyle(), 'large');
+        
+        self::$map->setZoomControl(null);
+        $this->assertNull(self::$map->getZoomControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setZoomControl('foo');
     }
     
     /**
