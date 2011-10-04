@@ -54,6 +54,11 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper
      */
     protected $streetViewControlHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper
+     */
+    protected $zoomControlHelper;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper
@@ -111,6 +116,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper $rotateControlHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper $scaleControlhelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper $streetViewControlHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper $zoomControlHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper $markerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
@@ -119,7 +125,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
@@ -129,6 +135,7 @@ class MapHelper
         $this->rotateControlHelper = $rotateControlHelper;
         $this->scaleControlHelper = $scaleControlHelper;
         $this->streetViewControlHelper = $streetViewControlHelper;
+        $this->zoomControlHelper = $zoomControlHelper;
         $this->markerHelper = $markerHelper;
         $this->boundHelper = $boundHelper;
         $this->infoWindowHelper = $infoWindowHelper;
@@ -284,6 +291,17 @@ class MapHelper
             
             if(isset($mapOptions['streetViewControl']))
                 unset($mapOptions['streetViewControl']);
+        }
+        
+        if(!is_null($map->getZoomControl()))
+        {
+            if(!isset($mapOptions['zoomControl']) || (isset($mapOptions['zoomControl']) && $mapOptions['zoomControl']))
+                $mapJSONOptions .= ',"zoomControl":true,"zoomControlOptions":'.$this->zoomControlHelper->render($map->getZoomControl());
+            else if(isset($mapOptions['zoomControl']) && !$mapOptions['zoomControl'])
+                $mapJSONOptions .= ',"zoomControl":false';
+            
+            if(isset($mapOptions['zoomControl']))
+                unset($mapOptions['zoomControl']);
         }
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))

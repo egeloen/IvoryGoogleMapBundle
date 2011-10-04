@@ -51,6 +51,10 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             new ControlsHelper\StreetViewControlHelper(
                 new ControlsHelper\ControlPositionHelper()
             ),
+            new ControlsHelper\ZoomControlHelper(
+                new ControlsHelper\ControlPositionHelper(),
+                new ControlsHelper\ZoomControlStyleHelper()
+            ),
             new OverlaysHelper\MarkerHelper(
                 new BaseHelper\CoordinateHelper(),
                 new OverlaysHelper\InfoWindowHelper(new BaseHelper\CoordinateHelper()),
@@ -155,9 +159,10 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setRotateControl(Controls\ControlPosition::BOTTOM_CENTER);
         $mapTest->setScaleControl(Controls\ControlPosition::BOTTOM_CENTER, Controls\ScaleControlStyle::DEFAULT_);
         $mapTest->setStreetViewControl(Controls\ControlPosition::BOTTOM_CENTER);
+        $mapTest->setZoomControl(Controls\ControlPosition::BOTTOM_CENTER, Controls\ZoomControlStyle::LARGE);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":true,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"overviewMapControl":true,"overviewMapControlOptions":{"opened":true},"panControl":true,"panControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"rotateControl":true,"rotateControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"scaleControl":true,"scaleControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.ScaleControlStyle.DEFAULT},"streetViewControl":true,"streetViewControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"zoom":5});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":true,"mapTypeControlOptions":{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU},"overviewMapControl":true,"overviewMapControlOptions":{"opened":true},"panControl":true,"panControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"rotateControl":true,"rotateControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"scaleControl":true,"scaleControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.ScaleControlStyle.DEFAULT},"streetViewControl":true,"streetViewControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER},"zoomControl":true,"zoomControlOptions":{"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.ZoomControlStyle.LARGE},"zoom":5});'.PHP_EOL
         );
         
         $mapTest->setMapOption('mapTypeControl', false);
@@ -166,9 +171,10 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setMapOption('rotateControl', false);
         $mapTest->setMapOption('scaleControl', false);
         $mapTest->setMapOption('streetViewControl', false);
+        $mapTest->setMapOption('zoomControl', false);
         
         $this->assertEquals(self::$mapHelper->renderMap($mapTest),
-            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":false,"overviewMapControl":false,"panControl":false,"rotateControl":false,"scaleControl":false,"streetViewControl":false,"zoom":5});'.PHP_EOL
+            'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"mapTypeControl":false,"overviewMapControl":false,"panControl":false,"rotateControl":false,"scaleControl":false,"streetViewControl":false,"zoomControl":false,"zoom":5});'.PHP_EOL
         );
     }
     
