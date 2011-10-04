@@ -46,6 +46,7 @@ class Configuration implements ConfigurationInterface
         $this->addScaleControlStyleSection($rootNode);
         $this->addScaleControlSection($rootNode);
         $this->addStreetViewControlSection($rootNode);
+        $this->addZoomControlStyleSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -370,6 +371,23 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\StreetViewControl')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the zoom control style section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addZoomControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('zoom_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper')->end()
                     ->end()
                 ->end()
             ->end();

@@ -49,6 +49,7 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadScaleControlStyle($config, $container);
         $this->loadScaleControl($config, $container);
         $this->loadStreetViewControl($config, $container);
+        $this->loadZoomControlStyle($config, $container);
         
         // Marker sections
         $this->loadMarker($config, $container);
@@ -276,6 +277,17 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.street_view_control.class', $config['street_view_control']['class']);
         $container->setParameter('ivory_google_map.street_view_control.helper', $config['street_view_control']['helper']);
         $container->setParameter('ivory_google_map.street_view_control.control_position', $config['street_view_control']['control_position']);
+    }
+    
+    /**
+     * Loads zoom control_style configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadZoomControlStyle(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.zoom_control_style.helper', $config['zoom_control_style']['helper']);
     }
     
     /**

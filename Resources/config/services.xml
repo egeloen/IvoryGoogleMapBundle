@@ -232,6 +232,9 @@
         <!-- Scale control style service -->
         <service id="ivory_google_map.helper.scale_control_style" class="%ivory_google_map.scale_control_style.helper%" public="false" />
         
+        <!-- Zoom control style service -->
+        <service id="ivory_google_map.helper.zoom_control_style" class="%ivory_google_map.zoom_control_style.helper%" public="false" />
+        
         <!-- Marker service -->
         <service id="ivory_google_map.marker" class="%ivory_google_map.marker.class%" scope="prototype">
             <call method="setPrefixJavascriptVariable">
