@@ -11,6 +11,12 @@ use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
  */
 class ControlPositionTest extends \PHPUnit_Framework_TestCase
 {
+    public function testConstruct()
+    {
+        $this->setExpectedException('Exception');
+        $controlPositionTest = new ControlPosition();
+    }
+    
     /**
      * Checks the map type ids getter
      */

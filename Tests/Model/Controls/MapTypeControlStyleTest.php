@@ -12,6 +12,15 @@ use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
 class MapTypeControlStyleTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Checks the disable constructor
+     */
+    public function testConstruct()
+    {
+        $this->setExpectedException('Exception');
+        $mapTypeControlStyleTest = new MapTypeControlStyle();
+    }
+    
+    /**
      * Checks the map type control styles getter
      */
     public function testMapTypeControlStyles()
