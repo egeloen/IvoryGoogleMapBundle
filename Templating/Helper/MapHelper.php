@@ -44,6 +44,11 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper
      */
     protected $rotateControlHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper
+     */
+    protected $scaleControlHelper;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper
@@ -99,6 +104,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper $overviewMapControl
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper $panControlHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper $rotateControlHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper $scaleControlhelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper $markerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
@@ -107,7 +113,7 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
@@ -115,6 +121,7 @@ class MapHelper
         $this->overviewMapControl = $overviewMapControlHelper;
         $this->panControlHelper = $panControlHelper;
         $this->rotateControlHelper = $rotateControlHelper;
+        $this->scaleControlHelper = $scaleControlHelper;
         $this->markerHelper = $markerHelper;
         $this->boundHelper = $boundHelper;
         $this->infoWindowHelper = $infoWindowHelper;
@@ -248,6 +255,17 @@ class MapHelper
             
             if(isset($mapOptions['rotateControl']))
                 unset($mapOptions['rotateControl']);
+        }
+        
+        if(!is_null($map->getScaleControl()))
+        {
+            if(!isset($mapOptions['scaleControl']) || (isset($mapOptions['scaleControl']) && $mapOptions['scaleControl']))
+                $mapJSONOptions .= ',"scaleControl":true,"scaleControlOptions":'.$this->scaleControlHelper->render($map->getScaleControl());
+            else if(isset($mapOptions['scaleControl']) && !$mapOptions['scaleControl'])
+                $mapJSONOptions .= ',"scaleControl":false';
+            
+            if(isset($mapOptions['scaleControl']))
+                unset($mapOptions['scaleControl']);
         }
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))
