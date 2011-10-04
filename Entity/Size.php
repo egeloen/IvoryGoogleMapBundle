@@ -14,8 +14,8 @@ class Size extends BaseSize
     /**
      * Create a size
      */
-    public function __construct($width = 0, $height = 0, $widthUnit = null, $heightUnit = null)
+    public function __construct($width = 1, $height = 1, $widthUnit = null, $heightUnit = null)
     {
-        parent::__construct($width, $ĥeight, $widthUnit, $heightUnit);
+        parent::__construct($width, $height, $widthUnit, $heightUnit);
     }
 }
