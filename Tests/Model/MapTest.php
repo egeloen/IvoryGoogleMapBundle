@@ -61,6 +61,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$map->getMapTypeControl());
         $this->assertNull(self::$map->getOverviewMapControl());
         $this->assertNull(self::$map->getPanControl());
+        $this->assertNull(self::$map->getRotateControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -265,6 +266,26 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setPanControl('foo');
+    }
+    
+    /**
+     * Checks the map rotate control getter & setter
+     */
+    public function testRotateControl()
+    {
+        $rotateControlTest = new Controls\RotateControl();
+        $rotateControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        self::$map->setRotateControl($rotateControlTest);
+        $this->assertEquals(self::$map->getRotateControl()->getControlPosition(), 'bottom_center');
+        
+        self::$map->setRotateControl(Controls\ControlPosition::BOTTOM_LEFT);
+        $this->assertEquals(self::$map->getRotateControl()->getControlPosition(), 'bottom_left');
+        
+        self::$map->setRotateControl(null);
+        $this->assertNull(self::$map->getRotateControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setRotateControl('foo');
     }
     
     /**

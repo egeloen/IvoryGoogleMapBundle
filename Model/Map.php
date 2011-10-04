@@ -68,6 +68,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $panControl = null;
     
     /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\RotateControl Map rotate control
+     */
+    protected $rotateControl = null;
+    
+    /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
      */
     protected $eventManager = null;
@@ -476,6 +481,47 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setPanControl(Ivory\GoogleMapBundle\Model\Controls\PanControl $panControl = null)',
                 ' - public function setPanControl(string $controlPosition)'));
+    }
+    
+    /**
+     * Gets the map rotate control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\RotateControl
+     */
+    public function getRotateControl()
+    {
+        return $this->rotateControl;
+    }
+    
+    /**
+     * Sets the map rotate control
+     * 
+     * Available prototype :
+     * 
+     * - public function setRotateControl(Ivory\GoogleMapBundle\Model\Controls\RotateControl $rotateControl = null)'
+     * - public function setRotateControl(string $controlPosition)
+     */
+    public function setRotateControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            if($this->rotateControl === null)
+                $this->rotateControl = new Controls\RotateControl();
+            
+            $this->rotateControl->setControlPosition($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\RotateControl))
+            $this->rotateControl = $args[0];
+        else if(!isset($args[0]))
+            $this->rotateControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The rotate control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setRotateControl(Ivory\GoogleMapBundle\Model\Controls\RotateControl $rotateControl = null)',
+                ' - public function setRotateControl(string $controlPosition)'));
     }
     
     /**
