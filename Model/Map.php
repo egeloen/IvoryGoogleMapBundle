@@ -78,6 +78,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $scaleControl = null;
     
     /**
+     * @var Ivory\GoogleMapBundle\Model\Controls\StreetViewControl Map street view control
+     */
+    protected $streetViewControl = null;
+    
+    /**
      * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
      */
     protected $eventManager = null;
@@ -569,6 +574,47 @@ class Map extends AbstractJavascriptVariableAsset
                 'The available prototypes are :',
                 ' - public function setScaleControl(Ivory\GoogleMapBundle\Model\Controls\ScaleControl $scaleControl = null)',
                 ' - public function setScaleControl(string $controlPosition, string $scaleControlStyle)'));
+    }
+    
+    /**
+     * Gets the map street view control
+     *
+     * @return Ivory\GoogleMapBundle\Model\Controls\StreetViewControl
+     */
+    public function getStreetViewControl()
+    {
+        return $this->streetViewControl;
+    }
+    
+    /**
+     * Sets the map street view control
+     * 
+     * Available prototype:
+     * 
+     * - public function setStreetViewControl(Ivory\GoogleMapBundle\Model\Controls\StreetViewControl $streetViewControl = null)
+     * - public function setStreetViewControl(string $controlPosition)
+     */
+    public function setStreetViewControl()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            if($this->streetViewControl === null)
+                $this->streetViewControl = new Controls\StreetViewControl();
+            
+            $this->streetViewControl->setControlPosition($args[0]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Controls\StreetViewControl))
+            $this->streetViewControl = $args[0];
+        else if(!isset($args[0]))
+            $this->streetViewControl = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The street view control setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setStreetViewControl(Ivory\GoogleMapBundle\Model\Controls\StreetViewControl $streetViewControl = null)',
+                ' - public function setStreetViewControl(string $controlPosition)'));
     }
     
     /**

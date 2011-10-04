@@ -63,6 +63,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$map->getPanControl());
         $this->assertNull(self::$map->getRotateControl());
         $this->assertNull(self::$map->getScaleControl());
+        $this->assertNull(self::$map->getStreetViewControl());
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
@@ -310,6 +311,26 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setScaleControl('foo');
+    }
+    
+    /**
+     * Checks the map street view control getter & setter
+     */
+    public function setStreetViewControl()
+    {
+        $streetViewControlTest = new Controls\StreetViewControl();
+        $streetViewControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        self::$map->setStreetViewControl($streetViewControlTest);
+        $this->assertEquals(self::$map->getStreetViewControl()->getControlPosition(), 'bottom_center');
+        
+        self::$map->setStreetViewControl(Controls\ControlPosition::BOTTOM_LEFT);
+        $this->assertEquals(self::$map->getStreetViewControl()->getControlPosition(), 'bottom_left');
+        
+        self::$map->setStreetViewControl(null);
+        $this->assertNull(self::$map->getStreetViewControl());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setStreetViewControl('foo');
     }
     
     /**
