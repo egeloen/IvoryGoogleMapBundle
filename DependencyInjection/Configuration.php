@@ -10,6 +10,7 @@ use Ivory\GoogleMapBundle\Model\MapTypeId;
 use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
 use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
 use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
+use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
 
 /**
  * Ivory google map configuration
@@ -47,6 +48,7 @@ class Configuration implements ConfigurationInterface
         $this->addScaleControlSection($rootNode);
         $this->addStreetViewControlSection($rootNode);
         $this->addZoomControlStyleSection($rootNode);
+        $this->addZoomControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -388,6 +390,26 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('zoom_control_style')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the zoom control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addZoomControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('zoom_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\ZoomControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper')->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
+                        ->scalarNode('zoom_control_style')->defaultValue(ZoomControlStyle::DEFAULT_)->end()
                     ->end()
                 ->end()
             ->end();
