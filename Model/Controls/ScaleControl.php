@@ -24,6 +24,14 @@ class ScaleControl
     protected $scaleControlStyle = ScaleControlStyle::DEFAULT_;
     
     /**
+     * Create a scale control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the control position
      *
      * @return string

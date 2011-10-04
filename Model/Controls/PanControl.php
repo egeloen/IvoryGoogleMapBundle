@@ -16,6 +16,14 @@ class PanControl
     protected $controlPosition = ControlPosition::TOP_LEFT;
     
     /**
+     * Create a pan control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the control position
      *
      * @return string

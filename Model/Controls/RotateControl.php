@@ -16,6 +16,14 @@ class RotateControl
     protected $controlPosition = ControlPosition::TOP_LEFT;
     
     /**
+     * Create a rotate control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the control position
      *
      * @return string

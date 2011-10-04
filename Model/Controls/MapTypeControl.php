@@ -33,6 +33,14 @@ class MapTypeControl
     protected $mapTypeControlStyle = MapTypeControlStyle::DEFAULT_;
     
     /**
+     * Create a map type control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the map type ids
      *
      * @return array

@@ -16,6 +16,14 @@ class OverviewMapControl
     protected $opened = false;
     
     /**
+     * Create an overview map control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Checks if the overview map control is opened else FALSE
      *
      * @return boolean TRUE if the overview map control is opened else FALSE

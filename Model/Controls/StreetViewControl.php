@@ -16,6 +16,14 @@ class StreetViewControl
     protected $controlPosition = ControlPosition::TOP_LEFT;
     
     /**
+     * Create a street view control
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the control position
      *
      * @return string

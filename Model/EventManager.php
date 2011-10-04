@@ -31,6 +31,14 @@ class EventManager
     protected $eventsOnce = array();
     
     /**
+     * Create an event manager
+     */
+    public function __construct()
+    {
+        
+    }
+    
+    /**
      * Gets the dom events
      *
      * @return array
