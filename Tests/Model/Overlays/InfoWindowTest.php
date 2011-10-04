@@ -6,6 +6,7 @@ use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractOptionsAssetTest;
 
 use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
+use Ivory\GoogleMapBundle\Model\Base\Size;
 
 /**
  * Info window test
@@ -38,6 +39,7 @@ class InfoWindowTest extends AbstractOptionsAssetTest
         parent::testDefaultValues();
         
         $this->assertNull(self::$object->getPosition());
+        $this->assertNull(self::$object->getPixelOffset());
         $this->assertEquals(self::$object->getContent(), '<p>Default content</p>');
         $this->assertTrue(self::$object->isOpen());
     }
@@ -63,6 +65,31 @@ class InfoWindowTest extends AbstractOptionsAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setPosition('foo');
+    }
+    
+    /**
+     * Checks the pixel offset getter & setter
+     */
+    public function testPixelOffset()
+    {
+        $pixelOffsetTest = new Size(1, 2, 'px', 'px');
+        self::$object->setPixelOffset($pixelOffsetTest);
+        $this->assertEquals(self::$object->getPixelOffset()->getWidth(), 1);
+        $this->assertEquals(self::$object->getPixelOffset()->getHeight(), 2);
+        $this->assertEquals(self::$object->getPixelOffset()->getWidthUnit(), 'px');
+        $this->assertEquals(self::$object->getPixelOffset()->getHeightUnit(), 'px');
+        
+        self::$object->setPixelOffset(3, 4, 'px', 'px');
+        $this->assertEquals(self::$object->getPixelOffset()->getWidth(), 3);
+        $this->assertEquals(self::$object->getPixelOffset()->getHeight(), 4);
+        $this->assertEquals(self::$object->getPixelOffset()->getWidthUnit(), 'px');
+        $this->assertEquals(self::$object->getPixelOffset()->getHeightUnit(), 'px');
+        
+        self::$object->setPixelOffset(null);
+        $this->assertNull(self::$object->getPixelOffset());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$object->setPixelOffset('foo');
     }
     
     /**

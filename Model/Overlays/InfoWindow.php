@@ -4,6 +4,7 @@ namespace Ivory\GoogleMapBundle\Model\Overlays;
 
 use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
+use Ivory\GoogleMapBundle\Model\Base\Size;
 
 /**
  * Info window which describes a google map info window
@@ -17,6 +18,11 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Info window position
      */
     protected $position = null;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Base\Size Info window pixel offset
+     */
+    protected $pixedOffset = null;
 
     /**
      * @var string Info window content
@@ -79,6 +85,54 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
                 'The available prototypes are :',
                 ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
                 ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
+    }
+    
+    /**
+     * Gets the pixel offset
+     *
+     * @return Ivory\GoogleMapBundle\Model\Base\Size
+     */
+    public function getPixelOffset()
+    {
+        return $this->pixedOffset;
+    }
+    
+    /**
+     * Sets the pixel offset
+     * 
+     * Available prototype :
+     * 
+     * - public function setPixelOffset(double $width, double $height, string $widthUnit = null, string $heightUnit = null)',
+     * - public function setPixelOffset(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)
+     */
+    public function setPixelOffset()
+    {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
+        {
+            if($this->pixedOffset === null)
+                $this->pixedOffset = new Size();
+            
+            $this->pixedOffset->setWidth($args[0]);
+            $this->pixedOffset->setHeight($args[1]);
+            
+            if(isset($args[2]) && is_string($args[2]))
+                $this->pixedOffset->setWidthUnit($args[2]);
+            
+            if(isset($args[3]) && is_string($args[3]))
+                $this->pixedOffset->setHeightUnit($args[3]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof Size))
+            $this->pixedOffset = $args[0];
+        else if(!isset($args[0]))
+            $this->pixedOffset = null;
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The pixel offset setter arguments is invalid.',
+                'The available prototypes are :',
+                ' - public function setPixelOffset(double $width, double $height, string $widthUnit = null, string $heightUnit = null)',
+                ' - public function setPixelOffset(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)'));
     }
 
     /**
