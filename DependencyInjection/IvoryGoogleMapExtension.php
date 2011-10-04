@@ -46,6 +46,8 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadOverviewMapControl($config, $container);
         $this->loadPanControl($config, $container);
         $this->loadRotateControl($config, $container);
+        $this->loadScaleControlStyle($config, $container);
+        $this->loadScaleControl($config, $container);
         
         // Marker sections
         $this->loadMarker($config, $container);
@@ -235,6 +237,31 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.rotate_control.class', $config['rotate_control']['class']);
         $container->setParameter('ivory_google_map.rotate_control.helper', $config['rotate_control']['helper']);
         $container->setParameter('ivory_google_map.rotate_control.control_position', $config['rotate_control']['control_position']);
+    }
+    
+    /**
+     * Loads scale control_style configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadScaleControlStyle(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.scale_control_style.helper', $config['scale_control_style']['helper']);
+    }
+    
+    /**
+     * Loads scale control configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadScaleControl(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.scale_control.class', $config['scale_control']['class']);
+        $container->setParameter('ivory_google_map.scale_control.helper', $config['scale_control']['helper']);
+        $container->setParameter('ivory_google_map.scale_control.control_position', $config['scale_control']['control_position']);
+        $container->setParameter('ivory_google_map.scale_control.scale_control_style', $config['scale_control']['scale_control_style']);
     }
     
     /**

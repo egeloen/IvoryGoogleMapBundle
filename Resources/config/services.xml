@@ -66,6 +66,7 @@
             <argument type="service" id="ivory_google_map.helper.overview_map_control" />
             <argument type="service" id="ivory_google_map.helper.pan_control" />
             <argument type="service" id="ivory_google_map.helper.rotate_control" />
+            <argument type="service" id="ivory_google_map.helper.scale_control" />
             <argument type="service" id="ivory_google_map.helper.marker" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
@@ -194,11 +195,30 @@
             <argument type="service" id="ivory_google_map.helper.control_position" />
         </service>
         
+        <!-- Scale control service -->
+        <service id="ivory_google_map.scale_control" class="%ivory_google_map.scale_control.class%" scope="prototype">
+            <call method="setControlPosition">
+                <argument>%ivory_google_map.scale_control.control_position%</argument>
+            </call>
+            
+            <call method="setScaleControlStyle">
+                <argument>%ivory_google_map.scale_control.scale_control_style%</argument>
+            </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.scale_control" class="%ivory_google_map.scale_control.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+            <argument type="service" id="ivory_google_map.helper.scale_control_style" />
+        </service>
+        
         <!-- Control Position service -->
         <service id="ivory_google_map.helper.control_position" class="%ivory_google_map.control_position.helper%" public="false" />
         
         <!-- Map type control style service -->
         <service id="ivory_google_map.helper.map_type_control_style" class="%ivory_google_map.map_type_control_style.helper%" public="false" />
+        
+        <!-- Scale control style service -->
+        <service id="ivory_google_map.helper.scale_control_style" class="%ivory_google_map.scale_control_style.helper%" public="false" />
         
         <!-- Marker service -->
         <service id="ivory_google_map.marker" class="%ivory_google_map.marker.class%" scope="prototype">

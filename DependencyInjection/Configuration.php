@@ -9,6 +9,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Ivory\GoogleMapBundle\Model\MapTypeId;
 use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
 use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
+use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
 
 /**
  * Ivory google map configuration
@@ -42,6 +43,8 @@ class Configuration implements ConfigurationInterface
         $this->addOverviewMapControlSection($rootNode);
         $this->addPanControlSection($rootNode);
         $this->addRotateControlSection($rootNode);
+        $this->addScaleControlStyleSection($rootNode);
+        $this->addScaleControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
@@ -310,6 +313,43 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\RotateControl')->end()
                         ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the scale control style section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addScaleControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('scale_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlStyleHelper')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the scale control section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addScaleControlSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('scale_control')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\ScaleControl')->end()
+                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper')->end()
+                        ->scalarNode('control_position')->defaultValue(ControlPosition::BOTTOM_LEFT)->end()
+                        ->scalarNode('scale_control_style')->defaultValue(ScaleControlStyle::DEFAULT_)->end()
                     ->end()
                 ->end()
             ->end();
