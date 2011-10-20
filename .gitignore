@@ -1,1 +1,3 @@
+Tests/Emulation/cache/*
+Tests/Emulation/logs/*
 phpunit.xml
