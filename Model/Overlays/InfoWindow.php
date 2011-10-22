@@ -88,6 +88,16 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     }
     
     /**
+     * Checks if the info window has a pixel offset
+     *
+     * @return boolean TRUE if the info window has a pixel offset else FALSE
+     */
+    public function hasPixelOffset()
+    {
+        return !is_null($this->pixedOffset);
+    }
+    
+    /**
      * Gets the pixel offset
      *
      * @return Ivory\GoogleMapBundle\Model\Base\Size

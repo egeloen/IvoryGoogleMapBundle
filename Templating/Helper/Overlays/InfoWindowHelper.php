@@ -54,7 +54,7 @@ class InfoWindowHelper
         else
             $infoWindowJSONOptions = '{';
         
-        if(!is_null($infoWindow->getPixelOffset()))
+        if($infoWindow->hasPixelOffset())
             $infoWindowJSONOptions .= '"pixelOffset":'.$this->sizeHelper->render($infoWindow->getPixelOffset()).',';
         
         $infoWindowOptions = array_merge(

@@ -72,8 +72,11 @@ class InfoWindowTest extends AbstractOptionsAssetTest
      */
     public function testPixelOffset()
     {
+        $this->assertFalse(self::$object->hasPixelOffset());
+        
         $pixelOffsetTest = new Size(1, 2, 'px', 'px');
         self::$object->setPixelOffset($pixelOffsetTest);
+        $this->assertTrue(self::$object->hasPixelOffset());
         $this->assertEquals(self::$object->getPixelOffset()->getWidth(), 1);
         $this->assertEquals(self::$object->getPixelOffset()->getHeight(), 2);
         $this->assertEquals(self::$object->getPixelOffset()->getWidthUnit(), 'px');
