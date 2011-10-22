@@ -61,9 +61,6 @@ class Configuration implements ConfigurationInterface
         // Event sections
         $this->addEventSection($rootNode);
         
-        // Twig section
-        $this->addTwigSection($rootNode);
-        
         return $treeBuilder;
     }
 
@@ -551,23 +548,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('event')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-
-    /**
-     * Add the twig section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addTwigSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('twig')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('enabled')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end();

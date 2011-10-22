@@ -1,5 +1,7 @@
 Provides an Overlay Google Map integration for your Symfony2 Project.
 
+This bundle allows you 
+
 Documentation
 -------------
 

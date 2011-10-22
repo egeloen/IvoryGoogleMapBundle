@@ -63,8 +63,7 @@ class IvoryGoogleMapExtension extends Extension
         // Event sections
         $this->loadEvent($config, $container);
 
-        if($config['twig']['enabled'])
-            $loader->load('twig.xml');
+        $loader->load('twig.xml');
     }
     
     /**
