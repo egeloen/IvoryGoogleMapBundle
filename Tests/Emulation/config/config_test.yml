@@ -1,2 +1,146 @@
 imports:
     - { resource: config.yml }
+
+ivory_google_map:
+    # Map configuration
+    map:
+        prefix_javascript_variable: "m"
+        html_container: "html_container_id"
+        auto_zoom: true
+        center:
+            longitude: 1.1
+            latitude: -2.1
+            no_wrap: false
+        type: "satellite"
+        zoom: 10
+        width: "100%"
+        height: "100px"
+        map_options:
+            option: "value"
+        stylesheet_options:
+            option: "value"
+    
+    # Base configuration
+    coordinate:
+        latitude: 1.1
+        longitude: -2.1
+        no_wrap: false
+        
+    bound:
+        prefix_javascript_variable: "b"
+        
+    point:
+        x: 1.1
+        y: -2.1
+        
+    size:
+        width: 100.1
+        height: 200.2
+        width_unit: "px"
+        height_unit: "pt"
+    
+    # Controls configuration
+    map_type_control:
+        map_type_ids: ["hybrid", "terrain"]
+        control_position: "top_center"
+        map_type_control_style: "horizontal_bar"
+
+    overview_map_control:
+        opened: true
+    
+    pan_control:
+        control_position: "top_center"
+        
+    rotate_control:
+        control_position: "top_center"
+        
+    scale_control:
+        control_position: "top_center"
+        scale_control_style: "default"
+    
+    street_view_control:
+        control_position: "top_center"
+        
+    zoom_control:
+        control_position: "top_center"
+        zoom_control_style: "default"
+    
+    # Overlays configuration
+    marker:
+        prefix_javascript_variable: "m"
+        position:
+            latitude: 1.1
+            longitude: -2.1
+            no_wrap: false
+        options:
+            option: "value"
+
+    marker_image:
+        prefix_javascript_variable: "mi"
+        url: "url"
+        
+    marker_shape:
+        prefix_javascript_variable: "ms"
+        type: "rect"
+        
+    info_window:
+        prefix_javascript_variable: "iw"
+        position:
+            latitude: 1.1
+            longitude: -2.1
+            no_wrap: false
+        content: "<div class=\"info_window\"></div>"
+        open: false
+        options:
+            option: "value"
+            
+    polyline:
+        prefix_javascript_variable: "p"
+        options:
+            option: "value"
+    
+    polygon:
+        prefix_javascript_variable: "p"
+        options:
+            option: "value"
+            
+    rectangle:
+        prefix_javascript_variable: "r"
+        bound:
+            south_west:
+                latitude: -1.1
+                longitude: -2.1
+                no_wrap: true
+            north_east:
+                latitude: 1.1
+                longitude: 2.1
+                no_wrap: false
+        options:
+            option: "value"
+            
+    circle:
+        prefix_javascript_variable: "c"
+        center:
+            latitude: 1.1
+            longitude: 2.1
+            no_wrap: false
+        radius: 10
+        options:
+            option: "value"
+            
+    ground_overlay:
+        prefix_javascript_variable: "go"
+        bound:
+            south_west:
+                latitude: -1.1
+                longitude: -2.1
+                no_wrap: true
+            north_east:
+                latitude: 1.1
+                longitude: 2.1
+                no_wrap: false
+        options:
+            option: "value"
+            
+    event:
+        prefix_javascript_variable: "e"

@@ -29,7 +29,6 @@ class Configuration implements ConfigurationInterface
 
         // Map sections
         $this->addMapSection($rootNode);
-        $this->addMapTypeIdSection($rootNode);
         
         // Base sections
         $this->addCoordinateSection($rootNode);
@@ -39,20 +38,15 @@ class Configuration implements ConfigurationInterface
         
         // Control sections
         $this->addMapTypeControlSection($rootNode);
-        $this->addControlPositionSection($rootNode);
-        $this->addMapTypeControlStyleSection($rootNode);
         $this->addOverviewMapControlSection($rootNode);
         $this->addPanControlSection($rootNode);
         $this->addRotateControlSection($rootNode);
-        $this->addScaleControlStyleSection($rootNode);
         $this->addScaleControlSection($rootNode);
         $this->addStreetViewControlSection($rootNode);
-        $this->addZoomControlStyleSection($rootNode);
         $this->addZoomControlSection($rootNode);
         
         // Marker sections
         $this->addMarkerSection($rootNode);
-        $this->addAnimationSection($rootNode);
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
         
@@ -65,7 +59,6 @@ class Configuration implements ConfigurationInterface
         $this->addGroundOverlaySection($rootNode);
 
         // Event sections
-        $this->addEventManagerSection($rootNode);
         $this->addEventSection($rootNode);
         
         // Twig section
@@ -85,8 +78,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('map')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Map')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MapHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('map_')->end()
                         ->scalarNode('html_container')->defaultValue('map_canvas')->end()
                         ->scalarNode('auto_zoom')->defaultFalse()->end()
@@ -111,23 +102,6 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
-    /**
-     * Add the map type id section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addMapTypeIdSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('map_type_id')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper')->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
 
     /**
      * Add the coordinate section
@@ -140,8 +114,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('coordinate')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Base\Coordinate')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper')->end()
                         ->scalarNode('latitude')->defaultValue(0)->end()
                         ->scalarNode('longitude')->defaultValue(0)->end()
                         ->scalarNode('no_wrap')->defaultTrue()->end()
@@ -161,8 +133,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('bound')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Base\Bound')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('bound_')->end()
                     ->end()
                 ->end()
@@ -180,8 +150,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('point')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Base\Point')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper')->end()
                         ->scalarNode('x')->defaultValue(0)->end()
                         ->scalarNode('y')->defaultValue(0)->end()
                     ->end()
@@ -200,8 +168,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('size')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Base\Size')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper')->end()
                         ->scalarNode('width')->defaultValue(1)->end()
                         ->scalarNode('height')->defaultValue(1)->end()
                         ->scalarNode('width_unit')->defaultValue(null)->end()
@@ -222,45 +188,12 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('map_type_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\MapTypeControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper')->end()
-                        ->scalarNode('map_type_ids')->defaultValue(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE))->end()
+                        ->arrayNode('map_type_ids')->addDefaultsIfNotSet()
+                            ->defaultValue(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE))
+                            ->prototype('scalar')->end()
+                        ->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_RIGHT)->end()
                         ->scalarNode('map_type_control_style')->defaultValue(MapTypeControlStyle::DEFAULT_)->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
-     * Add the control position section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addControlPositionSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('control_position')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper')->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
-     * Add the map type control style section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addMapTypeControlStyleSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('map_type_control_style')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlStyleHelper')->end()
                     ->end()
                 ->end()
             ->end();
@@ -277,8 +210,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('overview_map_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper')->end()
                         ->scalarNode('opened')->defaultFalse()->end()
                     ->end()
                 ->end()
@@ -296,8 +227,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('pan_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\PanControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
@@ -315,26 +244,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('rotate_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\RotateControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
-     * Add the scale control style section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addScaleControlStyleSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('scale_control_style')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlStyleHelper')->end()
                     ->end()
                 ->end()
             ->end();
@@ -351,8 +261,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('scale_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\ScaleControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::BOTTOM_LEFT)->end()
                         ->scalarNode('scale_control_style')->defaultValue(ScaleControlStyle::DEFAULT_)->end()
                     ->end()
@@ -371,26 +279,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('street_view_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\StreetViewControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
-     * Add the zoom control style section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addZoomControlStyleSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('zoom_control_style')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper')->end()
                     ->end()
                 ->end()
             ->end();
@@ -407,8 +296,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('zoom_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Controls\ZoomControl')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                         ->scalarNode('zoom_control_style')->defaultValue(ZoomControlStyle::DEFAULT_)->end()
                     ->end()
@@ -427,8 +314,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\Marker')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_')->end()
                         ->arrayNode('position')->addDefaultsIfNotSet()
                             ->children()
@@ -446,23 +331,6 @@ class Configuration implements ConfigurationInterface
     }
     
     /**
-     * Add the animation section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addAnimationSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('animation')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper')->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
      * Add the marker image section
      *
      * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
@@ -473,10 +341,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker_image')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\MarkerImage')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_image_')->end()
-                        ->scalarNode('url')->defaultValue(null)->end()
+                        ->scalarNode('url')->defaultValue('')->end()
                     ->end()
                 ->end()
             ->end();
@@ -493,8 +359,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker_shape')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\MarkerShape')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
                         ->scalarNode('type')->defaultValue('poly')->end()
                     ->end()
@@ -513,8 +377,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('info_window')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\InfoWindow')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('info_window_')->end()
                         ->arrayNode('position')->addDefaultsIfNotSet()
                             ->children()
@@ -544,8 +406,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('polyline')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\Polyline')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('polyline_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
@@ -566,8 +426,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('polygon')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\Polygon')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolygonHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('polygon_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
@@ -588,22 +446,20 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('rectangle')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\Rectangle')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\RectangleHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('rectangle_')->end()
                         ->arrayNode('bound')->addDefaultsIfNotSet()
                             ->children()
                                 ->arrayNode('south_west')->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('latitude')->defaultValue(0)->end()
-                                        ->scalarNode('longitude')->defaultValue(0)->end()
+                                        ->scalarNode('latitude')->defaultValue(-1)->end()
+                                        ->scalarNode('longitude')->defaultValue(-1)->end()
                                         ->scalarNode('no_wrap')->defaultTrue()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('north_east')->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('latitude')->defaultValue(0)->end()
-                                        ->scalarNode('longitude')->defaultValue(0)->end()
+                                        ->scalarNode('latitude')->defaultValue(1)->end()
+                                        ->scalarNode('longitude')->defaultValue(1)->end()
                                         ->scalarNode('no_wrap')->defaultTrue()->end()
                                     ->end()
                                 ->end()
@@ -628,8 +484,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('circle')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\Circle')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('circle_')->end()
                         ->arrayNode('center')->addDefaultsIfNotSet()
                             ->children()
@@ -658,22 +512,20 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('ground_overlay')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('ground_overlay_')->end()
                         ->arrayNode('bound')->addDefaultsIfNotSet()
                             ->children()
                                 ->arrayNode('south_west')->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('latitude')->defaultValue(0)->end()
-                                        ->scalarNode('longitude')->defaultValue(0)->end()
+                                        ->scalarNode('latitude')->defaultValue(-1)->end()
+                                        ->scalarNode('longitude')->defaultValue(-1)->end()
                                         ->scalarNode('no_wrap')->defaultTrue()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('north_east')->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('latitude')->defaultValue(0)->end()
-                                        ->scalarNode('longitude')->defaultValue(0)->end()
+                                        ->scalarNode('latitude')->defaultValue(1)->end()
+                                        ->scalarNode('longitude')->defaultValue(1)->end()
                                         ->scalarNode('no_wrap')->defaultTrue()->end()
                                     ->end()
                                 ->end()
@@ -682,23 +534,6 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-    
-    /**
-     * Add the event manager section
-     *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
-    protected function addEventManagerSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('event_manager')->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\EventManager')->end()
                     ->end()
                 ->end()
             ->end();
@@ -715,8 +550,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('event')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('class')->defaultValue('Ivory\GoogleMapBundle\Model\Event')->end()
-                        ->scalarNode('helper')->defaultValue('Ivory\GoogleMapBundle\Templating\Helper\EventHelper')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
                     ->end()
                 ->end()

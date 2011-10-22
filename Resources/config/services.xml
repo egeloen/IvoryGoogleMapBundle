@@ -3,6 +3,75 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+        
+    <parameters>
+        
+        <!-- Business -->
+        <parameter key="ivory_google_map.map.class">Ivory\GoogleMapBundle\Model\Map</parameter>
+        
+        <parameter key="ivory_google_map.coordinate.class">Ivory\GoogleMapBundle\Model\Base\Coordinate</parameter>
+        <parameter key="ivory_google_map.bound.class">Ivory\GoogleMapBundle\Model\Base\Bound</parameter>
+        <parameter key="ivory_google_map.point.class">Ivory\GoogleMapBundle\Model\Base\Point</parameter>
+        <parameter key="ivory_google_map.size.class">Ivory\GoogleMapBundle\Model\Base\Size</parameter>
+        
+        <parameter key="ivory_google_map.map_type_control.class">Ivory\GoogleMapBundle\Model\Controls\MapTypeControl</parameter>
+        <parameter key="ivory_google_map.overview_map_control.class">Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl</parameter>
+        <parameter key="ivory_google_map.pan_control.class">Ivory\GoogleMapBundle\Model\Controls\PanControl</parameter>
+        <parameter key="ivory_google_map.rotate_control.class">Ivory\GoogleMapBundle\Model\Controls\RotateControl</parameter>
+        <parameter key="ivory_google_map.scale_control.class">Ivory\GoogleMapBundle\Model\Controls\ScaleControl</parameter>
+        <parameter key="ivory_google_map.street_view_control.class">Ivory\GoogleMapBundle\Model\Controls\StreetViewControl</parameter>
+        <parameter key="ivory_google_map.zoom_control.class">Ivory\GoogleMapBundle\Model\Controls\ZoomControl</parameter>
+        
+        <parameter key="ivory_google_map.marker.class">Ivory\GoogleMapBundle\Model\Overlays\Marker</parameter>
+        <parameter key="ivory_google_map.marker_image.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerImage</parameter>
+        <parameter key="ivory_google_map.marker_shape.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerShape</parameter>
+        
+        <parameter key="ivory_google_map.info_window.class">Ivory\GoogleMapBundle\Model\Overlays\InfoWindow</parameter>
+        <parameter key="ivory_google_map.polyline.class">Ivory\GoogleMapBundle\Model\Overlays\Polyline</parameter>
+        <parameter key="ivory_google_map.polygon.class">Ivory\GoogleMapBundle\Model\Overlays\Polygon</parameter>
+        <parameter key="ivory_google_map.rectangle.class">Ivory\GoogleMapBundle\Model\Overlays\Rectangle</parameter>
+        <parameter key="ivory_google_map.circle.class">Ivory\GoogleMapBundle\Model\Overlays\Circle</parameter>
+        <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay</parameter>
+        
+        <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\EventManager</parameter>
+        <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Event</parameter>
+        
+        <!-- Herlper -->
+        <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
+        
+        <parameter key="ivory_google_map.map_type_id.helper">Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper</parameter>
+        <parameter key="ivory_google_map.coordinate.helper">Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper</parameter>
+        <parameter key="ivory_google_map.bound.helper">Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper</parameter>
+        <parameter key="ivory_google_map.point.helper">Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper</parameter>
+        <parameter key="ivory_google_map.size.helper">Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper</parameter>
+        
+        <parameter key="ivory_google_map.map_type_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper</parameter>
+        <parameter key="ivory_google_map.control_position.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper</parameter>
+        <parameter key="ivory_google_map.map_type_control_style.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlStyleHelper</parameter>
+        <parameter key="ivory_google_map.overview_map_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper</parameter>
+        <parameter key="ivory_google_map.pan_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper</parameter>
+        <parameter key="ivory_google_map.rotate_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper</parameter>
+        <parameter key="ivory_google_map.scale_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper</parameter>
+        <parameter key="ivory_google_map.scale_control_style.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlStyleHelper</parameter>
+        <parameter key="ivory_google_map.street_view_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper</parameter>
+        <parameter key="ivory_google_map.zoom_control.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper</parameter>
+        <parameter key="ivory_google_map.zoom_control_style.helper">Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper</parameter>
+        
+        <parameter key="ivory_google_map.marker.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerHelper</parameter>
+        <parameter key="ivory_google_map.marker_image.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper</parameter>
+        <parameter key="ivory_google_map.marker_shape.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper</parameter>
+        <parameter key="ivory_google_map.animation.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper</parameter>
+        
+        <parameter key="ivory_google_map.info_window.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper</parameter>
+        <parameter key="ivory_google_map.polyline.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper</parameter>
+        <parameter key="ivory_google_map.polygon.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolygonHelper</parameter>
+        <parameter key="ivory_google_map.rectangle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\RectangleHelper</parameter>
+        <parameter key="ivory_google_map.circle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper</parameter>
+        <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
+        
+        <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\EventHelper</parameter>
+        
+    </parameters>
 
     <services>
 
