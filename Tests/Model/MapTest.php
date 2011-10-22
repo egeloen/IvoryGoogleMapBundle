@@ -266,7 +266,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     {
         $panControlTest = new Controls\PanControl();
         $panControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        
+        $this->assertFalse(self::$map->hasPanControl());
+        
         self::$map->setPanControl($panControlTest);
+        $this->assertTrue(self::$map->hasPanControl());
         $this->assertEquals(self::$map->getPanControl()->getControlPosition(), 'bottom_center');
         
         self::$map->setPanControl(Controls\ControlPosition::BOTTOM_LEFT);

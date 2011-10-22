@@ -478,6 +478,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a pan control
+     *
+     * @return boolean TRUE if the map has a pan control else FALSE
+     */
+    public function hasPanControl()
+    {
+        return !is_null($this->panControl);
+    }
+    
+    /**
      * Gets the map pan control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\PanControl

@@ -249,7 +249,7 @@ class MapHelper
                 unset($mapOptions['overviewMapControl']);
         }
         
-        if(!is_null($map->getPanControl()))
+        if($map->hasPanControl())
         {
             if(!isset($mapOptions['panControl']) || (isset($mapOptions['panControl']) && $mapOptions['panControl']))
                 $mapJSONOptions .= ',"panControl":true,"panControlOptions":'.$this->panControlHelper->render($map->getPanControl());
