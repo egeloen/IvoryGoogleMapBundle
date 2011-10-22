@@ -632,6 +632,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a street view control
+     *
+     * @return boolean TRUE if the map has a street view control else FALSE
+     */
+    public function hasStreetViewControl()
+    {
+        return !is_null($this->streetViewControl);
+    }
+    
+    /**
      * Gets the map street view control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\StreetViewControl

@@ -341,7 +341,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     {
         $streetViewControlTest = new Controls\StreetViewControl();
         $streetViewControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        
+        $this->assertFalse(self::$map->hasStreetViewControl());
+        
         self::$map->setStreetViewControl($streetViewControlTest);
+        $this->assertTrue(self::$map->hasStreetViewControl());
         $this->assertEquals(self::$map->getStreetViewControl()->getControlPosition(), 'bottom_center');
         
         self::$map->setStreetViewControl(Controls\ControlPosition::BOTTOM_LEFT);

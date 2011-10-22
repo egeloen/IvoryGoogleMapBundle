@@ -282,7 +282,7 @@ class MapHelper
                 unset($mapOptions['scaleControl']);
         }
         
-        if(!is_null($map->getStreetViewControl()))
+        if($map->hasStreetViewControl())
         {
             if(!isset($mapOptions['streetViewControl']) || (isset($mapOptions['streetViewControl']) && $mapOptions['streetViewControl']))
                 $mapJSONOptions .= ',"streetViewControl":true,"streetViewControlOptions":'.$this->streetViewControlHelper->render($map->getStreetViewControl());
