@@ -683,6 +683,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a zoom control
+     *
+     * @return boolean TRUE if the map has a zoom control else FALSE
+     */
+    public function hasZoomControl()
+    {
+        return !is_null($this->zoomControl);
+    }
+    
+    /**
      * Gets the map zoom control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\ZoomControl

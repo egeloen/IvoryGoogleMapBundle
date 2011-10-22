@@ -293,7 +293,7 @@ class MapHelper
                 unset($mapOptions['streetViewControl']);
         }
         
-        if(!is_null($map->getZoomControl()))
+        if($map->hasZoomControl())
         {
             if(!isset($mapOptions['zoomControl']) || (isset($mapOptions['zoomControl']) && $mapOptions['zoomControl']))
                 $mapJSONOptions .= ',"zoomControl":true,"zoomControlOptions":'.$this->zoomControlHelper->render($map->getZoomControl());

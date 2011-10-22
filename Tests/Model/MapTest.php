@@ -366,7 +366,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $zoomControlTest = new Controls\ZoomControl();
         $zoomControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         $zoomControlTest->setZoomControlStyle(Controls\ZoomControlStyle::SMALL);
+        
+        $this->assertFalse(self::$map->hasZoomControl());
+        
         self::$map->setZoomControl($zoomControlTest);
+        $this->assertTrue(self::$map->hasZoomControl());
         $this->assertEquals(self::$map->getZoomControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getZoomControl()->getZoomControlStyle(), 'small');
         
