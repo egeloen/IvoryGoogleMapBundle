@@ -315,7 +315,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $scaleControlTest = new Controls\ScaleControl();
         $scaleControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         $scaleControlTest->setScaleControlStyle(Controls\ScaleControlStyle::DEFAULT_);
+        
+        $this->assertFalse(self::$map->hasScaleControl());
+        
         self::$map->setScaleControl($scaleControlTest);
+        $this->assertTrue(self::$map->hasScaleControl());
         $this->assertEquals(self::$map->getScaleControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getScaleControl()->getScaleControlStyle(), 'default');
         

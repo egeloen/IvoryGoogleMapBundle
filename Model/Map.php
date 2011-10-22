@@ -580,6 +580,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a scale control else FALSE
+     *
+     * @return boolean TRUE if the map has a scale control else FALSE
+     */
+    public function hasScaleControl()
+    {
+        return !is_null($this->scaleControl);
+    }
+    
+    /**
      * Gets the map scale control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\ScaleControl

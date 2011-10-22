@@ -271,7 +271,7 @@ class MapHelper
                 unset($mapOptions['rotateControl']);
         }
         
-        if(!is_null($map->getScaleControl()))
+        if($map->hasScaleControl())
         {
             if(!isset($mapOptions['scaleControl']) || (isset($mapOptions['scaleControl']) && $mapOptions['scaleControl']))
                 $mapJSONOptions .= ',"scaleControl":true,"scaleControlOptions":'.$this->scaleControlHelper->render($map->getScaleControl());
