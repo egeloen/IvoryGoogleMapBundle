@@ -238,7 +238,7 @@ class MapHelper
                 unset($mapOptions['mapTypeControl']);
         }
         
-        if(!is_null($map->getOverviewMapControl()))
+        if($map->hasOverviewMapControl())
         {
             if(!isset($mapOptions['overviewMapControl']) || (isset($mapOptions['overviewMapControl']) && $mapOptions['overviewMapControl']))
                 $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());

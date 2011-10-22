@@ -242,7 +242,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     {
         $overviewMapControlTest = new Controls\OverviewMapControl();
         $overviewMapControlTest->setOpened(true);
+        
+        $this->assertFalse(self::$map->hasOverviewMapControl());
+        
         self::$map->setOverviewMapControl($overviewMapControlTest);
+        $this->assertTrue(self::$map->hasOverviewMapControl());
         $this->assertTrue(self::$map->getOverviewMapControl()->isOpened());
         
         self::$map->setOverviewMapControl(false);

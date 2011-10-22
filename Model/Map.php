@@ -427,6 +427,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has an overview map control
+     *
+     * @return boolean TRUE if the map has an overview map control else FALSE
+     */
+    public function hasOverviewMapControl()
+    {
+        return !is_null($this->overviewMapControl);
+    }
+    
+    /**
      * Gets the overview map control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl
