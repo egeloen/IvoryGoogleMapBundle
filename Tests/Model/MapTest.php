@@ -290,7 +290,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     {
         $rotateControlTest = new Controls\RotateControl();
         $rotateControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
+        
+        $this->assertFalse(self::$map->hasRotateControl());
+        
         self::$map->setRotateControl($rotateControlTest);
+        $this->assertTrue(self::$map->hasRotateControl());
         $this->assertEquals(self::$map->getRotateControl()->getControlPosition(), 'bottom_center');
         
         self::$map->setRotateControl(Controls\ControlPosition::BOTTOM_LEFT);

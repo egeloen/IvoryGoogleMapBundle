@@ -260,7 +260,7 @@ class MapHelper
                 unset($mapOptions['panControl']);
         }
         
-        if(!is_null($map->getRotateControl()))
+        if($map->hasRotateControl())
         {
             if(!isset($mapOptions['rotateControl']) || (isset($mapOptions['rotateControl']) && $mapOptions['rotateControl']))
                 $mapJSONOptions .= ',"rotateControl":true,"rotateControlOptions":'.$this->rotateControlHelper->render($map->getRotateControl());

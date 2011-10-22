@@ -529,6 +529,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a rotate control
+     *
+     * @return boolean TRUE if the map has a rotate control else FALSE
+     */
+    public function hasRotateControl()
+    {
+        return !is_null($this->rotateControl);
+    }
+    
+    /**
      * Gets the map rotate control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\RotateControl
