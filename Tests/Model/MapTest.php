@@ -214,7 +214,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $mapTypeControlTest->setMapTypeIds(array(Model\MapTypeId::ROADMAP));
         $mapTypeControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         $mapTypeControlTest->setMapTypeControlStyle(Controls\MapTypeControlStyle::HORIZONTAL_BAR);
+        
+        $this->assertFalse(self::$map->hasMapTypeControl());
+        
         self::$map->setMapTypeControl($mapTypeControlTest);
+        $this->assertTrue(self::$map->hasMapTypeControl());
         $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeIds(), array('roadmap'));
         $this->assertEquals(self::$map->getMapTypeControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeControlStyle(), 'horizontal_bar');

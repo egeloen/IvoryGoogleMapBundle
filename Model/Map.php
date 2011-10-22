@@ -374,6 +374,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Checks if the map has a map type control
+     *
+     * @return boolean TRUE if the map has a map type control else FALSE
+     */
+    public function hasMapTypeControl()
+    {
+        return !is_null($this->mapTypeControl);
+    }
+    
+    /**
      * Gets the map type control
      *
      * @return Ivory\GoogleMapBundle\Model\Controls\MapTypeControl

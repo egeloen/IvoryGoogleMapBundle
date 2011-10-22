@@ -227,7 +227,7 @@ class MapHelper
         $mapJSONOptions = '{"mapTypeId":'.$this->mapTypeIdHelper->render($mapOptions['mapTypeId']);
         unset($mapOptions['mapTypeId']);
         
-        if(!is_null($map->getMapTypeControl()))
+        if($map->hasMapTypeControl())
         {
             if(!isset($mapOptions['mapTypeControl']) || (isset($mapOptions['mapTypeControl']) && $mapOptions['mapTypeControl']))
                 $mapJSONOptions .= ',"mapTypeControl":true,"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
