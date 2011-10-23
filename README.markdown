@@ -3,8 +3,8 @@ Provides a Google Map integration for your Symfony2 Project.
 Actually, this bundle allows you to manage:
 
    - Map 
-   - Controls: Type, Overview, Pan, Rotate, Scale, Street view, Zoom 
-   - Overlays: Marker, Marker image, Marker shape, Animation, Info window, Polyline, Polygon, Rectangle, Circle, Ground overlay 
+   - Controls: Map type, Overview, Pan, Rotate, Scale, Street view, Zoom 
+   - Overlays: Marker, Info window, Polyline, Polygon, Rectangle, Circle, Ground overlay 
    - Events
 
 It uses the google map API v3.
@@ -17,7 +17,7 @@ The documentation is being rewritten.
    1. [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
    2. [Usage](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage.md)
       - [Map](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/map.md)
-      - Controls
+      - [Controls](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/index.md)
          - [Map type](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/map_type.md)
          - [Overview](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/overview.md)
          - [Pan](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/pan.md)
@@ -25,7 +25,7 @@ The documentation is being rewritten.
          - [Scale](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/scale.md)
          - [Street view](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/street_view.md)
          - [Zoom](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/zoom.md)
-      - Overlays
+      - [Overlays](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/index.md)
          - [Marker](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker.md)
          - [Info window](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/info_window.md)
          - [Polyline](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/polyline.md)
