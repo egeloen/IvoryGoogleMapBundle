@@ -28,40 +28,12 @@ These elements are known as ``controls`` and you can include variations of these
 Alternatively, you can do nothing and let the Google Maps API handle all control behavior.
 
    1. [Map type control](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/map_type.md)
-
-      The map type control lets the user toggle between map types (such as ROADMAP and SATELLITE). 
-      This control appears by default in the top right corner of the map.
-
    2. [Overview](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/overview.md)
-
-      The overview map control displays a thumbnail overview map reflecting the current map viewport within a wider area. 
-      This control appears by default in the bottom right corner of the map, and is by default shown in its collapsed state.
-
    3. [Pan](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/pan.md)
-
-      The pan control displays buttons for panning the map. 
-      This control appears by default in the top left corner of the map on non-touch devices. 
-      The Pan control also allows you to rotate 45° imagery, if available.
-
    4. [Rotate](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/rotate.md)
-
-      The rotate control contains a small circular icon which allows you to rotate maps containing oblique imagery. 
-      This control appears by default in the top left corner of the map.
-
    5. [Scale](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/scale.md)
-
-      The scale control displays a map scale element. 
-      This control is not enabled by default.
-
    6. [Street view](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/street_view.md)
-
-      The street view control contains a Pegman icon which can be dragged onto the map to enable street view. 
-      This control appears by default in the top left corner of the map.
-
    7. [Zoom](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/zoom.md)
-
-      The zoom control displays a slider (for large maps) or small "+/-" buttons (for small maps) to control the zoom level of the map. 
-      This control appears by default in the top left corner of the map on non-touch devices or in the bottom left corner on touch devices.
 
 ### Configure overlays
 
