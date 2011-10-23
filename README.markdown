@@ -13,6 +13,8 @@ The documentation is being rewritten.
 
    1. [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
 
+The old documentation is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/index.rst).
+
 License
 -------
 
