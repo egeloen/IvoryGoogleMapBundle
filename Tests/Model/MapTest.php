@@ -149,6 +149,10 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$map->getBound()->getNorthEast()->getLongitude(), 2);
         $this->assertTrue(self::$map->getBound()->getNorthEast()->isNoWrap());
         $this->assertEquals(count(self::$map->getBound()->getExtends()), 0);
+        
+        self::$map->setBound(null);
+        $this->assertNull(self::$map->getBound()->getSouthWest());
+        $this->assertnull(self::$map->getBound()->getNorthEast());
     }
     
     /**

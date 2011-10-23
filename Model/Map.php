@@ -240,7 +240,7 @@ class Map extends AbstractJavascriptVariableAsset
      *
      * Available prototype:
      * 
-     * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)
+     * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound = null)
      * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
      */
@@ -265,6 +265,11 @@ class Map extends AbstractJavascriptVariableAsset
             
             if(isset($args[5]) && is_bool($args[5]))
                 $this->bound->getNorthEast()->setNoWrap($args[5]);
+        }
+        else if(!isset($args[0]))
+        {
+            $this->bound->setSouthWest(null);
+            $this->bound->setNorthEast(null);
         }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
