@@ -87,7 +87,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest = new Model\Map();
         $mapTest->setHtmlContainerId('html_container_id');
         
-        $this->assertEquals(self::$mapHelper->renderContainer($mapTest), '<div id="html_container_id"></div>'.PHP_EOL);
+        $this->assertEquals(self::$mapHelper->renderContainer($mapTest), '<div id="html_container_id" style="width:300px;height:300px;"></div>'.PHP_EOL);
     }
     
     /**

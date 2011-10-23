@@ -155,7 +155,11 @@ class MapHelper
      */
     public function renderContainer(Map $map)
     {
-        return sprintf('<div id="%s"></div>'.PHP_EOL, $map->getHtmlContainerId());
+        return sprintf('<div id="%s" style="width:%s;height:%s;"></div>'.PHP_EOL, 
+            $map->getHtmlContainerId(),
+            $map->getStylesheetOption('width'),
+            $map->getStylesheetOption('height')
+        );
     }
 
     /**
