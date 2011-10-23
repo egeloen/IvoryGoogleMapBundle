@@ -340,10 +340,6 @@ class MapHelper
         $html = array();
         
         $html[] = $this->boundHelper->render($map->getBound());
-        
-        if(!$map->getBound()->hasCoordinates() && $map->getBound()->hasExtends())
-            $html[] = $this->boundHelper->renderExtends($map->getBound());
-        
         $html[] = sprintf('%s.fitBounds(%s);'.PHP_EOL,
             $map->getJavascriptVariable(),
             $map->getBound()->getJavascriptVariable()

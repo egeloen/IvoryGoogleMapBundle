@@ -35,16 +35,25 @@ class BoundHelper
      */
     public function render(Bound $bound)
     {
-        if($bound->hasCoordinates())
-            return sprintf('var %s = new google.maps.LatLngBounds(%s, %s);'.PHP_EOL,
+        $html = array();
+        
+        if($bound->hasExtends() || !$bound->hasCoordinates())
+        {
+            $html[] = sprintf('var %s = new google.maps.LatLngBounds();'.PHP_EOL,
+                $bound->getJavascriptVariable()
+            );
+            
+            if($bound->hasExtends())
+                $html[] = $this->renderExtends($bound);
+        }
+        else
+            $html[] = sprintf('var %s = new google.maps.LatLngBounds(%s, %s);'.PHP_EOL,
                 $bound->getJavascriptVariable(),
                 $this->coordinateHelper->render($bound->getSouthWest()),
                 $this->coordinateHelper->render($bound->getNorthEast())
             );
-        else
-            return sprintf('var %s = new google.maps.LatLngBounds();'.PHP_EOL,
-                $bound->getJavascriptVariable()
-            );
+        
+        return implode('', $html);
     }
 
     /**
