@@ -90,9 +90,18 @@
             </call>
             
             <call method="setCenter">
-                <argument>%ivory_google_map.map.center.longitude%</argument>
                 <argument>%ivory_google_map.map.center.latitude%</argument>
+                <argument>%ivory_google_map.map.center.longitude%</argument>
                 <argument>%ivory_google_map.map.center.no_wrap%</argument>
+            </call>
+            
+            <call method="setBound">
+                <argument>%ivory_google_map.map.bound.south_west.latitude%</argument>
+                <argument>%ivory_google_map.map.bound.south_west.longitude%</argument>
+                <argument>%ivory_google_map.map.bound.north_east.latitude%</argument>
+                <argument>%ivory_google_map.map.bound.north_east.longitude%</argument>
+                <argument>%ivory_google_map.map.bound.south_west.no_wrap%</argument>
+                <argument>%ivory_google_map.map.bound.north_east.no_wrap%</argument>
             </call>
 
             <call method="setMapOption">

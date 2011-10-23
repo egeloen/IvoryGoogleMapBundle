@@ -48,9 +48,16 @@ class MapServiceTest extends WebTestCase
         $this->assertEquals(substr($map->getJavascriptVariable(), 0, 1), 'm');
         $this->assertEquals($map->getHtmlContainerId(), 'html_container_id');
         $this->assertTrue($map->isAutoZoom());
-        $this->assertEquals($map->getCenter()->getLatitude(), 1.1);
-        $this->assertEquals($map->getCenter()->getLongitude(), -2.1);
+        $this->assertEquals($map->getCenter()->getLatitude(), -2.1);
+        $this->assertEquals($map->getCenter()->getLongitude(), 1.1);
         $this->assertFalse($map->getCenter()->isNoWrap());
+        $this->assertEquals($map->getBound()->getSouthWest()->getLatitude(), -1.1);
+        $this->assertEquals($map->getBound()->getSouthWest()->getLongitude(), -2.1);
+        $this->assertTrue($map->getBound()->getSouthWest()->isNoWrap());
+        $this->assertEquals($map->getBound()->getNorthEast()->getLatitude(), 1.1);
+        $this->assertEquals($map->getBound()->getNorthEast()->getLongitude(), 2.1);
+        $this->assertFalse($map->getBound()->getNorthEast()->isNoWrap());
+        $this->assertEquals(count($map->getBound()->getExtends()), 0);
         $this->assertEquals($map->getMapOptions(), array(
             'mapTypeId' => 'satellite',
             'zoom' => 10,

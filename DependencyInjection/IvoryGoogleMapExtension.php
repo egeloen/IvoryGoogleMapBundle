@@ -80,6 +80,12 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.center.longitude', $config['map']['center']['longitude']);
         $container->setParameter('ivory_google_map.map.center.latitude', $config['map']['center']['latitude']);
         $container->setParameter('ivory_google_map.map.center.no_wrap', $config['map']['center']['no_wrap']);
+        $container->setParameter('ivory_google_map.map.bound.south_west.longitude', $config['map']['bound']['south_west']['longitude']);
+        $container->setParameter('ivory_google_map.map.bound.south_west.latitude', $config['map']['bound']['south_west']['latitude']);
+        $container->setParameter('ivory_google_map.map.bound.south_west.no_wrap', $config['map']['bound']['south_west']['no_wrap']);
+        $container->setParameter('ivory_google_map.map.bound.north_east.longitude', $config['map']['bound']['north_east']['longitude']);
+        $container->setParameter('ivory_google_map.map.bound.north_east.latitude', $config['map']['bound']['north_east']['latitude']);
+        $container->setParameter('ivory_google_map.map.bound.north_east.no_wrap', $config['map']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.map.type', $config['map']['type']);
         $container->setParameter('ivory_google_map.map.zoom', $config['map']['zoom']);
         $container->setParameter('ivory_google_map.map.width', $config['map']['width']);

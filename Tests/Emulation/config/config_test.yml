@@ -11,6 +11,15 @@ ivory_google_map:
             longitude: 1.1
             latitude: -2.1
             no_wrap: false
+        bound:
+            south_west:
+                latitude: -1.1
+                longitude: -2.1
+                no_wrap: true
+            north_east:
+                latitude: 1.1
+                longitude: 2.1
+                no_wrap: false   
         type: "satellite"
         zoom: 10
         width: "100%"
