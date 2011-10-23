@@ -32,7 +32,7 @@ The documentation is being rewritten.
 
    1. [Old documentation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/index.rst)
 
-   2. New documentation
+   2. New documentation 
       a. [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
 
 License
