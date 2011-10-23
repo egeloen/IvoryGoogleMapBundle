@@ -29,7 +29,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
     }
     
     /**
-     * Gets the overlay options
+     * Gets the options
      *
      * @return array
      */
@@ -39,7 +39,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
     }
 
     /**
-     * Sets the overlay options
+     * Sets the options
      *
      * @param array $options
      */
@@ -50,7 +50,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
     }
 
     /**
-     * Gets a specific overlay option
+     * Gets a specific option
      *
      * @param string $option
      * @return mixed
@@ -64,7 +64,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
     }
 
     /**
-     * Sets a specific overlay option
+     * Sets a specific option
      *
      * @param string $option
      * @param mixed $value
@@ -75,5 +75,18 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
             $this->options[$option] = $value;
         else
             throw new \InvalidArgumentException('The option property must be a string value.');
+    }
+    
+    /**
+     * Removes an option
+     *
+     * @param string $option 
+     */
+    public function removeOption($option)
+    {
+        if($this->hasOption($option))
+            unset($this->options[$option]);
+        else
+            throw new \InvalidArgumentException(sprintf('The option "%s" does not exist.', $option));
     }
 }
