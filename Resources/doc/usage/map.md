@@ -150,7 +150,8 @@ Overlays reflect objects that you "add" to the map to designate points, lines, a
 
 ### Configure map center & zoom
 
-For configurating the map center & zoom, you have three possibilities :
+For configurating the map center & zoom, you have three possibilities:
+
    1. Standard center coordinate & zoom
    2. Fitting a bound
    3. Fitting a bound which extends overlays
@@ -239,7 +240,3 @@ $map->setMapTypeId('satellite');
 $map->setMapTypeId(MapTypeId::TERRAIN);
 $map->setMapTypeId('terrain');
 ```
-
-## ORM Support
-
-Coming soon...
