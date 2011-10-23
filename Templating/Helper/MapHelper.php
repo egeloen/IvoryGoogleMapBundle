@@ -226,87 +226,15 @@ class MapHelper
     {
         $html = array();
         
+        $mapControlJSONOptions = $this->renderMapControls($map);
+        
         $mapOptions = $map->getMapOptions();
         
         $mapJSONOptions = '{"mapTypeId":'.$this->mapTypeIdHelper->render($mapOptions['mapTypeId']);
         unset($mapOptions['mapTypeId']);
         
-        if($map->hasMapTypeControl())
-        {
-            if(!isset($mapOptions['mapTypeControl']) || (isset($mapOptions['mapTypeControl']) && $mapOptions['mapTypeControl']))
-                $mapJSONOptions .= ',"mapTypeControl":true,"mapTypeControlOptions":'.$this->mapTypeControlHelper->render($map->getMapTypeControl());
-            else if(isset($mapOptions['mapTypeControl']) && !$mapOptions['mapTypeControl'])
-                $mapJSONOptions .= ',"mapTypeControl":false';
-            
-            if(isset($mapOptions['mapTypeControl']))
-                unset($mapOptions['mapTypeControl']);
-        }
-        
-        if($map->hasOverviewMapControl())
-        {
-            if(!isset($mapOptions['overviewMapControl']) || (isset($mapOptions['overviewMapControl']) && $mapOptions['overviewMapControl']))
-                $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControlHelper->render($map->getOverviewMapControl());
-            else if(isset($mapOptions['overviewMapControl']) && !$mapOptions['overviewMapControl'])
-                $mapJSONOptions .= ',"overviewMapControl":false';
-            
-            if(isset($mapOptions['overviewMapControl']))
-                unset($mapOptions['overviewMapControl']);
-        }
-        
-        if($map->hasPanControl())
-        {
-            if(!isset($mapOptions['panControl']) || (isset($mapOptions['panControl']) && $mapOptions['panControl']))
-                $mapJSONOptions .= ',"panControl":true,"panControlOptions":'.$this->panControlHelper->render($map->getPanControl());
-            else if(isset($mapOptions['panControl']) && !$mapOptions['panControl'])
-                $mapJSONOptions .= ',"panControl":false';
-            
-            if(isset($mapOptions['panControl']))
-                unset($mapOptions['panControl']);
-        }
-        
-        if($map->hasRotateControl())
-        {
-            if(!isset($mapOptions['rotateControl']) || (isset($mapOptions['rotateControl']) && $mapOptions['rotateControl']))
-                $mapJSONOptions .= ',"rotateControl":true,"rotateControlOptions":'.$this->rotateControlHelper->render($map->getRotateControl());
-            else if(isset($mapOptions['rotateControl']) && !$mapOptions['rotateControl'])
-                $mapJSONOptions .= ',"rotateControl":false';
-            
-            if(isset($mapOptions['rotateControl']))
-                unset($mapOptions['rotateControl']);
-        }
-        
-        if($map->hasScaleControl())
-        {
-            if(!isset($mapOptions['scaleControl']) || (isset($mapOptions['scaleControl']) && $mapOptions['scaleControl']))
-                $mapJSONOptions .= ',"scaleControl":true,"scaleControlOptions":'.$this->scaleControlHelper->render($map->getScaleControl());
-            else if(isset($mapOptions['scaleControl']) && !$mapOptions['scaleControl'])
-                $mapJSONOptions .= ',"scaleControl":false';
-            
-            if(isset($mapOptions['scaleControl']))
-                unset($mapOptions['scaleControl']);
-        }
-        
-        if($map->hasStreetViewControl())
-        {
-            if(!isset($mapOptions['streetViewControl']) || (isset($mapOptions['streetViewControl']) && $mapOptions['streetViewControl']))
-                $mapJSONOptions .= ',"streetViewControl":true,"streetViewControlOptions":'.$this->streetViewControlHelper->render($map->getStreetViewControl());
-            else if(isset($mapOptions['streetViewControl']) && !$mapOptions['streetViewControl'])
-                $mapJSONOptions .= ',"streetViewControl":false';
-            
-            if(isset($mapOptions['streetViewControl']))
-                unset($mapOptions['streetViewControl']);
-        }
-        
-        if($map->hasZoomControl())
-        {
-            if(!isset($mapOptions['zoomControl']) || (isset($mapOptions['zoomControl']) && $mapOptions['zoomControl']))
-                $mapJSONOptions .= ',"zoomControl":true,"zoomControlOptions":'.$this->zoomControlHelper->render($map->getZoomControl());
-            else if(isset($mapOptions['zoomControl']) && !$mapOptions['zoomControl'])
-                $mapJSONOptions .= ',"zoomControl":false';
-            
-            if(isset($mapOptions['zoomControl']))
-                unset($mapOptions['zoomControl']);
-        }
+        if(!empty($mapControlJSONOptions))
+            $mapJSONOptions .= ','.$mapControlJSONOptions;
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))
             unset($mapOptions['zoom']);
@@ -323,6 +251,68 @@ class MapHelper
         );
         
         return implode('', $html);
+    }
+    
+    /**
+     * Renders the map controls
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @return string Map controls
+     */
+    protected function renderMapControls(Map &$map)
+    {
+        $mapControls = array();
+        $controlNames = array('MapTypeControl', 'OverviewMapControl', 'PanControl', 'RotateControl', 'ScaleControl', 'StreetViewControl', 'ZoomControl');
+        
+        foreach($controlNames as $controlName)
+        {
+            $controlHelper = lcfirst($controlName).'Helper';
+            
+            $mapControlJSONOption = $this->renderMapControl($map, $controlName, $this->$controlHelper);
+            if(!empty($mapControlJSONOption))
+                $mapControls[] = $mapControlJSONOption;
+        }
+        
+        return implode(',', $mapControls);
+    }
+    
+    /**
+     * Renders the map control
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @param string $controlName
+     * @param mixed $controlHelper
+     * @return string Map control
+     */
+    protected function renderMapControl(Map &$map, $controlName, $controlHelper)
+    {
+        $mapControl = array();
+        $lcFirstControlName = lcfirst($controlName);
+        
+        if($map->hasMapOption($lcFirstControlName))
+        {
+            if($map->getMapOption($lcFirstControlName))
+            {
+                $mapControl[] = sprintf('"%s":true', $lcFirstControlName);
+                
+                $hasControlMethod = 'has'.$controlName;
+                if($map->$hasControlMethod())
+                {
+                    $getControlMethod = 'get'.$controlName;
+                    
+                    $mapControl[] = sprintf('"%sOptions":%s',
+                        $lcFirstControlName,
+                        $controlHelper->render($map->$getControlMethod())
+                    );
+                }
+            }
+            else
+                $mapControl[] = sprintf('"%s":false', $lcFirstControlName);
+            
+            $map->removeMapOption($lcFirstControlName);
+        }
+        
+        return implode(',', $mapControl);
     }
 
     /**
