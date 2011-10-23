@@ -9,7 +9,7 @@ Now, it can be interresting to be able to configure global map options, map cont
 
 #### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allow you to use the given objects like they are.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
 The ``ivory_google_map.map`` service is it. The configuration describes below is this default configuration.
 
 ```
@@ -118,7 +118,6 @@ $map->setStylesheetOptions(array(
     'width' => '300px',
     'height' => '300px'
 ));
-
 ```
 
 ### Configure map control options
