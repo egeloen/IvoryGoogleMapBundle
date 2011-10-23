@@ -10,9 +10,23 @@ namespace Ivory\GoogleMapBundle\Model\Assets;
 abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
 {
     /**
-     * @var array Overlay options
+     * @var array Options
      */
     protected $options = array();
+    
+    /**
+     * Checks if the option exists
+     *
+     * @param string $option
+     * @return boolean TRUE if the option exists else FALSE
+     */
+    public function hasOption($option)
+    {
+        if(is_string($option))
+            return in_array($option, array_keys($this->options));
+        else
+            throw new \InvalidArgumentException('The option property must be a string value.');
+    }
     
     /**
      * Gets the overlay options
