@@ -1,3 +1,3 @@
-# Polygon overlay
+# Polygon
 
 Coming soon...

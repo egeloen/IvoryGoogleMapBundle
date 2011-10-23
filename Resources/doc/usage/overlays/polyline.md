@@ -1,3 +1,3 @@
-# Polyline overlay
+# Polyline
 
 Coming soon...

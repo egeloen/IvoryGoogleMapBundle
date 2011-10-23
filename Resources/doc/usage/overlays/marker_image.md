@@ -1,3 +1,3 @@
-# Circle
+# Marker image
 
 Coming soon...

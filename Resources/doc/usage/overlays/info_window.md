@@ -1,3 +1,3 @@
-# Info window overlay
+# Info window
 
 Coming soon...

@@ -1,4 +1,4 @@
-# Marker overlay
+# Marker
 
 Markers identify locations on the map. By default, they use a standard icon.
 
@@ -37,6 +37,7 @@ ivory_google_map:
             no_wrap: true
 
         # Marker animation
+        # Available animation: bounce, drop
         # By default, there is no animation
         animation: "drop"
 
@@ -84,18 +85,42 @@ Now you have configurated your marker, you need to add it to the map.
 ``` php
 <?php
 
+// Requests the ivory google map marker service
+$marker = $this->get('ivory_google_map.marker');
+
 // Add your marker to the map
 $map->addMarker($marker);
 ```
 
-## Set the icon of your marker
+## Configure marker icon
 
-Coming soon...
+The complete marker icon configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
 
-## Set the shadow of your marker
+## Configure marker shadow
 
-Coming soon...
+The complete marker shadow configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shadow.md).
 
-## Set the shape to your marker
+## Configure marker shape
 
-Coming soon...
+The complete marker shape configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shape.md).
+
+## Configure marker animation
+
+For configurating the marker animation, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Overlays\Animation`` is here.
+It allows you to access all constants which describe marker animation. If you don't want to use this class, you can directly use the constant value.
+
+``` php
+<?php
+
+use Ivory\GoogleMapBundle\Model\Overlays\Animation;
+
+// Requests the ivory google map marker service
+$marker = $this->get('ivory_google_map.marker');
+
+// Sets your marker animation
+$marker->setAnimation(Animation::BOUNCE);
+$marker->setAnimation('bounce');
+
+$marker->setAnimation(Animation::DROP);
+$marker->setAnimation('drop');
+```

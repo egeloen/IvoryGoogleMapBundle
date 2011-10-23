@@ -226,6 +226,9 @@ It allows you to access all constants which describe map types. If you don't wan
 
 use Ivory\GoogleMapBundle\Model\MapTypeId
 
+// Requests the ivory google map service
+$map = $this->get('ivory_google_map.map');
+
 // Sets your map type
 $map->setMapTypeId(MapTypeId::HYBRID);
 $map->setMapTypeId('hybrid');

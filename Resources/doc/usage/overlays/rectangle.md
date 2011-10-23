@@ -1,3 +1,3 @@
-# Rectangle overlay
+# Rectangle
 
 Coming soon...

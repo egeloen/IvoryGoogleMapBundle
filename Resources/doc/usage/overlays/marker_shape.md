@@ -1,3 +1,3 @@
-# Circle
+# Marker shape
 
 Coming soon...
