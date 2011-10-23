@@ -48,3 +48,5 @@ public function registerBundles()
     );
 }
 ```
+
+Next: [Usage](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage.md)

@@ -12,6 +12,28 @@ Documentation
 The documentation is being rewritten.
 
    1. [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
+   2. [Usage](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage.md)
+      - Map
+      - Controls
+         - Type
+         - Overview
+         - Pan
+         - Rotate
+         - Scale
+         - Street view
+         - Zoom
+      - Overlays
+         - Marker
+         - Marker image
+         - Marker shape
+         - Animation
+         - Info window
+         - Polyline
+         - Polygon
+         - Rectangle
+         - Circle
+         - Ground overlay
+   3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
 The old documentation is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/index.rst).
 
