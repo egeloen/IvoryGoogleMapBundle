@@ -341,6 +341,10 @@
                 <argument>%ivory_google_map.marker.position.longitude%</argument>
                 <argument>%ivory_google_map.marker.position.no_wrap%</argument>
             </call>
+            
+            <call method="setAnimation">
+                <argument>%ivory_google_map.marker.animation%</argument>
+            </call>
 
             <call method="setOptions">
                 <argument>%ivory_google_map.marker.options%</argument>

@@ -337,6 +337,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('no_wrap')->defaultTrue()->end()
                             ->end()
                         ->end()
+                        ->scalarNode('animation')->defaultValue(null)->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('map_options')->prototype('scalar')->end()
                         ->end()

@@ -23,6 +23,7 @@ class MarkerServiceTest extends WebTestCase
         $this->assertEquals($marker->getPosition()->getLatitude(), 0);
         $this->assertEquals($marker->getPosition()->getLongitude(), 0);
         $this->assertTrue($marker->getPosition()->isNoWrap());
+        $this->assertFalse($marker->hasAnimation());
         $this->assertEmpty($marker->getOptions());
     }
     
@@ -37,6 +38,7 @@ class MarkerServiceTest extends WebTestCase
         $this->assertEquals($marker->getPosition()->getLatitude(), 1.1);
         $this->assertEquals($marker->getPosition()->getLongitude(), -2.1);
         $this->assertFalse($marker->getPosition()->isNoWrap());
+        $this->assertTrue($marker->hasAnimation());
         $this->assertEquals($marker->getOptions(), array('option' => 'value'));
     }
 }
