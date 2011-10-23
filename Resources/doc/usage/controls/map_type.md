@@ -1,0 +1,3 @@
+# Map type control
+
+Coming soon...
