@@ -130,7 +130,7 @@ class MapHelper
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
         $this->mapTypeControlHelper = $mapTypeControlHelper;
-        $this->overviewMapControl = $overviewMapControlHelper;
+        $this->overviewMapControlHelper = $overviewMapControlHelper;
         $this->panControlHelper = $panControlHelper;
         $this->rotateControlHelper = $rotateControlHelper;
         $this->scaleControlHelper = $scaleControlHelper;
@@ -241,7 +241,7 @@ class MapHelper
         if($map->hasOverviewMapControl())
         {
             if(!isset($mapOptions['overviewMapControl']) || (isset($mapOptions['overviewMapControl']) && $mapOptions['overviewMapControl']))
-                $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControl->render($map->getOverviewMapControl());
+                $mapJSONOptions .= ',"overviewMapControl":true,"overviewMapControlOptions":'.$this->overviewMapControlHelper->render($map->getOverviewMapControl());
             else if(isset($mapOptions['overviewMapControl']) && !$mapOptions['overviewMapControl'])
                 $mapJSONOptions .= ',"overviewMapControl":false';
             
