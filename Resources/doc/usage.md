@@ -15,6 +15,10 @@ Before starting, I recommend you to read the google map API v3 documentation whi
 $map = $this->get('ivory_google_map.map');
 ```
 
+The ``ivory_google_map.map`` service is the central point of the bundle. 
+It allows you to manipulate all map options.
+If you render the default map, the bundle will generate a map of 300px by 300px, centered on the coordinate (0, 0), configured with a zoom of 3 & using the default google map controls.
+
 ## Configure your map
 
 Now, you have requested your map, you can configure it easily & advancely.
@@ -50,11 +54,6 @@ Overlays reflect objects that you "add" to the map to designate points, lines, a
 
 ### Configure events
 
-JavaScript within the browser is event driven, meaning that JavaScript responds to interactions by generating events, and expects a program to listen to interesting events. 
-There are two types of events:
-   - User events (such as "click" mouse events) are propagated from the DOM to the Google Maps API. These events are separate and distinct from standard DOM events.
-   - MVC state change notifications reflect changes in Maps API objects and are named using a property_changed convention
-
 The complete events configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md).
 
 ## Render your map
@@ -62,13 +61,15 @@ The complete events configuration is available [here](http://github.com/egeloen/
 The google map API needs at least an html container & some javascript for being able to render a map. 
 For rendering them, the bundle delivered two twig functions : ``google_map_container`` & ``google_map_js``.
 
+Warning, the HTML container needs to be rendered before javascript.
+
 ### Render the HTML container
 
 ```
 {{ google_map_container(map) }}
 ```
 
-This function renders an html div block with the HTML container ID configured.
+This function renders an html div block with the HTML container ID, the width & the height configured.
 
 ``` html
 <div id="map_canvas" style="width:300px;height:300px"></div>
