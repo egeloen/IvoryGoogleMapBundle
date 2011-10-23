@@ -274,6 +274,20 @@ class Map extends AbstractJavascriptVariableAsset
                 ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
     }
+    
+    /**
+     * Checks if the map option exists
+     * 
+     * @param string $mapOption
+     * @return boolean TRUE if the map option exists else FALSE
+     */
+    public function hasMapOption($mapOption)
+    {
+        if(is_string($mapOption))
+            return in_array($mapOption, array_keys($this->mapOptions));
+        else
+            throw new \InvalidArgumentException('The map option property of a map must be a string value.');
+    }
 
     /**
      * Gets the map options
@@ -322,6 +336,20 @@ class Map extends AbstractJavascriptVariableAsset
             $this->mapOptions[$mapOption] = $value;
         else
             throw new \InvalidArgumentException('The map option property of a map must be a string value.');
+    }
+    
+    /**
+     * Checks if the stylesheet option exists
+     *
+     * @param string $stylesheetOption
+     * @return boolean TRUE if the stylesheet option exists else FALSE
+     */
+    public function hasStylesheetOption($stylesheetOption)
+    {
+        if(is_string($stylesheetOption))
+            return in_array($stylesheetOption, array_keys($this->stylesheetOptions));
+        else
+            throw new \InvalidArgumentException('The stylesheet option property of a map must be a string value.');
     }
 
     /**
@@ -413,11 +441,21 @@ class Map extends AbstractJavascriptVariableAsset
             $this->mapTypeControl->setMapTypeIds($args[0]);
             $this->mapTypeControl->setControlPosition($args[1]);
             $this->mapTypeControl->setMapTypeControlStyle($args[2]);
+            
+            $this->mapOptions['mapTypeControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\MapTypeControl))
+        {
             $this->mapTypeControl = $args[0];
+            $this->mapOptions['mapTypeControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->mapTypeControl = null;
+            
+            if(isset($this->mapOptions['mapTypeControl']))
+                unset($this->mapOptions['mapTypeControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The map type control setter arguments is invalid.',
@@ -464,11 +502,20 @@ class Map extends AbstractJavascriptVariableAsset
                 $this->overviewMapControl = new Controls\OverviewMapControl();
             
             $this->overviewMapControl->setOpened($args[0]);
+            $this->mapOptions['overviewMapControl'] = true;
         }
         else if(isset($args[0]) && ($args[0]) instanceof Controls\OverviewMapControl)
+        {
             $this->overviewMapControl = $args[0];
+            $this->mapOptions['overviewMapControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->overviewMapControl = null;
+            
+            if(isset($this->mapOptions['overviewMapControl']))
+                unset($this->mapOptions['overviewMapControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The overview map control setter arguments is invalid.',
@@ -515,11 +562,20 @@ class Map extends AbstractJavascriptVariableAsset
                 $this->panControl = new Controls\PanControl();
             
             $this->panControl->setControlPosition($args[0]);
+            $this->mapOptions['panControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\PanControl))
+        {
             $this->panControl = $args[0];
+            $this->mapOptions['panControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->panControl = null;
+            
+            if(isset($this->mapOptions['panControl']))
+                unset($this->mapOptions['panControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The pan control setter arguments is invalid.',
@@ -566,11 +622,21 @@ class Map extends AbstractJavascriptVariableAsset
                 $this->rotateControl = new Controls\RotateControl();
             
             $this->rotateControl->setControlPosition($args[0]);
+            $this->mapOptions['rotateControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\RotateControl))
+        {
             $this->rotateControl = $args[0];
+            
+            $this->mapOptions['rotateControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->rotateControl = null;
+            
+            if(isset($this->mapOptions['rotateControl']))
+                unset($this->mapOptions['rotateControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The rotate control setter arguments is invalid.',
@@ -618,11 +684,21 @@ class Map extends AbstractJavascriptVariableAsset
             
             $this->scaleControl->setControlPosition($args[0]);
             $this->scaleControl->setScaleControlStyle($args[1]);
+            
+            $this->mapOptions['scaleControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\ScaleControl))
+        {
             $this->scaleControl = $args[0];
+            $this->mapOptions['scaleControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->scaleControl = null;
+            
+            if(isset($this->mapOptions['scaleControl']))
+                unset($this->mapOptions['scaleControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The scale control setter arguments is invalid.',
@@ -669,11 +745,20 @@ class Map extends AbstractJavascriptVariableAsset
                 $this->streetViewControl = new Controls\StreetViewControl();
             
             $this->streetViewControl->setControlPosition($args[0]);
+            $this->mapOptions['streetViewControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\StreetViewControl))
+        {
             $this->streetViewControl = $args[0];
+            $this->mapOptions['streetViewControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->streetViewControl = null;
+            
+            if(isset($this->mapOptions['streetViewControl']))
+                unset($this->mapOptions['streetViewControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The street view control setter arguments is invalid.',
@@ -721,11 +806,22 @@ class Map extends AbstractJavascriptVariableAsset
             
             $this->zoomControl->setControlPosition($args[0]);
             $this->zoomControl->setZoomControlStyle($args[1]);
+            
+            $this->mapOptions['zoomControl'] = true;
         }
         else if(isset($args[0]) && ($args[0] instanceof Controls\ZoomControl))
+        {
             $this->zoomControl = $args[0];
+            
+            $this->mapOptions['zoomControl'] = true;
+        }
         else if(!isset($args[0]))
+        {
             $this->zoomControl = null;
+            
+            if(isset($this->mapOptions['zoomControl']))
+                unset($this->mapOptions['zoomControl']);
+        }
         else
             throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
                 'The zoom control setter arguments is invalid.',

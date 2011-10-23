@@ -27,18 +27,24 @@ abstract class AbstractOptionsAssetTest extends AbstractJavascriptVariableAssetT
      */
     public function testOptions()
     {
+        $this->assertFalse(self::$object->hasOption('foo'));
+        
         $validOptionsTest = array(
             'option1' => 'value1',
             'option2' => 'value2'
         );
         
         self::$object->setOptions($validOptionsTest);
+        $this->assertTrue(self::$object->hasOption('option1'));
         $this->assertEquals(count(self::$object->getOptions()), 2);
         
         $invalidOptionsTest = array(
             0 => 'value1',
             1 => 'value2'
         );
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$object->hasOption(0);
         
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setOptions($invalidOptionsTest);

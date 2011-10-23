@@ -156,18 +156,24 @@ class MapTest extends AbstractJavascriptVariableAssetTest
      */
     public function testMapOptions()
     {
+        $this->assertFalse(self::$map->hasMapOption('foo'));
+        
         $validMapOptionsTest = array(
             'option1' => 'value1',
             'option2' => 'value2'
         );
         
         self::$map->setMapOptions($validMapOptionsTest);
+        $this->assertTrue(self::$map->hasMapOption('option1'));
         $this->assertEquals(count(self::$map->getMapOptions()), 4);
         
         $invalidMapOptionsTest = array(
             0 => 'value1',
             1 => 'value2'
         );
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->hasMapOption(0);
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setMapOptions($invalidMapOptionsTest);
@@ -183,18 +189,24 @@ class MapTest extends AbstractJavascriptVariableAssetTest
      */
     public function testStylesheetOptions()
     {
+        $this->assertFalse(self::$map->hasStylesheetOption('foo'));
+        
         $validStylesheetOptionsTest = array(
             'option1' => 'value1',
             'option2' => 'value2'
         );
         
         self::$map->setStylesheetOptions($validStylesheetOptionsTest);
+        $this->assertTrue(self::$map->hasStylesheetOption('option1'));
         $this->assertEquals(count(self::$map->getStylesheetOptions()), 4);
         
         $invalidStylesheetOptionsTest = array(
             0 => 'value1',
             1 => 'value2'
         );
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->hasStylesheetOption(0);
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setStylesheetOptions($invalidStylesheetOptionsTest);
@@ -216,12 +228,14 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $mapTypeControlTest->setMapTypeControlStyle(Controls\MapTypeControlStyle::HORIZONTAL_BAR);
         
         $this->assertFalse(self::$map->hasMapTypeControl());
+        $this->assertFalse(self::$map->hasMapOption('mapTypeControl'));
         
         self::$map->setMapTypeControl($mapTypeControlTest);
         $this->assertTrue(self::$map->hasMapTypeControl());
         $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeIds(), array('roadmap'));
         $this->assertEquals(self::$map->getMapTypeControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeControlStyle(), 'horizontal_bar');
+        $this->assertTrue(self::$map->hasMapOption('mapTypeControl'));
         
         self::$map->setMapTypeControl(array(Model\MapTypeId::SATELLITE), Controls\ControlPosition::BOTTOM_LEFT, Controls\MapTypeControlStyle::DROPDOWN_MENU);
         $this->assertEquals(self::$map->getMapTypeControl()->getMapTypeIds(), array('satellite'));
@@ -230,6 +244,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         self::$map->setMapTypeControl(null);
         $this->assertNull(self::$map->getMapTypeControl());
+        $this->assertFalse(self::$map->hasMapOption('mapTypeControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setMapTypeControl('foo');
@@ -244,16 +259,19 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $overviewMapControlTest->setOpened(true);
         
         $this->assertFalse(self::$map->hasOverviewMapControl());
+        $this->assertFalse(self::$map->hasMapOption('overviewMapControl'));
         
         self::$map->setOverviewMapControl($overviewMapControlTest);
         $this->assertTrue(self::$map->hasOverviewMapControl());
         $this->assertTrue(self::$map->getOverviewMapControl()->isOpened());
+        $this->assertTrue(self::$map->hasMapOption('overviewMapControl'));
         
         self::$map->setOverviewMapControl(false);
         $this->assertFalse(self::$map->getOverviewMapControl()->isOpened());
         
         self::$map->setOverviewMapControl(null);
         $this->assertNull(self::$map->getOverviewMapControl());
+        $this->assertFalse(self::$map->hasMapOption('overviewMapControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setOverviewMapControl('foo');
@@ -268,16 +286,19 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $panControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         
         $this->assertFalse(self::$map->hasPanControl());
+        $this->assertFalse(self::$map->hasMapOption('panControl'));
         
         self::$map->setPanControl($panControlTest);
         $this->assertTrue(self::$map->hasPanControl());
         $this->assertEquals(self::$map->getPanControl()->getControlPosition(), 'bottom_center');
+        $this->assertTrue(self::$map->hasMapOption('panControl'));
         
         self::$map->setPanControl(Controls\ControlPosition::BOTTOM_LEFT);
         $this->assertEquals(self::$map->getPanControl()->getControlPosition(), 'bottom_left');
         
         self::$map->setPanControl(null);
         $this->assertNull(self::$map->getPanControl());
+        $this->assertFalse(self::$map->hasMapOption('panControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setPanControl('foo');
@@ -292,16 +313,19 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $rotateControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         
         $this->assertFalse(self::$map->hasRotateControl());
+        $this->assertFalse(self::$map->hasMapOption('rotateControl'));
         
         self::$map->setRotateControl($rotateControlTest);
         $this->assertTrue(self::$map->hasRotateControl());
         $this->assertEquals(self::$map->getRotateControl()->getControlPosition(), 'bottom_center');
+        $this->assertTrue(self::$map->hasMapOption('rotateControl'));
         
         self::$map->setRotateControl(Controls\ControlPosition::BOTTOM_LEFT);
         $this->assertEquals(self::$map->getRotateControl()->getControlPosition(), 'bottom_left');
         
         self::$map->setRotateControl(null);
         $this->assertNull(self::$map->getRotateControl());
+        $this->assertFalse(self::$map->hasMapOption('rotateControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setRotateControl('foo');
@@ -317,11 +341,13 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $scaleControlTest->setScaleControlStyle(Controls\ScaleControlStyle::DEFAULT_);
         
         $this->assertFalse(self::$map->hasScaleControl());
+        $this->assertFalse(self::$map->hasMapOption('scaleControl'));
         
         self::$map->setScaleControl($scaleControlTest);
         $this->assertTrue(self::$map->hasScaleControl());
         $this->assertEquals(self::$map->getScaleControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getScaleControl()->getScaleControlStyle(), 'default');
+        $this->assertTrue(self::$map->hasMapOption('scaleControl'));
         
         self::$map->setScaleControl(Controls\ControlPosition::BOTTOM_LEFT, Controls\ScaleControlStyle::DEFAULT_);
         $this->assertEquals(self::$map->getScaleControl()->getControlPosition(), 'bottom_left');
@@ -329,6 +355,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         self::$map->setScaleControl(null);
         $this->assertNull(self::$map->getScaleControl());
+        $this->assertFalse(self::$map->hasMapOption('scaleControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setScaleControl('foo');
@@ -343,16 +370,19 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $streetViewControlTest->setControlPosition(Controls\ControlPosition::BOTTOM_CENTER);
         
         $this->assertFalse(self::$map->hasStreetViewControl());
+        $this->assertFalse(self::$map->hasMapOption('streetViewControl'));
         
         self::$map->setStreetViewControl($streetViewControlTest);
         $this->assertTrue(self::$map->hasStreetViewControl());
         $this->assertEquals(self::$map->getStreetViewControl()->getControlPosition(), 'bottom_center');
+        $this->assertTrue(self::$map->hasMapOption('streetViewControl'));
         
         self::$map->setStreetViewControl(Controls\ControlPosition::BOTTOM_LEFT);
         $this->assertEquals(self::$map->getStreetViewControl()->getControlPosition(), 'bottom_left');
         
         self::$map->setStreetViewControl(null);
         $this->assertNull(self::$map->getStreetViewControl());
+        $this->assertFalse(self::$map->hasMapOption('streetViewControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setStreetViewControl('foo');
@@ -368,11 +398,13 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $zoomControlTest->setZoomControlStyle(Controls\ZoomControlStyle::SMALL);
         
         $this->assertFalse(self::$map->hasZoomControl());
+        $this->assertFalse(self::$map->hasMapOption('zoomControl'));
         
         self::$map->setZoomControl($zoomControlTest);
         $this->assertTrue(self::$map->hasZoomControl());
         $this->assertEquals(self::$map->getZoomControl()->getControlPosition(), 'bottom_center');
         $this->assertEquals(self::$map->getZoomControl()->getZoomControlStyle(), 'small');
+        $this->assertTrue(self::$map->hasMapOption('zoomControl'));
         
         self::$map->setZoomControl(Controls\ControlPosition::BOTTOM_LEFT, Controls\ZoomControlStyle::LARGE);
         $this->assertEquals(self::$map->getZoomControl()->getControlPosition(), 'bottom_left');
@@ -380,6 +412,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         self::$map->setZoomControl(null);
         $this->assertNull(self::$map->getZoomControl());
+        $this->assertFalse(self::$map->hasMapOption('zoomControl'));
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setZoomControl('foo');
