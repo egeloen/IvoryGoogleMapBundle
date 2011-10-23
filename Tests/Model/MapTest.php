@@ -164,8 +164,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         );
         
         self::$map->setMapOptions($validMapOptionsTest);
-        $this->assertTrue(self::$map->hasMapOption('option1'));
+        $this->assertTrue(self::$map->hasMapOption('option2'));
         $this->assertEquals(count(self::$map->getMapOptions()), 4);
+        
+        self::$map->removeMapOption('option2');
+        $this->assertFalse(self::$map->hasMapOption('option2'));
         
         $invalidMapOptionsTest = array(
             0 => 'value1',
@@ -197,8 +200,11 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         );
         
         self::$map->setStylesheetOptions($validStylesheetOptionsTest);
-        $this->assertTrue(self::$map->hasStylesheetOption('option1'));
+        $this->assertTrue(self::$map->hasStylesheetOption('option2'));
         $this->assertEquals(count(self::$map->getStylesheetOptions()), 4);
+        
+        self::$map->removeStylesheetOption('option2');
+        $this->assertFalse(self::$map->hasStylesheetOption('option2'));
         
         $invalidStylesheetOptionsTest = array(
             0 => 'value1',

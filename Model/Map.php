@@ -339,6 +339,19 @@ class Map extends AbstractJavascriptVariableAsset
     }
     
     /**
+     * Removes a map option
+     *
+     * @param string $mapOption 
+     */
+    public function removeMapOption($mapOption)
+    {
+        if($this->hasMapOption($mapOption))
+            unset($this->mapOptions[$mapOption]);
+        else
+            throw new \InvalidArgumentException(sprintf('The map option "%s" does not exist.', $mapOption));
+    }
+    
+    /**
      * Checks if the stylesheet option exists
      *
      * @param string $stylesheetOption
@@ -399,6 +412,19 @@ class Map extends AbstractJavascriptVariableAsset
             $this->stylesheetOptions[$stylesheetOption] = $value;
         else
             throw new \InvalidArgumentException('The stylesheet option property of a map must be a string value.');
+    }
+    
+    /**
+     * Removes a stylesheet option
+     *
+     * @param string $stylesheetOption 
+     */
+    public function removeStylesheetOption($stylesheetOption)
+    {
+        if($this->hasStylesheetOption($stylesheetOption))
+            unset($this->stylesheetOptions[$stylesheetOption]);
+        else
+            throw new \InvalidArgumentException(sprintf('The stylesheet option "%s" does not exist.', $stylesheetOption));
     }
     
     /**
