@@ -1,26 +1,29 @@
 Provides a Google Map integration for your Symfony2 Project.
 
 Actually, this bundle allows you to manage:
+
    - Map
-   - Controls:
-      - Type
-      - Overview
-      - Pan
-      - Rotate
-      - Scale
-      - Street view
-      - Zoom
-   - Overlays:
-      - Marker
-      - Marker image
-      - Marker shape
-      - Animation
-      - Info window
-      - Polyline
-      - Polygon
-      - Rectangle
-      - Circle
-      - Ground overlay
+
+   - Controls: 
+      - Type 
+      - Overview 
+      - Pan 
+      - Rotate 
+      - Scale 
+      - Street view 
+      - Zoom 
+
+   - Overlays: 
+      - Marker 
+      - Marker image 
+      - Marker shape 
+      - Animation 
+      - Info window 
+      - Polyline 
+      - Polygon 
+      - Rectangle 
+      - Circle 
+      - Ground overlay 
 
 Documentation
 -------------
