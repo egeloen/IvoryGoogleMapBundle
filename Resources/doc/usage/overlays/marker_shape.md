@@ -1,3 +1,76 @@
 # Marker shape
 
-Coming soon...
+This object defines the marker shape to use in determination of a marker's clickable region. 
+The shape consists of two properties "type" and "coordinates" which define the general type of marker and coordinates specific to that type of marker.
+
+The format of this attribute depends on the value of the type and follows the w3 AREA coords specification found at http://www.w3.org/TR/REC-html40/struct/objects.html#adef-coords. 
+The coords attribute is an array of integers that specify the pixel position of the shape relative to the top-left corner of the target image. 
+The coordinates depend on the value of type as follows: 
+
+  - circle: coords is [x1, y1, r] where x1, y2 are the coordinates of the center of the circle, and r is the radius of the circle. 
+  - poly: coords is [x1, y1, x2, y2 ... xn, yn] where each x, y pair contains the coordinates of one vertex of the polygon. 
+  - rect: coords is [x1, y1, x2, y2] where x1, y1 are the coordinates of the upper-left corner of the rectangle and x2, y2 are the coordinates of the lower-right coordinates of the rectangle.
+
+## Build your marker shape
+
+### By configuration file
+
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
+The ``ivory_google_map.marker_shape`` service is. The configuration describes below is this default configuration.
+
+```
+# app/config/config.yml
+
+ivory_google_map:
+    marker_shape:
+        # Prefix used for the generation of the marker shape javascript variable
+        prefix_javascript_variable: "marker_shape_"
+
+        # Marker shape type
+        # Available marker shape type : circle, poly, rect
+        type: "poly"
+
+        # Marker shape coordinates
+        # For a circle, the coordinates is [x1, y1, r] where x1, y2 are the coordinates of the center of the circle, and r is the radius of the circle. 
+        # For a poly, the coordinates is [x1, y1, x2, y2 ... xn, yn] where each x, y pair contains the coordinates of one vertex of the polygon. 
+        # For a rect, the coordinates is [x1, y1, x2, y2] where x1, y1 are the coordinates of the upper-left corner of the rectangle and x2, y2 are the coordinates of the lower-right coordinates of the rectangle.
+        coordinates: [1, 1, 1, -1, -1, -1, -1, 1]
+```
+
+``` php
+<?php
+
+// Requests the ivory google map marker shape service
+$markerShape = $this->get('ivory_google_map.marker_shape');
+```
+
+### By coding
+
+``` php
+<?php
+
+// Requests the ivory google map marker shape service
+$markerShape = $this->get('ivory_google_map.marker_shape');
+
+// Configure your marker shape options
+$markerShape->setPrefixJavascriptVariable('marker_shape_');
+$markerShape->setType('poly');
+$markerShape->setCoordinates(array(1, 1, 1, -1, -1, -1, -1, 1));
+
+// If the marker shape type is "poly", you can add coordinate one by one
+$markerShape->addPolyCoordinates(1, 1);
+```
+
+## Add your marker shape to the marker
+
+Now you have configurated your marker shape, you need to add it to your marker.
+
+``` php
+<?php
+
+// Requests the ivory google map marker shape service
+$markerShape = $this->get('ivory_google_map.marker_shape');
+
+// Add your marker shape to the marker
+$marker->setShape($markerShape);
+```
