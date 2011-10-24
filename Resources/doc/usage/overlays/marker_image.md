@@ -1,7 +1,7 @@
 # Marker image (Equivalent to marker icon & marker shape)
 
 Markers may define an icon to show in place of the default icon or a shadow to shown in place of the default shadow. 
-Defining an icon or a chadow involves setting a number of properties that define the visual behavior of the marker.
+Defining an icon or a shadow involves setting a number of properties that define the visual behavior of the marker.
 
 ## Build your marker image
 
