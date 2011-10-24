@@ -6,6 +6,7 @@ use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
+use Ivory\GoogleMapBundle\Model\Events;
 
 /**
  * Map wich describes a google map
@@ -88,7 +89,7 @@ class Map extends AbstractJavascriptVariableAsset
     protected $zoomControl = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\EventManager Map event manager
+     * @var Ivory\GoogleMapBundle\Model\Events\EventManager Map event manager
      */
     protected $eventManager = null;
 
@@ -136,7 +137,7 @@ class Map extends AbstractJavascriptVariableAsset
 
         $this->center = new Base\Coordinate();
         $this->bound = new Base\Bound();
-        $this->eventManager = new EventManager();
+        $this->eventManager = new Events\EventManager();
     }
 
     /**
@@ -864,7 +865,7 @@ class Map extends AbstractJavascriptVariableAsset
     /**
      * Gets the map event manager
      *
-     * @return Ivory\GoogleMapBundle\Model\EventManager
+     * @return Ivory\GoogleMapBundle\Model\Events\EventManager
      */
     public function getEventManager()
     {
@@ -874,9 +875,9 @@ class Map extends AbstractJavascriptVariableAsset
     /**
      * Sets the map event manager
      *
-     * @param Ivory\GoogleMapBundle\Model\EventManager $eventManager 
+     * @param Ivory\GoogleMapBundle\Model\Events\EventManager $eventManager 
      */
-    public function setEventManager(EventManager $eventManager)
+    public function setEventManager(Events\EventManager $eventManager)
     {
         $this->eventManager = $eventManager;
     }

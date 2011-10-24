@@ -33,8 +33,8 @@
         <parameter key="ivory_google_map.circle.class">Ivory\GoogleMapBundle\Model\Overlays\Circle</parameter>
         <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay</parameter>
         
-        <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\EventManager</parameter>
-        <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Event</parameter>
+        <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\Events\EventManager</parameter>
+        <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Events\Event</parameter>
         
         <!-- Herlper -->
         <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
@@ -69,7 +69,7 @@
         <parameter key="ivory_google_map.circle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper</parameter>
         <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
         
-        <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\EventHelper</parameter>
+        <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
         
     </parameters>
 

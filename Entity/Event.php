@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Event as BaseEvent;
+use Ivory\GoogleMapBundle\Model\Events\Event as BaseEvent;
 
 /**
  * Event entity which describes a google map event

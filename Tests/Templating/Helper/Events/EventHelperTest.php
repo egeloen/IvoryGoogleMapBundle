@@ -1,9 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Templating\Helper;
+namespace Ivory\GoogleMapBundle\Tests\Templating\Helper\Events;
 
-use Ivory\GoogleMapBundle\Templating\Helper\EventHelper;
-use Ivory\GoogleMapBundle\Model\Event;
+use Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper;
+use Ivory\GoogleMapBundle\Model\Events\Event;
 
 /**
  * Event helper test
@@ -13,7 +13,7 @@ use Ivory\GoogleMapBundle\Model\Event;
 class EventHelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\EventHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper
      */
     protected static $eventHelper = null;
     

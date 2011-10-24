@@ -1,10 +1,10 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Base;
+namespace Ivory\GoogleMapBundle\Tests\Model\Events;
 
 use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractJavascriptVariableAssetTest;
 
-use Ivory\GoogleMapBundle\Model\Event;
+use Ivory\GoogleMapBundle\Model\Events\Event;
 
 /**
  * Event test

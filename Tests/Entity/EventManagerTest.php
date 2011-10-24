@@ -17,6 +17,6 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $eventManagerEntityTest = new EventManager();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', $eventManagerEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Events\EventManager', $eventManagerEntityTest);
     }
 }

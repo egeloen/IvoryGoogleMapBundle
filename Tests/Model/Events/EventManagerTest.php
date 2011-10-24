@@ -1,9 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model;
+namespace Ivory\GoogleMapBundle\Tests\Model\Events;
 
-use Ivory\GoogleMapBundle\Model\EventManager;
-use Ivory\GoogleMapBundle\Model\Event;
+use Ivory\GoogleMapBundle\Model\Events\EventManager;
+use Ivory\GoogleMapBundle\Model\Events\Event;
 
 /**
  * Event manager test
@@ -13,7 +13,7 @@ use Ivory\GoogleMapBundle\Model\Event;
 class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\EventManager Tested event manager
+     * @var Ivory\GoogleMapBundle\Model\Events\EventManager Tested event manager
      */
     protected static $eventManager = null;
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
+namespace Ivory\GoogleMapBundle\Tests\DependencyInjection\Events;
 
 use Ivory\GoogleMapBundle\Tests\Emulation\WebTestCase;
 
@@ -18,7 +18,7 @@ class EventServiceTest extends WebTestCase
     {
         $event = self::createContainer()->get('ivory_google_map.event');
         
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Event', $event);
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Events\Event', $event);
         $this->assertEquals(substr($event->getJavascriptVariable(), 0, 6), 'event_');
     }
     

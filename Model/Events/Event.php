@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Events;
 
 use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 

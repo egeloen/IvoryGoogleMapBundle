@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model;
+namespace Ivory\GoogleMapBundle\Model\Events;
 
 /**
  * Event manager which manages the google map event
@@ -51,7 +51,7 @@ class EventManager
     /**
      * Add a dom event
      *
-     * @param Ivory\GoogleMapBundle\Model\Event $domEvent 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEvent 
      */
     public function addDomEvent(Event $domEvent)
     {
@@ -71,7 +71,7 @@ class EventManager
     /**
      * Add a dom event which is just trigger one time
      *
-     * @param Ivory\GoogleMapBundle\Model\Event $domEventOnce 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEventOnce 
      */
     public function addDomEventOnce(Event $domEventOnce)
     {
@@ -91,7 +91,7 @@ class EventManager
     /**
      * Add an event
      *
-     * @param Ivory\GoogleMapBundle\Model\Event $event 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $event 
      */
     public function addEvent(Event $event)
     {
@@ -111,7 +111,7 @@ class EventManager
     /**
      * Add an event which is just trigger one time
      *
-     * @param Ivory\GoogleMapBundle\Model\Event $eventOnce 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $eventOnce 
      */
     public function addEventOnce(Event $eventOnce)
     {

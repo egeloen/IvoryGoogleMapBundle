@@ -8,6 +8,7 @@ use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
+use Ivory\GoogleMapBundle\Model\Events;
 
 /**
  * Map test
@@ -65,7 +66,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$map->getScaleControl());
         $this->assertNull(self::$map->getStreetViewControl());
         $this->assertNull(self::$map->getZoomControl());
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\EventManager', self::$map->getEventManager());
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Events\EventManager', self::$map->getEventManager());
         $this->assertEquals(count(self::$map->getMarkers()), 0);
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
         $this->assertEquals(count(self::$map->getPolylines()), 0);
@@ -433,8 +434,8 @@ class MapTest extends AbstractJavascriptVariableAssetTest
      */
     public function testEventManager()
     {
-        $eventManagerTest = new Model\EventManager();
-        $eventTest = new Model\Event();
+        $eventManagerTest = new Events\EventManager();
+        $eventTest = new Events\Event();
         $eventTest->setInstance('instance');
         $eventTest->setEventName('event_name');
         $eventTest->setHandle('handle');

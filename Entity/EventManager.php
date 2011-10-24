@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\EventManager as BaseEventManager;
+use Ivory\GoogleMapBundle\Model\Events\EventManager as BaseEventManager;
 
 /**
  * Event manager entity which manages the google map event

@@ -6,11 +6,13 @@ use Ivory\GoogleMapBundle\Templating\Helper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base as BaseHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls as ControlsHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays as OverlaysHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Events as EventsHelper;
 
 use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
+use Ivory\GoogleMapBundle\Model\Events;
 
 /**
  * Map helper test
@@ -75,7 +77,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             new OverlaysHelper\RectangleHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
             new OverlaysHelper\CircleHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\GroundOverlayHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
-            new Helper\EventHelper()
+            new EventsHelper\EventHelper()
         );
     }
     
@@ -341,27 +343,27 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
     {
         $mapTest = new Model\Map();
         
-        $domEvent = new Model\Event();
+        $domEvent = new Events\Event();
         $domEvent->setInstance('instance');
         $domEvent->setEventName('event_name');
         $domEvent->setHandle('handle');
         $domEvent->setCapture(true);
         $mapTest->getEventManager()->addDomEvent($domEvent);
         
-        $domEventOnce = new Model\Event();
+        $domEventOnce = new Events\Event();
         $domEventOnce->setInstance('instance');
         $domEventOnce->setEventName('event_name');
         $domEventOnce->setHandle('handle');
         $domEventOnce->setCapture(true);
         $mapTest->getEventManager()->addDomEventOnce($domEventOnce);
         
-        $event = new Model\Event();
+        $event = new Events\Event();
         $event->setInstance('instance');
         $event->setEventName('event_name');
         $event->setHandle('handle');
         $mapTest->getEventManager()->addEvent($event);
         
-        $eventOnce = new Model\Event();
+        $eventOnce = new Events\Event();
         $eventOnce->setInstance('instance');
         $eventOnce->setEventName('event_name');
         $eventOnce->setHandle('handle');

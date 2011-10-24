@@ -5,6 +5,7 @@ namespace Ivory\GoogleMapBundle\Templating\Helper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays;
+use Ivory\GoogleMapBundle\Templating\Helper\Events;
 
 use Ivory\GoogleMapBundle\Model\Map;
 
@@ -101,7 +102,7 @@ class MapHelper
     protected $groundOverlayHelper;
     
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\EventHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper
      */
     protected $eventHelper;
     
@@ -123,9 +124,9 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper $polylineHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\EventHelper $eventHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventHelper $eventHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;

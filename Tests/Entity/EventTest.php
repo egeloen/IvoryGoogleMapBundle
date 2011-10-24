@@ -17,6 +17,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $eventEntityTest = new Event();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Event', $eventEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Events\Event', $eventEntityTest);
     }
 }
