@@ -21,6 +21,8 @@ class MarkerShapeServiceTest extends WebTestCase
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\MarkerShape', $markerShape);
         $this->assertEquals(substr($markerShape->getJavascriptVariable(), 0, 13), 'marker_shape_');
         $this->assertEquals($markerShape->getType(), 'poly');
+        $this->assertTrue($markerShape->hasCoordinates());
+        $this->assertEquals($markerShape->getCoordinates(), array(1, 1, 1, -1, -1, -1, -1, 1));
     }
     
     /**
@@ -32,5 +34,7 @@ class MarkerShapeServiceTest extends WebTestCase
         
         $this->assertEquals(substr($markerShape->getJavascriptVariable(), 0, 2), 'ms');
         $this->assertEquals($markerShape->getType(), 'rect');
+        $this->assertTrue($markerShape->hasCoordinates());
+        $this->assertEquals($markerShape->getCoordinates(), array(-1.1, -2.1, 2.1, 1.1));
     }
 }

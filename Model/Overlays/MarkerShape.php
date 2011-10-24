@@ -20,7 +20,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     /**
      * @var array Marker shape coordinates
      */
-    protected $coordinates = array();
+    protected $coordinates = array(1, 1, 1, -1, -1, -1, -1, 1);
     
     /**
      * Create a marker shape
@@ -90,7 +90,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
      *
      * @param array $coordinates 
      */
-    public function setCoordinates($coordinates)
+    public function setCoordinates(array $coordinates)
     {
         switch(strtolower($this->type))
         {

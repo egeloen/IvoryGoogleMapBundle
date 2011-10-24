@@ -40,8 +40,8 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
     public function testDefaultValues()
     {
         $this->assertEquals(self::$markerShape->getType(), 'poly');
-        $this->assertFalse(self::$markerShape->hasCoordinates());
-        $this->assertEquals(count(self::$markerShape->getCoordinates()), 0);
+        $this->assertTrue(self::$markerShape->hasCoordinates());
+        $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 1, 1, -1, -1, -1, -1, 1));
     }
     
     /**

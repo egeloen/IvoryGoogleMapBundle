@@ -423,6 +423,10 @@
             <call method="setType">
                 <argument>%ivory_google_map.marker_shape.type%</argument>
             </call>
+            
+            <call method="setCoordinates">
+                <argument>%ivory_google_map.marker_shape.coordinates%</argument>
+            </call>
         </service>
         
         <service id="ivory_google_map.helper.marker_shape" class="%ivory_google_map.marker_shape.helper%" public="false" />

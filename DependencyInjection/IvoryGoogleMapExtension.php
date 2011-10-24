@@ -281,6 +281,7 @@ class IvoryGoogleMapExtension extends Extension
     {
         $container->setParameter('ivory_google_map.marker_shape.prefix_javascript_variable', $config['marker_shape']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.marker_shape.type', $config['marker_shape']['type']);
+        $container->setParameter('ivory_google_map.marker_shape.coordinates', $config['marker_shape']['coordinates']);
     }
     
     /**

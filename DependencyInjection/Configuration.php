@@ -419,6 +419,10 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
                         ->scalarNode('type')->defaultValue('poly')->end()
+                        ->arrayNode('coordinates')->addDefaultsIfNotSet()
+                            ->defaultValue(array(1, 1, 1, -1, -1, -1, -1, 1))
+                            ->prototype('scalar')->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();
