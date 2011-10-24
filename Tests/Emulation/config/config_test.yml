@@ -125,6 +125,11 @@ ivory_google_map:
             longitude: -2.1
             no_wrap: false
         content: "<div class=\"info_window\"></div>"
+        pixel_offset:
+            width: 1.1
+            height: 2.1
+            width_unit: "px"
+            height_unit: "pt"
         open: false
         options:
             option: "value"

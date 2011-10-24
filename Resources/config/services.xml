@@ -446,13 +446,20 @@
             <call method="setContent">
                 <argument>%ivory_google_map.info_window.content%</argument>
             </call>
-
-            <call method="setOptions">
-                <argument>%ivory_google_map.info_window.options%</argument>
+            
+            <call method="setPixelOffset">
+                <argument>%ivory_google_map.info_window.pixel_offset.width%</argument>
+                <argument>%ivory_google_map.info_window.pixel_offset.height%</argument>
+                <argument>%ivory_google_map.info_window.pixel_offset.width_unit%</argument>
+                <argument>%ivory_google_map.info_window.pixel_offset.height_unit%</argument>
             </call>
             
             <call method="setOpen">
                 <argument>%ivory_google_map.info_window.open%</argument>
+            </call>
+
+            <call method="setOptions">
+                <argument>%ivory_google_map.info_window.options%</argument>
             </call>
         </service>
         

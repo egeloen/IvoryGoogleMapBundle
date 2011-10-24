@@ -296,9 +296,13 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.info_window.position.latitude', $config['info_window']['position']['latitude']);
         $container->setParameter('ivory_google_map.info_window.position.longitude', $config['info_window']['position']['longitude']);
         $container->setParameter('ivory_google_map.info_window.position.no_wrap', $config['info_window']['position']['no_wrap']);
+        $container->setParameter('ivory_google_map.info_window.pixel_offset.width', $config['info_window']['pixel_offset']['width']);
+        $container->setParameter('ivory_google_map.info_window.pixel_offset.height', $config['info_window']['pixel_offset']['height']);
+        $container->setParameter('ivory_google_map.info_window.pixel_offset.width_unit', $config['info_window']['pixel_offset']['width_unit']);
+        $container->setParameter('ivory_google_map.info_window.pixel_offset.height_unit', $config['info_window']['pixel_offset']['height_unit']);
         $container->setParameter('ivory_google_map.info_window.content', $config['info_window']['content']);
-        $container->setParameter('ivory_google_map.info_window.options', $config['info_window']['options']);
         $container->setParameter('ivory_google_map.info_window.open', $config['info_window']['open']);
+        $container->setParameter('ivory_google_map.info_window.options', $config['info_window']['options']);
     }
     
     /**
