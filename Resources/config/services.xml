@@ -183,6 +183,18 @@
             <call method="setPrefixJavascriptVariable">
                 <argument>%ivory_google_map.bound.prefix_javascript_variable%</argument>
             </call>
+            
+            <call method="setSouthWest">
+                <argument>%ivory_google_map.bound.south_west.latitude%</argument>
+                <argument>%ivory_google_map.bound.south_west.longitude%</argument>
+                <argument>%ivory_google_map.bound.south_west.no_wrap%</argument>
+            </call>
+            
+            <call method="setNorthEast">
+                <argument>%ivory_google_map.bound.north_east.latitude%</argument>
+                <argument>%ivory_google_map.bound.north_east.longitude%</argument>
+                <argument>%ivory_google_map.bound.north_east.no_wrap%</argument>
+            </call>
         </service>
         
         <service id="ivory_google_map.helper.bound" class="%ivory_google_map.bound.helper%" public="false">

@@ -116,6 +116,12 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadBound(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.bound.prefix_javascript_variable', $config['bound']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.bound.south_west.longitude', $config['bound']['south_west']['longitude']);
+        $container->setParameter('ivory_google_map.bound.south_west.latitude', $config['bound']['south_west']['latitude']);
+        $container->setParameter('ivory_google_map.bound.south_west.no_wrap', $config['bound']['south_west']['no_wrap']);
+        $container->setParameter('ivory_google_map.bound.north_east.longitude', $config['bound']['north_east']['longitude']);
+        $container->setParameter('ivory_google_map.bound.north_east.latitude', $config['bound']['north_east']['latitude']);
+        $container->setParameter('ivory_google_map.bound.north_east.no_wrap', $config['bound']['north_east']['no_wrap']);
     }
     
     /**
