@@ -4,19 +4,6 @@ Markers identify locations on the map. By default, they use a standard icon.
 
 ## Build your marker
 
-``` php
-<?php
-
-/**
- * Requests the ivory google map marker service
- *
- * @var Ivory\GoogleMapBundle\Model\Overlays\Marker $marker
- */
-$marker = $this->get('ivory_google_map.marker');
-```
-
-## Configure your marker
-
 ### By configuration file
 
 By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
@@ -92,18 +79,6 @@ $marker = $this->get('ivory_google_map.marker');
 $map->addMarker($marker);
 ```
 
-## Configure marker icon
-
-The complete marker icon configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
-
-## Configure marker shadow
-
-The complete marker shadow configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shadow.md).
-
-## Configure marker shape
-
-The complete marker shape configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shape.md).
-
 ## Configure marker animation
 
 For configurating the marker animation, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Overlays\Animation`` is here.
@@ -124,3 +99,15 @@ $marker->setAnimation('bounce');
 $marker->setAnimation(Animation::DROP);
 $marker->setAnimation('drop');
 ```
+
+## Configure marker icon
+
+The complete marker icon configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
+
+## Configure marker shadow
+
+The complete marker shadow configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shadow.md).
+
+## Configure marker shape
+
+The complete marker shape configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shape.md).
