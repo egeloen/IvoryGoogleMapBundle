@@ -63,7 +63,7 @@ $markerImage = $this->get('ivory_google_map.marker_image');
 <?php
 
 // Requests the ivory google map marker image service
-$marker = $this->get('ivory_google_map.marker_image');
+$markerImage = $this->get('ivory_google_map.marker_image');
 
 // Configure your marker image options
 $markerImage->setPrefixJavascriptVariable('marker_image_');
