@@ -383,6 +383,30 @@
             <call method="setUrl">
                 <argument>%ivory_google_map.marker_image.url%</argument>
             </call>
+            
+            <call method="setAnchor">
+                <argument>%ivory_google_map.marker_image.anchor.x%</argument>
+                <argument>%ivory_google_map.marker_image.anchor.y%</argument>
+            </call>
+            
+            <call method="setOrigin">
+                <argument>%ivory_google_map.marker_image.origin.x%</argument>
+                <argument>%ivory_google_map.marker_image.origin.y%</argument>
+            </call>
+            
+            <call method="setScaledSize">
+                <argument>%ivory_google_map.marker_image.scaled_size.width%</argument>
+                <argument>%ivory_google_map.marker_image.scaled_size.height%</argument>
+                <argument>%ivory_google_map.marker_image.scaled_size.width_unit%</argument>
+                <argument>%ivory_google_map.marker_image.scaled_size.height_unit%</argument>
+            </call>
+            
+            <call method="setSize">
+                <argument>%ivory_google_map.marker_image.size.width%</argument>
+                <argument>%ivory_google_map.marker_image.size.height%</argument>
+                <argument>%ivory_google_map.marker_image.size.width_unit%</argument>
+                <argument>%ivory_google_map.marker_image.size.height_unit%</argument>
+            </call>
         </service>
         
         <service id="ivory_google_map.helper.marker_image" class="%ivory_google_map.marker_image.helper%" public="false">

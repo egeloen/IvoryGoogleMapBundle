@@ -41,7 +41,7 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
      */
     public function testDefaultValues()
     {
-        $this->assertNull(self::$markerImage->getUrl());
+        $this->assertEquals(self::$markerImage->getUrl(), 'http://maps.gstatic.com/mapfiles/markers/marker.png');
         
         $this->assertFalse(self::$markerImage->hasAnchor());
         $this->assertNull(self::$markerImage->getAnchor());

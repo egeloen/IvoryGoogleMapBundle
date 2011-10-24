@@ -257,6 +257,18 @@ class IvoryGoogleMapExtension extends Extension
     {
         $container->setParameter('ivory_google_map.marker_image.prefix_javascript_variable', $config['marker_image']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
+        $container->setParameter('ivory_google_map.marker_image.anchor.x', $config['marker_image']['anchor']['x']);
+        $container->setParameter('ivory_google_map.marker_image.anchor.y', $config['marker_image']['anchor']['y']);
+        $container->setParameter('ivory_google_map.marker_image.origin.x', $config['marker_image']['origin']['x']);
+        $container->setParameter('ivory_google_map.marker_image.origin.y', $config['marker_image']['origin']['y']);
+        $container->setParameter('ivory_google_map.marker_image.scaled_size.width', $config['marker_image']['scaled_size']['width']);
+        $container->setParameter('ivory_google_map.marker_image.scaled_size.height', $config['marker_image']['scaled_size']['height']);
+        $container->setParameter('ivory_google_map.marker_image.scaled_size.width_unit', $config['marker_image']['scaled_size']['width_unit']);
+        $container->setParameter('ivory_google_map.marker_image.scaled_size.height_unit', $config['marker_image']['scaled_size']['height_unit']);
+        $container->setParameter('ivory_google_map.marker_image.size.width', $config['marker_image']['size']['width']);
+        $container->setParameter('ivory_google_map.marker_image.size.height', $config['marker_image']['size']['height']);
+        $container->setParameter('ivory_google_map.marker_image.size.width_unit', $config['marker_image']['size']['width_unit']);
+        $container->setParameter('ivory_google_map.marker_image.size.height_unit', $config['marker_image']['size']['height_unit']);
     }
     
     /**

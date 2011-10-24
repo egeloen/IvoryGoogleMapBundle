@@ -17,7 +17,7 @@ class MarkerImage extends AbstractJavascriptVariableAsset
     /**
      * @var string URL of the marker image
      */
-    protected $url = null;
+    protected $url = 'http://maps.gstatic.com/mapfiles/markers/marker.png';
     
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Point Anchor of the marker image
