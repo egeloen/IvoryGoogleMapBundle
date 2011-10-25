@@ -8,6 +8,8 @@ use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
 use Ivory\GoogleMapBundle\Model\Events;
 
+use Ivory\GoogleMapBundle\Templating\Helper;
+
 /**
  * Map wich describes a google map
  * 
@@ -127,6 +129,11 @@ class Map extends AbstractJavascriptVariableAsset
      * @var array Map ground overlays
      */
     protected $groundOverlays = array();
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper Info window helper
+     */
+    protected $infoWindowHelper = null;
 
     /**
      * Create a map
@@ -138,6 +145,8 @@ class Map extends AbstractJavascriptVariableAsset
         $this->center = new Base\Coordinate();
         $this->bound = new Base\Bound();
         $this->eventManager = new Events\EventManager();
+        
+        $this->infoWindowHelper = new Helper\Overlays\InfoWindowHelper(new Helper\Base\CoordinateHelper(), new Helper\Base\SizeHelper());
     }
 
     /**
@@ -900,6 +909,16 @@ class Map extends AbstractJavascriptVariableAsset
     public function addMarker(Overlays\Marker $marker)
     {
         $this->markers[] = $marker;
+        
+        if($marker->hasInfoWindow() && $marker->getInfoWindow()->isAutoOpen())
+        {
+            $event = new Events\Event();
+            $event->setInstance($marker->getJavascriptVariable());
+            $event->setEventName($marker->getInfoWindow()->getOpenEvent());
+            $event->setHandle(sprintf('function(){%s}', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $this, $marker)));
+            
+            $this->getEventManager()->addEvent($event);
+        }
         
         if($this->autoZoom)
             $this->bound->extend($marker);
