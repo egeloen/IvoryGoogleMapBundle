@@ -74,8 +74,7 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
             'var '.$markerTest->getShadow()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShape()->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"poly","coords":[1,2,3,4]});'.PHP_EOL.
             'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "animation":google.maps.Animation.BOUNCE, "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().'});'.PHP_EOL.
-            'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL.
-            $markerTest->getInfoWindow()->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');'.PHP_EOL
+            'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL
         );
         
         $markerTest->setOptions(array(
@@ -88,8 +87,7 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
             'var '.$markerTest->getShadow()->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             'var '.$markerTest->getShape()->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"poly","coords":[1,2,3,4]});'.PHP_EOL.
             'var '.$markerTest->getJavascriptVariable().' = new google.maps.Marker({"map":'.$mapTest->getJavascriptVariable().',"position":new google.maps.LatLng(1.1, 2.1, true), "animation":google.maps.Animation.BOUNCE, "icon":'.$markerTest->getIcon()->getJavascriptVariable().', "shadow":'.$markerTest->getShadow()->getJavascriptVariable().', "shape":'.$markerTest->getShape()->getJavascriptVariable().',"option1":"value1","option2":"value2"});'.PHP_EOL.
-            'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL.
-            $markerTest->getInfoWindow()->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');'.PHP_EOL
+            'var '.$markerTest->getInfoWindow()->getJavascriptVariable().' = new google.maps.InfoWindow({"content":"content"});'.PHP_EOL
         );
     }
 }

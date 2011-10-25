@@ -33,7 +33,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     /**
      * @var boolean TRUE if the info window is open else FALSE
      */
-    protected $open = true;
+    protected $open = false;
     
     /**
      * @var boolean TRUE if the info window auto open on event else FALSE

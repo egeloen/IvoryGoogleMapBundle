@@ -26,7 +26,7 @@ class InfoWindowServiceTest extends WebTestCase
         $this->assertEquals($infoWindow->getContent(), '<p>Default content</p>');
         $this->assertFalse($infoWindow->hasPixelOffset());
         $this->assertNull($infoWindow->getPixelOffset());
-        $this->assertTrue($infoWindow->isOpen());
+        $this->assertFalse($infoWindow->isOpen());
         $this->assertTrue($infoWindow->isAutoOpen());
         $this->assertEquals($infoWindow->getOpenEvent(), 'click');
         $this->assertEquals(count($infoWindow->getOptions()), 0);
@@ -49,7 +49,7 @@ class InfoWindowServiceTest extends WebTestCase
         $this->assertEquals($infoWindow->getPixelOffset()->getHeight(), 2.1);
         $this->assertEquals($infoWindow->getPixelOffset()->getWidthUnit(), 'px');
         $this->assertEquals($infoWindow->getPixelOffset()->getHeightUnit(), 'pt');
-        $this->assertFalse($infoWindow->isOpen());
+        $this->assertTrue($infoWindow->isOpen());
         $this->assertFalse($infoWindow->isAutoOpen());
         $this->assertEquals($infoWindow->getOpenEvent(), 'dblclick');
         $this->assertEquals($infoWindow->getOptions(), array('option' => 'value'));

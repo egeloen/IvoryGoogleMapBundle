@@ -41,7 +41,7 @@ class InfoWindowTest extends AbstractOptionsAssetTest
         $this->assertNull(self::$object->getPosition());
         $this->assertNull(self::$object->getPixelOffset());
         $this->assertEquals(self::$object->getContent(), '<p>Default content</p>');
-        $this->assertTrue(self::$object->isOpen());
+        $this->assertFalse(self::$object->isOpen());
         $this->assertTrue(self::$object->isAutoOpen());
         $this->assertEquals(self::$object->getOpenEvent(), 'click');
     }
@@ -114,8 +114,8 @@ class InfoWindowTest extends AbstractOptionsAssetTest
      */
     public function testOpen()
     {
-        self::$object->setOpen(false);
-        $this->assertFalse(self::$object->isOpen());
+        self::$object->setOpen(true);
+        $this->assertTrue(self::$object->isOpen());
         
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setOpen('foo');

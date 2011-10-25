@@ -185,6 +185,6 @@ class MarkerTest extends AbstractOptionsAssetTest
         self::$object->setInfoWindow($infoWindowTest);
         $this->assertNull(self::$object->getInfoWindow()->getPosition());
         $this->assertEquals(self::$object->getInfoWindow()->getContent(), '<p>Default content</p>');
-        $this->assertTrue(self::$object->getInfoWindow()->isOpen());
+        $this->assertFalse(self::$object->getInfoWindow()->isOpen());
     }
 }

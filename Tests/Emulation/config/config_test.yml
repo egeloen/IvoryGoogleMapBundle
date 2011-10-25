@@ -130,7 +130,7 @@ ivory_google_map:
             height: 2.1
             width_unit: "px"
             height_unit: "pt"
-        open: false
+        open: true
         auto_open: false
         open_event: "dblclick"
         options:
