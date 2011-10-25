@@ -3,6 +3,7 @@
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
 use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
+use Ivory\GoogleMapBundle\Model\Events\MouseEvent;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 use Ivory\GoogleMapBundle\Model\Base\Size;
 
@@ -33,6 +34,16 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * @var boolean TRUE if the info window is open else FALSE
      */
     protected $open = true;
+    
+    /**
+     * @var boolean TRUE if the info window auto open on event else FALSE
+     */
+    protected $autoOpen = true;
+    
+    /**
+     * @var string Event which opens the info window
+     */
+    protected $openEvent = MouseEvent::CLICK;
 
     /**
      * Create an info window
@@ -188,6 +199,52 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
         if(is_bool($open))
             $this->open = $open;
         else
-            throw new \InvalidArgumentException('The open property of a circle must be a boolean value.');
+            throw new \InvalidArgumentException('The open property of an info window must be a boolean value.');
+    }
+    
+    /**
+     * Checks if the info window auto open
+     *
+     * @return boolean TRUE if the info window auto open on event else FALSE
+     */
+    public function isAutoOpen()
+    {
+        return $this->autoOpen;
+    }
+    
+    /**
+     * Sets if the info window auto open
+     *
+     * @param boolean $autoOpen TRUE if the info window auto open on event else FALSE
+     */
+    public function setAutoOpen($autoOpen)
+    {
+        if(is_bool($autoOpen))
+            $this->autoOpen = $autoOpen;
+        else
+            throw new \InvalidArgumentException('The auto open property of an info window must be a boolean value.');
+    }
+    
+    /**
+     * Gets the info window open event
+     *
+     * @return string
+     */
+    public function getOpenEvent()
+    {
+        return $this->openEvent;
+    }
+    
+    /**
+     * Sets the info window open event
+     *
+     * @param string $openEvent 
+     */
+    public function setOpenEvent($openEvent)
+    {
+        if(in_array($openEvent, MouseEvent::getMouseEvents()))
+            $this->openEvent = $openEvent;
+        else
+            throw new \InvalidArgumentException(sprintf('The only available open event are : %s', implode(', ', MouseEvent::getMouseEvents())));
     }
 }
