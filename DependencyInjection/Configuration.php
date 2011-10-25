@@ -457,6 +457,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('content')->defaultValue('<p>Default content</p>')->end()
                         ->scalarNode('open')->defaultTrue()->end()
+                        ->scalarNode('auto_open')->defaultTrue()->end()
+                        ->scalarNode('open_event')->defaultValue('click')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
