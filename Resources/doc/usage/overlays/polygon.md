@@ -1,6 +1,6 @@
 # Polygon
 
-Polygon objects are similar to polygon objects in that they consist of a series of coordinates in an ordered sequence. 
+Polygon objects are similar to polyline objects in that they consist of a series of coordinates in an ordered sequence. 
 However, instead of being open-ended, polygons are designed to define regions within a closed loop.
 
 ## Build your polygon
