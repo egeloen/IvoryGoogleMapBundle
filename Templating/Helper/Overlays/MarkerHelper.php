@@ -111,7 +111,7 @@ class MarkerHelper
             $html[] = $this->infoWindowHelper->render($marker->getInfoWindow(), false);
             
             if($marker->getInfoWindow()->isOpen())
-                $html[] = $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker);
+                $html[] = $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker).PHP_EOL;
         }
 
         return implode('', $html);
