@@ -561,6 +561,10 @@
                 <argument>%ivory_google_map.ground_overlay.prefix_javascript_variable%</argument>
             </call>
             
+            <call method="setUrl">
+                <argument>%ivory_google_map.ground_overlay.url%</argument>
+            </call>
+            
             <call method="setBound">
                 <argument>%ivory_google_map.ground_overlay.bound.south_west.latitude%</argument>
                 <argument>%ivory_google_map.ground_overlay.bound.south_west.longitude%</argument>

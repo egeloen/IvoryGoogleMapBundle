@@ -585,6 +585,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('ground_overlay')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('ground_overlay_')->end()
+                        ->scalarNode('url')->defaultValue('')->end()
                         ->arrayNode('bound')->addDefaultsIfNotSet()
                             ->children()
                                 ->arrayNode('south_west')->addDefaultsIfNotSet()

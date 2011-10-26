@@ -172,6 +172,7 @@ ivory_google_map:
             
     ground_overlay:
         prefix_javascript_variable: "go"
+        url: "url"
         bound:
             south_west:
                 latitude: -1.1

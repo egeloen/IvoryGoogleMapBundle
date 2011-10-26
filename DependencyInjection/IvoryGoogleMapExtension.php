@@ -374,6 +374,7 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadGroundOverlay(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.ground_overlay.prefix_javascript_variable', $config['ground_overlay']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.ground_overlay.url', $config['ground_overlay']['url']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.latitude', $config['ground_overlay']['bound']['south_west']['latitude']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.longitude', $config['ground_overlay']['bound']['south_west']['longitude']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.south_west.no_wrap', $config['ground_overlay']['bound']['south_west']['no_wrap']);
