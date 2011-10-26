@@ -8,6 +8,7 @@ use Ivory\GoogleMapBundle\Templating\Helper\Overlays;
 use Ivory\GoogleMapBundle\Templating\Helper\Events;
 
 use Ivory\GoogleMapBundle\Model\Map;
+use Ivory\GoogleMapBundle\Model\Events\Event;
 
 /**
  * Map helper allows easy rendering
@@ -360,7 +361,20 @@ class MapHelper
         $html = array();
 
         foreach($map->getMarkers() as $marker)
+        {
             $html[] = $this->markerHelper->render($marker, $map);
+            
+            if($marker->hasInfoWindow() && $marker->getInfoWindow()->isAutoOpen())
+            {
+                $event = new Event();
+                $event->setInstance($marker->getJavascriptVariable());
+                $event->setEventName($marker->getInfoWindow()->getOpenEvent());
+                $event->setHandle(sprintf('function(){%s}', str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $this, $marker))));
+
+                $map->getEventManager()->addEvent($event);
+
+            }
+        }
 
         return implode('', $html);
     }
