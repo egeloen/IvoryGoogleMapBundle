@@ -369,7 +369,7 @@ class MapHelper
                 $event = new Event();
                 $event->setInstance($marker->getJavascriptVariable());
                 $event->setEventName($marker->getInfoWindow()->getOpenEvent());
-                $event->setHandle(sprintf('function(){%s}', str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $this, $marker))));
+                $event->setHandle(sprintf('function(){%s}', str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker))));
 
                 $map->getEventManager()->addEvent($event);
 
