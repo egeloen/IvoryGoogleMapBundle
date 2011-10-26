@@ -460,24 +460,13 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $markerTest = new Overlays\Marker();
         $boundMock = $this->getMock('Ivory\GoogleMapBundle\Model\Base\Bound', array('extend'));
         $boundMock->expects($this->once())
-            ->method('extend')
-            ->with($this->equalTo($markerTest));
+                  ->method('extend')
+                  ->with($this->equalTo($markerTest));
         
         self::$map->setBound($boundMock);
         self::$map->addMarker($markerTest);
         
         $this->assertEquals(count(self::$map->getMarkers()), 1);
-        
-        $markerTest = new Overlays\Marker();
-        $eventManagerMock = $this->getMock('Ivory\GoogleMapBundle\Model\Events\EventManager', array('addEvent'));
-        $eventManagerMock->expects($this->once())->method('addEvent');
-        
-        $infoWindowTest = new Overlays\InfoWindow();
-        $markerTest->setInfoWindow($infoWindowTest);
-        
-        self::$map->setBound(new Base\Bound());
-        self::$map->setEventManager($eventManagerMock);
-        self::$map->addMarker($markerTest);
     }
     
     /**
