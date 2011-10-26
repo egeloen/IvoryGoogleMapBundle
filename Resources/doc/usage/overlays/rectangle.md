@@ -52,7 +52,7 @@ $rectangle = $this->get('ivory_google_map.rectangle');
 $rectangle = $this->get('ivory_google_map.rectangle');
 
 // Configure your rectangle options
-$rectangle->setJavascriptVariable('rectangle_');
+$rectangle->setPrefixJavascriptVariable('rectangle_');
 $rectangle->setBound(-1, -1, 1, 1, true, true);
 
 $rectangle->setOption('clickable', false);

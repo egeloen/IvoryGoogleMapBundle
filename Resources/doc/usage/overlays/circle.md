@@ -50,7 +50,7 @@ $circle = $this->get('ivory_google_map.circle');
 $circle = $this->get('ivory_google_map.circle');
 
 // Configure your circle options
-$circle->setJavascriptVariable('circle_');
+$circle->setPrefixJavascriptVariable('circle_');
 $circle->setCenter(0, 0, true);
 $circle->setRadius(1);
 
