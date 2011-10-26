@@ -81,13 +81,13 @@ class InfoWindowHelper
     public function renderOpen(InfoWindow $infoWindow, Map $map, Marker $marker = null)
     {
         if($marker !== null)
-            return sprintf('%s.open(%s, %s);',
+            return sprintf('%s.open(%s, %s);'.PHP_EOL,
                 $infoWindow->getJavascriptVariable(),
                 $map->getJavascriptVariable(),
                 $marker->getJavascriptVariable()
             );
         else
-            return sprintf('%s.open(%s);',
+            return sprintf('%s.open(%s);'.PHP_EOL,
                 $infoWindow->getJavascriptVariable(),
                 $map->getJavascriptVariable()
             );

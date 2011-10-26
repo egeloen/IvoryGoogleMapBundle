@@ -380,7 +380,7 @@ class MapHelper
             $html[] = $this->infoWindowHelper->render($infoWindow);
             
             if($infoWindow->isOpen())
-                $html[] = $this->infoWindowHelper->renderOpen($infoWindow, $map).PHP_EOL;
+                $html[] = $this->infoWindowHelper->renderOpen($infoWindow, $map);
         }
 
         return implode('', $html);

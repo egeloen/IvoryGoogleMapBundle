@@ -66,9 +66,9 @@ class InfoWindowHelperTest extends \PHPUnit_Framework_TestCase
             'option2' => 'value2'
         ));
 
-        $this->assertEquals(self::$infoWindowHelper->renderOpen($infoWindowTest, $mapTest), $infoWindowTest->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');');
+        $this->assertEquals(self::$infoWindowHelper->renderOpen($infoWindowTest, $mapTest), $infoWindowTest->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().');'.PHP_EOL);
 
         $markerTest = new Marker();
-        $this->assertEquals(self::$infoWindowHelper->renderOpen($infoWindowTest, $mapTest, $markerTest), $infoWindowTest->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().', '.$markerTest->getJavascriptVariable().');');
+        $this->assertEquals(self::$infoWindowHelper->renderOpen($infoWindowTest, $mapTest, $markerTest), $infoWindowTest->getJavascriptVariable().'.open('.$mapTest->getJavascriptVariable().', '.$markerTest->getJavascriptVariable().');'.PHP_EOL);
     }
 }
