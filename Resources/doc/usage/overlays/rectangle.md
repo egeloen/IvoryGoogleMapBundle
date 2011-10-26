@@ -56,7 +56,7 @@ $rectangle->setJavascriptVariable('rectangle_');
 $rectangle->setBound(-1, -1, 1, 1, true, true);
 
 $rectangle->setOption('clickable', false);
-$rectangle->setOption('strokeColor', '#ffffff");
+$rectangle->setOption('strokeColor', '#ffffff');
 $rectangle->setOptions(array(
     'clickable' => false,
     'strokeColor' => '#ffffff'
