@@ -77,7 +77,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             new OverlaysHelper\RectangleHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
             new OverlaysHelper\CircleHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\GroundOverlayHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
-            new EventsHelper\EventHelper()
+            new EventsHelper\EventManagerHelper(new EventsHelper\EventHelper())
         );
     }
     

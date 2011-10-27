@@ -69,6 +69,7 @@
         <parameter key="ivory_google_map.circle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper</parameter>
         <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
         
+        <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper</parameter>
         <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
         
     </parameters>
@@ -155,7 +156,7 @@
             <argument type="service" id="ivory_google_map.helper.rectangle" />
             <argument type="service" id="ivory_google_map.helper.circle" />
             <argument type="service" id="ivory_google_map.helper.ground_overlay" />
-            <argument type="service" id="ivory_google_map.helper.event" />
+            <argument type="service" id="ivory_google_map.helper.event_manager" />
         </service>
         
         <!-- Map type ID service -->
@@ -585,6 +586,10 @@
         
         <!-- Event manager service -->
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
+        
+        <service id="ivory_google_map.helper.event_manager" class="%ivory_google_map.event_manager.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.event" />
+        </service>
         
         <!-- Event service -->
         <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype">

@@ -103,9 +103,9 @@ class MapHelper
     protected $groundOverlayHelper;
     
     /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper
      */
-    protected $eventHelper;
+    protected $eventManagerHelper;
     
     /**
      * Constructs a map helper
@@ -125,9 +125,9 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper $polylineHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper $eventHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventHelper $eventHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventManagerHelper $eventManagerHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
@@ -146,7 +146,7 @@ class MapHelper
         $this->rectangleHelper = $rectangleHelper;
         $this->circleHelper = $circleHelper;
         $this->groundOverlayHelper = $groundOverlayHelper;
-        $this->eventHelper = $eventHelper;
+        $this->eventManagerHelper = $eventManagerHelper;
     }
 
     /**
@@ -488,20 +488,6 @@ class MapHelper
      */
     public function renderEvents(Map $map)
     {
-        $html = array();
-        
-        foreach($map->getEventManager()->getDomEvents() as $domEvent)
-            $html[] = $this->eventHelper->renderDomEvent($domEvent);
-        
-        foreach($map->getEventManager()->getDomEventsOnce() as $domEventOnce)
-            $html[] = $this->eventHelper->renderDomEventOnce($domEventOnce);
-        
-        foreach($map->getEventManager()->getEvents() as $event)
-            $html[] = $this->eventHelper->renderEvent($event);
-        
-        foreach($map->getEventManager()->getEventsOnce() as $eventOnce)
-            $html[] = $this->eventHelper->renderEventOnce($eventOnce);
-        
-        return implode('', $html);
+        return $this->eventManagerHelper->render($map->getEventManager());
     }
 }
