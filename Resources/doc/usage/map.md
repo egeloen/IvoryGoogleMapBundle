@@ -98,7 +98,7 @@ $map->setMapOption('zoom', 3);
 $map->setBound(-2.1, -3.9, 2.6, 1.4, true, true);
 
 $map->setMapOption('mapTypeId', MapTypeId::ROADMAP);
-$map->setMapOption('mapTypeId', roadmap');
+$map->setMapOption('mapTypeId', 'roadmap');
 
 $map->setMapOption('disableDefaultUI', true);
 $map->setMapOption('disableDoubleClickZoom', true);
