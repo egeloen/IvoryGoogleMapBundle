@@ -71,7 +71,10 @@ class MapTypeControl
     public function addMapTypeId($mapTypeId)
     {
         if(in_array($mapTypeId, MapTypeId::getMapTypeIds()))
-            $this->mapTypeIds[] = $mapTypeId;
+        {
+            if(!in_array($mapTypeId, $this->mapTypeIds))
+                $this->mapTypeIds[] = $mapTypeId;
+        }
         else
             throw new \InvalidArgumentException(sprintf('The map type id of a map type control can only be : %s.', implode(', ', MapTypeId::getMapTypeIds())));
     }
