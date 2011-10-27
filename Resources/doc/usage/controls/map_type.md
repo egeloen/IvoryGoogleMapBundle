@@ -8,7 +8,7 @@ This control appears by default in the top right corner of the map.
 ### By configuration file
 
 By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.map_type`` service is. The configuration describes below is this default configuration.
+The ``ivory_google_map.map_type_control`` service is. The configuration describes below is this default configuration.
 
 ```
 # app/config/config.yml
