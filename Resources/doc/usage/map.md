@@ -93,7 +93,7 @@ $map->setHtmlContainerId('map_canvas');
 $map->setAutoZoom(false);
 
 $map->setCenter(0, 0, true);
-$map->setZoom(3);
+$map->setMapOption('zoom', 3);
 
 $map->setBound(-2.1, -3.9, 2.6, 1.4, true, true);
 
@@ -140,7 +140,7 @@ $map->setAutoZoom(false);
 $map->setCenter(0, 0, true);
 
 // Sets the zoom
-$map->setZoom(3);
+$map->setMapOption('zoom', 3);
 ```
 
 ### Fitting a bound
