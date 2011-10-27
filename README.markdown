@@ -36,8 +36,6 @@ The documentation is being rewritten.
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
    3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
-The old documentation is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/index.rst).
-
 License
 -------
 
