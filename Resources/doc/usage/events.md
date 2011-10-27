@@ -76,7 +76,7 @@ For example, it can be:
 ``` php
 <?php
 
-$handle = 'function(){alert('The event has been triggered');}'
+$handle = 'function(){alert("The event has been triggered");}'
 ```
 
 ## Add your event to the map
