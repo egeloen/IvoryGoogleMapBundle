@@ -10,7 +10,7 @@ The ``ivory_google_map.map`` service is. The configuration describes below is th
 ```
 # app/config/config.yml
 
-ivory_google_map
+ivory_google_map:
     map:
         # Prefix used for the generation of the map javascript variable
         prefix_javascript_variable: "map_"
