@@ -97,8 +97,8 @@ $map->setMapOption('zoom', 3);
 
 $map->setBound(-2.1, -3.9, 2.6, 1.4, true, true);
 
-$map->setMapTypeId(MapTypeId::ROADMAP);
-$map->setMapTypeId('roadmap');
+$map->setMapOption('mapTypeId', MapTypeId::ROADMAP);
+$map->setMapOption('mapTypeId', roadmap');
 
 $map->setMapOption('disableDefaultUI', true);
 $map->setMapOption('disableDoubleClickZoom', true);
@@ -198,17 +198,17 @@ use Ivory\GoogleMapBundle\Model\MapTypeId
 $map = $this->get('ivory_google_map.map');
 
 // Sets your map type
-$map->setMapTypeId(MapTypeId::HYBRID);
-$map->setMapTypeId('hybrid');
+$map->setMapOption('mapTypeId', MapTypeId::HYBRID);
+$map->setMapOption('mapTypeId', 'hybrid');
 
-$map->setMapTypeId(MapTypeId::ROADMAP);
-$map->setMapTypeId('roadmap');
+$map->setMapOption('mapTypeId', MapTypeId::ROADMAP);
+$map->setMapOption('mapTypeId', 'roadmap');
 
-$map->setMapTypeId(MapTypeId::SATELLITE);
-$map->setMapTypeId('satellite');
+$map->setMapOption('mapTypeId', MapTypeId::SATELLITE);
+$map->setMapOption('mapTypeId', 'satellite');
 
-$map->setMapTypeId(MapTypeId::TERRAIN);
-$map->setMapTypeId('terrain');
+$map->setMapOption('mapTypeId', MapTypeId::TERRAIN);
+$map->setMapOption('mapTypeId', 'terrain');
 ```
 
 ## Add overlays to your map
