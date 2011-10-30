@@ -36,6 +36,11 @@ The documentation is being rewritten.
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
    3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
+TODO
+----
+
+I'm actually working on ``google map services`` which will allow you to request the geocoding API easily. It will be available in few weeks !
+
 License
 -------
 
