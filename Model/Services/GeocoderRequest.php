@@ -164,9 +164,9 @@ class GeocoderRequest
     {
         $args = func_get_args();
         
-        if(isset($args[0]) && ($args[0] instanceof Base\Bound))
+        if(isset($args[0]) && ($args[0] instanceof Bound))
             $this->bound = $args[0];
-        else if(isset($args[0]) && ($args[0] instanceof Base\Coordinate) && isset($args[1]) && ($args[1] instanceof Base\Coordinate))
+        else if(isset($args[0]) && ($args[0] instanceof Coordinate) && isset($args[1]) && ($args[1] instanceof Coordinate))
         {
             if(is_null($this->bound))
                 $this->bound = new Bound();
@@ -179,8 +179,8 @@ class GeocoderRequest
             if(is_null($this->bound))
                 $this->bound = new Bound();
             
-            $this->bound->setSouthWest(new Base\Coordinate($args[0], $args[1]));
-            $this->bound->setNorthEast(new Base\Coordinate($args[2], $args[3]));
+            $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
+            $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
             
             if(isset($args[4]) && is_bool($args[4]))
                 $this->bound->getSouthWest()->setNoWrap($args[4]);
@@ -195,7 +195,7 @@ class GeocoderRequest
                 'The bound setter arguments are invalid.',
                 'The available prototypes are :',
                 ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound = null)',
-                ' - public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
+                ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
     }
     
