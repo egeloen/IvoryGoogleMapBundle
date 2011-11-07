@@ -16,8 +16,12 @@ class ZoomControlStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function testContruct()
     {
-        $this->setExpectedException('Exception');
-        $zoomControlStyleTest = new ZoomControlStyle();
+        try
+        {
+            $zoomControlStyleTest = new ZoomControlStyle();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**

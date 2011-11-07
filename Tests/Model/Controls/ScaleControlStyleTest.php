@@ -16,8 +16,12 @@ class ScaleControlStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function testContruct()
     {
-        $this->setExpectedException('Exception');
-        $scaleControlStyleTest = new ScaleControlStyle();
+        try
+        {
+            $scaleControlStyleTest = new ScaleControlStyle();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**

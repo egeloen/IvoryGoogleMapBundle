@@ -16,8 +16,12 @@ class ControlPositionTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->setExpectedException('Exception');
-        $controlPositionTest = new ControlPosition();
+        try
+        {
+            $controlPositionTest = new ControlPosition();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Controls\ControlPosition" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**

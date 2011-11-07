@@ -16,8 +16,12 @@ class MapTypeControlStyleTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->setExpectedException('Exception');
-        $mapTypeControlStyleTest = new MapTypeControlStyle();
+        try
+        {
+            $mapTypeControlStyleTest = new MapTypeControlStyle();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**

@@ -16,8 +16,12 @@ class MouseEventTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->setExpectedException('Exception');
-        $mouseEvent = new MouseEvent();
+        try
+        {
+            $mouseEvent = new MouseEvent();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Events\MouseEvent" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**

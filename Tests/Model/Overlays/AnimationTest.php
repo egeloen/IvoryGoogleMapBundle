@@ -16,8 +16,12 @@ class AnimationTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->setExpectedException('Exception');
-        $animationTest = new Animation();
+        try
+        {
+            $animationTest = new Animation();
+            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Overlays\Animation" can not be instanciated.');
+        }
+        catch(\Exception $e){}
     }
     
     /**
