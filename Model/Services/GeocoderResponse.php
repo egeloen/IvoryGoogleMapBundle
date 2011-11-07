@@ -3,11 +3,11 @@
 namespace Ivory\GoogleMapBundle\Model\Services;
 
 /**
- * Geocoder results wraps the geocoder results & the request status
+ * Geocoder response wraps the geocoder results & the response status
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class GeocoderResults
+class GeocoderResponse
 {
     /**
      * @var array Geocoder results

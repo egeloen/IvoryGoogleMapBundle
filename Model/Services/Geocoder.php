@@ -140,7 +140,7 @@ class Geocoder
         
         $response = $this->browser->get($this->generateUrl($geocoderRequest));
 
-        return $this->buildGeocoderResults($this->parse($response->getContent()));
+        return $this->buildGeocoderResponse($this->parse($response->getContent()));
     }
     
     /**
@@ -224,18 +224,18 @@ class Geocoder
     /**
      * Build geocoder results with the normalized geocoding API results given
      *
-     * @param stdClass $geocoderResults
-     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderResults
+     * @param stdClass $geocoderResponse
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderResponse
      */
-    protected function buildGeocoderResults(\stdClass $geocoderResults)
+    protected function buildGeocoderResponse(\stdClass $geocoderResponse)
     {
         $results = array();
-        foreach($geocoderResults->results as $geocoderResult)
+        foreach($geocoderResponse->results as $geocoderResult)
             $results[] = $this->buildGeocoderResult($geocoderResult);
 
-        $status = $geocoderResults->status;
+        $status = $geocoderResponse->status;
 
-        return new GeocoderResults($results, $status);
+        return new GeocoderResponse($results, $status);
     }
     
     /**
