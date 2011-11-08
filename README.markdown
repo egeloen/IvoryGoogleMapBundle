@@ -34,12 +34,14 @@ The documentation is being rewritten.
          - [Street view](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/street_view.md)
          - [Zoom](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/zoom.md)
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
+      - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
+         - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoder.md)
    3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
 TODO
 ----
 
-I'm actually working on ``google map services`` which will allow you to request the geocoding API easily. It will be available in few weeks !
+   - Integrate other services
 
 License
 -------
