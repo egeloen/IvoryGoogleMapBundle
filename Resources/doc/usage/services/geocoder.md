@@ -150,6 +150,7 @@ foreach($results as $result)
 ##### Geometry informations
 
 Geometry contains the following information:
+
    - location which is an ``Ivory\GoogleMapBundle\Model\Base\Coordinate``.
    - location type stores additional data about the specified location. The available possibilites are describes by the ``Ivory\GoogleMapBundle\Model\Services\GeocoderLocationType`` constants.
    - viewport which contains the recommended viewport for displaying the returned result, specified as ``Ivory\GoogleMapBundle\Model\Base\Bound``.
@@ -184,6 +185,7 @@ $results = $response->getResults();
 
 foreach($results as $result)
     $partialMatch = $result->isPartialMatch();
+```
 
 ##### Result types
 
