@@ -6,6 +6,7 @@ Actually, this bundle allows you to manage:
    - Controls: Map type, Overview, Pan, Rotate, Scale, Street view, Zoom 
    - Overlays: Marker, Info window, Polyline, Polygon, Rectangle, Circle, Ground overlay 
    - Events
+   - Services: Geocoding API
 
 It uses the google map API v3.
 
