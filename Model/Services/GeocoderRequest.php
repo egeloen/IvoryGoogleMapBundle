@@ -67,6 +67,7 @@ class GeocoderRequest
      * Sets the geocoder request address
      *
      * @param string $address 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $this
      */
     public function setAddress($address)
     {
@@ -74,6 +75,8 @@ class GeocoderRequest
             $this->address = $address;
         else
             throw new \InvalidArgumentException('The geocoder request address must be a string value.');
+        
+        return $this;
     }
     
     /**
@@ -103,6 +106,8 @@ class GeocoderRequest
      * 
      * public function setCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate = null)
      * public function setCoordinate(double $latitude, double $longitude, boolean $noWrap = true)
+     * 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $this
      */
     public function setCoordinate()
     {
@@ -129,6 +134,8 @@ class GeocoderRequest
                 'The available prototypes are :',
                 ' - public function setCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate = null)',
                 ' - public function setCoordinate(double $latitude, double $longitude, boolean $noWrap = true)'));
+        
+        return $this;
     }
     
     /**
@@ -159,6 +166,8 @@ class GeocoderRequest
      * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound = null)
      * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
+     * 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $this
      */
     public function setBound()
     {
@@ -197,6 +206,8 @@ class GeocoderRequest
                 ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound = null)',
                 ' - public function setBound(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)'));
+        
+        return $this;
     }
     
     /**
@@ -223,6 +234,7 @@ class GeocoderRequest
      * Sets the geocoder request region
      *
      * @param string $region 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $this
      */
     public function setRegion($region = null)
     {
@@ -230,6 +242,8 @@ class GeocoderRequest
             $this->region = $region;
         else
             throw new \InvalidArgumentException('The geocoder request region must be a string with two characters.');
+        
+        return $this;
     }
     
     /**
@@ -256,6 +270,7 @@ class GeocoderRequest
      * Sets the geocoder request language
      *
      * @param string $language 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $this
      */
     public function setLanguage($language = null)
     {
@@ -263,6 +278,8 @@ class GeocoderRequest
             $this->language = $language;
         else
             throw new \InvalidArgumentException('The geocoder request language must be a string value.');
+        
+        return $this;
     }
     
     /**
@@ -286,6 +303,8 @@ class GeocoderRequest
             $this->sensor = $sensor;
         else
             throw new \InvalidArgumentException('The geocoder request sensor flag must be a boolean value.');
+        
+        return $this;
     }
     
     /**

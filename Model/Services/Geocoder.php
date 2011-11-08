@@ -130,13 +130,33 @@ class Geocoder
     /**
      * Geolocates the given request
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $geocoderRequest
-     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderResults
+     * Available prototypes :
+     * - public function geolocate(string $address)
+     * - public function geolocate(Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $request)
+     * 
+     * @return Ivory\GoogleMapBundle\Model\Services\GeocoderResponse
      */
-    public function geolocate(GeocoderRequest $geocoderRequest)
+    public function geolocate()
     {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]))
+        {
+            $geocoderRequest = new GeocoderRequest();
+            $geocoderRequest->setAddress($args[0]);
+        }
+        else if (isset($args[0]) && ($args[0] instanceof GeocoderRequest))
+            $geocoderRequest = $args[0];
+        else
+            throw new \InvalidArgumentException(sprintf('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The geolocate argument is invalid.',
+                'The available prototypes are :',
+                ' - public function geolocate(string address)',
+                ' - public function geolocate(Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $request)'
+            ));
+        
         if(!$geocoderRequest->isValid())
-            throw new \Exception('The geocoder request is not valid. It needs at least an address or a coordinate.');
+            throw new \InvalidArgumentException('The geocoder request is not valid. It needs at least an address or a coordinate.');
         
         $response = $this->browser->get($this->generateUrl($geocoderRequest));
 
@@ -218,7 +238,7 @@ class Geocoder
      */
     protected function parseXML($response)
     {
-        throw new \InvalidArgumentException('Actually, the xml format is not supported.');
+        throw new \Exception('Actually, the xml format is not supported.');
     }
     
     /**

@@ -84,6 +84,6 @@ class GeocoderResponse
         if(in_array($status, GeocoderStatus::getGeocoderStatus()))
             $this->status = $status;
         else
-            throw new \InvalidArgumentException('The geocoder results status can only be : '.implode(', ', GeocoderStatus::getGeocoderStatus ()));
+            throw new \InvalidArgumentException('The geocoder response status can only be : '.implode(', ', GeocoderStatus::getGeocoderStatus()));
     }
 }
