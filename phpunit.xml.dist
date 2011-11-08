@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./Tests/bootstrap.php">
     <php>
-        <!-- <server name="SYMFONY" value="/path/to/symfony" /> -->
+        <!-- <server name="SYMFONY" value="/path/to/vendor/symfony/src" /> -->
+        <!-- <server name="BUZZ" value="/path/to/vendor/buzz/lib" /> -->
     </php>
     <testsuites>
         <testsuite name="IvoryGoogleMapBundle Test Suite">
