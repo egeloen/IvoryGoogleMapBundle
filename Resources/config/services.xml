@@ -36,6 +36,9 @@
         <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\Events\EventManager</parameter>
         <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Events\Event</parameter>
         
+        <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMapBundle\Model\Services\Geocoder</parameter>
+        <parameter key="ivory_google_map.geocoder_request.class">Ivory\GoogleMapBundle\Model\Services\GeocoderRequest</parameter>
+        
         <!-- Herlper -->
         <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
         
@@ -599,6 +602,55 @@
         </service>
         
         <service id="ivory_google_map.helper.event" class="%ivory_google_map.event.helper%" public="false" />
+        
+        <!-- Geocoder service -->
+        <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%" scope="prototype">
+            <call method="setUrl">
+                <argument>%ivory_google_map.geocoder.url%</argument>
+            </call>
+            
+            <call method="setHttps">
+                <argument>%ivory_google_map.geocoder.https%</argument>
+            </call>
+            
+            <call method="setFormat">
+                <argument>%ivory_google_map.geocoder.format%</argument>
+            </call>
+        </service>
+        
+        <!-- Geocoder request service -->
+        <service id="ivory_google_map.geocoder_request" class="%ivory_google_map.geocoder_request.class%" scope="prototype">
+            <call method="setAddress">
+                <argument>%ivory_google_map.geocoder_request.address%</argument>
+            </call>
+            
+            <call method="setCoordinate">
+                <argument>%ivory_google_map.geocoder_request.coordinate.latitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.coordinate.longitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.coordinate.no_wrap%</argument>
+            </call>
+            
+            <call method="setBound">
+                <argument>%ivory_google_map.geocoder_request.bound.south_west.latitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.bound.south_west.longitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.bound.north_east.latitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.bound.north_east.longitude%</argument>
+                <argument>%ivory_google_map.geocoder_request.bound.south_west.no_wrap%</argument>
+                <argument>%ivory_google_map.geocoder_request.bound.north_east.no_wrap%</argument>
+            </call>
+            
+            <call method="setRegion">
+                <argument>%ivory_google_map.geocoder_request.region%</argument>
+            </call>
+            
+            <call method="setLanguage">
+                <argument>%ivory_google_map.geocoder_request.language%</argument>
+            </call>
+            
+            <call method="setSensor">
+                <argument>%ivory_google_map.geocoder_request.sensor%</argument>
+            </call>
+        </service>
 
     </services>
 

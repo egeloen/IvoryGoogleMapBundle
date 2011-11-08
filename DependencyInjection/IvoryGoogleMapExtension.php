@@ -62,6 +62,10 @@ class IvoryGoogleMapExtension extends Extension
         
         // Event sections
         $this->loadEvent($config, $container);
+        
+        // Services sections
+        $this->loadGeocoder($config, $container);
+        $this->loadGeocoderRequest($config, $container);
 
         $loader->load('twig.xml');
     }
@@ -393,5 +397,44 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadEvent(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ivory_google_map.event.prefix_javascript_variable', $config['event']['prefix_javascript_variable']);
+    }
+    
+    /**
+     * Loads geocoder configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadGeocoder(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.geocoder.url', $config['geocoder']['url']);
+        $container->setParameter('ivory_google_map.geocoder.https', $config['geocoder']['https']);
+        $container->setParameter('ivory_google_map.geocoder.format', $config['geocoder']['format']);
+    }
+    
+    /**
+     * Loads geocoder request configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.geocoder_request.address', $config['geocoder_request']['address']);
+        
+        $container->setParameter('ivory_google_map.geocoder_request.coordinate.latitude', $config['geocoder_request']['coordinate']['latitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.coordinate.longitude', $config['geocoder_request']['coordinate']['longitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.coordinate.no_wrap', $config['geocoder_request']['coordinate']['no_wrap']);
+        
+        $container->setParameter('ivory_google_map.geocoder_request.bound.south_west.latitude', $config['geocoder_request']['bound']['south_west']['latitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.bound.south_west.longitude', $config['geocoder_request']['bound']['south_west']['longitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.bound.south_west.no_wrap', $config['geocoder_request']['bound']['south_west']['no_wrap']);
+        $container->setParameter('ivory_google_map.geocoder_request.bound.north_east.latitude', $config['geocoder_request']['bound']['north_east']['latitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.bound.north_east.longitude', $config['geocoder_request']['bound']['north_east']['longitude']);
+        $container->setParameter('ivory_google_map.geocoder_request.bound.north_east.no_wrap', $config['geocoder_request']['bound']['north_east']['no_wrap']);
+        
+        $container->setParameter('ivory_google_map.geocoder_request.region', $config['geocoder_request']['region']);
+        $container->setParameter('ivory_google_map.geocoder_request.language', $config['geocoder_request']['language']);
+        $container->setParameter('ivory_google_map.geocoder_request.sensor', $config['geocoder_request']['sensor']);
     }
 }

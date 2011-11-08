@@ -61,6 +61,10 @@ class Configuration implements ConfigurationInterface
         // Event sections
         $this->addEventSection($rootNode);
         
+        // Services sections
+        $this->addGeocoderSection($rootNode);
+        $this->addGeocoderRequestSection($rootNode);
+        
         return $treeBuilder;
     }
 
@@ -624,6 +628,70 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('event')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the geocoder section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addGeocoderSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('geocoder')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('url')->defaultValue('http://maps.googleapis.com/maps/api/geocode')->end()
+                        ->booleanNode('https')->defaultFalse()->end()
+                        ->scalarNode('format')->defaultValue('json')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the geocoder request section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addGeocoderRequestSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('geocoder_request')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('address')->defaultValue(null)->end()
+                        ->arrayNode('coordinate')->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('longitude')->defaultValue(null)->end()
+                                ->scalarNode('latitude')->defaultValue(null)->end()
+                                ->scalarNode('no_wrap')->defaultValue(null)->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('bound')->addDefaultsIfNotSet()
+                            ->children()
+                                ->arrayNode('south_west')->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('latitude')->defaultValue(null)->end()
+                                        ->scalarNode('longitude')->defaultValue(null)->end()
+                                        ->scalarNode('no_wrap')->defaultValue(null)->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('north_east')->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('latitude')->defaultValue(null)->end()
+                                        ->scalarNode('longitude')->defaultValue(null)->end()
+                                        ->scalarNode('no_wrap')->defaultValue(null)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('region')->defaultValue(null)->end()
+                        ->scalarNode('language')->defaultValue(null)->end()
+                        ->booleanNode('sensor')->defaultFalse()->end()
                     ->end()
                 ->end()
             ->end();
