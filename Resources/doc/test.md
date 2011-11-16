@@ -1,10 +1,10 @@
 # Test
 
-The IvoryGoogleMapBundle is unit tested by phpunit.
+The IvoryGoogleMapBundle is unit tested by PHPUnit.
 
-For testing the bundle, you need to rename the phpunit.xml.dist file to phpunit.xml & edit it for replacing the symfony2 path by your own.
+For testing the bundle, you need to install the dependencies by running the ``./Tests/bin/vendors`` script.
 
-Now, you just have to execute the following command :
+Now, you just have to execute the test suite :
 
 ``` bash
 $ phpunit
