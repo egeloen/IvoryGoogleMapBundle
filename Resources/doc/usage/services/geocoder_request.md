@@ -91,6 +91,6 @@ If you set an address & a coordinate, address takes precedence over coordinate.
 // Requests the ivory google map geocoder service
 $geocoder = $this->get('ivory_google_map.geocoder');
 
-// Geolocate your request
-$response = $geocoder->geolocate($request);
+// Geocode your request
+$response = $geocoder->geocode($request);
 ```

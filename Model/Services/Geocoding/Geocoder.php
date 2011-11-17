@@ -27,12 +27,12 @@ class Geocoder extends AbstractService
      * Geolocates the given request
      *
      * Available prototypes :
-     * - public function geolocate(string $address)
-     * - public function geolocate(Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $request)
+     * - public function geocode(string $address)
+     * - public function geocode(Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $request)
      * 
      * @return Ivory\GoogleMapBundle\Model\Services\GeocoderResponse
      */
-    public function geolocate()
+    public function geocode()
     {
         $args = func_get_args();
         

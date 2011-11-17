@@ -55,9 +55,9 @@ $geocoder->setHttps(false);
 $geocoder->setFormat('json');
 ```
 
-## Geolocate a position
+## Geocode a position
 
-Now you have requested your geocoder, you are able to geolocate a position. The bundle allows you to request the google map geocoding API by two different ways.
+Now you have requested your geocoder, you are able to geocode a position. The bundle allows you to request the google map geocoding API by two different ways.
 You have the choice between a simple address or an advanced geocoder request.
 
 ### Simple address
@@ -68,8 +68,8 @@ You have the choice between a simple address or an advanced geocoder request.
 // Requests the ivory google map geocoder service
 $geocoder = $this->get('ivory_google_map.geocoder');
 
-// Geolocate an address
-$response = $geocoder->geolocate('1600 Amphitheatre Parkway, Mountain View, CA');
+// Geocode an address
+$response = $geocoder->geocode('1600 Amphitheatre Parkway, Mountain View, CA');
 ```
 
 ### Advanced geocoder request
@@ -93,7 +93,7 @@ $status = $response->getStatus();
 
 ### Geocoder results
 
-A geolocated request can return many results. The geocoder response wraps an array of ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult``.
+A request can return many results. The geocoder response wraps an array of ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult``.
 
 ``` php
 <?php
