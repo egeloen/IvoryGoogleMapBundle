@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\DependencyInjection\Services;
+namespace Ivory\GoogleMapBundle\Tests\DependencyInjection\Services\Geocoder;
 
 use Ivory\GoogleMapBundle\Tests\Emulation\WebTestCase;
 
@@ -18,7 +18,7 @@ class GeocoderServiceTest extends WebTestCase
     {
         $geocoder = self::createContainer()->get('ivory_google_map.geocoder');
         
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoder', $geocoder);
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoder\Geocoder', $geocoder);
         $this->assertEquals($geocoder->getUrl(), 'http://maps.googleapis.com/maps/api/geocode');
         $this->assertFalse($geocoder->isHttps());
         $this->assertEquals($geocoder->getFormat(), 'json');

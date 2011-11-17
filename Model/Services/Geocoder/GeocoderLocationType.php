@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoder;
 
 /**
  * GeocoderLocationType which describes a google map geocoder location type

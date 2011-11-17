@@ -32,7 +32,7 @@ ivory_google_map:
 /**
  * Requests the ivory google map geocoder
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder $geocoder
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\Geocoder $geocoder
  */
 $geocoder = $this->get('ivory_google_map.geocoder');
 ```
@@ -45,7 +45,7 @@ $geocoder = $this->get('ivory_google_map.geocoder');
 /**
  * Requests the ivory google map geocoder
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder $geocoder
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\Geocoder $geocoder
  */
 $geocoder = $this->get('ivory_google_map.geocoder');
 

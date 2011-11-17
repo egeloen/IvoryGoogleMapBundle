@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
 
-use Ivory\GoogleMapBundle\Model\Services\GeocoderRequest;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderRequest;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 

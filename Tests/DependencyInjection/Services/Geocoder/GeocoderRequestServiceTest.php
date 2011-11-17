@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\DependencyInjection\Services;
+namespace Ivory\GoogleMapBundle\Tests\DependencyInjection\Services\Geocoder;
 
 use Ivory\GoogleMapBundle\Tests\Emulation\WebTestCase;
 
@@ -18,6 +18,7 @@ class GeocoderRequestServiceTest extends WebTestCase
     {
         $request = self::createContainer()->get('ivory_google_map.geocoder_request');
         
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderRequest', $request);
         $this->assertFalse($request->hasAddress());
         $this->assertFalse($request->hasCoordinate());
         $this->assertFalse($request->hasBound());

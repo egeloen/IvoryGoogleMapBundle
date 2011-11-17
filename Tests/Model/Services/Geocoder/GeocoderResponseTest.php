@@ -1,15 +1,16 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
 
-use Ivory\GoogleMapBundle\Model\Services\GeocoderResponse;
-use Ivory\GoogleMapBundle\Model\Services\GeocoderResult;
-use Ivory\GoogleMapBundle\Model\Services\GeocoderAddressComponent;
-use Ivory\GoogleMapBundle\Model\Services\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderResponse;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderResult;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderAddressComponent;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderStatus;
+
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
-use Ivory\GoogleMapBundle\Model\Services\GeocoderLocationType;
-use Ivory\GoogleMapBundle\Model\Services\GeocoderStatus;
 
 /**
  * GeocoderResponse test

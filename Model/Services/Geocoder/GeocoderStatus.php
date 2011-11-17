@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoder;
 
 /**
  * Geocoder status which describes a google map geocoder status
