@@ -2,7 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Services\Geocoder;
 
-use Buzz\Browser;
+use Ivory\GoogleMapBundle\Model\Services\AbstractService;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
@@ -13,118 +13,14 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Geocoder
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Geocoder
+class Geocoder extends AbstractService
 {
-    /**
-     * @var Buzz\Browser Buzz browser 
-     */
-    protected $browser = null;
-    
-    /**
-     * @var string Google map geocoding API url
-     */
-    protected $url = 'http://maps.googleapis.com/maps/api/geocode';
-    
-    /**
-     * @var boolean TRUE if the geocoder uses HTTPS else FALSE
-     */
-    protected $https = false;
-    
-    /**
-     * @var string Format used for requesting the google map geocoding API
-     */
-    protected $format = 'json';
-    
     /**
      * Creates a geocoder
      */
     public function __construct()
     {
-        $this->browser = new Browser();
-    }
-    
-    /**
-     * Gets the buzz browser
-     *
-     * @return Buzz\Browser
-     */
-    public function getBrowser()
-    {
-        return $this->browser;
-    }
-    
-    /**
-     * Gets the geocoding API url according to the https flag
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        if($this->isHttps())
-            return str_replace('http://', 'https://', $this->url);
-        else
-            return $this->url;
-    }
-    
-    /**
-     * Sets the geocoding API url
-     *
-     * @param string $url 
-     */
-    public function setUrl($url)
-    {
-        if(is_string($url))
-            $this->url = $url;
-        else
-            throw new \InvalidArgumentException('The geocoder url must be a string value.');
-    }
-    
-    /**
-     * Checks if the geocoder uses HTTPS
-     *
-     * @return boolean TRUE if the geocoder uses HTTPS else FALSE
-     */
-    public function isHttps()
-    {
-        return $this->https;
-    }
-    
-    /**
-     * Sets the geocoder HTTPS flag
-     *
-     * @param boolean $https TRUE if the geocoder uses HTTPS else FALSE
-     */
-    public function setHttps($https)
-    {
-        if(is_bool($https))
-            $this->https = $https;
-        else
-            throw new \InvalidArgumentException('The geocoder https flag must be a boolean value.');
-    }
-    
-    /**
-     * Gets the geocoder format
-     *
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->format;
-    }
-    
-    /**
-     * Sets the geocoder format
-     *
-     * @param string $format 
-     */
-    public function setFormat($format)
-    {
-        $availableFormats = array('json', 'xml');
-        
-        if(in_array($format, $availableFormats))
-            $this->format = $format;
-        else
-            throw new \InvalidArgumentException('The format can only be : '.implode(', ', $availableFormats));
+        parent::__construct('http://maps.googleapis.com/maps/api/geocode');
     }
     
     /**
