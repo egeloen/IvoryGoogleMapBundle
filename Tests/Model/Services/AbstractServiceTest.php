@@ -54,7 +54,7 @@ abstract class AbstractServiceTest extends \PHPUnit_Framework_TestCase
     {
         self::$service->setHttps(true);
         $this->assertTrue(self::$service->isHttps());
-        $this->assertEquals(self::$service->getUrl(), 'https://maps.googleapis.com/maps/api/geocode');
+        $this->assertEquals(substr(self::$service->getUrl(), 0, 5), 'https');
         
         $this->setExpectedException('InvalidArgumentException');
         self::$service->setHttps('foo');
