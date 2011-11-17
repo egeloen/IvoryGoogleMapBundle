@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderAddressComponent;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderAddressComponent;
 
 /**
  * GeocoderAddressComponent test
@@ -12,7 +12,7 @@ use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderAddressComponent;
 class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\GeocoderAddressComponent
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderAddressComponent
      */
     protected static $geocoderAddressComponent = null;
     

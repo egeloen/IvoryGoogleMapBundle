@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoding;
 
 /**
  * Geocoder response wraps the geocoder results & the response status

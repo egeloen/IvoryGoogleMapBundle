@@ -32,7 +32,7 @@ ivory_google_map:
 /**
  * Requests the ivory google map geocoder
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\Geocoder $geocoder
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder $geocoder
  */
 $geocoder = $this->get('ivory_google_map.geocoder');
 ```
@@ -45,7 +45,7 @@ $geocoder = $this->get('ivory_google_map.geocoder');
 /**
  * Requests the ivory google map geocoder
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\Geocoder $geocoder
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder $geocoder
  */
 $geocoder = $this->get('ivory_google_map.geocoder');
 
@@ -78,11 +78,11 @@ If you want to build an advanced request, read this specific [documenation](http
 
 ## Geocoder response
 
-When you have requested your position, the returned object is an ``Ivory\GoogleMapBundle\Model\Services\GeocoderResponse``. It wraps a geocoder status & geocoder results.
+When you have requested your position, the returned object is an ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResponse``. It wraps a geocoder status & geocoder results.
 
 ### Geocoder status
 
-The available status are defined by the ``Ivory\GoogleMapBundle\Model\Services\GeocoderStatus`` constants.
+The available status are defined by the ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus`` constants.
 
 ``` php
 <?php
@@ -93,7 +93,7 @@ $status = $response->getStatus();
 
 ### Geocoder results
 
-A geolocated request can return many results. The geocoder response wraps an array of ``Ivory\GoogleMapBundle\Model\Services\GeocoderResult``.
+A geolocated request can return many results. The geocoder response wraps an array of ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult``.
 
 ``` php
 <?php
@@ -152,7 +152,7 @@ foreach($results as $result)
 Geometry contains the following information:
 
    - location which is an ``Ivory\GoogleMapBundle\Model\Base\Coordinate``.
-   - location type stores additional data about the specified location. The available possibilites are describes by the ``Ivory\GoogleMapBundle\Model\Services\GeocoderLocationType`` constants.
+   - location type stores additional data about the specified location. The available possibilites are describes by the ``Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType`` constants.
    - viewport which contains the recommended viewport for displaying the returned result, specified as ``Ivory\GoogleMapBundle\Model\Base\Bound``.
    - bounds (optionally returned) which stores the bounding box which can fully contain the returned result, specified as ``Ivory\GoogleMapBundle\Model\Base\Bound``. Note that these bounds may not match the recommended viewport.
 

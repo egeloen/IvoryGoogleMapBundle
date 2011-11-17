@@ -1,11 +1,11 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderResult;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderAddressComponent;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderAddressComponent;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
@@ -18,7 +18,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class GeocoderResultTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\GeocoderResult
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult
      */
     protected static $geocoderResult = null;
     

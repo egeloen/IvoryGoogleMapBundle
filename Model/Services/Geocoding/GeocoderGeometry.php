@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoding;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;

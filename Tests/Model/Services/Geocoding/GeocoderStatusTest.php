@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderStatus;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus;
 
 /**
  * GeocoderStatus test
@@ -19,7 +19,7 @@ class GeocoderStatusTest extends \PHPUnit_Framework_TestCase
         try
         {
             $geocoderStatusTest = new GeocoderStatus();
-            $this->fail('The class "\Ivory\GoogleMapBundle\Model\Services\GeocoderStatus" can not be instanciated.');
+            $this->fail('The class "Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus" can not be instanciated.');
         }
         catch(\Exception $e){}
     }

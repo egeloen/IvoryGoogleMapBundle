@@ -55,7 +55,7 @@ ivory_google_map:
 /**
  * Requests & configure the ivory google map geocoder service
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderRequest $request
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest $request
  */
 $request = $this->get('ivory_google_map.geocoder_request');
 ```
@@ -68,7 +68,7 @@ $request = $this->get('ivory_google_map.geocoder_request');
 /**
  * Requests & configure the ivory google map geocoder service
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderRequest $request
+ * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest $request
  */
 $request = $this->get('ivory_google_map.geocoder_request')
     // Set address

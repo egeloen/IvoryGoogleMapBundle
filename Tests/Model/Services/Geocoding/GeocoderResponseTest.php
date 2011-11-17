@@ -1,13 +1,13 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderResponse;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderResult;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderAddressComponent;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderLocationType;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderStatus;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResponse;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderAddressComponent;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
@@ -20,7 +20,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class GeocoderResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\GeocoderResponse
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResponse
      */
     protected static $geocoderResponse = null;
     

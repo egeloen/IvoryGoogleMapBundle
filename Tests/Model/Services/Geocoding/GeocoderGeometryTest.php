@@ -1,9 +1,9 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoder;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry;
-use Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
@@ -16,7 +16,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class GeocoderGeometryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\GeocoderGeometry
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry
      */
     protected static $geocoderGeometry = null;
     
