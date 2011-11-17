@@ -21,7 +21,7 @@ class GeocoderResult
     protected $formattedAddress = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\GeocoderGeometry Geocoder result geometry
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry Geocoder result geometry
      */
     protected $geometry = null;
     
@@ -40,7 +40,7 @@ class GeocoderResult
      *
      * @param array $addressComponents Geocoder result address components
      * @param string $formattedAddress Geocoder result formatted address
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderGeometry $geometry Geocoder result geometry
+     * @param Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry $geometry Geocoder result geometry
      * @param boolean Geocoder result partial match flag
      * @param array $types Geocoder result types
      */
@@ -112,7 +112,7 @@ class GeocoderResult
     /**
      * Gets the geocoder result geometry
      *
-     * @return Ivory\GoogleMapBundle\Model\Services\Geometry
+     * @return Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry
      */
     public function getGeometry()
     {
@@ -122,7 +122,7 @@ class GeocoderResult
     /**
      * Sets the geocoder result geometry
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderGeometry $geometry 
+     * @param Ivory\GoogleMapBundle\Model\Services\Geocoder\GeocoderGeometry $geometry 
      */
     public function setGeometry(GeocoderGeometry $geometry)
     {
