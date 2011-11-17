@@ -3,7 +3,7 @@
 namespace Ivory\GoogleMapBundle\Tests\Emulation;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
-use Ivory\GoogleMapBundle\Tests\Util;
+use Symfony\Component\HttpKernel\Util\Filesystem;
 
 /**
  * Web test case
@@ -15,22 +15,22 @@ class WebTestCase extends BaseWebTestCase
     /**
      * @var boolean TRUE if the web test case has been initialized else FALSE
      */
-    protected static $initialize = false;
+    protected static $initialize = array();
     
     /**
      * Remove emulation cache & logs directories
+     * 
+     * @param string $environment
      */
     protected static function initialize($environment)
     {
-        if(!self::$initialize)
+        if(!isset(self::$initialize[$environment]) || (isset(self::$initialize[$environment]) && !self::$initialize[$environment]))
         {
-            if(file_exists(__DIR__.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$environment))
-                Util::removeDirectoryRecursilvy(__DIR__.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$environment);
+            $filesystem = new Filesystem();
+            $filesystem->remove(__DIR__.'/cache/'.$environment);
+            $filesystem->remove(__DIR__.'/logs');
             
-            if(file_exists(__DIR__.DIRECTORY_SEPARATOR.'logs'))
-                Util::removeDirectoryRecursilvy(__DIR__.DIRECTORY_SEPARATOR.'logs');
-            
-            self::$initialize = true;
+            self::$initialize[$environment] = true;
         }
     }
     
@@ -41,7 +41,7 @@ class WebTestCase extends BaseWebTestCase
     {
         $kernelClass = 'AppKernel';
         
-        require_once __DIR__.DIRECTORY_SEPARATOR.$kernelClass.'.php';
+        require_once __DIR__.'/'.$kernelClass.'.php';
 
         return $kernelClass;
     }
