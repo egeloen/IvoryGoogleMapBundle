@@ -29,4 +29,14 @@ class DirectionsServiceTest extends AbstractServiceTest
         
         $this->assertEquals(self::$service->getUrl(), 'http://maps.googleapis.com/maps/api/directions');
     }
+    
+    /**
+     * Checks the route method
+     * 
+     * @todo Finish implementation
+     */
+    public function testRoute()
+    {
+        
+    }
 }
