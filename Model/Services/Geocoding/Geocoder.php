@@ -62,7 +62,7 @@ class Geocoder extends AbstractService
     /**
      * Generates geocoding URL API according to the request
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderRequest $geocoderRequest
+     * @param Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest $geocoderRequest
      * @return string
      */
     protected function generateUrl(GeocoderRequest $geocoderRequest)
