@@ -9,7 +9,7 @@ use Ivory\GoogleMapBundle\Model\Services\Directions\UnitSystem;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class UnitSystemTest 
+class UnitSystemTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Checks the disable constructor
