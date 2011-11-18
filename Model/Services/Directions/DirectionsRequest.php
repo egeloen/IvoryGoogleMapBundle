@@ -63,6 +63,11 @@ class DirectionsRequest
     protected $waypoints = array();
     
     /**
+     * @var boolean TRUE if the request has a sensor else FALSE
+     */
+    protected $sensor = false;
+    
+    /**
      * Checks if the directions request has an avoid hightways flag
      *
      * @return boolean TRUE if the directions request has an avoid hightways flag else FALSE
@@ -489,6 +494,29 @@ class DirectionsRequest
                 ' - public function addWaypoint(string $location)',
                 ' - public function addWaypoint(double $latitude, double $longitude, boolean $noWrap)',
                 ' - public function addWaypoint(Ivory\GoogleMapBundle\Model\Base\Coordinate $location)'));
+    }
+    
+    /**
+     * Checks if the directions request has a sensor
+     *
+     * @return boolean TRUE if the directions request has a sensor else FALSE
+     */
+    public function hasSensor()
+    {
+        return $this->sensor;
+    }
+    
+    /**
+     * Sets the directions request sensor
+     *
+     * @param boolean $sensor TRUE if the directions request has a sensor else FALSE
+     */
+    public function setSensor($sensor)
+    {
+        if(is_bool($sensor))
+            $this->sensor = $sensor;
+        else
+            throw new \InvalidArgumentException('The directions request sensor flag must be a boolean value.');
     }
     
     /**

@@ -237,6 +237,18 @@ class DirectionsRequestTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
+     * Checks the sensor getter & setter
+     */
+    public function testSensor()
+    {
+        self::$directionsRequest->setSensor(true);
+        $this->assertTrue(self::$directionsRequest->hasSensor());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$directionsRequest->setSensor('foo');
+    }
+    
+    /**
      * Checks the isValid method
      */
     public function testIsValid()
