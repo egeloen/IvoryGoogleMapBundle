@@ -1,6 +1,6 @@
 <?php
 
-system(sprintf('php %s/bin/vendors', escapeshellarg(__DIR__)));
+system(sprintf('php %s', escapeshellarg(__DIR__.'/bin/vendors')));
 
 require_once __DIR__.'/'.$_SERVER['SYMFONY'].'/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
