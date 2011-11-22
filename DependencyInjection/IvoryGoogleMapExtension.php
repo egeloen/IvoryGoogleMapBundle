@@ -66,6 +66,8 @@ class IvoryGoogleMapExtension extends Extension
         // Services sections
         $this->loadGeocoder($config, $container);
         $this->loadGeocoderRequest($config, $container);
+        $this->loadDirections($config, $container);
+        $this->loadDirectionsRequest($config, $container);
 
         $loader->load('twig.xml');
     }
@@ -436,5 +438,36 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.geocoder_request.region', $config['geocoder_request']['region']);
         $container->setParameter('ivory_google_map.geocoder_request.language', $config['geocoder_request']['language']);
         $container->setParameter('ivory_google_map.geocoder_request.sensor', $config['geocoder_request']['sensor']);
+    }
+    
+    /**
+     * Loads directions configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadDirections(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.directions.url', $config['directions']['url']);
+        $container->setParameter('ivory_google_map.directions.https', $config['directions']['https']);
+        $container->setParameter('ivory_google_map.directions.format', $config['directions']['format']);
+    }
+    
+    /**
+     * Loads directions request configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.directions_request.avoid_highways', $config['directions_request']['avoid_highways']);
+        $container->setParameter('ivory_google_map.directions_request.avoid_tolls', $config['directions_request']['avoid_tolls']);
+        $container->setParameter('ivory_google_map.directions_request.optimize_waypoints', $config['directions_request']['optimize_waypoints']);
+        $container->setParameter('ivory_google_map.directions_request.provide_route_alternatives', $config['directions_request']['provide_route_alternatives']);
+        $container->setParameter('ivory_google_map.directions_request.region', $config['directions_request']['region']);
+        $container->setParameter('ivory_google_map.directions_request.travel_mode', is_null($config['directions_request']['travel_mode']) ? null : strtoupper($config['directions_request']['travel_mode']));
+        $container->setParameter('ivory_google_map.directions_request.unit_system', is_null($config['directions_request']['unit_system']) ? null : strtoupper($config['directions_request']['unit_system']));
+        $container->setParameter('ivory_google_map.directions_request.sensor', $config['directions_request']['sensor']);
     }
 }

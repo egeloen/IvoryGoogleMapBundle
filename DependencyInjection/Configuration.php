@@ -64,6 +64,8 @@ class Configuration implements ConfigurationInterface
         // Services sections
         $this->addGeocoderSection($rootNode);
         $this->addGeocoderRequestSection($rootNode);
+        $this->addDirectionsSection($rootNode);
+        $this->addDirectionsRequestSection($rootNode);
         
         return $treeBuilder;
     }
@@ -691,6 +693,49 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('region')->defaultValue(null)->end()
                         ->scalarNode('language')->defaultValue(null)->end()
+                        ->booleanNode('sensor')->defaultFalse()->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the directions section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addDirectionsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('directions')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('url')->defaultValue('http://maps.googleapis.com/maps/api/directions')->end()
+                        ->booleanNode('https')->defaultFalse()->end()
+                        ->scalarNode('format')->defaultValue('json')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the directions request section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addDirectionsRequestSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('directions_request')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('avoid_highways')->defaultValue(null)->end()
+                        ->scalarNode('avoid_tolls')->defaultValue(null)->end()
+                        ->scalarNode('optimize_waypoints')->defaultValue(null)->end()
+                        ->scalarNode('provide_route_alternatives')->defaultValue(null)->end()
+                        ->scalarNode('region')->defaultValue(null)->end()
+                        ->scalarNode('travel_mode')->defaultValue(null)->end()
+                        ->scalarNode('unit_system')->defaultValue(null)->end()
                         ->booleanNode('sensor')->defaultFalse()->end()
                     ->end()
                 ->end()

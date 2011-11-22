@@ -39,6 +39,9 @@
         <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder</parameter>
         <parameter key="ivory_google_map.geocoder_request.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest</parameter>
         
+        <parameter key="ivory_google_map.directions.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService</parameter>
+        <parameter key="ivory_google_map.directions_request.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequest</parameter>
+        
         <!-- Herlper -->
         <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
         
@@ -649,6 +652,56 @@
             
             <call method="setSensor">
                 <argument>%ivory_google_map.geocoder_request.sensor%</argument>
+            </call>
+        </service>
+        
+        <!-- Directions service -->
+        <service id="ivory_google_map.directions" class="%ivory_google_map.directions.class%" scope="prototype">
+            <call method="setUrl">
+                <argument>%ivory_google_map.directions.url%</argument>
+            </call>
+            
+            <call method="setHttps">
+                <argument>%ivory_google_map.directions.https%</argument>
+            </call>
+            
+            <call method="setFormat">
+                <argument>%ivory_google_map.directions.format%</argument>
+            </call>
+        </service>
+        
+        <!-- Directions request service -->
+        <service id="ivory_google_map.directions_request" class="%ivory_google_map.directions_request.class%" scope="prototype">
+            <call method="setAvoidHighways">
+                <argument>%ivory_google_map.directions_request.avoid_highways%</argument>
+            </call>
+            
+            <call method="setAvoidTolls">
+                <argument>%ivory_google_map.directions_request.avoid_tolls%</argument>
+            </call>
+            
+            <call method="setOptimizeWaypoints">
+                <argument>%ivory_google_map.directions_request.optimize_waypoints%</argument>
+            </call>
+            
+            <call method="setProvideRouteAlternatives">
+                <argument>%ivory_google_map.directions_request.provide_route_alternatives%</argument>
+            </call>
+            
+            <call method="setRegion">
+                <argument>%ivory_google_map.directions_request.region%</argument>
+            </call>
+            
+            <call method="setTravelMode">
+                <argument>%ivory_google_map.directions_request.travel_mode%</argument>
+            </call>
+            
+            <call method="setUnitSystem">
+                <argument>%ivory_google_map.directions_request.unit_system%</argument>
+            </call>
+            
+            <call method="setSensor">
+                <argument>%ivory_google_map.directions_request.sensor%</argument>
             </call>
         </service>
 
