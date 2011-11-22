@@ -93,8 +93,8 @@ class DirectionsService extends AbstractService
         
         if($directionsRequest->hasAvoidTolls() && $directionsRequest->getAvoidTolls())
             $httpQuery['avoid'] = 'tolls';
-        else if($directionsRequest->hasAvoidHightways() && $directionsRequest->getAvoidHighways())
-            $httpQuery['avoid'] = 'hightways';
+        else if($directionsRequest->hasAvoidHighways() && $directionsRequest->getAvoidHighways())
+            $httpQuery['avoid'] = 'highways';
         
         if($directionsRequest->hasUnitSystem())
             $httpQuery['units'] = strtolower($directionsRequest->getUnitSystem());
