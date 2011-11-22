@@ -74,7 +74,7 @@ $response = $geocoder->geocode('1600 Amphitheatre Parkway, Mountain View, CA');
 
 ### Advanced geocoder request
 
-If you want to build an advanced request, read this specific [documenation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoder_request.md).
+If you want to build an advanced request, read this specific [documenation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder_request.md).
 
 ## Geocoder response
 

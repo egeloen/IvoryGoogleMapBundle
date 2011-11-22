@@ -2,9 +2,7 @@
 
 The IvoryGoogleMapBundle is unit tested by PHPUnit.
 
-For testing the bundle, you need to install the dependencies by running the ``./Tests/bin/vendors`` script.
-
-Now, you just have to execute the test suite :
+For testing the bundle, you just have to execute the test suite
 
 ``` bash
 $ phpunit
