@@ -33,7 +33,7 @@ class DirectionsRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultValues()
     {
-        $this->assertFalse(self::$directionsRequest->hasAvoidHightways());
+        $this->assertFalse(self::$directionsRequest->hasAvoidHighways());
         $this->assertFalse(self::$directionsRequest->hasAvoidTolls());
         $this->assertFalse(self::$directionsRequest->hasDestination());
         $this->assertFalse(self::$directionsRequest->hasOptimizeWaypoints());
@@ -51,11 +51,11 @@ class DirectionsRequestTest extends \PHPUnit_Framework_TestCase
     public function testAvoidHightways()
     {
         self::$directionsRequest->setAvoidHighways(true);
-        $this->assertTrue(self::$directionsRequest->hasAvoidHightways());
+        $this->assertTrue(self::$directionsRequest->hasAvoidHighways());
         $this->assertTrue(self::$directionsRequest->getAvoidHighways());
         
         self::$directionsRequest->setAvoidHighways(null);
-        $this->assertFalse(self::$directionsRequest->hasAvoidHightways());
+        $this->assertFalse(self::$directionsRequest->hasAvoidHighways());
         
         $this->setExpectedException('InvalidArgumentException');
         self::$directionsRequest->setAvoidHighways('foo');

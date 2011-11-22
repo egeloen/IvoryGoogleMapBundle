@@ -72,7 +72,7 @@ class DirectionsRequest
      *
      * @return boolean TRUE if the directions request has an avoid hightways flag else FALSE
      */
-    public function hasAvoidHightways()
+    public function hasAvoidHighways()
     {
         return !is_null($this->avoidHighways);
     }
