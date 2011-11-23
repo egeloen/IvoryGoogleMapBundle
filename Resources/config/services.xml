@@ -49,7 +49,7 @@
         <!-- Event listener -->
         <parameter key="ivory_google_map.geocoder.event_listener.fake_request.class">Ivory\GoogleMapBundle\EventListener\FakeRequestListener</parameter>
         
-        <!-- Herlper -->
+        <!-- Helper -->
         <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
         
         <parameter key="ivory_google_map.map_type_id.helper">Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper</parameter>
@@ -85,6 +85,7 @@
         <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper</parameter>
         <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
         
+        <parameter key="ivory_google_map.encoded_polyline.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper</parameter>
         <parameter key="ivory_google_map.encoding.helper">Ivory\GoogleMapBundle\Templating\Helper\Geometry\EncodingHelper</parameter>
         
     </parameters>
@@ -167,6 +168,7 @@
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
             <argument type="service" id="ivory_google_map.helper.polyline" />
+            <argument type="service" id="ivory_google_map.helper.encoded_polyline" />
             <argument type="service" id="ivory_google_map.helper.polygon" />
             <argument type="service" id="ivory_google_map.helper.rectangle" />
             <argument type="service" id="ivory_google_map.helper.circle" />
@@ -516,6 +518,10 @@
             <call method="setOptions">
                 <argument>%ivory_google_map.encoded_polyline.options%</argument>
             </call>
+        </service>
+        
+        <service id="ivory_google_map.helper.encoded_polyline" class="%ivory_google_map.encoded_polyline.helper%" public="false">
+            <argument type="service" id="ivory_google_map.helper.encoding" />
         </service>
         
         <service id="ivory_google_map.helper.encoding" class="%ivory_google_map.encoding.helper%" public="false" />

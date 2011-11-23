@@ -7,12 +7,14 @@ use Ivory\GoogleMapBundle\Templating\Helper\Base as BaseHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls as ControlsHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays as OverlaysHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Events as EventsHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Geometry as GeometryHelper;
 
 use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
 use Ivory\GoogleMapBundle\Model\Events;
+use Ivory\GoogleMapBundle\Model\Geometry;
 
 /**
  * Map helper test
@@ -73,6 +75,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
                 new BaseHelper\SizeHelper()
             ),
             new OverlaysHelper\PolylineHelper(new BaseHelper\CoordinateHelper()),
+            new OverlaysHelper\EncodedPolylineHelper(new GeometryHelper\EncodingHelper()),
             new OverlaysHelper\PolygonHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\RectangleHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
             new OverlaysHelper\CircleHelper(new BaseHelper\CoordinateHelper()),
@@ -265,6 +268,20 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals(self::$mapHelper->renderPolylines($mapTest), 
             'var '.$polylineTest->getJavascriptVariable().' = new google.maps.Polyline({"map":'.$mapTest->getJavascriptVariable().',"path":[new google.maps.LatLng(1.1, 2.1, true),new google.maps.LatLng(3.1, 4.1, true)]});'.PHP_EOL
+        );
+    }
+    
+    /**
+     * Checks the render encoded polylines method
+     */
+    public function testRenderEncodedPolylines()
+    {
+        $mapTest = new Model\Map();
+        $encodedPolylineTest = new Overlays\EncodedPolyline('value');
+        $mapTest->addEncodedPolyline($encodedPolylineTest);
+        
+        $this->assertEquals(self::$mapHelper->renderEncodedPolylines($mapTest), 
+            'var '.$encodedPolylineTest->getJavascriptVariable().' = new google.maps.Polyline({"map":'.$mapTest->getJavascriptVariable().',"path":google.maps.geometry.encoding.decodePath("value")});'.PHP_EOL
         );
     }
     

@@ -81,6 +81,11 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper
      */
     protected $polylineHelper;
+    
+    /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper
+     */
+    protected $encodedPolylineHelper;
 
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolygonHelper
@@ -123,11 +128,12 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper $boundHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper $infoWindowHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper $polylineHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper $encodedPolylineHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventManagerHelper $eventManagerHelper)
+    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\EncodedPolylineHelper $encodedPolylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventManagerHelper $eventManagerHelper)
     {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
@@ -142,6 +148,7 @@ class MapHelper
         $this->boundHelper = $boundHelper;
         $this->infoWindowHelper = $infoWindowHelper;
         $this->polylineHelper = $polylineHelper;
+        $this->encodedPolylineHelper = $encodedPolylineHelper;
         $this->polygonHelper = $polygonHelper;
         $this->rectangleHelper = $rectangleHelper;
         $this->circleHelper = $circleHelper;
@@ -202,6 +209,7 @@ class MapHelper
         $html[] = $this->renderMarkers($map);
         $html[] = $this->renderInfoWindows($map);
         $html[] = $this->renderPolylines($map);
+        $html[] = $this->renderEncodedPolylines($map);
         $html[] = $this->renderPolygons($map);
         $html[] = $this->renderRectangles($map);
         $html[] = $this->renderCircles($map);
@@ -412,6 +420,22 @@ class MapHelper
 
         foreach($map->getPolylines() as $polyline)
             $html[] = $this->polylineHelper->render($polyline, $map);
+
+        return implode('', $html);
+    }
+    
+    /**
+     * Renders the map javascript encoded polylines
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @return string HTML output
+     */
+    public function renderEncodedPolylines(Map $map)
+    {
+        $html = array();
+
+        foreach($map->getEncodedPolylines() as $encodedPolyline)
+            $html[] = $this->encodedPolylineHelper->render($encodedPolyline, $map);
 
         return implode('', $html);
     }

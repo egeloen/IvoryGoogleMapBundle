@@ -73,7 +73,7 @@ class BoundHelper
                     $bound->getJavascriptVariable(),
                     $extend->getJavascriptVariable()
                 );
-            else if(($extend instanceof Overlays\Polyline) || ($extend instanceof Overlays\Polygon))
+            else if(($extend instanceof Overlays\Polyline) || ($extend instanceof Overlays\EncodedPolyline) || ($extend instanceof Overlays\Polygon))
                 $html[] = sprintf('%s.getPath().forEach(function(element){%s.extend(element)});'.PHP_EOL,
                     $extend->getJavascriptVariable(),
                     $bound->getJavascriptVariable()
