@@ -2,18 +2,20 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
+use Ivory\GoogleMapBundle\Model\Assets\AbstractOptionsAsset;
+
 /**
  * Encoded polyline
  *
  * @see http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html
  * @author GeLo <geloen.eric@gmail.com>
  */
-class EncodedPolyline 
+class EncodedPolyline extends AbstractOptionsAsset implements IExtendable
 {
     /**
      * @var string Encoded polyline value
      */
-    protected $value;
+    protected $value = null;
     
     /**
      * Create an encoded polyline
@@ -22,6 +24,7 @@ class EncodedPolyline
      */
     public function __construct($value)
     {
+        $this->setPrefixJavascriptVariable('encoded_polyline_');
         $this->setValue($value);
     }
     
