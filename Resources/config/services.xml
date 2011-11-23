@@ -85,6 +85,8 @@
         <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper</parameter>
         <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
         
+        <parameter key="ivory_google_map.encoding.helper">Ivory\GoogleMapBundle\Templating\Helper\Geometry\EncodingHelper</parameter>
+        
     </parameters>
 
     <services>
@@ -515,6 +517,8 @@
                 <argument>%ivory_google_map.encoded_polyline.options%</argument>
             </call>
         </service>
+        
+        <service id="ivory_google_map.helper.encoding" class="%ivory_google_map.encoding.helper%" public="false" />
 
         <!-- Polygon service -->
         <service id="ivory_google_map.polygon" class="%ivory_google_map.polygon.class%" scope="prototype">
