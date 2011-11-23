@@ -135,7 +135,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setMapOption('zoom', 5);
         
         $this->assertEquals(self::$mapHelper->renderJavascripts($mapTest),
-            '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.PHP_EOL.
+            '<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>'.PHP_EOL.
             '<script type="text/javascript">'.PHP_EOL.
             'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL.
             $mapTest->getJavascriptVariable().'.setCenter(new google.maps.LatLng(1.1, 2.1, true));'.PHP_EOL.

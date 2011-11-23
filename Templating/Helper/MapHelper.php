@@ -203,7 +203,7 @@ class MapHelper
     {
         $html = array();
 
-        $html[] = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>'.PHP_EOL;
+        $html[] = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>'.PHP_EOL;
         $html[] = '<script type="text/javascript">'.PHP_EOL;
         $html[] = $this->renderMap($map);
         $html[] = $this->renderMarkers($map);
