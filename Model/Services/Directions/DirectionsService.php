@@ -27,10 +27,30 @@ class DirectionsService extends AbstractService
     /**
      * Routes the given request
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequest $directionsRequest 
+     * Available prototypes:
+     * - public function route(string $origin, string $destination)
+     * - public function route(Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequest $request)
      */
-    public function route(DirectionsRequest $directionsRequest)
+    public function route()
     {
+        $args = func_get_args();
+        
+        if(isset($args[0]) && is_string($args[0]) && isset($args[1]) && is_string($args[1]))
+        {
+            $directionsRequest = new DirectionsRequest();
+            $directionsRequest->setOrigin($args[0]);
+            $directionsRequest->setDestination($args[1]);
+        }
+        else if(isset($args[0]) && ($args[0] instanceof DirectionsRequest))
+            $directionsRequest = $args[0];
+        else
+            throw new \InvalidArgumentException('%s'.PHP_EOL.'%s'.PHP_EOL.'%s'.PHP_EOL.'%s',
+                'The route arguments are invalid.',
+                'The available prototypes are:',
+                '- public function route(string $origin, string $destination)',
+                '- public function route(Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequest $request)'
+            );
+        
         if(!$directionsRequest->isValid())
             throw new \InvalidArgumentException('The directions request is not valid. It needs at least an origin and a destination.'.PHP_EOL.'If you add waypoint to the directions request, it needs at least a location.');
         
