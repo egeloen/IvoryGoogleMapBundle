@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Directions;
+namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline;
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
 
 /**
  * EncodedPolyline test
@@ -12,7 +12,7 @@ use Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline;
 class EncodedPolylineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline
+     * @var Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline
      */
     protected static $encodedPolyline = null;
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Directions;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
 
 /**
  * Encoded polyline

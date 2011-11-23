@@ -6,7 +6,8 @@ use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsResponse;
 use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRoute;
 use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsStatus;
 
-use Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline;
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
+
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 
 /**

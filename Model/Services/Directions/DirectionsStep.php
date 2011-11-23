@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Services\Directions;
 
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
@@ -33,7 +34,7 @@ class DirectionsStep
     protected $instructions = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline
+     * @var Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline
      */
     protected $encodedPolyline = null;
     
@@ -54,7 +55,7 @@ class DirectionsStep
      * @param Ivory\GoogleMapBundle\Model\Services\Directions\Duration $duration 
      * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $endLocation
      * @param string $instructions
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline $encodedPolyline
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline
      * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $startLocation
      * @param string $travelMode
      */
@@ -155,7 +156,7 @@ class DirectionsStep
     /**
      * Gets the encoded polyline which describes the step
      *
-     * @return Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline
+     * @return Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline
      */
     public function getEncodedPolyline()
     {
@@ -165,7 +166,7 @@ class DirectionsStep
     /**
      * Sets the encoded polyline which describes the step
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline $encodedPolyline 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline 
      */
     public function setEncodedPolyline(EncodedPolyline $encodedPolyline)
     {

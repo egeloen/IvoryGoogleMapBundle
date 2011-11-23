@@ -7,8 +7,9 @@ use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsLeg;
 use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsStep;
 use Ivory\GoogleMapBundle\Model\Services\Directions\Distance;
 use Ivory\GoogleMapBundle\Model\Services\Directions\Duration;
-use Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline;
 use Ivory\GoogleMapBundle\Model\Services\Directions\TravelMode;
+
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
 
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 

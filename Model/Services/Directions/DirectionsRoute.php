@@ -2,6 +2,7 @@
 
 namespace Ivory\GoogleMapBundle\Model\Services\Directions;
 
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 
 /**
@@ -28,7 +29,7 @@ class DirectionsRoute
     protected $legs = array();
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline Route overview encoded polyline
+     * @var Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline Route overview encoded polyline
      */
     protected $overviewPolyline = null;
     
@@ -53,7 +54,7 @@ class DirectionsRoute
      * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound 
      * @param string $copyrights
      * @param array $legs 
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline $overviewPolyline
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $overviewPolyline
      * @param string $summary
      * @param array $warnings
      * @param array $waypointOrder
@@ -148,7 +149,7 @@ class DirectionsRoute
     /**
      * Gets the route overview polyline
      *
-     * @return Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline
+     * @return Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline
      */
     public function getOverviewPolyline()
     {
@@ -158,7 +159,7 @@ class DirectionsRoute
     /**
      * Sets the route overview polyline
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\EncodedPolyline $overviewPolyline 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $overviewPolyline 
      */
     public function setOverviewPolyline(EncodedPolyline $overviewPolyline)
     {

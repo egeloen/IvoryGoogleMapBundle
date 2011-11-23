@@ -4,6 +4,8 @@ namespace Ivory\GoogleMapBundle\Model\Services\Directions;
 
 use Ivory\GoogleMapBundle\Model\Services\AbstractService;
 
+use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline;
+
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
