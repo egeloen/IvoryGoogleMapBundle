@@ -18,7 +18,7 @@ class EncodingHelper
     public function renderDecodePath($encodedPath)
     {
         if(is_string($encodedPath))
-            return sprintf('google.maps.geometry.encoding.decodePath("%s")', $encodedPath);
+            return sprintf('google.maps.geometry.encoding.decodePath("%s")', addslashes($encodedPath));
         else
             throw new \InvalidArgumentException('The encoded path must be a string value.');
     }
