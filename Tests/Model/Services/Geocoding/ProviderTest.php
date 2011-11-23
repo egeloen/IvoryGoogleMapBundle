@@ -5,6 +5,8 @@ namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 use Ivory\GoogleMapBundle\Model\Services\Geocoding\Provider;
 use Geocoder\HttpAdapter\BuzzHttpAdapter;
 
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest;
+
 /**
  * Ivory google map provider test
  *
@@ -33,5 +35,44 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$provider->getUrl(), 'http://maps.googleapis.com/maps/api/geocode');
         $this->assertFalse(self::$provider->isHttps());
         $this->assertEquals(self::$provider->getFormat(), 'json');
+    }
+    
+    /**
+     * Checks the geocoded data method with an address
+     */
+    public function testGeocodedDataWithAddress()
+    {
+        $response = self::$provider->getGeocodedData('address');
+        $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
+    }
+    
+    /**
+     * Checks the geocoded data method with an IP
+     */
+    public function testGeocdedDataWithIp()
+    {
+        $response = self::$provider->getGeocodedData('111.111.111.111');
+        $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
+    }
+    
+    /**
+     * Checks the geocoded data method with a GeocoderRequest
+     */
+    public function testGeocodedDataWithGeocoderRequest()
+    {
+        $request = new GeocoderRequest();
+        $request->setAddress('address');
+        
+        $response = self::$provider->getGeocodedData($request);
+        $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
+    }
+    
+    /**
+     * Checks the reserved data method
+     */
+    public function testReversedData()
+    {
+        $response = self::$provider->getReversedData(array(1.1, 2.1));
+        $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
 }

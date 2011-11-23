@@ -4,6 +4,10 @@ namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
 use Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder;
 
+use Geocoder\HttpAdapter\BuzzHttpAdapter;
+use Geocoder\Provider\GoogleMapsProvider;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Provider;
+
 /**
  * Geocoder test
  *
@@ -12,35 +16,58 @@ use Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder;
 class GeocoderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder $geocoder Geocoder testes
+     * Checks the geocode method with a geocoder provider
      */
-    protected static $geocoder = null;
-    
-    /**
-     * @override
-     */
-    public function setUp()
+    public function testGeocodeWithGeocoderProvider()
     {
-        self::$geocoder = new Geocoder();
+        $adapter = new BuzzHttpAdapter();
+        $provider = new GoogleMapsProvider($adapter);
+        
+        $geocoder = new Geocoder($provider);
+        $response = $geocoder->geocode('address');
+        
+        $this->assertInstanceOf('Geocoder\Result\Geocoded', $response);
     }
     
     /**
-     * Checks the geocode method
-     * 
-     * @todo Finish implementation
+     * Checks the geocode method with the ivory provider
      */
-    public function testGeocode()
+    public function testGeocodeWithIvoryProvider()
     {
+        $adapter = new BuzzHttpAdapter();
+        $provider = new Provider($adapter);
         
+        $geocoder = new Geocoder($provider);
+        $response = $geocoder->geocode('address');
+        
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
     
     /**
-     * Checks the reverse method
-     * 
-     * @todo Finish implementation
+     * Checks the reverse method with a geocoder provider
      */
-    public function testReverse()
+    public function testReverseWithGeocoderProvider()
     {
+        $adapter = new BuzzHttpAdapter();
+        $provider = new GoogleMapsProvider($adapter);
         
+        $geocoder = new Geocoder($provider);
+        $response = $geocoder->reverse(1.1, 2.1);
+        
+        $this->assertInstanceOf('Geocoder\Result\Geocoded', $response);
+    }
+    
+    /**
+     * Checks the reverse method with the ivory provider
+     */
+    public function testReverseWithIvoryProvider()
+    {
+        $adapter = new BuzzHttpAdapter();
+        $provider = new Provider($adapter);
+        
+        $geocoder = new Geocoder($provider);
+        $response = $geocoder->reverse(1.1, 2.1);
+        
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
 }
