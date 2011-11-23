@@ -71,6 +71,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(count(self::$map->getInfoWindows()), 0);
         $this->assertEquals(count(self::$map->getPolylines()), 0);
         $this->assertEquals(count(self::$map->getPolygons()), 0);
+        $this->assertEquals(count(self::$map->getEncodedPolylines()), 0);
         $this->assertEquals(count(self::$map->getRectangles()), 0);
         $this->assertEquals(count(self::$map->getCircles()), 0);
         $this->assertEquals(count(self::$map->getGroundOverlays()), 0);
@@ -505,6 +506,25 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         self::$map->addPolyline($polylineTest);
         
         $this->assertEquals(count(self::$map->getPolylines()), 1);
+    }
+    
+    /**
+     * Checks the encoded polylines getter & setter
+     */
+    public function testEncodedPolylines()
+    {
+        self::$map->setAutoZoom(true);
+        
+        $encodedPolylineTest = new Overlays\EncodedPolyline('value');
+        $boundMock = $this->getMock('Ivory\GoogleMapBundle\Model\Base\Bound', array('extend'));
+        $boundMock->expects($this->once())
+                  ->method('extend')
+                  ->with($this->equalTo($encodedPolylineTest));
+        
+        self::$map->setBound($boundMock);
+        self::$map->addEncodedPolyline($encodedPolylineTest);
+        
+        $this->assertEquals(count(self::$map->getEncodedPolylines()), 1);
     }
     
     /**

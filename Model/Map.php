@@ -107,6 +107,11 @@ class Map extends AbstractJavascriptVariableAsset
      * @var array Map polylines
      */
     protected $polylines = array();
+    
+    /**
+     * @var array Map encoded polylines
+     */
+    protected $encodedPolylines = array();
 
     /**
      * @var array Map polygons
@@ -941,7 +946,7 @@ class Map extends AbstractJavascriptVariableAsset
     /**
      * Add a map polyline
      *
-     * @param Ivory\GoogleMapBundle\Model\Overlays\Polyline $polyline
+     * @param Ivory\GoogleMapBundle\Model\Overlays\Polyline
      */
     public function addPolyline(Overlays\Polyline $polyline)
     {
@@ -949,6 +954,29 @@ class Map extends AbstractJavascriptVariableAsset
         
         if($this->autoZoom)
             $this->bound->extend($polyline);
+    }
+    
+    /**
+     * Gets the map encoded polyline
+     *
+     * @return array
+     */
+    public function getEncodedPolylines()
+    {
+        return $this->encodedPolylines;
+    }
+    
+    /**
+     * Adds an encoded polyline to the map
+     *
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline 
+     */
+    public function addEncodedPolyline(Overlays\EncodedPolyline $encodedPolyline)
+    {
+        $this->encodedPolylines[] = $encodedPolyline;
+        
+        if($this->autoZoom)
+            $this->bound->extend($encodedPolyline);
     }
 
     /**
