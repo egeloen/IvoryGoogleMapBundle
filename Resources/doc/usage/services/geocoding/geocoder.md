@@ -78,5 +78,7 @@ Available cache layer:
    - ``Geocoder\Cache\InMemory``
    - ``Geocoder\Cache\Memcached``
 
+## The Ivory Google Map Geocoder
+
 The specific Ivory Google Map Geocoder has been added to allow you to geocode a very advanced request & use the response to directly build your overlays.
 If you are interrested about this geocoder, the documentation is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/ivory_geocoder.md).
