@@ -40,12 +40,18 @@ class Geocoder extends BaseGeocoder
     {
         if($this->getProvider() instanceof Provider)
         {
-            $request = new GeocoderRequest();
-            $request->setCoordinate($latitude, $longitude);
-            
-            return $this->geocode($request);
+            $value = $latitude.'-'.$longitude;
+            $result = $this->retrieve($value);
+
+            if(is_null($result))
+            {
+                $result = $this->getProvider()->getReversedData(array($latitude, $longitude));
+                $this->store($value, $result);
+            }
+
+            return $result;
         }
         else
-            return parent::geocode($request);
+            return parent::reverse($latitude, $longitude);
     }
 }
