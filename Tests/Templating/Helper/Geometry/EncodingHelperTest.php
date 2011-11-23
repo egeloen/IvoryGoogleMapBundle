@@ -29,6 +29,6 @@ class EncodingHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderDecodePath()
     {
-        $this->assertEquals(self::$encodingHelper->renderDeocodePath('value'), 'google.maps.geometry.encoding.decodePath("value")');
+        $this->assertEquals(self::$encodingHelper->renderDecodePath('value'), 'google.maps.geometry.encoding.decodePath("value")');
     }
 }

@@ -15,7 +15,7 @@ class EncodingHelper
      * 
      * @param string $encodedPath
      */
-    public function renderDeocodePath($encodedPath)
+    public function renderDecodePath($encodedPath)
     {
         if(is_string($encodedPath))
             return sprintf('google.maps.geometry.encoding.decodePath("%s")', $encodedPath);
