@@ -7,6 +7,7 @@ $vendorDir = __DIR__.'/../vendor';
 $deps = array(
     array('symfony', 'http://github.com/symfony/symfony', isset($_SERVER['SYMFONY_VERSION']) ? $_SERVER['SYMFONY_VERSION'] : 'origin/master'),
     array('buzz', 'http://github.com/kriswallsmith/Buzz.git', 'origin/master'),
+    array('geocoder', 'http://github.com/willdurand/Geocoder.git', 'origin/master'),
 );
 
 if(!is_dir($vendorDir))

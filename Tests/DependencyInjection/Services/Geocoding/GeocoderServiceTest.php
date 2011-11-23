@@ -19,9 +19,6 @@ class GeocoderServiceTest extends WebTestCase
         $geocoder = self::createContainer()->get('ivory_google_map.geocoder');
         
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder', $geocoder);
-        $this->assertEquals($geocoder->getUrl(), 'http://maps.googleapis.com/maps/api/geocode');
-        $this->assertFalse($geocoder->isHttps());
-        $this->assertEquals($geocoder->getFormat(), 'json');
     }
     
     /**
@@ -30,9 +27,5 @@ class GeocoderServiceTest extends WebTestCase
     public function testGeocoderServiceWithConfiguration()
     {
         $geocoder = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.geocoder');
-        
-        $this->assertEquals($geocoder->getUrl(), 'https://geocoder');
-        $this->assertTrue($geocoder->isHttps());
-        $this->assertEquals($geocoder->getFormat(), 'xml');
     }
 }

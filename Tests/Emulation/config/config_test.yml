@@ -191,10 +191,14 @@ ivory_google_map:
     
     # Services
     geocoder:
-        url: "http://geocoder"
-        https: true
-        format: "xml"
-    
+        class: "Geocoder\Geocoder"
+        provider: 
+            class: "Geocoder\\Provider\HostIpProvider"
+            api_key: "apikey"
+            locale: "en"
+        adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
+        cache: "Geocoder\Cache\Memcached"
+        
     geocoder_request:
         address: "address"
         coordinate:

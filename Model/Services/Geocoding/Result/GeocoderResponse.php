@@ -1,13 +1,15 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoding\Result;
+
+use Geocoder\Result\Geocoded;
 
 /**
  * Geocoder response wraps the geocoder results & the response status
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class GeocoderResponse
+class GeocoderResponse extends Geocoded
 {
     /**
      * @var array Geocoder results
@@ -57,7 +59,8 @@ class GeocoderResponse
     /**
      * Add a geocoder result
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderResult $result 
+     * @todo Parse result to update geocoded properties
+     * @param Ivory\GoogleMapBundle\Model\Services\Result\GeocoderResult $result 
      */
     public function addResult(GeocoderResult $result)
     {

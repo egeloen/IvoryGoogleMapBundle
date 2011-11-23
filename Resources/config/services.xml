@@ -37,6 +37,8 @@
         <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Events\Event</parameter>
         
         <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder</parameter>
+        <parameter key="ivory_google_map.geocoder.provider.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\Provider</parameter>
+        <parameter key="ivory_google_map.geocoder.adapter.class">Geocoder\HttpAdapter\BuzzHttpAdapter</parameter>
         <parameter key="ivory_google_map.geocoder_request.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest</parameter>
         
         <parameter key="ivory_google_map.directions.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService</parameter>
@@ -608,18 +610,18 @@
         
         <!-- Geocoder service -->
         <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%" scope="prototype">
-            <call method="setUrl">
-                <argument>%ivory_google_map.geocoder.url%</argument>
-            </call>
-            
-            <call method="setHttps">
-                <argument>%ivory_google_map.geocoder.https%</argument>
-            </call>
-            
-            <call method="setFormat">
-                <argument>%ivory_google_map.geocoder.format%</argument>
-            </call>
+            <argument type="service" id="ivory_google_map.geocoder.provider" />
         </service>
+        
+        <!-- Geocoder provider service -->
+        <service id="ivory_google_map.geocoder.provider" class="%ivory_google_map.geocoder.provider.class%" public="false">
+            <argument type="service" id="ivory_google_map.geocoder.adapter" />
+            <argument></argument>
+            <argument></argument>
+        </service>
+        
+        <!-- Geocoder adapter service -->
+        <service id="ivory_google_map.geocoder.adapter" class="%ivory_google_map.geocoder.adapter.class%" public="false" />
         
         <!-- Geocoder request service -->
         <service id="ivory_google_map.geocoder_request" class="%ivory_google_map.geocoder_request.class%" scope="prototype">

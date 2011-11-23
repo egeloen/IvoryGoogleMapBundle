@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoding\Result;
 
 /**
  * GeocoderAddressComponent which describes a google map geocoder address component

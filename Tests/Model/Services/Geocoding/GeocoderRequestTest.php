@@ -3,6 +3,7 @@
 namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
 use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest;
+
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 

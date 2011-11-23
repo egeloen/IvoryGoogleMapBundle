@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding\Result;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderStatus;
 
 /**
  * GeocoderStatus test
