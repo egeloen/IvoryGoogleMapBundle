@@ -43,7 +43,7 @@ class Geocoder extends BaseGeocoder
             $request = new GeocoderRequest();
             $request->setCoordinate($latitude, $longitude);
             
-            return $this->geocode($request)
+            return $this->geocode($request);
         }
         else
             return parent::geocode($request);
