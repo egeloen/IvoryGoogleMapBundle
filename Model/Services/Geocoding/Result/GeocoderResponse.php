@@ -64,6 +64,40 @@ class GeocoderResponse extends Geocoded
      */
     public function addResult(GeocoderResult $result)
     {
+        if(is_null($this->latitude))
+        {
+            $this->latitude = $result->getGeometry()->getLocation()->getLatitude();
+            $this->longitude = $result->getGeometry()->getLocation()->getLongitude();
+            
+            foreach($result->getAddressComponents() as $addressComponent)
+            {
+                foreach($addressComponent->getTypes() as $type)
+                {
+                    switch($type) 
+                    {
+                        case 'postal_code':
+                            $this->zipcode = $addressComponent->getLongName();
+                        break;
+
+                        case 'locality':
+                            $this->city = $addressComponent->getLongName();
+                        break;
+
+                        case 'administrative_area_level_1':
+                            $this->region = $addressComponent->getLongName();
+                        break;
+
+                        case 'country':
+                            $this->country = $addressComponent->getLongName();
+                        break;
+
+                        default:
+                        break;
+                    }
+                }
+            }
+        }
+        
         $this->results[] = $result;
     }
     
