@@ -409,6 +409,11 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
+        if(!is_null($config['geocoder']['fake_ip']))
+            $container
+                ->getDefinition('ivory_google_map.geocoder.event_listener.fake_request')
+                ->replaceArgument(0, $config['geocoder']['fake_ip']);
+        
         if(!is_null($config['geocoder']['class']))
             $container->setParameter('ivory_google_map.geocoder.class', $config['geocoder']['class']);
         

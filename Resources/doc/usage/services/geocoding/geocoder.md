@@ -18,6 +18,10 @@ ivory_google_map:
         # Geocoder class
         class: "Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder"
         provider: 
+            # Fake IP
+            # If you set a fake IP, the parameter will replace the REMOTE_ADDR value by the given one
+            fake_ip: "123.345.567.123"
+
             # Provider class
             class: "Ivory\GoogleMapBundle\Model\Services\Geocoding\\Provider"
 

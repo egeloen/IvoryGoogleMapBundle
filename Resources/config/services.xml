@@ -45,6 +45,9 @@
         <parameter key="ivory_google_map.directions.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService</parameter>
         <parameter key="ivory_google_map.directions_request.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequest</parameter>
         
+        <!-- Event listener -->
+        <parameter key="ivory_google_map.geocoder.event_listener.fake_request.class">Ivory\GoogleMapBundle\EventListener\FakeRequestListener</parameter>
+        
         <!-- Herlper -->
         <parameter key="ivory_google_map.map.helper">Ivory\GoogleMapBundle\Templating\Helper\MapHelper</parameter>
         
@@ -627,6 +630,12 @@
         
         <!-- Geocoder cache service -->
         <service id="ivory_google_map.geocoder.cache" class="%ivory_google_map.geocoder.cache.class%" public="false" />
+        
+        <!-- Geocoder listener service -->
+        <service id="ivory_google_map.geocoder.event_listener.fake_request" class="%ivory_google_map.geocoder.event_listener.fake_request.class%">
+            <argument></argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
         
         <!-- Geocoder request service -->
         <service id="ivory_google_map.geocoder_request" class="%ivory_google_map.geocoder_request.class%" scope="prototype">

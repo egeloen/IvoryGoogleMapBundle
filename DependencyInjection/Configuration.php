@@ -646,6 +646,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('geocoder')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('fake_ip')->defaultValue(null)->end()
                         ->scalarNode('class')->defaultValue(null)->end()
                         ->scalarNode('adapter')->defaultValue(null)->end()
                         ->arrayNode('provider')->addDefaultsIfNotSet()

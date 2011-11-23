@@ -191,6 +191,7 @@ ivory_google_map:
     
     # Services
     geocoder:
+        fake_ip: "123.345.567.123"
         class: "Geocoder\Geocoder"
         provider: 
             class: "Geocoder\\Provider\HostIpProvider"
