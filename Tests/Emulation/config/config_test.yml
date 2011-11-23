@@ -197,7 +197,7 @@ ivory_google_map:
             api_key: "apikey"
             locale: "en"
         adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
-        cache: "Geocoder\Cache\Memcached"
+        cache: "Geocoder\Cache\InMemory"
         
     geocoder_request:
         address: "address"

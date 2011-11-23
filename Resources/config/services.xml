@@ -39,6 +39,7 @@
         <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder</parameter>
         <parameter key="ivory_google_map.geocoder.provider.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\Provider</parameter>
         <parameter key="ivory_google_map.geocoder.adapter.class">Geocoder\HttpAdapter\BuzzHttpAdapter</parameter>
+        <parameter key="ivory_google_map.geocoder.cache.class">Geocoder\Cache\InMemory</parameter>
         <parameter key="ivory_google_map.geocoder_request.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest</parameter>
         
         <parameter key="ivory_google_map.directions.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService</parameter>
@@ -611,6 +612,7 @@
         <!-- Geocoder service -->
         <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%" scope="prototype">
             <argument type="service" id="ivory_google_map.geocoder.provider" />
+            <argument type="service" id="ivory_google_map.geocoder.cache"></argument>
         </service>
         
         <!-- Geocoder provider service -->
@@ -622,6 +624,9 @@
         
         <!-- Geocoder adapter service -->
         <service id="ivory_google_map.geocoder.adapter" class="%ivory_google_map.geocoder.adapter.class%" public="false" />
+        
+        <!-- Geocoder cache service -->
+        <service id="ivory_google_map.geocoder.cache" class="%ivory_google_map.geocoder.cache.class%" public="false" />
         
         <!-- Geocoder request service -->
         <service id="ivory_google_map.geocoder_request" class="%ivory_google_map.geocoder_request.class%" scope="prototype">

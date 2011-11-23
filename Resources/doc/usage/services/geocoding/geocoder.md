@@ -35,8 +35,7 @@ ivory_google_map:
         adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
 
         # Cache class
-        # By default, there is no cache
-        cache: "Geocoder\Cache\Memcached"
+        cache: "Geocoder\Cache\InMemory"
 ```
 
 ``` php
@@ -73,6 +72,11 @@ Available adapter:
    - ``Geocoder\HttpAdapter\CurlHttpAdapter``
    - ``Geocoder\HttpAdapter\GuzzleHttpAdapter``
    - ``Geocoder\HttpAdapter\ZendHttpAdapter``
+
+Available cache layer:
+
+   - ``Geocoder\Cache\InMemory``
+   - ``Geocoder\Cache\Memcached``
 
 The specific Ivory Google Map Geocoder has been added to allow you to geocode a very advanced request & use the response to directly build your overlays.
 If you are interrested about this geocoder, the documentation is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/ivory_geocoder.md).
