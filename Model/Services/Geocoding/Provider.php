@@ -130,7 +130,7 @@ class Provider extends AbstractProvider implements ProviderInterface
         if(!$geocoderRequest->isValid())
             throw new \InvalidArgumentException('The geocoder request is not valid. It needs at least an address or a coordinate.');
         
-        $url = $this->generateUrl($request);
+        $url = $this->generateUrl($geocoderRequest);
         $response = $this->getAdapter()->getContent($url);
         $normalizedResponse = $this->parse($response);
         

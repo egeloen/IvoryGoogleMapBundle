@@ -402,16 +402,34 @@ class IvoryGoogleMapExtension extends Extension
     }
     
     /**
-     * Loads geocoder configuration
+     * Loads geocoder provider configuration
      *
      * @param array $config
      * @param ContainerBuilder $container 
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
-        $container->setParameter('ivory_google_map.geocoder.url', $config['geocoder']['url']);
-        $container->setParameter('ivory_google_map.geocoder.https', $config['geocoder']['https']);
-        $container->setParameter('ivory_google_map.geocoder.format', $config['geocoder']['format']);
+        if(!is_null($config['geocoder']['class']))
+            $container->setParameter('ivory_google_map.geocoder.class', $config['geocoder']['class']);
+        
+        if(!is_null($config['geocoder']['adapter']))
+            $container->setParameter('ivory_google_map.geocoder.adapter.class', $config['geocoder']['adapter']);
+        
+        if(!is_null($config['geocoder']['provider']['class']))
+            $container->setParameter('ivory_google_map.geocoder.provider.class', $config['geocoder']['provider']['class']);
+        
+        if(!is_null($config['geocoder']['provider']['api_key']))
+            $container
+                ->getDefinition('ivory_google_map.geocoder.provider')
+                ->replaceArgument(1, $config['geocoder']['provider']['api_key']);
+        
+        if(!is_null($config['geocoder']['provider']['locale']))
+            $container
+                ->getDefinition('ivory_google_map.geocoder.provider')
+                ->replaceArgument(!is_null($config['geocoder']['provider']['api_key']) ? 2 : 1, $config['geocoder']['provider']['locale']);
+        
+        if(!is_null($config['geocoder']['cache']))
+            $container->setParameter('ivory_google_map.geocoder.cache.class', $config['geocoder']['cache']);
     }
     
     /**
