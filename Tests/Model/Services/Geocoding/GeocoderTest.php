@@ -2,7 +2,6 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
 
-use Ivory\GoogleMapBundle\Tests\Model\Services\AbstractServiceTest;
 use Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder;
 
 /**
@@ -10,32 +9,33 @@ use Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class GeocoderTest extends AbstractServiceTest
+class GeocoderTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder $geocoder Geocoder testes
+     */
+    protected static $geocoder = null;
+    
     /**
      * @override
      */
     public function setUp()
     {
-        self::$service = new Geocoder();
+        self::$geocoder = new Geocoder();
     }
     
     /**
-     * Checks the geocoder default values
+     * Checks the geocode method
      */
-    public function testDefaultValues()
+    public function testGeocode()
     {
-        parent::testDefaultValues();
         
-        $this->assertEquals(self::$service->getUrl(), 'http://maps.googleapis.com/maps/api/geocode');
     }
     
     /**
-     * Checks the geocoloate method
-     * 
-     * @todo Finish implementation, i'm tired... :s
+     * Checks the reverse method
      */
-    public function testGeolocate()
+    public function testReverse()
     {
         
     }

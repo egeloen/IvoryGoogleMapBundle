@@ -1,13 +1,13 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding\Result;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResponse;
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResult;
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderAddressComponent;
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry;
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType;
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderStatus;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResult;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderAddressComponent;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderGeometry;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderStatus;
 
 use Ivory\GoogleMapBundle\Model\Base\Bound;
 use Ivory\GoogleMapBundle\Model\Base\Coordinate;
@@ -20,7 +20,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class GeocoderResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderResponse
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse
      */
     protected static $geocoderResponse = null;
     
@@ -44,7 +44,7 @@ class GeocoderResponseTest extends \PHPUnit_Framework_TestCase
         
         $geometryTest = new GeocoderGeometry(new Coordinate(1.2, 2.1, true), GeocoderLocationType::APPROXIMATE, $viewportTest, $boundTest);
         
-        $results = array(new GeocoderResult($addressComponentsTest, 'address', $geometryTest, true, array('type_1', 'type_2')));
+        $results = array(new GeocoderResult($addressComponentsTest, 'address', $geometryTest, array('type_1', 'type_2'), true));
         $status = GeocoderStatus::OK;
         
         self::$geocoderResponse = new GeocoderResponse($results, $status);
@@ -79,7 +79,7 @@ class GeocoderResponseTest extends \PHPUnit_Framework_TestCase
         
         $geometryTest = new GeocoderGeometry(new Coordinate(1.2, 2.1, true), GeocoderLocationType::APPROXIMATE, $viewportTest, $boundTest);
         
-        self::$geocoderResponse->addResult(new GeocoderResult($addressComponentsTest, 'address', $geometryTest, true, array('type_1', 'type_2')));
+        self::$geocoderResponse->addResult(new GeocoderResult($addressComponentsTest, 'address', $geometryTest, array('type_1', 'type_2'), true));
         $this->assertEquals(count(self::$geocoderResponse->getResults()), 2);
     }
     

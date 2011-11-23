@@ -1,8 +1,8 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Tests\Model\Services\Geocoding\Result;
 
-use Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationType;
+use Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderLocationType;
 
 /**
  * GeocoderLocationType test
@@ -19,7 +19,7 @@ class GeocoderLocationTypeTest extends \PHPUnit_Framework_TestCase
         try
         {
             $geocoderLocationTypeTest = new GeocoderLocationType();
-            $this->fail('The class "Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderLocationtype" can not be instanciated.');
+            $this->fail('The class "Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderLocationtype" can not be instanciated.');
         }
         catch(\Exception $e){}
     }

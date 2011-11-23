@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\GoogleMapBundle\Model\Services\Geocoding;
+namespace Ivory\GoogleMapBundle\Model\Services\Geocoding\Result;
 
 /**
  * Geocoder result which describes a google map geocoder result
@@ -21,7 +21,7 @@ class GeocoderResult
     protected $formattedAddress = null;
     
     /**
-     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry Geocoder result geometry
+     * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderGeometry Geocoder result geometry
      */
     protected $geometry = null;
     
@@ -40,17 +40,17 @@ class GeocoderResult
      *
      * @param array $addressComponents Geocoder result address components
      * @param string $formattedAddress Geocoder result formatted address
-     * @param Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry $geometry Geocoder result geometry
-     * @param boolean Geocoder result partial match flag
+     * @param Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderGeometry $geometry Geocoder result geometry
      * @param array $types Geocoder result types
+     * @param boolean Geocoder result partial match flag
      */
-    public function __construct(array $addressComponents, $formattedAddress, GeocoderGeometry $geometry, $partialMatch, array $types)
+    public function __construct(array $addressComponents, $formattedAddress, GeocoderGeometry $geometry, array $types, $partialMatch = null)
     {
         $this->setAddressComponents($addressComponents);
         $this->setFormattedAddress($formattedAddress);
         $this->setGeometry($geometry);
-        $this->setPartialMatch($partialMatch);
         $this->setTypes($types);
+        $this->setPartialMatch($partialMatch);
     }
     
     /**
@@ -79,7 +79,7 @@ class GeocoderResult
     /**
      * Add an address component to the geocoder result
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\GeocoderAddressComponent $addressComponent 
+     * @param Ivory\GoogleMapBundle\Model\Services\Result\GeocoderAddressComponent $addressComponent 
      */
     public function addAddressComponent(GeocoderAddressComponent $addressComponent)
     {
@@ -112,7 +112,7 @@ class GeocoderResult
     /**
      * Gets the geocoder result geometry
      *
-     * @return Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry
+     * @return Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderGeometry
      */
     public function getGeometry()
     {
@@ -122,7 +122,7 @@ class GeocoderResult
     /**
      * Sets the geocoder result geometry
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderGeometry $geometry 
+     * @param Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderGeometry $geometry 
      */
     public function setGeometry(GeocoderGeometry $geometry)
     {
@@ -144,9 +144,9 @@ class GeocoderResult
      *
      * @param boolean $partialMatch TRUE if the geocoder result is a partial match else FALSE
      */
-    public function setPartialMatch($partialMatch)
+    public function setPartialMatch($partialMatch = null)
     {
-        if(is_bool($partialMatch))
+        if(is_bool($partialMatch) || is_null($partialMatch))
             $this->partialMatch = $partialMatch;
         else
             throw new \InvalidArgumentException('The geocoder result partial match flag must be a boolean value.');
