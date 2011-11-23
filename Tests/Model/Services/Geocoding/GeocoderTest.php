@@ -26,6 +26,8 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Checks the geocode method
+     * 
+     * @todo Finish implementation
      */
     public function testGeocode()
     {
@@ -34,6 +36,8 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     
     /**
      * Checks the reverse method
+     * 
+     * @todo Finish implementation
      */
     public function testReverse()
     {
