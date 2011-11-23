@@ -37,6 +37,7 @@ The documentation is being rewritten.
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
       - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
          - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
+         - Directions API (Implemented but not yet documented)
    3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
 TODO
