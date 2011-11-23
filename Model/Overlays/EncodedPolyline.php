@@ -19,13 +19,14 @@ class EncodedPolyline extends AbstractOptionsAsset implements IExtendable
     
     /**
      * Create an encoded polyline
-     *
-     * @param string $value 
+     * 
+     * @param string $value
      */
-    public function __construct($value)
+    public function __construct($value = null)
     {
         $this->setPrefixJavascriptVariable('encoded_polyline_');
-        $this->setValue($value);
+        
+        if(!is_null($value)) $this->setValue($value);
     }
     
     /**
