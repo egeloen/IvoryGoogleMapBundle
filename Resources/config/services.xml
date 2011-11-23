@@ -28,6 +28,7 @@
         
         <parameter key="ivory_google_map.info_window.class">Ivory\GoogleMapBundle\Model\Overlays\InfoWindow</parameter>
         <parameter key="ivory_google_map.polyline.class">Ivory\GoogleMapBundle\Model\Overlays\Polyline</parameter>
+        <parameter key="ivory_google_map.encoded_polyline.class">Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline</parameter>
         <parameter key="ivory_google_map.polygon.class">Ivory\GoogleMapBundle\Model\Overlays\Polygon</parameter>
         <parameter key="ivory_google_map.rectangle.class">Ivory\GoogleMapBundle\Model\Overlays\Rectangle</parameter>
         <parameter key="ivory_google_map.circle.class">Ivory\GoogleMapBundle\Model\Overlays\Circle</parameter>
@@ -502,6 +503,17 @@
         
         <service id="ivory_google_map.helper.polyline" class="%ivory_google_map.polyline.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
+        
+        <!-- Encoded polyline service -->
+        <service id="ivory_google_map.encoded_polyline" class="%ivory_google_map.encoded_polyline.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.encoded_polyline.prefix_javascript_variable%</argument>
+            </call>
+
+            <call method="setOptions">
+                <argument>%ivory_google_map.encoded_polyline.options%</argument>
+            </call>
         </service>
 
         <!-- Polygon service -->

@@ -54,6 +54,7 @@ class Configuration implements ConfigurationInterface
         $this->addInfoWindowSection($rootNode);
         $this->addPolylineSection($rootNode);
         $this->addPolygonSection($rootNode);
+        $this->addEncodedPolylineSection($rootNode);
         $this->addRectangleSection($rootNode);
         $this->addCircleSection($rootNode);
         $this->addGroundOverlaySection($rootNode);
@@ -485,6 +486,26 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('polyline')->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('polyline_')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+    
+    /**
+     * Add the encoded polyline section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addEncodedPolylineSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('encoded_polyline')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('encoded_polyline_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()

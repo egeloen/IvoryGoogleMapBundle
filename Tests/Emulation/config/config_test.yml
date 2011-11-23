@@ -140,6 +140,11 @@ ivory_google_map:
         prefix_javascript_variable: "p"
         options:
             option: "value"
+            
+    encoded_polyline:
+        prefix_javascript_variable: "ep"
+        options:
+            option: "value"
     
     polygon:
         prefix_javascript_variable: "p"

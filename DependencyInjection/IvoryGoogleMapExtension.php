@@ -55,6 +55,7 @@ class IvoryGoogleMapExtension extends Extension
         // Overlay sections
         $this->loadInfoWindow($config, $container);
         $this->loadPolyline($config, $container);
+        $this->loadEncodedPolyline($config, $container);
         $this->loadPolygon($config, $container);
         $this->loadRectangle($config, $container);
         $this->loadCircle($config, $container);
@@ -323,6 +324,18 @@ class IvoryGoogleMapExtension extends Extension
     {
         $container->setParameter('ivory_google_map.polyline.prefix_javascript_variable', $config['polyline']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.polyline.options', $config['polyline']['options']);
+    }
+    
+    /**
+     * Loads encoded polyline configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container 
+     */
+    protected function loadEncodedPolyline(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.encoded_polyline.prefix_javascript_variable', $config['encoded_polyline']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.encoded_polyline.options', $config['encoded_polyline']['options']);
     }
     
     /**
