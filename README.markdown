@@ -22,6 +22,7 @@ The documentation is being rewritten.
          - [Marker](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker.md)
          - [Info window](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/info_window.md)
          - [Polyline](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/polyline.md)
+         - [Encoded Polyline](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/encoded_polyline.md)
          - [Polygon](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/polygon.md)
          - [Rectangle](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/rectangle.md)
          - [Circle](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/circle.md)
@@ -37,7 +38,7 @@ The documentation is being rewritten.
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
       - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
          - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
-         - Directions API (Implemented but not yet documented)
+         - Directions API (Implemented & tested but not yet documented)
    3. [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
 
 TODO
