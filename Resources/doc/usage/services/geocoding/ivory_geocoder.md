@@ -49,11 +49,11 @@ A request can return many results. The geocoder response wraps an array of ``Ivo
 $results = $reponse->getResults();
 ```
 
-#### Geocoder result
+### Geocoder result
 
 Each result wraps an human readable adress, some address & geometry informations, a partial match flag & some result types.
 
-##### Human readable address
+#### Human readable address
 
 The method ``getFormattedAddress`` is a string containing the human-readable address of this location. 
 Often this address is equivalent to the "postal address," which sometimes differs from country to country. (Note that some countries, such as the United Kingdom, do not allow distribution of true postal addresses due to licensing restrictions.)
@@ -69,7 +69,7 @@ foreach($results as $result)
     $address = $result->getFormattedAddress();
 ```
 
-##### Address informations
+#### Address informations
 
 The method ``getAddressComponents`` returns an array containing the separate address components. Each address_component typically contains:
 
@@ -94,7 +94,7 @@ foreach($results as $result)
 }
 ```
 
-##### Geometry informations
+#### Geometry informations
 
 Geometry contains the following information:
 
@@ -118,7 +118,7 @@ foreach($results as $result)
 }
 ```
 
-##### Partial match flag
+#### Partial match flag
 
 The partial match flag indicates that the geocoder did not return an exact match for the original request, though it did match part of the requested address. 
 You may wish to examine the original request for misspellings and/or an incomplete address. 
@@ -134,7 +134,7 @@ foreach($results as $result)
     $partialMatch = $result->isPartialMatch();
 ```
 
-##### Result types
+#### Result types
 
 The result types is an array indicates the type of the returned result. 
 This array contains a set of one or more tags identifying the type of feature returned in the result. 
