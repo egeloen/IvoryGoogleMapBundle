@@ -18,7 +18,7 @@ class WebTestCase extends BaseWebTestCase
     protected static $initialize = array();
     
     /**
-     * Remove emulation cache & logs directories
+     * Remove emulation cache & logs directories for the given environment
      * 
      * @param string $environment
      */
@@ -28,7 +28,9 @@ class WebTestCase extends BaseWebTestCase
         {
             $filesystem = new Filesystem();
             $filesystem->remove(__DIR__.'/cache/'.$environment);
-            $filesystem->remove(__DIR__.'/logs');
+            
+            if(empty(self::$initialize))
+                $filesystem->remove(__DIR__.'/logs');
             
             self::$initialize[$environment] = true;
         }
