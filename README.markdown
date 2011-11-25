@@ -10,10 +10,10 @@ Actually, this bundle allows you to manage:
 
 It uses the google map API v3.
 
+[![Build Status](https://secure.travis-ci.org/egeloen/IvoryGoogleMapBundle.png)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
+
 Documentation
 -------------
-
-The documentation is being rewritten.
 
    1. [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
    2. [Usage](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage.md)
