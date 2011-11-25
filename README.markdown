@@ -1,5 +1,7 @@
 Provides a Google Map integration for your Symfony2 Project.
 
+[![Build Status](https://secure.travis-ci.org/egeloen/IvoryGoogleMapBundle.png)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
+
 Actually, this bundle allows you to manage:
 
    - Map 
@@ -9,8 +11,6 @@ Actually, this bundle allows you to manage:
    - Services: Geocoding API
 
 It uses the google map API v3.
-
-[![Build Status](https://secure.travis-ci.org/egeloen/IvoryGoogleMapBundle.png)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
 
 Documentation
 -------------
