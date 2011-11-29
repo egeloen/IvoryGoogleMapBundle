@@ -37,9 +37,6 @@ ivory_google_map:
 
         # Adapter class
         adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
-
-        # Cache class
-        cache: "Geocoder\Cache\InMemory"
 ```
 
 ``` php
@@ -77,10 +74,9 @@ Available adapter:
    - ``Geocoder\HttpAdapter\GuzzleHttpAdapter``
    - ``Geocoder\HttpAdapter\ZendHttpAdapter``
 
-Available cache layer:
+## The standard Geocoder
 
-   - ``Geocoder\Cache\InMemory``
-   - ``Geocoder\Cache\Memcached``
+If you use the standard Geocoder components, I recommand you to directly read this own documentation available [here](http://www.geocoder-php.org/).
 
 ## The Ivory Google Map Geocoder
 

@@ -677,7 +677,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('locale')->defaultValue(null)->end()
                             ->end()
                         ->end()
-                        ->scalarNode('cache')->defaultValue(null)->end()
                     ->end()
                 ->end()
             ->end();

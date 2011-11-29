@@ -445,9 +445,6 @@ class IvoryGoogleMapExtension extends Extension
             $container
                 ->getDefinition('ivory_google_map.geocoder.provider')
                 ->replaceArgument(!is_null($config['geocoder']['provider']['api_key']) ? 2 : 1, $config['geocoder']['provider']['locale']);
-        
-        if(!is_null($config['geocoder']['cache']))
-            $container->setParameter('ivory_google_map.geocoder.cache.class', $config['geocoder']['cache']);
     }
     
     /**

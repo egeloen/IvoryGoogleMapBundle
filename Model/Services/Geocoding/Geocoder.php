@@ -18,17 +18,7 @@ class Geocoder extends BaseGeocoder
     public function geocode($request)
     {
         if($this->getProvider() instanceof Provider)
-        {
-            $result = $this->retrieve($request);
-
-            if(is_null($result))
-            {
-                $result = $this->getProvider()->getGeocodedData($request);
-                $this->store($request, $result);
-            }
-
-            return $result;
-        }
+            return $this->getProvider()->getGeocodedData($request);
         else
             return parent::geocode($request);
     }
@@ -41,15 +31,7 @@ class Geocoder extends BaseGeocoder
         if($this->getProvider() instanceof Provider)
         {
             $value = $latitude.'-'.$longitude;
-            $result = $this->retrieve($value);
-
-            if(is_null($result))
-            {
-                $result = $this->getProvider()->getReversedData(array($latitude, $longitude));
-                $this->store($value, $result);
-            }
-
-            return $result;
+            return $this->getProvider()->getReversedData(array($latitude, $longitude));
         }
         else
             return parent::reverse($latitude, $longitude);
