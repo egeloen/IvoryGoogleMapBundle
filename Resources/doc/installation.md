@@ -40,7 +40,7 @@ $ git submodule add http://github.com/egeloen/IvoryGoogleMapBundle.git vendor/bu
 
 $loader->registerNamespaces(array(
     'Buzz'     => __DIR__.'/../vendor',
-    'Geocoder' => __DIR__.'/../vendor',
+    'Geocoder' => __DIR__.'/../vendor/Geocoder/src',
     'Ivory'    => __DIR__.'/../vendor/bundles',
     // ...
 );
