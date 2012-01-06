@@ -28,6 +28,7 @@ class MapServiceTest extends WebTestCase
         $this->assertNull($map->getBound()->getNorthEast());
         $this->assertNull($map->getBound()->getSouthWest());
         $this->assertEquals(count($map->getBound()->getExtends()), 0);
+        $this->assertEquals($map->getLanguage(), 'en');
         $this->assertEquals($map->getMapOptions(), array(
             'mapTypeId' => 'roadmap',
             'zoom' => 3
@@ -58,6 +59,7 @@ class MapServiceTest extends WebTestCase
         $this->assertEquals($map->getBound()->getNorthEast()->getLongitude(), 2.1);
         $this->assertFalse($map->getBound()->getNorthEast()->isNoWrap());
         $this->assertEquals(count($map->getBound()->getExtends()), 0);
+        $this->assertEquals($map->getLanguage(), 'fr');
         $this->assertEquals($map->getMapOptions(), array(
             'mapTypeId' => 'satellite',
             'zoom' => 10,

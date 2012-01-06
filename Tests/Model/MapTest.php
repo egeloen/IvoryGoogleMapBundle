@@ -75,6 +75,16 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(count(self::$map->getRectangles()), 0);
         $this->assertEquals(count(self::$map->getCircles()), 0);
         $this->assertEquals(count(self::$map->getGroundOverlays()), 0);
+        $this->assertEquals(self::$map->getLanguage(), 'en');
+    }
+    
+    /**
+     * Checks the language getter & setter
+     */
+    public function testLanguage()
+    {
+        self::$map->setLanguage('fr');
+        $this->assertEquals(self::$map->getLanguage(), 'fr');
     }
     
     /**
