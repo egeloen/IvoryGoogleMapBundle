@@ -134,6 +134,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $groundOverlays = array();
 
     /**
+     * @var string Api language
+     */
+    protected $language = 'en';
+
+    /**
      * Create a map
      */
     public function __construct()
@@ -1070,4 +1075,22 @@ class Map extends AbstractJavascriptVariableAsset
         if($this->autoZoom)
             $this->bound->extend($groundOverlay);
     }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+
 }

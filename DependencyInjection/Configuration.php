@@ -120,6 +120,7 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('stylesheet_options')
                             ->useAttributeAsKey('stylesheet_options')->prototype('scalar')->end()
                         ->end()
+                        ->scalarNode('language')->defaultValue('en')->end()
                     ->end()
                 ->end()
             ->end();

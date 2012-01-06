@@ -99,6 +99,7 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.height', $config['map']['height']);
         $container->setParameter('ivory_google_map.map.map_options', $config['map']['map_options']);
         $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);
+        $container->setParameter('ivory_google_map.map.language', $config['map']['language']);
     }
     
     /**
