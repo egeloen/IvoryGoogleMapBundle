@@ -137,6 +137,7 @@ class Map extends AbstractJavascriptVariableAsset
      * @var string Api language
      */
     protected $language = 'en';
+
     /**
      * Create a map
      */
