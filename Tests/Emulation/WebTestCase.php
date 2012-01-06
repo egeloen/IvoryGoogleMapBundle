@@ -3,7 +3,7 @@
 namespace Ivory\GoogleMapBundle\Tests\Emulation;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
-use Symfony\Component\HttpKernel\Util\Filesystem;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Web test case
