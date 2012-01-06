@@ -147,6 +147,10 @@
             <call method="setStylesheetOptions">
                 <argument>%ivory_google_map.map.stylesheet_options%</argument>
             </call>
+
+            <call method="setLanguage">
+                <argument>%ivory_google_map.map.language%</argument>
+            </call>
             
             <call method="setEventManager">
                 <argument type="service" id="ivory_google_map.event_manager" />

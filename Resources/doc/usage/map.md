@@ -67,6 +67,9 @@ ivory_google_map:
         stylesheet_options:
             border: "1px solid #000"
             background-color: "#fff"
+
+        # google map Api language, default en
+        language: en
 ```
 
 ``` php
@@ -113,6 +116,8 @@ $map->setStylesheetOptions(array(
     'width' => '300px',
     'height' => '300px'
 ));
+
+$map->setLanguage('en');
 ```
 
 ## Configure map center & zoom
