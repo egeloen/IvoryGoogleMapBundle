@@ -38,12 +38,26 @@ class InfoWindowTest extends AbstractOptionsAssetTest
     {
         parent::testDefaultValues();
         
+        $this->assertFalse(self::$object->isAutoClose());
         $this->assertNull(self::$object->getPosition());
         $this->assertNull(self::$object->getPixelOffset());
         $this->assertEquals(self::$object->getContent(), '<p>Default content</p>');
         $this->assertFalse(self::$object->isOpen());
         $this->assertTrue(self::$object->isAutoOpen());
         $this->assertEquals(self::$object->getOpenEvent(), 'click');
+        $this->assertFalse(self::$object->isAutoClose());
+    }
+    
+    /**
+     * Checks the auto close getter & setter
+     */
+    public function testAutoClose()
+    {
+        self::$object->setAutoClose(true);
+        $this->assertTrue(self::$object->isAutoClose());
+        
+        self::$object->setAutoClose(false);
+        $this->assertFalse(self::$object->isAutoClose());
     }
     
     /**

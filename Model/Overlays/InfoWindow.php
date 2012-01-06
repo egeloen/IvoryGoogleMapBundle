@@ -44,6 +44,11 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * @var string Event which opens the info window
      */
     protected $openEvent = MouseEvent::CLICK;
+    
+    /**
+     * @var boolean TRUE if the info window closes when one is opened else FALSE
+     */
+    protected $autoClose = false;
 
     /**
      * Create an info window
@@ -246,5 +251,28 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
             $this->openEvent = $openEvent;
         else
             throw new \InvalidArgumentException(sprintf('The only available open event are : %s', implode(', ', MouseEvent::getMouseEvents())));
+    }
+    
+    /**
+     * Gets the auto close flag
+     *
+     * @return boolean TRUE if all opened info windows close when one is opened else FALSE
+     */
+    public function isAutoClose()
+    {
+        return $this->autoClose;
+    }
+    
+    /**
+     * Sets the auto close flag
+     *
+     * @param boolean $autoClose TRUE if all opened info windows close when one is opened else FALSE
+     */
+    public function setAutoClose($autoClose)
+    {
+        if(is_bool($autoClose))
+            $this->autoClose = $autoClose;
+        else
+            throw new \InvalidArgumentException('The info window auto close flag must be a boolean value.');
     }
 }
