@@ -486,6 +486,10 @@
             <call method="setOpenEvent">
                 <argument>%ivory_google_map.info_window.open_event%</argument>
             </call>
+            
+            <call method="setAutoClose">
+                <argument>%ivory_google_map.info_window.auto_close%</argument>
+            </call>
 
             <call method="setOptions">
                 <argument>%ivory_google_map.info_window.options%</argument>

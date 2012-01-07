@@ -312,6 +312,7 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.info_window.open', $config['info_window']['open']);
         $container->setParameter('ivory_google_map.info_window.auto_open', $config['info_window']['auto_open']);
         $container->setParameter('ivory_google_map.info_window.open_event', $config['info_window']['open_event']);
+        $container->setParameter('ivory_google_map.info_window.auto_close', $config['info_window']['auto_close']);
         $container->setParameter('ivory_google_map.info_window.options', $config['info_window']['options']);
     }
     

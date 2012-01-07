@@ -29,6 +29,7 @@ class InfoWindowServiceTest extends WebTestCase
         $this->assertFalse($infoWindow->isOpen());
         $this->assertTrue($infoWindow->isAutoOpen());
         $this->assertEquals($infoWindow->getOpenEvent(), 'click');
+        $this->assertFalse($infoWindow->isAutoClose());
         $this->assertEquals(count($infoWindow->getOptions()), 0);
     }
     
@@ -52,6 +53,7 @@ class InfoWindowServiceTest extends WebTestCase
         $this->assertTrue($infoWindow->isOpen());
         $this->assertFalse($infoWindow->isAutoOpen());
         $this->assertEquals($infoWindow->getOpenEvent(), 'dblclick');
+        $this->assertTrue($infoWindow->isAutoClose());
         $this->assertEquals($infoWindow->getOptions(), array('option' => 'value'));
     }
 }

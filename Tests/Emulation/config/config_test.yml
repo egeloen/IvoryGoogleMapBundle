@@ -134,6 +134,7 @@ ivory_google_map:
         open: true
         auto_open: false
         open_event: "dblclick"
+        auto_close: true
         options:
             option: "value"
             
