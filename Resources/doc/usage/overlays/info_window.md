@@ -50,6 +50,9 @@ ivory_google_map:
         # Available open event : click, dblclick, mouseup, mousedown, mouseover, mouseout
         open_event: "click"
 
+        # If it is enabled, the info window will be closed each time an info window configurated with the auto open flag is opened.
+        auto_close: false
+
         # Custom info window options
         # By default, there is no options
         options:
@@ -80,6 +83,7 @@ $infoWindow->setContent('<p>Default content</p>');
 $infoWindow->setOpen(false);
 $infoWindow->setAutoOpen(true);
 $infoWindow->setOpenEvent(MouseEvent::CLICK);
+$infoWindow->setAutoClose(false);
 $infoWindow->setOption('disableAutoPan', true);
 $infoWindow->setOption('zIndex', 10);
 $infoWindow->setOptions(array(
