@@ -140,6 +140,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             '<script type="text/javascript">'.PHP_EOL.
             'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL.
             $mapTest->getJavascriptVariable().'.setCenter(new google.maps.LatLng(1.1, 2.1, true));'.PHP_EOL.
+            'var closable_info_windows = Array();'.PHP_EOL.
             '</script>'.PHP_EOL
         );
     }

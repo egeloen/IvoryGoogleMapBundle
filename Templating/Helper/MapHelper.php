@@ -222,8 +222,36 @@ class MapHelper
         else
             $html[] = $this->renderCenter($map);
         
+        $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
         $html[] = '</script>'.PHP_EOL;
+        
+        return implode('', $html);
+    }
+    
+    /**
+     * Renders the global map variables
+     *
+     * @return string HTML output
+     */
+    public function renderGlobalVariables(Map $map)
+    {
+        $html = array();
+        
+        $closableInfoWindows = array();
+        foreach($map->getInfoWindows() as $infoWindow)
+        {
+            if($infoWindow->isAutoClose())
+                $closableInfoWindows[] = $infoWindow->getJavascriptVariable();
+        }
+        
+        foreach($map->getMarkers() as $marker)
+        {
+            if($marker->hasInfoWindow() && $marker->getInfoWindow()->isAutoClose())
+                $closableInfoWindows[] = $marker->getInfoWindow()->getJavascriptVariable();
+        }
+        
+        $html[] = sprintf('var closable_info_windows = Array(%s);'.PHP_EOL, implode(', ', $closableInfoWindows));
         
         return implode('', $html);
     }
@@ -379,7 +407,9 @@ class MapHelper
                 $event = new Event();
                 $event->setInstance($marker->getJavascriptVariable());
                 $event->setEventName($marker->getInfoWindow()->getOpenEvent());
-                $event->setHandle(sprintf('function(){%s}', str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker))));
+                $event->setHandle(sprintf('function(){for(var info_window in closable_info_windows){closable_info_windows[info_window].close();%s}}',
+                    str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker))
+                ));
 
                 $map->getEventManager()->addEvent($event);
 
