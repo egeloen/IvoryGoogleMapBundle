@@ -407,7 +407,7 @@ class MapHelper
                 $event = new Event();
                 $event->setInstance($marker->getJavascriptVariable());
                 $event->setEventName($marker->getInfoWindow()->getOpenEvent());
-                $event->setHandle(sprintf('function(){for(var info_window in closable_info_windows){closable_info_windows[info_window].close();%s}}',
+                $event->setHandle(sprintf('function(){for(var info_window in closable_info_windows){closable_info_windows[info_window].close();}%s}',
                     str_replace(PHP_EOL, '', $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker))
                 ));
 
