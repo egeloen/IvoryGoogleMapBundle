@@ -101,7 +101,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * Checks the asyncronous load getter & setter
+     * Checks the asynchronous map load getter & setter
      */
     public function testAsync()
     {

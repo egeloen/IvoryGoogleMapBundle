@@ -18,7 +18,7 @@ ivory_google_map:
         # HTML container ID used for the map container
         html_container: "map_canvas"
 
-        # If this flag is enabled, the map will load asyncronous
+        # If this flag is enabled, the map will load asynchronous
         async: false
 
         # If this flag is enabled, the map will autozoom on the overlays added

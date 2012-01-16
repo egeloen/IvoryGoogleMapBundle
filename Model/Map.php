@@ -22,7 +22,7 @@ class Map extends AbstractJavascriptVariableAsset
     protected $htmlContainerId = 'map_canvas';
 
     /**
-     * @var boolean TRUE if the map loads asyncronous else FALSE
+     * @var boolean TRUE if the map loads asynchronous else FALSE
      */
     protected $async = false;
 
@@ -179,9 +179,9 @@ class Map extends AbstractJavascriptVariableAsset
     }
 
     /**
-     * Check if the map loads is asyncronous
+     * Check if the map loads is asynchronous
      *
-     * @return boolean TRUE if the map loads is asyncronous else FALSE
+     * @return boolean TRUE if the map load is asynchronous else FALSE
      */
     public function isAsync()
     {
@@ -189,16 +189,16 @@ class Map extends AbstractJavascriptVariableAsset
     }
 
     /**
-     * Sets if the map loads asyncronous
+     * Sets if the map loads asynchronous
      *
-     * @param boolean $async TRUE if the map loads asyncronous else FALSE
+     * @param boolean $async TRUE if the map loads asynchronous else FALSE
      */
     public function setAsync($async)
     {
         if(is_bool($async))
             $this->async = $async;
         else
-            throw new \InvalidArgumentException('The asyncronous load of a map must be a boolean value.');
+            throw new \InvalidArgumentException('The asynchronous load of a map must be a boolean value.');
     }
 
     /**
