@@ -213,9 +213,11 @@ class MapHelper
         }
         
         $html[] = '<script type="text/javascript">'.PHP_EOL;
+
         if($map->isAsync()) {
             $html[] = 'function map_initialize() {'.PHP_EOL;
         }
+
         $html[] = $this->renderMap($map);
         $html[] = $this->renderMarkers($map);
         $html[] = $this->renderInfoWindows($map);
@@ -233,9 +235,11 @@ class MapHelper
         
         $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
+
         if($map->isAsync()) {
             $html[] = '}'.PHP_EOL;
         }
+        
         $html[] = '</script>'.PHP_EOL;
         
         return implode('', $html);

@@ -18,6 +18,9 @@ ivory_google_map:
         # HTML container ID used for the map container
         html_container: "map_canvas"
 
+        # If this flag is enabled, the map will load asyncronous
+        async: false
+
         # If this flag is enabled, the map will autozoom on the overlays added
         auto_zoom: false
 
@@ -92,6 +95,8 @@ $map = $this->get('ivory_google_map.map');
 // Configure your map options
 $map->setPrefixJavascriptVariable('map_');
 $map->setHtmlContainerId('map_canvas');
+
+$map->setAsync(false);
 
 $map->setAutoZoom(false);
 

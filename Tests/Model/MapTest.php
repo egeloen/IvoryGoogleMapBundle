@@ -44,6 +44,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     public function testDefaultValues()
     {
         $this->assertEquals(self::$map->getHtmlContainerId(), 'map_canvas');
+        $this->assertFalse(self::$map->isAsync());
         $this->assertFalse(self::$map->isAutoZoom());
         $this->assertEquals(self::$map->getCenter()->getLatitude(), 0);
         $this->assertEquals(self::$map->getCenter()->getLongitude(), 0);
@@ -97,6 +98,18 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         
         $this->setExpectedException('InvalidArgumentException');
         self::$map->setHtmlContainerId(0);
+    }
+
+    /**
+     * Checks the asyncronous load getter & setter
+     */
+    public function testAsync()
+    {
+        self::$map->setAsync(true);
+        $this->assertTrue(self::$map->isAsync());
+        
+        $this->setExpectedException('InvalidArgumentException');
+        self::$map->setAsync('foo');
     }
     
     /**
