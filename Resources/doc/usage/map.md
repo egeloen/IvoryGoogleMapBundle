@@ -221,6 +221,29 @@ $map->setMapOption('mapTypeId', MapTypeId::TERRAIN);
 $map->setMapOption('mapTypeId', 'terrain');
 ```
 
+## Loading map asynchronously
+
+For loading the map asynchronously, you need to set the async property to true. Enabling this feature the map will load asynchronously, allowing you to load the map through AJAX. To do this, the javascript code is wrapped by a function called ``load_ivory_google_map`` and the script responsible to load Google API adds the ``callback`` parameter with this value.
+
+``` php
+<?php
+
+// Requests the ivory google map service
+$map = $this->get('ivory_google_map.map');
+
+$map->setAsync(true);
+```
+
+The javascript function ``{{ google_map_js(map) }}`` with the asynchronous mode renders an html javascript block with all code needed for displaying your map wrapped by ``load_ivory_google_map`` function.
+
+``` html
+<script type="text/javascript">
+    function load_ivory_google_map() {
+        // Code needed for displaying your map 
+    }    
+</script>
+```
+
 ## Add overlays to your map
 
 Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map. 
