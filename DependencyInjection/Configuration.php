@@ -84,6 +84,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('map_')->end()
                         ->scalarNode('html_container')->defaultValue('map_canvas')->end()
+                        ->scalarNode('async')->defaultFalse()->end()
                         ->scalarNode('auto_zoom')->defaultFalse()->end()
                         ->arrayNode('center')->addDefaultsIfNotSet()
                             ->children()

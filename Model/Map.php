@@ -22,6 +22,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $htmlContainerId = 'map_canvas';
 
     /**
+     * @var boolean TRUE if the map loads asyncronous else FALSE
+     */
+    protected $async = false;
+
+    /**
      * @var boolean TRUE if the map autozoom else FALSE
      */
     protected $autoZoom = false;
@@ -171,6 +176,29 @@ class Map extends AbstractJavascriptVariableAsset
             $this->htmlContainerId = $htmlContainerId;
         else
             throw new \InvalidArgumentException('The html container id of a map must be a string value.');
+    }
+
+    /**
+     * Check if the map loads is asyncronous
+     *
+     * @return boolean TRUE if the map loads is asyncronous else FALSE
+     */
+    public function isAsync()
+    {
+        return $this->async;
+    }
+
+    /**
+     * Sets if the map loads asyncronous
+     *
+     * @param boolean $async TRUE if the map loads asyncronous else FALSE
+     */
+    public function setAsync($async)
+    {
+        if(is_bool($async))
+            $this->async = $async;
+        else
+            throw new \InvalidArgumentException('The asyncronous load of a map must be a boolean value.');
     }
 
     /**
