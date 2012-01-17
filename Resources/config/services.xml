@@ -101,6 +101,10 @@
                 <argument>%ivory_google_map.map.html_container%</argument>
             </call>
 
+            <call method="setAsync">
+                <argument>%ivory_google_map.map.async%</argument>
+            </call>
+
             <call method="setAutoZoom">
                 <argument>%ivory_google_map.map.auto_zoom%</argument>
             </call>

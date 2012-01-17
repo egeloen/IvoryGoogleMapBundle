@@ -202,11 +202,22 @@ class MapHelper
     public function renderJavascripts(Map $map)
     {
         $html = array();
-
-        $html[] = sprintf('<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&language=%s"></script>'.PHP_EOL,
-            $map->getLanguage()
-        );
+        if($map->isAsync()) {
+            $html[] = sprintf('<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&language=%s&callback=load_ivory_google_map"></script>'.PHP_EOL,
+                $map->getLanguage()
+            );
+        } else {
+            $html[] = sprintf('<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&language=%s"></script>'.PHP_EOL,
+                $map->getLanguage()
+            );
+        }
+        
         $html[] = '<script type="text/javascript">'.PHP_EOL;
+
+        if($map->isAsync()) {
+            $html[] = 'function load_ivory_google_map() {'.PHP_EOL;
+        }
+
         $html[] = $this->renderMap($map);
         $html[] = $this->renderMarkers($map);
         $html[] = $this->renderInfoWindows($map);
@@ -224,6 +235,11 @@ class MapHelper
         
         $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
+
+        if($map->isAsync()) {
+            $html[] = '}'.PHP_EOL;
+        }
+        
         $html[] = '</script>'.PHP_EOL;
         
         return implode('', $html);

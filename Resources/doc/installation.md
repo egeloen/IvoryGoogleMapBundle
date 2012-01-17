@@ -28,7 +28,7 @@ Run the vendors script
 
 ``` bash
 $ git submodule add http://github.com/kriswallsmith/Buzz.git vendor
-$ git submodule ass http://github.com/willdurand/Geocoder.git vendor
+$ git submodule add http://github.com/willdurand/Geocoder.git vendor
 $ git submodule add http://github.com/egeloen/IvoryGoogleMapBundle.git vendor/bundles/Ivory/GoogleMapBundle
 ```
 
@@ -40,7 +40,7 @@ $ git submodule add http://github.com/egeloen/IvoryGoogleMapBundle.git vendor/bu
 
 $loader->registerNamespaces(array(
     'Buzz'     => __DIR__.'/../vendor/buzz/lib',
-    'Geocoder' => __DIR__.'/../vendor/Geocoder/src',
+    'Geocoder' => __DIR__.'/../vendor/geocoder/src',
     'Ivory'    => __DIR__.'/../vendor/bundles',
     // ...
 );
