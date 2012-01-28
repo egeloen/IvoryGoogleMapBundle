@@ -2,7 +2,7 @@
     "name": "egeloen/google-map-bundle",
     "type": "symfony-bundle",
     "description": "Provides a google map integration for your Symfony2 Project.",
-    "keywords": ["Google map"],
+    "keywords": ["google map"],
     "license": "MIT",
     "authors": [
         {
