@@ -9,7 +9,7 @@ use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MarkerShapeHelper 
+class MarkerShapeHelper
 {
     /**
      * Renders the marker shape

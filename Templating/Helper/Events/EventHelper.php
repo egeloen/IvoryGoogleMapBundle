@@ -10,12 +10,12 @@ use Ivory\GoogleMapBundle\Model\Events\Event;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EventHelper
-{   
+{
     /**
      * Renders the javascript dom event
      *
      * @param Ivory\GoogleMapBundle\Model\Events\Event $domEvent
-     * @return string HTML output 
+     * @return string HTML output
      */
     public function renderDomEvent(Event $domEvent)
     {
@@ -27,12 +27,12 @@ class EventHelper
             json_encode($domEvent->isCapture())
         );
     }
-    
+
     /**
      * Renders the javascript dom event once
      *
      * @param Ivory\GoogleMapBundle\Model\Events\Event $domEventOnce
-     * @return string HTML output 
+     * @return string HTML output
      */
     public function renderDomEventOnce(Event $domEventOnce)
     {
@@ -44,12 +44,12 @@ class EventHelper
             json_encode($domEventOnce->isCapture())
         );
     }
-    
+
     /**
      * Renders the javascript event
      *
      * @param Ivory\GoogleMapBundle\Model\Events\Event $event
-     * @return string HTML output 
+     * @return string HTML output
      */
     public function renderEvent(Event $event)
     {
@@ -60,12 +60,12 @@ class EventHelper
             $event->getHandle()
         );
     }
-    
+
     /**
      * Renders the javascript event once
      *
      * @param Ivory\GoogleMapBundle\Model\Events\Event $eventOnce
-     * @return string HTML output 
+     * @return string HTML output
      */
     public function renderEventOnce(Event $eventOnce)
     {

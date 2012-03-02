@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
  * Fake Request Listener
- * 
+ *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class FakeRequestListener
@@ -20,13 +20,13 @@ class FakeRequestListener
     /**
      * Creates a fake IP request
      *
-     * @param string $fakeIp 
+     * @param string $fakeIp
      */
     public function __construct($fakeIp)
     {
         $this->setFakeIp($fakeIp);
     }
-    
+
     /**
      * Gets the fake IP
      *
@@ -36,11 +36,11 @@ class FakeRequestListener
     {
         return $this->fakeIp;
     }
-    
+
     /**
      * Sets the fake IP
      *
-     * @param string $fakeIp 
+     * @param string $fakeIp
      */
     public function setFakeIp($fakeIp)
     {
@@ -53,7 +53,7 @@ class FakeRequestListener
     /**
      *
      * @param GetResponseEvent $event
-     * @return type 
+     * @return type
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

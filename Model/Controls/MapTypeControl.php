@@ -21,25 +21,25 @@ class MapTypeControl
         MapTypeId::ROADMAP,
         MapTypeId::SATELLITE
     );
-    
+
     /**
      * @var string Control position
      */
     protected $controlPosition = ControlPosition::TOP_RIGHT;
-    
+
     /**
      * @var string Map type control style
      */
     protected $mapTypeControlStyle = MapTypeControlStyle::DEFAULT_;
-    
+
     /**
      * Create a map type control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the map type ids
      *
@@ -49,24 +49,24 @@ class MapTypeControl
     {
         return $this->mapTypeIds;
     }
-    
+
     /**
      * Sets the map type ids
      *
-     * @param array $mapTypeIds 
+     * @param array $mapTypeIds
      */
     public function setMapTypeIds($mapTypeIds)
     {
         $this->mapTypeIds = array();
-        
+
         foreach($mapTypeIds as $mapTypeId)
             $this->addMapTypeId($mapTypeId);
     }
-    
+
     /**
      * Add a map type id
      *
-     * @param string $mapTypeId 
+     * @param string $mapTypeId
      */
     public function addMapTypeId($mapTypeId)
     {
@@ -78,7 +78,7 @@ class MapTypeControl
         else
             throw new \InvalidArgumentException(sprintf('The map type id of a map type control can only be : %s.', implode(', ', MapTypeId::getMapTypeIds())));
     }
-    
+
     /**
      * Gets the control position
      *
@@ -88,11 +88,11 @@ class MapTypeControl
     {
         return $this->controlPosition;
     }
-    
+
     /**
      * Sets the control position
      *
-     * @param string $controlPosition 
+     * @param string $controlPosition
      */
     public function setControlPosition($controlPosition)
     {
@@ -101,7 +101,7 @@ class MapTypeControl
         else
             throw new \InvalidArgumentException(sprintf('The control position of a map type control can only be : %s.', implode(', ', ControlPosition::getControlPositions())));
     }
-    
+
     /**
      * Gets the map type control style
      *
@@ -111,11 +111,11 @@ class MapTypeControl
     {
         return $this->mapTypeControlStyle;
     }
-    
+
     /**
      * Sets the map type control style
      *
-     * @param type $mapTypeControlStyle 
+     * @param type $mapTypeControlStyle
      */
     public function setMapTypeControlStyle($mapTypeControlStyle)
     {

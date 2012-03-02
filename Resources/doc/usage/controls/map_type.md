@@ -1,6 +1,6 @@
 # Map type control
 
-The map type control lets the user toggle between map types (such as ROADMAP and SATELLITE). 
+The map type control lets the user toggle between map types (such as ROADMAP and SATELLITE).
 This control appears by default in the top right corner of the map.
 
 ## Build your map type control

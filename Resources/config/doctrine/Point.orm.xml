@@ -8,5 +8,5 @@
         <field name="x" type="float" />
         <field name="y" type="float" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

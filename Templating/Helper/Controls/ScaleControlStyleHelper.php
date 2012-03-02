@@ -9,7 +9,7 @@ use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class ScaleControlStyleHelper 
+class ScaleControlStyleHelper
 {
     /**
      * Renders javascript scale control style
@@ -24,7 +24,7 @@ class ScaleControlStyleHelper
             case ScaleControlStyle::DEFAULT_:
                 return 'google.maps.ScaleControlStyle.DEFAULT';
             break;
-        
+
             default:
                 throw new \InvalidArgumentException('The scale control style is not valid.');
             break;

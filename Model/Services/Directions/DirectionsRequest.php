@@ -10,63 +10,63 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#DirectionsRequest
  * @author GeLo <geloen.eric@gmail.com>
  */
-class DirectionsRequest 
+class DirectionsRequest
 {
     /**
      * @var boolean TRUE, the Directions service will use highways if possible else FALSE
      */
     protected $avoidHighways = null;
-    
+
     /**
      * @var boolean TRUE, the Directions service will use tolls if possible else FALSE
      */
     protected $avoidTolls = null;
-    
+
     /**
      * @var string|Ivory\GoogleMapBundle\Model\Base\Coordinate Directions request destination
      */
     protected $destination = null;
-    
+
     /**
      * @var boolean TRUE, the DirectionService will attempt to re-order the supplied intermediate waypoints to minimize overall cost of the route else FALSE
      */
     protected $optimizeWaypoints = null;
-    
+
     /**
      * @var string|Ivory\GoogleMapBundle\Model\Base\Coordinate Directions request origin
      */
     protected $origin = null;
-    
+
     /**
      * @var boolean TRUE if route alternatives should be provided else FALSE
      */
     protected $provideRouteAlternatives = null;
-    
+
     /**
      * @var string Region code used as a bias for geocoding requests
      */
     protected $region = null;
-    
+
     /**
      * @var string Directions request travel mode
      */
     protected $travelMode = null;
-    
+
     /**
      * @var string Directionsrequest unit system
      */
     protected $unitSystem = null;
-    
+
     /**
      * @var array Array of intermediate waypoints
      */
     protected $waypoints = array();
-    
+
     /**
      * @var boolean TRUE if the request has a sensor else FALSE
      */
     protected $sensor = false;
-    
+
     /**
      * Checks if the directions request has an avoid hightways flag
      *
@@ -76,7 +76,7 @@ class DirectionsRequest
     {
         return !is_null($this->avoidHighways);
     }
-    
+
     /**
      * Checks if the directions request avoid hightways
      *
@@ -86,7 +86,7 @@ class DirectionsRequest
     {
         return $this->avoidHighways;
     }
-    
+
     /**
      * Sets if the the directions request avoids hightways
      *
@@ -99,7 +99,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request avoid hightways flag must be a boolean value.');
     }
-    
+
     /**
      * Checks if the directions request has an avoid tolls flag
      *
@@ -109,7 +109,7 @@ class DirectionsRequest
     {
         return !is_null($this->avoidTolls);
     }
-    
+
     /**
      * Checks if the directions request avoid tolls
      *
@@ -119,7 +119,7 @@ class DirectionsRequest
     {
         return $this->avoidTolls;
     }
-    
+
     /**
      * Sets if the the directions request avoids tolls
      *
@@ -132,7 +132,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request avoid tolls flag must be a boolean value.');
     }
-    
+
     /**
      * Checks if the directions request has a destination
      *
@@ -142,7 +142,7 @@ class DirectionsRequest
     {
         return !is_null($this->destination);
     }
-    
+
     /**
      * Gets the directions request destination
      *
@@ -152,10 +152,10 @@ class DirectionsRequest
     {
         return $this->destination;
     }
-    
+
     /**
      * Sets the directions request destination
-     * 
+     *
      * Available prototypes:
      * - public function setDestination(string $destination)
      * - public function setDestination(double $latitude, double $longitude, boolean $noWrap)
@@ -164,17 +164,17 @@ class DirectionsRequest
     public function setDestination()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_string($args[0]))
             $this->destination = $args[0];
         else if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if(is_null($this->destination))
                 $this->destination = new Coordinate();
-            
+
             $this->destination->setLatitude($args[0]);
             $this->destination->setLongitude($args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $this->destination->setNoWrap($args[2]);
         }
@@ -188,7 +188,7 @@ class DirectionsRequest
                 ' - public function setDestination(double $latitude, double $longitude, boolean $noWrap)',
                 ' - public function setDestination(Ivory\GoogleMapBundle\Model\Base\Coordinate $destination)'));
     }
-    
+
     /**
      * Checks if the directions request has the optimize waypoints flag
      *
@@ -198,7 +198,7 @@ class DirectionsRequest
     {
         return !is_null($this->optimizeWaypoints);
     }
-    
+
     /**
      * Checks if the directions request optimizes waypoints
      *
@@ -208,7 +208,7 @@ class DirectionsRequest
     {
         return $this->optimizeWaypoints;
     }
-    
+
     /**
      * Sets if the directions request optimizes waypoints
      *
@@ -221,7 +221,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request optimize waypoints flag must be a boolean value.');
     }
-    
+
     /**
      * Checks if the directions request has an origin
      *
@@ -231,7 +231,7 @@ class DirectionsRequest
     {
         return !is_null($this->origin);
     }
-    
+
     /**
      * Gets the directions request origin
      *
@@ -241,10 +241,10 @@ class DirectionsRequest
     {
         return $this->origin;
     }
-    
+
     /**
      * Sets the directions request origin
-     * 
+     *
      * Available prototypes:
      * - public function setOrigin(string $destination)
      * - public function setOrigin(double $latitude, double $longitude, boolean $noWrap)
@@ -253,17 +253,17 @@ class DirectionsRequest
     public function setOrigin()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_string($args[0]))
             $this->origin = $args[0];
         else if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if(is_null($this->origin))
                 $this->origin = new Coordinate();
-            
+
             $this->origin->setLatitude($args[0]);
             $this->origin->setLongitude($args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $this->origin->setNoWrap($args[2]);
         }
@@ -277,7 +277,7 @@ class DirectionsRequest
                 ' - public function setOrigin(double $latitude, double $longitude, boolean $noWrap)',
                 ' - public function setOrigin(Ivory\GoogleMapBundle\Model\Base\Coordinate $destination)'));
     }
-    
+
     /**
      * Checks if the directions request has a provide route alternatives flag
      *
@@ -287,7 +287,7 @@ class DirectionsRequest
     {
         return !is_null($this->provideRouteAlternatives);
     }
-    
+
     /**
      * Checks if the directions request provides route alternatives
      *
@@ -297,7 +297,7 @@ class DirectionsRequest
     {
         return $this->provideRouteAlternatives;
     }
-    
+
     /**
      * Sets if the directions request provides route alternatives
      *
@@ -310,7 +310,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request provide route alternatives flag must be a boolean value.');
     }
-    
+
     /**
      * Checks if the directions request has a region
      *
@@ -320,7 +320,7 @@ class DirectionsRequest
     {
         return !is_null($this->region);
     }
-    
+
     /**
      * Gets the directions request region
      *
@@ -330,7 +330,7 @@ class DirectionsRequest
     {
         return $this->region;
     }
-    
+
     /**
      * Sets the directions request region
      *
@@ -343,7 +343,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request region must be a string with two characters.');
     }
-    
+
     /**
      * Checks if the directions request has a travel mode
      *
@@ -353,7 +353,7 @@ class DirectionsRequest
     {
         return !is_null($this->travelMode);
     }
-    
+
     /**
      * Gets the directionsrequest travel mode
      *
@@ -363,11 +363,11 @@ class DirectionsRequest
     {
         return $this->travelMode;
     }
-    
+
     /**
      * Sets the directions request travel mode
      *
-     * @param string $travelMode 
+     * @param string $travelMode
      */
     public function setTravelMode($travelMode = null)
     {
@@ -376,7 +376,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException(sprintf('The directions request travel mode can only be : %s', implode(', ', TravelMode::getTravelModes())));
     }
-    
+
     /**
      * Checks if the directions request has a unit system
      *
@@ -386,7 +386,7 @@ class DirectionsRequest
     {
         return !is_null($this->unitSystem);
     }
-    
+
     /**
      * Gets the directions request unit system
      *
@@ -396,11 +396,11 @@ class DirectionsRequest
     {
         return $this->unitSystem;
     }
-    
+
     /**
      * Sets  the directions request unit system
      *
-     * @param string $unitSystem 
+     * @param string $unitSystem
      */
     public function setUnitSystem($unitSystem = null)
     {
@@ -409,7 +409,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException(sprintf('The directions request unit system can only be : %s', implode(', ', UnitSystem::getUnitSystems())));
     }
-    
+
     /**
      * Checks if the directions request has waypoints
      *
@@ -419,7 +419,7 @@ class DirectionsRequest
     {
         return !empty($this->waypoints);
     }
-    
+
     /**
      * Gets the directions request waypoints
      *
@@ -429,16 +429,16 @@ class DirectionsRequest
     {
         return $this->waypoints;
     }
-    
+
     /**
      * Sets the directions request waypoints
      *
-     * @param array $waypoints 
+     * @param array $waypoints
      */
     public function setWaypoints(array $waypoints = array())
     {
         $this->waypoints = array();
-        
+
         foreach(array_values($waypoints) as $waypoint)
         {
             if(is_array($waypoint))
@@ -446,14 +446,14 @@ class DirectionsRequest
                 $latitude = $waypoint[0];
                 $lonitude = $waypoint[1];
                 isset($waypoint[2]) ? $noWrap = $waypoint[2] : null;
-                
+
                 $this->addWaypoint($latitude, $lonitude, $noWrap);
             }
             else
                 $this->addWaypoint($waypoint);
         }
     }
-    
+
     /**
      * Adds a waypoint to the directions request
      *
@@ -461,29 +461,29 @@ class DirectionsRequest
      * - public function addWaypoint(Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsWaypoint $waypoint)
      * - public function addWaypoint(string $location)
      * - public function addWaypoint(double $latitude, double $longitude, boolean $noWrap)
-     * - public function addWaypoint(Ivory\GoogleMapBundle\Model\Base\Coordinate $location) 
+     * - public function addWaypoint(Ivory\GoogleMapBundle\Model\Base\Coordinate $location)
      */
     public function addWaypoint()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && ($args[0] instanceof DirectionsWaypoint))
             $this->waypoints[] = $args[0];
         else if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             $waypoint = new DirectionsWaypoint();
             $waypoint->setLocation($args[0], $args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $waypoint->getLocation()->setNoWrap($args[2]);
-            
+
             $this->waypoints[] = $waypoint;
         }
         else if(isset($args[0]) && (is_string($args[0]) || ($args[0] instanceof Coordinate)))
         {
             $waypoint = new DirectionsWaypoint();
             $waypoint->setLocation($args[0]);
-            
+
             $this->waypoints[] = $waypoint;
         }
         else
@@ -495,7 +495,7 @@ class DirectionsRequest
                 ' - public function addWaypoint(double $latitude, double $longitude, boolean $noWrap)',
                 ' - public function addWaypoint(Ivory\GoogleMapBundle\Model\Base\Coordinate $location)'));
     }
-    
+
     /**
      * Checks if the directions request has a sensor
      *
@@ -505,7 +505,7 @@ class DirectionsRequest
     {
         return $this->sensor;
     }
-    
+
     /**
      * Sets the directions request sensor
      *
@@ -518,7 +518,7 @@ class DirectionsRequest
         else
             throw new \InvalidArgumentException('The directions request sensor flag must be a boolean value.');
     }
-    
+
     /**
      * Checks if the directions request is valid
      *
@@ -527,10 +527,10 @@ class DirectionsRequest
     public function isValid()
     {
         $isValid = $this->hasDestination() && $this->hasOrigin();
-        
+
         for($i = 0 ; $isValid && ($i < count($this->waypoints)) ; $i++)
             $isValid = $this->waypoints[$i]->isValid();
-        
+
         return $isValid;
     }
 }

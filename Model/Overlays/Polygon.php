@@ -25,7 +25,7 @@ class Polygon extends AbstractOptionsAsset implements IExtendable
     {
         $this->setPrefixJavascriptVariable('polygon_');
     }
-    
+
     /**
      * Checks if polygon has coordinates
      *
@@ -45,16 +45,16 @@ class Polygon extends AbstractOptionsAsset implements IExtendable
     {
         return $this->coordinates;
     }
-    
+
     /**
      * Sets the polygon coordinates
      *
-     * @param array $coordinates 
+     * @param array $coordinates
      */
     public function setCoordinates($coordinates)
     {
         $this->coordinates = array();
-        
+
         foreach($coordinates as $coordinate)
             $this->addCoordinate($coordinate);
     }
@@ -63,14 +63,14 @@ class Polygon extends AbstractOptionsAsset implements IExtendable
      * Add a coordinate to the polygon
      *
      * Available prototype:
-     * 
+     *
      * public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)
      * public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function addCoordinate()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if(isset($args[2]) && is_bool($args[2]))

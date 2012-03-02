@@ -1,7 +1,7 @@
 # Info window
 
-Info window displays content in a floating window above the map. 
-The info window looks a little like a comic-book word balloon. 
+Info window displays content in a floating window above the map.
+The info window looks a little like a comic-book word balloon.
 It has a content area and a tapered stem, where the tip of the stem is at a specified location on the map.
 
 ## Build your info window

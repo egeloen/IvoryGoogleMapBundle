@@ -34,7 +34,7 @@ class GoogleMapExtension extends \Twig_Extension
     {
         return 'ivory_google_map';
     }
-    
+
     /**
      * {@inheritdoc}
      */

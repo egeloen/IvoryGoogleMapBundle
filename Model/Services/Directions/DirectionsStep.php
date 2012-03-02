@@ -11,48 +11,48 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#DirectionsStep
  * @author GeLo <geloen.eric@gmail.com>
  */
-class DirectionsStep 
+class DirectionsStep
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Services\Directions\Distance Step distance
      */
     protected $distance = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Services\Directions\Duration Step duration
      */
     protected $duration = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Step end location
      */
     protected $endLocation = null;
-    
+
     /**
      * @var string Step instructions
      */
     protected $instructions = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline
      */
     protected $encodedPolyline = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Step start location
      */
     protected $startLocation = null;
-    
+
     /**
      * @var string Travel mode used by the step
      */
     protected $travelMode = null;
-    
+
     /**
      * Creates a directions step
      *
      * @param Ivory\GoogleMapBundle\Model\Services\Directions\Distance $distance
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Duration $duration 
+     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Duration $duration
      * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $endLocation
      * @param string $instructions
      * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline
@@ -69,7 +69,7 @@ class DirectionsStep
         $this->setStartLocation($startLocation);
         $this->setTravelMode($travelMode);
     }
-    
+
     /**
      * Gets the step distance
      *
@@ -79,17 +79,17 @@ class DirectionsStep
     {
         return $this->distance;
     }
-    
+
     /**
      * Sets the step distance
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Distance $distance 
+     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Distance $distance
      */
     public function setDistance(Distance $distance)
     {
         $this->distance = $distance;
     }
-    
+
     /**
      * Gets the step duration
      *
@@ -99,17 +99,17 @@ class DirectionsStep
     {
         return $this->duration;
     }
-    
+
     /**
      * Sets the step duration
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Duration $duration 
+     * @param Ivory\GoogleMapBundle\Model\Services\Directions\Duration $duration
      */
     public function setDuration(Duration $duration)
     {
         $this->duration = $duration;
     }
-    
+
     /**
      * Gets the step end location
      *
@@ -119,17 +119,17 @@ class DirectionsStep
     {
         return $this->endLocation;
     }
-    
+
     /**
      * Sets the step end location
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $endLocation 
+     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $endLocation
      */
     public function setEndLocation(Coordinate $endLocation)
     {
         $this->endLocation = $endLocation;
     }
-    
+
     /**
      * Gets the step instructions
      *
@@ -139,11 +139,11 @@ class DirectionsStep
     {
         return $this->instructions;
     }
-    
+
     /**
      * Sets the step instructions
      *
-     * @param string $instructions 
+     * @param string $instructions
      */
     public function setInstructions($instructions)
     {
@@ -152,7 +152,7 @@ class DirectionsStep
         else
             throw new \InvalidArgumentException('The step instructions must be a string value.');
     }
-    
+
     /**
      * Gets the encoded polyline which describes the step
      *
@@ -162,17 +162,17 @@ class DirectionsStep
     {
         return $this->encodedPolyline;
     }
-    
+
     /**
      * Sets the encoded polyline which describes the step
      *
-     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $encodedPolyline
      */
     public function setEncodedPolyline(EncodedPolyline $encodedPolyline)
     {
         $this->encodedPolyline = $encodedPolyline;
     }
-    
+
     /**
      * Gets the step start location
      *
@@ -182,17 +182,17 @@ class DirectionsStep
     {
         return $this->startLocation;
     }
-    
+
     /**
      * Sets the step start location
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $startLocation 
+     * @param Ivory\GoogleMapBundle\Model\Base\Coordinate $startLocation
      */
     public function setStartLocation(Coordinate $startLocation)
     {
         $this->startLocation = $startLocation;
     }
-    
+
     /**
      * Gets the step travel mode
      *
@@ -202,11 +202,11 @@ class DirectionsStep
     {
         return $this->travelMode;
     }
-    
+
     /**
      * Sets the step travel mode
      *
-     * @param string $travelMode 
+     * @param string $travelMode
      */
     public function setTravelMode($travelMode)
     {

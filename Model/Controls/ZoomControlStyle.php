@@ -13,7 +13,7 @@ class ZoomControlStyle
     const DEFAULT_ = 'default';
     const LARGE = 'large';
     const SMALL = 'small';
-    
+
     /**
      * Disabled constructor
      */
@@ -21,7 +21,7 @@ class ZoomControlStyle
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available map zoom control styles
      *

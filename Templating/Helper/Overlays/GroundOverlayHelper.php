@@ -18,11 +18,11 @@ class GroundOverlayHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\BoundHelper
      */
     protected $boundHelper;
-    
+
     /**
      * Create a ground overlay helper
      *
-     * @param Ivory\GoogleMapBundle\templating\Helper\Base\BoundHelper $boundHelper 
+     * @param Ivory\GoogleMapBundle\templating\Helper\Base\BoundHelper $boundHelper
      */
     public function __construct(BoundHelper $boundHelper)
     {

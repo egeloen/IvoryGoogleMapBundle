@@ -102,8 +102,8 @@ $marker->setAnimation('drop');
 
 ## Configure marker icon
 
-By default, the marker uses a standard icon. If you want to change this icon, two ways are available. You can use an icon url or a marker image. 
-The first solution is appropriated if you build an icon which doesn't need any specific configuration (anchor, origin, size or scaled size). 
+By default, the marker uses a standard icon. If you want to change this icon, two ways are available. You can use an icon url or a marker image.
+The first solution is appropriated if you build an icon which doesn't need any specific configuration (anchor, origin, size or scaled size).
 If you want to build an advanced icon, you must use the marker image.
 
 ### Icon URL
@@ -134,8 +134,8 @@ $marker->setIcon($markerImage);
 
 ## Configure marker shadow
 
-Like marker icon, the marker uses a standard shadow but if you want to change this shadow, two ways are available. You can use a shadow url or a marker image. 
-The first solution is appropriated if you build a shadow which doesn't need any specific configuration (anchor, origin, size or scaled size). 
+Like marker icon, the marker uses a standard shadow but if you want to change this shadow, two ways are available. You can use a shadow url or a marker image.
+The first solution is appropriated if you build a shadow which doesn't need any specific configuration (anchor, origin, size or scaled size).
 If you want to build an advanced shadow, you must use the marker image.
 
 ### Shadow URL

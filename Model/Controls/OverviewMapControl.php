@@ -8,21 +8,21 @@ namespace Ivory\GoogleMapBundle\Model\Controls;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#OverviewMapControlOptions
  * @author GeLo <geloen.eric@gmail.com>
  */
-class OverviewMapControl 
+class OverviewMapControl
 {
     /**
      * @var boolean TRUE if the overview map control is opened else FALSE
      */
     protected $opened = false;
-    
+
     /**
      * Create an overview map control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Checks if the overview map control is opened else FALSE
      *
@@ -32,7 +32,7 @@ class OverviewMapControl
     {
         return $this->opened;
     }
-    
+
     /**
      * Sets if the overview map control is opened
      *

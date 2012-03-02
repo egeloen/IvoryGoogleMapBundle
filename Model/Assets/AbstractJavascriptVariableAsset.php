@@ -50,6 +50,3 @@ abstract class AbstractJavascriptVariableAsset
             throw new \InvalidArgumentException('The javascript variable must be a string value.');
     }
 }
-
-
-?>

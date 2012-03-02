@@ -8,7 +8,7 @@ namespace Ivory\GoogleMapBundle\Model\Controls;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#ControlPosition
  * @author GeLo <geloen.eric@gmail.com>
  */
-class ControlPosition 
+class ControlPosition
 {
     const BOTTOM_CENTER = 'bottom_center';
     const BOTTOM_LEFT = 'bottom_left';
@@ -22,7 +22,7 @@ class ControlPosition
     const TOP_CENTER = 'top_center';
     const TOP_LEFT = 'top_left';
     const TOP_RIGHT = 'top_right';
-    
+
     /**
      * Disabled constructor
      */
@@ -30,7 +30,7 @@ class ControlPosition
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available control positions
      *

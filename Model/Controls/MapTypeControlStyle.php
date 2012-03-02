@@ -13,7 +13,7 @@ class MapTypeControlStyle
     const DEFAULT_ = 'default';
     const DROPDOWN_MENU = 'dropdown_menu';
     const HORIZONTAL_BAR = 'horizontal_bar';
-    
+
     /**
      * Disabled constructor
      */
@@ -21,7 +21,7 @@ class MapTypeControlStyle
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available map type control styles
      *

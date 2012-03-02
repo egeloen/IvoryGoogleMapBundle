@@ -4,9 +4,9 @@ Provides a Google Map integration for your Symfony2 Project.
 
 Actually, this bundle allows you to manage:
 
-   - Map 
-   - Controls: Map type, Overview, Pan, Rotate, Scale, Street view, Zoom 
-   - Overlays: Marker, Info window, Polyline, Encoded Polyline, Polygon, Rectangle, Circle, Ground overlay 
+   - Map
+   - Controls: Map type, Overview, Pan, Rotate, Scale, Street view, Zoom
+   - Overlays: Marker, Info window, Polyline, Encoded Polyline, Polygon, Rectangle, Circle, Ground overlay
    - Events
    - Services: Geocoding API
 

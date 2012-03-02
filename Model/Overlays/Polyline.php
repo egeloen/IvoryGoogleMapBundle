@@ -25,7 +25,7 @@ class Polyline extends AbstractOptionsAsset implements IExtendable
     {
         $this->setPrefixJavascriptVariable('polyline_');
     }
-    
+
     /**
      * Checks if the polyline has coordinates
      *
@@ -45,16 +45,16 @@ class Polyline extends AbstractOptionsAsset implements IExtendable
     {
         return $this->coordinates;
     }
-    
+
     /**
      * Sets the polyline coordinates
      *
-     * @param array $coordinates 
+     * @param array $coordinates
      */
     public function setCoordinates($coordinates)
     {
         $this->coordinates = array();
-        
+
         foreach($coordinates as $coordinate)
             $this->addCoordinate($coordinate);
     }
@@ -63,14 +63,14 @@ class Polyline extends AbstractOptionsAsset implements IExtendable
      * Add a coordinate to the polyline
      *
      * Available prototype:
-     * 
+     *
      * public function addCoordinate(Ivory\GoogleMapBundle\Model\Base\Coordinate $coordinate)
      * public function addCoordinate(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function addCoordinate()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if(isset($args[2]) && is_bool($args[2]))

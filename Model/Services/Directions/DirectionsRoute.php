@@ -11,49 +11,49 @@ use Ivory\GoogleMapBundle\Model\Base\Bound;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#DirectionsRoute
  * @author GeLo <geloen.eric@gmail.com>
  */
-class DirectionsRoute 
+class DirectionsRoute
 {
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Bound Route bound
      */
     protected $bound = null;
-    
+
     /**
      * @var string Copyrights text to be displayed for this route
      */
     protected $copyrights = null;
-    
+
     /**
      * @var array Route legs
      */
     protected $legs = array();
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline Route overview encoded polyline
      */
     protected $overviewPolyline = null;
-    
+
     /**
      * @var string Route summary
      */
     protected $summary = null;
-    
+
     /**
      * @var array Route warnings
      */
     protected $warnings = array();
-    
+
     /**
      * @var array Route waypoint order
      */
     protected $waypointOrder = array();
-    
+
     /**
      * Creates a directions route
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound 
+     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound
      * @param string $copyrights
-     * @param array $legs 
+     * @param array $legs
      * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $overviewPolyline
      * @param string $summary
      * @param array $warnings
@@ -69,7 +69,7 @@ class DirectionsRoute
         $this->setWarnings($warnings);
         $this->setWaypointOrder($waypointOrder);
     }
-    
+
     /**
      * Gets the route bound
      *
@@ -79,17 +79,17 @@ class DirectionsRoute
     {
         return $this->bound;
     }
-    
+
     /**
      * Sets the route bound
      *
-     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound 
+     * @param Ivory\GoogleMapBundle\Model\Base\Bound $bound
      */
     public function setBound(Bound $bound)
     {
         $this->bound = $bound;
     }
-    
+
     /**
      * Gets the directions route copyrights
      *
@@ -99,11 +99,11 @@ class DirectionsRoute
     {
         return $this->copyrights;
     }
-    
+
     /**
      * Sets the directions route copyrights
      *
-     * @param string $copyrights 
+     * @param string $copyrights
      */
     public function setCopyrights($copyrights)
     {
@@ -112,7 +112,7 @@ class DirectionsRoute
         else
             throw new \InvalidArgumentException('The directions route copyrights must be a string value.');
     }
-    
+
     /**
      * Gets the route legs
      *
@@ -122,30 +122,30 @@ class DirectionsRoute
     {
         return $this->legs;
     }
-    
+
     /**
      * Sets the route legs
      *
-     * @param array $legs 
+     * @param array $legs
      */
     public function setLegs(array $legs)
     {
         $this->legs = array();
-        
+
         foreach($legs as $leg)
             $this->addLeg($leg);
     }
-    
+
     /**
      * Add a leg to the route
-     * 
+     *
      * @param Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsLeg
      */
     public function addLeg(DirectionsLeg $leg)
     {
         $this->legs[] = $leg;
     }
-    
+
     /**
      * Gets the route overview polyline
      *
@@ -155,17 +155,17 @@ class DirectionsRoute
     {
         return $this->overviewPolyline;
     }
-    
+
     /**
      * Sets the route overview polyline
      *
-     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $overviewPolyline 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline $overviewPolyline
      */
     public function setOverviewPolyline(EncodedPolyline $overviewPolyline)
     {
         $this->overviewPolyline = $overviewPolyline;
     }
-    
+
     /**
      * Gets the route summary
      *
@@ -175,11 +175,11 @@ class DirectionsRoute
     {
         return $this->summary;
     }
-    
+
     /**
      * Sets the route summary
      *
-     * @param string $summary 
+     * @param string $summary
      */
     public function setSummary($summary)
     {
@@ -188,7 +188,7 @@ class DirectionsRoute
         else
             throw new \InvalidArgumentException('The directions route summary must be a string value.');
     }
-    
+
     /**
      * Gets the route warnings
      *
@@ -198,24 +198,24 @@ class DirectionsRoute
     {
        return $this->warnings;
     }
-    
+
     /**
      * Sets the route warnings
      *
-     * @param array $warnings 
+     * @param array $warnings
      */
     public function setWarnings(array $warnings)
     {
         $this->warnings = array();
-        
+
         foreach($warnings as $warning)
             $this->addWarning($warning);
     }
-    
+
     /**
      * Add a warning to the route
      *
-     * @param string $warning 
+     * @param string $warning
      */
     public function addWarning($warning)
     {
@@ -224,7 +224,7 @@ class DirectionsRoute
         else
             throw new \InvalidArgumentException('The directions route warning must be a string value.');
     }
-    
+
     /**
      * Gets the route waypoint order
      *
@@ -234,24 +234,24 @@ class DirectionsRoute
     {
         return $this->waypointOrder;
     }
-    
+
     /**
      * Sets the routes waypoint order
      *
-     * @param array $waypointOrder 
+     * @param array $waypointOrder
      */
     public function setWaypointOrder(array $waypointOrder)
     {
         $this->waypointOrder = array();
-        
+
         foreach($waypointOrder as $order)
             $this->addWaypointOrder($order);
     }
-    
+
     /**
      * Add a waypoint order to the route
      *
-     * @param integer $order 
+     * @param integer $order
      */
     public function addWaypointOrder($order)
     {

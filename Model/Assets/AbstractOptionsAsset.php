@@ -13,7 +13,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
      * @var array Options
      */
     protected $options = array();
-    
+
     /**
      * Checks if the option exists
      *
@@ -27,7 +27,7 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
         else
             throw new \InvalidArgumentException('The option property must be a string value.');
     }
-    
+
     /**
      * Gets the options
      *
@@ -76,11 +76,11 @@ abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
         else
             throw new \InvalidArgumentException('The option property must be a string value.');
     }
-    
+
     /**
      * Removes an option
      *
-     * @param string $option 
+     * @param string $option
      */
     public function removeOption($option)
     {

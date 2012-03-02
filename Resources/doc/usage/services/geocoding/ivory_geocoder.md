@@ -55,7 +55,7 @@ Each result wraps an human readable adress, some address & geometry informations
 
 #### Human readable address
 
-The method ``getFormattedAddress`` is a string containing the human-readable address of this location. 
+The method ``getFormattedAddress`` is a string containing the human-readable address of this location.
 Often this address is equivalent to the "postal address," which sometimes differs from country to country. (Note that some countries, such as the United Kingdom, do not allow distribution of true postal addresses due to licensing restrictions.)
 
 ``` php
@@ -111,7 +111,7 @@ $results = $response->getResults();
 
 foreach($results as $result)
 {
-    $location = $result->getGeometry()->getLocation()   
+    $location = $result->getGeometry()->getLocation()
     $locationType = $result->getGeometry()->getLocationType();
     $viewport = $result->getGeometry()->getViewport();
     $bound = $result->getGeometry()->getBound();
@@ -120,8 +120,8 @@ foreach($results as $result)
 
 #### Partial match flag
 
-The partial match flag indicates that the geocoder did not return an exact match for the original request, though it did match part of the requested address. 
-You may wish to examine the original request for misspellings and/or an incomplete address. 
+The partial match flag indicates that the geocoder did not return an exact match for the original request, though it did match part of the requested address.
+You may wish to examine the original request for misspellings and/or an incomplete address.
 Partial matches most often occur for street addresses that do not exist within the locality you pass in the request.
 
 ``` php
@@ -136,8 +136,8 @@ foreach($results as $result)
 
 #### Result types
 
-The result types is an array indicates the type of the returned result. 
-This array contains a set of one or more tags identifying the type of feature returned in the result. 
+The result types is an array indicates the type of the returned result.
+This array contains a set of one or more tags identifying the type of feature returned in the result.
 For example, a geocode of "Chicago" returns "locality" which indicates that "Chicago" is a city, and also returns "political" which indicates it is a political entity.
 
 ``` php

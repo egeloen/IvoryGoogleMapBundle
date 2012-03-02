@@ -4,49 +4,49 @@ namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Size which describes a google map size
- * 
+ *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Size
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Size 
+class Size
 {
     /**
      * @var double Width size
      */
     protected $width = 1;
-    
+
     /**
      * @var double Height size
      */
     protected $height = 1;
-    
+
     /**
      * @var string Width unit size
      */
     protected $widthUnit = null;
-    
+
     /**
      * @var string Height unit size
      */
     protected $heightUnit = null;
-    
+
     /**
      * Create a size
      *
      * @param double $width
      * @param double $height
      * @param string $widthUnit
-     * @param string $heightUnit 
+     * @param string $heightUnit
      */
     public function __construct($width = 1, $height = 1, $widthUnit = null, $heightUnit = null)
     {
         $this->setWidth($width);
         $this->setHeight($height);
-        
+
         $this->setWidthUnit($widthUnit);
         $this->setHeightUnit($heightUnit);
     }
-    
+
     /**
      * Gets the width size
      *
@@ -56,11 +56,11 @@ class Size
     {
         return $this->width;
     }
-    
+
     /**
      * Sets the width size
      *
-     * @param double $width 
+     * @param double $width
      */
     public function setWidth($width)
     {
@@ -69,7 +69,7 @@ class Size
         else
             throw new \InvalidArgumentException('The width of a size must be a numeric value.');
     }
-    
+
     /**
      * Gets the height size
      *
@@ -79,11 +79,11 @@ class Size
     {
         return $this->height;
     }
-    
+
     /**
      * Sets the height size
      *
-     * @param double $height 
+     * @param double $height
      */
     public function setHeight($height)
     {
@@ -92,7 +92,7 @@ class Size
         else
             throw new \InvalidArgumentException('The height of a size must be a numeric value.');
     }
-    
+
     /**
      * Checks if the size has units
      *
@@ -102,7 +102,7 @@ class Size
     {
         return !is_null($this->widthUnit) && !is_null($this->heightUnit);
     }
-    
+
     /**
      * Gets the width unit size
      *
@@ -112,11 +112,11 @@ class Size
     {
         return $this->widthUnit;
     }
-    
+
     /**
      * Set sthe width unit size
      *
-     * @param string $widthUnit 
+     * @param string $widthUnit
      */
     public function setWidthUnit($widthUnit)
     {
@@ -125,21 +125,21 @@ class Size
         else
             throw new \InvalidArgumentException('The width unit of a size must be a string value.');
     }
-    
+
     /**
      * Gets the height unit size
      *
-     * @return string 
+     * @return string
      */
     public function getHeightUnit()
     {
         return $this->heightUnit;
     }
-    
+
     /**
      * Set sthe height unit size
      *
-     * @param string $heightUnit 
+     * @param string $heightUnit
      */
     public function setHeightUnit($heightUnit)
     {

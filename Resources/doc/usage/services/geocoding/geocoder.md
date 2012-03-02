@@ -2,7 +2,7 @@
 
 The Geocoding API uses [Geocoder](http://github.com/willdurand/Geocoder) which is a PHP 5.3 library for issuing Geocoding. So, I I recommend you to read his documentation.
 
-Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map. 
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
 Additionally, the service allows you to perform the converse operation (turning coordinates into addresses). This process is known as "reverse geocoding".
 
 ## Request a geocoder
@@ -17,7 +17,7 @@ ivory_google_map:
     geocoder:
         # Geocoder class
         class: "Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder"
-        provider: 
+        provider:
             # Fake IP
             # If you set a fake IP, the parameter will replace the REMOTE_ADDR value by the given one
             fake_ip: "123.345.567.123"

@@ -7,7 +7,7 @@ namespace Ivory\GoogleMapBundle\Model\Overlays;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-interface IExtendable 
+interface IExtendable
 {
-    
+
 }

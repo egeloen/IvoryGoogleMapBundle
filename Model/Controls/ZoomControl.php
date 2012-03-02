@@ -11,26 +11,26 @@ use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#ZoomControlOptions
  * @author GeLo <geloen.eric@gmail.com>
  */
-class ZoomControl 
+class ZoomControl
 {
     /**
      * @var string Control position
      */
     protected $controlPosition = ControlPosition::TOP_LEFT;
-    
+
     /**
      * @var string Zoom control style
      */
     protected $zoomControlStyle = ZoomControlStyle::DEFAULT_;
-    
+
     /**
      * Create a zoom control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the control position
      *
@@ -40,11 +40,11 @@ class ZoomControl
     {
         return $this->controlPosition;
     }
-    
+
     /**
      * Sets the control position
      *
-     * @param string $controlPosition 
+     * @param string $controlPosition
      */
     public function setControlPosition($controlPosition)
     {
@@ -53,7 +53,7 @@ class ZoomControl
         else
             throw new \InvalidArgumentException(sprintf('The control position of a zoom control can only be : %s.', implode(', ', ControlPosition::getControlPositions())));
     }
-    
+
     /**
      * Gets the zoom control style
      *
@@ -63,11 +63,11 @@ class ZoomControl
     {
         return $this->zoomControlStyle;
     }
-    
+
     /**
      * Sets the zoom control style
      *
-     * @param string $zoomControlStyle 
+     * @param string $zoomControlStyle
      */
     public function setZoomControlStyle($zoomControlStyle)
     {

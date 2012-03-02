@@ -10,5 +10,5 @@
         <field name="widthUnit" column="width_unit" type="string" length="20" nullable="true" />
         <field name="heightUnit" column="height_unit" type="string" length="20" nullable="true" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

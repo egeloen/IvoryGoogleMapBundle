@@ -9,7 +9,7 @@ use Ivory\GoogleMapBundle\Model\Overlays\Animation;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class AnimationHelper 
+class AnimationHelper
 {
     /**
      * Renders javascript animation
@@ -24,7 +24,7 @@ class AnimationHelper
             case Animation::BOUNCE:
                 return 'google.maps.Animation.BOUNCE';
             break;
-        
+
             case Animation::DROP:
                 return 'google.maps.Animation.DROP';
             break;

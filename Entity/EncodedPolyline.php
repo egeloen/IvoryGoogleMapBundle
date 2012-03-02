@@ -14,12 +14,10 @@ class EncodedPolyline extends BaseEncodedPolyline
     /**
      * Create an encoded polyline
      *
-     * @param string $value 
+     * @param string $value
      */
     public function __construct($value = null)
     {
         parent::__construct($value);
     }
 }
-
-?>

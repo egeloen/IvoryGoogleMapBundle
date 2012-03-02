@@ -4,7 +4,7 @@ namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Coordinate which describes a google map coordinate
- * 
+ *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#LatLng
  * @author GeLo <geloen.eric@gmail.com>
  */
@@ -30,7 +30,7 @@ class Coordinate
      *
      * @param double $latitude
      * @param double $longitude
-     * @param boolean $noWrap 
+     * @param boolean $noWrap
      */
     public function __construct($latitude = 0, $longitude = 0, $noWrap = true)
     {
@@ -71,7 +71,7 @@ class Coordinate
     {
         return $this->longitude;
     }
-    
+
     /**
      * Sets the longitude
      *

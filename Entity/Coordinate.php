@@ -13,6 +13,10 @@ class Coordinate extends BaseCoordinate
 {
     /**
      * Create a coordinate
+     *
+     * @param integer $latitude The latitude
+     * @param integer $longitue The longitude
+     * @param boolean $noWrap No wrap flag
      */
     public function __construct($latitude = 0, $longitude = 0, $noWrap = true)
     {

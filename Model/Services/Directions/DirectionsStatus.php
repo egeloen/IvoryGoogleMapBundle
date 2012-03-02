@@ -8,7 +8,7 @@ namespace Ivory\GoogleMapBundle\Model\Services\Directions;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#DirectionsStatus
  * @author GeLo <geloen.eric@gmail.com>
  */
-class DirectionsStatus 
+class DirectionsStatus
 {
     const INVALID_REQUEST = 'INVALID_REQUEST';
     const MAX_WAYPOINTS_EXCEEDED = 'MAX_WAYPOINTS_EXCEEDED';
@@ -18,7 +18,7 @@ class DirectionsStatus
     const REQUEST_DENIED = 'REQUEST_DENIED';
     const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
     const ZERO_RESULTS = 'ZERO_RESULTS';
-    
+
     /**
      * Disabled constructor
      */
@@ -26,7 +26,7 @@ class DirectionsStatus
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available directions status
      *

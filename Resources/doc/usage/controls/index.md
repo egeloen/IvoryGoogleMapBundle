@@ -1,7 +1,7 @@
 # Controls
 
-The maps on Google Maps contain UI elements for allowing user interaction through the map. 
-These elements are known as controls and you can include variations of these controls in your Google Maps API application. 
+The maps on Google Maps contain UI elements for allowing user interaction through the map.
+These elements are known as controls and you can include variations of these controls in your Google Maps API application.
 Alternatively, you can do nothing and let the Google Maps API handle all control behavior.
 
    1. [Map type](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/map_type.md)

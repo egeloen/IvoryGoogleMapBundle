@@ -8,11 +8,11 @@ namespace Ivory\GoogleMapBundle\Model\Overlays;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Animation
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Animation 
+class Animation
 {
     const BOUNCE = 'bounce';
     const DROP = 'drop';
-    
+
     /**
      * Disabled constructor
      */
@@ -20,7 +20,7 @@ class Animation
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available animations
      *
@@ -34,5 +34,3 @@ class Animation
         );
     }
 }
-
-?>

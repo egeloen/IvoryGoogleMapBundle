@@ -18,7 +18,7 @@ class ScaleControlHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected $controlPositionHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControleStyleHelper
      */

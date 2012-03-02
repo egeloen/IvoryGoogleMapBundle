@@ -15,12 +15,12 @@ use Ivory\GoogleMapBundle\Model\Map;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class InfoWindowHelper
-{   
+{
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper
      */
@@ -53,10 +53,10 @@ class InfoWindowHelper
             );
         else
             $infoWindowJSONOptions = '{';
-        
+
         if($infoWindow->hasPixelOffset())
             $infoWindowJSONOptions .= '"pixelOffset":'.$this->sizeHelper->render($infoWindow->getPixelOffset()).',';
-        
+
         $infoWindowOptions = array_merge(
             array('content' => $infoWindow->getContent()),
             $infoWindow->getOptions()

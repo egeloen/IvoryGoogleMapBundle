@@ -21,42 +21,42 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper
      */
     protected $mapTypeIdHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper
      */
     protected $mapTypeControlHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper
      */
     protected $overviewMapControl;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper
      */
     protected $panControlHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper
      */
     protected $rotateControlHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper
      */
     protected $scaleControlHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper
      */
     protected $streetViewControlHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper
      */
@@ -81,7 +81,7 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\PolylineHelper
      */
     protected $polylineHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper
      */
@@ -106,12 +106,12 @@ class MapHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper
      */
     protected $groundOverlayHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper
      */
     protected $eventManagerHelper;
-    
+
     /**
      * Constructs a map helper
      *
@@ -164,7 +164,7 @@ class MapHelper
      */
     public function renderContainer(Map $map)
     {
-        return sprintf('<div id="%s" style="width:%s;height:%s;"></div>'.PHP_EOL, 
+        return sprintf('<div id="%s" style="width:%s;height:%s;"></div>'.PHP_EOL,
             $map->getHtmlContainerId(),
             $map->getStylesheetOption('width'),
             $map->getStylesheetOption('height')
@@ -211,7 +211,7 @@ class MapHelper
                 $map->getLanguage()
             );
         }
-        
+
         $html[] = '<script type="text/javascript">'.PHP_EOL;
 
         if($map->isAsync()) {
@@ -232,19 +232,19 @@ class MapHelper
             $html[] = $this->renderBound($map);
         else
             $html[] = $this->renderCenter($map);
-        
+
         $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
 
         if($map->isAsync()) {
             $html[] = '}'.PHP_EOL;
         }
-        
+
         $html[] = '</script>'.PHP_EOL;
-        
+
         return implode('', $html);
     }
-    
+
     /**
      * Renders the global map variables
      *
@@ -253,22 +253,22 @@ class MapHelper
     public function renderGlobalVariables(Map $map)
     {
         $html = array();
-        
+
         $closableInfoWindows = array();
         foreach($map->getInfoWindows() as $infoWindow)
         {
             if($infoWindow->isAutoClose())
                 $closableInfoWindows[] = $infoWindow->getJavascriptVariable();
         }
-        
+
         foreach($map->getMarkers() as $marker)
         {
             if($marker->hasInfoWindow() && $marker->getInfoWindow()->isAutoClose())
                 $closableInfoWindows[] = $marker->getInfoWindow()->getJavascriptVariable();
         }
-        
+
         $html[] = sprintf('var closable_info_windows = Array(%s);'.PHP_EOL, implode(', ', $closableInfoWindows));
-        
+
         return implode('', $html);
     }
 
@@ -281,34 +281,34 @@ class MapHelper
     public function renderMap(Map $map)
     {
         $html = array();
-        
+
         $mapControlJSONOptions = $this->renderMapControls($map);
-        
+
         $mapOptions = $map->getMapOptions();
-        
+
         $mapJSONOptions = '{"mapTypeId":'.$this->mapTypeIdHelper->render($mapOptions['mapTypeId']);
         unset($mapOptions['mapTypeId']);
-        
+
         if(!empty($mapControlJSONOptions))
             $mapJSONOptions .= ','.$mapControlJSONOptions;
 
         if($map->isAutoZoom() && isset($mapOptions['zoom']))
             unset($mapOptions['zoom']);
-        
+
         if(!empty($mapOptions))
             $mapJSONOptions .= ','.substr(json_encode($mapOptions), 1);
         else
             $mapJSONOptions .= '}';
-        
+
         $html[] = sprintf('var %s = new google.maps.Map(document.getElementById("%s"), %s);'.PHP_EOL,
             $map->getJavascriptVariable(),
             $map->getHtmlContainerId(),
             $mapJSONOptions
         );
-        
+
         return implode('', $html);
     }
-    
+
     /**
      * Renders the map controls
      *
@@ -319,19 +319,19 @@ class MapHelper
     {
         $mapControls = array();
         $controlNames = array('MapTypeControl', 'OverviewMapControl', 'PanControl', 'RotateControl', 'ScaleControl', 'StreetViewControl', 'ZoomControl');
-        
+
         foreach($controlNames as $controlName)
         {
             $controlHelper = lcfirst($controlName).'Helper';
-            
+
             $mapControlJSONOption = $this->renderMapControl($map, $controlName, $this->$controlHelper);
             if(!empty($mapControlJSONOption))
                 $mapControls[] = $mapControlJSONOption;
         }
-        
+
         return implode(',', $mapControls);
     }
-    
+
     /**
      * Renders the map control
      *
@@ -344,18 +344,18 @@ class MapHelper
     {
         $mapControl = array();
         $lcFirstControlName = lcfirst($controlName);
-        
+
         if($map->hasMapOption($lcFirstControlName))
         {
             if($map->getMapOption($lcFirstControlName))
             {
                 $mapControl[] = sprintf('"%s":true', $lcFirstControlName);
-                
+
                 $hasControlMethod = 'has'.$controlName;
                 if($map->$hasControlMethod())
                 {
                     $getControlMethod = 'get'.$controlName;
-                    
+
                     $mapControl[] = sprintf('"%sOptions":%s',
                         $lcFirstControlName,
                         $controlHelper->render($map->$getControlMethod())
@@ -364,10 +364,10 @@ class MapHelper
             }
             else
                 $mapControl[] = sprintf('"%s":false', $lcFirstControlName);
-            
+
             $map->removeMapOption($lcFirstControlName);
         }
-        
+
         return implode(',', $mapControl);
     }
 
@@ -384,7 +384,7 @@ class MapHelper
             $this->coordinateHelper->render($map->getCenter())
         );
     }
-    
+
     /**
      * Renders the map javascript bound
      *
@@ -394,13 +394,13 @@ class MapHelper
     public function renderBound(Map $map)
     {
         $html = array();
-        
+
         $html[] = $this->boundHelper->render($map->getBound());
         $html[] = sprintf('%s.fitBounds(%s);'.PHP_EOL,
             $map->getJavascriptVariable(),
             $map->getBound()->getJavascriptVariable()
         );
-        
+
         return implode('', $html);
     }
 
@@ -417,7 +417,7 @@ class MapHelper
         foreach($map->getMarkers() as $marker)
         {
             $html[] = $this->markerHelper->render($marker, $map);
-            
+
             if($marker->hasInfoWindow() && $marker->getInfoWindow()->isAutoOpen())
             {
                 $event = new Event();
@@ -448,7 +448,7 @@ class MapHelper
         foreach($map->getInfoWindows() as $infoWindow)
         {
             $html[] = $this->infoWindowHelper->render($infoWindow);
-            
+
             if($infoWindow->isOpen())
                 $html[] = $this->infoWindowHelper->renderOpen($infoWindow, $map);
         }
@@ -471,7 +471,7 @@ class MapHelper
 
         return implode('', $html);
     }
-    
+
     /**
      * Renders the map javascript encoded polylines
      *
@@ -551,10 +551,10 @@ class MapHelper
 
         return implode('', $html);
     }
-    
+
     /**
      * Renders the map javascript events
-     * 
+     *
      * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string HTML output
      */

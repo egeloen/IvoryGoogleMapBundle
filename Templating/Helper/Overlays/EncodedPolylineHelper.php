@@ -18,17 +18,17 @@ class EncodedPolylineHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Geometry\EncodingHelper $encodingHelper
      */
     protected $encodingHelper = null;
-    
+
     /**
      * Creates an encoded polyline helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Geometry\EncodingHelper $encodingHelper 
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Geometry\EncodingHelper $encodingHelper
      */
     public function __construct(EncodingHelper $encodingHelper)
     {
         $this->encodingHelper = $encodingHelper;
     }
-    
+
     /**
      * Renders the encoded polyline
      *

@@ -8,30 +8,30 @@ namespace Ivory\GoogleMapBundle\Model\Services\Directions;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Distance
  * @author GeLo <geloen.eric@gmail.com>
  */
-class Distance 
+class Distance
 {
     /**
      * @var string A string representation of the distance value
      */
     protected $text = null;
-    
+
     /**
      * @var double The distance in meters
      */
     protected $value = null;
-    
+
     /**
      * Creates a distance
      *
      * @param string $text
-     * @param double $value 
+     * @param double $value
      */
     public function __construct($text, $value)
     {
         $this->setText($text);
         $this->setValue($value);
     }
-    
+
     /**
      * Gets the string representation of the distance value
      *
@@ -41,11 +41,11 @@ class Distance
     {
         return $this->text;
     }
-    
+
     /**
      * Sets the string representation of the distance value
      *
-     * @param string $text 
+     * @param string $text
      */
     public function setText($text)
     {
@@ -54,7 +54,7 @@ class Distance
         else
             throw new \InvalidArgumentException('The distance text must be a string value.');
     }
-    
+
     /**
      * Gets the distance in meters
      *
@@ -64,11 +64,11 @@ class Distance
     {
         return $this->value;
     }
-    
+
     /**
      * Sets the distance in meters
      *
-     * @param double $value 
+     * @param double $value
      */
     public function setValue($value)
     {

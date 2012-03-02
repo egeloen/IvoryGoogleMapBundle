@@ -6,7 +6,7 @@ use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 
 /**
  * Marker shape which describes a google map marker shape
- * 
+ *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MarkerShape
  * @author GeLo <geloen.eric@gmail.com>
  */
@@ -16,12 +16,12 @@ class MarkerShape extends AbstractJavascriptVariableAsset
      * @var string Maker shape type (circle | poly | rect)
      */
     protected $type = 'poly';
-    
+
     /**
      * @var array Marker shape coordinates
      */
     protected $coordinates = array(1, 1, 1, -1, -1, -1, -1, 1);
-    
+
     /**
      * Create a marker shape
      */
@@ -29,7 +29,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     {
         $this->setPrefixJavascriptVariable('marker_shape_');
     }
-    
+
     /**
      * Gets the marker shape type
      *
@@ -39,13 +39,13 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     {
         return $this->type;
     }
-    
+
     /**
      * Sets the marker shape type
-     * 
+     *
      * The allowing marker shape type are : circle, poly & rect
      *
-     * @param string $type 
+     * @param string $type
      */
     public function setType($type)
     {
@@ -56,15 +56,15 @@ class MarkerShape extends AbstractJavascriptVariableAsset
             case 'rect':
                 $this->type = $type;
             break;
-        
+
             default:
                 throw new \InvalidArgumentException(sprintf('The type of a marker shape can only be : %s.', implode(', ', array('circle', 'poly', 'rect'))));
             break;
         }
-        
+
         $this->type = $type;
     }
-    
+
     /**
      * Cheks if the marker shape has coordinates
      *
@@ -74,7 +74,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     {
         return !empty($this->coordinates);
     }
-    
+
     /**
      * Gets the marker shape coordinates
      *
@@ -84,11 +84,11 @@ class MarkerShape extends AbstractJavascriptVariableAsset
     {
         return $this->coordinates;
     }
-    
+
     /**
      * Sets the marker shape coordinates
      *
-     * @param array $coordinates 
+     * @param array $coordinates
      */
     public function setCoordinates(array $coordinates)
     {
@@ -136,7 +136,7 @@ class MarkerShape extends AbstractJavascriptVariableAsset
             break;
         }
     }
-    
+
     /**
      * Add a coordinate to the marker shape if the type is poly
      *
@@ -158,5 +158,3 @@ class MarkerShape extends AbstractJavascriptVariableAsset
             throw new \InvalidArgumentException('This method can only be use with a marker shape which has type poly.');
     }
 }
-
-?>

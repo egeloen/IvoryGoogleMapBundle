@@ -10,5 +10,5 @@
         <field name="options" type="array" />
         <field name="open" type="boolean" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

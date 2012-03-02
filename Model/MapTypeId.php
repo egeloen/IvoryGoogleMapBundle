@@ -8,13 +8,13 @@ namespace Ivory\GoogleMapBundle\Model;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapTypeId
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MapTypeId 
+class MapTypeId
 {
     const HYBRID = 'hybrid';
     const ROADMAP = 'roadmap';
     const SATELLITE = 'satellite';
     const TERRAIN = 'terrain';
-    
+
     /**
      * Disabled constructor
      */
@@ -22,7 +22,7 @@ class MapTypeId
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available map type ids
      *

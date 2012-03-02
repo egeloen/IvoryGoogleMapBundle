@@ -15,17 +15,17 @@ class PanControlHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected $controlPositionHelper;
-    
+
     /**
      * Creates a pan control helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper $controlPositionHelper 
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper $controlPositionHelper
      */
     public function __construct(ControlPositionHelper $controlPositionHelper)
     {
         $this->controlPositionHelper = $controlPositionHelper;
     }
-    
+
     /**
      * Renders the pan control
      *

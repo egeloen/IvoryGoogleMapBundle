@@ -11,7 +11,7 @@ namespace Ivory\GoogleMapBundle\Model\Controls;
 class ScaleControlStyle
 {
     const DEFAULT_ = 'default';
-    
+
     /**
      * Disabled constructor
      */
@@ -19,7 +19,7 @@ class ScaleControlStyle
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available map scale control styles
      *

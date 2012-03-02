@@ -1,6 +1,6 @@
 # Circle
 
-A Circle is similar to a Polygon in that you can define custom colors, weights, and opacities for the edge of the circle (the "stroke") and custom colors and opacities for the area within the enclosed region (the "fill"). 
+A Circle is similar to a Polygon in that you can define custom colors, weights, and opacities for the edge of the circle (the "stroke") and custom colors and opacities for the area within the enclosed region (the "fill").
 Unlike a Polygon, you do not define paths for a Circle. Instead, a circle has two additional properties which define its shape: center of the circle, radius of the circle, in meters.
 
 ## Build your circle

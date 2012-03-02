@@ -8,5 +8,5 @@
         <field name="type" type="string" length="50" />
         <field name="coordinates" type="array" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

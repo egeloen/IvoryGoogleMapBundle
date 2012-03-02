@@ -14,15 +14,15 @@ class StreetViewControl
      * @var string Control position
      */
     protected $controlPosition = ControlPosition::TOP_LEFT;
-    
+
     /**
      * Create a street view control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the control position
      *
@@ -32,11 +32,11 @@ class StreetViewControl
     {
         return $this->controlPosition;
     }
-    
+
     /**
      * Sets the control position
      *
-     * @param string $controlPosition 
+     * @param string $controlPosition
      */
     public function setControlPosition($controlPosition)
     {

@@ -1,6 +1,6 @@
 # Street view control
 
-The Street View control contains a Pegman icon which can be dragged onto the map to enable Street View. 
+The Street View control contains a Pegman icon which can be dragged onto the map to enable Street View.
 This control appears by default in the top left corner of the map.
 
 ## Build your street view control

@@ -19,7 +19,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Info window position
      */
     protected $position = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Base\Size Info window pixel offset
      */
@@ -29,22 +29,22 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * @var string Info window content
      */
     protected $content = '<p>Default content</p>';
-    
+
     /**
      * @var boolean TRUE if the info window is open else FALSE
      */
     protected $open = false;
-    
+
     /**
      * @var boolean TRUE if the info window auto open on event else FALSE
      */
     protected $autoOpen = true;
-    
+
     /**
      * @var string Event which opens the info window
      */
     protected $openEvent = MouseEvent::CLICK;
-    
+
     /**
      * @var boolean TRUE if the info window closes when one is opened else FALSE
      */
@@ -72,22 +72,22 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
      * Sets the info window position
      *
      * Available prototype:
-     * 
+     *
      * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position = null)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setPosition()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->position === null)
                 $this->position = new Coordinate();
-            
+
             $this->position->setLatitude($args[0]);
             $this->position->setLongitude($args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $this->position->setNoWrap($args[2]);
         }
@@ -102,7 +102,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
                 ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
                 ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
-    
+
     /**
      * Checks if the info window has a pixel offset
      *
@@ -112,7 +112,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return !is_null($this->pixedOffset);
     }
-    
+
     /**
      * Gets the pixel offset
      *
@@ -122,30 +122,30 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return $this->pixedOffset;
     }
-    
+
     /**
      * Sets the pixel offset
-     * 
+     *
      * Available prototype :
-     * 
+     *
      * - public function setPixelOffset(double $width, double $height, string $widthUnit = null, string $heightUnit = null)',
      * - public function setPixelOffset(Ivory\GoogleMapBundle\Model\Base\Size $scaledSize)
      */
     public function setPixelOffset()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->pixedOffset === null)
                 $this->pixedOffset = new Size();
-            
+
             $this->pixedOffset->setWidth($args[0]);
             $this->pixedOffset->setHeight($args[1]);
-            
+
             if(isset($args[2]) && is_string($args[2]))
                 $this->pixedOffset->setWidthUnit($args[2]);
-            
+
             if(isset($args[3]) && is_string($args[3]))
                 $this->pixedOffset->setHeightUnit($args[3]);
         }
@@ -183,7 +183,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
         else
             throw new \InvalidArgumentException('The content of an info window must be a string value.');
     }
-    
+
     /**
      * Checks if the info window is open
      *
@@ -193,7 +193,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return $this->open;
     }
-    
+
     /**
      * Set if the info window is open
      *
@@ -206,7 +206,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
         else
             throw new \InvalidArgumentException('The open property of an info window must be a boolean value.');
     }
-    
+
     /**
      * Checks if the info window auto open
      *
@@ -216,7 +216,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return $this->autoOpen;
     }
-    
+
     /**
      * Sets if the info window auto open
      *
@@ -229,7 +229,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
         else
             throw new \InvalidArgumentException('The auto open property of an info window must be a boolean value.');
     }
-    
+
     /**
      * Gets the info window open event
      *
@@ -239,11 +239,11 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return $this->openEvent;
     }
-    
+
     /**
      * Sets the info window open event
      *
-     * @param string $openEvent 
+     * @param string $openEvent
      */
     public function setOpenEvent($openEvent)
     {
@@ -252,7 +252,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
         else
             throw new \InvalidArgumentException(sprintf('The only available open event are : %s', implode(', ', MouseEvent::getMouseEvents())));
     }
-    
+
     /**
      * Gets the auto close flag
      *
@@ -262,7 +262,7 @@ class InfoWindow extends AbstractOptionsAsset implements IExtendable
     {
         return $this->autoClose;
     }
-    
+
     /**
      * Sets the auto close flag
      *
