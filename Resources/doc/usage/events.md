@@ -1,6 +1,6 @@
 # Events
 
-JavaScript within the browser is event driven, meaning that JavaScript responds to interactions by generating events, and expects a program to listen to interesting events. 
+JavaScript within the browser is event driven, meaning that JavaScript responds to interactions by generating events, and expects a program to listen to interesting events.
 The event model for the Google Maps API V3 is similar to that used in V2 of the API, though much has changed under the hood. There are two types of events:
 
 - User events (such as "click" mouse events) are propagated from the DOM to the Google Maps API. These events are separate and distinct from standard DOM events.
@@ -29,7 +29,7 @@ ivory_google_map:
 $event = $this->get('ivory_google_map.event');
 ```
 
-The configuration file allows you to manage the generated javascript variable. 
+The configuration file allows you to manage the generated javascript variable.
 All the other configuration can only be done by coding.
 
 ### By coding
@@ -52,7 +52,7 @@ $event->setCapture(true);
 
 #### Instance
 
-The ``$instance`` variable describes the javascript variable which registers the event. 
+The ``$instance`` variable describes the javascript variable which registers the event.
 Each Ivory google map objects which can register an event have a method called ``getJavascriptVariable`` which identifies this variable.
 
 For example, in the case of an info window, it can be:
@@ -91,7 +91,7 @@ The map wraps an event manager which allows you to add events. Like describes in
 // Add a DOM event
 $map->getEventManager()->addDomEvent($event);
 
-// Add a DOM event which will be triggered only one time 
+// Add a DOM event which will be triggered only one time
 $map->getEventManager()->addDomEventOnce($event);
 ```
 

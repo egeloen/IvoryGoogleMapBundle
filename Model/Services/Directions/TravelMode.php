@@ -8,12 +8,12 @@ namespace Ivory\GoogleMapBundle\Model\Services\Directions;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#TravelMode
  * @author GeLo <geloen.eric@gmail.com>
  */
-class TravelMode 
+class TravelMode
 {
     const BICYCLING = 'BICYCLING';
     const DRIVING = 'DRIVING';
     const WALKING = 'WALKING';
-    
+
     /**
      * Disabled constructor
      */
@@ -21,7 +21,7 @@ class TravelMode
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available travel modes
      *

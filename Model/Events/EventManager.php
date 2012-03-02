@@ -8,36 +8,36 @@ namespace Ivory\GoogleMapBundle\Model\Events;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#MapsEventListener
  * @author GeLo <geloen.eric@gmail.com>
  */
-class EventManager 
+class EventManager
 {
     /**
      * @var array Dom events
      */
     protected $domEvents = array();
-    
+
     /**
      * @var array Dom events which are just trigger one time
      */
     protected $domEventsOnce = array();
-    
+
     /**
      * @var array Events
      */
     protected $events = array();
-    
+
     /**
      * @var array Events which are just trigger one time
      */
     protected $eventsOnce = array();
-    
+
     /**
      * Create an event manager
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the dom events
      *
@@ -47,17 +47,17 @@ class EventManager
     {
         return $this->domEvents;
     }
-    
+
     /**
      * Add a dom event
      *
-     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEvent 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEvent
      */
     public function addDomEvent(Event $domEvent)
     {
         $this->domEvents[] = $domEvent;
     }
-    
+
     /**
      * Gets the dom events which are just trigger one time
      *
@@ -67,17 +67,17 @@ class EventManager
     {
         return $this->domEventsOnce;
     }
-    
+
     /**
      * Add a dom event which is just trigger one time
      *
-     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEventOnce 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $domEventOnce
      */
     public function addDomEventOnce(Event $domEventOnce)
     {
         $this->domEventsOnce[] = $domEventOnce;
     }
-    
+
     /**
      * Gets the events
      *
@@ -87,17 +87,17 @@ class EventManager
     {
         return $this->events;
     }
-    
+
     /**
      * Add an event
      *
-     * @param Ivory\GoogleMapBundle\Model\Events\Event $event 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $event
      */
     public function addEvent(Event $event)
     {
         $this->events[] = $event;
     }
-    
+
     /**
      * Gets the event which are just trigger one time
      *
@@ -107,11 +107,11 @@ class EventManager
     {
         return $this->eventsOnce;
     }
-    
+
     /**
      * Add an event which is just trigger one time
      *
-     * @param Ivory\GoogleMapBundle\Model\Events\Event $eventOnce 
+     * @param Ivory\GoogleMapBundle\Model\Events\Event $eventOnce
      */
     public function addEventOnce(Event $eventOnce)
     {

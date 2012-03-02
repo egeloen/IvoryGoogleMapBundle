@@ -1,6 +1,6 @@
 # Polyline
 
-The Polyline class defines a linear overlay of connected line segments on the map. 
+The Polyline class defines a linear overlay of connected line segments on the map.
 A Polyline object consists of an array of coordinates, and creates a series of line segments that connect those locations in an ordered sequence.
 
 ## Build your polyline

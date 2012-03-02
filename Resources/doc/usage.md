@@ -15,7 +15,7 @@ Before starting, I recommend you to read the google map API v3 documentation whi
 $map = $this->get('ivory_google_map.map');
 ```
 
-The ``ivory_google_map.map`` service is the central point of the bundle. 
+The ``ivory_google_map.map`` service is the central point of the bundle.
 It allows you to manipulate all map options.
 If you render the default map, the bundle will generate a map of 300px by 300px, centered on the coordinate (0, 0), configured with a zoom of 3 & using the default google map controls.
 
@@ -27,7 +27,7 @@ The complete map configuration is available [here](http://github.com/egeloen/Ivo
 
 ### Configure overlays
 
-Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map. 
+Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map.
 Overlays reflect objects that you "add" to the map to designate points, lines, areas, or collections of objects.
 
    1. [Marker](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker.md)
@@ -41,8 +41,8 @@ Overlays reflect objects that you "add" to the map to designate points, lines, a
 
 ### Configure controls
 
-The maps on Google Maps contain UI elements for allowing user interaction through the map. 
-These elements are known as ``controls`` and you can include variations of these controls in your Google Maps API application. 
+The maps on Google Maps contain UI elements for allowing user interaction through the map.
+These elements are known as ``controls`` and you can include variations of these controls in your Google Maps API application.
 Alternatively, you can do nothing and let the Google Maps API handle all control behavior.
 
    1. [Map type control](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/map_type.md)
@@ -59,7 +59,7 @@ The complete events configuration is available [here](http://github.com/egeloen/
 
 ## Render your map
 
-The google map API needs at least an html container & some javascript for being able to render a map. 
+The google map API needs at least an html container & some javascript for being able to render a map.
 For rendering them, the bundle delivered two twig functions : ``google_map_container`` & ``google_map_js``.
 
 Warning, the HTML container needs to be rendered before javascript.
@@ -108,4 +108,3 @@ This function renders an html style block with the CSS configured.
 
 Previous: [Installation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/installation.md)
 Next: [Test](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/test.md)
-        

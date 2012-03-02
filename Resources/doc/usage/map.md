@@ -239,14 +239,14 @@ The javascript function ``{{ google_map_js(map) }}`` with the asynchronous mode 
 ``` html
 <script type="text/javascript">
     function load_ivory_google_map() {
-        // Code needed for displaying your map 
-    }    
+        // Code needed for displaying your map
+    }
 </script>
 ```
 
 ## Add overlays to your map
 
-Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map. 
+Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map.
 Overlays reflect objects that you "add" to the map to designate points, lines, areas, or collections of objects.
 
    1. [Marker](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker.md)
@@ -259,8 +259,8 @@ Overlays reflect objects that you "add" to the map to designate points, lines, a
 
 ## Configure map control options
 
-The maps on Google Maps contain UI elements for allowing user interaction through the map. 
-These elements are known as controls and you can include variations of these controls in your Google Maps API application. 
+The maps on Google Maps contain UI elements for allowing user interaction through the map.
+These elements are known as controls and you can include variations of these controls in your Google Maps API application.
 Alternatively, you can do nothing and let the Google Maps API handle all control behavior.
 
    1. [Map type](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/map_type.md)

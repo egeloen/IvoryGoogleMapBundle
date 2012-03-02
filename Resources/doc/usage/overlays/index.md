@@ -1,6 +1,6 @@
 # Overlays
 
-Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map. 
+Overlays are objects on the map that are tied to latitude/longitude coordinates, so they move when you drag or zoom the map.
 Overlays reflect objects that you "add" to the map to designate points, lines, areas, or collections of objects.
 
    1. [Marker](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker.md)

@@ -30,7 +30,7 @@ class GroundOverlay extends AbstractOptionsAsset implements IExtendable
     public function __construct()
     {
         $this->setPrefixJavascriptVariable('ground_overlay_');
-        
+
         $this->bound = new Bound();
         $this->bound->setNorthEast(new Coordinate(1, 1));
         $this->bound->setSouthWest(new Coordinate(-1, -1));
@@ -73,7 +73,7 @@ class GroundOverlay extends AbstractOptionsAsset implements IExtendable
      * Sets the ground overlay bound
      *
      * Available prototype:
-     * 
+     *
      * public function setBound(Ivory\GoogleMapBundle\Model\Base\Bound $bound)
      * public function setBount(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest, Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)
      * public function setBound(double $southWestLatitude, double $southWestLongitude, double $northEastLatitude, double $northEastLongitude, boolean southWestNoWrap = true, boolean $northEastNoWrap = true)
@@ -81,7 +81,7 @@ class GroundOverlay extends AbstractOptionsAsset implements IExtendable
     public function setBound()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && ($args[0] instanceof Bound))
         {
             if($args[0]->hasCoordinates())
@@ -98,10 +98,10 @@ class GroundOverlay extends AbstractOptionsAsset implements IExtendable
         {
             $this->bound->setSouthWest(new Coordinate($args[0], $args[1]));
             $this->bound->setNorthEast(new Coordinate($args[2], $args[3]));
-            
+
             if(isset($args[4]) && is_bool($args[4]))
                 $this->bound->getSouthWest()->setNoWrap($args[4]);
-            
+
             if(isset($args[5]) && is_bool($args[5]))
                 $this->bound->getNorthEast()->setNoWrap($args[5]);
         }

@@ -15,24 +15,24 @@ class ZoomControlHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected $controlPositionHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper
      */
     protected $zoomControlStyleHelper;
-    
+
     /**
      * Create a zoom control helper
      *
      * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper $controlPositionHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper $zoomControlStyleHelper 
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper $zoomControlStyleHelper
      */
     public function __construct(ControlPositionHelper $controlPositionHelper, ZoomControlStyleHelper $zoomControlStyleHelper)
     {
         $this->controlPositionHelper = $controlPositionHelper;
         $this->zoomControlStyleHelper = $zoomControlStyleHelper;
     }
-    
+
     /**
      * Renders javascript zoom control
      *

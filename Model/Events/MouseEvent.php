@@ -15,7 +15,7 @@ class MouseEvent
     const MOUSEDOWN = 'mousedown';
     const MOUSEOVER = 'mouseover';
     const MOUSEOUT = 'mouseout';
-    
+
     /**
      * Disabled constructor
      */
@@ -23,7 +23,7 @@ class MouseEvent
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available mouse events
      *

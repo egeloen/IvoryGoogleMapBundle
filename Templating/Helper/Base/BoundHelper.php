@@ -36,13 +36,13 @@ class BoundHelper
     public function render(Bound $bound)
     {
         $html = array();
-        
+
         if($bound->hasExtends() || !$bound->hasCoordinates())
         {
             $html[] = sprintf('var %s = new google.maps.LatLngBounds();'.PHP_EOL,
                 $bound->getJavascriptVariable()
             );
-            
+
             if($bound->hasExtends())
                 $html[] = $this->renderExtends($bound);
         }
@@ -52,7 +52,7 @@ class BoundHelper
                 $this->coordinateHelper->render($bound->getSouthWest()),
                 $this->coordinateHelper->render($bound->getNorthEast())
             );
-        
+
         return implode('', $html);
     }
 

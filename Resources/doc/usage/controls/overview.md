@@ -1,6 +1,6 @@
 # Overview map control
 
-The overview map control displays a thumbnail overview map reflecting the current map viewport within a wider area. 
+The overview map control displays a thumbnail overview map reflecting the current map viewport within a wider area.
 This control appears by default in the bottom right corner of the map, and is by default shown in its collapsed state.
 
 ## Build your overview map control

@@ -19,12 +19,12 @@ class MapTypeControlHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper
      */
     protected $mapTypeIdHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected $controlPositionHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControleStyleHelper
      */
@@ -53,10 +53,10 @@ class MapTypeControlHelper
     public function render(MapTypeControl $mapTypeControl)
     {
         $mapTypeIds = array();
-        
+
         foreach($mapTypeControl->getMapTypeIds() as $mapTypeId)
             $mapTypeIds[] = $this->mapTypeIdHelper->render($mapTypeId);
-        
+
         return sprintf('{"mapTypeIds":[%s],"position":%s,"style":%s}',
             implode(', ', $mapTypeIds),
             $this->controlPositionHelper->render($mapTypeControl->getControlPosition()),

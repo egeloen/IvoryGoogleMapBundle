@@ -1,6 +1,6 @@
 # Zoom control
 
-The Zoom control displays a slider (for large maps) or small "+/-" buttons (for small maps) to control the zoom level of the map. 
+The Zoom control displays a slider (for large maps) or small "+/-" buttons (for small maps) to control the zoom level of the map.
 This control appears by default in the top left corner of the map on non-touch devices or in the bottom left corner on touch devices.
 
 ## Build your zoom control

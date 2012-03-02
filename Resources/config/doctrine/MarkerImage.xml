@@ -7,5 +7,5 @@
     <mapped-superclass name="Ivory\GoogleMapBundle\Entity\MarkerImage" table="ivory_marker_image">
         <field name="url" type="string" length="255" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

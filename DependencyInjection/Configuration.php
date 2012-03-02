@@ -29,13 +29,13 @@ class Configuration implements ConfigurationInterface
 
         // Map sections
         $this->addMapSection($rootNode);
-        
+
         // Base sections
         $this->addCoordinateSection($rootNode);
         $this->addBoundSection($rootNode);
         $this->addPointSection($rootNode);
         $this->addSizeSection($rootNode);
-        
+
         // Control sections
         $this->addMapTypeControlSection($rootNode);
         $this->addOverviewMapControlSection($rootNode);
@@ -44,12 +44,12 @@ class Configuration implements ConfigurationInterface
         $this->addScaleControlSection($rootNode);
         $this->addStreetViewControlSection($rootNode);
         $this->addZoomControlSection($rootNode);
-        
+
         // Marker sections
         $this->addMarkerSection($rootNode);
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
-        
+
         // Overlay sections
         $this->addInfoWindowSection($rootNode);
         $this->addPolylineSection($rootNode);
@@ -61,13 +61,13 @@ class Configuration implements ConfigurationInterface
 
         // Event sections
         $this->addEventSection($rootNode);
-        
+
         // Services sections
         $this->addGeocoderSection($rootNode);
         $this->addGeocoderRequestSection($rootNode);
         $this->addDirectionsSection($rootNode);
         $this->addDirectionsRequestSection($rootNode);
-        
+
         return $treeBuilder;
     }
 
@@ -145,7 +145,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the bound section
      *
@@ -176,7 +176,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the point section
      *
@@ -194,7 +194,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the size section
      *
@@ -214,7 +214,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the map type control section
      *
@@ -226,7 +226,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('map_type_control')->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('map_type_ids')->addDefaultsIfNotSet()
+                        ->arrayNode('map_type_ids')
                             ->defaultValue(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE))
                             ->prototype('scalar')->end()
                         ->end()
@@ -236,7 +236,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the overview map control section
      *
@@ -253,7 +253,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the pan control section
      *
@@ -270,7 +270,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the rotate control section
      *
@@ -287,7 +287,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the scale control section
      *
@@ -305,7 +305,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the street view control section
      *
@@ -322,7 +322,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the zoom control section
      *
@@ -368,7 +368,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the marker image section
      *
@@ -414,7 +414,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the marker shape section
      *
@@ -428,7 +428,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
                         ->scalarNode('type')->defaultValue('poly')->end()
-                        ->arrayNode('coordinates')->addDefaultsIfNotSet()
+                        ->arrayNode('coordinates')
                             ->defaultValue(array(1, 1, 1, -1, -1, -1, -1, 1))
                             ->prototype('scalar')->end()
                         ->end()
@@ -496,7 +496,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the encoded polyline section
      *
@@ -641,7 +641,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the event section
      *
@@ -658,7 +658,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the geocoder section
      *
@@ -684,7 +684,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the geocoder request section
      *
@@ -729,7 +729,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the directions section
      *
@@ -748,7 +748,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
     }
-    
+
     /**
      * Add the directions request section
      *

@@ -1,6 +1,6 @@
 # Rotate control
 
-The Rotate control contains a small circular icon which allows you to rotate maps containing oblique imagery. 
+The Rotate control contains a small circular icon which allows you to rotate maps containing oblique imagery.
 This control appears by default in the top left corner of the map.
 
 ## Build your rotate control

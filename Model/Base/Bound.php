@@ -22,7 +22,7 @@ class Bound extends AbstractJavascriptVariableAsset
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate North east bound
      */
     protected $northEast = null;
-    
+
     /**
      * @var array Google map objects that bound extends
      */
@@ -35,7 +35,7 @@ class Bound extends AbstractJavascriptVariableAsset
     {
         $this->setPrefixJavascriptVariable('bound_');
     }
-    
+
     /**
      * Checks if the bound has coordinates
      *
@@ -60,22 +60,22 @@ class Bound extends AbstractJavascriptVariableAsset
      * Sets the south west bound
      *
      * Available prototype:
-     * 
+     *
      * public function setSouthWest(Ivory\GoogleMapBundle\Model\Base\Coordinate $southWest = null)
      * public function setSouthWest(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setSouthWest()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->southWest === null)
                 $this->southWest = new Coordinate();
-            
+
             $this->southWest->setLatitude($args[0]);
             $this->southWest->setLongitude($args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $this->southWest->setNoWrap($args[2]);
         }
@@ -105,22 +105,22 @@ class Bound extends AbstractJavascriptVariableAsset
      * Sets the north east bound
      *
      * Available prototype:
-     * 
+     *
      * public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast = null)
      * public function setNorthEast(double $latitude, double $longitude, boolean $noWrap = true)
      */
     public function setNorthEast()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_numeric($args[0]) && isset($args[1]) && is_numeric($args[1]))
         {
             if($this->northEast === null)
                 $this->northEast = new Coordinate();
-            
+
             $this->northEast->setLatitude($args[0]);
             $this->northEast->setLongitude($args[1]);
-            
+
             if(isset($args[2]) && is_bool($args[2]))
                 $this->northEast->setNoWrap($args[2]);
         }
@@ -135,7 +135,7 @@ class Bound extends AbstractJavascriptVariableAsset
                 ' - public function setNorthEast(Ivory\GoogleMapBundle\Model\Base\Coordinate $northEast)',
                 ' - public function setNorthEast(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
-    
+
     /**
      * Checks if the bound extends something
      *
@@ -145,7 +145,7 @@ class Bound extends AbstractJavascriptVariableAsset
     {
         return !empty($this->extends);
     }
-    
+
     /**
      * Gets the google map objects that bound extends
      *
@@ -155,24 +155,24 @@ class Bound extends AbstractJavascriptVariableAsset
     {
         return $this->extends;
     }
-    
+
     /**
      * Sets the google map objects that bound extends
      *
-     * @param array $extends 
+     * @param array $extends
      */
     public function setExtends($extends)
     {
         $this->extends = array();
-        
+
         foreach($extends as $extend)
             $this->extend($extend);
     }
-    
+
     /**
      * Add an overlay google map extendable object for bound extend it
      *
-     * @param Ivory\GoogleMapBundle\Model\Overlays\IExtendable $extend 
+     * @param Ivory\GoogleMapBundle\Model\Overlays\IExtendable $extend
      */
     public function extend(IExtendable $extend)
     {

@@ -13,6 +13,9 @@ class Point extends BasePoint
 {
     /**
      * Create a point
+     *
+     * @param integer $x The x coordinate
+     * @param integer $y The y coordinate
      */
     public function __construct($x = 0, $y = 0)
     {

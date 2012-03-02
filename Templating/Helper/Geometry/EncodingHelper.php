@@ -12,7 +12,7 @@ class EncodingHelper
 {
     /**
      * Renders the decode path method
-     * 
+     *
      * @param string $encodedPath
      */
     public function renderDecodePath($encodedPath)

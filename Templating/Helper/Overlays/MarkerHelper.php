@@ -18,7 +18,7 @@ class MarkerHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper
      */
@@ -28,12 +28,12 @@ class MarkerHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\InfoWindowHelper
      */
     protected $infoWindowHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper
      */
     protected $markerImageHelper;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper
      */
@@ -56,7 +56,7 @@ class MarkerHelper
         $this->markerImageHelper = $markerImageHelper;
         $this->markerShapeHelper = $markerShapeHelper;
     }
-    
+
     /**
      * Renders the marker
      *
@@ -67,14 +67,14 @@ class MarkerHelper
     public function render(Marker $marker, Map $map)
     {
         $html = array();
-        
+
         $markerJSONOptions = sprintf('{"map":%s,"position":%s',
             $map->getJavascriptVariable(),
             $this->coordinateHelper->render($marker->getPosition())
         );
-        
+
         $markerOptions = $marker->getOptions();
-        
+
         if($marker->hasAnimation())
             $markerJSONOptions .= ', "animation":'.$this->animationHelper->render($marker->getAnimation());
 
@@ -89,7 +89,7 @@ class MarkerHelper
             $html[] = $this->markerImageHelper->render($marker->getShadow());
             $markerJSONOptions .= ', "shadow":'.$marker->getShadow()->getJavascriptVariable();
         }
-        
+
         if($marker->hasShape())
         {
             $html[] = $this->markerShapeHelper->render($marker->getShape());
@@ -109,7 +109,7 @@ class MarkerHelper
         if($marker->hasInfoWindow())
         {
             $html[] = $this->infoWindowHelper->render($marker->getInfoWindow(), false);
-            
+
             if($marker->getInfoWindow()->isOpen())
                 $html[] = $this->infoWindowHelper->renderOpen($marker->getInfoWindow(), $map, $marker);
         }

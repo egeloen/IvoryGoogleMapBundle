@@ -13,24 +13,24 @@ class DirectionsResponse
      * @var array Directions routes
      */
     protected $routes = array();
-    
+
     /**
      * @var string Directions results status
      */
     protected $status = null;
-    
+
     /**
      * Create a directions response
      *
      * @param array $routes
-     * @param string $status 
+     * @param string $status
      */
     public function __construct(array $routes, $status)
     {
         $this->setRoutes($routes);
         $this->setStatus($status);
     }
-    
+
     /**
      * Gets the directions routes
      *
@@ -40,30 +40,30 @@ class DirectionsResponse
     {
         return $this->routes;
     }
-    
+
     /**
      * Sets the directions routes
      *
-     * @param array $routes 
+     * @param array $routes
      */
     public function setRoutes(array $routes)
     {
         $this->routes = array();
-        
+
         foreach($routes as $route)
             $this->addRoute($route);
     }
-    
+
     /**
      * Add a directions route
      *
-     * @param Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRoute $route 
+     * @param Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRoute $route
      */
     public function addRoute(DirectionsRoute $route)
     {
         $this->routes[] = $route;
     }
-    
+
     /**
      * Gets the directions results status
      *
@@ -73,11 +73,11 @@ class DirectionsResponse
     {
         return $this->status;
     }
-    
+
     /**
      * Sets the directions results status
      *
-     * @param string $status 
+     * @param string $status
      */
     public function setStatus($status)
     {

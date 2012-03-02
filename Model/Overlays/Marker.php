@@ -7,7 +7,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 
 /**
  * Marker which describes a google map marker
- * 
+ *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Marker
  * @author GeLo <geloen.eric@gmail.com>
  */
@@ -17,7 +17,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * @var Ivory\GoogleMapBundle\Model\Base\Coordinate Marker position
      */
     protected $position = null;
-    
+
     /**
      * @var string Marker animation
      */
@@ -32,7 +32,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerImage Marker shadow
      */
     protected $shadow = null;
-    
+
     /**
      * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerShape Marker shape
      */
@@ -49,7 +49,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
     public function __construct()
     {
         $this->setPrefixJavascriptVariable('marker_');
-        
+
         $this->position = new Coordinate();
     }
 
@@ -67,7 +67,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * Sets the marker position
      *
      * Available prototype:
-     * 
+     *
      * public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position = null)
      * public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)
      */
@@ -94,7 +94,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
                 ' - public function setPosition(Ivory\GoogleMapBundle\Model\Base\Coordinate $position)',
                 ' - public function setPosition(double $latitude, double $longitude, boolean $noWrap = true)'));
     }
-    
+
     /**
      * Checks if the marker has an animation
      *
@@ -104,7 +104,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
     {
         return !is_null($this->animation);
     }
-    
+
     /**
      * Gets the marker animation
      *
@@ -114,7 +114,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
     {
         return $this->animation;
     }
-    
+
     /**
      * Sets the marker animation
      *
@@ -127,7 +127,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
         else
             throw new \InvalidArgumentException(sprintf('The animation of a marker can only be : ', implode(', ', Animation::getAnimations())));
     }
-    
+
     /**
      * Checks if the marker has an icon
      *
@@ -152,19 +152,19 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * Sets the marker icon
      *
      * Available prototype:
-     * 
+     *
      * public function setIcon(string $url = null)
      * public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage = null)
      */
     public function setIcon()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_string($args[0]))
         {
             if($this->icon === null)
                 $this->icon = new MarkerImage();
-            
+
             $this->icon->setUrl($args[0]);
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
@@ -183,7 +183,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
                 ' - public function setIcon(string $url)',
                 ' - public function setIcon(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)'));
     }
-    
+
     /**
      * Checks if the marker has a shadow
      *
@@ -208,19 +208,19 @@ class Marker extends AbstractOptionsAsset implements IExtendable
      * Sets the marker shadow
      *
      * Available prototype:
-     * 
+     *
      * public function setShadow(string $url = null)
      * public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage = null)
      */
     public function setShadow()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_string($args[0]))
         {
             if($this->shadow === null)
                 $this->shadow = new MarkerImage();
-            
+
             $this->shadow->setUrl($args[0]);
         }
         else if(isset($args[0]) && ($args[0] instanceof MarkerImage))
@@ -239,7 +239,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
                 ' - public function setShadow(string $url)',
                 ' - public function setShadow(Ivory\GoogleMapBundle\Model\Overlays\MarkerImage $markerImage)'));
     }
-    
+
     /**
      * Checks if the marker has a shape
      *
@@ -249,7 +249,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
     {
         return !is_null($this->shape);
     }
-    
+
     /**
      * Gets the marker shape
      *
@@ -259,24 +259,24 @@ class Marker extends AbstractOptionsAsset implements IExtendable
     {
         return $this->shape;
     }
-    
+
     /**
      * Sets the marker shape
-     * 
+     *
      * Available prototype:
-     * 
+     *
      * public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape = null)
      * public function setShape(string $type, array $coordinates)
      */
     public function setShape()
     {
         $args = func_get_args();
-        
+
         if(isset($args[0]) && is_string($args[0]) && isset($args[1]) && is_array($args[1]))
         {
             if($this->shape === null)
                 $this->shape = new MarkerShape();
-            
+
             $this->shape->setType($args[0]);
             $this->shape->setCoordinates($args[1]);
         }
@@ -296,7 +296,7 @@ class Marker extends AbstractOptionsAsset implements IExtendable
                 ' - public function setShape(Ivory\GoogleMapBundle\Model\Overlays\MarkerShape $shape)',
                 ' - public function setShape(string $type, array $coordinates)'));
     }
-    
+
     /**
      * Check if the marker has an info window
      *

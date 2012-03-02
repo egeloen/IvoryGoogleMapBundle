@@ -16,22 +16,22 @@ class Event extends AbstractJavascriptVariableAsset
      * @var string Event object instance
      */
     protected $instance = null;
-    
+
     /**
      * @var string Event name
      */
     protected $eventName = null;
-    
+
     /**
      * @var string Event function handle
      */
     protected $handle = null;
-    
+
     /**
      * @var boolean TRUE if the event is capture else FALSE
      */
     protected $capture = false;
-    
+
     /**
      * Create an event
      */
@@ -39,7 +39,7 @@ class Event extends AbstractJavascriptVariableAsset
     {
         $this->setPrefixJavascriptVariable('event_');
     }
-    
+
     /**
      * Gets the event object instance
      *
@@ -49,11 +49,11 @@ class Event extends AbstractJavascriptVariableAsset
     {
         return $this->instance;
     }
-    
+
     /**
      * Sets the event object instance
      *
-     * @param string $instance 
+     * @param string $instance
      */
     public function setInstance($instance)
     {
@@ -62,7 +62,7 @@ class Event extends AbstractJavascriptVariableAsset
         else
             throw new \InvalidArgumentException('The instance of an event must be a string value.');
     }
-    
+
     /**
      * Gets the event name
      *
@@ -72,11 +72,11 @@ class Event extends AbstractJavascriptVariableAsset
     {
         return $this->eventName;
     }
-    
+
     /**
      * Sets the event name
      *
-     * @param string $eventName 
+     * @param string $eventName
      */
     public function setEventName($eventName)
     {
@@ -85,7 +85,7 @@ class Event extends AbstractJavascriptVariableAsset
         else
             throw new \InvalidArgumentException('The event name of an event must be a string value.');
     }
-    
+
     /**
      * Gets the event function handle
      *
@@ -95,11 +95,11 @@ class Event extends AbstractJavascriptVariableAsset
     {
         return $this->handle;
     }
-    
+
     /**
      * Sets the event function handle
      *
-     * @param string $handle 
+     * @param string $handle
      */
     public function setHandle($handle)
     {
@@ -108,7 +108,7 @@ class Event extends AbstractJavascriptVariableAsset
         else
             throw new \InvalidArgumentException('The handle of an event must be a string value.');
     }
-    
+
     /**
      * Checks if the event is capture
      *
@@ -118,7 +118,7 @@ class Event extends AbstractJavascriptVariableAsset
     {
         return $this->capture;
     }
-    
+
     /**
      * Sets if the event is capture
      *

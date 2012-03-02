@@ -17,20 +17,20 @@ class ScaleControl
      * @var string Control position
      */
     protected $controlPosition = ControlPosition::BOTTOM_LEFT;
-    
+
     /**
      * @var string Scale control style
      */
     protected $scaleControlStyle = ScaleControlStyle::DEFAULT_;
-    
+
     /**
      * Create a scale control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the control position
      *
@@ -40,11 +40,11 @@ class ScaleControl
     {
         return $this->controlPosition;
     }
-    
+
     /**
      * Sets the control position
      *
-     * @param string $controlPosition 
+     * @param string $controlPosition
      */
     public function setControlPosition($controlPosition)
     {
@@ -53,7 +53,7 @@ class ScaleControl
         else
             throw new \InvalidArgumentException(sprintf('The control position of a map type control can only be : %s.', implode(', ', ControlPosition::getControlPositions())));
     }
-    
+
     /**
      * Gets the scale control style
      *
@@ -63,11 +63,11 @@ class ScaleControl
     {
         return $this->scaleControlStyle;
     }
-    
+
     /**
      * Sets the scale control style
      *
-     * @param type $scaleControlStyle 
+     * @param type $scaleControlStyle
      */
     public function setScaleControlStyle($scaleControlStyle)
     {

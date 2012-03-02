@@ -9,5 +9,5 @@
         <field name="longitude" type="float" />
         <field name="noWrap" column="no_wrap" type="boolean" />
     </mapped-superclass>
-    
+
 </doctrine-mapping>

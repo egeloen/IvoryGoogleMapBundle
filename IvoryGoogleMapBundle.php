@@ -11,4 +11,5 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class IvoryGoogleMapBundle extends Bundle
 {
+    
 }

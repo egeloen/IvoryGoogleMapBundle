@@ -1,6 +1,6 @@
 # Ground overlay
 
-Polygons are useful overlays to represent arbitrarily-sized areas, but they cannot display images. 
+Polygons are useful overlays to represent arbitrarily-sized areas, but they cannot display images.
 If you have an image that you wish to place on a map, you can use a GroundOverlay object.
 
 ## Build your ground overlay

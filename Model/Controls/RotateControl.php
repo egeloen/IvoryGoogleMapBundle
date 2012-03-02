@@ -14,15 +14,15 @@ class RotateControl
      * @var string Control position
      */
     protected $controlPosition = ControlPosition::TOP_LEFT;
-    
+
     /**
      * Create a rotate control
      */
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * Gets the control position
      *
@@ -32,11 +32,11 @@ class RotateControl
     {
         return $this->controlPosition;
     }
-    
+
     /**
      * Sets the control position
      *
-     * @param string $controlPosition 
+     * @param string $controlPosition
      */
     public function setControlPosition($controlPosition)
     {

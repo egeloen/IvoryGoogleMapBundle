@@ -4,7 +4,7 @@ namespace Ivory\GoogleMapBundle\Model\Base;
 
 /**
  * Point which describes a google map point
- * 
+ *
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#Point
  * @author GeLo <geloen.eric@gmail.com>
  */
@@ -14,12 +14,12 @@ class Point
      * @var double X coordinate
      */
     protected $x = 0;
-    
+
     /**
      * @var double Y coordinate
      */
     protected $y = 0;
-    
+
     /**
      * Creates a point
      *
@@ -31,7 +31,7 @@ class Point
         $this->setX($x);
         $this->setY($y);
     }
-    
+
     /**
      * Gets the x coordinate
      *
@@ -41,11 +41,11 @@ class Point
     {
         return $this->x;
     }
-    
+
     /**
      * Sets the x coordinate
      *
-     * @param double $x 
+     * @param double $x
      */
     public function setX($x)
     {
@@ -54,7 +54,7 @@ class Point
         else
             throw new \InvalidArgumentException('The x coordinate of a point must be a numeric value.');
     }
-    
+
     /**
      * Gets the y coordinate
      *
@@ -64,11 +64,11 @@ class Point
     {
         return $this->y;
     }
-    
+
     /**
      * Sets the y coordinate
      *
-     * @param double $y 
+     * @param double $y
      */
     public function setY($y)
     {

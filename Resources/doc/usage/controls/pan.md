@@ -1,7 +1,7 @@
 # Pan control
 
-The Pan control displays buttons for panning the map. 
-This control appears by default in the top left corner of the map on non-touch devices. 
+The Pan control displays buttons for panning the map.
+This control appears by default in the top left corner of the map on non-touch devices.
 The Pan control also allows you to rotate 45° imagery, if available.
 
 ## Build your pan control

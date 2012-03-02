@@ -15,17 +15,17 @@ class RotateControlHelper
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected $controlPositionHelper;
-    
+
     /**
      * Creates a rotate control helper
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper $controlPositionHelper 
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper $controlPositionHelper
      */
     public function __construct(ControlPositionHelper $controlPositionHelper)
     {
         $this->controlPositionHelper = $controlPositionHelper;
     }
-    
+
     /**
      * Renders the rotate control
      *

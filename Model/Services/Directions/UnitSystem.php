@@ -8,11 +8,11 @@ namespace Ivory\GoogleMapBundle\Model\Services\Directions;
  * @see http://code.google.com/apis/maps/documentation/javascript/reference.html#UnitSystem
  * @author GeLo <geloen.eric@gmail.com>
  */
-class UnitSystem 
+class UnitSystem
 {
     const IMPERIAL = 'IMPERIAL';
     const METRIC = 'METRIC';
-    
+
     /**
      * Disabled constructor
      */
@@ -20,7 +20,7 @@ class UnitSystem
     {
         throw new \Exception(sprintf('The class "%s" can not be instanciate.', get_class($this)));
     }
-    
+
     /**
      * Gets the available unit systems
      *
