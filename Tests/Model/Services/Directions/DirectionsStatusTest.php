@@ -23,7 +23,7 @@ class DirectionsStatusTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the directions status getter
      */

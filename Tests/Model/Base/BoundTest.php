@@ -20,7 +20,7 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
      * @var Ivory\GoogleMapBundle\Model\Base\Bound Tested bound
      */
     protected static $bound = null;
-    
+
     /**
      * @override
      */
@@ -28,15 +28,15 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
     {
         self::$bound = new Bound();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$bound->getJavascriptVariable(), 0, 6), 'bound_');
     }
-    
+
     /**
      * Checks the bound default value
      */
@@ -48,7 +48,7 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         $this->assertFalse(self::$bound->hasExtends());
         $this->assertEquals(count(self::$bound->getExtends()), 0);
     }
-    
+
     /**
      * Checks the north east getter & setter
      */
@@ -59,19 +59,19 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$bound->getNorthEast()->getLatitude(), 1.1);
         $this->assertEquals(self::$bound->getNorthEast()->getLongitude(), 1.1);
         $this->assertTrue(self::$bound->getNorthEast()->isNoWrap());
-        
+
         self::$bound->setNorthEast(2.1, 2.1, false);
         $this->assertEquals(self::$bound->getNorthEast()->getLatitude(), 2.1);
         $this->assertEquals(self::$bound->getNorthEast()->getLongitude(), 2.1);
         $this->assertFalse(self::$bound->getNorthEast()->isNoWrap());
-        
+
         self::$bound->setNorthEast(null);
         $this->assertNull(self::$bound->getNorthEast());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$bound->setNorthEast('foo');
     }
-    
+
     /**
      * Checks the south west getter & setter
      */
@@ -82,19 +82,19 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$bound->getSouthWest()->getLatitude(), 1.1);
         $this->assertEquals(self::$bound->getSouthWest()->getLongitude(), 1.1);
         $this->assertTrue(self::$bound->getSouthWest()->isNoWrap());
-        
+
         self::$bound->setSouthWest(2.1, 2.1, false);
         $this->assertEquals(self::$bound->getSouthWest()->getLatitude(), 2.1);
         $this->assertEquals(self::$bound->getSouthWest()->getLongitude(), 2.1);
         $this->assertFalse(self::$bound->getSouthWest()->isNoWrap());
-        
+
         self::$bound->setSouthWest(null);
         $this->assertNull(self::$bound->getSouthWest());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$bound->setSouthWest('foo');
     }
-    
+
     /**
      * Checks the extend methods
      */
@@ -109,7 +109,7 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
             new Overlays\Polyline(),
             new Overlays\Rectangle
         );
-        
+
         self::$bound->setExtends($extendsTest);
         $this->assertEquals(count(self::$bound->getExtends()), 7);
     }

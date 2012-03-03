@@ -16,7 +16,7 @@ class CoordinateHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected static $coordinateHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class CoordinateHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$coordinateHelper = new CoordinateHelper();
     }
-    
+
     /**
      * Checks the render method
      */
@@ -32,7 +32,7 @@ class CoordinateHelperTest extends \PHPUnit_Framework_TestCase
     {
         $coordinateTest = new Coordinate(1.1, 2.1, true);
         $this->assertEquals(self::$coordinateHelper->render($coordinateTest), 'new google.maps.LatLng(1.1, 2.1, true)');
-        
+
         $coordinateTest = new Coordinate(2.1, 1.1, false);
         $this->assertEquals(self::$coordinateHelper->render($coordinateTest), 'new google.maps.LatLng(2.1, 1.1, false)');
     }

@@ -13,7 +13,7 @@ $deps = array(
 if(!is_dir($vendorDir))
     mkdir($vendorDir, 0777, true);
 
-foreach ($deps as $dep) 
+foreach ($deps as $dep)
 {
     list($name, $url, $rev) = $dep;
 

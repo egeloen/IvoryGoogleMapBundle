@@ -23,7 +23,7 @@ class TravelModeTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the travel modes getter
      */

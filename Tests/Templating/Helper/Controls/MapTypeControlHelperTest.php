@@ -23,7 +23,7 @@ class MapTypeControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\MapTypeControlHelper
      */
     protected static $mapTypeControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -31,7 +31,7 @@ class MapTypeControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControlHelper = new MapTypeControlHelper(new MapTypeIdHelper(), new ControlPositionHelper(), new MapTypeControlStyleHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -41,7 +41,7 @@ class MapTypeControlHelperTest extends \PHPUnit_Framework_TestCase
         $mapTypeControlTest->setMapTypeIds(array(MapTypeId::ROADMAP));
         $mapTypeControlTest->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $mapTypeControlTest->setMapTypeControlStyle(MapTypeControlStyle::DROPDOWN_MENU);
-        
+
         $this->assertEquals(self::$mapTypeControlHelper->render($mapTypeControlTest), '{"mapTypeIds":[google.maps.MapTypeId.ROADMAP],"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.MapTypeControlStyle.DROPDOWN_MENU}');
     }
 }

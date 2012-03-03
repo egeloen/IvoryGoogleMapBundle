@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\RotateControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class RotateControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the rotate control constuctor
      */

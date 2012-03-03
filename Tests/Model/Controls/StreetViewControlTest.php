@@ -16,7 +16,7 @@ class StreetViewControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\StreetViewControl Tested street view control
      */
     protected static $streetViewControl = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class StreetViewControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$streetViewControl = new StreetViewControl();
     }
-    
+
     /**
      * Checks the street view control default value
      */
@@ -32,7 +32,7 @@ class StreetViewControlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$streetViewControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the control position getter & setter
      */
@@ -40,7 +40,7 @@ class StreetViewControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$streetViewControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$streetViewControl->getControlPosition(), 'bottom_center');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$streetViewControl->setControlPosition('foo');
     }

@@ -17,19 +17,19 @@ class ScaleControlServiceTest extends WebTestCase
     public function testScaleControlServiceWithoutConfiguration()
     {
         $scaleControl = self::createContainer()->get('ivory_google_map.scale_control');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\ScaleControl', $scaleControl);
         $this->assertEquals($scaleControl->getControlPosition(), 'bottom_left');
         $this->assertEquals($scaleControl->getScaleControlStyle(), 'default');
     }
-    
+
     /**
      * Checks the scale control service with configuration
      */
     public function testScaleControlServiceWithConfiguration()
     {
         $scaleControl = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.scale_control');
-        
+
         $this->assertEquals($scaleControl->getControlPosition(), 'top_center');
         $this->assertEquals($scaleControl->getScaleControlStyle(), 'default');
     }

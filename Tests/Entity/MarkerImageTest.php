@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\MarkerImage;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MarkerImageTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the marker image constuctor
      */

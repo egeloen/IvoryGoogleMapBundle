@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Bound;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class BoundTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the bound constuctor
      */

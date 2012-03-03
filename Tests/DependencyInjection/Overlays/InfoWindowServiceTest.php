@@ -17,7 +17,7 @@ class InfoWindowServiceTest extends WebTestCase
     public function testInfoWindowServiceWithoutConfiguration()
     {
         $infoWindow = self::createContainer()->get('ivory_google_map.info_window');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\InfoWindow', $infoWindow);
         $this->assertEquals(substr($infoWindow->getJavascriptVariable(), 0, 12), 'info_window_');
         $this->assertEquals($infoWindow->getPosition()->getLatitude(), 0);
@@ -32,14 +32,14 @@ class InfoWindowServiceTest extends WebTestCase
         $this->assertFalse($infoWindow->isAutoClose());
         $this->assertEquals(count($infoWindow->getOptions()), 0);
     }
-    
+
     /**
      * Checks the info window service with configuration
      */
     public function testInfoWindowServiceWithConfiguration()
     {
         $infoWindow = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.info_window');
-        
+
         $this->assertEquals(substr($infoWindow->getJavascriptVariable(), 0, 2), 'iw');
         $this->assertEquals($infoWindow->getPosition()->getLatitude(), 1.1);
         $this->assertEquals($infoWindow->getPosition()->getLongitude(), -2.1);

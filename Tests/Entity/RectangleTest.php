@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Rectangle;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class RectangleTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the rectangle constuctor
      */

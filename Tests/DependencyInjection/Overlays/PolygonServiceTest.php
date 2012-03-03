@@ -17,18 +17,18 @@ class PolygonServiceTest extends WebTestCase
     public function testpolygonServiceWithoutConfiguration()
     {
         $polygon = self::createContainer()->get('ivory_google_map.polygon');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\Polygon', $polygon);
         $this->assertEquals(substr($polygon->getJavascriptVariable(), 0, 8), 'polygon_');
     }
-    
+
     /**
      * Checks the polygon service with configuration
      */
     public function testPolygonServiceWithConfiguration()
     {
         $polygon = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.polygon');
-        
+
         $this->assertEquals(substr($polygon->getJavascriptVariable(), 0, 1), 'p');
         $this->assertEquals($polygon->getOptions(), array('option' => 'value'));
     }

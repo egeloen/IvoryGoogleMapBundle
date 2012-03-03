@@ -19,7 +19,7 @@ class CircleHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper
      */
     protected static $circleHelper = null;
-    
+
     /**
      * @override
      */
@@ -27,7 +27,7 @@ class CircleHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$circleHelper = new CircleHelper(new CoordinateHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -41,7 +41,7 @@ class CircleHelperTest extends \PHPUnit_Framework_TestCase
             'option1' => 'value1',
             'option2' => 'value2'
         ));
-        
+
         $this->assertEquals(self::$circleHelper->render($circleTest, $mapTest), 'var '.$circleTest->getJavascriptVariable().' = new google.maps.Circle({"map":'.$mapTest->getJavascriptVariable().',"center":new google.maps.LatLng(1.1, 2.1, true),"radius":2,"option1":"value1","option2":"value2"});'.PHP_EOL);
     }
 }

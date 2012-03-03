@@ -22,13 +22,13 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new BuzzHttpAdapter();
         $provider = new GoogleMapsProvider($adapter);
-        
+
         $geocoder = new Geocoder($provider);
         $response = $geocoder->geocode('address');
-        
+
         $this->assertInstanceOf('Geocoder\Result\Geocoded', $response);
     }
-    
+
     /**
      * Checks the geocode method with the ivory provider
      */
@@ -36,13 +36,13 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new BuzzHttpAdapter();
         $provider = new Provider($adapter);
-        
+
         $geocoder = new Geocoder($provider);
         $response = $geocoder->geocode('address');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
-    
+
     /**
      * Checks the reverse method with a geocoder provider
      */
@@ -50,13 +50,13 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new BuzzHttpAdapter();
         $provider = new GoogleMapsProvider($adapter);
-        
+
         $geocoder = new Geocoder($provider);
         $response = $geocoder->reverse(1.1, 2.1);
-        
+
         $this->assertInstanceOf('Geocoder\Result\Geocoded', $response);
     }
-    
+
     /**
      * Checks the reverse method with the ivory provider
      */
@@ -64,10 +64,10 @@ class GeocoderTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new BuzzHttpAdapter();
         $provider = new Provider($adapter);
-        
+
         $geocoder = new Geocoder($provider);
         $response = $geocoder->reverse(1.1, 2.1);
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
 }

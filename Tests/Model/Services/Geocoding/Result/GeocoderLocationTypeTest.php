@@ -23,7 +23,7 @@ class GeocoderLocationTypeTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the geocoder location types getter
      */

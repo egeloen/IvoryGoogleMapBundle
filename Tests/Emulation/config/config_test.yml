@@ -19,7 +19,7 @@ ivory_google_map:
             north_east:
                 latitude: 1.1
                 longitude: 2.1
-                no_wrap: false   
+                no_wrap: false
         type: "satellite"
         zoom: 10
         width: "100%"
@@ -29,13 +29,13 @@ ivory_google_map:
             option: "value"
         stylesheet_options:
             option: "value"
-    
+
     # Base configuration
     coordinate:
         latitude: 1.1
         longitude: -2.1
         no_wrap: false
-        
+
     bound:
         prefix_javascript_variable: "b"
         south_west:
@@ -46,17 +46,17 @@ ivory_google_map:
             latitude: 2.1
             longitude: 1.1
             no_wrap: false
-        
+
     point:
         x: 1.1
         y: -2.1
-        
+
     size:
         width: 100.1
         height: 200.2
         width_unit: "px"
         height_unit: "pt"
-    
+
     # Controls configuration
     map_type_control:
         map_type_ids: ["hybrid", "terrain"]
@@ -65,24 +65,24 @@ ivory_google_map:
 
     overview_map_control:
         opened: true
-    
+
     pan_control:
         control_position: "top_center"
-        
+
     rotate_control:
         control_position: "top_center"
-        
+
     scale_control:
         control_position: "top_center"
         scale_control_style: "default"
-    
+
     street_view_control:
         control_position: "top_center"
-        
+
     zoom_control:
         control_position: "top_center"
         zoom_control_style: "default"
-    
+
     # Overlays configuration
     marker:
         prefix_javascript_variable: "m"
@@ -113,12 +113,12 @@ ivory_google_map:
             height: 22
             width_unit: "px"
             height_unit: "pt"
-        
+
     marker_shape:
         prefix_javascript_variable: "ms"
         type: "rect"
         coordinates: [-1.1, -2.1, 2.1, 1.1]
-        
+
     info_window:
         prefix_javascript_variable: "iw"
         position:
@@ -137,22 +137,22 @@ ivory_google_map:
         auto_close: true
         options:
             option: "value"
-            
+
     polyline:
         prefix_javascript_variable: "p"
         options:
             option: "value"
-            
+
     encoded_polyline:
         prefix_javascript_variable: "ep"
         options:
             option: "value"
-    
+
     polygon:
         prefix_javascript_variable: "p"
         options:
             option: "value"
-            
+
     rectangle:
         prefix_javascript_variable: "r"
         bound:
@@ -166,7 +166,7 @@ ivory_google_map:
                 no_wrap: false
         options:
             option: "value"
-            
+
     circle:
         prefix_javascript_variable: "c"
         center:
@@ -176,7 +176,7 @@ ivory_google_map:
         radius: 10
         options:
             option: "value"
-            
+
     ground_overlay:
         prefix_javascript_variable: "go"
         url: "url"
@@ -191,21 +191,21 @@ ivory_google_map:
                 no_wrap: false
         options:
             option: "value"
-    
+
     # Events
     event:
         prefix_javascript_variable: "e"
-    
+
     # Services
     geocoder:
         fake_ip: "123.345.567.123"
         class: "Geocoder\Geocoder"
-        provider: 
+        provider:
             class: "Geocoder\\Provider\HostIpProvider"
             api_key: "apikey"
             locale: "en"
         adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
-        
+
     geocoder_request:
         address: "address"
         coordinate:
@@ -224,12 +224,12 @@ ivory_google_map:
         region: "es"
         language: "en"
         sensor: true
-    
+
     directions:
         url: "http://directions"
         https: true
         format: "xml"
-        
+
     directions_request:
         avoid_highways: true
         avoid_tolls: true

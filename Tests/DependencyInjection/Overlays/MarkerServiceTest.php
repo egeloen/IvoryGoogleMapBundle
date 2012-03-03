@@ -17,7 +17,7 @@ class MarkerServiceTest extends WebTestCase
     public function testMarkerServiceWithoutConfiguration()
     {
         $marker = self::createContainer()->get('ivory_google_map.marker');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\Marker', $marker);
         $this->assertEquals(substr($marker->getJavascriptVariable(), 0, 7), 'marker_');
         $this->assertEquals($marker->getPosition()->getLatitude(), 0);
@@ -26,14 +26,14 @@ class MarkerServiceTest extends WebTestCase
         $this->assertFalse($marker->hasAnimation());
         $this->assertEmpty($marker->getOptions());
     }
-    
+
     /**
      * Checks the marker service with configuration
      */
     public function testMarkerServiceWithConfiguration()
     {
         $marker = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.marker');
-        
+
         $this->assertEquals(substr($marker->getJavascriptVariable(), 0, 1), 'm');
         $this->assertEquals($marker->getPosition()->getLatitude(), 1.1);
         $this->assertEquals($marker->getPosition()->getLongitude(), -2.1);

@@ -16,7 +16,7 @@ class PanControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\PanControl Tested pan control
      */
     protected static $panControl = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class PanControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$panControl = new PanControl();
     }
-    
+
     /**
      * Checks the pan control default value
      */
@@ -32,7 +32,7 @@ class PanControlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$panControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the control position getter & setter
      */
@@ -40,7 +40,7 @@ class PanControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$panControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$panControl->getControlPosition(), 'bottom_center');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$panControl->setControlPosition('foo');
     }

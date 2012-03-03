@@ -17,18 +17,18 @@ class StreetViewControlServiceTest extends WebTestCase
     public function testStreetViewControlServiceWithoutConfiguration()
     {
         $streetViewControl = self::createContainer()->get('ivory_google_map.street_view_control');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\StreetViewControl', $streetViewControl);
         $this->assertEquals($streetViewControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the StreetView control service with configuration
      */
     public function testStreetViewControlServiceWithConfiguration()
     {
         $streetViewControl = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.street_view_control');
-        
+
         $this->assertEquals($streetViewControl->getControlPosition(), 'top_center');
     }
 }

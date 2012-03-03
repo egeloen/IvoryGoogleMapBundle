@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\PanControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class PanControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the pan control constuctor
      */

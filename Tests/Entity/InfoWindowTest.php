@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\InfoWindow;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class InfoWindowTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the info window constuctor
      */

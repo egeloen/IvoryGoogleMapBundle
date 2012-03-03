@@ -18,7 +18,7 @@ class PanControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\PanControlHelper
      */
     protected static $panControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class PanControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$panControlHelper = new PanControlHelper(new ControlPositionHelper());
     }
-    
+
     /**
      * Checks the render method
      */

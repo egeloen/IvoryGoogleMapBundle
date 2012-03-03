@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\OverviewMapControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the overview map control constuctor
      */

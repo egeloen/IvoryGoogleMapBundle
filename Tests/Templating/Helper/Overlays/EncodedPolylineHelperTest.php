@@ -19,7 +19,7 @@ class EncodedPolylineHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper $encodedPolylineHelper Encoded polyline helper tested
      */
     protected static $encodedPolylineHelper = null;
-    
+
     /**
      * @override
      */
@@ -27,7 +27,7 @@ class EncodedPolylineHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$encodedPolylineHelper = new EncodedPolylineHelper(new EncodingHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -35,14 +35,14 @@ class EncodedPolylineHelperTest extends \PHPUnit_Framework_TestCase
     {
         $mapTest = new Map();
         $encodedPolylineTest = new EncodedPolyline('value');
-        
+
         $this->assertEquals(self::$encodedPolylineHelper->render($encodedPolylineTest, $mapTest), 'var '.$encodedPolylineTest->getJavascriptVariable().' = new google.maps.Polyline({"map":'.$mapTest->getJavascriptVariable().',"path":google.maps.geometry.encoding.decodePath("value")});'.PHP_EOL);
-        
+
         $encodedPolylineTest->setOptions(array(
             'option1' => 'value1',
             'option2' => 'value2'
         ));
-        
+
         $this->assertEquals(self::$encodedPolylineHelper->render($encodedPolylineTest, $mapTest), 'var '.$encodedPolylineTest->getJavascriptVariable().' = new google.maps.Polyline({"map":'.$mapTest->getJavascriptVariable().',"path":google.maps.geometry.encoding.decodePath("value"),"option1":"value1","option2":"value2"});'.PHP_EOL);
     }
 }

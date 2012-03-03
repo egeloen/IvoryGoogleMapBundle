@@ -21,7 +21,7 @@ class ZoomControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlHelper Tested zoom control helper
      */
     protected static $zoomControlHelper;
-    
+
     /**
      * @override
      */
@@ -29,7 +29,7 @@ class ZoomControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$zoomControlHelper = new ZoomControlHelper(new ControlPositionHelper(), new ZoomControlStyleHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -38,7 +38,7 @@ class ZoomControlHelperTest extends \PHPUnit_Framework_TestCase
         $zoomControlTest = new ZoomControl();
         $zoomControlTest->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $zoomControlTest->setZoomControlStyle(ZoomControlStyle::SMALL);
-        
+
         $this->assertEquals(self::$zoomControlHelper->render($zoomControlTest), '{"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.ZoomControlStyle.SMALL}');
     }
 }

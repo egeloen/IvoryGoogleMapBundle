@@ -18,7 +18,7 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\MapTypeControl Tested map type control
      */
     protected static $mapTypeControl = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControl = new MapTypeControl();
     }
-    
+
     /**
      * Checks the map type control default value
      */
@@ -36,7 +36,7 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$mapTypeControl->getControlPosition(), 'top_right');
         $this->assertEquals(self::$mapTypeControl->getMapTypeControlStyle(), 'default');
     }
-    
+
     /**
      * Checks the map type ids getter & setter
      */
@@ -45,15 +45,15 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
         self::$mapTypeControl->setMapTypeIds(array(MapTypeId::ROADMAP));
         $this->assertTrue(in_array('roadmap', self::$mapTypeControl->getMapTypeIds()));
         $this->assertEquals(count(self::$mapTypeControl->getMapTypeIds()), 1);
-        
+
         self::$mapTypeControl->addMapTypeId(MapTypeId::SATELLITE);
         $this->assertTrue(in_array('satellite', self::$mapTypeControl->getMapTypeIds()));
         $this->assertEquals(count(self::$mapTypeControl->getMapTypeIds()), 2);
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$mapTypeControl->addMapTypeId('foo');
     }
-    
+
     /**
      * Checks the control position getter & setter
      */
@@ -61,11 +61,11 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$mapTypeControl->getControlPosition(), 'bottom_center');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$mapTypeControl->setControlPosition('foo');
     }
-    
+
     /**
      * Checks the map type control style getter & setter
      */
@@ -73,7 +73,7 @@ class MapTypeControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeControl->setMapTypeControlStyle(MapTypeControlStyle::DROPDOWN_MENU);
         $this->assertEquals(self::$mapTypeControl->getMapTypeControlStyle(), 'dropdown_menu');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$mapTypeControl->setMapTypeControlStyle('foo');
     }

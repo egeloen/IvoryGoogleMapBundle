@@ -18,7 +18,7 @@ class StreetViewControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\StreetViewControlHelper
      */
     protected static $streetViewControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class StreetViewControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$streetViewControlHelper = new StreetViewControlHelper(new ControlPositionHelper());
     }
-    
+
     /**
      * Checks the render method
      */

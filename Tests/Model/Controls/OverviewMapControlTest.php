@@ -15,7 +15,7 @@ class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl Tested overview map control
      */
     protected static $overviewMapControl = null;
-    
+
     /**
      * @override
      */
@@ -23,7 +23,7 @@ class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$overviewMapControl = new OverviewMapControl();
     }
-    
+
     /**
      * Checks the map type control default value
      */
@@ -31,7 +31,7 @@ class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(self::$overviewMapControl->isOpened());
     }
-    
+
     /**
      * Checks the opened getter & setter
      */
@@ -39,7 +39,7 @@ class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$overviewMapControl->setOpened(true);
         $this->assertTrue(self::$overviewMapControl->isOpened());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$overviewMapControl->setOpened('foo');
     }

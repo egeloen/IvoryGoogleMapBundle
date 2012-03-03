@@ -17,7 +17,7 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
      * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerShape Tested marker shape
      */
     protected static $markerShape = null;
-    
+
     /**
      * @override
      */
@@ -25,15 +25,15 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
     {
         self::$markerShape = new MarkerShape();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$markerShape->getJavascriptVariable(), 0, 13), 'marker_shape_');
     }
-    
+
     /**
      * Checks the marker image default values
      */
@@ -43,7 +43,7 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
         $this->assertTrue(self::$markerShape->hasCoordinates());
         $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 1, 1, -1, -1, -1, -1, 1));
     }
-    
+
     /**
      * Checks the type getter & setter
      */
@@ -51,17 +51,17 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
     {
         self::$markerShape->setType('circle');
         $this->assertEquals(self::$markerShape->getType(), 'circle');
-        
+
         self::$markerShape->setType('poly');
         $this->assertEquals(self::$markerShape->getType(), 'poly');
-        
+
         self::$markerShape->setType('rect');
         $this->assertEquals(self::$markerShape->getType(), 'rect');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerShape->setType('foo');
     }
-    
+
     /**
      * Checks the cooordinates getter & setter
      */
@@ -70,24 +70,24 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
         self::$markerShape->setType('circle');
         self::$markerShape->setCoordinates(array(1, 2, 3));
         $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 2, 3));
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerShape->setCoordinates(array('foo'));
-        
+
         self::$markerShape->setType('poly');
         self::$markerShape->setCoordinates(array(1, 2, 3, 4));
         $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 2, 3, 4));
-        
+
         self::$markerShape->addCoordinate(5, 6);
         $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 2, 3, 4, 5, 6));
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerShape->setCoordinates(array('foo'));
-        
+
         self::$markerShape->setType('rect');
         self::$markerShape->setCoordinates(array(1, 2, 3, 4));
         $this->assertEquals(self::$markerShape->getCoordinates(), array(1, 2, 3, 4));
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerShape->setCoordinates(array('foo'));
     }

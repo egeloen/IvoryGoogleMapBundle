@@ -23,7 +23,7 @@ class MapTypeControlStyleTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the map type control styles getter
      */

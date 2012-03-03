@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\StreetViewControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class StreetViewControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the street view control constuctor
      */

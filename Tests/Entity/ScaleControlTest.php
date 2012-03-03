@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\ScaleControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class ScaleControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the scale control constuctor
      */

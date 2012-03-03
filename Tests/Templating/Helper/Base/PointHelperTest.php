@@ -16,7 +16,7 @@ class PointHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\PointHelper
      */
     protected static $pointHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class PointHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$pointHelper = new PointHelper();
     }
-    
+
     /**
      * Checks the render method
      */

@@ -16,7 +16,7 @@ class AnimationHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\AnimationHelper
      */
     protected static $animationHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class AnimationHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$animationHelper = new AnimationHelper();
     }
-    
+
     /**
      * Checks the render method
      */
@@ -32,7 +32,7 @@ class AnimationHelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$animationHelper->render(Animation::BOUNCE), 'google.maps.Animation.BOUNCE');
         $this->assertEquals(self::$animationHelper->render(Animation::DROP), 'google.maps.Animation.DROP');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$animationHelper->render('foo');
     }

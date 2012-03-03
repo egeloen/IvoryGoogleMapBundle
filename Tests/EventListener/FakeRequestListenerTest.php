@@ -15,7 +15,7 @@ class FakeRequestListenerTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\EventListener\FakeRequestListener $fakeRequestListene Fake request listener tested
      */
     protected static $fakeRequestListener = null;
-    
+
     /**
      * @override
      */
@@ -23,7 +23,7 @@ class FakeRequestListenerTest extends \PHPUnit_Framework_TestCase
     {
         self::$fakeRequestListener = new FakeRequestListener('111.111.111.111');
     }
-    
+
     /**
      * Checks the fake IP getter & setter
      */

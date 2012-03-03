@@ -17,18 +17,18 @@ class OverviewMapControlServiceTest extends WebTestCase
     public function testOverviewMapControlServiceWithoutConfiguration()
     {
         $overviewMapControl = self::createContainer()->get('ivory_google_map.overview_map_control');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl', $overviewMapControl);
         $this->assertFalse($overviewMapControl->isOpened());
     }
-    
+
     /**
      * Checks the overview map control service with configuration
      */
     public function testMapTypeControlServiceWithConfiguration()
     {
         $overviewMapControl = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.overview_map_control');
-        
+
         $this->assertTrue($overviewMapControl->isOpened());
     }
 }

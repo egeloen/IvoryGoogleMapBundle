@@ -16,7 +16,7 @@ class SizeHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\SizeHelper
      */
     protected static $sizeHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class SizeHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$sizeHelper = new SizeHelper();
     }
-    
+
     /**
      * Checks the render method
      */
@@ -32,7 +32,7 @@ class SizeHelperTest extends \PHPUnit_Framework_TestCase
     {
         $sizeTest = new Size(1.1, 2.1);
         $this->assertEquals(self::$sizeHelper->render($sizeTest), 'new google.maps.Size(1.1, 2.1)');
-        
+
         $sizeTest = new Size(1.1, 2.1, 'px', 'px');
         $this->assertEquals(self::$sizeHelper->render($sizeTest), 'new google.maps.Size(1.1, 2.1, "px", "px")');
     }
