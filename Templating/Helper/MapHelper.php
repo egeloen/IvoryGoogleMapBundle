@@ -4,6 +4,7 @@ namespace Ivory\GoogleMapBundle\Templating\Helper;
 
 use Ivory\GoogleMapBundle\Templating\Helper\Base;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls;
+use Ivory\GoogleMapBundle\Templating\Helper\Layers;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays;
 use Ivory\GoogleMapBundle\Templating\Helper\Events;
 
@@ -108,6 +109,11 @@ class MapHelper
     protected $groundOverlayHelper;
 
     /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayer
+     */
+    protected $kmlLayerHelper;
+
+    /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper
      */
     protected $eventManagerHelper;
@@ -131,10 +137,31 @@ class MapHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper $encodedPolylineHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayer $kmlLayerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper $eventHelper
      */
-    public function __construct(Base\CoordinateHelper $coordinateHelper, MapTypeIdHelper $mapTypeIdHelper, Controls\MapTypeControlHelper $mapTypeControlHelper, Controls\OverviewMapControlHelper $overviewMapControlHelper, Controls\PanControlHelper $panControlHelper, Controls\RotateControlHelper $rotateControlHelper, Controls\ScaleControlHelper $scaleControlHelper, Controls\StreetViewControlHelper $streetViewControlHelper, Controls\ZoomControlHelper $zoomControlHelper, Overlays\MarkerHelper $markerHelper, Base\BoundHelper $boundHelper, Overlays\InfoWindowHelper $infoWindowHelper, Overlays\PolylineHelper $polylineHelper, Overlays\EncodedPolylineHelper $encodedPolylineHelper, Overlays\PolygonHelper $polygonHelper, Overlays\RectangleHelper $rectangleHelper, Overlays\CircleHelper $circleHelper, Overlays\GroundOverlayHelper $groundOverlayHelper, Events\EventManagerHelper $eventManagerHelper)
-    {
+    public function __construct(
+        Base\CoordinateHelper $coordinateHelper,
+        MapTypeIdHelper $mapTypeIdHelper,
+        Controls\MapTypeControlHelper $mapTypeControlHelper,
+        Controls\OverviewMapControlHelper $overviewMapControlHelper,
+        Controls\PanControlHelper $panControlHelper,
+        Controls\RotateControlHelper $rotateControlHelper,
+        Controls\ScaleControlHelper $scaleControlHelper,
+        Controls\StreetViewControlHelper $streetViewControlHelper,
+        Controls\ZoomControlHelper $zoomControlHelper,
+        Overlays\MarkerHelper $markerHelper,
+        Base\BoundHelper $boundHelper,
+        Overlays\InfoWindowHelper $infoWindowHelper,
+        Overlays\PolylineHelper $polylineHelper,
+        Overlays\EncodedPolylineHelper $encodedPolylineHelper,
+        Overlays\PolygonHelper $polygonHelper,
+        Overlays\RectangleHelper $rectangleHelper,
+        Overlays\CircleHelper $circleHelper,
+        Overlays\GroundOverlayHelper $groundOverlayHelper,
+        Layers\KMLLayerHelper $kmlLayerHelper,
+        Events\EventManagerHelper $eventManagerHelper
+    ) {
         $this->coordinateHelper = $coordinateHelper;
         $this->mapTypeIdHelper = $mapTypeIdHelper;
         $this->mapTypeControlHelper = $mapTypeControlHelper;
@@ -153,6 +180,7 @@ class MapHelper
         $this->rectangleHelper = $rectangleHelper;
         $this->circleHelper = $circleHelper;
         $this->groundOverlayHelper = $groundOverlayHelper;
+        $this->kmlLayerHelper = $kmlLayerHelper;
         $this->eventManagerHelper = $eventManagerHelper;
     }
 
@@ -232,6 +260,8 @@ class MapHelper
             $html[] = $this->renderBound($map);
         else
             $html[] = $this->renderCenter($map);
+
+        $html[] = $this->renderKMLLayers($map);
 
         $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
@@ -548,6 +578,22 @@ class MapHelper
 
         foreach($map->getGroundOverlays() as $groundOverlay)
             $html[] = $this->groundOverlayHelper->render($groundOverlay, $map);
+
+        return implode('', $html);
+    }
+
+    /**
+     * Renders the map javascript KML layers
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     * @return string HTML output
+     */
+    public function renderKMLLayers(Map $map)
+    {
+        $html = array();
+
+        foreach ($map->getKMLLayers() as $kmlLayer)
+            $html[] = $this->kmlLayerHelper->render($kmlLayer, $map);
 
         return implode('', $html);
     }
