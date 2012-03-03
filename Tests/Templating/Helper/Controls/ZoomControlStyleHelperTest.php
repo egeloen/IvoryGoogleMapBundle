@@ -16,7 +16,7 @@ class ZoomControlStyleHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ZoomControlStyleHelper
      */
     protected static $zoomControlStyleHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class ZoomControlStyleHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$zoomControlStyleHelper = new ZoomControlStyleHelper();
     }
-    
+
     /**
      * Checks the render method
      */
@@ -33,7 +33,7 @@ class ZoomControlStyleHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$zoomControlStyleHelper->render(ZoomControlStyle::DEFAULT_), 'google.maps.ZoomControlStyle.DEFAULT');
         $this->assertEquals(self::$zoomControlStyleHelper->render(ZoomControlStyle::LARGE), 'google.maps.ZoomControlStyle.LARGE');
         $this->assertEquals(self::$zoomControlStyleHelper->render(ZoomControlStyle::SMALL), 'google.maps.ZoomControlStyle.SMALL');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$zoomControlStyleHelper->render('foo');
     }

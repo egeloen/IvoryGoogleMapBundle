@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\ZoomControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class ZoomControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the zoom control constuctor
      */

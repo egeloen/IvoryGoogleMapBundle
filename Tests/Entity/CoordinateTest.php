@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Coordinate;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class CoordinateTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the coordinate constuctor
      */

@@ -16,7 +16,7 @@ class ScaleControlStyleHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlStyleHelper
      */
     protected static $scaleControlStyleHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,14 +24,14 @@ class ScaleControlStyleHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$scaleControlStyleHelper = new ScaleControlStyleHelper();
     }
-    
+
     /**
      * Checks the render method
      */
     public function testRender()
     {
         $this->assertEquals(self::$scaleControlStyleHelper->render(ScaleControlStyle::DEFAULT_), 'google.maps.ScaleControlStyle.DEFAULT');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$scaleControlStyleHelper->render('foo');
     }

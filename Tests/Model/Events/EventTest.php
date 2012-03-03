@@ -17,7 +17,7 @@ class EventTest extends AbstractJavascriptVariableAssetTest
      * @var Ivory\GoogleMapBundle\Model\Event Tested event
      */
     protected static $event = null;
-    
+
     /**
      * @override
      */
@@ -25,15 +25,15 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     {
         self::$event = new Event();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$event->getJavascriptVariable(), 0, 6), 'event_');
     }
-    
+
     /**
      * Checks the event default value
      */
@@ -44,7 +44,7 @@ class EventTest extends AbstractJavascriptVariableAssetTest
         $this->assertNull(self::$event->getHandle());
         $this->assertFalse(self::$event->isCapture());
     }
-    
+
     /**
      * Checks the instance getter & setter
      */
@@ -52,11 +52,11 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     {
         self::$event->setInstance('instance');
         $this->assertEquals(self::$event->getInstance(), 'instance');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$event->setInstance(0);
     }
-    
+
     /**
      * Checks the event name getter & setter
      */
@@ -64,11 +64,11 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     {
         self::$event->setEventName('event_name');
         $this->assertEquals(self::$event->getEventName(), 'event_name');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$event->setEventName(0);
     }
-    
+
     /**
      * Checks the handle getter & setter
      */
@@ -76,11 +76,11 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     {
         self::$event->setHandle('handle');
         $this->assertEquals(self::$event->getHandle(), 'handle');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$event->setHandle(0);
     }
-    
+
     /**
      * Checks the capture getter & setter
      */
@@ -88,7 +88,7 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     {
         self::$event->setCapture(true);
         $this->assertTrue(self::$event->isCapture());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$event->setCapture('foo');
     }

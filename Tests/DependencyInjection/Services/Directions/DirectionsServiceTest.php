@@ -17,20 +17,20 @@ class DirectionsServiceTest extends WebTestCase
     public function testDirectionsServiceWithoutConfiguration()
     {
         $directions = self::createContainer()->get('ivory_google_map.directions');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService', $directions);
         $this->assertEquals($directions->getUrl(), 'http://maps.googleapis.com/maps/api/directions');
         $this->assertFalse($directions->isHttps());
         $this->assertEquals($directions->getFormat(), 'json');
     }
-    
+
     /**
      * Checks the Directions service with configuration
      */
     public function testDirectionsServiceWithConfiguration()
     {
         $geocoder = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.directions');
-        
+
         $this->assertEquals($geocoder->getUrl(), 'https://directions');
         $this->assertTrue($geocoder->isHttps());
         $this->assertEquals($geocoder->getFormat(), 'xml');

@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\MarkerShape;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MarkerShapeTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the marker shape constuctor
      */

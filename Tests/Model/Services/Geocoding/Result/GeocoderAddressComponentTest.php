@@ -15,7 +15,7 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderAddressComponent
      */
     protected static $geocoderAddressComponent = null;
-    
+
     /**
      * @override
      */
@@ -23,7 +23,7 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderAddressComponent = new GeocoderAddressComponent('long_name', 'short_name', array('type_1', 'type_2'));
     }
-    
+
     /**
      * Checks geocoder address component default values
      */
@@ -33,7 +33,7 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderAddressComponent->getShortName(), 'short_name');
         $this->assertEquals(self::$geocoderAddressComponent->getTypes(), array('type_1', 'type_2'));
     }
-    
+
     /**
      * Checks the long name getter & setter
      */
@@ -41,11 +41,11 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderAddressComponent->setLongName('longname');
         $this->assertEquals(self::$geocoderAddressComponent->getLongName(), 'longname');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderAddressComponent->setLongName(true);
     }
-    
+
     /**
      * Checks the short name getter & setter
      */
@@ -53,11 +53,11 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderAddressComponent->setShortName('shortname');
         $this->assertEquals(self::$geocoderAddressComponent->getShortName(), 'shortname');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderAddressComponent->setShortName(true);
     }
-    
+
     /**
      * Checks the types getter & setter
      */
@@ -66,10 +66,10 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
         $typesTest = array('type1', 'type2');
         self::$geocoderAddressComponent->setTypes($typesTest);
         $this->assertEquals(self::$geocoderAddressComponent->getTypes(), array('type1', 'type2'));
-        
+
         self::$geocoderAddressComponent->addType('type3');
         $this->assertEquals(self::$geocoderAddressComponent->getTypes(), array('type1', 'type2', 'type3'));
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderAddressComponent->addType(true);
     }

@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\EventManager;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EventManagerTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the event manager constuctor
      */

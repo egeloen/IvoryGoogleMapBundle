@@ -17,18 +17,18 @@ class PanControlServiceTest extends WebTestCase
     public function testPanControlServiceWithoutConfiguration()
     {
         $panControl = self::createContainer()->get('ivory_google_map.pan_control');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\PanControl', $panControl);
         $this->assertEquals($panControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the pan control service with configuration
      */
     public function testPanControlServiceWithConfiguration()
     {
         $panControl = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.pan_control');
-        
+
         $this->assertEquals($panControl->getControlPosition(), 'top_center');
     }
 }

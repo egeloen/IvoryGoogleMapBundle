@@ -16,7 +16,7 @@ class MapTypeIdHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\MapTypeIdHelper
      */
     protected static $mapTypeIdHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,17 +24,17 @@ class MapTypeIdHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$mapTypeIdHelper = new MapTypeIdHelper();
     }
-    
+
     /**
      * Checks the render method
      */
     public function testRender()
-    {   
+    {
         $this->assertEquals(self::$mapTypeIdHelper->render(MapTypeId::HYBRID), 'google.maps.MapTypeId.HYBRID');
         $this->assertEquals(self::$mapTypeIdHelper->render(MapTypeId::ROADMAP), 'google.maps.MapTypeId.ROADMAP');
         $this->assertEquals(self::$mapTypeIdHelper->render(MapTypeId::SATELLITE), 'google.maps.MapTypeId.SATELLITE');
         $this->assertEquals(self::$mapTypeIdHelper->render(MapTypeId::TERRAIN), 'google.maps.MapTypeId.TERRAIN');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$mapTypeIdHelper->render('foo');
     }

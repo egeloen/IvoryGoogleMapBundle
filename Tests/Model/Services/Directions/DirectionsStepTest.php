@@ -22,7 +22,7 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsStep Directions step tested
      */
     protected static $directionsStep = null;
-    
+
     /**
      * @override
      */
@@ -35,10 +35,10 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
         $encodedPolyline = new EncodedPolyline('value');
         $startLocation = new Coordinate(2.1, 1.1, true);
         $travelMode = TravelMode::DRIVING;
-        
+
         self::$directionsStep = new DirectionsStep($distance, $duration, $endLocation, $instructions, $encodedPolyline, $startLocation, $travelMode);
     }
-    
+
     /**
      * Checks the distance getter & setter
      */
@@ -47,7 +47,7 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$directionsStep->getDistance()->getText(), '10 meters');
         $this->assertEquals(self::$directionsStep->getDistance()->getValue(), 10);
     }
-    
+
     /**
      * Checks the duration getter & setter
      */
@@ -56,7 +56,7 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$directionsStep->getDuration()->getText(), '2 minutes');
         $this->assertEquals(self::$directionsStep->getDuration()->getValue(), 2);
     }
-    
+
     /**
      * Checks the end location getter & setter
      */
@@ -66,18 +66,18 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$directionsStep->getEndLocation()->getLongitude(), 2.1);
         $this->assertTrue(self::$directionsStep->getEndLocation()->isNoWrap());
     }
-    
+
     /**
      * Checks the instructions getter & setter
      */
     public function testInstructions()
     {
         $this->assertEquals(self::$directionsStep->getInstructions(), 'instructions');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$directionsStep->setInstructions(true);
     }
-    
+
     /**
      * Checks the encoded polyline getter & setter
      */
@@ -85,7 +85,7 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$directionsStep->getEncodedPolyline()->getValue(), 'value');
     }
-    
+
     /**
      * Checks the start location getter & setter
      */
@@ -95,14 +95,14 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$directionsStep->getStartLocation()->getLongitude(), 1.1);
         $this->assertTrue(self::$directionsStep->getStartLocation()->isNoWrap());
     }
-    
+
     /**
      * Checks the travel mode getter & setter
      */
     public function testTravelMode()
     {
         $this->assertEquals(self::$directionsStep->getTravelMode(), 'DRIVING');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$directionsStep->setTravelMode('foo');
     }

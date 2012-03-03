@@ -18,7 +18,7 @@ class RotateControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\RotateControlHelper
      */
     protected static $rotateControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class RotateControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$rotateControlHelper = new RotateControlHelper(new ControlPositionHelper());
     }
-    
+
     /**
      * Checks the render method
      */

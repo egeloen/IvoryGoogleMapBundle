@@ -23,7 +23,7 @@ class ZoomControlStyleTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the zoom styles getter
      */

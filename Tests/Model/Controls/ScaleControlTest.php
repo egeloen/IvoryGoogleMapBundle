@@ -17,7 +17,7 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\ScaleControl Tested scale control
      */
     protected static $scaleControl = null;
-    
+
     /**
      * @override
      */
@@ -25,7 +25,7 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$scaleControl = new ScaleControl();
     }
-    
+
     /**
      * Checks the map type control default value
      */
@@ -34,7 +34,7 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$scaleControl->getControlPosition(), 'bottom_left');
         $this->assertEquals(self::$scaleControl->getScaleControlStyle(), 'default');
     }
-    
+
     /**
      * Checks the control position getter & setter
      */
@@ -42,11 +42,11 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$scaleControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$scaleControl->getControlPosition(), 'bottom_center');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$scaleControl->setControlPosition('foo');
     }
-    
+
     /**
      * Checks the scale control style getter & setter
      */
@@ -54,7 +54,7 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$scaleControl->setScaleControlStyle(ScaleControlStyle::DEFAULT_);
         $this->assertEquals(self::$scaleControl->getScaleControlStyle(), 'default');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$scaleControl->setScaleControlStyle('foo');
     }

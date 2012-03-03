@@ -14,7 +14,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class RectangleTest extends AbstractOptionsAssetTest
-{   
+{
     /**
      * @override
      */
@@ -22,15 +22,15 @@ class RectangleTest extends AbstractOptionsAssetTest
     {
         self::$object = new Rectangle();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$object->getJavascriptVariable(), 0, 10), 'rectangle_');
     }
-    
+
     /**
      * @override
      */
@@ -45,7 +45,7 @@ class RectangleTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getBound()->getSouthWest()->getLongitude(), -1);
         $this->assertTrue(self::$object->getBound()->getSouthWest()->isNoWrap());
     }
-    
+
     /**
      * Checks the bound getter & setter
      */
@@ -61,7 +61,7 @@ class RectangleTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLatitude(), 1);
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLongitude(), 1);
         $this->assertTrue(self::$object->getBound()->getNorthEast()->isNoWrap());
-        
+
         $southWestTest = new Coordinate(-2.1, -2.1, false);
         $northEastTest = new Coordinate(2.1, 2.1, false);
         self::$object->setBound($southWestTest, $northEastTest);
@@ -71,7 +71,7 @@ class RectangleTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLatitude(), 2.1);
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLongitude(), 2.1);
         $this->assertFalse(self::$object->getBound()->getNorthEast()->isNoWrap());
-        
+
         self::$object->setBound(-3.1, -3.1, 3.1, 3.1, true, false);
         $this->assertEquals(self::$object->getBound()->getSouthWest()->getLatitude(), -3.1);
         $this->assertEquals(self::$object->getBound()->getSouthWest()->getLongitude(), -3.1);
@@ -79,11 +79,11 @@ class RectangleTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLatitude(), 3.1);
         $this->assertEquals(self::$object->getBound()->getNorthEast()->getLongitude(), 3.1);
         $this->assertFalse(self::$object->getBound()->getNorthEast()->isNoWrap());
-        
+
         $boundTest = new Bound();
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setBound($boundTest);
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setBound('foo');
     }

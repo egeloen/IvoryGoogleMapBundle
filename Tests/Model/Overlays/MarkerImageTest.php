@@ -19,7 +19,7 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
      * @var Ivory\GoogleMapBundle\Model\Overlays\MarkerImage Tested marker image
      */
     protected static $markerImage = null;
-    
+
     /**
      * @override
      */
@@ -27,35 +27,35 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
     {
         self::$markerImage = new MarkerImage();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$markerImage->getJavascriptVariable(), 0, 13), 'marker_image_');
     }
-    
+
     /**
      * Checks the marker image default values
      */
     public function testDefaultValues()
     {
         $this->assertEquals(self::$markerImage->getUrl(), 'http://maps.gstatic.com/mapfiles/markers/marker.png');
-        
+
         $this->assertFalse(self::$markerImage->hasAnchor());
         $this->assertNull(self::$markerImage->getAnchor());
-        
+
         $this->assertFalse(self::$markerImage->hasOrigin());
         $this->assertNull(self::$markerImage->getOrigin());
-        
+
         $this->assertFalse(self::$markerImage->hasScaledSize());
         $this->assertNull(self::$markerImage->getScaledSize());
-        
+
         $this->assertFalse(self::$markerImage->hasSize());
         $this->assertNull(self::$markerImage->getSize());
     }
-    
+
     /**
      * Checks the url getter & setter
      */
@@ -63,11 +63,11 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
     {
         self::$markerImage->setUrl('url');
         $this->assertEquals(self::$markerImage->getUrl(), 'url');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerImage->setUrl(0);
     }
-    
+
     /**
      * Checks the anchor getter & setter
      */
@@ -77,18 +77,18 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
         self::$markerImage->setAnchor($pointTest);
         $this->assertEquals(self::$markerImage->getAnchor()->getX(), 1);
         $this->assertEquals(self::$markerImage->getAnchor()->getY(), 1);
-        
+
         self::$markerImage->setAnchor(2, 2);
         $this->assertEquals(self::$markerImage->getAnchor()->getX(), 2);
         $this->assertEquals(self::$markerImage->getAnchor()->getY(), 2);
-        
+
         self::$markerImage->setAnchor(null);
         $this->assertNull(self::$markerImage->getAnchor());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerImage->setAnchor('foo');
     }
-    
+
     /**
      * Checks the origin getter & setter
      */
@@ -98,18 +98,18 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
         self::$markerImage->setOrigin($pointTest);
         $this->assertEquals(self::$markerImage->getOrigin()->getX(), 1);
         $this->assertEquals(self::$markerImage->getOrigin()->getY(), 1);
-        
+
         self::$markerImage->setOrigin(2, 2);
         $this->assertEquals(self::$markerImage->getOrigin()->getX(), 2);
         $this->assertEquals(self::$markerImage->getOrigin()->getY(), 2);
-        
+
         self::$markerImage->setOrigin(null);
         $this->assertNull(self::$markerImage->getOrigin());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerImage->setOrigin('foo');
     }
-    
+
     /**
      * Checks the scaled size getter & setter
      */
@@ -121,20 +121,20 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$markerImage->getScaledSize()->getHeight(), 1);
         $this->assertEquals(self::$markerImage->getScaledSize()->getWidthUnit(), 'px');
         $this->assertEquals(self::$markerImage->getScaledSize()->getHeightUnit(), 'px');
-        
+
         self::$markerImage->setScaledSize(2, 2, 'px', 'px');
         $this->assertEquals(self::$markerImage->getScaledSize()->getWidth(), 2);
         $this->assertEquals(self::$markerImage->getScaledSize()->getHeight(), 2);
         $this->assertEquals(self::$markerImage->getScaledSize()->getWidthUnit(), 'px');
         $this->assertEquals(self::$markerImage->getScaledSize()->getHeightUnit(), 'px');
-        
+
         self::$markerImage->setScaledSize(null);
         $this->assertNull(self::$markerImage->getScaledSize());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerImage->setScaledSize('foo');
     }
-    
+
     /**
      * Checks the size getter & setter
      */
@@ -146,16 +146,16 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(self::$markerImage->getSize()->getHeight(), 1);
         $this->assertEquals(self::$markerImage->getSize()->getWidthUnit(), 'px');
         $this->assertEquals(self::$markerImage->getSize()->getHeightUnit(), 'px');
-        
+
         self::$markerImage->setSize(2, 2, 'px', 'px');
         $this->assertEquals(self::$markerImage->getSize()->getWidth(), 2);
         $this->assertEquals(self::$markerImage->getSize()->getHeight(), 2);
         $this->assertEquals(self::$markerImage->getSize()->getWidthUnit(), 'px');
         $this->assertEquals(self::$markerImage->getSize()->getHeightUnit(), 'px');
-        
+
         self::$markerImage->setSize(null);
         $this->assertNull(self::$markerImage->getSize());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$markerImage->setSize('foo');
     }

@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Polygon;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class PolygonTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the polygon constuctor
      */

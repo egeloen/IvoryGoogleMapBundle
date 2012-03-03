@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Circle;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class CircleTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the circle constuctor
      */

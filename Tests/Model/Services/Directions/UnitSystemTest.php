@@ -23,7 +23,7 @@ class UnitSystemTest extends \PHPUnit_Framework_TestCase
         }
         catch(\Exception $e){}
     }
-    
+
     /**
      * Checks the unit systems getter
      */

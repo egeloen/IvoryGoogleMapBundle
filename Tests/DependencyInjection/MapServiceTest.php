@@ -17,7 +17,7 @@ class MapServiceTest extends WebTestCase
     public function testMapServiceWithoutConfiguration()
     {
         $map = self::createContainer()->get('ivory_google_map.map');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Map', $map);
         $this->assertEquals(substr($map->getJavascriptVariable(), 0, 4), 'map_');
         $this->assertEquals($map->getHtmlContainerId(), 'map_canvas');
@@ -38,14 +38,14 @@ class MapServiceTest extends WebTestCase
             'height' => '300px'
         ));
     }
-    
+
     /**
      * Checks the map service with configuration
      */
     public function testMapServiceWithConfiguration()
     {
         $map = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.map');
-        
+
         $this->assertEquals(substr($map->getJavascriptVariable(), 0, 1), 'm');
         $this->assertEquals($map->getHtmlContainerId(), 'html_container_id');
         $this->assertTrue($map->isAutoZoom());

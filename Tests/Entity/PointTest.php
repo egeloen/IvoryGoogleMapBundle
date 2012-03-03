@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Point;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class PointTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the point constuctor
      */

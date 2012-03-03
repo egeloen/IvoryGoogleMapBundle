@@ -17,18 +17,18 @@ class RotateControlServiceTest extends WebTestCase
     public function testRotateControlServiceWithoutConfiguration()
     {
         $rotateControl = self::createContainer()->get('ivory_google_map.rotate_control');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\RotateControl', $rotateControl);
         $this->assertEquals($rotateControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the rotate control service with configuration
      */
     public function testRotateControlServiceWithConfiguration()
     {
         $rotateControl = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.rotate_control');
-        
+
         $this->assertEquals($rotateControl->getControlPosition(), 'top_center');
     }
 }

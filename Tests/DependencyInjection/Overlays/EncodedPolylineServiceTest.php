@@ -17,18 +17,18 @@ class EncodedPolylineServiceTest extends WebTestCase
     public function testEncodedPolylineServiceWithoutConfiguration()
     {
         $encodedPolyline = self::createContainer()->get('ivory_google_map.encoded_polyline');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline', $encodedPolyline);
         $this->assertEquals(substr($encodedPolyline->getJavascriptVariable(), 0, 17), 'encoded_polyline_');
     }
-    
+
     /**
      * Checks the encoded polyline service with configuration
      */
     public function testEncodedPolylineServiceWithConfiguration()
     {
         $encodedPolyline = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.encoded_polyline');
-        
+
         $this->assertEquals(substr($encodedPolyline->getJavascriptVariable(), 0, 2), 'ep');
         $this->assertEquals($encodedPolyline->getOptions(), array('option' => 'value'));
     }

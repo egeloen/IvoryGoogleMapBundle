@@ -16,7 +16,7 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsWaypoint
      */
     protected static $directionsWaypoint = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
     {
         self::$directionsWaypoint = new DirectionsWaypoint();
     }
-    
+
     /**
      * Checks the directions waypoint default values
      */
@@ -33,7 +33,7 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$directionsWaypoint->hasLocation());
         $this->assertFalse(self::$directionsWaypoint->hasStopover());
     }
-    
+
     /**
      * Checks the location getter & setter
      */
@@ -42,22 +42,22 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
         self::$directionsWaypoint->setLocation('address');
         $this->assertTrue(self::$directionsWaypoint->hasLocation());
         $this->assertEquals(self::$directionsWaypoint->getLocation(), 'address');
-        
+
         $locationTest = new Coordinate(2.1, 1.1, true);
         self::$directionsWaypoint->setLocation($locationTest);
         $this->assertEquals(self::$directionsWaypoint->getLocation()->getLatitude(), 2.1);
         $this->assertEquals(self::$directionsWaypoint->getLocation()->getLongitude(), 1.1);
         $this->assertTrue(self::$directionsWaypoint->getLocation()->isNoWrap());
-        
+
         self::$directionsWaypoint->setLocation(1.1, 2.1, false);
         $this->assertEquals(self::$directionsWaypoint->getLocation()->getLatitude(), 1.1);
         $this->assertEquals(self::$directionsWaypoint->getLocation()->getLongitude(), 2.1);
         $this->assertFalse(self::$directionsWaypoint->getLocation()->isNoWrap());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$directionsWaypoint->setLocation(true);
     }
-    
+
     /**
      * Checks the stopover getter & setter
      */
@@ -66,11 +66,11 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
         self::$directionsWaypoint->setStopover(true);
         $this->assertTrue(self::$directionsWaypoint->hasStopover());
         $this->assertTrue(self::$directionsWaypoint->getStopover());
-        
+
         self::$directionsWaypoint->setStopover(null);
         $this->assertFalse(self::$directionsWaypoint->hasStopover());
     }
-    
+
     /**
      * Checks the isValid method
      */

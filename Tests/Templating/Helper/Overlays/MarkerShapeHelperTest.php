@@ -16,7 +16,7 @@ class MarkerShapeHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerShapeHelper
      */
     protected static $markerShapeHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class MarkerShapeHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$markerShapeHelper = new MarkerShapeHelper(new PointHelper(), new SizeHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -37,20 +37,20 @@ class MarkerShapeHelperTest extends \PHPUnit_Framework_TestCase
             3, 4,
             5, 6
         ));
-        
+
         $this->assertEquals(self::$markerShapeHelper->render($markerShapeTest), 'var '.$markerShapeTest->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"poly","coords":[1,2,3,4,5,6]});'.PHP_EOL);
-        
+
         $markerShapeTest->setType('circle');
         $markerShapeTest->setCoordinates(array(1, 2, 3));
-        
+
         $this->assertEquals(self::$markerShapeHelper->render($markerShapeTest), 'var '.$markerShapeTest->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"circle","coords":[1,2,3]});'.PHP_EOL);
-        
+
         $markerShapeTest->setType('rect');
         $markerShapeTest->setCoordinates(array(
             -1, -1,
             1, 1
         ));
-        
+
         $this->assertEquals(self::$markerShapeHelper->render($markerShapeTest), 'var '.$markerShapeTest->getJavascriptVariable().' = new google.maps.MarkerShape({"type":"rect","coords":[-1,-1,1,1]});'.PHP_EOL);
     }
 }

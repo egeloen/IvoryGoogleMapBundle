@@ -16,7 +16,7 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper
      */
     protected static $eventHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$eventHelper = new EventHelper();
     }
-    
+
     /**
      * Checks the render dom event method
      */
@@ -35,10 +35,10 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
         $eventTest->setEventName('event_name');
         $eventTest->setHandle('handle');
         $eventTest->setCapture(true);
-        
+
         $this->assertEquals(self::$eventHelper->renderDomEvent($eventTest), 'var '.$eventTest->getJavascriptVariable().' = google.maps.event.addDomListener(instance, "event_name", handle, true);'.PHP_EOL);
     }
-    
+
     /**
      * Checks the render dom event once method
      */
@@ -49,10 +49,10 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
         $eventTest->setEventName('event_name');
         $eventTest->setHandle('handle');
         $eventTest->setCapture(true);
-        
+
         $this->assertEquals(self::$eventHelper->renderDomEventOnce($eventTest), 'var '.$eventTest->getJavascriptVariable().' = google.maps.event.addDomListenerOnce(instance, "event_name", handle, true);'.PHP_EOL);
     }
-    
+
     /**
      * Checks the render event method
      */
@@ -62,10 +62,10 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
         $eventTest->setInstance('instance');
         $eventTest->setEventName('event_name');
         $eventTest->setHandle('handle');
-        
+
         $this->assertEquals(self::$eventHelper->renderEvent($eventTest), 'var '.$eventTest->getJavascriptVariable().' = google.maps.event.addListener(instance, "event_name", handle);'.PHP_EOL);
     }
-    
+
     /**
      * Checks the render event once method
      */
@@ -75,7 +75,7 @@ class EventHelperTest extends \PHPUnit_Framework_TestCase
         $eventTest->setInstance('instance');
         $eventTest->setEventName('event_name');
         $eventTest->setHandle('handle');
-        
+
         $this->assertEquals(self::$eventHelper->renderEventOnce($eventTest), 'var '.$eventTest->getJavascriptVariable().' = google.maps.event.addListenerOnce(instance, "event_name", handle);'.PHP_EOL);
     }
 }

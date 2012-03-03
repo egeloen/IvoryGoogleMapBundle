@@ -17,21 +17,21 @@ class BoundServiceTest extends WebTestCase
     public function testBoundServiceWithoutConfiguration()
     {
         $bound = self::createContainer()->get('ivory_google_map.bound');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Base\Bound', $bound);
         $this->assertEquals(substr($bound->getJavascriptVariable(), 0, 6), 'bound_');
         $this->assertFalse($bound->hasCoordinates());
         $this->assertNull($bound->getSouthWest());
         $this->assertNull($bound->getNorthEast());
     }
-    
+
     /**
      * Checks the bound service with configuration
      */
     public function testBoundServiceWithConfiguration()
     {
         $bound = self::createContainer(array('environment' => 'test'))->get('ivory_google_map.bound');
-        
+
         $this->assertEquals(substr($bound->getJavascriptVariable(), 0, 1), 'b');
         $this->assertTrue($bound->hasCoordinates());
         $this->assertEquals($bound->getSouthWest()->getLatitude(), -1.1);

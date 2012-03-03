@@ -13,7 +13,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class CircleTest extends AbstractOptionsAssetTest
-{   
+{
     /**
      * @override
      */
@@ -21,28 +21,28 @@ class CircleTest extends AbstractOptionsAssetTest
     {
         self::$object = new Circle();
     }
-    
+
     /**
      * @override
      */
-    public function testJavascriptVariable() 
+    public function testJavascriptVariable()
     {
         $this->assertEquals(substr(self::$object->getJavascriptVariable(), 0, 7), 'circle_');
     }
-    
+
     /**
      * @override
      */
     public function testDefaultValues()
     {
         parent::testDefaultValues();
-        
+
         $this->assertEquals(self::$object->getCenter()->getLatitude(), 0);
         $this->assertEquals(self::$object->getCenter()->getLongitude(), 0);
         $this->assertTrue(self::$object->getCenter()->isNoWrap());
         $this->assertEquals(self::$object->getRadius(), 1);
     }
-    
+
     /**
      * Checks the center getter & setter
      */
@@ -53,16 +53,16 @@ class CircleTest extends AbstractOptionsAssetTest
         $this->assertEquals(self::$object->getCenter()->getLatitude(), 1.1);
         $this->assertEquals(self::$object->getCenter()->getLongitude(), 1.1);
         $this->assertTrue(self::$object->getCenter()->isNoWrap());
-        
+
         self::$object->setCenter(2.1, 2.1, false);
         $this->assertEquals(self::$object->getCenter()->getLatitude(), 2.1);
         $this->assertEquals(self::$object->getCenter()->getLongitude(), 2.1);
         $this->assertFalse(self::$object->getCenter()->isNoWrap());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setCenter('foo');
     }
-    
+
     /**
      * Checks the radius getter & setter
      */
@@ -70,7 +70,7 @@ class CircleTest extends AbstractOptionsAssetTest
     {
         self::$object->setRadius(2.1);
         $this->assertEquals(self::$object->getRadius(), 2.1);
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$object->setRadius('foo');
     }

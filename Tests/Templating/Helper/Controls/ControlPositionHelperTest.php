@@ -16,7 +16,7 @@ class ControlPositionHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ControlPositionHelper
      */
     protected static $controlPositionHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class ControlPositionHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$controlPositionHelper = new ControlPositionHelper();
     }
-    
+
     /**
      * Checks the render method
      */
@@ -42,7 +42,7 @@ class ControlPositionHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$controlPositionHelper->render(ControlPosition::TOP_CENTER), 'google.maps.ControlPosition.TOP_CENTER');
         $this->assertEquals(self::$controlPositionHelper->render(ControlPosition::TOP_LEFT), 'google.maps.ControlPosition.TOP_LEFT');
         $this->assertEquals(self::$controlPositionHelper->render(ControlPosition::TOP_RIGHT), 'google.maps.ControlPosition.TOP_RIGHT');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$controlPositionHelper->render('foo');
     }

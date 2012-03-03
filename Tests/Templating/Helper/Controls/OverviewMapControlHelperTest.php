@@ -16,7 +16,7 @@ class OverviewMapControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\OverviewMapControlHelper
      */
     protected static $overviewMapControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class OverviewMapControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$overviewMapControlHelper = new OverviewMapControlHelper();
     }
-    
+
     /**
      * Checks the render method
      */

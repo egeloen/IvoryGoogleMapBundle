@@ -21,7 +21,7 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResult
      */
     protected static $geocoderResult = null;
-    
+
     /**
      * @override
      */
@@ -31,20 +31,20 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
             new GeocoderAddressComponent('long_name_1', 'short_name_1', array('type_1', 'type_2')),
             new GeocoderAddressComponent('long_name_2', 'short_name_2', array('type_3', 'type_4'))
         );
-        
+
         $viewportTest = new Bound();
         $viewportTest->setSouthWest(-1.1, -2.1, true);
         $viewportTest->setNorthEast(2.1, 1.1, true);
-        
+
         $boundTest = new Bound();
         $boundTest->setSouthWest(-5.1, -4.1, true);
         $boundTest->setNorthEast(4.1, 5.1, true);
-        
+
         $geometryTest = new GeocoderGeometry(new Coordinate(1.2, 2.1, true), GeocoderLocationType::APPROXIMATE, $viewportTest, $boundTest);
-        
+
         self::$geocoderResult = new GeocoderResult($addressComponentsTest, 'address', $geometryTest, array('type_1', 'type_2'), true);
     }
-    
+
     /**
      * Checks the geocoder result default values
      */
@@ -57,9 +57,9 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($addressComponents[1]->getLongName(), 'long_name_2');
         $this->assertEquals($addressComponents[1]->getShortName(), 'short_name_2');
         $this->assertEquals($addressComponents[1]->getTypes(), array('type_3', 'type_4'));
-        
+
         $this->assertEquals(self::$geocoderResult->getFormattedAddress(), 'address');
-        
+
         $this->assertEquals(self::$geocoderResult->getGeometry()->getLocation()->getLatitude(), 1.2);
         $this->assertEquals(self::$geocoderResult->getGeometry()->getLocation()->getLongitude(), 2.1);
         $this->assertTrue(self::$geocoderResult->getGeometry()->getLocation()->isNoWrap());
@@ -76,11 +76,11 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderResult->getGeometry()->getBound()->getNorthEast()->getLatitude(), 4.1);
         $this->assertEquals(self::$geocoderResult->getGeometry()->getBound()->getNorthEast()->getLongitude(), 5.1);
         $this->assertTrue(self::$geocoderResult->getGeometry()->getBound()->getNorthEast()->isNoWrap());
-        
+
         $this->assertTrue(self::$geocoderResult->isPartialMatch());
         $this->assertEquals(self::$geocoderResult->getTypes(), array('type_1', 'type_2'));
     }
-    
+
     /**
      * Checks the address components getter & setter
      */
@@ -90,7 +90,7 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
             new GeocoderAddressComponent('longname1', 'shortname1', array('type1', 'type2')),
             new GeocoderAddressComponent('longname2', 'shortname2', array('type3', 'type4'))
         );
-        
+
         self::$geocoderResult->setAddressComponents($addressComponentsTest);
         $addressComponents = self::$geocoderResult->getAddressComponents();
         $this->assertEquals($addressComponents[0]->getLongName(), 'longname1');
@@ -99,15 +99,15 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($addressComponents[1]->getLongName(), 'longname2');
         $this->assertEquals($addressComponents[1]->getShortName(), 'shortname2');
         $this->assertEquals($addressComponents[1]->getTypes(), array('type3', 'type4'));
-        
+
         self::$geocoderResult->addAddressComponent(new GeocoderAddressComponent('longname3', 'shortname3', array('type5', 'type6')));
-        
+
         $addressComponents = self::$geocoderResult->getAddressComponents();
         $this->assertEquals($addressComponents[2]->getLongName(), 'longname3');
         $this->assertEquals($addressComponents[2]->getShortName(), 'shortname3');
         $this->assertEquals($addressComponents[2]->getTypes(), array('type5', 'type6'));
     }
-    
+
     /**
      * Checks the formatted address getter & setter
      */
@@ -115,11 +115,11 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderResult->setFormattedAddress('formatted_address');
         $this->assertEquals(self::$geocoderResult->getFormattedAddress(), 'formatted_address');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderResult->setFormattedAddress(true);
     }
-    
+
     /**
      * Checks the geometry getter & setter
      */
@@ -128,13 +128,13 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
         $viewportTest = new Bound();
         $viewportTest->setSouthWest(-1, -2, true);
         $viewportTest->setNorthEast(2, 1, true);
-        
+
         $boundTest = new Bound();
         $boundTest->setSouthWest(-5, -4, true);
         $boundTest->setNorthEast(4, 5, true);
-        
+
         self::$geocoderResult->setGeometry(new GeocoderGeometry(new Coordinate(1, 2, true), GeocoderLocationType::APPROXIMATE, $viewportTest, $boundTest));
-        
+
         $this->assertEquals(self::$geocoderResult->getGeometry()->getLocation()->getLatitude(), 1);
         $this->assertEquals(self::$geocoderResult->getGeometry()->getLocation()->getLongitude(), 2);
         $this->assertTrue(self::$geocoderResult->getGeometry()->getLocation()->isNoWrap());
@@ -152,7 +152,7 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderResult->getGeometry()->getBound()->getNorthEast()->getLongitude(), 5);
         $this->assertTrue(self::$geocoderResult->getGeometry()->getBound()->getNorthEast()->isNoWrap());
     }
-    
+
     /**
      * Checks the partial match getter & setter
      */
@@ -160,11 +160,11 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderResult->setPartialMatch(false);
         $this->assertFalse(self::$geocoderResult->isPartialMatch());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderResult->setPartialMatch('foo');
     }
-    
+
     /**
      * Checks the types getter & setter
      */

@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\MapTypeControl;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MapTypeControlTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the map type control constuctor
      */

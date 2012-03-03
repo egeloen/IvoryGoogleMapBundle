@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Event;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EventTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the event constuctor
      */

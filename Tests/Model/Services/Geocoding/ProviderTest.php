@@ -18,7 +18,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\Provider $provider
      */
     protected static $provider = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     {
         self::$provider = new Provider(new BuzzHttpAdapter());
     }
-    
+
     /**
      * Checks the provider default values
      */
@@ -36,7 +36,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$provider->isHttps());
         $this->assertEquals(self::$provider->getFormat(), 'json');
     }
-    
+
     /**
      * Checks the geocoded data method with an address
      */
@@ -45,7 +45,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $response = self::$provider->getGeocodedData('address');
         $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
-    
+
     /**
      * Checks the geocoded data method with an IP
      */
@@ -54,7 +54,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $response = self::$provider->getGeocodedData('111.111.111.111');
         $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
-    
+
     /**
      * Checks the geocoded data method with a GeocoderRequest
      */
@@ -62,11 +62,11 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     {
         $request = new GeocoderRequest();
         $request->setAddress('address');
-        
+
         $response = self::$provider->getGeocodedData($request);
         $this->assertInstanceOf('ivory\GoogleMapBundle\Model\Services\Geocoding\Result\GeocoderResponse', $response);
     }
-    
+
     /**
      * Checks the reserved data method
      */

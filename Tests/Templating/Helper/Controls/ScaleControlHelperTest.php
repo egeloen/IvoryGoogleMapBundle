@@ -21,7 +21,7 @@ class ScaleControlHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Controls\ScaleControlHelper
      */
     protected static $scaleControlHelper = null;
-    
+
     /**
      * @override
      */
@@ -29,7 +29,7 @@ class ScaleControlHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$scaleControlHelper = new ScaleControlHelper(new ControlPositionHelper(), new ScaleControlStyleHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -38,7 +38,7 @@ class ScaleControlHelperTest extends \PHPUnit_Framework_TestCase
         $scaleControlTest = new ScaleControl();
         $scaleControlTest->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $scaleControlTest->setScaleControlStyle(ScaleControlStyle::DEFAULT_);
-        
+
         $this->assertEquals(self::$scaleControlHelper->render($scaleControlTest), '{"position":google.maps.ControlPosition.BOTTOM_CENTER,"style":google.maps.ScaleControlStyle.DEFAULT}');
     }
 }

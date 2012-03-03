@@ -18,7 +18,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest Geocoder request tested
      */
     protected static $geocoderRequest = null;
-    
+
     /**
      * @override
      */
@@ -26,7 +26,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderRequest = new GeocoderRequest();
     }
-    
+
     /**
      * Checks geocoder request default values
      */
@@ -39,7 +39,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(self::$geocoderRequest->hasLanguage());
         $this->assertFalse(self::$geocoderRequest->hasSensor());
     }
-    
+
     /**
      * Checks the addresse getter & setter
      */
@@ -48,14 +48,14 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         self::$geocoderRequest->setAddress('address');
         $this->assertTrue(self::$geocoderRequest->hasAddress());
         $this->assertEquals(self::$geocoderRequest->getAddress(), 'address');
-        
+
         self::$geocoderRequest->setAddress(null);
         $this->assertFalse(self::$geocoderRequest->hasAddress());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setAddress(true);
     }
-    
+
     /**
      * Checks the coordinate getter & settr
      */
@@ -67,20 +67,20 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderRequest->getCoordinate()->getLatitude(), 1.2);
         $this->assertEquals(self::$geocoderRequest->getCoordinate()->getLongitude(), -1.8);
         $this->assertTrue(self::$geocoderRequest->getCoordinate()->isNoWrap());
-        
+
         self::$geocoderRequest->setCoordinate(1.1, -2.1, false);
         $this->assertTrue(self::$geocoderRequest->hasCoordinate());
         $this->assertEquals(self::$geocoderRequest->getCoordinate()->getLatitude(), 1.1);
         $this->assertEquals(self::$geocoderRequest->getCoordinate()->getLongitude(), -2.1);
         $this->assertFalse(self::$geocoderRequest->getCoordinate()->isNoWrap());
-        
+
         self::$geocoderRequest->setCoordinate(null);
         $this->assertFalse(self::$geocoderRequest->hasCoordinate());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setCoordinate('foo');
     }
-    
+
     /**
      * Checks the bound getter & setter
      */
@@ -88,7 +88,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
     {
         $southWestCoordinateTest = new Coordinate(-1, -1, true);
         $northEastCoordinateTest = new Coordinate(1, 1, true);
-        
+
         $boundTest = new Bound();
         $boundTest->setSouthWest($southWestCoordinateTest);
         $boundTest->setNorthEast($northEastCoordinateTest);
@@ -100,7 +100,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLatitude(), 1);
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLongitude(), 1);
         $this->assertTrue(self::$geocoderRequest->getBound()->getNorthEast()->isNoWrap());
-        
+
         self::$geocoderRequest->setBound($southWestCoordinateTest, $northEastCoordinateTest);
         $this->assertTrue(self::$geocoderRequest->hasBound());
         $this->assertEquals(self::$geocoderRequest->getBound()->getSouthWest()->getLatitude(), -1);
@@ -109,7 +109,7 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLatitude(), 1);
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLongitude(), 1);
         $this->assertTrue(self::$geocoderRequest->getBound()->getNorthEast()->isNoWrap());
-        
+
         self::$geocoderRequest->setBound(-2, -2, 2, 2, true, true);
         $this->assertTrue(self::$geocoderRequest->hasBound());
         $this->assertEquals(self::$geocoderRequest->getBound()->getSouthWest()->getLatitude(), -2);
@@ -118,14 +118,14 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLatitude(), 2);
         $this->assertEquals(self::$geocoderRequest->getBound()->getNorthEast()->getLongitude(), 2);
         $this->assertTrue(self::$geocoderRequest->getBound()->getNorthEast()->isNoWrap());
-        
+
         self::$geocoderRequest->setBound(null);
         $this->assertFalse(self::$geocoderRequest->hasBound());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setBound('foo');
     }
-    
+
     /**
      * Checks the region getter & setter
      */
@@ -134,14 +134,14 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         self::$geocoderRequest->setRegion('fr');
         $this->assertTrue(self::$geocoderRequest->hasRegion());
         $this->assertEquals(self::$geocoderRequest->getRegion(), 'fr');
-        
+
         self::$geocoderRequest->setRegion(null);
         $this->assertFalse(self::$geocoderRequest->hasRegion());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setRegion('foo');
     }
-    
+
     /**
      * Checks the language getter & setter
      */
@@ -150,14 +150,14 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         self::$geocoderRequest->setLanguage('fr');
         $this->assertTrue(self::$geocoderRequest->hasLanguage());
         $this->assertEquals(self::$geocoderRequest->getLanguage(), 'fr');
-        
+
         self::$geocoderRequest->setLanguage(null);
         $this->assertFalse(self::$geocoderRequest->hasLanguage());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setLanguage(true);
     }
-    
+
     /**
      * Checks the sensor getter & setter
      */
@@ -165,11 +165,11 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
     {
         self::$geocoderRequest->setSensor(true);
         $this->assertTrue(self::$geocoderRequest->hasSensor());
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$geocoderRequest->setSensor('foo');
     }
-    
+
     /**
      * Checks the isValid method
      */
@@ -178,11 +178,11 @@ class GeocoderRequestTest extends \PHPUnit_Framework_TestCase
         self::$geocoderRequest->setAddress(null);
         self::$geocoderRequest->setCoordinate(null);
         $this->assertFalse(self::$geocoderRequest->isValid());
-        
+
         self::$geocoderRequest->setAddress('address');
         self::$geocoderRequest->setCoordinate(null);
         $this->assertTrue(self::$geocoderRequest->isValid());
-        
+
         self::$geocoderRequest->setAddress(null);
         self::$geocoderRequest->setCoordinate(1, 1, true);
         $this->assertTrue(self::$geocoderRequest->isValid());

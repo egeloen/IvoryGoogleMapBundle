@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Size;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class SizeTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the size constuctor
      */

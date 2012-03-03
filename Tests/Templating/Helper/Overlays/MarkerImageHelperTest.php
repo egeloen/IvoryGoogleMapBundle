@@ -20,7 +20,7 @@ class MarkerImageHelperTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Templating\Helper\Overlays\MarkerImageHelper
      */
     protected static $markerImageHelper = null;
-    
+
     /**
      * @override
      */
@@ -28,7 +28,7 @@ class MarkerImageHelperTest extends \PHPUnit_Framework_TestCase
     {
         self::$markerImageHelper = new MarkerImageHelper(new PointHelper(), new SizeHelper());
     }
-    
+
     /**
      * Checks the render method
      */
@@ -40,8 +40,8 @@ class MarkerImageHelperTest extends \PHPUnit_Framework_TestCase
         $markerImageTest->setOrigin(new point(3, 4));
         $markerImageTest->setAnchor(new Point(5, 6));
         $markerImageTest->setScaledSize(new Size(7, 8));
-        
-        $this->assertEquals(self::$markerImageHelper->render($markerImageTest), 
+
+        $this->assertEquals(self::$markerImageHelper->render($markerImageTest),
             'var '.$markerImageTest->getJavascriptVariable().' = new google.maps.MarkerImage("url");'.PHP_EOL.
             $markerImageTest->getJavascriptVariable().'.size = new google.maps.Size(1, 2);'.PHP_EOL.
             $markerImageTest->getJavascriptVariable().'.origin = new google.maps.Point(3, 4);'.PHP_EOL.

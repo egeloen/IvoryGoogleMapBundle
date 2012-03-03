@@ -16,7 +16,7 @@ class RotateControlTest extends \PHPUnit_Framework_TestCase
      * @var Ivory\GoogleMapBundle\Model\Controls\RotateControl Tested rotate control
      */
     protected static $rotateControl = null;
-    
+
     /**
      * @override
      */
@@ -24,7 +24,7 @@ class RotateControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$rotateControl = new RotateControl();
     }
-    
+
     /**
      * Checks the rotate control default value
      */
@@ -32,7 +32,7 @@ class RotateControlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$rotateControl->getControlPosition(), 'top_left');
     }
-    
+
     /**
      * Checks the control position getter & setter
      */
@@ -40,7 +40,7 @@ class RotateControlTest extends \PHPUnit_Framework_TestCase
     {
         self::$rotateControl->setControlPosition(ControlPosition::BOTTOM_CENTER);
         $this->assertEquals(self::$rotateControl->getControlPosition(), 'bottom_center');
-        
+
         $this->setExpectedException('InvalidArgumentException');
         self::$rotateControl->setControlPosition('foo');
     }

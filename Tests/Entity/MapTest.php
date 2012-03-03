@@ -10,7 +10,7 @@ use Ivory\GoogleMapBundle\Entity\Map;
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MapTest extends \PHPUnit_Framework_TestCase
-{    
+{
     /**
      * Checks the map constuctor
      */

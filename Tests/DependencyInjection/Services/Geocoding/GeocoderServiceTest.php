@@ -17,10 +17,10 @@ class GeocoderServiceTest extends WebTestCase
     public function testGeocoderServiceWithoutConfiguration()
     {
         $geocoder = self::createContainer()->get('ivory_google_map.geocoder');
-        
+
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Services\Geocoding\Geocoder', $geocoder);
     }
-    
+
     /**
      * Checks the Geocoder service with configuration
      */
