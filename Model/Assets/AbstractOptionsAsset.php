@@ -5,7 +5,7 @@ namespace Ivory\GoogleMapBundle\Model\Assets;
 /**
  * Allow easy add of options for any class model that required it
  *
- * @author gelo
+ * @author GeLo <geloen.eric@gmail.com>
  */
 abstract class AbstractOptionsAsset extends AbstractJavascriptVariableAsset
 {
