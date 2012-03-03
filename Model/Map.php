@@ -5,6 +5,7 @@ namespace Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Assets\AbstractJavascriptVariableAsset;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
+use Ivory\GoogleMapBundle\Model\Layers;
 use Ivory\GoogleMapBundle\Model\Overlays;
 use Ivory\GoogleMapBundle\Model\Events;
 
@@ -137,6 +138,11 @@ class Map extends AbstractJavascriptVariableAsset
      * @var array Map ground overlays
      */
     protected $groundOverlays = array();
+
+    /**
+     * @var array Map KML layers
+     */
+    protected $kmlLayers = array();
 
     /**
      * @var string Api language
@@ -1102,6 +1108,26 @@ class Map extends AbstractJavascriptVariableAsset
 
         if($this->autoZoom)
             $this->bound->extend($groundOverlay);
+    }
+
+    /**
+     * Gets the KML layers.
+     *
+     * @return array
+     */
+    public function getKMLLayers()
+    {
+        return $this->kmlLayers;
+    }
+
+    /**
+     * Adds a KML Layer to the map.
+     *
+     * @param Ivory\GoogleMapBundle\Model\Layers\KMLLayer $kmlLayer The KML Layer to add
+     */
+    public function addKMLLayer(Layers\KMLLayer $kmlLayer)
+    {
+        $this->kmlLayers[] = $kmlLayer;
     }
 
     /**
