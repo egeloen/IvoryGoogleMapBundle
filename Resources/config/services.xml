@@ -34,6 +34,8 @@
         <parameter key="ivory_google_map.circle.class">Ivory\GoogleMapBundle\Model\Overlays\Circle</parameter>
         <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay</parameter>
 
+        <parameter key="ivory_google_map.kml_layer.class">Ivory\GoogleMapBundle\Model\Layers\KMLLayer</parameter>
+
         <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\Events\EventManager</parameter>
         <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Events\Event</parameter>
 
@@ -80,6 +82,8 @@
         <parameter key="ivory_google_map.rectangle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\RectangleHelper</parameter>
         <parameter key="ivory_google_map.circle.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper</parameter>
         <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
+
+        <parameter key="ivory_google_map.kml_layer.helper">Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayer</parameter>
 
         <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper</parameter>
         <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
@@ -180,6 +184,7 @@
             <argument type="service" id="ivory_google_map.helper.rectangle" />
             <argument type="service" id="ivory_google_map.helper.circle" />
             <argument type="service" id="ivory_google_map.helper.ground_overlay" />
+            <argument type="service" id="ivory_google_map.helper.kml_layer" />
             <argument type="service" id="ivory_google_map.helper.event_manager" />
         </service>
 
@@ -628,6 +633,23 @@
         <service id="ivory_google_map.helper.ground_overlay" class="%ivory_google_map.ground_overlay.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.bound" />
         </service>
+
+        <!-- KML Layer service -->
+        <service id="ivory_google_map.kml_layer" class="%ivory_google_map.kml_layer.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.kml_layer.prefix_javascript_variable%</argument>
+            </call>
+
+            <call method="setUrl">
+                <argument>%ivory_google_map.kml_layer.url%</argument>
+            </call>
+
+            <call method="setOptions">
+                <argument>%ivory_google_map.kml_layer.options%</argument>
+            </call>
+        </service>
+
+        <service id="ivory_google_map.helper.kml_layer" class="%ivory_google_map.kml_layer.helper%" public="false" />
 
         <!-- Event manager service -->
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />
