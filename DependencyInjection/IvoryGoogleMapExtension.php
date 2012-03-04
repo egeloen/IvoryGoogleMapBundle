@@ -61,6 +61,9 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadCircle($config, $container);
         $this->loadGroundOverlay($config, $container);
 
+        // Layers sections
+        $this->loadKMLLayer($config, $container);
+
         // Event sections
         $this->loadEvent($config, $container);
 
@@ -404,6 +407,19 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.longitude', $config['ground_overlay']['bound']['north_east']['longitude']);
         $container->setParameter('ivory_google_map.ground_overlay.bound.north_east.no_wrap', $config['ground_overlay']['bound']['north_east']['no_wrap']);
         $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
+    }
+
+    /**
+     * Loads KML layer configuration
+     *
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    protected function loadKMLLayer(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.kml_layer.prefix_javascript_variable', $config['kml_layer']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.kml_layer.url', $config['kml_layer']['url']);
+        $container->setParameter('ivory_google_map.kml_layer.options', $config['kml_layer']['options']);
     }
 
     /**
