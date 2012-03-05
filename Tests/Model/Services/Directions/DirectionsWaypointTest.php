@@ -18,7 +18,7 @@ class DirectionsWaypointTest extends \PHPUnit_Framework_TestCase
     protected static $directionsWaypoint = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

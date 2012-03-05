@@ -18,7 +18,7 @@ class CoordinateHelperTest extends \PHPUnit_Framework_TestCase
     protected static $coordinateHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

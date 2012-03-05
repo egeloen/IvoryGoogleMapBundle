@@ -18,7 +18,7 @@ class StreetViewControlTest extends \PHPUnit_Framework_TestCase
     protected static $streetViewControl = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

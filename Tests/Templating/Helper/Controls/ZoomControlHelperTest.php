@@ -23,7 +23,7 @@ class ZoomControlHelperTest extends \PHPUnit_Framework_TestCase
     protected static $zoomControlHelper;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

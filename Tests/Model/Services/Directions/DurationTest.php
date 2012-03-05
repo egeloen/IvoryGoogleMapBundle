@@ -17,7 +17,7 @@ class DurationTest extends \PHPUnit_Framework_TestCase
     protected static $duration = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

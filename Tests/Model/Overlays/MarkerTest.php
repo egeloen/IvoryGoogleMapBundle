@@ -19,7 +19,7 @@ use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow;
 class MarkerTest extends AbstractOptionsAssetTest
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -27,7 +27,7 @@ class MarkerTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {
@@ -35,7 +35,7 @@ class MarkerTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testDefaultValues()
     {

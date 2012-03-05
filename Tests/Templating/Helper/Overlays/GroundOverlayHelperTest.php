@@ -23,7 +23,7 @@ class GroundOverlayHelperTest extends \PHPUnit_Framework_TestCase
     protected static $groundOverlayHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

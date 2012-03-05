@@ -18,7 +18,7 @@ class AnimationHelperTest extends \PHPUnit_Framework_TestCase
     protected static $animationHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

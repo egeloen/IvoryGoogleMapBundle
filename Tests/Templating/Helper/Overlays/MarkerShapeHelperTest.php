@@ -18,7 +18,7 @@ class MarkerShapeHelperTest extends \PHPUnit_Framework_TestCase
     protected static $markerShapeHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

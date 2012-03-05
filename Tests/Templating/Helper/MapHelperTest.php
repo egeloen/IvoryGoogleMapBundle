@@ -31,7 +31,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
     protected static $mapHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

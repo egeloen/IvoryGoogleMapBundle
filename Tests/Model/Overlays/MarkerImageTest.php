@@ -21,7 +21,7 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
     protected static $markerImage = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -29,7 +29,7 @@ class MarkerImageTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {

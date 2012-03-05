@@ -26,7 +26,7 @@ class DirectionsLegTest extends \PHPUnit_Framework_TestCase
     protected static $directionsLeg = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

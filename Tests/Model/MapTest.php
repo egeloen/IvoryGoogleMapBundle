@@ -24,7 +24,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     protected static $map = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -32,7 +32,7 @@ class MapTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {

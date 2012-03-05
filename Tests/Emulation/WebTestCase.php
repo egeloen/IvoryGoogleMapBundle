@@ -37,7 +37,7 @@ class WebTestCase extends BaseWebTestCase
     }
 
     /**
-     *@override
+     *{@inheritdoc}
      */
     protected static function getKernelClass()
     {

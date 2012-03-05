@@ -20,7 +20,7 @@ class StreetViewControlHelperTest extends \PHPUnit_Framework_TestCase
     protected static $streetViewControlHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

@@ -21,7 +21,7 @@ class GeocoderGeometryTest extends \PHPUnit_Framework_TestCase
     protected static $geocoderGeometry = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

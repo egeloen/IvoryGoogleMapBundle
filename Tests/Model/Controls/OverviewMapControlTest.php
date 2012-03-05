@@ -17,7 +17,7 @@ class OverviewMapControlTest extends \PHPUnit_Framework_TestCase
     protected static $overviewMapControl = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

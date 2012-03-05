@@ -18,7 +18,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
     protected static $eventManager = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

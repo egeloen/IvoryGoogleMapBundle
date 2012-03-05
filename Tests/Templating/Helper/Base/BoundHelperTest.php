@@ -21,7 +21,7 @@ class BoundHelperTest extends \PHPUnit_Framework_TestCase
     protected static $boundHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

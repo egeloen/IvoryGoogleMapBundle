@@ -17,7 +17,7 @@ class GeocoderAddressComponentTest extends \PHPUnit_Framework_TestCase
     protected static $geocoderAddressComponent = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

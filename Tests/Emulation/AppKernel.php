@@ -6,7 +6,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 class AppKernel extends Kernel
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function registerBundles()
     {
@@ -19,7 +19,7 @@ class AppKernel extends Kernel
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

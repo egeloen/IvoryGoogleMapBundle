@@ -23,7 +23,7 @@ class GeocoderResultTest extends \PHPUnit_Framework_TestCase
     protected static $geocoderResult = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

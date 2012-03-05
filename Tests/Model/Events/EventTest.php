@@ -19,7 +19,7 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     protected static $event = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -27,7 +27,7 @@ class EventTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {

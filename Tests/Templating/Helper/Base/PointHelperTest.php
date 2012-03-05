@@ -18,7 +18,7 @@ class PointHelperTest extends \PHPUnit_Framework_TestCase
     protected static $pointHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

@@ -17,7 +17,7 @@ class EncodingHelperTest extends \PHPUnit_Framework_TestCase
     protected static $encodingHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

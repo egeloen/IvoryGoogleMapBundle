@@ -24,7 +24,7 @@ class DirectionsStepTest extends \PHPUnit_Framework_TestCase
     protected static $directionsStep = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {
