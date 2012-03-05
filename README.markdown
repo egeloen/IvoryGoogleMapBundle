@@ -2,7 +2,7 @@ Provides a Google Map integration for your Symfony2 Project.
 
 [![Build Status](https://secure.travis-ci.org/egeloen/IvoryGoogleMapBundle.png)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
 
-Actually, this bundle allows you to manage:
+Currently, this bundle allows you to manage:
 
    - Map
    - Controls: Map type, Overview, Pan, Rotate, Scale, Street view, Zoom
@@ -35,6 +35,8 @@ Documentation
          - [Scale](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/scale.md)
          - [Street view](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/street_view.md)
          - [Zoom](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/controls/zoom.md)
+      - [Layers](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/layers/index.md)
+         - [KML Layer](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/layers/kml_layer.md)
       - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
       - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
          - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)

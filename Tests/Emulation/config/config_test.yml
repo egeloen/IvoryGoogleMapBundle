@@ -192,6 +192,13 @@ ivory_google_map:
         options:
             option: "value"
 
+    # Layers
+    kml_layer:
+        prefix_javascript_variable: "kl"
+        url: "url"
+        options:
+            option: "value"
+
     # Events
     event:
         prefix_javascript_variable: "e"

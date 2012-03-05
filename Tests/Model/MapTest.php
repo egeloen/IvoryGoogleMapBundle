@@ -7,6 +7,7 @@ use Ivory\GoogleMapBundle\Tests\Model\Assets\AbstractJavascriptVariableAssetTest
 use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
+use Ivory\GoogleMapBundle\Model\Layers;
 use Ivory\GoogleMapBundle\Model\Overlays;
 use Ivory\GoogleMapBundle\Model\Events;
 
@@ -76,16 +77,8 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         $this->assertEquals(count(self::$map->getRectangles()), 0);
         $this->assertEquals(count(self::$map->getCircles()), 0);
         $this->assertEquals(count(self::$map->getGroundOverlays()), 0);
+        $this->assertEquals(count(self::$map->getKMLLayers()), 0);
         $this->assertEquals(self::$map->getLanguage(), 'en');
-    }
-
-    /**
-     * Checks the language getter & setter
-     */
-    public function testLanguage()
-    {
-        self::$map->setLanguage('fr');
-        $this->assertEquals(self::$map->getLanguage(), 'fr');
     }
 
     /**
@@ -624,5 +617,25 @@ class MapTest extends AbstractJavascriptVariableAssetTest
         self::$map->addGroundOverlay($groundOverlayTest);
 
         $this->assertEquals(count(self::$map->getGroundOverlays()), 1);
+    }
+
+    /**
+     * Checks the KML layer getter & setter
+     */
+    public function testKMLLayers()
+    {
+        $kmlLayer = new Layers\KMLLayer();
+        self::$map->addKMLLayer($kmlLayer);
+
+        $this->assertEquals(count(self::$map->getKMLLayers()), 1);
+    }
+
+    /**
+     * Checks the language getter & setter
+     */
+    public function testLanguage()
+    {
+        self::$map->setLanguage('fr');
+        $this->assertEquals(self::$map->getLanguage(), 'fr');
     }
 }
