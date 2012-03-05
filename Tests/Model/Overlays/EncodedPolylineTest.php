@@ -17,7 +17,7 @@ class EncodedPolylineTest extends \PHPUnit_Framework_TestCase
     protected static $encodedPolyline = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

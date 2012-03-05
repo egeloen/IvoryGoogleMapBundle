@@ -19,7 +19,7 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
     protected static $markerShape = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -27,7 +27,7 @@ class MarkerShapeTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {

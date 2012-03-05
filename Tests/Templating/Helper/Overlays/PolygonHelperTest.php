@@ -21,7 +21,7 @@ class PolygonHelperTest extends \PHPUnit_Framework_TestCase
     protected static $polygonHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

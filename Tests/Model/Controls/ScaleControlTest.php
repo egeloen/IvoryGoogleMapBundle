@@ -19,7 +19,7 @@ class ScaleControlTest extends \PHPUnit_Framework_TestCase
     protected static $scaleControl = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

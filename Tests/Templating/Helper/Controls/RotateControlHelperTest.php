@@ -20,7 +20,7 @@ class RotateControlHelperTest extends \PHPUnit_Framework_TestCase
     protected static $rotateControlHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

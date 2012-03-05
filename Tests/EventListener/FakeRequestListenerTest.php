@@ -17,7 +17,7 @@ class FakeRequestListenerTest extends \PHPUnit_Framework_TestCase
     protected static $fakeRequestListener = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

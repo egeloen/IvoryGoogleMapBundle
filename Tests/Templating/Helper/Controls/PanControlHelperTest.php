@@ -20,7 +20,7 @@ class PanControlHelperTest extends \PHPUnit_Framework_TestCase
     protected static $panControlHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

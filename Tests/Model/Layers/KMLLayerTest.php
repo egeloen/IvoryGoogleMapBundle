@@ -13,7 +13,7 @@ use Ivory\GoogleMapBundle\Model\Layers\KMLLayer;
 class KMLLayerTest extends AbstractOptionsAssetTest
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -21,7 +21,7 @@ class KMLLayerTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {
@@ -29,7 +29,7 @@ class KMLLayerTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testDefaultValues()
     {

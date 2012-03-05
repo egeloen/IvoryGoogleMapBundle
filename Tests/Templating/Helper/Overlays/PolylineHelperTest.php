@@ -21,7 +21,7 @@ class PolylineHelperTest extends \PHPUnit_Framework_TestCase
     protected static $polylineHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

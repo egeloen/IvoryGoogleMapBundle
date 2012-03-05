@@ -17,7 +17,7 @@ class DistanceTest extends \PHPUnit_Framework_TestCase
     protected static $distance = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

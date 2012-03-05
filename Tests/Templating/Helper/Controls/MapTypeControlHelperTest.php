@@ -25,7 +25,7 @@ class MapTypeControlHelperTest extends \PHPUnit_Framework_TestCase
     protected static $mapTypeControlHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

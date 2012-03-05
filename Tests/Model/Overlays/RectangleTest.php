@@ -16,7 +16,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class RectangleTest extends AbstractOptionsAssetTest
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -24,7 +24,7 @@ class RectangleTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {
@@ -32,7 +32,7 @@ class RectangleTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testDefaultValues()
     {

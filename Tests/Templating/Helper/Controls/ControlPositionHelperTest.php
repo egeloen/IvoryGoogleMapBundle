@@ -18,7 +18,7 @@ class ControlPositionHelperTest extends \PHPUnit_Framework_TestCase
     protected static $controlPositionHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

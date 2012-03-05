@@ -24,7 +24,7 @@ class InfoWindowHelperTest extends \PHPUnit_Framework_TestCase
     protected static $infoWindowHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

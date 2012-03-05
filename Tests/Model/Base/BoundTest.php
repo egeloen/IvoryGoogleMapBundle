@@ -22,7 +22,7 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
     protected static $bound = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -30,7 +30,7 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {

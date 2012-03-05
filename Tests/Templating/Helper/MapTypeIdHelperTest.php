@@ -18,7 +18,7 @@ class MapTypeIdHelperTest extends \PHPUnit_Framework_TestCase
     protected static $mapTypeIdHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

@@ -21,7 +21,7 @@ class MarkerHelperTest extends \PHPUnit_Framework_TestCase
     protected static $markerHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

@@ -15,7 +15,7 @@ use Ivory\GoogleMapBundle\Model\Base\Coordinate;
 class PolylineTest extends AbstractOptionsAssetTest
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -23,7 +23,7 @@ class PolylineTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testJavascriptVariable()
     {
@@ -31,7 +31,7 @@ class PolylineTest extends AbstractOptionsAssetTest
     }
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function testDefaultValues()
     {

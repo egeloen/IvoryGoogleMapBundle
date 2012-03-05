@@ -19,7 +19,7 @@ class ZoomControlTest extends \PHPUnit_Framework_TestCase
     protected static $zoomControl = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

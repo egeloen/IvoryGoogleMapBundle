@@ -18,7 +18,7 @@ class SizeHelperTest extends \PHPUnit_Framework_TestCase
     protected static $sizeHelper = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     protected function setUp()
     {

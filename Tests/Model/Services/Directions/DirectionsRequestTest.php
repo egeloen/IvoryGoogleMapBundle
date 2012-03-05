@@ -21,7 +21,7 @@ class DirectionsRequestTest extends \PHPUnit_Framework_TestCase
     protected static $directionsRequest = null;
 
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {

@@ -13,7 +13,7 @@ use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsService;
 class DirectionsServiceTest extends AbstractServiceTest
 {
     /**
-     * @override
+     * {@inheritdoc}
      */
     public function setUp()
     {
