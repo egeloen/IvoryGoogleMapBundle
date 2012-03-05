@@ -59,6 +59,9 @@ class Configuration implements ConfigurationInterface
         $this->addCircleSection($rootNode);
         $this->addGroundOverlaySection($rootNode);
 
+        // Layers sections
+        $this->addKMLLayerSection($rootNode);
+
         // Event sections
         $this->addEventSection($rootNode);
 
@@ -634,6 +637,27 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the KML layer section
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addKMLLayerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('kml_layer')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('kml_layer_')->end()
+                        ->scalarNode('url')->defaultValue('')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()

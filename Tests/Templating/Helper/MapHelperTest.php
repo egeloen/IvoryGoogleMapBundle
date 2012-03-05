@@ -6,6 +6,7 @@ use Ivory\GoogleMapBundle\Templating\Helper;
 use Ivory\GoogleMapBundle\Templating\Helper\Base as BaseHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls as ControlsHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Overlays as OverlaysHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\Layers as LayersHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Events as EventsHelper;
 use Ivory\GoogleMapBundle\Templating\Helper\Geometry as GeometryHelper;
 
@@ -13,6 +14,7 @@ use Ivory\GoogleMapBundle\Model;
 use Ivory\GoogleMapBundle\Model\Base;
 use Ivory\GoogleMapBundle\Model\Controls;
 use Ivory\GoogleMapBundle\Model\Overlays;
+use Ivory\GoogleMapBundle\Model\Layers;
 use Ivory\GoogleMapBundle\Model\Events;
 use Ivory\GoogleMapBundle\Model\Geometry;
 
@@ -80,6 +82,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
             new OverlaysHelper\RectangleHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
             new OverlaysHelper\CircleHelper(new BaseHelper\CoordinateHelper()),
             new OverlaysHelper\GroundOverlayHelper(new BaseHelper\BoundHelper(new BaseHelper\CoordinateHelper())),
+            new LayersHelper\KMLLayerHelper(),
             new EventsHelper\EventManagerHelper(new EventsHelper\EventHelper())
         );
     }
@@ -352,6 +355,21 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::$mapHelper->renderGroundOverlays($mapTest),
             'var '.$groundOverlayTest->getBound()->getJavascriptVariable().' = new google.maps.LatLngBounds(new google.maps.LatLng(-1.1, -2.1, true), new google.maps.LatLng(1.1, 2.1, true));'.PHP_EOL.
             'var '.$groundOverlayTest->getJavascriptVariable().' = new google.maps.GroundOverlay("url", '.$groundOverlayTest->getBound()->getJavascriptVariable().', {"map":'.$mapTest->getJavascriptVariable().'});'.PHP_EOL
+        );
+    }
+
+    /**
+     * Checks the render kml layers method
+     */
+    public function testRenderKMLLayers()
+    {
+        $mapTest = new Model\Map();
+        $kmlLayerTest = new Layers\KMLLayer();
+        $kmlLayerTest->setUrl('url');
+        $mapTest->addKMLLayer($kmlLayerTest);
+
+        $this->assertEquals(self::$mapHelper->renderKMLLayers($mapTest),
+            'var '.$kmlLayerTest->getJavascriptVariable().' = new google.maps.KmlLayer("url", {"map":'.$mapTest->getJavascriptVariable().'});'.PHP_EOL
         );
     }
 
