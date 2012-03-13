@@ -231,7 +231,7 @@ class MapHelper
     {
         $html = array();
 
-        $html[] = $this->buildGoogleMapUrl($map);
+        $html[] = $this->renderGoogleMapAPI($map);
         $html[] = '<script type="text/javascript">'.PHP_EOL;
 
         if($map->isAsync()) {
@@ -268,12 +268,12 @@ class MapHelper
     }
 
     /**
-     * Builds the google map url according to the map.
+     * Renders the google map API.
      *
      * @param Ivory\GoogleMapBundle\Model\Map $map
-     * @return string The google map URL
+     * @return string The google map API
      */
-    protected function buildGoogleMapUrl(Map $map)
+    protected function renderGoogleMapAPI(Map $map)
     {
         $url = 'http://maps.google.com/maps/api/js?';
 
