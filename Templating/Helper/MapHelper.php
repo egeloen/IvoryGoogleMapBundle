@@ -270,7 +270,7 @@ class MapHelper
     /**
      * Builds the google map url according to the map.
      *
-     * Ivory\GoogleMapBundle\Model\Map $map
+     * @param Ivory\GoogleMapBundle\Model\Map $map
      * @return string The google map URL
      */
     protected function buildGoogleMapUrl(Map $map)
