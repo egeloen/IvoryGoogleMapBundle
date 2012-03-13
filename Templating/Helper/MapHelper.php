@@ -230,16 +230,8 @@ class MapHelper
     public function renderJavascripts(Map $map)
     {
         $html = array();
-        if($map->isAsync()) {
-            $html[] = sprintf('<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&language=%s&callback=load_ivory_google_map"></script>'.PHP_EOL,
-                $map->getLanguage()
-            );
-        } else {
-            $html[] = sprintf('<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false&language=%s"></script>'.PHP_EOL,
-                $map->getLanguage()
-            );
-        }
 
+        $html[] = $this->buildGoogleMapUrl($map);
         $html[] = '<script type="text/javascript">'.PHP_EOL;
 
         if($map->isAsync()) {
@@ -273,6 +265,32 @@ class MapHelper
         $html[] = '</script>'.PHP_EOL;
 
         return implode('', $html);
+    }
+
+    /**
+     * Builds the google map url according to the map.
+     *
+     * Ivory\GoogleMapBundle\Model\Map $map
+     * @return string The google map URL
+     */
+    protected function buildGoogleMapUrl(Map $map)
+    {
+        $url = 'http://maps.google.com/maps/api/js?';
+
+        $encodedPolylines = $map->getEncodedPolylines();
+        if (!empty($encodedPolylines))
+            $url .= 'libraries=geometry&amp;';
+
+        if ($map->isAsync())
+            $url .= 'callback=load_ivory_google_map&amp;';
+
+        $url .= sprintf('language=%s&amp;sensor=false',
+            $map->getLanguage()
+        );
+
+        return sprintf('<script type="text/javascript" src="%s"></script>'.PHP_EOL,
+            $url
+        );
     }
 
     /**
