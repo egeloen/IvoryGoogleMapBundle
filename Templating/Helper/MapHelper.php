@@ -279,12 +279,12 @@ class MapHelper
 
         $encodedPolylines = $map->getEncodedPolylines();
         if (!empty($encodedPolylines))
-            $url .= 'libraries=geometry&amp;';
+            $url .= 'libraries=geometry&';
 
         if ($map->isAsync())
-            $url .= 'callback=load_ivory_google_map&amp;';
+            $url .= 'callback=load_ivory_google_map&';
 
-        $url .= sprintf('language=%s&amp;sensor=false',
+        $url .= sprintf('language=%s&sensor=false',
             $map->getLanguage()
         );
 
