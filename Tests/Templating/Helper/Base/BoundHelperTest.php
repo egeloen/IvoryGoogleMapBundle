@@ -71,7 +71,7 @@ class BoundHelperTest extends \PHPUnit_Framework_TestCase
         $boundTest->extend($rectangleTest);
 
         $this->assertEquals(self::$boundHelper->renderExtends($boundTest),
-            $boundTest->getJavascriptVariable().'.extend('.$circleTest->getJavascriptVariable().'.getCenter());'.PHP_EOL.
+            $boundTest->getJavascriptVariable().'.union('.$circleTest->getJavascriptVariable().'.getBounds());'.PHP_EOL.
             $boundTest->getJavascriptVariable().'.union('.$groundOverlayTest->getBound()->getJavascriptVariable().');'.PHP_EOL.
             $boundTest->getJavascriptVariable().'.extend('.$infoWindowTest->getJavascriptVariable().'.getPosition());'.PHP_EOL.
             $boundTest->getJavascriptVariable().'.extend('.$markerTest->getJavascriptVariable().'.getPosition());'.PHP_EOL.

@@ -84,7 +84,7 @@ class BoundHelper
                     $extend->getBound()->getJavascriptVariable()
                 );
             else if($extend instanceof Overlays\Circle)
-                $html[] = sprintf('%s.extend(%s.getCenter());'.PHP_EOL,
+                $html[] = sprintf('%s.union(%s.getBounds());'.PHP_EOL,
                     $bound->getJavascriptVariable(),
                     $extend->getJavascriptVariable()
                 );
