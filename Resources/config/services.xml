@@ -165,7 +165,8 @@
             </call>
         </service>
 
-        <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper%" public="false">
+        <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper%">
+            <tag name="templating.helper" alias="ivory_google_map" />
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.map_type_id" />
             <argument type="service" id="ivory_google_map.helper.map_type_control" />

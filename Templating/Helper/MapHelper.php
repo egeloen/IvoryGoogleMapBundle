@@ -2,6 +2,8 @@
 
 namespace Ivory\GoogleMapBundle\Templating\Helper;
 
+use Symfony\Component\Templating\Helper\Helper;
+
 use Ivory\GoogleMapBundle\Templating\Helper\Base;
 use Ivory\GoogleMapBundle\Templating\Helper\Controls;
 use Ivory\GoogleMapBundle\Templating\Helper\Layers;
@@ -16,7 +18,7 @@ use Ivory\GoogleMapBundle\Model\Events\Event;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MapHelper
+class MapHelper extends Helper
 {
     /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
@@ -625,5 +627,16 @@ class MapHelper
     public function renderEvents(Map $map)
     {
         return $this->eventManagerHelper->render($map->getEventManager());
+    }
+
+    /**
+     * Returns the canonical name of this helper.
+     *
+     * @return string The canonical name
+     *
+     */
+    public function getName()
+    {
+        return 'ivory_google_map';
     }
 }
