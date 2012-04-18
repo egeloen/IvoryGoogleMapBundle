@@ -178,4 +178,17 @@ class Bound extends AbstractJavascriptVariableAsset
     {
         $this->extends[] = $extend;
     }
+
+    /**
+     * Gets the center of the bound.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Base\Coordinate
+     */
+    public function getCenter()
+    {
+        $centerLatitude = ($this->getSouthWest()->getLatitude() + $this->getNorthEast()->getLatitude()) / 2;
+        $centerLongitude = ($this->getSouthWest()->getLongitude() + $this->getNorthEast()->getLongitude()) / 2;
+
+        return new Coordinate($centerLatitude, $centerLongitude);
+    }
 }

@@ -113,4 +113,20 @@ class BoundTest extends AbstractJavascriptVariableAssetTest
         self::$bound->setExtends($extendsTest);
         $this->assertEquals(count(self::$bound->getExtends()), 7);
     }
+
+    /**
+     * Checks getCenter method
+     */
+    public function testCenter()
+    {
+        self::$bound->setNorthEast(new Coordinate(1, 1));
+        self::$bound->setSouthWest(new Coordinate(-1, -1));
+        $this->assertEquals(0, self::$bound->getCenter()->getLatitude());
+        $this->assertEquals(0, self::$bound->getCenter()->getLongitude());
+
+        self::$bound->setNorthEast(new Coordinate(1, 1));
+        self::$bound->setSouthWest(new Coordinate(1, 0));
+        $this->assertEquals(1, self::$bound->getCenter()->getLatitude());
+        $this->assertEquals(0.5, self::$bound->getCenter()->getLongitude());
+    }
 }
