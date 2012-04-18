@@ -35,6 +35,33 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Checks the latitude getter & setter with null value
+     */
+    public function testLatitudeWithNullValue()
+    {
+        self::$coordinate->setLatitude(null);
+        $this->assertNull(self::$coordinate->getLatitude());
+    }
+
+    /**
+     * Checks the longitude getter & setter with null value
+     */
+    public function testLongitudeWithNullValue()
+    {
+        self::$coordinate->setLongitude(null);
+        $this->assertNull(self::$coordinate->getLongitude());
+    }
+
+    /**
+     * Checks the no wrap getter & setter with null value
+     */
+    public function testNoWrapWithNullValue()
+    {
+        self::$coordinate->setNoWrap(null);
+        $this->assertNull(self::$coordinate->isNoWrap());
+    }
+
+    /**
      * Checks the latitude getter & setter
      */
     public function testLatitude()

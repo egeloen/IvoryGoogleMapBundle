@@ -56,7 +56,7 @@ class Coordinate
      */
     public function setLatitude($latitude)
     {
-        if(is_numeric($latitude))
+        if(is_numeric($latitude) || is_null($latitude))
             $this->latitude = $latitude;
         else
             throw new \InvalidArgumentException('The latitude of a coordinate must be a numeric value.');
@@ -79,7 +79,7 @@ class Coordinate
      */
     public function setLongitude($longitude)
     {
-        if(is_numeric($longitude))
+        if(is_numeric($longitude) || is_null($longitude))
             $this->longitude = $longitude;
         else
             throw new \InvalidArgumentException('The longitude of a coordinate must be a numeric value.');
@@ -102,7 +102,7 @@ class Coordinate
      */
     public function setNoWrap($noWrap)
     {
-        if(is_bool($noWrap))
+        if(is_bool($noWrap) || is_null($noWrap))
             $this->noWrap = $noWrap;
         else
             throw new \InvalidArgumentException('The no wrap coordinate property must be a boolean value.');
