@@ -21,6 +21,11 @@ use Ivory\GoogleMapBundle\Model\Events\Event;
 class MapHelper extends Helper
 {
     /**
+     * @var boolean TRUE if the google map api has already been loaded else FALSE.
+     */
+    static protected $apiIsLoaded = false;
+
+    /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Base\CoordinateHelper
      */
     protected $coordinateHelper;
@@ -233,12 +238,13 @@ class MapHelper extends Helper
     {
         $html = array();
 
-        $html[] = $this->renderGoogleMapAPI($map);
+        if (!self::$apiIsLoaded)
+            $html[] = $this->renderGoogleMapAPI($map);
+
         $html[] = '<script type="text/javascript">'.PHP_EOL;
 
-        if($map->isAsync()) {
+        if($map->isAsync())
             $html[] = 'function load_ivory_google_map() {'.PHP_EOL;
-        }
 
         $html[] = $this->renderMap($map);
         $html[] = $this->renderMarkers($map);
@@ -277,6 +283,8 @@ class MapHelper extends Helper
      */
     protected function renderGoogleMapAPI(Map $map)
     {
+        self::$apiIsLoaded = true;
+
         $url = 'http://maps.google.com/maps/api/js?';
 
         $encodedPolylines = $map->getEncodedPolylines();
@@ -633,7 +641,6 @@ class MapHelper extends Helper
      * Returns the canonical name of this helper.
      *
      * @return string The canonical name
-     *
      */
     public function getName()
     {
