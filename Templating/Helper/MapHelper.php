@@ -285,7 +285,7 @@ class MapHelper extends Helper
     {
         self::$apiIsLoaded = true;
 
-        $url = 'http://maps.google.com/maps/api/js?';
+        $url = '//maps.google.com/maps/api/js?';
 
         $encodedPolylines = $map->getEncodedPolylines();
         if (!empty($encodedPolylines))
