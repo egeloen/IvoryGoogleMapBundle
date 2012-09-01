@@ -139,7 +139,7 @@ class MapHelperTest extends \PHPUnit_Framework_TestCase
         $mapTest->setLanguage('en');
 
         $this->assertEquals(self::$mapHelper->renderJavascripts($mapTest),
-            '<script type="text/javascript" src="http://maps.google.com/maps/api/js?language=en&sensor=false"></script>'.PHP_EOL.
+            '<script type="text/javascript" src="//maps.google.com/maps/api/js?language=en&sensor=false"></script>'.PHP_EOL.
             '<script type="text/javascript">'.PHP_EOL.
             'var '.$mapTest->getJavascriptVariable().' = new google.maps.Map(document.getElementById("html_container_id"), {"mapTypeId":google.maps.MapTypeId.SATELLITE,"zoom":5});'.PHP_EOL.
             $mapTest->getJavascriptVariable().'.setCenter(new google.maps.LatLng(1.1, 2.1, true));'.PHP_EOL.
