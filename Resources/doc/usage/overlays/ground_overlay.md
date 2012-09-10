@@ -13,7 +13,7 @@ The ``ivory_google_map.ground_overlay`` service is. The configuration describes 
 ```
 # app/config/config.yml
 
-ivory_goole_map:
+ivory_google_map:
     ground_overlay:
         # Prefix used for the generation of the groune overlay javascript variable
         prefix_javascript_variable: "ground_overlay_"
