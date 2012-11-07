@@ -6,7 +6,7 @@
 
     <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Marker" table="ivory_marker">
         <field name="javascriptVariable" column="javascript_variable" type="string" length="100" />
-        <field name="animation" type="string" length="100" />
+        <field name="animation" type="string" length="100" nullable="true" />
         <field name="options" type="array" />
     </mapped-superclass>
 
