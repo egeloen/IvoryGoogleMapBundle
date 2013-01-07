@@ -4,6 +4,24 @@ If you use the geocoding API, you need to install [Geocoder](http://github.com/w
 
 ## Add respectively Buzz|Geocoder & IvoryGoogleMapBundle to your vendor/ & vendor/bundles/ directories
 
+### Using composer
+
+Add IvoryGoogleMapBundle in your composer.json:
+
+```js
+{
+    "require": {
+        "egeloen/google-map-bundle": "*"
+    }
+}
+```
+
+Now tell composer to download the bundle by running the command:
+
+``` bash
+$ php composer.phar update egeloen/google-map-bundle
+```
+
 ### Using the vendors script
 
 Add the following lines in your ``deps`` file
