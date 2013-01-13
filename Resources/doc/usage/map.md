@@ -227,10 +227,6 @@ $map = $this->get('ivory_google_map.map');
 $map->setClustering(true);
 ```
 
-For configurating the map type, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\MapTypeId`` is here.
-It allows you to access all constants which describe map types. If you don't want to use this class, you can directly use the constant value.
-
-
 ## Configure map type
 
 For configurating the map type, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\MapTypeId`` is here.
