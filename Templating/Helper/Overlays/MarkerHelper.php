@@ -68,11 +68,17 @@ class MarkerHelper
     {
         $html = array();
 
-        $markerJSONOptions = sprintf('{"map":%s,"position":%s',
-            $map->getJavascriptVariable(),
-            $this->coordinateHelper->render($marker->getPosition())
-        );
-
+        if ($map->isClusteringActive()) {
+            $markerJSONOptions = sprintf('{"position":%s',
+                $this->coordinateHelper->render($marker->getPosition())
+            );            
+        } else {
+            $markerJSONOptions = sprintf('{"map":%s,"position":%s',
+                $map->getJavascriptVariable(),
+                $this->coordinateHelper->render($marker->getPosition())
+            );
+        }
+        
         $markerOptions = $marker->getOptions();
 
         if($marker->hasAnimation())
@@ -101,11 +107,19 @@ class MarkerHelper
         else
             $markerJSONOptions .= '}';
 
-        $html[] = sprintf('var %s = new google.maps.Marker(%s);'.PHP_EOL,
-            $marker->getJavascriptVariable(),
-            $markerJSONOptions
-        );
-
+        if ($map->isClusteringActive()) {
+            $html[] = sprintf('%s.push(%s = new google.maps.Marker(%s));'.PHP_EOL,                
+                $map->getJavascriptVariable().'_markers',
+                $marker->getJavascriptVariable(),
+                $markerJSONOptions
+            );
+        } else {
+            $html[] = sprintf('var %s = new google.maps.Marker(%s);'.PHP_EOL,
+                $marker->getJavascriptVariable(),
+                $markerJSONOptions
+            );
+        }
+        
         if($marker->hasInfoWindow())
         {
             $html[] = $this->infoWindowHelper->render($marker->getInfoWindow(), false);
