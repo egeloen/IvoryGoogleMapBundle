@@ -88,6 +88,7 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.html_container', $config['map']['html_container']);
         $container->setParameter('ivory_google_map.map.async', $config['map']['async']);
         $container->setParameter('ivory_google_map.map.auto_zoom', $config['map']['auto_zoom']);
+        $container->setParameter('ivory_google_map.map.clustering', $config['map']['clustering']);
         $container->setParameter('ivory_google_map.map.center.longitude', $config['map']['center']['longitude']);
         $container->setParameter('ivory_google_map.map.center.latitude', $config['map']['center']['latitude']);
         $container->setParameter('ivory_google_map.map.center.no_wrap', $config['map']['center']['no_wrap']);
@@ -102,7 +103,9 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.map.width', $config['map']['width']);
         $container->setParameter('ivory_google_map.map.height', $config['map']['height']);
         $container->setParameter('ivory_google_map.map.map_options', $config['map']['map_options']);
-        $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);
+        $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);        
+        $container->setParameter('ivory_google_map.map.clustering_options.maxZoom', $config['map']['clustering_options']['maxZoom']);        
+        $container->setParameter('ivory_google_map.map.clustering_options.gridSize', $config['map']['clustering_options']['gridSize']);        
         $container->setParameter('ivory_google_map.map.language', $config['map']['language']);
     }
 

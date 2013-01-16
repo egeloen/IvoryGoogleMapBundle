@@ -150,6 +150,19 @@ class Map extends AbstractJavascriptVariableAsset
     protected $language = 'en';
 
     /**
+     * @var boolean TRUE if the map clustering is active else FALSE
+     */
+    protected $clustering = false;
+        
+    /**
+     * @var array Map clustering options
+     */
+    protected $clusteringOptions = array(
+        'maxZoom'  => 10,
+        'gridSize' => null
+    );
+    
+    /**
      * Create a map
      */
     public function __construct()
@@ -1148,5 +1161,104 @@ class Map extends AbstractJavascriptVariableAsset
     public function getLanguage()
     {
         return $this->language;
+    }
+    
+    /**
+     * Check if the clustering is active
+     *
+     * @return boolean TRUE if the clustering is active else FALSE
+     */
+    public function isClusteringActive()
+    {
+        return $this->clustering;
+    }
+    
+    /**
+     * Sets if the clustering is active
+     *
+     * @param boolean $clustering TRUE if the clustering is active else FALSE
+     */
+    public function setClustering($clustering)
+    {
+        if(is_bool($clustering))
+            $this->clustering = $clustering;
+        else
+            throw new \InvalidArgumentException('The clustering value of a map must be a boolean value.');
+    }
+    
+    /**
+     * Checks if the clustering option exists
+     *
+     * @param string $clusteringOption
+     * @return boolean TRUE if the clustering option exists else FALSE
+     */
+    public function hasClusteringOption($clusteringOption)
+    {
+        if(is_string($clusteringOption))
+            return in_array($clusteringOption, array_keys($this->clusteringOptions));
+        else
+            throw new \InvalidArgumentException('The clustering option property of a clustering must be a string value.');
+    }
+    
+    /**
+     * Gets the clustering options
+     *
+     * @return array
+     */
+    public function getClusteringOptions()
+    {
+        return $this->clusteringOptions;
+    }
+    
+    /**
+     * Sets the clustering options
+     *
+     * @param array $clusteringOptions
+     */
+    public function setClusteringOptions(array $clusteringOptions)
+    {
+        foreach($clusteringOptions as $clusteringOption => $value)
+            $this->setClusteringOption($clusteringOption, $value);
+    }
+    
+    /**
+     * Gets a specific clustering option
+     *
+     * @param string $clusteringOption
+     * @return mixed
+     */
+    public function getClusteringOption($clusteringOption)
+    {
+        if(is_string($clusteringOption))
+            return isset($this->clusteringOptions[$clusteringOption]) ? $this->clusteringOptions[$clusteringOption] : null;
+        else
+            throw new \InvalidArgumentException('The clustering option property of a clustering must be a string value.');
+    }
+    
+    /**
+     * Sets a specific clustering option
+     *
+     * @param string $clusteringOption
+     * @param mixed $value
+     */
+    public function setClusteringOption($clusteringOption, $value)
+    {
+        if(is_string($clusteringOption))
+            $this->clusteringOptions[$clusteringOption] = $value;
+        else
+            throw new \InvalidArgumentException('The clustering option property of a clustering must be a string value.');
+    }
+    
+    /**
+     * Removes a clustering option
+     *
+     * @param string $clusteringOption
+     */
+    public function removeClusteringOption($clusteringOption)
+    {
+        if($this->hasClusteringOption($clusteringOption))
+            unset($this->clusteringOptions[$clusteringOption]);
+        else
+            throw new \InvalidArgumentException(sprintf('The clustering option "%s" does not exist.', $clusteringOption));
     }
 }

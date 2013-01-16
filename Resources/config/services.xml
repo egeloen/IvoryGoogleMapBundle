@@ -160,6 +160,20 @@
                 <argument>%ivory_google_map.map.language%</argument>
             </call>
 
+			<call method="setClustering">
+                <argument>%ivory_google_map.map.clustering%</argument>
+            </call>
+            
+            <call method="setClusteringOption">
+                <argument>maxZoom</argument>
+                <argument>%ivory_google_map.map.clustering_options.maxZoom%</argument>
+            </call>
+
+            <call method="setClusteringOption">
+                <argument>gridSize</argument>
+                <argument>%ivory_google_map.map.clustering_options.gridSize%</argument>
+            </call>
+            
             <call method="setEventManager">
                 <argument type="service" id="ivory_google_map.event_manager" />
             </call>

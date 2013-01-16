@@ -24,6 +24,9 @@ ivory_google_map:
         # If this flag is enabled, the map will autozoom on the overlays added
         auto_zoom: false
 
+        # If this flag is enabled, the map will create clusters for large amounts of markers
+        clustering: false
+
         # Center coordinate of the map
         # If the autozoom flag is enabled, the center is not used
         center:
@@ -70,6 +73,12 @@ ivory_google_map:
         stylesheet_options:
             border: "1px solid #000"
             background-color: "#fff"
+
+        # Custom clustering map options
+        # By default, there is the options
+        clustering_options:
+            maxZoom: 10
+            gridSize: null
 
         # google map Api language, default en
         language: en
@@ -120,6 +129,15 @@ $map->setStylesheetOption('height', '300px');
 $map->setStylesheetOptions(array(
     'width' => '300px',
     'height' => '300px'
+));
+
+$map->setClustering(false);
+
+$map->getClusteringOption('maxZoom', 10);
+$map->getClusteringOption('gridSize', null);
+$map->setClusteringOptions(array(
+    'maxZoom' => '300px',
+    'gridSize' => null
 ));
 
 $map->setLanguage('en');
@@ -192,6 +210,21 @@ $marker = $this->get('ivory_google_map.marker');
 
 // Add marker overlay to your map
 $map->addMarker($marker);
+```
+
+## Configure map markers clustering
+
+This functionality uses the [MarkerClusterer](http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/docs/reference.html) library. The library creates and manages per-zoom-level clusters for large amounts of markers.
+
+To use markers clustering in the map you only need set the clustering value to true. 
+
+``` php
+<?php
+
+// Requests the ivory google map service
+$map = $this->get('ivory_google_map.map');
+
+$map->setClustering(true);
 ```
 
 ## Configure map type

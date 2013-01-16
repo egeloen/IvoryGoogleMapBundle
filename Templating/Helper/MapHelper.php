@@ -241,6 +241,9 @@ class MapHelper extends Helper
         if (!self::$apiIsLoaded)
             $html[] = $this->renderGoogleMapAPI($map);
 
+        if ($map->isClusteringActive())
+            $html[] = $this->renderGoogleMarkerClusterer();
+        
         $html[] = '<script type="text/javascript">'.PHP_EOL;
 
         if($map->isAsync())
@@ -255,7 +258,16 @@ class MapHelper extends Helper
         $html[] = $this->renderRectangles($map);
         $html[] = $this->renderCircles($map);
         $html[] = $this->renderGroundOverlays($map);
-
+        
+        if ($map->isClusteringActive()) {
+            $html[] = sprintf('var %s = new MarkerClusterer(%s, %s, %s);'.PHP_EOL,
+                $map->getJavascriptVariable().'_marker_cluster',
+                $map->getJavascriptVariable(),
+                $map->getJavascriptVariable().'_markers',
+                json_encode($map->getClusteringOptions())
+            );
+        }
+        
         if($map->isAutoZoom())
             $html[] = $this->renderBound($map);
         else
@@ -303,6 +315,21 @@ class MapHelper extends Helper
         );
     }
 
+    /**
+     * Renders the MarkerClusterer for Google Maps.
+     * To learn more see {@link http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/docs/reference.html}
+     *
+     * @return string The google map MarkerClusterer
+     */
+    protected function renderGoogleMarkerClusterer()
+    {
+        $url = '//google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js';
+        
+        return sprintf('<script type="text/javascript" src="%s"></script>'.PHP_EOL,
+            $url
+        );
+    }
+    
     /**
      * Renders the global map variables
      *
@@ -471,7 +498,13 @@ class MapHelper extends Helper
     public function renderMarkers(Map $map)
     {
         $html = array();
-
+        
+        if ($map->isClusteringActive()) {
+            $html[] = sprintf('var %s = [];'.PHP_EOL,
+                $map->getJavascriptVariable().'_markers'
+            );
+        }
+        
         foreach($map->getMarkers() as $marker)
         {
             $html[] = $this->markerHelper->render($marker, $map);
