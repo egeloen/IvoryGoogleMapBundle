@@ -323,7 +323,7 @@ class MapHelper extends Helper
      */
     protected function renderGoogleMarkerClusterer()
     {
-        $url = 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js';
+        $url = '//google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js';
         
         return sprintf('<script type="text/javascript" src="%s"></script>'.PHP_EOL,
             $url
