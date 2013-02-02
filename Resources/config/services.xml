@@ -35,6 +35,7 @@
         <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMapBundle\Model\Overlays\GroundOverlay</parameter>
 
         <parameter key="ivory_google_map.kml_layer.class">Ivory\GoogleMapBundle\Model\Layers\KMLLayer</parameter>
+        <parameter key="ivory_google_map.heatmap_layer.class">Ivory\GoogleMapBundle\Model\Layers\HeatmapLayer</parameter>
 
         <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMapBundle\Model\Events\EventManager</parameter>
         <parameter key="ivory_google_map.event.class">Ivory\GoogleMapBundle\Model\Events\Event</parameter>
@@ -84,6 +85,7 @@
         <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
 
         <parameter key="ivory_google_map.kml_layer.helper">Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayerHelper</parameter>
+        <parameter key="ivory_google_map.heatmap_layer.helper">Ivory\GoogleMapBundle\Templating\Helper\Layers\HeatmapLayerHelper</parameter>
 
         <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper</parameter>
         <parameter key="ivory_google_map.event.helper">Ivory\GoogleMapBundle\Templating\Helper\Events\EventHelper</parameter>
@@ -186,6 +188,7 @@
             <argument type="service" id="ivory_google_map.helper.circle" />
             <argument type="service" id="ivory_google_map.helper.ground_overlay" />
             <argument type="service" id="ivory_google_map.helper.kml_layer" />
+            <argument type="service" id="ivory_google_map.helper.heatmap_layer" />
             <argument type="service" id="ivory_google_map.helper.event_manager" />
         </service>
 
@@ -651,6 +654,19 @@
         </service>
 
         <service id="ivory_google_map.helper.kml_layer" class="%ivory_google_map.kml_layer.helper%" public="false" />
+
+        <!-- Heatmap layer service -->
+        <service id="ivory_google_map.heatmap_layer" class="%ivory_google_map.heatmap_layer.class%" scope="prototype">
+            <call method="setPrefixJavascriptVariable">
+                <argument>%ivory_google_map.heatmap_layer.prefix_javascript_variable%</argument>
+            </call>
+
+            <call method="setOptions">
+                <argument>%ivory_google_map.heatmap_layer.options%</argument>
+            </call>
+        </service>
+
+        <service id="ivory_google_map.helper.heatmap_layer" class="%ivory_google_map.heatmap_layer.helper%" public="false" />
 
         <!-- Event manager service -->
         <service id="ivory_google_map.event_manager" class="%ivory_google_map.event_manager.class%" scope="prototype" />

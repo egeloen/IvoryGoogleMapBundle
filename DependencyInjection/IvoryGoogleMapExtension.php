@@ -12,6 +12,7 @@ use Symfony\Component\Config\FileLocator;
  * Ivory google map extension
  *
  * @author GeLo <geloen.eric@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class IvoryGoogleMapExtension extends Extension
 {
@@ -63,6 +64,7 @@ class IvoryGoogleMapExtension extends Extension
 
         // Layers sections
         $this->loadKMLLayer($config, $container);
+        $this->loadHeatmapLayer($config, $container);
 
         // Event sections
         $this->loadEvent($config, $container);
@@ -420,6 +422,18 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.kml_layer.prefix_javascript_variable', $config['kml_layer']['prefix_javascript_variable']);
         $container->setParameter('ivory_google_map.kml_layer.url', $config['kml_layer']['url']);
         $container->setParameter('ivory_google_map.kml_layer.options', $config['kml_layer']['options']);
+    }
+
+    /**
+     * Loads heatmap layer configuration.
+     *
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    protected function loadHeatmapLayer(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ivory_google_map.heatmap_layer.prefix_javascript_variable', $config['heatmap_layer']['prefix_javascript_variable']);
+        $container->setParameter('ivory_google_map.heatmap_layer.options', $config['heatmap_layer']['options']);
     }
 
     /**

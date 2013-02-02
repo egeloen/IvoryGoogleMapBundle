@@ -145,6 +145,11 @@ class Map extends AbstractJavascriptVariableAsset
     protected $kmlLayers = array();
 
     /**
+     * @var array Map heatmap layers
+     */
+    protected $heatmapLayers = array();
+
+    /**
      * @var string Api language
      */
     protected $language = 'en';
@@ -1128,6 +1133,26 @@ class Map extends AbstractJavascriptVariableAsset
     public function addKMLLayer(Layers\KMLLayer $kmlLayer)
     {
         $this->kmlLayers[] = $kmlLayer;
+    }
+
+    /**
+     * Gets the heatmap layers.
+     *
+     * @return array
+     */
+    public function getHeatmapLayers()
+    {
+        return $this->heatmapLayers;
+    }
+
+    /**
+     * Adds a heatmap layer to the map.
+     *
+     * @param Ivory\GoogleMapBundle\Model\Layers\HeatmapLayer $kmlLayer The heatmap layer to add
+     */
+    public function addHeatmapLayer(Layers\HeatmapLayer $heatmapLayers)
+    {
+        $this->heatmapLayers[] = $heatmapLayers;
     }
 
     /**

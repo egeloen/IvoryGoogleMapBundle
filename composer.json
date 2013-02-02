@@ -13,10 +13,23 @@
     "require": {
         "php": ">=5.3.0",
         "symfony/framework-bundle": "2.*",
-        "willdurand/geocoder": ">=1.0.0"
+        "willdurand/geocoder": ">=1.0.0",
+        "zendframework/zend-json": "2.*"
+    },
+    "require-dev": {
+        "symfony/class-loader": "2.*",
+        "symfony/yaml": "2.*",
+        "symfony/form": "2.*",
+        "kriswallsmith/buzz": "0.7.*"
     },
     "autoload": {
         "psr-0": { "Ivory\\GoogleMapBundle": "" }
     },
-    "target-dir": "Ivory/GoogleMapBundle"
+    "target-dir": "Ivory/GoogleMapBundle",
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"http://packages.zendframework.com/"
+        }
+    ]
 }

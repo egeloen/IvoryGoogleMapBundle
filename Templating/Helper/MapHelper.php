@@ -17,6 +17,7 @@ use Ivory\GoogleMapBundle\Model\Events\Event;
  * Map helper allows easy rendering
  *
  * @author GeLo <geloen.eric@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class MapHelper extends Helper
 {
@@ -121,6 +122,11 @@ class MapHelper extends Helper
     protected $kmlLayerHelper;
 
     /**
+     * @var Ivory\GoogleMapBundle\Templating\Helper\Layers\HeatmapLayer
+     */
+    protected $heatmapLayerHelper;
+
+    /**
      * @var Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper
      */
     protected $eventManagerHelper;
@@ -144,7 +150,8 @@ class MapHelper extends Helper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\EncodedPolylineHelper $encodedPolylineHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\CircleHelper $circleHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Overlays\GroundOverlayHelper $groundOverlayHelper
-     * @param Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayer $kmlLayerHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Layers\KMLLayerHelper $kmlLayerHelper
+     * @param Ivory\GoogleMapBundle\Templating\Helper\Layers\HeatmapLayerHelper $heatmapLayerHelper
      * @param Ivory\GoogleMapBundle\Templating\Helper\Events\EventManagerHelper $eventHelper
      */
     public function __construct(
@@ -167,6 +174,7 @@ class MapHelper extends Helper
         Overlays\CircleHelper $circleHelper,
         Overlays\GroundOverlayHelper $groundOverlayHelper,
         Layers\KMLLayerHelper $kmlLayerHelper,
+        Layers\HeatmapLayerHelper $heatmapLayerHelper,
         Events\EventManagerHelper $eventManagerHelper
     ) {
         $this->coordinateHelper = $coordinateHelper;
@@ -188,6 +196,7 @@ class MapHelper extends Helper
         $this->circleHelper = $circleHelper;
         $this->groundOverlayHelper = $groundOverlayHelper;
         $this->kmlLayerHelper = $kmlLayerHelper;
+        $this->heatmapLayerHelper = $heatmapLayerHelper;
         $this->eventManagerHelper = $eventManagerHelper;
     }
 
@@ -262,6 +271,7 @@ class MapHelper extends Helper
             $html[] = $this->renderCenter($map);
 
         $html[] = $this->renderKMLLayers($map);
+        $html[] = $this->renderHeatmapLayers($map);
 
         $html[] = $this->renderGlobalVariables($map);
         $html[] = $this->renderEvents($map);
@@ -287,9 +297,18 @@ class MapHelper extends Helper
 
         $url = '//maps.google.com/maps/api/js?';
 
+        $libraries = array();
+
         $encodedPolylines = $map->getEncodedPolylines();
         if (!empty($encodedPolylines))
-            $url .= 'libraries=geometry&';
+            $libraries[] = 'geometry';
+
+        $heatmapLayers = $map->getHeatmapLayers();
+        if (!empty($heatmapLayers))
+            $libraries[] = 'visualization';
+
+        if (!empty($libraries))
+            $url .= sprintf('libraries=%s&', implode(',', $libraries));
 
         if ($map->isAsync())
             $url .= 'callback=load_ivory_google_map&';
@@ -622,6 +641,23 @@ class MapHelper extends Helper
 
         foreach ($map->getKMLLayers() as $kmlLayer)
             $html[] = $this->kmlLayerHelper->render($kmlLayer, $map);
+
+        return implode('', $html);
+    }
+
+    /**
+     * Renders the map javascript heatmap layers.
+     *
+     * @param Ivory\GoogleMapBundle\Model\Map $map
+     *
+     * @return string HTML output
+     */
+    public function renderHeatmapLayers(Map $map)
+    {
+        $html = array();
+
+        foreach ($map->getHeatmapLayers() as $heatmapLayer)
+            $html[] = $this->heatmapLayerHelper->render($heatmapLayer, $map);
 
         return implode('', $html);
     }
