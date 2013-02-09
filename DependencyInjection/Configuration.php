@@ -16,6 +16,7 @@ use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
  * Ivory google map configuration
  *
  * @author GeLo <geloen.eric@gmail.com>
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -61,6 +62,7 @@ class Configuration implements ConfigurationInterface
 
         // Layers sections
         $this->addKMLLayerSection($rootNode);
+        $this->addHeatmapSection($rootNode);
 
         // Event sections
         $this->addEventSection($rootNode);
@@ -658,6 +660,26 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('kml_layer_')->end()
                         ->scalarNode('url')->defaultValue('')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Add the heatmap layer section.
+     *
+     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     */
+    protected function addHeatmapSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('heatmap_layer')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('prefix_javascript_variable')->defaultValue('heatmap_layer_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
