@@ -799,15 +799,6 @@
             public="false"
         />
 
-        <!-- Geocoder listener service -->
-        <service
-            id="ivory_google_map.geocoder.event_listener.fake_request"
-            class="%ivory_google_map.geocoder.event_listener.fake_request.class%"
-        >
-            <argument></argument>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-        </service>
-
         <!-- Geocoder request service -->
         <service
             id="ivory_google_map.geocoder_request"

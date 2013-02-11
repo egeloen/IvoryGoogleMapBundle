@@ -14,6 +14,7 @@ namespace Ivory\GoogleMapBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Processor,
     Symfony\Component\Config\FileLocator,
     Symfony\Component\DependencyInjection\ContainerBuilder,
+    Symfony\Component\DependencyInjection\Definition,
     Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
     Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -708,9 +709,17 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
         if ($config['geocoder']['fake_ip'] !== null) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder.event_listener.fake_request')
-                ->replaceArgument(0, $config['geocoder']['fake_ip']);
+            $definition = new Definition(
+                $container->getParameter('ivory_google_map.geocoder.event_listener.fake_request.class'),
+                array($config['geocoder']['fake_ip'])
+            );
+
+            $definition->addTag('kernel.event_listener', array(
+                'event'  => 'kernel.request',
+                'method' => 'onKernelRequest',
+            ));
+
+            $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $definition);
         }
 
         if ($config['geocoder']['class'] !== null) {

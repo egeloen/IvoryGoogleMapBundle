@@ -708,6 +708,24 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($rectangle->getBound()->getSouthWest()->isNoWrap());
     }
 
+    public function testFakeRequestListenerWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.geocoder.event_listener.fake_request'));
+    }
+
+    public function testFakeRequestListenerWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'fake_request');
+        $this->container->compile();
+
+        $fakeRequestListener = $this->container->get('ivory_google_map.geocoder.event_listener.fake_request');
+
+        $this->assertSame('222.222.222.222', $fakeRequestListener->getFakeIp());
+    }
+
     public function testGeocoderRequestServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
