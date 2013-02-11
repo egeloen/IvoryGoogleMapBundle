@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Ivory CKEditor package.
+ * This file is part of the Ivory Google Map bundle package.
  *
  * (c) Eric GELOEN <geloen.eric@gmail.com>
  *
