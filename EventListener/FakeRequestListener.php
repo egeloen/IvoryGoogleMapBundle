@@ -11,6 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\EventListener;
 
+use \InvalidArgumentException;
+
 use Symfony\Component\HttpKernel\Event\GetResponseEvent,
     Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -48,11 +50,13 @@ class FakeRequestListener
      * Sets the fake IP.
      *
      * @param string $fakeIp The fake IP.
+     *
+     * @throws \InvalidArgumentException If the fake IP is not valid.
      */
     public function setFakeIp($fakeIp)
     {
         if (!is_string($fakeIp)) {
-            throw new \InvalidArgumentException('The geocoder fake IP must be a string value.');
+            throw new InvalidArgumentException('The geocoder fake IP must be a string value.');
         }
 
         $this->fakeIp = $fakeIp;
@@ -69,8 +73,6 @@ class FakeRequestListener
             return;
         }
 
-        if ($this->fakeIp !== null) {
-            $event->getRequest()->server->set('REMOTE_ADDR', $this->fakeIp);
-        }
+        $event->getRequest()->server->set('REMOTE_ADDR', $this->fakeIp);
     }
 }

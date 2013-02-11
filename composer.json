@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "symfony/yaml": "2.*",
+        "twig/twig": "1.*",
         "kriswallsmith/buzz": "*",
         "willdurand/geocoder": "*"
     },
