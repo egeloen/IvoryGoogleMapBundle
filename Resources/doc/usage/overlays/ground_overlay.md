@@ -1,14 +1,15 @@
 # Ground overlay
 
-Polygons are useful overlays to represent arbitrarily-sized areas, but they cannot display images.
-If you have an image that you wish to place on a map, you can use a GroundOverlay object.
+Polygons are useful overlays to represent arbitrarily-sized areas, but they cannot display images. If you have an
+image that you wish to place on a map, you can use a GroundOverlay object.
 
 ## Build your ground overlay
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.ground_overlay`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.ground_overlay`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml

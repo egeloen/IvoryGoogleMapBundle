@@ -6,8 +6,9 @@ Markers identify locations on the map. By default, they use a standard icon.
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.marker`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.marker`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -47,7 +48,7 @@ $marker = $this->get('ivory_google_map.marker');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Overlays\Animation;
+use Ivory\GoogleMap\Overlays\Animation;
 
 // Requests the ivory google map marker service
 $marker = $this->get('ivory_google_map.marker');
@@ -81,13 +82,14 @@ $map->addMarker($marker);
 
 ## Configure marker animation
 
-For configurating the marker animation, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Overlays\Animation`` is here.
-It allows you to access all constants which describe marker animation. If you don't want to use this class, you can directly use the constant value.
+For configurating the marker animation, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Overlays\Animation`` is here. It allows you to access all constants which describe marker animation.
+If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Overlays\Animation;
+use Ivory\GoogleMap\Overlays\Animation;
 
 // Requests the ivory google map marker service
 $marker = $this->get('ivory_google_map.marker');
@@ -102,9 +104,10 @@ $marker->setAnimation('drop');
 
 ## Configure marker icon
 
-By default, the marker uses a standard icon. If you want to change this icon, two ways are available. You can use an icon url or a marker image.
-The first solution is appropriated if you build an icon which doesn't need any specific configuration (anchor, origin, size or scaled size).
-If you want to build an advanced icon, you must use the marker image.
+By default, the marker uses a standard icon. If you want to change this icon, two ways are available. You can use an
+icon url or a marker image. The first solution is appropriated if you build an icon which doesn't need any specific
+configuration (anchor, origin, size or scaled size). If you want to build an advanced icon, you must use the marker
+image.
 
 ### Icon URL
 
@@ -120,7 +123,8 @@ $marker->setIcon('http://maps.gstatic.com/mapfiles/markers/marker.png');
 
 ### Marker image
 
-The complete marker image configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
+The complete marker image configuration is available
+[here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
 
 ``` php
 <?php
@@ -134,9 +138,10 @@ $marker->setIcon($markerImage);
 
 ## Configure marker shadow
 
-Like marker icon, the marker uses a standard shadow but if you want to change this shadow, two ways are available. You can use a shadow url or a marker image.
-The first solution is appropriated if you build a shadow which doesn't need any specific configuration (anchor, origin, size or scaled size).
-If you want to build an advanced shadow, you must use the marker image.
+Like marker icon, the marker uses a standard shadow but if you want to change this shadow, two ways are available. You
+can use a shadow url or a marker image. The first solution is appropriated if you build a shadow which doesn't need any
+specific configuration (anchor, origin, size or scaled size). If you want to build an advanced shadow, you must use
+the marker image.
 
 ### Shadow URL
 
@@ -152,7 +157,8 @@ $marker->setShadow('http://maps.gstatic.com/mapfiles/markers/marker.png');
 
 ### Marker image
 
-The complete marker image configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
+The complete marker image configuration is available
+[here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_image.md).
 
 ``` php
 <?php
@@ -166,4 +172,5 @@ $marker->setShadow($markerImage);
 
 ## Configure marker shape
 
-The complete marker shape configuration is available [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shape.md).
+The complete marker shape configuration is available
+[here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/marker_shape.md).

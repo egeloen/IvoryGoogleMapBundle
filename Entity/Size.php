@@ -1,26 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Base\Size as BaseSize;
+use Ivory\GoogleMap\Base\Size as BaseSize;
 
 /**
- * Size entity which describes a google map size
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Size extends BaseSize
 {
-    /**
-     * Create a size
-     *
-     * @param integer $width The with
-     * @param integer $height The height
-     * @param string $widthUnit The with unit
-     * @param string $heightUnit The height unit
-     */
-    public function __construct($width = 1, $height = 1, $widthUnit = null, $heightUnit = null)
-    {
-        parent::__construct($width, $height, $widthUnit, $heightUnit);
-    }
+
 }

@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\EventManager;
 
 /**
- * Event manager entity test
+ * Event manager entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the event manager constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $eventManagerEntityTest = new EventManager();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Events\EventManager', $eventManagerEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Events\EventManager', new EventManager());
     }
 }

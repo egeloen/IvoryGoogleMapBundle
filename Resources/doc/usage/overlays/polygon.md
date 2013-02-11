@@ -7,8 +7,9 @@ However, instead of being open-ended, polygons are designed to define regions wi
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.polygon`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.polygon`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -53,7 +54,8 @@ $polygon->setOptions(array(
 
 ## Add coordinate to your polygon
 
-Like describe in the introduction, a polygon object consists of an array of coordinates. So, you need to add coordinate to your polygon.
+Like describe in the introduction, a polygon object consists of an array of coordinates. So, you need to add
+coordinate to your polygon.
 
 ``` php
 <?php

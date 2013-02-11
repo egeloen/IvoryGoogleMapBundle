@@ -1,13 +1,15 @@
 # Encoded Polyline
 
-The Encoded Polyline class defines a [Polyline](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/polyline.md) which has been encoded using the algorithm described [here](http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html).
+The Encoded Polyline class defines a [Polyline](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/overlays/polyline.md)
+which has been encoded using the algorithm described [here](http://code.google.com/apis/maps/documentation/utilities/polylinealgorithm.html).
 
 ## Build your encoded polyline
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.encoded_polyline`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.encoded_polyline`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml

@@ -1,0 +1,3 @@
+ivory_google_map:
+    event:
+        prefix_javascript_variable: "e"

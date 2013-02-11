@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\ZoomControl;
 
 /**
- * Zoom control entity test
+ * Zoom control entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class ZoomControlTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the zoom control constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $zoomControlEntityTest = new ZoomControl();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Controls\ZoomControl', $zoomControlEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Controls\ZoomControl', new ZoomControl());
     }
 }

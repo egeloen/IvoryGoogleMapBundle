@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\Polyline;
 
 /**
- * Polyline entity test
+ * Polyline entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class PolylineTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the polyline constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $polylineEntityTest = new Polyline();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\Polyline', $polylineEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Polyline', new Polyline());
     }
 }

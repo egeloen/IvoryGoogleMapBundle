@@ -1,38 +1,39 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Twig;
 
-use Ivory\GoogleMapBundle\Templating\Helper\MapHelper;
-use Ivory\GoogleMapBundle\Model\Map;
+use \Twig_Function_Method;
+
+use Ivory\GoogleMap\Map,
+    Ivory\GoogleMap\Templating\Helper\MapHelper;
 
 /**
- * Ivory google map twig extension
+ * Ivory google map twig extension.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class GoogleMapExtension extends \Twig_Extension
 {
-    /**
-     * @var Ivory\GoogleMapBundle\Templating\Helper\MapHelper $mapHelper
-     */
-    protected $mapHelper = null;
+    /**@var \Ivory\GoogleMap\Templating\Helper\MapHelper */
+    protected $mapHelper;
 
     /**
-     * Create a google map twig extension
+     * Create the google map twig extension.
      *
-     * @param Ivory\GoogleMapBundle\Templating\Helper\MapHelper $mapHelper
+     * @param \Ivory\GoogleMap\Templating\Helper\MapHelper $mapHelper The map helper.
      */
     public function __construct(MapHelper $mapHelper)
     {
         $this->mapHelper = $mapHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'ivory_google_map';
     }
 
     /**
@@ -43,21 +44,23 @@ class GoogleMapExtension extends \Twig_Extension
         $mapping = array(
             'google_map_container' => 'renderContainer',
             'google_map_css'       => 'renderStylesheets',
-            'google_map_js'        => 'renderJavascripts'
+            'google_map_js'        => 'renderJavascripts',
         );
 
         $functions = array();
-        foreach($mapping as $twig => $local)
-            $functions[$twig] = new \Twig_Function_Method($this, $local, array('is_safe' => array('html')));
+        foreach ($mapping as $twig => $local) {
+            $functions[$twig] = new Twig_Function_Method($this, $local, array('is_safe' => array('html')));
+        }
 
         return $functions;
     }
 
     /**
-     * Renders the google map container
+     * Renders the google map container.
      *
-     * @param Ivory\GoogleMapBundle\Model\Map $map
-     * @return string HTML output
+     * @param \Ivory\GoogleMap\Map $map The map.
+     *
+     * @return string The html output.
      */
     public function renderContainer(Map $map)
     {
@@ -65,10 +68,11 @@ class GoogleMapExtension extends \Twig_Extension
     }
 
     /**
-     * Renders the google map stylesheets
+     * Renders the google map stylesheets.
      *
-     * @param Ivory\GoogleMapBundle\Model\Map $map
-     * @return string HTML output
+     * @param \Ivory\GoogleMap\Map $map The map.
+     *
+     * @return string The html output.
      */
     public function renderStylesheets(Map $map)
     {
@@ -76,13 +80,22 @@ class GoogleMapExtension extends \Twig_Extension
     }
 
     /**
-     * Renders the google map javascripts
+     * Renders the google map javascripts.
      *
-     * @param Ivory\GoogleMapBundle\Model\Map $map
-     * @return string HTML output
+     * @param \Ivory\GoogleMap\Map $map The map.
+     *
+     * @return string The html output.
      */
     public function renderJavascripts(Map $map)
     {
         return $this->mapHelper->renderJavascripts($map);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'ivory_google_map';
     }
 }

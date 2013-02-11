@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Overlays\InfoWindow as BaseInfoWindow;
+use Ivory\GoogleMap\Overlays\InfoWindow as BaseInfoWindow;
 
 /**
- * Info window entity which describes a google map info window
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class InfoWindow extends BaseInfoWindow
 {
-    /**
-     * Create an info window
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

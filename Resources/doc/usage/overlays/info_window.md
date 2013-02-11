@@ -1,15 +1,15 @@
 # Info window
 
-Info window displays content in a floating window above the map.
-The info window looks a little like a comic-book word balloon.
-It has a content area and a tapered stem, where the tip of the stem is at a specified location on the map.
+Info window displays content in a floating window above the map. The info window looks a little like a comic-book word
+balloon. It has a content area and a tapered stem, where the tip of the stem is at a specified location on the map.
 
 ## Build your info window
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.info_window`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.info_window`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -43,14 +43,16 @@ ivory_google_map:
         open: false
 
         # This flag is only used if you link an info window to a marker
-        # If it is enabled, an event will be generated for allowing you to open the info window when you trigger the event configured below on the linked marker
+        # If it is enabled, an event will be generated for allowing you to open the info window when you trigger
+        # the event configured below on the linked marker
         auto_open: true
 
         # Info window open event
         # Available open event : click, dblclick, mouseup, mousedown, mouseover, mouseout
         open_event: "click"
 
-        # If it is enabled, the info window will be closed each time an info window configurated with the auto open flag is opened.
+        # If it is enabled, the info window will be closed each time an info window configurated with the auto
+        # open flag is opened.
         auto_close: false
 
         # Custom info window options
@@ -118,13 +120,14 @@ $marker->setInfoWindow($infoWindow);
 
 ## Configure info window open event
 
-For configurating the info window open event, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Events\MouseEvent`` is here.
-It allows you to access all constants which describe open event. If you don't want to use this class, you can directly use the constant value.
+For configurating the info window open event, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Events\MouseEvent`` is here. It allows you to access all constants which describe open event. If you
+don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Events\MouseEvent;
+use Ivory\GoogleMap\Events\MouseEvent;
 
 // Requests the ivory google map info window service
 $infoWindow = $this->get('ivory_google_map.info_window');

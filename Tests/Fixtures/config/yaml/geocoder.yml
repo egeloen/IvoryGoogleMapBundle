@@ -1,0 +1,9 @@
+ivory_google_map:
+    geocoder:
+        fake_ip: "123.345.567.123"
+        class:   "Geocoder\\Geocoder"
+        provider:
+            class:   "Geocoder\\Provider\\HostIpProvider"
+            api_key: "apikey"
+            locale:  "en"
+        adapter: "Geocoder\\HttpAdapter\\CurlHttpAdapter"

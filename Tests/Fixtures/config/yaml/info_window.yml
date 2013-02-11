@@ -1,0 +1,19 @@
+ivory_google_map:
+    info_window:
+        prefix_javascript_variable: "iw"
+        position:
+            latitude:  1.1
+            longitude: -2.1
+            no_wrap:   false
+        content: "<div class=\"info_window\"></div>"
+        pixel_offset:
+            width:       1.1
+            height:      2.1
+            width_unit:  "px"
+            height_unit: "pt"
+        open:       true
+        auto_open:  false
+        open_event: "dblclick"
+        auto_close: true
+        options:
+            option: "value"

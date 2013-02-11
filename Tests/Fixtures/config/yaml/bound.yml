@@ -1,0 +1,11 @@
+ivory_google_map:
+    bound:
+        prefix_javascript_variable: "b"
+        south_west:
+            latitude:  -1.1
+            longitude: -2.1
+            no_wrap:   true
+        north_east:
+            latitude:  2.1
+            longitude: 1.1
+            no_wrap:   false

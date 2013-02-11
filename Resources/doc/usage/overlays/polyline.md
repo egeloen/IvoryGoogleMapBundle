@@ -1,14 +1,15 @@
 # Polyline
 
-The Polyline class defines a linear overlay of connected line segments on the map.
-A Polyline object consists of an array of coordinates, and creates a series of line segments that connect those locations in an ordered sequence.
+The Polyline class defines a linear overlay of connected line segments on the map. A Polyline object consists of an
+array of coordinates, and creates a series of line segments that connect those locations in an ordered sequence.
 
 ## Build your polyline
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.polyline`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.polyline`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -53,7 +54,8 @@ $polyline->setOptions(array(
 
 ## Add coordinate to your polyline
 
-Like describe in the introduction, a polyline object consists of an array of coordinates. So, you need to add coordinate to your polyline.
+Like describe in the introduction, a polyline object consists of an array of coordinates. So, you need to add
+coordinate to your polyline.
 
 ``` php
 <?php

@@ -1,25 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Base\Coordinate as BaseCoordinate;
+use Ivory\GoogleMap\Base\Coordinate as BaseCoordinate;
 
 /**
- * Coordinate entity which describes a google map coordinate
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Coordinate extends BaseCoordinate
 {
-    /**
-     * Create a coordinate
-     *
-     * @param integer $latitude The latitude
-     * @param integer $longitue The longitude
-     * @param boolean $noWrap No wrap flag
-     */
-    public function __construct($latitude = 0, $longitude = 0, $noWrap = true)
-    {
-        parent::__construct($latitude, $longitude, $noWrap);
-    }
+
 }

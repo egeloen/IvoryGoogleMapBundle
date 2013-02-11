@@ -1,13 +1,15 @@
 # KML Layer
 
-The Google Maps API supports the KML and GeoRSS data formats for displaying geographic information. For more information, see official [documentation](http://code.google.com/apis/maps/documentation/javascript/layers.html#KMLLayers).
+The Google Maps API supports the KML and GeoRSS data formats for displaying geographic information. For more
+information, see official [documentation](http://code.google.com/apis/maps/documentation/javascript/layers.html#KMLLayers).
 
 ## Build your KML layer
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.kml_layer`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.kml_layer`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml

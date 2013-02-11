@@ -1,22 +1,28 @@
 # Marker shape
 
-This object defines the marker shape to use in determination of a marker's clickable region.
-The shape consists of two properties "type" and "coordinates" which define the general type of marker and coordinates specific to that type of marker.
+This object defines the marker shape to use in determination of a marker's clickable region. The shape consists of
+two properties "type" and "coordinates" which define the general type of marker and coordinates specific to that
+type of marker.
 
-The format of this attribute depends on the value of the type and follows the w3 AREA coords specification found at http://www.w3.org/TR/REC-html40/struct/objects.html#adef-coords.
-The coordinates attribute is an array of integers that specify the pixel position of the shape relative to the top-left corner of the target image.
-The coordinates depend on the value of type as follows:
+The format of this attribute depends on the value of the type and follows the w3 AREA coords specification found at
+http://www.w3.org/TR/REC-html40/struct/objects.html#adef-coords. The coordinates attribute is an array of integers that
+specify the pixel position of the shape relative to the top-left corner of the target image. The coordinates depend on
+the value of type as follows:
 
-  - circle: coordinates is [x1, y1, r] where x1, y2 are the coordinates of the center of the circle, and r is the radius of the circle.
-  - poly: coordinates is [x1, y1, x2, y2 ... xn, yn] where each x, y pair contains the coordinates of one vertex of the polygon.
-  - rect: coordinates is [x1, y1, x2, y2] where x1, y1 are the coordinates of the upper-left corner of the rectangle and x2, y2 are the coordinates of the lower-right coordinates of the rectangle.
+ - circle: coordinates is [x1, y1, r] where x1, y2 are the coordinates of the center of the circle, and r is the
+   radius of the circle.
+ - poly: coordinates is [x1, y1, x2, y2 ... xn, yn] where each x, y pair contains the coordinates of one vertex of
+   the polygon.
+ - rect: coordinates is [x1, y1, x2, y2] where x1, y1 are the coordinates of the upper-left corner of the rectangle
+   and x2, y2 are the coordinates of the lower-right coordinates of the rectangle.
 
 ## Build your marker shape
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.marker_shape`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.marker_shape`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml

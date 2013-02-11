@@ -7,8 +7,9 @@ This control appears by default in the bottom right corner of the map, and is by
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.overview_map_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.overview_map_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml

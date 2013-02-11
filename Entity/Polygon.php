@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Overlays\Polygon as BasePolygon;
+use Ivory\GoogleMap\Overlays\Polygon as BasePolygon;
 
 /**
- * Polygon entity which describes a google map polygon
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Polygon extends BasePolygon
 {
-    /**
-     * Create a polygon
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

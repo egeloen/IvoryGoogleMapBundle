@@ -1,26 +1,34 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-
-use Ivory\GoogleMapBundle\Model\MapTypeId;
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
-use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
-use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
-use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
+use Ivory\GoogleMap\Controls\ControlPosition,
+    Ivory\GoogleMap\Controls\MapTypeControlStyle,
+    Ivory\GoogleMap\Controls\ScaleControlStyle,
+    Ivory\GoogleMap\Controls\ZoomControlStyle,
+    Ivory\GoogleMap\MapTypeId,
+    Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition,
+    Symfony\Component\Config\Definition\Builder\TreeBuilder,
+    Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Ivory google map configuration
+ * Ivory google map configuration.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
@@ -75,9 +83,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the map section
+     * Adds the map section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addMapSection(ArrayNodeDefinition $node)
     {
@@ -131,9 +139,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the coordinate section
+     * Adds the coordinate section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addCoordinateSection(ArrayNodeDefinition $node)
     {
@@ -150,9 +158,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the bound section
+     * Adds the bound section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addBoundSection(ArrayNodeDefinition $node)
     {
@@ -181,9 +189,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the point section
+     * Adds the point section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addPointSection(ArrayNodeDefinition $node)
     {
@@ -199,9 +207,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the size section
+     * Adds the size section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addSizeSection(ArrayNodeDefinition $node)
     {
@@ -219,9 +227,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the map type control section
+     * Adds the map type control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addMapTypeControlSection(ArrayNodeDefinition $node)
     {
@@ -241,9 +249,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the overview map control section
+     * Adds the overview map control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addOverviewMapControlSection(ArrayNodeDefinition $node)
     {
@@ -258,9 +266,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the pan control section
+     * Adds the pan control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addPanControlSection(ArrayNodeDefinition $node)
     {
@@ -275,9 +283,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the rotate control section
+     * Adds the rotate control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addRotateControlSection(ArrayNodeDefinition $node)
     {
@@ -292,9 +300,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the scale control section
+     * Adds the scale control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addScaleControlSection(ArrayNodeDefinition $node)
     {
@@ -310,9 +318,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the street view control section
+     * Adds the street view control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addStreetViewControlSection(ArrayNodeDefinition $node)
     {
@@ -327,9 +335,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the zoom control section
+     * Adds the zoom control section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addZoomControlSection(ArrayNodeDefinition $node)
     {
@@ -345,9 +353,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the marker section
+     * Adds the marker section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addMarkerSection(ArrayNodeDefinition $node)
     {
@@ -373,9 +381,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the marker image section
+     * Adds the marker image section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addMarkerImageSection(ArrayNodeDefinition $node)
     {
@@ -419,9 +427,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the marker shape section
+     * Adds the marker shape section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addMarkerShapeSection(ArrayNodeDefinition $node)
     {
@@ -441,9 +449,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the info window section
+     * Adds the info window section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addInfoWindowSection(ArrayNodeDefinition $node)
     {
@@ -481,9 +489,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the polyline section
+     * Adds the polyline section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addPolylineSection(ArrayNodeDefinition $node)
     {
@@ -501,9 +509,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the encoded polyline section
+     * Adds the encoded polyline section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addEncodedPolylineSection(ArrayNodeDefinition $node)
     {
@@ -521,9 +529,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the polygon section
+     * Adds the polygon section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addPolygonSection(ArrayNodeDefinition $node)
     {
@@ -541,9 +549,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the rectangle section
+     * Adds the rectangle section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addRectangleSection(ArrayNodeDefinition $node)
     {
@@ -579,9 +587,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the circle section
+     * Adds the circle section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addCircleSection(ArrayNodeDefinition $node)
     {
@@ -607,9 +615,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the ground overlay section
+     * Adds the ground overlay section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addGroundOverlaySection(ArrayNodeDefinition $node)
     {
@@ -646,9 +654,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the KML layer section
+     * Adds the KML layer section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addKMLLayerSection(ArrayNodeDefinition $node)
     {
@@ -667,9 +675,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the event section
+     * Adds the event section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addEventSection(ArrayNodeDefinition $node)
     {
@@ -684,9 +692,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the geocoder section
+     * Adds the geocoder section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addGeocoderSection(ArrayNodeDefinition $node)
     {
@@ -710,9 +718,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the geocoder request section
+     * Adds the geocoder request section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addGeocoderRequestSection(ArrayNodeDefinition $node)
     {
@@ -747,7 +755,6 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('region')->defaultValue(null)->end()
-                        ->scalarNode('language')->defaultValue(null)->end()
                         ->booleanNode('sensor')->defaultFalse()->end()
                     ->end()
                 ->end()
@@ -755,9 +762,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the directions section
+     * Adds the directions section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addDirectionsSection(ArrayNodeDefinition $node)
     {
@@ -774,9 +781,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Add the directions request section
+     * Adds the directions request section.
      *
-     * @param Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
      */
     protected function addDirectionsRequestSection(ArrayNodeDefinition $node)
     {

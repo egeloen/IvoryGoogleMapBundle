@@ -1,14 +1,17 @@
 # Rectangle
 
-A Rectangle is similar to a Polygon in that you can define custom colors, weights, and opacities for the edge of the rectangle (the "stroke") and custom colors and opacities for the area within the enclosed region (the "fill").
-Unlike a Polygon, you do not define paths for a Rectangle; instead, a rectangle has one additional property which defines its shape : the bound.
+A Rectangle is similar to a Polygon in that you can define custom colors, weights, and opacities for the edge of the
+rectangle (the "stroke") and custom colors and opacities for the area within the enclosed region (the "fill"). Unlike
+a Polygon, you do not define paths for a Rectangle; instead, a rectangle has one additional property which defines its
+shape : the bound.
 
 ## Build your rectangle
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.rectangle`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.rectangle`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml

@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Controls\StreetViewControl as BaseStreetViewControl;
+use Ivory\GoogleMap\Controls\StreetViewControl as BaseStreetViewControl;
 
 /**
- * Street view control entity wich describes a google map street view control
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class StreetViewControl extends BaseStreetViewControl
 {
-    /**
-     * Create a street view control
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

@@ -1,14 +1,16 @@
 # Zoom control
 
-The Zoom control displays a slider (for large maps) or small "+/-" buttons (for small maps) to control the zoom level of the map.
-This control appears by default in the top left corner of the map on non-touch devices or in the bottom left corner on touch devices.
+The Zoom control displays a slider (for large maps) or small "+/-" buttons (for small maps) to control the zoom level
+of the map. This control appears by default in the top left corner of the map on non-touch devices or in the bottom
+left corner on touch devices.
 
 ## Build your zoom control
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.zoom_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.zoom_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -40,8 +42,8 @@ $zoomControl = $this->get('ivory_google_map.zoom_control');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition:
-use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
+use Ivory\GoogleMap\Controls\ControlPosition:
+use Ivory\GoogleMap\Controls\ZoomControlStyle;
 
 // Requests the ivory google map zoom control service
 $zoomControl = $this->get('ivory_google_map.zoom_control');
@@ -53,13 +55,14 @@ $zoomControl->setZoomControlStyle(ZoomControlStyle::DEFAULT_);
 
 ## Configure your zoom control position
 
-For configurating the zoom control position, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ControlPosition`` is here.
-It allows you to access all constants which describe control position. If you don't want to use this class, you can directly use the constant value.
+For configurating the zoom control position, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ControlPosition`` is here. It allows you to access all constants which describe control
+position. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map zoom control service
 $zoomControl = $this->get('ivory_google_map.zoom_control');
@@ -104,13 +107,14 @@ $zoomControl->setControlPosition('bottom_right');
 
 ## Configure your zoom control style
 
-For configurating the zoom control style, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle`` is here.
-It allows you to access all constants which describe zoom control style. If you don't want to use this class, you can directly use the constant value.
+For configurating the zoom control style, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ZoomControlStyle`` is here. It allows you to access all constants which describe zoom
+control style. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
+use Ivory\GoogleMap\Controls\ZoomControlStyle;
 
 // Requests the ivory google map zoom control service
 $zoomControl = $this->get('ivory_google_map.zoom_control');
@@ -131,8 +135,8 @@ $zoomControl->setZoomControlStyle('small');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
-use Ivory\GoogleMapBundle\Model\Controls\ZoomControlStyle;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ZoomControlStyle;
 
 // Requests the ivory google map zoom control service
 $zoomControl = $this->get('ivory_google_map.zoom_control');

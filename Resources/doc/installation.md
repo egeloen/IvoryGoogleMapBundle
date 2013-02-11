@@ -1,73 +1,20 @@
 # Installation
 
-If you use the geocoding API, you need to install [Geocoder](http://github.com/willdurand/Geocoder.git) which is a PHP 5.3 library for issuing Geocoding and his dependencies ([Buzz](https://github.com/kriswallsmith/Buzz) or other adapters).
+## Symfony 2.1.*
 
-## Add respectively Buzz|Geocoder & IvoryGoogleMapBundle to your vendor/ & vendor/bundles/ directories
+Require the bundle in your composer.json file:
 
-### Using composer
-
-Add IvoryGoogleMapBundle in your composer.json:
-
-```js
+```
 {
     "require": {
-        "egeloen/google-map-bundle": "*"
+        "egeloen/google-map-bundle": "*",
     }
 }
 ```
 
-Now tell composer to download the bundle by running the command:
-
-``` bash
-$ php composer.phar update egeloen/google-map-bundle
-```
-
-### Using the vendors script
-
-Add the following lines in your ``deps`` file
-
-```
-[buzz]
-    git=http://github.com/kriswallsmith/Buzz.git
-
-[geocoder]
-    git=http://github.com/willdurand/Geocoder.git
-
-[IvoryGoogleMapBundle]
-    git=http://github.com/egeloen/IvoryGoogleMapBundle.git
-    target=/bundles/Ivory/GoogleMapBundle
-```
-
-Run the vendors script
-
-    ./bin/vendors update
-
-### Using submodules
-
-``` bash
-$ git submodule add http://github.com/kriswallsmith/Buzz.git vendor
-$ git submodule add http://github.com/willdurand/Geocoder.git vendor
-$ git submodule add http://github.com/egeloen/IvoryGoogleMapBundle.git vendor/bundles/Ivory/GoogleMapBundle
-```
-
-## Add Buzz, Geocoder & Ivory namespaces to your autoloader
+Register the bundle:
 
 ``` php
-<?php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    'Buzz'     => __DIR__.'/../vendor/buzz/lib',
-    'Geocoder' => __DIR__.'/../vendor/geocoder/src',
-    'Ivory'    => __DIR__.'/../vendor/bundles',
-    // ...
-);
-```
-
-## Add the IvoryGoogleMapBundle to your application kernel
-
-``` php
-<?php
 // app/AppKernel.php
 
 public function registerBundles()
@@ -79,4 +26,50 @@ public function registerBundles()
 }
 ```
 
-Next: [Usage](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage.md)
+Install the bundle:
+
+```
+$ composer update
+```
+
+## Symfony 2.0.*
+
+Add Ivory Google Map bundle to your deps file:
+
+```
+[IvoryGoogleMapBundle]
+    git=http://github.com/egeloen/IvoryGoogleMapBundle.git
+    target=bundles/Ivory/GoogleMapBundle
+    version=1.0.0
+```
+
+Autoload the Ivory Google Map bundle namespaces:
+
+``` php
+// app/autoload.php
+
+$loader->registerNamespaces(array(
+    'Ivory\\GoogleMapBundle' => __DIR__.'/../vendor/bundles',
+    // ...
+);
+```
+
+Register the bundle:
+
+``` php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    return array(
+        new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+        // ...
+    );
+}
+```
+
+Run the vendors script:
+
+``` bash
+$ php bin/vendors install
+```

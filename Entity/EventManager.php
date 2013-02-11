@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Events\EventManager as BaseEventManager;
+use Ivory\GoogleMap\Events\EventManager as BaseEventManager;
 
 /**
- * Event manager entity which manages the google map event
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EventManager extends BaseEventManager
 {
-    /**
-     * Create an event manager
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

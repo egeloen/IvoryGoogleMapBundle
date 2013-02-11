@@ -1,14 +1,15 @@
 # Map type control
 
-The map type control lets the user toggle between map types (such as ROADMAP and SATELLITE).
-This control appears by default in the top right corner of the map.
+The map type control lets the user toggle between map types (such as ROADMAP and SATELLITE). This control appears by
+default in the top right corner of the map.
 
 ## Build your map type control
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.map_type_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.map_type_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -44,9 +45,9 @@ $mapTypeControl = $this->get('ivory_google_map.map_type_control');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\MapTypeId;
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
-use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
+use Ivory\GoogleMap\MapTypeId;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\MapTypeControlStyle;
 
 // Requests the ivory google map type control service
 $mapTypeControl = $this->get('ivory_google_map.map_type_control');
@@ -64,13 +65,14 @@ $mapTypeControl->setMapTypeControlStyle(MapTypeControlStyle::DEFAULT_);
 
 ## Configure the map type control IDs
 
-For configurating the map type ids, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\MapTypeId`` is here.
-It allows you to access all constants which describe map types. If you don't want to use this class, you can directly use the constant value.
+For configurating the map type ids, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\MapTypeId`` is here. It allows you to access all constants which describe map types. If you don't
+want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\MapTypeId;
+use Ivory\GoogleMap\MapTypeId;
 
 // Requests the ivory google map type control service
 $mapTypeControl = $this->get('ivory_google_map.map_type_control');
@@ -91,13 +93,14 @@ $mapTypeControl->addMapTypeId('terrain');
 
 ## Configure the map type control position
 
-For configurating the map type control position, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ControlPosition`` is here.
-It allows you to access all constants which describe control position. If you don't want to use this class, you can directly use the constant value.
+For configurating the map type control position, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ControlPosition`` is here. It allows you to access all constants which describe control
+position. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map type control service
 $mapTypeControl = $this->get('ivory_google_map.map_type_control');
@@ -142,13 +145,14 @@ $mapTypeControl->setControlPosition('bottom_right');
 
 ## Configure the map type control style
 
-For configurating the map type control style, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle`` is here.
-It allows you to access all constants which describe map type control style. If you don't want to use this class, you can directly use the constant value.
+For configurating the map type control style, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\MapTypeControlStyle`` is here. It allows you to access all constants which describe map
+type control style. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
+use Ivory\GoogleMap\Controls\MapTypeControlStyle;
 
 // Requests the ivory google map type control service
 $mapTypeControl = $this->get('ivory_google_map.map_type_control');
@@ -169,14 +173,18 @@ $mapTypeControl->setMapTypeControlStyle('horizontal_bar');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\MapTypeId;
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
-use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlStyle;
+use Ivory\GoogleMap\MapTypeId;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\MapTypeControlStyle;
 
 // Requests the ivory google map type control service
 $mapTypeControl = $this->get('ivory_google_map.map_type_control');
 
 // Add your map type control to the map
 $map->setMapTypeControl($mapTypeControl);
-$map->setMapTypeControl(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE), ControlPosition::TOP_RIGHT, MapTypeControlStyle::DEFAULT_);
+$map->setMapTypeControl(
+    array(MapTypeId::ROADMAP, MapTypeId::SATELLITE),
+    ControlPosition::TOP_RIGHT,
+    MapTypeControlStyle::DEFAULT_
+);
 ```

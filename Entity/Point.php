@@ -1,8 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Base\Point as BasePoint;
+use Ivory\GoogleMap\Base\Point as BasePoint;
 
 /**
  * Point entity which describes a google map point
@@ -11,14 +20,5 @@ use Ivory\GoogleMapBundle\Model\Base\Point as BasePoint;
  */
 class Point extends BasePoint
 {
-    /**
-     * Create a point
-     *
-     * @param integer $x The x coordinate
-     * @param integer $y The y coordinate
-     */
-    public function __construct($x = 0, $y = 0)
-    {
-        parent::__construct($x, $y);
-    }
+
 }

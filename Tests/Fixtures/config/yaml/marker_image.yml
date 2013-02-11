@@ -1,0 +1,20 @@
+ivory_google_map:
+    marker_image:
+        prefix_javascript_variable: "mi"
+        url:                        "url"
+        anchor:
+            x: 1.1
+            y: 2.1
+        origin:
+            x: 2.1
+            y: 1.1
+        scaled_size:
+            width:       16
+            height:      19
+            width_unit:  "px"
+            height_unit: "pt"
+        size:
+            width:       20
+            height:      22
+            width_unit:  "px"
+            height_unit: "pt"

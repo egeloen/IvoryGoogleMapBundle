@@ -6,8 +6,9 @@ The Scale control displays a map scale element. This control is not enabled by d
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.scale_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.scale_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -39,8 +40,8 @@ $scaleControl = $this->get('ivory_google_map.scale_control');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition:
-use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
+use Ivory\GoogleMap\Controls\ControlPosition:
+use Ivory\GoogleMap\Controls\ScaleControlStyle;
 
 // Requests the ivory google map scale control service
 $scaleControl = $this->get('ivory_google_map.scale_control');
@@ -52,13 +53,14 @@ $scaleControl->setScaleControlStyle(ScaleControlStyle::DEFAULT_);
 
 ## Configure your scale control position
 
-For configurating the pan control position, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ControlPosition`` is here.
-It allows you to access all constants which describe control position. If you don't want to use this class, you can directly use the constant value.
+For configurating the pan control position, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ControlPosition`` is here. It allows you to access all constants which describe control
+position. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map scale control service
 $scaleControl = $this->get('ivory_google_map.scale_control');
@@ -103,13 +105,14 @@ $scaleControl->setControlPosition('bottom_right');
 
 ## Configure your scale control style
 
-For configurating the scale control style, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle`` is here.
-It allows you to access all constants which describe scale control style. If you don't want to use this class, you can directly use the constant value.
+For configurating the scale control style, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ScaleControlStyle`` is here. It allows you to access all constants which describe scale
+control style. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
+use Ivory\GoogleMap\Controls\ScaleControlStyle;
 
 // Requests the ivory google map scale control service
 $scaleControl = $this->get('ivory_google_map.scale_control');
@@ -123,8 +126,8 @@ $scaleControl->setScaleControlStyle(ScaleControlStyle::DEFAULT_);
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
-use Ivory\GoogleMapBundle\Model\Controls\ScaleControlStyle;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ScaleControlStyle;
 
 // Requests the ivory google map scale control service
 $scaleControl = $this->get('ivory_google_map.scale_control');

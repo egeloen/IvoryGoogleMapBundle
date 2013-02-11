@@ -1,0 +1,5 @@
+ivory_google_map:
+    marker_shape:
+        prefix_javascript_variable: "ms"
+        type:                       "rect"
+        coordinates:                [ -1.1, -2.1, 2.1, 1.1 ]

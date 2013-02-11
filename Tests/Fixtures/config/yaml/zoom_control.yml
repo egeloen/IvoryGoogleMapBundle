@@ -1,0 +1,4 @@
+ivory_google_map:
+    zoom_control:
+        control_position:   "top_center"
+        zoom_control_style: "default"

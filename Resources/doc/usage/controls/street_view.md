@@ -1,14 +1,15 @@
 # Street view control
 
-The Street View control contains a Pegman icon which can be dragged onto the map to enable Street View.
-This control appears by default in the top left corner of the map.
+The Street View control contains a Pegman icon which can be dragged onto the map to enable Street View. This control
+appears by default in the top left corner of the map.
 
 ## Build your street view control
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.street_view_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.street_view_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -36,7 +37,7 @@ $streetViewControl = $this->get('ivory_google_map.street_view_control');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map street view control service
 $streetViewControl = $this->get('ivory_google_map.street_view_control');
@@ -47,13 +48,14 @@ $streetViewControl->setControlPosition(ControlPosition::TOP_LEFT);
 
 ## Configure the street view control position
 
-For configurating the street view control position, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ControlPosition`` is here.
-It allows you to access all constants which describe control position. If you don't want to use this class, you can directly use the constant value.
+For configurating the street view control position, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ControlPosition`` is here. It allows you to access all constants which describe control
+position. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map street view control service
 $streetViewControl = $this->get('ivory_google_map.street_view_control');
@@ -101,7 +103,7 @@ $streetViewControl->setControlPosition('bottom_right');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map street view control service
 $streetViewControl = $this->get('ivory_google_map.street_view_control');

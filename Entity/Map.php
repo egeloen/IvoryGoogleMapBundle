@@ -1,32 +1,34 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Map as BaseMap;
+use Ivory\GoogleMap\Map as BaseMap;
 
 /**
- * Map entity wich describes a google map
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Map extends BaseMap
 {
     /**
-     * Create a map
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Action performed before database persist
+     * Cleans up the map before database persist.
      */
     public function prePersist()
     {
-        if($this->isAutoZoom())
+        if ($this->isAutoZoom()) {
             unset($this->center);
-        else
+        } else {
             unset($this->bound);
+        }
     }
 }

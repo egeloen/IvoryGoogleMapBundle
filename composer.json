@@ -13,7 +13,12 @@
     "require": {
         "php": ">=5.3.0",
         "symfony/framework-bundle": "2.*",
-        "willdurand/geocoder": ">=1.0.0"
+        "egeloen/google-map": "*@dev"
+    },
+    "require-dev": {
+        "symfony/yaml": "2.*",
+        "kriswallsmith/buzz": "*",
+        "willdurand/geocoder": "*"
     },
     "autoload": {
         "psr-0": { "Ivory\\GoogleMapBundle": "" }

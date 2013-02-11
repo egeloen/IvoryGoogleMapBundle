@@ -1,17 +1,21 @@
 # Events
 
-JavaScript within the browser is event driven, meaning that JavaScript responds to interactions by generating events, and expects a program to listen to interesting events.
-The event model for the Google Maps API V3 is similar to that used in V2 of the API, though much has changed under the hood. There are two types of events:
+JavaScript within the browser is event driven, meaning that JavaScript responds to interactions by generating events,
+and expects a program to listen to interesting events. The event model for the Google Maps API V3 is similar to that
+used in V2 of the API, though much has changed under the hood. There are two types of events:
 
-- User events (such as "click" mouse events) are propagated from the DOM to the Google Maps API. These events are separate and distinct from standard DOM events.
-- MVC state change notifications reflect changes in Maps API objects and are named using a property_changed convention
+ - User events (such as "click" mouse events) are propagated from the DOM to the Google Maps API. These events are
+   separate and distinct from standard DOM events.
+ - MVC state change notifications reflect changes in Maps API objects and are named using a property_changed
+   convention.
 
 ## Build your event
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.event`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.event`` service is. The configuration describes
+below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -52,8 +56,8 @@ $event->setCapture(true);
 
 #### Instance
 
-The ``$instance`` variable describes the javascript variable which registers the event.
-Each Ivory google map objects which can register an event have a method called ``getJavascriptVariable`` which identifies this variable.
+The ``$instance`` variable describes the javascript variable which registers the event. Each Ivory google map objects
+which can register an event have a method called ``getJavascriptVariable`` which identifies this variable.
 
 For example, in the case of an info window, it can be:
 
@@ -81,7 +85,8 @@ $handle = 'function(){alert("The event has been triggered");}'
 
 ## Add your event to the map
 
-The map wraps an event manager which allows you to add events. Like describes in the introduction, two differents type of event can be used.
+The map wraps an event manager which allows you to add events. Like describes in the introduction, two differents type
+of event can be used.
 
 ### DOM event
 

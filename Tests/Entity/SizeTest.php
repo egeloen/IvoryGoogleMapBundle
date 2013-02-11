@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\Size;
 
 /**
- * Size entity test
+ * Size entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class SizeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the size constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $sizeEntityTest = new Size();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Base\Size', $sizeEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Base\Size', new Size());
     }
 }

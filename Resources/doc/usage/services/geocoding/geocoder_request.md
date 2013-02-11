@@ -4,8 +4,8 @@
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.geocoder_request`` service is.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.geocoder_request`` service is.
 
 ```
 # app/config/config.yml
@@ -40,7 +40,8 @@ ivory_google_map:
         region: "en"
 
         # The language in which to return results.
-        # If language is not supplied, the geocoder will attempt to use the native language of the domain from which the request is sent wherever possible
+        # If language is not supplied, the geocoder will attempt to use the native language of the domain from
+        # which the request is sent wherever possible
         # By default, there is no language
         language: "en"
 
@@ -55,7 +56,7 @@ ivory_google_map:
 /**
  * Requests & configure the ivory google map geocoder service
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest $request
+ * @var Ivory\GoogleMap\Services\Geocoding\GeocoderRequest $request
  */
 $request = $this->get('ivory_google_map.geocoder_request');
 ```
@@ -68,7 +69,7 @@ $request = $this->get('ivory_google_map.geocoder_request');
 /**
  * Requests & configure the ivory google map geocoder service
  *
- * @var Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequest $request
+ * @var Ivory\GoogleMap\Services\Geocoding\GeocoderRequest $request
  */
 $request = $this->get('ivory_google_map.geocoder_request')
     // Set address

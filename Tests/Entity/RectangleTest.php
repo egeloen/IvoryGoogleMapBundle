@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\Rectangle;
 
 /**
- * Rectangle entity test
+ * Rectangle entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class RectangleTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the rectangle constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $rectangleEntityTest = new Rectangle();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\Rectangle', $rectangleEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Rectangle', new Rectangle());
     }
 }

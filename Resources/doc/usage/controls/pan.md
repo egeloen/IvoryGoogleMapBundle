@@ -1,15 +1,15 @@
 # Pan control
 
-The Pan control displays buttons for panning the map.
-This control appears by default in the top left corner of the map on non-touch devices.
-The Pan control also allows you to rotate 45° imagery, if available.
+The Pan control displays buttons for panning the map. This control appears by default in the top left corner of the
+map on non-touch devices. The Pan control also allows you to rotate 45° imagery, if available.
 
 ## Build your pan control
 
 ### By configuration file
 
-By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows you to use the given objects like they are.
-The ``ivory_google_map.pan_control`` service is. The configuration describes below is this default configuration.
+By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
+you to use the given objects like they are. The ``ivory_google_map.pan_control`` service is. The configuration
+describes below is this default configuration.
 
 ```
 # app/config/config.yml
@@ -37,7 +37,7 @@ $panControl = $this->get('ivory_google_map.pan_control');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map pan control service
 $panControl = $this->get('ivory_google_map.pan_control');
@@ -48,13 +48,14 @@ $panControl->setControlPosition(ControlPosition::TOP_LEFT);
 
 ## Configure the pan control position
 
-For configurating the pan control position, the better way is to follow the oriented object way. For that, the ``Ivory\GoogleMapBundle\Model\Controls\ControlPosition`` is here.
-It allows you to access all constants which describe control position. If you don't want to use this class, you can directly use the constant value.
+For configurating the pan control position, the better way is to follow the oriented object way. For that, the
+``Ivory\GoogleMap\Controls\ControlPosition`` is here. It allows you to access all constants which describe control
+position. If you don't want to use this class, you can directly use the constant value.
 
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map pan control service
 $panControl = $this->get('ivory_google_map.pan_control');
@@ -102,7 +103,7 @@ $panControl->setControlPosition('bottom_right');
 ``` php
 <?php
 
-use Ivory\GoogleMapBundle\Model\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\ControlPosition;
 
 // Requests the ivory google map pan control service
 $panControl = $this->get('ivory_google_map.pan_control');

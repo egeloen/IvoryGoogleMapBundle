@@ -1,23 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Overlays\EncodedPolyline as BaseEncodedPolyline;
+use Ivory\GoogleMap\Overlays\EncodedPolyline as BaseEncodedPolyline;
 
 /**
- * Encoded Polyline Entity
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class EncodedPolyline extends BaseEncodedPolyline
 {
-    /**
-     * Create an encoded polyline
-     *
-     * @param string $value
-     */
-    public function __construct($value = null)
-    {
-        parent::__construct($value);
-    }
+
 }

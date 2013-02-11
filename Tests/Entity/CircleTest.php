@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\Circle;
 
 /**
- * Circle entity test
+ * Circle entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class CircleTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the circle constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $circleEntityTest = new Circle();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Overlays\Circle', $circleEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Circle', new Circle());
     }
 }

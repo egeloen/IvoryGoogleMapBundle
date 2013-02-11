@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Controls\ScaleControl as BaseScaleControl;
+use Ivory\GoogleMap\Controls\ScaleControl as BaseScaleControl;
 
 /**
- * Scale control entity wich describes a google map scale control
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class ScaleControl extends BaseScaleControl
 {
-    /**
-     * Create a scale control
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

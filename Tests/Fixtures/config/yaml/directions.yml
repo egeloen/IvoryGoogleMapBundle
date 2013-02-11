@@ -1,0 +1,5 @@
+ivory_google_map:
+    directions:
+        url:    "http://directions"
+        https:  true
+        format: "xml"

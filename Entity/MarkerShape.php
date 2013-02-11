@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Overlays\MarkerShape as BaseMarkerShape;
+use Ivory\GoogleMap\Overlays\MarkerShape as BaseMarkerShape;
 
 /**
- * Marker shape entity which describes a google map marker shape
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class MarkerShape extends BaseMarkerShape
 {
-    /**
-     * Create a marker shape
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

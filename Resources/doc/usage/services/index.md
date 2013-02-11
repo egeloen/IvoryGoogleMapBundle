@@ -1,7 +1,7 @@
 # Google Map API Services
 
-   - Directions API
-   - Distance Matrix API
-   - Elevation API
-   - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
-   - Places API
+ 1. Directions API
+ 2. Distance Matrix API
+ 3. Elevation API
+ 4. [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
+ 5. Places API

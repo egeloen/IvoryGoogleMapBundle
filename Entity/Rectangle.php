@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Overlays\Rectangle as BaseRectangle;
+use Ivory\GoogleMap\Overlays\Rectangle as BaseRectangle;
 
 /**
- * Rectangle entity which describes a google map rectangle
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Rectangle extends BaseRectangle
 {
-    /**
-     * Create a rectangle
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

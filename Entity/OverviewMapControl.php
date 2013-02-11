@@ -1,21 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Entity;
 
-use Ivory\GoogleMapBundle\Model\Controls\OverviewMapControl as BaseOverviewMapControl;
+use Ivory\GoogleMap\Controls\OverviewMapControl as BaseOverviewMapControl;
 
 /**
- * Overview map control entity wich describes a google map overview control
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class OverviewMapControl extends BaseOverviewMapControl
 {
-    /**
-     * Create an overview map control
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 }

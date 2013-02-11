@@ -1,22 +1,27 @@
 <?php
 
+/*
+ * This file is part of the Ivory Google Map bundle package.
+ *
+ * (c) Eric GELOEN <geloen.eric@gmail.com>
+ *
+ * For the full copyright and license information, please read the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ivory\GoogleMapBundle\Tests\Entity;
 
 use Ivory\GoogleMapBundle\Entity\Coordinate;
 
 /**
- * Coordinate entity test
+ * Coordinate entity test.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class CoordinateTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Checks the coordinate constuctor
-     */
-    public function testConstructor()
+    public function testInheritance()
     {
-        $coordinateEntityTest = new Coordinate();
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Model\Base\Coordinate', $coordinateEntityTest);
+        $this->assertInstanceOf('Ivory\GoogleMap\Base\Coordinate', new Coordinate());
     }
 }
