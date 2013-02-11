@@ -34,21 +34,25 @@ $ composer update
 
 ## Symfony 2.0.*
 
-Add Ivory Google Map bundle to your deps file:
+Add Ivory Google Map bundle & library to your deps file:
 
 ```
 [IvoryGoogleMapBundle]
     git=http://github.com/egeloen/IvoryGoogleMapBundle.git
     target=bundles/Ivory/GoogleMapBundle
     version=1.0.0
+
+[ivory-google-map]
+    git=http://github.com/egeloen/ivory-google-map.git
 ```
 
-Autoload the Ivory Google Map bundle namespaces:
+Autoload the Ivory Google Map bundle & library namespaces:
 
 ``` php
 // app/autoload.php
 
 $loader->registerNamespaces(array(
+    'Ivory\\GoogleMap'       => __DIR__.'/../vendor/ivory-google-map/src',
     'Ivory\\GoogleMapBundle' => __DIR__.'/../vendor/bundles',
     // ...
 );
