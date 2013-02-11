@@ -26,9 +26,9 @@ class Map extends BaseMap
     public function prePersist()
     {
         if ($this->isAutoZoom()) {
-            unset($this->center);
+            $this->center = null;
         } else {
-            unset($this->bound);
+            $this->bound = null;
         }
     }
 }
