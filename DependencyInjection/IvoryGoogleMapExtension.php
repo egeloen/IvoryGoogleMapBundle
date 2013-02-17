@@ -37,6 +37,7 @@ class IvoryGoogleMapExtension extends Extension
 
         $resources = array(
             'services/base.xml',
+            'services/controls.xml',
             'services.xml',
             'twig.xml',
         );
