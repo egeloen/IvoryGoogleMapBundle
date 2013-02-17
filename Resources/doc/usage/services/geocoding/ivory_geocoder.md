@@ -105,6 +105,20 @@ foreach($results as $result)
 }
 ```
 
+You can filter the address components by type:
+
+``` php
+<?php
+
+// Get the geocoder results
+$results = $response->getResults();
+
+foreach ($results as $result) {
+    foreach ($result->getAddressComponents('route') as $addressComponent) {
+        // ...
+    }
+}
+
 #### Geometry informations
 
 Geometry contains the following information:
