@@ -35,9 +35,15 @@ class IvoryGoogleMapExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $configs);
 
+        $resources = array(
+            'services/base.xml',
+            'services.xml',
+            'twig.xml',
+        );
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        foreach (array('services.xml', 'twig.xml') as $file) {
-            $loader->load($file);
+        foreach ($resources as $resource) {
+            $loader->load($resource);
         }
 
         // Map sections
