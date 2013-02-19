@@ -805,6 +805,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertFalse($request->hasOrigin());
         $this->assertFalse($request->hasProvideRouteAlternatives());
         $this->assertFalse($request->hasRegion());
+        $this->assertFalse($request->hasLanguage());
         $this->assertFalse($request->hasTravelMode());
         $this->assertFalse($request->hasUnitSystem());
         $this->assertFalse($request->hasWaypoints());
@@ -832,6 +833,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertTrue($request->hasRegion());
         $this->assertSame('es', $request->getRegion());
+
+        $this->assertTrue($request->hasLanguage());
+        $this->assertSame('en', $request->getLanguage());
 
         $this->assertTrue($request->hasTravelMode());
         $this->assertSame('WALKING', $request->getTravelMode());

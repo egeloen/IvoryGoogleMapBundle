@@ -874,6 +874,10 @@
                 <argument>%ivory_google_map.directions_request.region%</argument>
             </call>
 
+            <call method="setLanguage">
+                <argument>%ivory_google_map.directions_request.language%</argument>
+            </call>
+
             <call method="setTravelMode">
                 <argument>%ivory_google_map.directions_request.travel_mode%</argument>
             </call>

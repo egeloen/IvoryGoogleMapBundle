@@ -796,6 +796,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('optimize_waypoints')->defaultValue(null)->end()
                         ->scalarNode('provide_route_alternatives')->defaultValue(null)->end()
                         ->scalarNode('region')->defaultValue(null)->end()
+                        ->scalarNode('language')->defaultValue(null)->end()
                         ->scalarNode('travel_mode')->defaultValue(null)->end()
                         ->scalarNode('unit_system')->defaultValue(null)->end()
                         ->booleanNode('sensor')->defaultFalse()->end()

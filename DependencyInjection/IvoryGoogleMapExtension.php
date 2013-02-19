@@ -853,6 +853,11 @@ class IvoryGoogleMapExtension extends Extension
         $container->setParameter('ivory_google_map.directions_request.region', $config['directions_request']['region']);
 
         $container->setParameter(
+            'ivory_google_map.directions_request.language',
+            $config['directions_request']['language']
+        );
+
+        $container->setParameter(
             'ivory_google_map.directions_request.travel_mode',
             $config['directions_request']['travel_mode'] !== null ? strtoupper($config['directions_request']['travel_mode']) : null
         );

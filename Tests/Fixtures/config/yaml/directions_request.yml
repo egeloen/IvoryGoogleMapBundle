@@ -6,5 +6,6 @@ ivory_google_map:
         provide_route_alternatives: true
         region:                     "es"
         travel_mode:                "walking"
+        language:                   "en"
         unit_system:                "imperial"
         sensor:                     true

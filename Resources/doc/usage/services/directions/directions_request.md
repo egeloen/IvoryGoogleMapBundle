@@ -32,6 +32,10 @@ ivory_google_map:
         # By default there is no region.
         region: "us"
 
+        # The language used for this request.
+        # By default there is no language.
+        language: "en"
+
         # The travel mode used to filter directions results.
         # By default there is no travel mode.
         travel_mode: "DRIVING"
@@ -88,6 +92,7 @@ $request->setAvoidTolls(true);
 $request->setProvideRouteAlternatives(true);
 
 $request->setRegion('us');
+$request->setLanguage('en');
 $request->setTravelMode(TravelMode::DRIVING);
 $request->setUnitSystem(UnitSystem::METRIC);
 $request->setSensor(false);
