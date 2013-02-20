@@ -15,6 +15,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     scale_control:
+        # You own scale control class
+        class: "My\Fucking\ScaleControl"
+
+        # Your own scale control helper
+        helper_class: "My\Fucking\ScaleControlHelper"
+
         # Scale control position
         # Available scale control position:
         # - top_left, top_center, top_right

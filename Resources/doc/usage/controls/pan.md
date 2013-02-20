@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     pan_control:
+        # You own pan control class
+        class: "My\Fucking\PanControl"
+
+        # Your own pan control helper
+        helper_class: "My\Fucking\PanControlHelper"
+
         # Pan control position
         # Available pan control position:
         # - top_left, top_center, top_right

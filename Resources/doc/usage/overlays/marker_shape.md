@@ -29,6 +29,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     marker_shape:
+        # Your own marker shape class
+        class: "My\Fucking\MarkerShape"
+
+        # Your own marker shape helper class
+        helper_class: "My\Fucking\MarkerShapeHelper"
+
         # Prefix used for the generation of the marker shape javascript variable
         prefix_javascript_variable: "marker_shape_"
 

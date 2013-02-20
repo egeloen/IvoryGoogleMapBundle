@@ -12,6 +12,9 @@ you to use the given objects like they are. The ``ivory_google_map.directions_re
 
 ivory_google_map:
     directions_request:
+        # Your own directions request class
+        class: "My\Fucking\DirectionsRequest"
+
         # TRUE if the directions should avoid highways else FALSE
         # By default there is no avoid highways.
         avoid_highways: true

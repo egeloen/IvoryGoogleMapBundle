@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     marker_image:
+        # Your own marker image class
+        class: "My\Fucking\MarkerImage"
+
+        # Your own marker image helper class
+        helper_class: "My\Fucking\MarkerImageHelper"
+
         # Prefix used for the generation of the marker image javascript variable
         prefix_javascript_variable: "marker_image_"
 

@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     ground_overlay:
+        # Your own marker class
+        class: "My\Fucking\GroundOverlay"
+
+        # Your own ground overlay helper class
+        helper_class: "My\Fucking\GroundOverlayHelper"
+
         # Prefix used for the generation of the groune overlay javascript variable
         prefix_javascript_variable: "ground_overlay_"
 

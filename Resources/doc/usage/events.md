@@ -22,8 +22,21 @@ below is this default configuration.
 
 ivory_google_map:
     event:
+        # You own event class
+        class: "My\Fucking\Event"
+
+        # Your own event helper class
+        helper_class: "My\Fucking\EventHelper"
+
         # Prefix used for the generation of the event javascript variable
         prefix_javascript_variable: "event_"
+
+    event_manager:
+        # You own event manager class
+        class: "My\Fucking\EventManager"
+
+        # Your own event manager helper class
+        helper_class: "My\Fucking\EventManagerHelper"
 ```
 
 ``` php

@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     info_window:
+        # Your own marker class
+        class: "My\Fucking\InfoWindow"
+
+        # Your own info window helper class
+        helper_class: "My\Fucking\InfoWindowHelper"
+
         # Prefix used for the generation of the info window javascript variable
         prefix_javascript_variable: "info_window_"
 

@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     rotate_control:
+        # You own rotate control class
+        class: "My\Fucking\RotateControl"
+
+        # Your own rotate control helper
+        helper_class: "My\Fucking\RotateControlHelper"
+
         # Rotate control position
         # Available rotate control position:
         # - top_left, top_center, top_right

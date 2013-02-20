@@ -18,6 +18,12 @@ below is this default configuration.
 
 ivory_goole_map:
     circle:
+        # Your own circle class
+        class: "My\Fucking\Circle"
+
+        # Your own circle helper class
+        helper_class: "My\Fucking\CircleHelper"
+
         # Prefix used for the generation of the circle javascript variable
         prefix_javascript_variable: "circle_"
 

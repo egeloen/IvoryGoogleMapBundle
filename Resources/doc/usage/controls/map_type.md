@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     map_type_control:
+        # You own map type control class
+        class: "My\Fucking\MapTypeControl"
+
+        # Your own map type control helper
+        helper_class: "My\Fucking\MapTypeControlHelper"
+
         # Map type ids of the map type control
         # Available map type ids : roadmap, satellite, hybrid, terrain
         map_type_ids: ["roadmap", "satellite"]

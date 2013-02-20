@@ -12,6 +12,9 @@ you to use the given objects like they are. The ``ivory_google_map.geocoder_requ
 
 ivory_google_map:
     geocoder_request:
+        # Your own geocoder request class
+        class: "My\Fucking\GeocoderRequest"
+
         # The address that you want to geocode
         # By default, there is no address
         address: "address"

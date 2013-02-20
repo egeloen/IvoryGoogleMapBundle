@@ -19,6 +19,12 @@ ivory_goole_map:
         # Prefix used for the generation of the KML layer javascript variable
         prefix_javascript_variable: "kml_layer_"
 
+        # Your own kml layer class
+        class: "My\Fucking\KMLLayer"
+
+        # Your own kml layer helper class
+        helper_class: "My\Fucking\KMLLayerHelper"
+
         # KML layer url
         url: "http://domain.com/kml_layer.kml"
 

@@ -17,6 +17,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     zoom_control:
+        # You own zoom control class
+        class: "My\Fucking\ZoomControl"
+
+        # Your own zoom control helper
+        helper_class: "My\Fucking\ZoomControlHelper"
+
         # Zoom control position
         # Available zoom control position:
         # - top_left, top_center, top_right

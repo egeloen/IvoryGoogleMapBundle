@@ -19,6 +19,9 @@ below is this default configuration.
 
 ivory_google_map:
     directions:
+        # Your own directions class
+        class: "My\Fucking\Directions"
+
         # The Directions API URL
         url: "http://maps.googleapis.com/maps/api/directions"
 

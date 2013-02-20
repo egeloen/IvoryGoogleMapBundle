@@ -16,6 +16,12 @@ below is this default configuration.
 
 ivory_google_map
     polygon:
+        # Your own polygon class
+        class: "My\Fucking\Polygon"
+
+        # Your own polygon helper class
+        helper_class: "My\Fucking\PolygonHelper"
+
         # Prefix used for the generation of the polygon javascript variable
         prefix_javascript_variable: "polygon_"
 

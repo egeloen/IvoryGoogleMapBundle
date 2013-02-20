@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     overview_map_control:
+        # You own overview map control class
+        class: "My\Fucking\OverviewMapControl"
+
+        # Your own overview map control helper
+        helper_class: "My\Fucking\OverviewMapControlHelper"
+
         # TRUE if the overview map control is opened else FALSE
         opened: false
 ```

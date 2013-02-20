@@ -37,6 +37,7 @@ class Configuration implements ConfigurationInterface
 
         // Map sections
         $this->addMapSection($rootNode);
+        $this->addMapTypeIdSection($rootNode);
 
         // Base sections
         $this->addCoordinateSection($rootNode);
@@ -45,20 +46,23 @@ class Configuration implements ConfigurationInterface
         $this->addSizeSection($rootNode);
 
         // Control sections
+        $this->addControlPositionSection($rootNode);
         $this->addMapTypeControlSection($rootNode);
+        $this->addMapTypeControlStyleSection($rootNode);
         $this->addOverviewMapControlSection($rootNode);
         $this->addPanControlSection($rootNode);
         $this->addRotateControlSection($rootNode);
         $this->addScaleControlSection($rootNode);
+        $this->addScaleControlStyleSection($rootNode);
         $this->addStreetViewControlSection($rootNode);
         $this->addZoomControlSection($rootNode);
+        $this->addZoomControlStyleSection($rootNode);
 
-        // Marker sections
+        // Overlay sections
+        $this->addAnimationSection($rootNode);
         $this->addMarkerSection($rootNode);
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
-
-        // Overlay sections
         $this->addInfoWindowSection($rootNode);
         $this->addPolylineSection($rootNode);
         $this->addPolygonSection($rootNode);
@@ -71,7 +75,11 @@ class Configuration implements ConfigurationInterface
         $this->addKMLLayerSection($rootNode);
 
         // Event sections
+        $this->addEventManagerSection($rootNode);
         $this->addEventSection($rootNode);
+
+        // Geometry sections
+        $this->addEncodingSection($rootNode);
 
         // Services sections
         $this->addGeocoderSection($rootNode);
@@ -93,6 +101,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('map')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('map_')->end()
                         ->scalarNode('html_container')->defaultValue('map_canvas')->end()
                         ->scalarNode('async')->defaultFalse()->end()
@@ -139,6 +149,23 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Adds the map type ID section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addMapTypeIdSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map_type_id')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
      * Adds the coordinate section.
      *
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
@@ -149,6 +176,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('coordinate')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('latitude')->defaultValue(0)->end()
                         ->scalarNode('longitude')->defaultValue(0)->end()
                         ->scalarNode('no_wrap')->defaultTrue()->end()
@@ -168,6 +197,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('bound')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('bound_')->end()
                         ->arrayNode('south_west')->addDefaultsIfNotSet()
                             ->children()
@@ -199,6 +230,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('point')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('x')->defaultValue(0)->end()
                         ->scalarNode('y')->defaultValue(0)->end()
                     ->end()
@@ -217,10 +250,29 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('size')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('width')->defaultValue(1)->end()
                         ->scalarNode('height')->defaultValue(1)->end()
                         ->scalarNode('width_unit')->defaultValue(null)->end()
                         ->scalarNode('height_unit')->defaultValue(null)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the control position section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addControlPositionSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('control_position')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -237,12 +289,31 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('map_type_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->arrayNode('map_type_ids')
                             ->defaultValue(array(MapTypeId::ROADMAP, MapTypeId::SATELLITE))
                             ->prototype('scalar')->end()
                         ->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_RIGHT)->end()
                         ->scalarNode('map_type_control_style')->defaultValue(MapTypeControlStyle::DEFAULT_)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the map type control style section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addMapTypeControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('map_type_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -259,6 +330,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('overview_map_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('opened')->defaultFalse()->end()
                     ->end()
                 ->end()
@@ -276,6 +349,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('pan_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
@@ -293,6 +368,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('rotate_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
@@ -310,8 +387,27 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('scale_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::BOTTOM_LEFT)->end()
                         ->scalarNode('scale_control_style')->defaultValue(ScaleControlStyle::DEFAULT_)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the scale control style section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addScaleControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('scale_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -328,6 +424,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('street_view_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                     ->end()
                 ->end()
@@ -345,8 +443,44 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('zoom_control')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('control_position')->defaultValue(ControlPosition::TOP_LEFT)->end()
                         ->scalarNode('zoom_control_style')->defaultValue(ZoomControlStyle::DEFAULT_)->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the zoom control style section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addZoomControlStyleSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('zoom_control_style')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the animation section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addAnimationSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('animation')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -363,6 +497,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_')->end()
                         ->arrayNode('position')->addDefaultsIfNotSet()
                             ->children()
@@ -391,6 +527,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker_image')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_image_')->end()
                         ->scalarNode('url')->defaultValue('http://maps.gstatic.com/mapfiles/markers/marker.png')->end()
                         ->arrayNode('anchor')->addDefaultsIfNotSet()
@@ -437,6 +575,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('marker_shape')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('marker_shape_')->end()
                         ->scalarNode('type')->defaultValue('poly')->end()
                         ->arrayNode('coordinates')
@@ -459,6 +599,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('info_window')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('info_window_')->end()
                         ->arrayNode('position')->addDefaultsIfNotSet()
                             ->children()
@@ -499,6 +641,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('polyline')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('polyline_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
@@ -519,6 +663,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('encoded_polyline')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('encoded_polyline_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
@@ -539,6 +685,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('polygon')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('polygon_')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
@@ -559,6 +707,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('rectangle')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('rectangle_')->end()
                         ->arrayNode('bound')->addDefaultsIfNotSet()
                             ->children()
@@ -597,6 +747,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('circle')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('circle_')->end()
                         ->arrayNode('center')->addDefaultsIfNotSet()
                             ->children()
@@ -625,6 +777,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('ground_overlay')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('ground_overlay_')->end()
                         ->scalarNode('url')->defaultValue('')->end()
                         ->arrayNode('bound')->addDefaultsIfNotSet()
@@ -664,11 +818,31 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('kml_layer')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('kml_layer_')->end()
                         ->scalarNode('url')->defaultValue('')->end()
                         ->arrayNode('options')
                             ->useAttributeAsKey('options')->prototype('scalar')->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the event manager section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addEventManagerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('event_manager')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -685,7 +859,26 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('event')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
                         ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the encoding section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addEncodingSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('encoding')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
                     ->end()
                 ->end()
             ->end();
@@ -702,8 +895,8 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('geocoder')->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('fake_ip')->defaultValue(null)->end()
                         ->scalarNode('class')->defaultValue(null)->end()
+                        ->scalarNode('fake_ip')->defaultValue(null)->end()
                         ->scalarNode('adapter')->defaultValue(null)->end()
                         ->arrayNode('provider')->addDefaultsIfNotSet()
                             ->children()
@@ -728,6 +921,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('geocoder_request')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
                         ->scalarNode('address')->defaultValue(null)->end()
                         ->arrayNode('coordinate')->addDefaultsIfNotSet()
                             ->children()
@@ -772,6 +966,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('directions')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
                         ->scalarNode('url')->defaultValue('http://maps.googleapis.com/maps/api/directions')->end()
                         ->booleanNode('https')->defaultFalse()->end()
                         ->scalarNode('format')->defaultValue('json')->end()
@@ -791,6 +986,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('directions_request')->addDefaultsIfNotSet()
                     ->children()
+                        ->scalarNode('class')->end()
                         ->scalarNode('avoid_highways')->defaultValue(null)->end()
                         ->scalarNode('avoid_tolls')->defaultValue(null)->end()
                         ->scalarNode('optimize_waypoints')->defaultValue(null)->end()

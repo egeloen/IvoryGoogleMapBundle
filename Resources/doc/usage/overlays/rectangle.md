@@ -18,6 +18,12 @@ below is this default configuration.
 
 ivory_goole_map:
     rectangle:
+        # Your own rectangle class
+        class: "My\Fucking\Rectangle"
+
+        # Your own rectangle helper class
+        helper_class: "My\Fucking\RectangleHelper"
+
         # Prefix used for the generation of the rectangle javascript variable
         prefix_javascript_variable: "rectangle_"
 

@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map:
     street_view_control:
+        # You own street view control class
+        class: "My\Fucking\StreetViewControl"
+
+        # Your own street view control helper
+        helper_class: "My\Fucking\StreetViewControlHelper"
+
         # Street view control position
         # Available street view control position:
         # - top_left, top_center, top_right

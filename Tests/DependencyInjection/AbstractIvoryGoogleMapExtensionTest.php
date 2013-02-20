@@ -870,4 +870,331 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($directions->isHttps());
         $this->assertSame('xml', $directions->getFormat());
     }
+
+    public function testHelpersWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMap\Templating\Helper\MapHelper',
+            $this->container->get('ivory_google_map.helper.map')
+        );
+    }
+
+    public function testHelpersWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'helpers');
+        $this->container->compile();
+
+        $mapHelper = $this->container->get('ivory_google_map.helper.map');
+
+        $this->assertInstanceOf('Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\MapHelper', $mapHelper);
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\MapTypeIdHelper',
+            $mapHelper->getMapTypeIdHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Base\CoordinateHelper',
+            $mapHelper->getCoordinateHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Base\BoundHelper',
+            $mapHelper->getBoundHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Base\PointHelper',
+            $mapHelper->getMarkerHelper()->getMarkerImageHelper()->getPointHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Base\SizeHelper',
+            $mapHelper->getMarkerHelper()->getMarkerImageHelper()->getSizeHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\ControlPositionHelper',
+            $mapHelper->getMapTypeControlHelper()->getControlPositionHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\MapTypeControlHelper',
+            $mapHelper->getMapTypeControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\MapTypeControlStyleHelper',
+            $mapHelper->getMapTypeControlHelper()->getMapTypeControlStyleHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\OverviewMapControlHelper',
+            $mapHelper->getOverviewMapControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\PanControlHelper',
+            $mapHelper->getPanControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\RotateControlHelper',
+            $mapHelper->getRotateControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\ScaleControlHelper',
+            $mapHelper->getScaleControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\ScaleControlStyleHelper',
+            $mapHelper->getScaleControlHelper()->getScaleControlStyleHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\StreetViewControlHelper',
+            $mapHelper->getStreetViewControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\ZoomControlHelper',
+            $mapHelper->getZoomControlHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Controls\ZoomControlStyleHelper',
+            $mapHelper->getZoomControlHelper()->getZoomControlStyleHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\AnimationHelper',
+            $mapHelper->getMarkerHelper()->getAnimationHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\CircleHelper',
+            $mapHelper->getCircleHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\EncodedPolylineHelper',
+            $mapHelper->getEncodedPolylineHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\GroundOverlayHelper',
+            $mapHelper->getGroundOverlayHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\InfoWindowHelper',
+            $mapHelper->getInfoWindowHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\MarkerHelper',
+            $mapHelper->getMarkerHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\MarkerImageHelper',
+            $mapHelper->getMarkerHelper()->getMarkerImageHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\MarkerShapeHelper',
+            $mapHelper->getMarkerHelper()->getMarkerShapeHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\PolygonHelper',
+            $mapHelper->getPolygonHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\PolylineHelper',
+            $mapHelper->getPolylineHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Overlays\RectangleHelper',
+            $mapHelper->getRectangleHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Layers\KMLLayerHelper',
+            $mapHelper->getKmlLayerHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Events\EventManagerHelper',
+            $mapHelper->getEventManagerHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Events\EventHelper',
+            $mapHelper->getEventManagerHelper()->getEventHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Templating\Helper\Geometry\EncodingHelper',
+            $mapHelper->getEncodedPolylineHelper()->getEncodingHelper()
+        );
+    }
+
+    public function testClassesWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'classes');
+        $this->container->compile();
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Map',
+            $this->container->get('ivory_google_map.map')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Coordinate',
+            $this->container->get('ivory_google_map.coordinate')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Bound',
+            $this->container->get('ivory_google_map.bound')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Point',
+            $this->container->get('ivory_google_map.point')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Size',
+            $this->container->get('ivory_google_map.size')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\MapTypeControl',
+            $this->container->get('ivory_google_map.map_type_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\OverviewMapControl',
+            $this->container->get('ivory_google_map.overview_map_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\PanControl',
+            $this->container->get('ivory_google_map.pan_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\RotateControl',
+            $this->container->get('ivory_google_map.rotate_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\ScaleControl',
+            $this->container->get('ivory_google_map.scale_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\StreetViewControl',
+            $this->container->get('ivory_google_map.street_view_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\ZoomControl',
+            $this->container->get('ivory_google_map.zoom_control')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Circle',
+            $this->container->get('ivory_google_map.circle')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\EncodedPolyline',
+            $this->container->get('ivory_google_map.encoded_polyline')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\GroundOverlay',
+            $this->container->get('ivory_google_map.ground_overlay')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\InfoWindow',
+            $this->container->get('ivory_google_map.info_window')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Marker',
+            $this->container->get('ivory_google_map.marker')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerImage',
+            $this->container->get('ivory_google_map.marker_image')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerShape',
+            $this->container->get('ivory_google_map.marker_shape')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Polygon',
+            $this->container->get('ivory_google_map.polygon')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Polyline',
+            $this->container->get('ivory_google_map.polyline')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Rectangle',
+            $this->container->get('ivory_google_map.rectangle')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Layers\KMLLayer',
+            $this->container->get('ivory_google_map.kml_layer')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Events\EventManager',
+            $this->container->get('ivory_google_map.event_manager')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Events\Event',
+            $this->container->get('ivory_google_map.event')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Geocoding\Geocoder',
+            $this->container->get('ivory_google_map.geocoder')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Geocoding\GeocoderRequest',
+            $this->container->get('ivory_google_map.geocoder_request')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Directions\Directions',
+            $this->container->get('ivory_google_map.directions')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Directions\DirectionsRequest',
+            $this->container->get('ivory_google_map.directions_request')
+        );
+    }
 }

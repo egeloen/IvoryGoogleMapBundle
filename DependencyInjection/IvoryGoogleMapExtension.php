@@ -42,6 +42,7 @@ class IvoryGoogleMapExtension extends Extension
 
         // Map sections
         $this->loadMap($config, $container);
+        $this->loadMapTypeId($config, $container);
 
         // Base sections
         $this->loadCoordinate($config, $container);
@@ -50,20 +51,23 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadSize($config, $container);
 
         // Control sections
+        $this->loadControlPosition($config, $container);
         $this->loadMapTypeControl($config, $container);
+        $this->loadMapTypeControlStyle($config, $container);
         $this->loadOverviewMapControl($config, $container);
         $this->loadPanControl($config, $container);
         $this->loadRotateControl($config, $container);
         $this->loadScaleControl($config, $container);
+        $this->loadScaleControlStyle($config, $container);
         $this->loadStreetViewControl($config, $container);
         $this->loadZoomControl($config, $container);
+        $this->loadZoomControlStyle($config, $container);
 
-        // Marker sections
+        // Overlay sections
+        $this->loadAnimation($config, $container);
         $this->loadMarker($config, $container);
         $this->loadMarkerImage($config, $container);
         $this->loadMarkerShape($config, $container);
-
-        // Overlay sections
         $this->loadInfoWindow($config, $container);
         $this->loadPolyline($config, $container);
         $this->loadEncodedPolyline($config, $container);
@@ -76,7 +80,11 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadKMLLayer($config, $container);
 
         // Event sections
+        $this->loadEventManager($config, $container);
         $this->loadEvent($config, $container);
+
+        // Geometry sections
+        $this->loadEncoding($config, $container);
 
         // Services sections
         $this->loadGeocoder($config, $container);
@@ -93,6 +101,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMap(array $config, ContainerBuilder $container)
     {
+        if (isset($config['map']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.map')
+                ->setClass($config['map']['class']);
+        }
+
+        if (isset($config['map']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.map')
+                ->setClass($config['map']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.map.prefix_javascript_variable',
             $config['map']['prefix_javascript_variable']
@@ -145,6 +165,21 @@ class IvoryGoogleMapExtension extends Extension
     }
 
     /**
+     * Loads map type ID configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadMapTypeId(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['map_type_id']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.map_type_id')
+                ->setClass($config['map_type_id']['helper_class']);
+        }
+    }
+
+    /**
      * Loads coordinate configuration.
      *
      * @param array                                                   $config    The processed condiguration.
@@ -152,6 +187,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadCoordinate(array $config, ContainerBuilder $container)
     {
+        if (isset($config['coordinate']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.coordinate')
+                ->setClass($config['coordinate']['class']);
+        }
+
+        if (isset($config['coordinate']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.coordinate')
+                ->setClass($config['coordinate']['helper_class']);
+        }
+
         $container->setParameter('ivory_google_map.coordinate.latitude', $config['coordinate']['latitude']);
         $container->setParameter('ivory_google_map.coordinate.longitude', $config['coordinate']['longitude']);
         $container->setParameter('ivory_google_map.coordinate.no_wrap', $config['coordinate']['no_wrap']);
@@ -165,6 +212,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadBound(array $config, ContainerBuilder $container)
     {
+        if (isset($config['bound']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.bound')
+                ->setClass($config['bound']['class']);
+        }
+
+        if (isset($config['bound']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.bound')
+                ->setClass($config['bound']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.bound.prefix_javascript_variable',
             $config['bound']['prefix_javascript_variable']
@@ -209,6 +268,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPoint(array $config, ContainerBuilder $container)
     {
+        if (isset($config['point']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.point')
+                ->setClass($config['point']['class']);
+        }
+
+        if (isset($config['point']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.point')
+                ->setClass($config['point']['helper_class']);
+        }
+
         $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
         $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
     }
@@ -221,10 +292,37 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadSize(array $config, ContainerBuilder $container)
     {
+        if (isset($config['size']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.size')
+                ->setClass($config['size']['class']);
+        }
+
+        if (isset($config['size']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.size')
+                ->setClass($config['size']['helper_class']);
+        }
+
         $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
         $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
         $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
         $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+    }
+
+    /**
+     * Loads control position configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadControlPosition(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['control_position']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.control_position')
+                ->setClass($config['control_position']['helper_class']);
+        }
     }
 
     /**
@@ -235,6 +333,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMapTypeControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['map_type_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.map_type_control')
+                ->setClass($config['map_type_control']['class']);
+        }
+
+        if (isset($config['map_type_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.map_type_control')
+                ->setClass($config['map_type_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.map_type_control.map_type_ids',
             $config['map_type_control']['map_type_ids']
@@ -252,6 +362,21 @@ class IvoryGoogleMapExtension extends Extension
     }
 
     /**
+     * Loads map type control style configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadMapTypeControlStyle(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['map_type_control_style']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.map_type_control_style')
+                ->setClass($config['map_type_control_style']['helper_class']);
+        }
+    }
+
+    /**
      * Loads overview map control configuration.
      *
      * @param array                                                   $config    The processed condiguration.
@@ -259,6 +384,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadOverviewMapControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['overview_map_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.overview_map_control')
+                ->setClass($config['overview_map_control']['class']);
+        }
+
+        if (isset($config['overview_map_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.overview_map_control')
+                ->setClass($config['overview_map_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.overview_map_control.opened',
             $config['overview_map_control']['opened']
@@ -273,6 +410,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPanControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['pan_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.pan_control')
+                ->setClass($config['pan_control']['class']);
+        }
+
+        if (isset($config['pan_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.pan_control')
+                ->setClass($config['pan_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.pan_control.control_position',
             $config['pan_control']['control_position']
@@ -287,6 +436,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadRotateControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['rotate_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.rotate_control')
+                ->setClass($config['rotate_control']['class']);
+        }
+
+        if (isset($config['rotate_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.rotate_control')
+                ->setClass($config['rotate_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.rotate_control.control_position',
             $config['rotate_control']['control_position']
@@ -301,6 +462,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadScaleControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['scale_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.scale_control')
+                ->setClass($config['scale_control']['class']);
+        }
+
+        if (isset($config['scale_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.scale_control')
+                ->setClass($config['scale_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.scale_control.control_position',
             $config['scale_control']['control_position']
@@ -313,6 +486,21 @@ class IvoryGoogleMapExtension extends Extension
     }
 
     /**
+     * Loads scale control style configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadScaleControlStyle(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['scale_control_style']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.scale_control_style')
+                ->setClass($config['scale_control_style']['helper_class']);
+        }
+    }
+
+    /**
      * Loads street view control configuration.
      *
      * @param array                                                   $config    The processed condiguration.
@@ -320,6 +508,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadStreetViewControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['street_view_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.street_view_control')
+                ->setClass($config['street_view_control']['class']);
+        }
+
+        if (isset($config['street_view_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.street_view_control')
+                ->setClass($config['street_view_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.street_view_control.control_position',
             $config['street_view_control']['control_position']
@@ -334,6 +534,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadZoomControl(array $config, ContainerBuilder $container)
     {
+        if (isset($config['zoom_control']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.zoom_control')
+                ->setClass($config['zoom_control']['class']);
+        }
+
+        if (isset($config['zoom_control']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.zoom_control')
+                ->setClass($config['zoom_control']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.zoom_control.control_position',
             $config['zoom_control']['control_position']
@@ -346,6 +558,36 @@ class IvoryGoogleMapExtension extends Extension
     }
 
     /**
+     * Loads zoom control style configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadZoomControlStyle(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['zoom_control_style']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.zoom_control_style')
+                ->setClass($config['zoom_control_style']['helper_class']);
+        }
+    }
+
+    /**
+     * Loads animation configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadAnimation(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['animation']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.animation')
+                ->setClass($config['animation']['helper_class']);
+        }
+    }
+
+    /**
      * Loads marker configuration.
      *
      * @param array                                                   $config    The processed condiguration.
@@ -353,6 +595,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarker(array $config, ContainerBuilder $container)
     {
+        if (isset($config['marker']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.marker')
+                ->setClass($config['marker']['class']);
+        }
+
+        if (isset($config['marker']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.marker')
+                ->setClass($config['marker']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.marker.prefix_javascript_variable',
             $config['marker']['prefix_javascript_variable']
@@ -385,6 +639,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarkerImage(array $config, ContainerBuilder $container)
     {
+        if (isset($config['marker_image']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.marker_image')
+                ->setClass($config['marker_image']['class']);
+        }
+
+        if (isset($config['marker_image']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.marker_image')
+                ->setClass($config['marker_image']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.marker_image.prefix_javascript_variable',
             $config['marker_image']['prefix_javascript_variable']
@@ -445,6 +711,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarkerShape(array $config, ContainerBuilder $container)
     {
+        if (isset($config['marker_shape']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.marker_shape')
+                ->setClass($config['marker_shape']['class']);
+        }
+
+        if (isset($config['marker_shape']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.marker_shape')
+                ->setClass($config['marker_shape']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.marker_shape.prefix_javascript_variable',
             $config['marker_shape']['prefix_javascript_variable']
@@ -462,6 +740,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadInfoWindow(array $config, ContainerBuilder $container)
     {
+        if (isset($config['info_window']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.info_window')
+                ->setClass($config['info_window']['class']);
+        }
+
+        if (isset($config['info_window']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.info_window')
+                ->setClass($config['info_window']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.info_window.prefix_javascript_variable',
             $config['info_window']['prefix_javascript_variable']
@@ -518,6 +808,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPolyline(array $config, ContainerBuilder $container)
     {
+        if (isset($config['polyline']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.polyline')
+                ->setClass($config['polyline']['class']);
+        }
+
+        if (isset($config['polyline']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.polyline')
+                ->setClass($config['polyline']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.polyline.prefix_javascript_variable',
             $config['polyline']['prefix_javascript_variable']
@@ -534,6 +836,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadEncodedPolyline(array $config, ContainerBuilder $container)
     {
+        if (isset($config['encoded_polyline']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.encoded_polyline')
+                ->setClass($config['encoded_polyline']['class']);
+        }
+
+        if (isset($config['encoded_polyline']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.encoded_polyline')
+                ->setClass($config['encoded_polyline']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.encoded_polyline.prefix_javascript_variable',
             $config['encoded_polyline']['prefix_javascript_variable']
@@ -550,6 +864,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPolygon(array $config, ContainerBuilder $container)
     {
+        if (isset($config['polygon']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.polygon')
+                ->setClass($config['polygon']['class']);
+        }
+
+        if (isset($config['polygon']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.polygon')
+                ->setClass($config['polygon']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.polygon.prefix_javascript_variable',
             $config['polygon']['prefix_javascript_variable']
@@ -566,6 +892,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadRectangle(array $config, ContainerBuilder $container)
     {
+        if (isset($config['rectangle']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.rectangle')
+                ->setClass($config['rectangle']['class']);
+        }
+
+        if (isset($config['rectangle']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.rectangle')
+                ->setClass($config['rectangle']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.rectangle.prefix_javascript_variable',
             $config['rectangle']['prefix_javascript_variable']
@@ -612,6 +950,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadCircle(array $config, ContainerBuilder $container)
     {
+        if (isset($config['circle']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.circle')
+                ->setClass($config['circle']['class']);
+        }
+
+        if (isset($config['circle']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.circle')
+                ->setClass($config['circle']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.circle.prefix_javascript_variable',
             $config['circle']['prefix_javascript_variable']
@@ -632,6 +982,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGroundOverlay(array $config, ContainerBuilder $container)
     {
+        if (isset($config['ground_overlay']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.ground_overlay')
+                ->setClass($config['ground_overlay']['class']);
+        }
+
+        if (isset($config['ground_overlay']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.ground_overlay')
+                ->setClass($config['ground_overlay']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.ground_overlay.prefix_javascript_variable',
             $config['ground_overlay']['prefix_javascript_variable']
@@ -680,6 +1042,18 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadKMLLayer(array $config, ContainerBuilder $container)
     {
+        if (isset($config['kml_layer']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.kml_layer')
+                ->setClass($config['kml_layer']['class']);
+        }
+
+        if (isset($config['kml_layer']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.kml_layer')
+                ->setClass($config['kml_layer']['helper_class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.kml_layer.prefix_javascript_variable',
             $config['kml_layer']['prefix_javascript_variable']
@@ -690,14 +1064,62 @@ class IvoryGoogleMapExtension extends Extension
     }
 
     /**
-     * Loads event configuration
+     * Loads event manager configuration.
      *
-     * @param array $config
-     * @param ContainerBuilder $container
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadEventManager(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['event_manager']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.event_manager')
+                ->setClass($config['event_manager']['class']);
+        }
+
+        if (isset($config['event_manager']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.event_manager')
+                ->setClass($config['event_manager']['helper_class']);
+        }
+    }
+
+    /**
+     * Loads event configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadEvent(array $config, ContainerBuilder $container)
     {
+        if (isset($config['event']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.event')
+                ->setClass($config['event']['class']);
+        }
+
+        if (isset($config['event']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.event')
+                ->setClass($config['event']['helper_class']);
+        }
+
         $container->setParameter('ivory_google_map.event.prefix_javascript_variable', $config['event']['prefix_javascript_variable']);
+    }
+
+    /**
+     * Loads encoding configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadEncoding(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['encoding']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.encoding')
+                ->setClass($config['encoding']['helper_class']);
+        }
     }
 
     /**
@@ -758,6 +1180,12 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
     {
+        if (isset($config['geocoder_request']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.geocoder_request')
+                ->setClass($config['geocoder_request']['class']);
+        }
+
         $container->setParameter('ivory_google_map.geocoder_request.address', $config['geocoder_request']['address']);
 
         $container->setParameter(
@@ -817,6 +1245,12 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirections(array $config, ContainerBuilder $container)
     {
+        if (isset($config['directions']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.directions')
+                ->setClass($config['directions']['class']);
+        }
+
         $container->setParameter('ivory_google_map.directions.url', $config['directions']['url']);
         $container->setParameter('ivory_google_map.directions.https', $config['directions']['https']);
         $container->setParameter('ivory_google_map.directions.format', $config['directions']['format']);
@@ -830,6 +1264,12 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
     {
+        if (isset($config['directions_request']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.directions_request')
+                ->setClass($config['directions_request']['class']);
+        }
+
         $container->setParameter(
             'ivory_google_map.directions_request.avoid_highways',
             $config['directions_request']['avoid_highways']

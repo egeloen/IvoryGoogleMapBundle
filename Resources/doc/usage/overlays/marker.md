@@ -15,6 +15,12 @@ below is this default configuration.
 
 ivory_google_map:
     marker:
+        # Your own marker class
+        class: "My\Fucking\Marker"
+
+        # Your own marker helper class
+        helper_class: "My\Fucking\MarkerHelper"
+
         # Prefix used for the generation of the marker javascript variable
         prefix_javascript_variable: "marker_"
 

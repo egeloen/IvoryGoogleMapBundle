@@ -13,6 +13,12 @@ below is this default configuration.
 
 ivory_google_map:
     map:
+        # You own map class
+        class: "My\Fucking\Map"
+
+        # Your own map helper class
+        helper_class: "My\Fucking\MapHelper"
+
         # Prefix used for the generation of the map javascript variable
         prefix_javascript_variable: "map_"
 

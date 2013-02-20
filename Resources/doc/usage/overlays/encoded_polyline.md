@@ -16,6 +16,12 @@ describes below is this default configuration.
 
 ivory_google_map
     encoded_polyline:
+        # Your own encoded polyline class
+        class: "My\Fucking\EncodedPolyline"
+
+        # Your own encoded polyline helper class
+        helper_class: "My\Fucking\EncodedPolylineHelper"
+
         # Prefix used for the generation of the encoded polyline javascript variable
         prefix_javascript_variable: "encoded_polyline_"
 

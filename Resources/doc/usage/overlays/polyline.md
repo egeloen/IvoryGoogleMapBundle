@@ -16,6 +16,12 @@ below is this default configuration.
 
 ivory_google_map
     polyline:
+        # Your own polyline class
+        class: "My\Fucking\Polyline"
+
+        # Your own polyline helper class
+        helper_class: "My\Fucking\PolylineHelper"
+
         # Prefix used for the generation of the polyline javascript variable
         prefix_javascript_variable: "polyline_"
 
