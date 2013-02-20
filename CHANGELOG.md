@@ -2,6 +2,7 @@
 
 ### 2.0.0 (????-??-??)
 
+ * bbf251f - Allow to override all business classes & helpers
  * f82a0d4 - [Directions] Add language parameter to the request
  * a02d698 - [EventListener] Fix fake request listener registration
  * de0c9e6 - [Tests] Fix code coverage
