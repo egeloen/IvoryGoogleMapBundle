@@ -11,11 +11,7 @@
 
 namespace Ivory\GoogleMapBundle\DependencyInjection;
 
-use Ivory\GoogleMap\Controls\ControlPosition,
-    Ivory\GoogleMap\Controls\MapTypeControlStyle,
-    Ivory\GoogleMap\Controls\ScaleControlStyle,
-    Ivory\GoogleMap\Controls\ZoomControlStyle,
-    Ivory\GoogleMap\MapTypeId,
+use Ivory\GoogleMap\MapTypeId,
     Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition,
     Symfony\Component\Config\Definition\Builder\TreeBuilder,
     Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -861,7 +857,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('class')->end()
                         ->scalarNode('helper_class')->end()
-                        ->scalarNode('prefix_javascript_variable')->defaultValue('event_')->end()
+                        ->scalarNode('prefix_javascript_variable')->end()
                     ->end()
                 ->end()
             ->end();

@@ -38,6 +38,7 @@ class IvoryGoogleMapExtension extends Extension
         $resources = array(
             'services/base.xml',
             'services/controls.xml',
+            'services/events.xml',
             'services/layers.xml',
             'services.xml',
             'twig.xml',
@@ -1129,8 +1130,8 @@ class IvoryGoogleMapExtension extends Extension
     {
         if (isset($config['event_manager']['class'])) {
             $container
-                ->getDefinition('ivory_google_map.event_manager')
-                ->setClass($config['event_manager']['class']);
+                ->getDefinition('ivory_google_map.event_manager.builder')
+                ->setArguments(array($config['event_manager']['class']));
         }
 
         if (isset($config['event_manager']['helper_class'])) {
@@ -1148,10 +1149,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadEvent(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.event.builder');
+
         if (isset($config['event']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.event')
-                ->setClass($config['event']['class']);
+            $builderDefinition->setArguments(array($config['event']['class']));
         }
 
         if (isset($config['event']['helper_class'])) {
@@ -1160,7 +1161,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['event']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.event.prefix_javascript_variable', $config['event']['prefix_javascript_variable']);
+        if (isset($config['event']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['event']['prefix_javascript_variable'])
+            );
+        }
     }
 
     /**

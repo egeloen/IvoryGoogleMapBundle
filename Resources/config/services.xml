@@ -21,9 +21,6 @@
         <parameter key="ivory_google_map.circle.class">Ivory\GoogleMap\Overlays\Circle</parameter>
         <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMap\Overlays\GroundOverlay</parameter>
 
-        <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMap\Events\EventManager</parameter>
-        <parameter key="ivory_google_map.event.class">Ivory\GoogleMap\Events\Event</parameter>
-
         <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMap\Services\Geocoding\Geocoder</parameter>
         <parameter key="ivory_google_map.geocoder.provider.class">Ivory\GoogleMap\Services\Geocoding\GeocoderProvider</parameter>
         <parameter key="ivory_google_map.geocoder.adapter.class">Geocoder\HttpAdapter\BuzzHttpAdapter</parameter>
@@ -51,9 +48,6 @@
         <parameter key="ivory_google_map.rectangle.helper">Ivory\GoogleMap\Templating\Helper\Overlays\RectangleHelper</parameter>
         <parameter key="ivory_google_map.circle.helper">Ivory\GoogleMap\Templating\Helper\Overlays\CircleHelper</parameter>
         <parameter key="ivory_google_map.ground_overlay.helper">Ivory\GoogleMap\Templating\Helper\Overlays\GroundOverlayHelper</parameter>
-
-        <parameter key="ivory_google_map.event_manager.helper">Ivory\GoogleMap\Templating\Helper\Events\EventManagerHelper</parameter>
-        <parameter key="ivory_google_map.event.helper">Ivory\GoogleMap\Templating\Helper\Events\EventHelper</parameter>
 
         <parameter key="ivory_google_map.encoded_polyline.helper">Ivory\GoogleMap\Templating\Helper\Overlays\EncodedPolylineHelper</parameter>
         <parameter key="ivory_google_map.encoding.helper">Ivory\GoogleMap\Templating\Helper\Geometry\EncodingHelper</parameter>
@@ -448,30 +442,6 @@
         <service id="ivory_google_map.helper.ground_overlay" class="%ivory_google_map.ground_overlay.helper%" public="false">
             <argument type="service" id="ivory_google_map.helper.bound" />
         </service>
-
-        <!-- Event manager service -->
-        <service
-            id="ivory_google_map.event_manager"
-            class="%ivory_google_map.event_manager.class%"
-            scope="prototype"
-        />
-
-        <service
-            id="ivory_google_map.helper.event_manager"
-            class="%ivory_google_map.event_manager.helper%"
-            public="false"
-        >
-            <argument type="service" id="ivory_google_map.helper.event" />
-        </service>
-
-        <!-- Event service -->
-        <service id="ivory_google_map.event" class="%ivory_google_map.event.class%" scope="prototype">
-            <call method="setPrefixJavascriptVariable">
-                <argument>%ivory_google_map.event.prefix_javascript_variable%</argument>
-            </call>
-        </service>
-
-        <service id="ivory_google_map.helper.event" class="%ivory_google_map.event.helper%" public="false" />
 
         <!-- Geocoder service -->
         <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%" scope="prototype">
