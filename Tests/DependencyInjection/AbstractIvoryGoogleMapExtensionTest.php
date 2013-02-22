@@ -346,7 +346,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Layers\KMLLayer', $kmlLayer);
         $this->assertSame('kml_layer_', substr($kmlLayer->getJavascriptVariable(), 0, 10));
-        $this->assertSame('', $kmlLayer->getUrl());
+        $this->assertNull($kmlLayer->getUrl());
         $this->assertEmpty($kmlLayer->getOptions());
     }
 

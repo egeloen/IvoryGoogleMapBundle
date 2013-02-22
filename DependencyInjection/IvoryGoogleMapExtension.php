@@ -38,6 +38,7 @@ class IvoryGoogleMapExtension extends Extension
         $resources = array(
             'services/base.xml',
             'services/controls.xml',
+            'services/layers.xml',
             'services.xml',
             'twig.xml',
         );
@@ -1090,10 +1091,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadKMLLayer(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.kml_layer.builder');
+
         if (isset($config['kml_layer']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.kml_layer')
-                ->setClass($config['kml_layer']['class']);
+            $builderDefinition->setArguments(array($config['kml_layer']['class']));
         }
 
         if (isset($config['kml_layer']['helper_class'])) {
@@ -1102,13 +1103,20 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['kml_layer']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.kml_layer.prefix_javascript_variable',
-            $config['kml_layer']['prefix_javascript_variable']
-        );
+        if (isset($config['kml_layer']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['kml_layer']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.kml_layer.url', $config['kml_layer']['url']);
-        $container->setParameter('ivory_google_map.kml_layer.options', $config['kml_layer']['options']);
+        if (isset($config['kml_layer']['url'])) {
+            $builderDefinition->addMethodCall('setUrl', array($config['kml_layer']['url']));
+        }
+
+        if (isset($config['kml_layer']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['kml_layer']['options']));
+        }
     }
 
     /**
