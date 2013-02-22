@@ -194,10 +194,13 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadCoordinate(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.coordinate.builder');
+
         if (isset($config['coordinate']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.coordinate')
-                ->setClass($config['coordinate']['class']);
+            $builderDefinition->setArguments(array_replace(
+                $builderDefinition->getArguments(),
+                array($config['coordinate']['class'])
+            ));
         }
 
         if (isset($config['coordinate']['helper_class'])) {
@@ -206,9 +209,17 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['coordinate']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.coordinate.latitude', $config['coordinate']['latitude']);
-        $container->setParameter('ivory_google_map.coordinate.longitude', $config['coordinate']['longitude']);
-        $container->setParameter('ivory_google_map.coordinate.no_wrap', $config['coordinate']['no_wrap']);
+        if (isset($config['coordinate']['latitude'])) {
+            $builderDefinition->addMethodCall('setLatitude', array($config['coordinate']['latitude']));
+        }
+
+        if (isset($config['coordinate']['longitude'])) {
+            $builderDefinition->addMethodCall('setLongitude', array($config['coordinate']['longitude']));
+        }
+
+        if (isset($config['coordinate']['no_wrap'])) {
+            $builderDefinition->addMethodCall('setNoWrap', array($config['coordinate']['no_wrap']));
+        }
     }
 
     /**
@@ -219,10 +230,13 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadBound(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.bound.builder');
+
         if (isset($config['bound']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.bound')
-                ->setClass($config['bound']['class']);
+            $builderDefinition->setArguments(array_replace(
+                $builderDefinition->getArguments(),
+                array($config['bound']['class'])
+            ));
         }
 
         if (isset($config['bound']['helper_class'])) {
@@ -231,40 +245,38 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['bound']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.bound.prefix_javascript_variable',
-            $config['bound']['prefix_javascript_variable']
-        );
+        if (isset($config['bound']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['bound']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.longitude',
-            $config['bound']['south_west']['longitude']
-        );
+        if (isset($config['bound']['south_west']['latitude']) && isset($config['bound']['south_west']['longitude'])) {
+            $southWest = array(
+                $config['bound']['south_west']['latitude'],
+                $config['bound']['south_west']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.latitude',
-            $config['bound']['south_west']['latitude']
-        );
+            if (isset($config['bound']['south_west']['no_wrap'])) {
+                $southWest[] = $config['bound']['south_west']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.no_wrap',
-            $config['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setSouthWest', $southWest);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.longitude',
-            $config['bound']['north_east']['longitude']
-        );
+        if (isset($config['bound']['north_east']['latitude']) && isset($config['bound']['north_east']['longitude'])) {
+            $northEast = array(
+                $config['bound']['north_east']['latitude'],
+                $config['bound']['north_east']['longitude']
+            );
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.latitude',
-            $config['bound']['north_east']['latitude']
-        );
+            if (isset($config['bound']['north_east']['no_wrap'])) {
+                $northEast[] = $config['bound']['north_east']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.no_wrap',
-            $config['bound']['north_east']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setNorthEast', $northEast);
+        }
     }
 
     /**
@@ -275,10 +287,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPoint(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.point.builder');
+
         if (isset($config['point']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.point')
-                ->setClass($config['point']['class']);
+            $builderDefinition->setArguments(array($config['point']['class']));
         }
 
         if (isset($config['point']['helper_class'])) {
@@ -287,8 +299,13 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['point']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
-        $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
+        if (isset($config['point']['x'])) {
+            $builderDefinition->addMethodCall('setX', array($config['point']['x']));
+        }
+
+        if (isset($config['point']['y'])) {
+            $builderDefinition->addMethodCall('setY', array($config['point']['y']));
+        }
     }
 
     /**
@@ -299,10 +316,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadSize(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.size.builder');
+
         if (isset($config['size']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.size')
-                ->setClass($config['size']['class']);
+            $builderDefinition->setArguments(array($config['size']['class']));
         }
 
         if (isset($config['size']['helper_class'])) {
@@ -311,10 +328,21 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['size']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
-        $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
-        $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
-        $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+        if (isset($config['size']['width'])) {
+            $builderDefinition->addMethodCall('setWidth', array($config['size']['width']));
+        }
+
+        if (isset($config['size']['height'])) {
+            $builderDefinition->addMethodCall('setHeight', array($config['size']['height']));
+        }
+
+        if (isset($config['size']['width_unit'])) {
+            $builderDefinition->addMethodCall('setWidthUnit', array($config['size']['width_unit']));
+        }
+
+        if (isset($config['size']['height_unit'])) {
+            $builderDefinition->addMethodCall('setHeightUnit', array($config['size']['height_unit']));
+        }
     }
 
     /**
@@ -340,10 +368,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMapTypeControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.map_type_control.builder');
+
         if (isset($config['map_type_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.map_type_control')
-                ->setClass($config['map_type_control']['class']);
+            $builderDefinition->setArguments(array($config['map_type_control']['class']));
         }
 
         if (isset($config['map_type_control']['helper_class'])) {
@@ -352,20 +380,23 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['map_type_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.map_type_ids',
-            $config['map_type_control']['map_type_ids']
-        );
+        if (isset($config['map_type_control']['map_type_ids'])) {
+            $builderDefinition->addMethodCall('setMapTypeIds', array($config['map_type_control']['map_type_ids']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.control_position',
-            $config['map_type_control']['control_position']
-        );
+        if (isset($config['map_type_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['map_type_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.map_type_control_style',
-            $config['map_type_control']['map_type_control_style']
-        );
+        if (isset($config['map_type_control']['map_type_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setMapTypeControlStyle',
+                array($config['map_type_control']['map_type_control_style'])
+            );
+        }
     }
 
     /**
@@ -391,10 +422,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadOverviewMapControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.overview_map_control.builder');
+
         if (isset($config['overview_map_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.overview_map_control')
-                ->setClass($config['overview_map_control']['class']);
+            $builderDefinition->setArguments(array($config['overview_map_control']['class']));
         }
 
         if (isset($config['overview_map_control']['helper_class'])) {
@@ -403,10 +434,9 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['overview_map_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.overview_map_control.opened',
-            $config['overview_map_control']['opened']
-        );
+        if (isset($config['overview_map_control']['opened'])) {
+            $builderDefinition->addMethodCall('setOpened', array($config['overview_map_control']['opened']));
+        }
     }
 
     /**
@@ -417,10 +447,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPanControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.pan_control.builder');
+
         if (isset($config['pan_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.pan_control')
-                ->setClass($config['pan_control']['class']);
+            $builderDefinition->setArguments(array($config['pan_control']['class']));
         }
 
         if (isset($config['pan_control']['helper_class'])) {
@@ -429,10 +459,9 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['pan_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.pan_control.control_position',
-            $config['pan_control']['control_position']
-        );
+        if (isset($config['pan_control']['control_position'])) {
+            $builderDefinition->addMethodCall('setControlPosition', array($config['pan_control']['control_position']));
+        }
     }
 
     /**
@@ -443,10 +472,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadRotateControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.rotate_control.builder');
+
         if (isset($config['rotate_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.rotate_control')
-                ->setClass($config['rotate_control']['class']);
+            $builderDefinition->setArguments(array($config['rotate_control']['class']));
         }
 
         if (isset($config['rotate_control']['helper_class'])) {
@@ -455,10 +484,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['rotate_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.rotate_control.control_position',
-            $config['rotate_control']['control_position']
-        );
+        if (isset($config['rotate_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['rotate_control']['control_position'])
+            );
+        }
     }
 
     /**
@@ -469,10 +500,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadScaleControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.scale_control.builder');
+
         if (isset($config['scale_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.scale_control')
-                ->setClass($config['scale_control']['class']);
+            $builderDefinition->setArguments(array($config['scale_control']['class']));
         }
 
         if (isset($config['scale_control']['helper_class'])) {
@@ -481,15 +512,19 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['scale_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.scale_control.control_position',
-            $config['scale_control']['control_position']
-        );
+        if (isset($config['scale_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['scale_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.scale_control.scale_control_style',
-            $config['scale_control']['scale_control_style']
-        );
+        if (isset($config['scale_control']['scale_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setScaleControlStyle',
+                array($config['scale_control']['scale_control_style'])
+            );
+        }
     }
 
     /**
@@ -515,10 +550,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadStreetViewControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.street_view_control.builder');
+
         if (isset($config['street_view_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.street_view_control')
-                ->setClass($config['street_view_control']['class']);
+            $builderDefinition->setArguments(array($config['street_view_control']['class']));
         }
 
         if (isset($config['street_view_control']['helper_class'])) {
@@ -527,10 +562,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['street_view_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.street_view_control.control_position',
-            $config['street_view_control']['control_position']
-        );
+        if (isset($config['street_view_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['street_view_control']['control_position'])
+            );
+        }
     }
 
     /**
@@ -541,10 +578,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadZoomControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.zoom_control.builder');
+
         if (isset($config['zoom_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.zoom_control')
-                ->setClass($config['zoom_control']['class']);
+            $builderDefinition->setArguments(array($config['zoom_control']['class']));
         }
 
         if (isset($config['zoom_control']['helper_class'])) {
@@ -553,15 +590,19 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['zoom_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.zoom_control.control_position',
-            $config['zoom_control']['control_position']
-        );
+        if (isset($config['zoom_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['zoom_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.zoom_control.zoom_control_style',
-            $config['zoom_control']['zoom_control_style']
-        );
+        if (isset($config['zoom_control']['zoom_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setZoomControlStyle',
+                array($config['zoom_control']['zoom_control_style'])
+            );
+        }
     }
 
     /**

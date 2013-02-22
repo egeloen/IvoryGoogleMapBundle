@@ -58,12 +58,8 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Base\Bound', $bound);
         $this->assertSame('bound_', substr($bound->getJavascriptVariable(), 0, 6));
-
-        $this->assertNull($bound->getSouthWest()->getLatitude());
-        $this->assertNull($bound->getSouthWest()->getLongitude());
-
-        $this->assertNull($bound->getNorthEast()->getLatitude());
-        $this->assertNull($bound->getNorthEast()->getLongitude());
+        $this->assertNull($bound->getSouthWest());
+        $this->assertNull($bound->getNorthEast());
     }
 
     public function testBoundServiceWithConfiguration()

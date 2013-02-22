@@ -6,31 +6,31 @@
 
     <parameters>
         <parameter key="ivory_google_map.map_type_control.class">Ivory\GoogleMap\Controls\MapTypeControl</parameter>
-        <parameter key="ivory_google_map.map_type_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\MapTypeControlFactory</parameter>
+        <parameter key="ivory_google_map.map_type_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\MapTypeControlBuilder</parameter>
         <parameter key="ivory_google_map.map_type_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\MapTypeControlHelper</parameter>
 
         <parameter key="ivory_google_map.overview_map_control.class">Ivory\GoogleMap\Controls\OverviewMapControl</parameter>
-        <parameter key="ivory_google_map.overview_map_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\OverviewMapControlFactory</parameter>
+        <parameter key="ivory_google_map.overview_map_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\OverviewMapControlBuilder</parameter>
         <parameter key="ivory_google_map.overview_map_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\OverviewMapControlHelper</parameter>
 
         <parameter key="ivory_google_map.pan_control.class">Ivory\GoogleMap\Controls\PanControl</parameter>
-        <parameter key="ivory_google_map.pan_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\PanControlFactory</parameter>
+        <parameter key="ivory_google_map.pan_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\PanControlBuilder</parameter>
         <parameter key="ivory_google_map.pan_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\PanControlHelper</parameter>
 
         <parameter key="ivory_google_map.rotate_control.class">Ivory\GoogleMap\Controls\RotateControl</parameter>
-        <parameter key="ivory_google_map.rotate_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\RotateControlFactory</parameter>
+        <parameter key="ivory_google_map.rotate_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\RotateControlBuilder</parameter>
         <parameter key="ivory_google_map.rotate_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\RotateControlHelper</parameter>
 
         <parameter key="ivory_google_map.scale_control.class">Ivory\GoogleMap\Controls\ScaleControl</parameter>
-        <parameter key="ivory_google_map.scale_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\ScaleControlFactory</parameter>
+        <parameter key="ivory_google_map.scale_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\ScaleControlBuilder</parameter>
         <parameter key="ivory_google_map.scale_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\ScaleControlHelper</parameter>
 
         <parameter key="ivory_google_map.street_view_control.class">Ivory\GoogleMap\Controls\StreetViewControl</parameter>
-        <parameter key="ivory_google_map.street_view_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\StreetViewControlFactory</parameter>
+        <parameter key="ivory_google_map.street_view_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\StreetViewControlBuilder</parameter>
         <parameter key="ivory_google_map.street_view_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\StreetViewControlHelper</parameter>
 
         <parameter key="ivory_google_map.zoom_control.class">Ivory\GoogleMap\Controls\ZoomControl</parameter>
-        <parameter key="ivory_google_map.zoom_control.factory.class">Ivory\GoogleMapBundle\Model\Controls\ZoomControlFactory</parameter>
+        <parameter key="ivory_google_map.zoom_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\ZoomControlBuilder</parameter>
         <parameter key="ivory_google_map.zoom_control.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\ZoomControlHelper</parameter>
 
         <parameter key="ivory_google_map.control_position.helper.class">Ivory\GoogleMap\Templating\Helper\Controls\ControlPositionHelper</parameter>
@@ -44,18 +44,16 @@
         <service
             id="ivory_google_map.map_type_control"
             class="%ivory_google_map.map_type_control.class%"
-            factory-service="ivory_google_map.map_type_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.map_type_control.map_type_ids%</argument>
-            <argument>%ivory_google_map.map_type_control.control_position%</argument>
-            <argument>%ivory_google_map.map_type_control.map_type_control_style%</argument>
-        </service>
+            factory-service="ivory_google_map.map_type_control.builder"
+            factory-method="build"
+        />
 
         <service
-            id="ivory_google_map.map_type_control.factory"
-            class="%ivory_google_map.map_type_control.factory.class%"
-        />
+            id="ivory_google_map.map_type_control.builder"
+            class="%ivory_google_map.map_type_control.builder.class%"
+        >
+            <argument>%ivory_google_map.map_type_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.map_type_control"
@@ -71,16 +69,16 @@
         <service
             id="ivory_google_map.overview_map_control"
             class="%ivory_google_map.overview_map_control.class%"
-            factory-service="ivory_google_map.overview_map_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.overview_map_control.opened%</argument>
-        </service>
+            factory-service="ivory_google_map.overview_map_control.builder"
+            factory-method="build"
+        />
 
         <service
-            id="ivory_google_map.overview_map_control.factory"
-            class="%ivory_google_map.overview_map_control.factory.class%"
-        />
+            id="ivory_google_map.overview_map_control.builder"
+            class="%ivory_google_map.overview_map_control.builder.class%"
+        >
+            <argument>%ivory_google_map.overview_map_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.overview_map_control"
@@ -92,13 +90,13 @@
         <service
             id="ivory_google_map.pan_control"
             class="%ivory_google_map.pan_control.class%"
-            factory-service="ivory_google_map.pan_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.pan_control.control_position%</argument>
-        </service>
+            factory-service="ivory_google_map.pan_control.builder"
+            factory-method="build"
+        />
 
-        <service id="ivory_google_map.pan_control.factory" class="%ivory_google_map.pan_control.factory.class%" />
+        <service id="ivory_google_map.pan_control.builder" class="%ivory_google_map.pan_control.builder.class%">
+            <argument>%ivory_google_map.pan_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.pan_control"
@@ -112,13 +110,13 @@
         <service
             id="ivory_google_map.rotate_control"
             class="%ivory_google_map.rotate_control.class%"
-            factory-service="ivory_google_map.rotate_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.rotate_control.control_position%</argument>
-        </service>
+            factory-service="ivory_google_map.rotate_control.builder"
+            factory-method="build"
+        />
 
-        <service id="ivory_google_map.rotate_control.factory" class="%ivory_google_map.rotate_control.factory.class%" />
+        <service id="ivory_google_map.rotate_control.builder" class="%ivory_google_map.rotate_control.builder.class%">
+            <argument>%ivory_google_map.rotate_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.rotate_control"
@@ -132,14 +130,13 @@
         <service
             id="ivory_google_map.scale_control"
             class="%ivory_google_map.scale_control.class%"
-            factory-service="ivory_google_map.scale_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.scale_control.control_position%</argument>
-            <argument>%ivory_google_map.scale_control.scale_control_style%</argument>
-        </service>
+            factory-service="ivory_google_map.scale_control.builder"
+            factory-method="build"
+        />
 
-        <service id="ivory_google_map.scale_control.factory" class="%ivory_google_map.scale_control.factory.class%" />
+        <service id="ivory_google_map.scale_control.builder" class="%ivory_google_map.scale_control.builder.class%">
+            <argument>%ivory_google_map.scale_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.scale_control"
@@ -154,16 +151,16 @@
         <service
             id="ivory_google_map.street_view_control"
             class="%ivory_google_map.street_view_control.class%"
-            factory-service="ivory_google_map.street_view_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.street_view_control.control_position%</argument>
-        </service>
+            factory-service="ivory_google_map.street_view_control.builder"
+            factory-method="build"
+        />
 
         <service
-            id="ivory_google_map.street_view_control.factory"
-            class="%ivory_google_map.street_view_control.factory.class%"
-        />
+            id="ivory_google_map.street_view_control.builder"
+            class="%ivory_google_map.street_view_control.builder.class%"
+        >
+            <argument>%ivory_google_map.street_view_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.street_view_control"
@@ -177,14 +174,13 @@
         <service
             id="ivory_google_map.zoom_control"
             class="%ivory_google_map.zoom_control.class%"
-            factory-service="ivory_google_map.zoom_control.factory"
-            factory-method="create"
-        >
-            <argument>%ivory_google_map.zoom_control.control_position%</argument>
-            <argument>%ivory_google_map.zoom_control.zoom_control_style%</argument>
-        </service>
+            factory-service="ivory_google_map.zoom_control.builder"
+            factory-method="build"
+        />
 
-        <service id="ivory_google_map.zoom_control.factory" class="%ivory_google_map.zoom_control.factory.class%" />
+        <service id="ivory_google_map.zoom_control.builder" class="%ivory_google_map.zoom_control.builder.class%">
+            <argument>%ivory_google_map.zoom_control.class%</argument>
+        </service>
 
         <service
             id="ivory_google_map.helper.zoom_control"
