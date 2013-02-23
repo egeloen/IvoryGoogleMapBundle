@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Ivory\GoogleMapBundle\Model\Base;
+namespace Ivory\GoogleMapBundle\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\AbstractBuilder;
+use Ivory\GoogleMapBundle\Model\AbstractBuilder,
+    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
 
 /**
- * Bound builder.
+ * Marker builder.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class BoundBuilder extends AbstractBuilder
+class MarkerBuilder extends AbstractBuilder
 {
     /** @var \Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder */
     protected $coordinateBuilder;
@@ -27,15 +28,18 @@ class BoundBuilder extends AbstractBuilder
     protected $prefixJavascriptVariable;
 
     /** @var array */
-    protected $southWest;
+    protected $position;
+
+    /** @var string */
+    protected $animation;
 
     /** @var array */
-    protected $northEast;
+    protected $options;
 
     /**
-     * Creates a bound builder.
+     * Creates a marker builder.
      *
-     * @param string                                              $class             The bound class.
+     * @param string                                              $class             The class to build.
      * @param \Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder $coordinateBuilder The coordinate builder.
      */
     public function __construct($class, CoordinateBuilder $coordinateBuilder)
@@ -61,7 +65,7 @@ class BoundBuilder extends AbstractBuilder
      *
      * @param \Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder $coordinateBuilder The coordinate builder.
      *
-     * @return \Ivory\GoogleMapBundle\Model\Base\BoundBuilder The builder.
+     * @return \Ivory\GoogleMapBundle\Model\Layers\MarkerBuilder The builder.
      */
     public function setCoordinateBuilder(CoordinateBuilder $coordinateBuilder)
     {
@@ -85,7 +89,7 @@ class BoundBuilder extends AbstractBuilder
      *
      * @param string $prefixJavascriptVariable The prefix javascript variable.
      *
-     * @return \Ivory\GoogleMapBundle\Model\Base\BoundBuilder The builder.
+     * @return \Ivory\GoogleMapBundle\Model\Layers\MarkerBuilder The builder.
      */
     public function setPrefixJavascriptVariable($prefixJavascriptVariable)
     {
@@ -95,49 +99,75 @@ class BoundBuilder extends AbstractBuilder
     }
 
     /**
-     * Gets the bound south west.
+     * Gets the position.
      *
-     * @return \Ivory\GoogleMap\Base\Coordinate The bound south west.
+     * @return array The position.
      */
-    public function getSouthWest()
+    public function getPosition()
     {
-        return $this->southWest;
+        return $this->position;
     }
 
     /**
-     * Sets the bound south west.
+     * Sets the position.
      *
      * @param double  $latitude  The latitude.
      * @param double  $longitude The longitude.
      * @param boolean $noWrap    The no wrap.
      *
-     * @return \Ivory\GoogleMapBundle\Model\Base\BoundBuilder The builder.
+     * @return \Ivory\GoogleMapBundle\Model\Layers\MarkerBuilder The builder.
      */
-    public function setSouthWest($latitude, $longitude, $noWrap = true)
+    public function setPosition($latitude, $longtitude, $noWrap = true)
     {
-        $this->southWest = array($latitude, $longitude, $noWrap);
+        $this->position = array($latitude, $longtitude, $noWrap);
 
         return $this;
     }
 
     /**
-     * Gets the bound north east.
+     * Gets the animation.
      *
-     * @return \Ivory\GoogleMap\Base\Coordinate The bound north east.
+     * @return string The animation.
      */
-    public function getNorthEast()
+    public function getAnimation()
     {
-        return $this->northEast;
+        return $this->animation;
     }
 
     /**
-     * Sets the bound north east.
+     * Sets the animation.
      *
-     * @return \Ivory\GoogleMapBundle\Model\Base\BoundBuilder The builder.
+     * @param string $animation The animation.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Layers\MarkerBuilder The builder.
      */
-    public function setNorthEast($latitude, $longitude, $noWrap = true)
+    public function setAnimation($animation)
     {
-        $this->northEast = array($latitude, $longitude, $noWrap);
+        $this->animation = $animation;
+
+        return $this;
+    }
+
+    /**
+     * Gets the options.
+     *
+     * @return array The options.
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Sets the options.
+     *
+     * @param array $options The options.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Layers\MarkerBuilder The builder.
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
 
         return $this;
     }
@@ -150,8 +180,9 @@ class BoundBuilder extends AbstractBuilder
         $this->coordinateBuilder->reset();
 
         $this->prefixJavascriptVariable = null;
-        $this->southWest = array();
-        $this->northEast = array();
+        $this->position = array();
+        $this->animation = null;
+        $this->options = array();
 
         return $this;
     }
@@ -159,38 +190,35 @@ class BoundBuilder extends AbstractBuilder
     /**
      * {@inheritdoc}
      *
-     * @return \Ivory\GoogleMap\Base\Bound The bound.
+     * @return \Ivory\GoogleMap\Overlays\Marker The marker.
      */
     public function build()
     {
-        $bound = new $this->class();
+        $marker = new $this->class();
 
         if ($this->prefixJavascriptVariable !== null) {
-            $bound->setPrefixJavascriptVariable($this->prefixJavascriptVariable);
+            $marker->setPrefixJavascriptVariable($this->prefixJavascriptVariable);
         }
 
-        if (!empty($this->southWest)) {
-            $southWest = $this->coordinateBuilder
+        if (!empty($this->position)) {
+            $position = $this->coordinateBuilder
                 ->reset()
-                ->setLatitude($this->southWest[0])
-                ->setLongitude($this->southWest[1])
-                ->setNoWrap($this->southWest[2])
+                ->setLatitude($this->position[0])
+                ->setLongitude($this->position[1])
+                ->setNoWrap($this->position[2])
                 ->build();
 
-            $bound->setSouthWest($southWest);
+            $marker->setPosition($position);
         }
 
-        if (!empty($this->northEast)) {
-            $northEast = $this->coordinateBuilder
-                ->reset()
-                ->setLatitude($this->northEast[0])
-                ->setLongitude($this->northEast[1])
-                ->setNoWrap($this->northEast[2])
-                ->build();
-
-            $bound->setNorthEast($northEast);
+        if ($this->animation !== null) {
+            $marker->setAnimation($this->animation);
         }
 
-        return $bound;
+        if (!empty($this->options)) {
+            $marker->setOptions($this->options);
+        }
+
+        return $marker;
     }
 }

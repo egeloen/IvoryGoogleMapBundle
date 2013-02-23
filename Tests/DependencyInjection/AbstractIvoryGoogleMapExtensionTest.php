@@ -466,10 +466,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf('Ivory\GoogleMap\Overlays\InfoWindow', $infoWindow);
         $this->assertEquals('info_window_', substr($infoWindow->getJavascriptVariable(), 0, 12));
 
-        $this->assertSame(0, $infoWindow->getPosition()->getLatitude());
-        $this->assertSame(0, $infoWindow->getPosition()->getLongitude());
-        $this->assertTrue($infoWindow->getPosition()->isNoWrap());
-
+        $this->assertNull($infoWindow->getPosition());
         $this->assertSame($infoWindow->getContent(), '<p>Default content</p>');
         $this->assertFalse($infoWindow->hasPixelOffset());
         $this->assertNull($infoWindow->getPixelOffset());
@@ -518,7 +515,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Overlays\MarkerImage', $markerImage);
         $this->assertSame('marker_image_', substr($markerImage->getJavascriptVariable(), 0, 13));
-        $this->assertSame('http://maps.gstatic.com/mapfiles/markers/marker.png', $markerImage->getUrl());
+        $this->assertSame('//maps.gstatic.com/mapfiles/markers/marker.png', $markerImage->getUrl());
 
         $this->assertFalse($markerImage->hasAnchor());
         $this->assertNull($markerImage->getAnchor());

@@ -81,6 +81,8 @@ class PointBuilder extends AbstractBuilder
     {
         $this->x = null;
         $this->y = null;
+
+        return $this;
     }
 
     /**
