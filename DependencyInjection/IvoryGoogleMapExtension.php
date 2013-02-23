@@ -41,6 +41,7 @@ class IvoryGoogleMapExtension extends Extension
             'services/events.xml',
             'services/layers.xml',
             'services/overlays.xml',
+            'services/services.xml',
             'services.xml',
             'twig.xml',
         );
@@ -98,6 +99,7 @@ class IvoryGoogleMapExtension extends Extension
 
         // Services sections
         $this->loadGeocoder($config, $container);
+        $this->loadGeocoderFakeRequest($config, $container);
         $this->loadGeocoderRequest($config, $container);
         $this->loadDirections($config, $container);
         $this->loadDirectionsRequest($config, $container);
@@ -200,10 +202,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.coordinate.builder');
 
         if (isset($config['coordinate']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['coordinate']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['coordinate']['class']);
         }
 
         if (isset($config['coordinate']['helper_class'])) {
@@ -236,10 +235,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.bound.builder');
 
         if (isset($config['bound']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['bound']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['bound']['class']);
         }
 
         if (isset($config['bound']['helper_class'])) {
@@ -649,10 +645,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.marker.builder');
 
         if (isset($config['marker']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['marker']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['marker']['class']);
         }
 
         if (isset($config['marker']['helper_class'])) {
@@ -698,10 +691,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.marker_image.builder');
 
         if (isset($config['marker_image']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['marker_image']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['marker_image']['class']);
         }
 
         if (isset($config['marker_image']['helper_class'])) {
@@ -825,10 +815,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.info_window.builder');
 
         if (isset($config['info_window']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['info_window']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['info_window']['class']);
         }
 
         if (isset($config['info_window']['helper_class'])) {
@@ -1011,10 +998,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.rectangle.builder');
 
         if (isset($config['rectangle']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['rectangle']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['rectangle']['class']);
         }
 
         if (isset($config['rectangle']['helper_class'])) {
@@ -1071,10 +1055,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.circle.builder');
 
         if (isset($config['circle']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['circle']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['circle']['class']);
         }
 
         if (isset($config['circle']['helper_class'])) {
@@ -1120,10 +1101,7 @@ class IvoryGoogleMapExtension extends Extension
         $builderDefinition = $container->getDefinition('ivory_google_map.ground_overlay.builder');
 
         if (isset($config['ground_overlay']['class'])) {
-            $builderDefinition->setArguments(array_replace(
-                $builderDefinition->getArguments(),
-                array($config['ground_overlay']['class'])
-            ));
+            $builderDefinition->replaceArgument(0, $config['ground_overlay']['class']);
         }
 
         if (isset($config['ground_overlay']['helper_class'])) {
@@ -1281,45 +1259,53 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
-        if ($config['geocoder']['fake_ip'] !== null) {
-            $definition = new Definition(
-                $container->getParameter('ivory_google_map.geocoder.event_listener.fake_request.class'),
+        $providerDefinition = $container->getDefinition('ivory_google_map.geocoder.provider');
+
+        if (isset($config['geocoder']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.geocoder')
+                ->setClass($config['geocoder']['class']);
+        }
+
+        if (isset($config['geocoder']['adapter'])) {
+            $container
+                ->getDefinition('ivory_google_map.geocoder.adapter')
+                ->setClass($config['geocoder']['adapter']);
+        }
+
+        if (isset($config['geocoder']['provider']['class'])) {
+            $providerDefinition->setClass($config['geocoder']['provider']['class']);
+        }
+
+        if (isset($config['geocoder']['provider']['api_key'])) {
+            $providerDefinition->addArgument($config['geocoder']['provider']['api_key']);
+        }
+
+        if (isset($config['geocoder']['provider']['locale'])) {
+            $providerDefinition->addArgument($config['geocoder']['provider']['locale']);
+        }
+    }
+
+    /**
+     * Loads geocoder fake request configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadGeocoderFakeRequest(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['geocoder']['fake_ip'])) {
+            $fakeRequestDefinition = new Definition(
+                'Ivory\GoogleMapBundle\EventListener\FakeRequestListener',
                 array($config['geocoder']['fake_ip'])
             );
 
-            $definition->addTag('kernel.event_listener', array(
+            $fakeRequestDefinition->addTag('kernel.event_listener', array(
                 'event'  => 'kernel.request',
                 'method' => 'onKernelRequest',
             ));
 
-            $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $definition);
-        }
-
-        if ($config['geocoder']['class'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.class', $config['geocoder']['class']);
-        }
-
-        if ($config['geocoder']['adapter'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.adapter.class', $config['geocoder']['adapter']);
-        }
-
-        if ($config['geocoder']['provider']['class'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.provider.class', $config['geocoder']['provider']['class']);
-        }
-
-        if ($config['geocoder']['provider']['api_key'] !== null) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder.provider')
-                ->replaceArgument(1, $config['geocoder']['provider']['api_key']);
-        }
-
-        if ($config['geocoder']['provider']['locale'] !== null) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder.provider')
-                ->replaceArgument(
-                    $config['geocoder']['provider']['api_key'] !== null ? 2 : 1,
-                    $config['geocoder']['provider']['locale']
-                );
+            $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $fakeRequestDefinition);
         }
     }
 
@@ -1331,62 +1317,66 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.geocoder_request.builder');
+
         if (isset($config['geocoder_request']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder_request')
-                ->setClass($config['geocoder_request']['class']);
+            $builderDefinition->replaceArgument(0, $config['geocoder_request']['class']);
         }
 
-        $container->setParameter('ivory_google_map.geocoder_request.address', $config['geocoder_request']['address']);
+        if (isset($config['geocoder_request']['address'])) {
+            $builderDefinition->addMethodCall('setAddress', array($config['geocoder_request']['address']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.latitude',
-            $config['geocoder_request']['coordinate']['latitude']
-        );
+        if (isset($config['geocoder_request']['coordinate']['latitude'])
+            && isset($config['geocoder_request']['coordinate']['longitude'])) {
+            $coordinate = array(
+                $config['geocoder_request']['coordinate']['latitude'],
+                $config['geocoder_request']['coordinate']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.longitude',
-            $config['geocoder_request']['coordinate']['longitude']
-        );
+            if (isset($config['geocoder_request']['coordinate']['no_wrap'])) {
+                $coordinate[] = $config['geocoder_request']['coordinate']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.no_wrap',
-            $config['geocoder_request']['coordinate']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setCoordinate', $coordinate);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.latitude',
-            $config['geocoder_request']['bound']['south_west']['latitude']
-        );
+        if (isset($config['geocoder_request']['bound']['south_west']['latitude'])
+            && isset($config['geocoder_request']['bound']['south_west']['longitude'])
+            && isset($config['geocoder_request']['bound']['north_east']['latitude'])
+            && isset($config['geocoder_request']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['geocoder_request']['bound']['south_west']['latitude'],
+                $config['geocoder_request']['bound']['south_west']['longitude'],
+                $config['geocoder_request']['bound']['north_east']['latitude'],
+                $config['geocoder_request']['bound']['north_east']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.longitude',
-            $config['geocoder_request']['bound']['south_west']['longitude']
-        );
+            if (isset($config['geocoder_request']['bound']['south_west']['no_wrap'])
+                && isset($config['geocoder_request']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['geocoder_request']['bound']['south_west']['no_wrap'],
+                        $config['geocoder_request']['bound']['north_east']['no_wrap']
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.no_wrap',
-            $config['geocoder_request']['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.latitude',
-            $config['geocoder_request']['bound']['north_east']['latitude']
-        );
+        if (isset($config['geocoder_request']['region'])) {
+            $builderDefinition->addMethodCall('setRegion', array($config['geocoder_request']['region']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.longitude',
-            $config['geocoder_request']['bound']['north_east']['longitude']
-        );
+        if (isset($config['geocoder_request']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['geocoder_request']['language']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.no_wrap',
-            $config['geocoder_request']['bound']['north_east']['no_wrap']
-        );
-
-        $container->setParameter('ivory_google_map.geocoder_request.region', $config['geocoder_request']['region']);
-        $container->setParameter('ivory_google_map.geocoder_request.language', $config['geocoder_request']['language']);
-        $container->setParameter('ivory_google_map.geocoder_request.sensor', $config['geocoder_request']['sensor']);
+        if (isset($config['geocoder_request']['sensor'])) {
+            $builderDefinition->addMethodCall('setSensor', array($config['geocoder_request']['sensor']));
+        }
     }
 
     /**
@@ -1397,15 +1387,23 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirections(array $config, ContainerBuilder $container)
     {
+        $directionsDefinition = $container->getDefinition('ivory_google_map.directions');
+
         if (isset($config['directions']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.directions')
-                ->setClass($config['directions']['class']);
+            $directionsDefinition->setClass($config['directions']['class']);
         }
 
-        $container->setParameter('ivory_google_map.directions.url', $config['directions']['url']);
-        $container->setParameter('ivory_google_map.directions.https', $config['directions']['https']);
-        $container->setParameter('ivory_google_map.directions.format', $config['directions']['format']);
+        if (isset($config['directions']['url'])) {
+            $directionsDefinition->addMethodCall('setUrl', array($config['directions']['url']));
+        }
+
+        if (isset($config['directions']['https'])) {
+            $directionsDefinition->addMethodCall('setHttps', array($config['directions']['https']));
+        }
+
+        if (isset($config['directions']['format'])) {
+            $directionsDefinition->addMethodCall('setFormat', array($config['directions']['format']));
+        }
     }
 
     /**
@@ -1416,49 +1414,55 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.directions_request.builder');
+
         if (isset($config['directions_request']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.directions_request')
-                ->setClass($config['directions_request']['class']);
+            $builderDefinition->replaceArgument(0, $config['directions_request']['class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.avoid_highways',
-            $config['directions_request']['avoid_highways']
-        );
+        if (isset($config['directions_request']['avoid_highways'])) {
+            $builderDefinition->addMethodCall(
+                'setAvoidHighways',
+                array($config['directions_request']['avoid_highways'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.avoid_tolls',
-            $config['directions_request']['avoid_tolls']
-        );
+        if (isset($config['directions_request']['avoid_tolls'])) {
+            $builderDefinition->addMethodCall('setAvoidTolls', array($config['directions_request']['avoid_tolls']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.optimize_waypoints',
-            $config['directions_request']['optimize_waypoints']
-        );
+        if (isset($config['directions_request']['optimize_waypoints'])) {
+            $builderDefinition->addMethodCall(
+                'setOptimizeWaypoints',
+                array($config['directions_request']['optimize_waypoints'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.provide_route_alternatives',
-            $config['directions_request']['provide_route_alternatives']
-        );
+        if (isset($config['directions_request']['provide_route_alternatives'])) {
+            $builderDefinition->addMethodCall(
+                'setProvideRouteAlternatives',
+                array($config['directions_request']['provide_route_alternatives'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.directions_request.region', $config['directions_request']['region']);
+        if (isset($config['directions_request']['region'])) {
+            $builderDefinition->addMethodCall('setRegion', array($config['directions_request']['region']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.language',
-            $config['directions_request']['language']
-        );
+        if (isset($config['directions_request']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['directions_request']['language']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.travel_mode',
-            $config['directions_request']['travel_mode'] !== null ? strtoupper($config['directions_request']['travel_mode']) : null
-        );
+        if (isset($config['directions_request']['travel_mode'])) {
+            $builderDefinition->addMethodCall('setTravelMode', array($config['directions_request']['travel_mode']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.unit_system',
-            $config['directions_request']['unit_system'] !== null ? strtoupper($config['directions_request']['unit_system']) : null
-        );
+        if (isset($config['directions_request']['unit_system'])) {
+            $builderDefinition->addMethodCall('setUnitSystem', array($config['directions_request']['unit_system']));
+        }
 
-        $container->setParameter('ivory_google_map.directions_request.sensor', $config['directions_request']['sensor']);
+        if (isset($config['directions_request']['sensor'])) {
+            $builderDefinition->addMethodCall('setSensor', array($config['directions_request']['sensor']));
+        }
     }
 }

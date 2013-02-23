@@ -5,7 +5,7 @@ ivory_google_map:
         optimize_waypoints:         true
         provide_route_alternatives: true
         region:                     "es"
-        travel_mode:                "walking"
+        travel_mode:                "WALKING"
         language:                   "en"
-        unit_system:                "imperial"
+        unit_system:                "IMPERIAL"
         sensor:                     true
