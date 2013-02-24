@@ -36,17 +36,17 @@ class IvoryGoogleMapExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $resources = array(
-            'services/base.xml',
-            'services/controls.xml',
-            'services/events.xml',
-            'services/layers.xml',
-            'services/overlays.xml',
-            'services/services.xml',
+            'base.xml',
+            'controls.xml',
+            'events.xml',
+            'layers.xml',
+            'overlays.xml',
             'services.xml',
+            'map.xml',
             'twig.xml',
         );
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
         foreach ($resources as $resource) {
             $loader->load($resource);
         }
@@ -113,10 +113,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMap(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.map.builder');
+
         if (isset($config['map']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.map')
-                ->setClass($config['map']['class']);
+            $builderDefinition->replaceArgument(0, $config['map']['class']);
         }
 
         if (isset($config['map']['helper_class'])) {
@@ -125,55 +125,99 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['map']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.map.prefix_javascript_variable',
-            $config['map']['prefix_javascript_variable']
-        );
+        if (isset($config['map']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['map']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.map.html_container', $config['map']['html_container']);
-        $container->setParameter('ivory_google_map.map.async', $config['map']['async']);
-        $container->setParameter('ivory_google_map.map.auto_zoom', $config['map']['auto_zoom']);
-        $container->setParameter('ivory_google_map.map.center.longitude', $config['map']['center']['longitude']);
-        $container->setParameter('ivory_google_map.map.center.latitude', $config['map']['center']['latitude']);
-        $container->setParameter('ivory_google_map.map.center.no_wrap', $config['map']['center']['no_wrap']);
+        if (isset($config['map']['html_container'])) {
+            $builderDefinition->addMethodCall('setHtmlContainerId', array($config['map']['html_container']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.longitude',
-            $config['map']['bound']['south_west']['longitude']
-        );
+        if (isset($config['map']['async'])) {
+            $builderDefinition->addMethodCall('setAsync', array($config['map']['async']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.latitude',
-            $config['map']['bound']['south_west']['latitude']
-        );
+        if (isset($config['map']['auto_zoom'])) {
+            $builderDefinition->addMethodCall('setAutoZoom', array($config['map']['auto_zoom']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.no_wrap',
-            $config['map']['bound']['south_west']['no_wrap']
-        );
+        if (isset($config['map']['center']['latitude']) && isset($config['map']['center']['longitude'])) {
+            $center = array($config['map']['center']['latitude'], $config['map']['center']['longitude']);
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.longitude',
-            $config['map']['bound']['north_east']['longitude']
-        );
+            if (isset($config['map']['center']['no_wrap'])) {
+                $center[] = $config['map']['center']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.latitude',
-            $config['map']['bound']['north_east']['latitude']
-        );
+            $builderDefinition->addMethodCall('setCenter', $center);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.no_wrap',
-            $config['map']['bound']['north_east']['no_wrap']
-        );
+        if (isset($config['map']['bound']['south_west']['latitude'])
+            && isset($config['map']['bound']['south_west']['longitude'])
+            && isset($config['map']['bound']['north_east']['latitude'])
+            && isset($config['map']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['map']['bound']['south_west']['latitude'],
+                $config['map']['bound']['south_west']['longitude'],
+                $config['map']['bound']['north_east']['latitude'],
+                $config['map']['bound']['north_east']['longitude'],
+            );
 
-        $container->setParameter('ivory_google_map.map.type', $config['map']['type']);
-        $container->setParameter('ivory_google_map.map.zoom', $config['map']['zoom']);
-        $container->setParameter('ivory_google_map.map.width', $config['map']['width']);
-        $container->setParameter('ivory_google_map.map.height', $config['map']['height']);
-        $container->setParameter('ivory_google_map.map.map_options', $config['map']['map_options']);
-        $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);
-        $container->setParameter('ivory_google_map.map.language', $config['map']['language']);
+            if (isset($config['map']['bound']['south_west']['no_wrap'])
+                && isset($config['map']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['map']['bound']['south_west']['no_wrap'],
+                        $config['map']['bound']['north_east']['no_wrap'],
+                    )
+                );
+            }
+
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
+
+        if (isset($config['map']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['map']['language']));
+        }
+
+        $mapOptions = array();
+
+        if (isset($config['map']['type'])) {
+            $mapOptions['mapTypeId'] = $config['map']['type'];
+        }
+
+        if (isset($config['map']['zoom'])) {
+            $mapOptions['zoom'] = $config['map']['zoom'];
+        }
+
+        if (isset($config['map']['map_options'])) {
+            $mapOptions = array_merge($config['map']['map_options'], $mapOptions);
+        }
+
+        if (!empty($mapOptions)) {
+            $builderDefinition->addMethodCall('setMapOptions', array($mapOptions));
+        }
+
+        $stylesheetOptions = array();
+
+        if (isset($config['map']['width'])) {
+            $stylesheetOptions['width'] = $config['map']['width'];
+        }
+
+        if (isset($config['map']['height'])) {
+            $stylesheetOptions['height'] = $config['map']['height'];
+        }
+
+        if (isset($config['map']['stylesheet_options'])) {
+            $stylesheetOptions = array_merge($config['map']['stylesheet_options'], $stylesheetOptions);
+        }
+
+        if (!empty($stylesheetOptions)) {
+            $builderDefinition->addMethodCall('setStylesheetOptions', array($stylesheetOptions));
+        }
     }
 
     /**
