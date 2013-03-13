@@ -1234,6 +1234,7 @@ class IvoryGoogleMapExtension extends Extension
         );
 
         $container->setParameter('ivory_google_map.geocoder_request.region', $config['geocoder_request']['region']);
+        $container->setParameter('ivory_google_map.geocoder_request.language', $config['geocoder_request']['language']);
         $container->setParameter('ivory_google_map.geocoder_request.sensor', $config['geocoder_request']['sensor']);
     }
 
