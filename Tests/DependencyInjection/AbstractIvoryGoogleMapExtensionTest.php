@@ -738,6 +738,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertFalse($request->hasCoordinate());
         $this->assertFalse($request->hasBound());
         $this->assertFalse($request->hasRegion());
+        $this->assertFalse($request->hasLanguage());
         $this->assertFalse($request->hasSensor());
     }
 
@@ -766,6 +767,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertTrue($request->hasRegion());
         $this->assertSame('es', $request->getRegion());
+
+        $this->assertTrue($request->hasLanguage());
+        $this->assertSame('pl', $request->getLanguage());
 
         $this->assertTrue($request->hasSensor());
     }

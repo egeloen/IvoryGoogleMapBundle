@@ -12,7 +12,7 @@ env:
     - SYMFONY_VERSION="dev-master"
 
 before_script:
-    - composer require symfony/framework-bundle:${SYMFONY_VERSION}
+    - composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}
     - composer install --dev
 
 script: phpunit

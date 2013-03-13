@@ -949,6 +949,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->scalarNode('region')->defaultValue(null)->end()
+                        ->scalarNode('language')->defaultValue(null)->end()
                         ->booleanNode('sensor')->defaultFalse()->end()
                     ->end()
                 ->end()
