@@ -15,4 +15,5 @@ ivory_google_map:
                 longitude: 2.3
                 no_wrap:   true
         region:   "es"
+        language: "pl"
         sensor:   true

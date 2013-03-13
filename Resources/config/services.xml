@@ -828,6 +828,10 @@
                 <argument>%ivory_google_map.geocoder_request.region%</argument>
             </call>
 
+            <call method="setLanguage">
+                <argument>%ivory_google_map.geocoder_request.language%</argument>
+            </call>
+
             <call method="setSensor">
                 <argument>%ivory_google_map.geocoder_request.sensor%</argument>
             </call>
