@@ -35,9 +35,20 @@ class IvoryGoogleMapExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        foreach (array('services.xml', 'twig.xml') as $file) {
-            $loader->load($file);
+        $resources = array(
+            'base.xml',
+            'controls.xml',
+            'events.xml',
+            'layers.xml',
+            'overlays.xml',
+            'services.xml',
+            'map.xml',
+            'twig.xml',
+        );
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
+        foreach ($resources as $resource) {
+            $loader->load($resource);
         }
 
         // Map sections
@@ -88,6 +99,7 @@ class IvoryGoogleMapExtension extends Extension
 
         // Services sections
         $this->loadGeocoder($config, $container);
+        $this->loadGeocoderFakeRequest($config, $container);
         $this->loadGeocoderRequest($config, $container);
         $this->loadDirections($config, $container);
         $this->loadDirectionsRequest($config, $container);
@@ -101,10 +113,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMap(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.map.builder');
+
         if (isset($config['map']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.map')
-                ->setClass($config['map']['class']);
+            $builderDefinition->replaceArgument(0, $config['map']['class']);
         }
 
         if (isset($config['map']['helper_class'])) {
@@ -113,55 +125,99 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['map']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.map.prefix_javascript_variable',
-            $config['map']['prefix_javascript_variable']
-        );
+        if (isset($config['map']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['map']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.map.html_container', $config['map']['html_container']);
-        $container->setParameter('ivory_google_map.map.async', $config['map']['async']);
-        $container->setParameter('ivory_google_map.map.auto_zoom', $config['map']['auto_zoom']);
-        $container->setParameter('ivory_google_map.map.center.longitude', $config['map']['center']['longitude']);
-        $container->setParameter('ivory_google_map.map.center.latitude', $config['map']['center']['latitude']);
-        $container->setParameter('ivory_google_map.map.center.no_wrap', $config['map']['center']['no_wrap']);
+        if (isset($config['map']['html_container'])) {
+            $builderDefinition->addMethodCall('setHtmlContainerId', array($config['map']['html_container']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.longitude',
-            $config['map']['bound']['south_west']['longitude']
-        );
+        if (isset($config['map']['async'])) {
+            $builderDefinition->addMethodCall('setAsync', array($config['map']['async']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.latitude',
-            $config['map']['bound']['south_west']['latitude']
-        );
+        if (isset($config['map']['auto_zoom'])) {
+            $builderDefinition->addMethodCall('setAutoZoom', array($config['map']['auto_zoom']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.south_west.no_wrap',
-            $config['map']['bound']['south_west']['no_wrap']
-        );
+        if (isset($config['map']['center']['latitude']) && isset($config['map']['center']['longitude'])) {
+            $center = array($config['map']['center']['latitude'], $config['map']['center']['longitude']);
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.longitude',
-            $config['map']['bound']['north_east']['longitude']
-        );
+            if (isset($config['map']['center']['no_wrap'])) {
+                $center[] = $config['map']['center']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.latitude',
-            $config['map']['bound']['north_east']['latitude']
-        );
+            $builderDefinition->addMethodCall('setCenter', $center);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map.bound.north_east.no_wrap',
-            $config['map']['bound']['north_east']['no_wrap']
-        );
+        if (isset($config['map']['bound']['south_west']['latitude'])
+            && isset($config['map']['bound']['south_west']['longitude'])
+            && isset($config['map']['bound']['north_east']['latitude'])
+            && isset($config['map']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['map']['bound']['south_west']['latitude'],
+                $config['map']['bound']['south_west']['longitude'],
+                $config['map']['bound']['north_east']['latitude'],
+                $config['map']['bound']['north_east']['longitude'],
+            );
 
-        $container->setParameter('ivory_google_map.map.type', $config['map']['type']);
-        $container->setParameter('ivory_google_map.map.zoom', $config['map']['zoom']);
-        $container->setParameter('ivory_google_map.map.width', $config['map']['width']);
-        $container->setParameter('ivory_google_map.map.height', $config['map']['height']);
-        $container->setParameter('ivory_google_map.map.map_options', $config['map']['map_options']);
-        $container->setParameter('ivory_google_map.map.stylesheet_options', $config['map']['stylesheet_options']);
-        $container->setParameter('ivory_google_map.map.language', $config['map']['language']);
+            if (isset($config['map']['bound']['south_west']['no_wrap'])
+                && isset($config['map']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['map']['bound']['south_west']['no_wrap'],
+                        $config['map']['bound']['north_east']['no_wrap'],
+                    )
+                );
+            }
+
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
+
+        if (isset($config['map']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['map']['language']));
+        }
+
+        $mapOptions = array();
+
+        if (isset($config['map']['type'])) {
+            $mapOptions['mapTypeId'] = $config['map']['type'];
+        }
+
+        if (isset($config['map']['zoom'])) {
+            $mapOptions['zoom'] = $config['map']['zoom'];
+        }
+
+        if (isset($config['map']['map_options'])) {
+            $mapOptions = array_merge($config['map']['map_options'], $mapOptions);
+        }
+
+        if (!empty($mapOptions)) {
+            $builderDefinition->addMethodCall('setMapOptions', array($mapOptions));
+        }
+
+        $stylesheetOptions = array();
+
+        if (isset($config['map']['width'])) {
+            $stylesheetOptions['width'] = $config['map']['width'];
+        }
+
+        if (isset($config['map']['height'])) {
+            $stylesheetOptions['height'] = $config['map']['height'];
+        }
+
+        if (isset($config['map']['stylesheet_options'])) {
+            $stylesheetOptions = array_merge($config['map']['stylesheet_options'], $stylesheetOptions);
+        }
+
+        if (!empty($stylesheetOptions)) {
+            $builderDefinition->addMethodCall('setStylesheetOptions', array($stylesheetOptions));
+        }
     }
 
     /**
@@ -187,10 +243,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadCoordinate(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.coordinate.builder');
+
         if (isset($config['coordinate']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.coordinate')
-                ->setClass($config['coordinate']['class']);
+            $builderDefinition->replaceArgument(0, $config['coordinate']['class']);
         }
 
         if (isset($config['coordinate']['helper_class'])) {
@@ -199,9 +255,17 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['coordinate']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.coordinate.latitude', $config['coordinate']['latitude']);
-        $container->setParameter('ivory_google_map.coordinate.longitude', $config['coordinate']['longitude']);
-        $container->setParameter('ivory_google_map.coordinate.no_wrap', $config['coordinate']['no_wrap']);
+        if (isset($config['coordinate']['latitude'])) {
+            $builderDefinition->addMethodCall('setLatitude', array($config['coordinate']['latitude']));
+        }
+
+        if (isset($config['coordinate']['longitude'])) {
+            $builderDefinition->addMethodCall('setLongitude', array($config['coordinate']['longitude']));
+        }
+
+        if (isset($config['coordinate']['no_wrap'])) {
+            $builderDefinition->addMethodCall('setNoWrap', array($config['coordinate']['no_wrap']));
+        }
     }
 
     /**
@@ -212,10 +276,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadBound(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.bound.builder');
+
         if (isset($config['bound']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.bound')
-                ->setClass($config['bound']['class']);
+            $builderDefinition->replaceArgument(0, $config['bound']['class']);
         }
 
         if (isset($config['bound']['helper_class'])) {
@@ -224,40 +288,38 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['bound']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.bound.prefix_javascript_variable',
-            $config['bound']['prefix_javascript_variable']
-        );
+        if (isset($config['bound']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['bound']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.longitude',
-            $config['bound']['south_west']['longitude']
-        );
+        if (isset($config['bound']['south_west']['latitude']) && isset($config['bound']['south_west']['longitude'])) {
+            $southWest = array(
+                $config['bound']['south_west']['latitude'],
+                $config['bound']['south_west']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.latitude',
-            $config['bound']['south_west']['latitude']
-        );
+            if (isset($config['bound']['south_west']['no_wrap'])) {
+                $southWest[] = $config['bound']['south_west']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.bound.south_west.no_wrap',
-            $config['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setSouthWest', $southWest);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.longitude',
-            $config['bound']['north_east']['longitude']
-        );
+        if (isset($config['bound']['north_east']['latitude']) && isset($config['bound']['north_east']['longitude'])) {
+            $northEast = array(
+                $config['bound']['north_east']['latitude'],
+                $config['bound']['north_east']['longitude']
+            );
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.latitude',
-            $config['bound']['north_east']['latitude']
-        );
+            if (isset($config['bound']['north_east']['no_wrap'])) {
+                $northEast[] = $config['bound']['north_east']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.bound.north_east.no_wrap',
-            $config['bound']['north_east']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setNorthEast', $northEast);
+        }
     }
 
     /**
@@ -268,10 +330,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPoint(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.point.builder');
+
         if (isset($config['point']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.point')
-                ->setClass($config['point']['class']);
+            $builderDefinition->setArguments(array($config['point']['class']));
         }
 
         if (isset($config['point']['helper_class'])) {
@@ -280,8 +342,13 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['point']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.point.x', $config['point']['x']);
-        $container->setParameter('ivory_google_map.point.y', $config['point']['y']);
+        if (isset($config['point']['x'])) {
+            $builderDefinition->addMethodCall('setX', array($config['point']['x']));
+        }
+
+        if (isset($config['point']['y'])) {
+            $builderDefinition->addMethodCall('setY', array($config['point']['y']));
+        }
     }
 
     /**
@@ -292,10 +359,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadSize(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.size.builder');
+
         if (isset($config['size']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.size')
-                ->setClass($config['size']['class']);
+            $builderDefinition->setArguments(array($config['size']['class']));
         }
 
         if (isset($config['size']['helper_class'])) {
@@ -304,10 +371,21 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['size']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.size.width', $config['size']['width']);
-        $container->setParameter('ivory_google_map.size.height', $config['size']['height']);
-        $container->setParameter('ivory_google_map.size.width_unit', $config['size']['width_unit']);
-        $container->setParameter('ivory_google_map.size.height_unit', $config['size']['height_unit']);
+        if (isset($config['size']['width'])) {
+            $builderDefinition->addMethodCall('setWidth', array($config['size']['width']));
+        }
+
+        if (isset($config['size']['height'])) {
+            $builderDefinition->addMethodCall('setHeight', array($config['size']['height']));
+        }
+
+        if (isset($config['size']['width_unit'])) {
+            $builderDefinition->addMethodCall('setWidthUnit', array($config['size']['width_unit']));
+        }
+
+        if (isset($config['size']['height_unit'])) {
+            $builderDefinition->addMethodCall('setHeightUnit', array($config['size']['height_unit']));
+        }
     }
 
     /**
@@ -333,10 +411,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMapTypeControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.map_type_control.builder');
+
         if (isset($config['map_type_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.map_type_control')
-                ->setClass($config['map_type_control']['class']);
+            $builderDefinition->setArguments(array($config['map_type_control']['class']));
         }
 
         if (isset($config['map_type_control']['helper_class'])) {
@@ -345,20 +423,23 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['map_type_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.map_type_ids',
-            $config['map_type_control']['map_type_ids']
-        );
+        if (isset($config['map_type_control']['map_type_ids'])) {
+            $builderDefinition->addMethodCall('setMapTypeIds', array($config['map_type_control']['map_type_ids']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.control_position',
-            $config['map_type_control']['control_position']
-        );
+        if (isset($config['map_type_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['map_type_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.map_type_control.map_type_control_style',
-            $config['map_type_control']['map_type_control_style']
-        );
+        if (isset($config['map_type_control']['map_type_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setMapTypeControlStyle',
+                array($config['map_type_control']['map_type_control_style'])
+            );
+        }
     }
 
     /**
@@ -384,10 +465,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadOverviewMapControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.overview_map_control.builder');
+
         if (isset($config['overview_map_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.overview_map_control')
-                ->setClass($config['overview_map_control']['class']);
+            $builderDefinition->setArguments(array($config['overview_map_control']['class']));
         }
 
         if (isset($config['overview_map_control']['helper_class'])) {
@@ -396,10 +477,9 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['overview_map_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.overview_map_control.opened',
-            $config['overview_map_control']['opened']
-        );
+        if (isset($config['overview_map_control']['opened'])) {
+            $builderDefinition->addMethodCall('setOpened', array($config['overview_map_control']['opened']));
+        }
     }
 
     /**
@@ -410,10 +490,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPanControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.pan_control.builder');
+
         if (isset($config['pan_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.pan_control')
-                ->setClass($config['pan_control']['class']);
+            $builderDefinition->setArguments(array($config['pan_control']['class']));
         }
 
         if (isset($config['pan_control']['helper_class'])) {
@@ -422,10 +502,9 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['pan_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.pan_control.control_position',
-            $config['pan_control']['control_position']
-        );
+        if (isset($config['pan_control']['control_position'])) {
+            $builderDefinition->addMethodCall('setControlPosition', array($config['pan_control']['control_position']));
+        }
     }
 
     /**
@@ -436,10 +515,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadRotateControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.rotate_control.builder');
+
         if (isset($config['rotate_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.rotate_control')
-                ->setClass($config['rotate_control']['class']);
+            $builderDefinition->setArguments(array($config['rotate_control']['class']));
         }
 
         if (isset($config['rotate_control']['helper_class'])) {
@@ -448,10 +527,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['rotate_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.rotate_control.control_position',
-            $config['rotate_control']['control_position']
-        );
+        if (isset($config['rotate_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['rotate_control']['control_position'])
+            );
+        }
     }
 
     /**
@@ -462,10 +543,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadScaleControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.scale_control.builder');
+
         if (isset($config['scale_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.scale_control')
-                ->setClass($config['scale_control']['class']);
+            $builderDefinition->setArguments(array($config['scale_control']['class']));
         }
 
         if (isset($config['scale_control']['helper_class'])) {
@@ -474,15 +555,19 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['scale_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.scale_control.control_position',
-            $config['scale_control']['control_position']
-        );
+        if (isset($config['scale_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['scale_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.scale_control.scale_control_style',
-            $config['scale_control']['scale_control_style']
-        );
+        if (isset($config['scale_control']['scale_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setScaleControlStyle',
+                array($config['scale_control']['scale_control_style'])
+            );
+        }
     }
 
     /**
@@ -508,10 +593,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadStreetViewControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.street_view_control.builder');
+
         if (isset($config['street_view_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.street_view_control')
-                ->setClass($config['street_view_control']['class']);
+            $builderDefinition->setArguments(array($config['street_view_control']['class']));
         }
 
         if (isset($config['street_view_control']['helper_class'])) {
@@ -520,10 +605,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['street_view_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.street_view_control.control_position',
-            $config['street_view_control']['control_position']
-        );
+        if (isset($config['street_view_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['street_view_control']['control_position'])
+            );
+        }
     }
 
     /**
@@ -534,10 +621,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadZoomControl(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.zoom_control.builder');
+
         if (isset($config['zoom_control']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.zoom_control')
-                ->setClass($config['zoom_control']['class']);
+            $builderDefinition->setArguments(array($config['zoom_control']['class']));
         }
 
         if (isset($config['zoom_control']['helper_class'])) {
@@ -546,15 +633,19 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['zoom_control']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.zoom_control.control_position',
-            $config['zoom_control']['control_position']
-        );
+        if (isset($config['zoom_control']['control_position'])) {
+            $builderDefinition->addMethodCall(
+                'setControlPosition',
+                array($config['zoom_control']['control_position'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.zoom_control.zoom_control_style',
-            $config['zoom_control']['zoom_control_style']
-        );
+        if (isset($config['zoom_control']['zoom_control_style'])) {
+            $builderDefinition->addMethodCall(
+                'setZoomControlStyle',
+                array($config['zoom_control']['zoom_control_style'])
+            );
+        }
     }
 
     /**
@@ -595,10 +686,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarker(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.marker.builder');
+
         if (isset($config['marker']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.marker')
-                ->setClass($config['marker']['class']);
+            $builderDefinition->replaceArgument(0, $config['marker']['class']);
         }
 
         if (isset($config['marker']['helper_class'])) {
@@ -607,28 +698,30 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['marker']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.marker.prefix_javascript_variable',
-            $config['marker']['prefix_javascript_variable']
-        );
+        if (isset($config['marker']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['marker']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.marker.position.latitude',
-            $config['marker']['position']['latitude']
-        );
+        if (isset($config['marker']['position']['latitude']) && $config['marker']['position']['longitude']) {
+            $position = array($config['marker']['position']['latitude'], $config['marker']['position']['longitude']);
 
-        $container->setParameter(
-            'ivory_google_map.marker.position.longitude',
-            $config['marker']['position']['longitude']
-        );
+            if (isset($config['marker']['position']['no_wrap'])) {
+                $position[] = $config['marker']['position']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.marker.position.no_wrap',
-            $config['marker']['position']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setPosition', $position);
+        }
 
-        $container->setParameter('ivory_google_map.marker.animation', $config['marker']['animation']);
-        $container->setParameter('ivory_google_map.marker.options', $config['marker']['options']);
+        if (isset($config['marker']['animation'])) {
+            $builderDefinition->addMethodCall('setAnimation', array($config['marker']['animation']));
+        }
+
+        if (isset($config['marker']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['marker']['options']));
+        }
     }
 
     /**
@@ -639,10 +732,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarkerImage(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.marker_image.builder');
+
         if (isset($config['marker_image']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.marker_image')
-                ->setClass($config['marker_image']['class']);
+            $builderDefinition->replaceArgument(0, $config['marker_image']['class']);
         }
 
         if (isset($config['marker_image']['helper_class'])) {
@@ -651,56 +744,72 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['marker_image']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.prefix_javascript_variable',
-            $config['marker_image']['prefix_javascript_variable']
-        );
+        if (isset($config['marker_image']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['marker_image']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.marker_image.url', $config['marker_image']['url']);
-        $container->setParameter('ivory_google_map.marker_image.anchor.x', $config['marker_image']['anchor']['x']);
-        $container->setParameter('ivory_google_map.marker_image.anchor.y', $config['marker_image']['anchor']['y']);
-        $container->setParameter('ivory_google_map.marker_image.origin.x', $config['marker_image']['origin']['x']);
-        $container->setParameter('ivory_google_map.marker_image.origin.y', $config['marker_image']['origin']['y']);
+        if (isset($config['marker_image']['url'])) {
+            $builderDefinition->addMethodCall('setUrl', array($config['marker_image']['url']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.scaled_size.width',
-            $config['marker_image']['scaled_size']['width']
-        );
+        if (isset($config['marker_image']['anchor']['x']) && isset($config['marker_image']['anchor']['y'])) {
+            $builderDefinition->addMethodCall(
+                'setAnchor',
+                array($config['marker_image']['anchor']['x'], $config['marker_image']['anchor']['y'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.scaled_size.height',
-            $config['marker_image']['scaled_size']['height']
-        );
+        if (isset($config['marker_image']['origin']['x']) && isset($config['marker_image']['origin']['y'])) {
+            $builderDefinition->addMethodCall(
+                'setOrigin',
+                array($config['marker_image']['origin']['x'], $config['marker_image']['origin']['y'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.scaled_size.width_unit',
-            $config['marker_image']['scaled_size']['width_unit']
-        );
+        if (isset($config['marker_image']['scaled_size']['width'])
+            && isset($config['marker_image']['scaled_size']['height'])) {
+            $scaledSize = array(
+                $config['marker_image']['scaled_size']['width'],
+                $config['marker_image']['scaled_size']['height'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.scaled_size.height_unit',
-            $config['marker_image']['scaled_size']['height_unit']
-        );
+            if (isset($config['marker_image']['scaled_size']['width_unit'])
+                && isset($config['marker_image']['scaled_size']['height_unit'])) {
+                $scaledSize = array_merge(
+                    $scaledSize,
+                    array(
+                        $config['marker_image']['scaled_size']['width_unit'],
+                        $config['marker_image']['scaled_size']['height_unit'],
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.size.width',
-            $config['marker_image']['size']['width']
-        );
+            $builderDefinition->addMethodCall('setScaledSize', $scaledSize);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.size.height',
-            $config['marker_image']['size']['height']
-        );
+        if (isset($config['marker_image']['size']['width'])
+            && isset($config['marker_image']['size']['height'])) {
+            $size = array(
+                $config['marker_image']['size']['width'],
+                $config['marker_image']['size']['height'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.size.width_unit',
-            $config['marker_image']['size']['width_unit']
-        );
+            if (isset($config['marker_image']['size']['width_unit'])
+                && isset($config['marker_image']['size']['height_unit'])) {
+                $size = array_merge(
+                    $size,
+                    array(
+                        $config['marker_image']['size']['width_unit'],
+                        $config['marker_image']['size']['height_unit'],
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.marker_image.size.height_unit',
-            $config['marker_image']['size']['height_unit']
-        );
+            $builderDefinition->addMethodCall('setSize', $size);
+        }
     }
 
     /**
@@ -711,10 +820,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadMarkerShape(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.marker_shape.builder');
+
         if (isset($config['marker_shape']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.marker_shape')
-                ->setClass($config['marker_shape']['class']);
+            $builderDefinition->setArguments(array($config['marker_shape']['class']));
         }
 
         if (isset($config['marker_shape']['helper_class'])) {
@@ -723,13 +832,20 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['marker_shape']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.marker_shape.prefix_javascript_variable',
-            $config['marker_shape']['prefix_javascript_variable']
-        );
+        if (isset($config['marker_shape']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['marker_shape']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.marker_shape.type', $config['marker_shape']['type']);
-        $container->setParameter('ivory_google_map.marker_shape.coordinates', $config['marker_shape']['coordinates']);
+        if (isset($config['marker_shape']['type'])) {
+            $builderDefinition->addMethodCall('setType', array($config['marker_shape']['type']));
+        }
+
+        if (isset($config['marker_shape']['coordinates'])) {
+            $builderDefinition->addMethodCall('setCoordinates', array($config['marker_shape']['coordinates']));
+        }
     }
 
     /**
@@ -740,10 +856,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadInfoWindow(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.info_window.builder');
+
         if (isset($config['info_window']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.info_window')
-                ->setClass($config['info_window']['class']);
+            $builderDefinition->replaceArgument(0, $config['info_window']['class']);
         }
 
         if (isset($config['info_window']['helper_class'])) {
@@ -752,52 +868,71 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['info_window']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.prefix_javascript_variable',
-            $config['info_window']['prefix_javascript_variable']
-        );
+        if (isset($config['info_window']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['info_window']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.position.latitude',
-            $config['info_window']['position']['latitude']
-        );
+        if (isset($config['info_window']['position']['latitude'])
+            && isset($config['info_window']['position']['longitude'])) {
+            $position = array(
+                $config['info_window']['position']['latitude'],
+                $config['info_window']['position']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.info_window.position.longitude',
-            $config['info_window']['position']['longitude']
-        );
+            if (isset($config['info_window']['position']['no_wrap'])) {
+                $position[] = $config['info_window']['position']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.position.no_wrap',
-            $config['info_window']['position']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setPosition', $position);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.pixel_offset.width',
-            $config['info_window']['pixel_offset']['width']
-        );
+        if (isset($config['info_window']['pixel_offset']['width'])
+            && isset($config['info_window']['pixel_offset']['height'])) {
+            $pixelOffset = array(
+                $config['info_window']['pixel_offset']['width'],
+                $config['info_window']['pixel_offset']['height'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.info_window.pixel_offset.height',
-            $config['info_window']['pixel_offset']['height']
-        );
+            if (isset($config['info_window']['pixel_offset']['width_unit'])
+                && isset($config['info_window']['pixel_offset']['height_unit'])) {
+                $pixelOffset = array_merge(
+                    $pixelOffset,
+                    array(
+                        $config['info_window']['pixel_offset']['width_unit'],
+                        $config['info_window']['pixel_offset']['height_unit'],
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.pixel_offset.width_unit',
-            $config['info_window']['pixel_offset']['width_unit']
-        );
+            $builderDefinition->addMethodCall('setPixelOffset', $pixelOffset);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.info_window.pixel_offset.height_unit',
-            $config['info_window']['pixel_offset']['height_unit']
-        );
+        if (isset($config['info_window']['content'])) {
+            $builderDefinition->addMethodCall('setContent', array($config['info_window']['content']));
+        }
 
-        $container->setParameter('ivory_google_map.info_window.content', $config['info_window']['content']);
-        $container->setParameter('ivory_google_map.info_window.open', $config['info_window']['open']);
-        $container->setParameter('ivory_google_map.info_window.auto_open', $config['info_window']['auto_open']);
-        $container->setParameter('ivory_google_map.info_window.open_event', $config['info_window']['open_event']);
-        $container->setParameter('ivory_google_map.info_window.auto_close', $config['info_window']['auto_close']);
-        $container->setParameter('ivory_google_map.info_window.options', $config['info_window']['options']);
+        if (isset($config['info_window']['open'])) {
+            $builderDefinition->addMethodCall('setOpen', array($config['info_window']['open']));
+        }
+
+        if (isset($config['info_window']['auto_open'])) {
+            $builderDefinition->addMethodCall('setAutoOpen', array($config['info_window']['auto_open']));
+        }
+
+        if (isset($config['info_window']['open_event'])) {
+            $builderDefinition->addMethodCall('setOpenEvent', array($config['info_window']['open_event']));
+        }
+
+        if (isset($config['info_window']['auto_close'])) {
+            $builderDefinition->addMethodCall('setAutoClose', array($config['info_window']['auto_close']));
+        }
+
+        if (isset($config['info_window']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['info_window']['options']));
+        }
     }
 
     /**
@@ -808,10 +943,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPolyline(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.polyline.builder');
+
         if (isset($config['polyline']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.polyline')
-                ->setClass($config['polyline']['class']);
+            $builderDefinition->setArguments(array($config['polyline']['class']));
         }
 
         if (isset($config['polyline']['helper_class'])) {
@@ -820,12 +955,16 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['polyline']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.polyline.prefix_javascript_variable',
-            $config['polyline']['prefix_javascript_variable']
-        );
+        if (isset($config['polyline']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['polyline']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.polyline.options', $config['polyline']['options']);
+        if (isset($config['polyline']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['polyline']['options']));
+        }
     }
 
     /**
@@ -836,10 +975,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadEncodedPolyline(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.encoded_polyline.builder');
+
         if (isset($config['encoded_polyline']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.encoded_polyline')
-                ->setClass($config['encoded_polyline']['class']);
+            $builderDefinition->setArguments(array($config['encoded_polyline']['class']));
         }
 
         if (isset($config['encoded_polyline']['helper_class'])) {
@@ -848,12 +987,16 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['encoded_polyline']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.encoded_polyline.prefix_javascript_variable',
-            $config['encoded_polyline']['prefix_javascript_variable']
-        );
+        if (isset($config['encoded_polyline']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['encoded_polyline']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.encoded_polyline.options', $config['encoded_polyline']['options']);
+        if (isset($config['encoded_polyline']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['encoded_polyline']['options']));
+        }
     }
 
     /**
@@ -864,10 +1007,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadPolygon(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.polygon.builder');
+
         if (isset($config['polygon']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.polygon')
-                ->setClass($config['polygon']['class']);
+            $builderDefinition->setArguments(array($config['polygon']['class']));
         }
 
         if (isset($config['polygon']['helper_class'])) {
@@ -876,12 +1019,16 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['polygon']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.polygon.prefix_javascript_variable',
-            $config['polygon']['prefix_javascript_variable']
-        );
+        if (isset($config['polygon']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['polygon']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.polygon.options', $config['polygon']['options']);
+        if (isset($config['polygon']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['polygon']['options']));
+        }
     }
 
     /**
@@ -892,10 +1039,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadRectangle(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.rectangle.builder');
+
         if (isset($config['rectangle']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.rectangle')
-                ->setClass($config['rectangle']['class']);
+            $builderDefinition->replaceArgument(0, $config['rectangle']['class']);
         }
 
         if (isset($config['rectangle']['helper_class'])) {
@@ -904,42 +1051,41 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['rectangle']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.rectangle.prefix_javascript_variable',
-            $config['rectangle']['prefix_javascript_variable']
-        );
+        if (isset($config['rectangle']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['rectangle']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.south_west.latitude',
-            $config['rectangle']['bound']['south_west']['latitude']
-        );
+        if (isset($config['rectangle']['bound']['south_west']['latitude'])
+            && isset($config['rectangle']['bound']['south_west']['longitude'])
+            && isset($config['rectangle']['bound']['north_east']['latitude'])
+            && isset($config['rectangle']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['rectangle']['bound']['south_west']['latitude'],
+                $config['rectangle']['bound']['south_west']['longitude'],
+                $config['rectangle']['bound']['north_east']['latitude'],
+                $config['rectangle']['bound']['north_east']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.south_west.longitude',
-            $config['rectangle']['bound']['south_west']['longitude']
-        );
+            if (isset($config['rectangle']['bound']['south_west']['no_wrap'])
+                && isset($config['rectangle']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['rectangle']['bound']['south_west']['no_wrap'],
+                        $config['rectangle']['bound']['north_east']['no_wrap'],
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.south_west.no_wrap',
-            $config['rectangle']['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.north_east.latitude',
-            $config['rectangle']['bound']['north_east']['latitude']
-        );
-
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.north_east.longitude',
-            $config['rectangle']['bound']['north_east']['longitude']
-        );
-
-        $container->setParameter(
-            'ivory_google_map.rectangle.bound.north_east.no_wrap',
-            $config['rectangle']['bound']['north_east']['no_wrap']
-        );
-
-        $container->setParameter('ivory_google_map.rectangle.options', $config['rectangle']['options']);
+        if (isset($config['rectangle']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['rectangle']['options']));
+        }
     }
 
     /**
@@ -950,10 +1096,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadCircle(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.circle.builder');
+
         if (isset($config['circle']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.circle')
-                ->setClass($config['circle']['class']);
+            $builderDefinition->replaceArgument(0, $config['circle']['class']);
         }
 
         if (isset($config['circle']['helper_class'])) {
@@ -962,16 +1108,30 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['circle']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.circle.prefix_javascript_variable',
-            $config['circle']['prefix_javascript_variable']
-        );
+        if (isset($config['circle']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['circle']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.circle.center.longitude', $config['circle']['center']['longitude']);
-        $container->setParameter('ivory_google_map.circle.center.latitude', $config['circle']['center']['latitude']);
-        $container->setParameter('ivory_google_map.circle.center.no_wrap', $config['circle']['center']['no_wrap']);
-        $container->setParameter('ivory_google_map.circle.radius', $config['circle']['radius']);
-        $container->setParameter('ivory_google_map.circle.options', $config['circle']['options']);
+        if (isset($config['circle']['center']['latitude']) && isset($config['circle']['center']['longitude'])) {
+            $center = array($config['circle']['center']['latitude'], $config['circle']['center']['longitude']);
+
+            if (isset($config['circle']['center']['no_wrap'])) {
+                $center[] = $config['circle']['center']['no_wrap'];
+            }
+
+            $builderDefinition->addMethodCall('setCenter', $center);
+        }
+
+        if (isset($config['circle']['radius'])) {
+            $builderDefinition->addMethodCall('setRadius', array($config['circle']['radius']));
+        }
+
+        if (isset($config['circle']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['circle']['options']));
+        }
     }
 
     /**
@@ -982,10 +1142,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGroundOverlay(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.ground_overlay.builder');
+
         if (isset($config['ground_overlay']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.ground_overlay')
-                ->setClass($config['ground_overlay']['class']);
+            $builderDefinition->replaceArgument(0, $config['ground_overlay']['class']);
         }
 
         if (isset($config['ground_overlay']['helper_class'])) {
@@ -994,44 +1154,45 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['ground_overlay']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.prefix_javascript_variable',
-            $config['ground_overlay']['prefix_javascript_variable']
-        );
+        if (isset($config['ground_overlay']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['ground_overlay']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.ground_overlay.url', $config['ground_overlay']['url']);
+        if (isset($config['ground_overlay']['url'])) {
+            $builderDefinition->addMethodCall('setUrl', array($config['ground_overlay']['url']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.south_west.latitude',
-            $config['ground_overlay']['bound']['south_west']['latitude']
-        );
+        if (isset($config['ground_overlay']['bound']['south_west']['latitude'])
+            && isset($config['ground_overlay']['bound']['south_west']['longitude'])
+            && isset($config['ground_overlay']['bound']['north_east']['latitude'])
+            && isset($config['ground_overlay']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['ground_overlay']['bound']['south_west']['latitude'],
+                $config['ground_overlay']['bound']['south_west']['longitude'],
+                $config['ground_overlay']['bound']['north_east']['latitude'],
+                $config['ground_overlay']['bound']['north_east']['longitude']
+            );
 
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.south_west.longitude',
-            $config['ground_overlay']['bound']['south_west']['longitude']
-        );
+            if (isset($config['ground_overlay']['bound']['south_west']['no_wrap'])
+                && isset($config['ground_overlay']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['ground_overlay']['bound']['south_west']['no_wrap'],
+                        $config['ground_overlay']['bound']['north_east']['no_wrap'],
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.south_west.no_wrap',
-            $config['ground_overlay']['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.north_east.latitude',
-            $config['ground_overlay']['bound']['north_east']['latitude']
-        );
-
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.north_east.longitude',
-            $config['ground_overlay']['bound']['north_east']['longitude']
-        );
-
-        $container->setParameter(
-            'ivory_google_map.ground_overlay.bound.north_east.no_wrap',
-            $config['ground_overlay']['bound']['north_east']['no_wrap']
-        );
-
-        $container->setParameter('ivory_google_map.ground_overlay.options', $config['ground_overlay']['options']);
+        if (isset($config['ground_overlay']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['ground_overlay']['options']));
+        }
     }
 
     /**
@@ -1042,10 +1203,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadKMLLayer(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.kml_layer.builder');
+
         if (isset($config['kml_layer']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.kml_layer')
-                ->setClass($config['kml_layer']['class']);
+            $builderDefinition->setArguments(array($config['kml_layer']['class']));
         }
 
         if (isset($config['kml_layer']['helper_class'])) {
@@ -1054,13 +1215,20 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['kml_layer']['helper_class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.kml_layer.prefix_javascript_variable',
-            $config['kml_layer']['prefix_javascript_variable']
-        );
+        if (isset($config['kml_layer']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['kml_layer']['prefix_javascript_variable'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.kml_layer.url', $config['kml_layer']['url']);
-        $container->setParameter('ivory_google_map.kml_layer.options', $config['kml_layer']['options']);
+        if (isset($config['kml_layer']['url'])) {
+            $builderDefinition->addMethodCall('setUrl', array($config['kml_layer']['url']));
+        }
+
+        if (isset($config['kml_layer']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['kml_layer']['options']));
+        }
     }
 
     /**
@@ -1073,8 +1241,8 @@ class IvoryGoogleMapExtension extends Extension
     {
         if (isset($config['event_manager']['class'])) {
             $container
-                ->getDefinition('ivory_google_map.event_manager')
-                ->setClass($config['event_manager']['class']);
+                ->getDefinition('ivory_google_map.event_manager.builder')
+                ->setArguments(array($config['event_manager']['class']));
         }
 
         if (isset($config['event_manager']['helper_class'])) {
@@ -1092,10 +1260,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadEvent(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.event.builder');
+
         if (isset($config['event']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.event')
-                ->setClass($config['event']['class']);
+            $builderDefinition->setArguments(array($config['event']['class']));
         }
 
         if (isset($config['event']['helper_class'])) {
@@ -1104,7 +1272,12 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['event']['helper_class']);
         }
 
-        $container->setParameter('ivory_google_map.event.prefix_javascript_variable', $config['event']['prefix_javascript_variable']);
+        if (isset($config['event']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['event']['prefix_javascript_variable'])
+            );
+        }
     }
 
     /**
@@ -1130,45 +1303,53 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
-        if ($config['geocoder']['fake_ip'] !== null) {
-            $definition = new Definition(
-                $container->getParameter('ivory_google_map.geocoder.event_listener.fake_request.class'),
+        $providerDefinition = $container->getDefinition('ivory_google_map.geocoder.provider');
+
+        if (isset($config['geocoder']['class'])) {
+            $container
+                ->getDefinition('ivory_google_map.geocoder')
+                ->setClass($config['geocoder']['class']);
+        }
+
+        if (isset($config['geocoder']['adapter'])) {
+            $container
+                ->getDefinition('ivory_google_map.geocoder.adapter')
+                ->setClass($config['geocoder']['adapter']);
+        }
+
+        if (isset($config['geocoder']['provider']['class'])) {
+            $providerDefinition->setClass($config['geocoder']['provider']['class']);
+        }
+
+        if (isset($config['geocoder']['provider']['api_key'])) {
+            $providerDefinition->addArgument($config['geocoder']['provider']['api_key']);
+        }
+
+        if (isset($config['geocoder']['provider']['locale'])) {
+            $providerDefinition->addArgument($config['geocoder']['provider']['locale']);
+        }
+    }
+
+    /**
+     * Loads geocoder fake request configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadGeocoderFakeRequest(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['geocoder']['fake_ip'])) {
+            $fakeRequestDefinition = new Definition(
+                'Ivory\GoogleMapBundle\EventListener\FakeRequestListener',
                 array($config['geocoder']['fake_ip'])
             );
 
-            $definition->addTag('kernel.event_listener', array(
+            $fakeRequestDefinition->addTag('kernel.event_listener', array(
                 'event'  => 'kernel.request',
                 'method' => 'onKernelRequest',
             ));
 
-            $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $definition);
-        }
-
-        if ($config['geocoder']['class'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.class', $config['geocoder']['class']);
-        }
-
-        if ($config['geocoder']['adapter'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.adapter.class', $config['geocoder']['adapter']);
-        }
-
-        if ($config['geocoder']['provider']['class'] !== null) {
-            $container->setParameter('ivory_google_map.geocoder.provider.class', $config['geocoder']['provider']['class']);
-        }
-
-        if ($config['geocoder']['provider']['api_key'] !== null) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder.provider')
-                ->replaceArgument(1, $config['geocoder']['provider']['api_key']);
-        }
-
-        if ($config['geocoder']['provider']['locale'] !== null) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder.provider')
-                ->replaceArgument(
-                    $config['geocoder']['provider']['api_key'] !== null ? 2 : 1,
-                    $config['geocoder']['provider']['locale']
-                );
+            $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $fakeRequestDefinition);
         }
     }
 
@@ -1180,62 +1361,66 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.geocoder_request.builder');
+
         if (isset($config['geocoder_request']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.geocoder_request')
-                ->setClass($config['geocoder_request']['class']);
+            $builderDefinition->replaceArgument(0, $config['geocoder_request']['class']);
         }
 
-        $container->setParameter('ivory_google_map.geocoder_request.address', $config['geocoder_request']['address']);
+        if (isset($config['geocoder_request']['address'])) {
+            $builderDefinition->addMethodCall('setAddress', array($config['geocoder_request']['address']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.latitude',
-            $config['geocoder_request']['coordinate']['latitude']
-        );
+        if (isset($config['geocoder_request']['coordinate']['latitude'])
+            && isset($config['geocoder_request']['coordinate']['longitude'])) {
+            $coordinate = array(
+                $config['geocoder_request']['coordinate']['latitude'],
+                $config['geocoder_request']['coordinate']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.longitude',
-            $config['geocoder_request']['coordinate']['longitude']
-        );
+            if (isset($config['geocoder_request']['coordinate']['no_wrap'])) {
+                $coordinate[] = $config['geocoder_request']['coordinate']['no_wrap'];
+            }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.coordinate.no_wrap',
-            $config['geocoder_request']['coordinate']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setCoordinate', $coordinate);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.latitude',
-            $config['geocoder_request']['bound']['south_west']['latitude']
-        );
+        if (isset($config['geocoder_request']['bound']['south_west']['latitude'])
+            && isset($config['geocoder_request']['bound']['south_west']['longitude'])
+            && isset($config['geocoder_request']['bound']['north_east']['latitude'])
+            && isset($config['geocoder_request']['bound']['north_east']['longitude'])) {
+            $bound = array(
+                $config['geocoder_request']['bound']['south_west']['latitude'],
+                $config['geocoder_request']['bound']['south_west']['longitude'],
+                $config['geocoder_request']['bound']['north_east']['latitude'],
+                $config['geocoder_request']['bound']['north_east']['longitude'],
+            );
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.longitude',
-            $config['geocoder_request']['bound']['south_west']['longitude']
-        );
+            if (isset($config['geocoder_request']['bound']['south_west']['no_wrap'])
+                && isset($config['geocoder_request']['bound']['north_east']['no_wrap'])) {
+                $bound = array_merge(
+                    $bound,
+                    array(
+                        $config['geocoder_request']['bound']['south_west']['no_wrap'],
+                        $config['geocoder_request']['bound']['north_east']['no_wrap']
+                    )
+                );
+            }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.south_west.no_wrap',
-            $config['geocoder_request']['bound']['south_west']['no_wrap']
-        );
+            $builderDefinition->addMethodCall('setBound', $bound);
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.latitude',
-            $config['geocoder_request']['bound']['north_east']['latitude']
-        );
+        if (isset($config['geocoder_request']['region'])) {
+            $builderDefinition->addMethodCall('setRegion', array($config['geocoder_request']['region']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.longitude',
-            $config['geocoder_request']['bound']['north_east']['longitude']
-        );
+        if (isset($config['geocoder_request']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['geocoder_request']['language']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.geocoder_request.bound.north_east.no_wrap',
-            $config['geocoder_request']['bound']['north_east']['no_wrap']
-        );
-
-        $container->setParameter('ivory_google_map.geocoder_request.region', $config['geocoder_request']['region']);
-        $container->setParameter('ivory_google_map.geocoder_request.language', $config['geocoder_request']['language']);
-        $container->setParameter('ivory_google_map.geocoder_request.sensor', $config['geocoder_request']['sensor']);
+        if (isset($config['geocoder_request']['sensor'])) {
+            $builderDefinition->addMethodCall('setSensor', array($config['geocoder_request']['sensor']));
+        }
     }
 
     /**
@@ -1246,15 +1431,23 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirections(array $config, ContainerBuilder $container)
     {
+        $directionsDefinition = $container->getDefinition('ivory_google_map.directions');
+
         if (isset($config['directions']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.directions')
-                ->setClass($config['directions']['class']);
+            $directionsDefinition->setClass($config['directions']['class']);
         }
 
-        $container->setParameter('ivory_google_map.directions.url', $config['directions']['url']);
-        $container->setParameter('ivory_google_map.directions.https', $config['directions']['https']);
-        $container->setParameter('ivory_google_map.directions.format', $config['directions']['format']);
+        if (isset($config['directions']['url'])) {
+            $directionsDefinition->addMethodCall('setUrl', array($config['directions']['url']));
+        }
+
+        if (isset($config['directions']['https'])) {
+            $directionsDefinition->addMethodCall('setHttps', array($config['directions']['https']));
+        }
+
+        if (isset($config['directions']['format'])) {
+            $directionsDefinition->addMethodCall('setFormat', array($config['directions']['format']));
+        }
     }
 
     /**
@@ -1265,49 +1458,55 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
     {
+        $builderDefinition = $container->getDefinition('ivory_google_map.directions_request.builder');
+
         if (isset($config['directions_request']['class'])) {
-            $container
-                ->getDefinition('ivory_google_map.directions_request')
-                ->setClass($config['directions_request']['class']);
+            $builderDefinition->replaceArgument(0, $config['directions_request']['class']);
         }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.avoid_highways',
-            $config['directions_request']['avoid_highways']
-        );
+        if (isset($config['directions_request']['avoid_highways'])) {
+            $builderDefinition->addMethodCall(
+                'setAvoidHighways',
+                array($config['directions_request']['avoid_highways'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.avoid_tolls',
-            $config['directions_request']['avoid_tolls']
-        );
+        if (isset($config['directions_request']['avoid_tolls'])) {
+            $builderDefinition->addMethodCall('setAvoidTolls', array($config['directions_request']['avoid_tolls']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.optimize_waypoints',
-            $config['directions_request']['optimize_waypoints']
-        );
+        if (isset($config['directions_request']['optimize_waypoints'])) {
+            $builderDefinition->addMethodCall(
+                'setOptimizeWaypoints',
+                array($config['directions_request']['optimize_waypoints'])
+            );
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.provide_route_alternatives',
-            $config['directions_request']['provide_route_alternatives']
-        );
+        if (isset($config['directions_request']['provide_route_alternatives'])) {
+            $builderDefinition->addMethodCall(
+                'setProvideRouteAlternatives',
+                array($config['directions_request']['provide_route_alternatives'])
+            );
+        }
 
-        $container->setParameter('ivory_google_map.directions_request.region', $config['directions_request']['region']);
+        if (isset($config['directions_request']['region'])) {
+            $builderDefinition->addMethodCall('setRegion', array($config['directions_request']['region']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.language',
-            $config['directions_request']['language']
-        );
+        if (isset($config['directions_request']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['directions_request']['language']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.travel_mode',
-            $config['directions_request']['travel_mode'] !== null ? strtoupper($config['directions_request']['travel_mode']) : null
-        );
+        if (isset($config['directions_request']['travel_mode'])) {
+            $builderDefinition->addMethodCall('setTravelMode', array($config['directions_request']['travel_mode']));
+        }
 
-        $container->setParameter(
-            'ivory_google_map.directions_request.unit_system',
-            $config['directions_request']['unit_system'] !== null ? strtoupper($config['directions_request']['unit_system']) : null
-        );
+        if (isset($config['directions_request']['unit_system'])) {
+            $builderDefinition->addMethodCall('setUnitSystem', array($config['directions_request']['unit_system']));
+        }
 
-        $container->setParameter('ivory_google_map.directions_request.sensor', $config['directions_request']['sensor']);
+        if (isset($config['directions_request']['sensor'])) {
+            $builderDefinition->addMethodCall('setSensor', array($config['directions_request']['sensor']));
+        }
     }
 }
