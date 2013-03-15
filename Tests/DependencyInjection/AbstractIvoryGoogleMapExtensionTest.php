@@ -58,7 +58,6 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Base\Bound', $bound);
         $this->assertSame('bound_', substr($bound->getJavascriptVariable(), 0, 6));
-        $this->assertFalse($bound->hasCoordinates());
         $this->assertNull($bound->getSouthWest());
         $this->assertNull($bound->getNorthEast());
     }
@@ -347,7 +346,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Layers\KMLLayer', $kmlLayer);
         $this->assertSame('kml_layer_', substr($kmlLayer->getJavascriptVariable(), 0, 10));
-        $this->assertSame('', $kmlLayer->getUrl());
+        $this->assertNull($kmlLayer->getUrl());
         $this->assertEmpty($kmlLayer->getOptions());
     }
 
@@ -467,10 +466,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf('Ivory\GoogleMap\Overlays\InfoWindow', $infoWindow);
         $this->assertEquals('info_window_', substr($infoWindow->getJavascriptVariable(), 0, 12));
 
-        $this->assertSame(0, $infoWindow->getPosition()->getLatitude());
-        $this->assertSame(0, $infoWindow->getPosition()->getLongitude());
-        $this->assertTrue($infoWindow->getPosition()->isNoWrap());
-
+        $this->assertNull($infoWindow->getPosition());
         $this->assertSame($infoWindow->getContent(), '<p>Default content</p>');
         $this->assertFalse($infoWindow->hasPixelOffset());
         $this->assertNull($infoWindow->getPixelOffset());
@@ -519,7 +515,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Overlays\MarkerImage', $markerImage);
         $this->assertSame('marker_image_', substr($markerImage->getJavascriptVariable(), 0, 13));
-        $this->assertSame('http://maps.gstatic.com/mapfiles/markers/marker.png', $markerImage->getUrl());
+        $this->assertSame('//maps.gstatic.com/mapfiles/markers/marker.png', $markerImage->getUrl());
 
         $this->assertFalse($markerImage->hasAnchor());
         $this->assertNull($markerImage->getAnchor());
@@ -706,6 +702,64 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(-1.1, $rectangle->getBound()->getSouthWest()->getLatitude());
         $this->assertSame(-2.1, $rectangle->getBound()->getSouthWest()->getLongitude());
         $this->assertTrue($rectangle->getBound()->getSouthWest()->isNoWrap());
+    }
+
+    public function testMapServiceWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $map = $this->container->get('ivory_google_map.map');
+
+        $this->assertSame('map_', substr($map->getJavascriptVariable(), 0, 4));
+        $this->assertSame('map_canvas', $map->getHtmlContainerId());
+        $this->assertFalse($map->isAsync());
+        $this->assertFalse($map->isAutoZoom());
+        $this->assertSame('en', $map->getLanguage());
+
+        $this->assertSame(0, $map->getCenter()->getLatitude());
+        $this->assertSame(0, $map->getCenter()->getLongitude());
+        $this->assertTrue($map->getCenter()->isNoWrap());
+
+        $this->assertFalse($map->getBound()->hasCoordinates());
+        $this->assertSame(array('mapTypeId' => 'roadmap', 'zoom' => 3), $map->getMapOptions());
+        $this->assertSame(array('width' => '300px', 'height' => '300px'), $map->getStylesheetOptions());
+    }
+
+    public function testMapServiceWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'map');
+        $this->container->compile();
+
+        $map = $this->container->get('ivory_google_map.map');
+
+        $this->assertSame('foo', substr($map->getJavascriptVariable(), 0, 3));
+        $this->assertSame('bar', $map->getHtmlContainerId());
+        $this->assertTrue($map->isAsync());
+        $this->assertTrue($map->isAutoZoom());
+        $this->assertSame('en', $map->getLanguage());
+
+        $this->assertSame(1, $map->getCenter()->getLatitude());
+        $this->assertSame(2, $map->getCenter()->getLongitude());
+        $this->assertFalse($map->getCenter()->isNoWrap());
+
+        $this->assertSame(1, $map->getBound()->getSouthWest()->getLatitude());
+        $this->assertSame(2, $map->getBound()->getSouthWest()->getLongitude());
+        $this->assertTrue($map->getBound()->getSouthWest()->isNoWrap());
+
+        $this->assertSame(3, $map->getBound()->getNorthEast()->getLatitude());
+        $this->assertSame(4, $map->getBound()->getNorthEast()->getLongitude());
+        $this->assertFalse($map->getBound()->getNorthEast()->isNoWrap());
+
+        $this->assertSame(
+            array('mapTypeId' => 'satellite', 'zoom' => 6, 'foo' => 'bar'),
+            $map->getMapOptions()
+        );
+
+        $this->assertSame(
+            array('width' => '400px', 'height' => '500px', 'bar' => 'foo'),
+            $map->getStylesheetOptions()
+        );
     }
 
     public function testFakeRequestListenerWithoutConfiguration()
