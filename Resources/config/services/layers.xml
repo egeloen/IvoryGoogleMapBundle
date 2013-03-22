@@ -17,6 +17,7 @@
             class="%ivory_google_map.kml_layer.class%"
             factory-service="ivory_google_map.kml_layer.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.kml_layer.builder" class="%ivory_google_map.kml_layer.builder.class%">

@@ -82,6 +82,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertFalse($bound->getNorthEast()->isNoWrap());
     }
 
+    public function testBoundInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.bound'),
+            $this->container->get('ivory_google_map.bound')
+        );
+    }
+
     public function testCoordinateServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -108,6 +119,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertFalse($coordinate->isNoWrap());
     }
 
+    public function testCoordinateInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.coordinate'),
+            $this->container->get('ivory_google_map.coordinate')
+        );
+    }
+
     public function testPointServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -129,6 +151,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertSame(1.1, $point->getX());
         $this->assertSame(-2.1, $point->getY());
+    }
+
+    public function testPointInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.point'),
+            $this->container->get('ivory_google_map.point')
+        );
     }
 
     public function testSizeServiceWithoutConfiguration()
@@ -161,6 +194,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertEquals($size->getHeightUnit(), 'pt');
     }
 
+    public function testSizeInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.size'),
+            $this->container->get('ivory_google_map.size')
+        );
+    }
+
     public function testMapTypeControlServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -186,6 +230,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertEquals('horizontal_bar', $mapTypeControl->getMapTypeControlStyle());
     }
 
+    public function testMapTypeControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.map_type_control'),
+            $this->container->get('ivory_google_map.map_type_control')
+        );
+    }
+
     public function testOverviewMapControlServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -205,6 +260,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $overviewMapControl = $this->container->get('ivory_google_map.overview_map_control');
 
         $this->assertTrue($overviewMapControl->isOpened());
+    }
+
+    public function testOverviewMapControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.overview_map_control'),
+            $this->container->get('ivory_google_map.overview_map_control')
+        );
     }
 
     public function testPanControlServiceWithoutConfiguration()
@@ -228,6 +294,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('top_center', $panControl->getControlPosition());
     }
 
+    public function testPanControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.pan_control'),
+            $this->container->get('ivory_google_map.pan_control')
+        );
+    }
+
     public function testRotateControlServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -247,6 +324,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $rotateControl = $this->container->get('ivory_google_map.rotate_control');
 
         $this->assertSame('top_center', $rotateControl->getControlPosition());
+    }
+
+    public function testRotateControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.rotate_control'),
+            $this->container->get('ivory_google_map.rotate_control')
+        );
     }
 
     public function testScaleControlServiceWithoutConfiguration()
@@ -272,6 +360,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('default', $scaleControl->getScaleControlStyle());
     }
 
+    public function testScaleControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.scale_control'),
+            $this->container->get('ivory_google_map.scale_control')
+        );
+    }
+
     public function testStreetViewControlServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -291,6 +390,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $streetViewControl = $this->container->get('ivory_google_map.street_view_control');
 
         $this->assertSame('top_center', $streetViewControl->getControlPosition());
+    }
+
+    public function testStreetViewControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.street_view_control'),
+            $this->container->get('ivory_google_map.street_view_control')
+        );
     }
 
     public function testZoomControlServiceWithoutConfiguration()
@@ -316,6 +426,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('default', $zoomControl->getZoomControlStyle());
     }
 
+    public function testZoomControlInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.zoom_control'),
+            $this->container->get('ivory_google_map.zoom_control')
+        );
+    }
+
     public function testEventServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -335,6 +456,28 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $event = $this->container->get('ivory_google_map.event');
 
         $this->assertSame('e', substr($event->getJavascriptVariable(), 0, 1));
+    }
+
+    public function testEventInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.event'),
+            $this->container->get('ivory_google_map.event')
+        );
+    }
+
+    public function testEventManagerInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.event_manager'),
+            $this->container->get('ivory_google_map.event_manager')
+        );
     }
 
     public function testKmlLayerServiceWithoutConfiguration()
@@ -360,6 +503,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('kl', substr($kmlLayer->getJavascriptVariable(), 0, 2));
         $this->assertSame('url', $kmlLayer->getUrl());
         $this->assertSame(array('option' => 'value'), $kmlLayer->getOptions());
+    }
+
+    public function testKmlLayerInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.kml_layer'),
+            $this->container->get('ivory_google_map.kml_layer')
+        );
     }
 
     public function testCircleServiceWithoutConfiguration()
@@ -394,6 +548,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(array('option' => 'value'), $circle->getOptions());
     }
 
+    public function testCircleInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.circle'),
+            $this->container->get('ivory_google_map.circle')
+        );
+    }
+
     public function testEncodedPolylineServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -414,6 +579,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertSame('ep', substr($encodedPolyline->getJavascriptVariable(), 0, 2));
         $this->assertSame(array('option' => 'value'), $encodedPolyline->getOptions());
+    }
+
+    public function testEncodedPolylineInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.encoded_polyline'),
+            $this->container->get('ivory_google_map.encoded_polyline')
+        );
     }
 
     public function testGroundOverlayServiceWithoutConfiguration()
@@ -454,6 +630,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(-1.1, $groundOverlay->getBound()->getSouthWest()->getLatitude());
         $this->assertSame(-2.1, $groundOverlay->getBound()->getSouthWest()->getLongitude());
         $this->assertTrue($groundOverlay->getBound()->getSouthWest()->isNoWrap());
+    }
+
+    public function testGroundOverlayInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.ground_overlay'),
+            $this->container->get('ivory_google_map.ground_overlay')
+        );
     }
 
     public function testInfoWindowServiceWithoutConfiguration()
@@ -504,6 +691,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($infoWindow->isAutoClose());
 
         $this->assertSame(array('option' => 'value'), $infoWindow->getOptions());
+    }
+
+    public function testInfoWindowInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.info_window'),
+            $this->container->get('ivory_google_map.info_window')
+        );
     }
 
     public function testMarkerImageServiceWithoutConfiguration()
@@ -561,6 +759,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame("pt", $markerImage->getSize()->getHeightUnit());
     }
 
+    public function testMarkerImageInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.marker_image'),
+            $this->container->get('ivory_google_map.marker_image')
+        );
+    }
+
     public function testMarkerServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -596,6 +805,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertEquals(array('option' => 'value'), $marker->getOptions());
     }
 
+    public function testMarkerInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.marker'),
+            $this->container->get('ivory_google_map.marker')
+        );
+    }
+
     public function testMarkerShapeServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -623,7 +843,18 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(array(-1.1, -2.1, 2.1, 1.1), $markerShape->getCoordinates());
     }
 
-    public function testpolygonServiceWithoutConfiguration()
+    public function testMarkerShapeInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.marker_shape'),
+            $this->container->get('ivory_google_map.marker_shape')
+        );
+    }
+
+    public function testPolygonServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
         $this->container->compile();
@@ -645,7 +876,18 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(array('option' => 'value'), $polygon->getOptions());
     }
 
-    public function testpolylineServiceWithoutConfiguration()
+    public function testPolygonInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.polygon'),
+            $this->container->get('ivory_google_map.polygon')
+        );
+    }
+
+    public function testPolylineServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
         $this->container->compile();
@@ -665,6 +907,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertSame('p', substr($polyline->getJavascriptVariable(), 0, 1));
         $this->assertSame(array('option' => 'value'), $polyline->getOptions());
+    }
+
+    public function testPolylineInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.polyline'),
+            $this->container->get('ivory_google_map.polyline')
+        );
     }
 
     public function testRectangleServiceWithoutConfiguration()
@@ -702,6 +955,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(-1.1, $rectangle->getBound()->getSouthWest()->getLatitude());
         $this->assertSame(-2.1, $rectangle->getBound()->getSouthWest()->getLongitude());
         $this->assertTrue($rectangle->getBound()->getSouthWest()->isNoWrap());
+    }
+
+    public function testRectangeInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.rectangle'),
+            $this->container->get('ivory_google_map.rectangle')
+        );
     }
 
     public function testMapServiceWithoutConfiguration()
@@ -759,6 +1023,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame(
             array('width' => '400px', 'height' => '500px', 'bar' => 'foo'),
             $map->getStylesheetOptions()
+        );
+    }
+
+    public function testMapInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.map'),
+            $this->container->get('ivory_google_map.map')
         );
     }
 
@@ -828,6 +1103,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($request->hasSensor());
     }
 
+    public function testGeocoderRequestInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.geocoder_request'),
+            $this->container->get('ivory_google_map.geocoder_request')
+        );
+    }
+
     public function testGeocoderServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -846,6 +1132,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $geocoder = $this->container->get('ivory_google_map.geocoder');
 
         $this->assertInstanceOf('Geocoder\Geocoder', $geocoder);
+    }
+
+    public function testGeocoderInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertSame(
+            $this->container->get('ivory_google_map.geocoder'),
+            $this->container->get('ivory_google_map.geocoder')
+        );
     }
 
     public function testDirectionsRequestServiceWithoutConfiguration()
@@ -904,6 +1201,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($request->hasSensor());
     }
 
+    public function testDirectionsRequestInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.directions_request'),
+            $this->container->get('ivory_google_map.directions_request')
+        );
+    }
+
     public function testDirectionsServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -927,6 +1235,17 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('https://directions', $directions->getUrl());
         $this->assertTrue($directions->isHttps());
         $this->assertSame('xml', $directions->getFormat());
+    }
+
+    public function testDirectionsInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertSame(
+            $this->container->get('ivory_google_map.directions'),
+            $this->container->get('ivory_google_map.directions')
+        );
     }
 
     public function testHelpersWithoutConfiguration()

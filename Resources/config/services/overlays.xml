@@ -63,6 +63,7 @@
             class="%ivory_google_map.circle.class%"
             factory-service="ivory_google_map.circle.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.circle.builder" class="%ivory_google_map.circle.builder.class%">
@@ -80,6 +81,7 @@
             class="%ivory_google_map.encoded_polyline.class%"
             factory-service="ivory_google_map.encoded_polyline.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service
@@ -109,6 +111,7 @@
             class="%ivory_google_map.ground_overlay.class%"
             factory-service="ivory_google_map.ground_overlay.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.ground_overlay.builder" class="%ivory_google_map.ground_overlay.builder.class%">
@@ -130,6 +133,7 @@
             class="%ivory_google_map.info_window.class%"
             factory-service="ivory_google_map.info_window.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.info_window.builder" class="%ivory_google_map.info_window.builder.class%">
@@ -153,6 +157,7 @@
             class="%ivory_google_map.marker.class%"
             factory-service="ivory_google_map.marker.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.marker.builder" class="%ivory_google_map.marker.builder.class%">
@@ -174,6 +179,7 @@
             class="%ivory_google_map.marker_image.class%"
             factory-service="ivory_google_map.marker_image.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.marker_image.builder" class="%ivory_google_map.marker_image.builder.class%">
@@ -197,6 +203,7 @@
             class="%ivory_google_map.marker_shape.class%"
             factory-service="ivory_google_map.marker_shape.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.marker_shape.builder" class="%ivory_google_map.marker_shape.builder.class%">
@@ -215,6 +222,7 @@
             class="%ivory_google_map.polygon.class%"
             factory-service="ivory_google_map.polygon.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.polygon.builder" class="%ivory_google_map.polygon.builder.class%">
@@ -231,6 +239,7 @@
             class="%ivory_google_map.polyline.class%"
             factory-service="ivory_google_map.polyline.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.polyline.builder" class="%ivory_google_map.polyline.builder.class%">
@@ -247,6 +256,7 @@
             class="%ivory_google_map.rectangle.class%"
             factory-service="ivory_google_map.rectangle.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.rectangle.builder" class="%ivory_google_map.rectangle.builder.class%">

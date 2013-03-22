@@ -29,6 +29,7 @@
             class="%ivory_google_map.coordinate.class%"
             factory-service="ivory_google_map.coordinate.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.coordinate.builder" class="%ivory_google_map.coordinate.builder.class%">
@@ -43,6 +44,7 @@
             class="%ivory_google_map.bound.class%"
             factory-service="ivory_google_map.bound.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.bound.builder" class="%ivory_google_map.bound.builder.class%">
@@ -60,6 +62,7 @@
             class="%ivory_google_map.point.class%"
             factory-service="ivory_google_map.point.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.point.builder" class="%ivory_google_map.point.builder.class%">
@@ -74,6 +77,7 @@
             class="%ivory_google_map.size.class%"
             factory-service="ivory_google_map.size.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.size.builder" class="%ivory_google_map.size.builder.class%">

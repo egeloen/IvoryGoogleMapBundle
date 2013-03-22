@@ -46,6 +46,7 @@
             class="%ivory_google_map.geocoder_request.class%"
             factory-service="ivory_google_map.geocoder_request.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service
@@ -64,6 +65,7 @@
             class="%ivory_google_map.directions_request.class%"
             factory-service="ivory_google_map.directions_request.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service

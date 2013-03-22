@@ -46,6 +46,7 @@
             class="%ivory_google_map.map_type_control.class%"
             factory-service="ivory_google_map.map_type_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service
@@ -71,6 +72,7 @@
             class="%ivory_google_map.overview_map_control.class%"
             factory-service="ivory_google_map.overview_map_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service
@@ -92,6 +94,7 @@
             class="%ivory_google_map.pan_control.class%"
             factory-service="ivory_google_map.pan_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.pan_control.builder" class="%ivory_google_map.pan_control.builder.class%">
@@ -112,6 +115,7 @@
             class="%ivory_google_map.rotate_control.class%"
             factory-service="ivory_google_map.rotate_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.rotate_control.builder" class="%ivory_google_map.rotate_control.builder.class%">
@@ -132,6 +136,7 @@
             class="%ivory_google_map.scale_control.class%"
             factory-service="ivory_google_map.scale_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.scale_control.builder" class="%ivory_google_map.scale_control.builder.class%">
@@ -153,6 +158,7 @@
             class="%ivory_google_map.street_view_control.class%"
             factory-service="ivory_google_map.street_view_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service
@@ -176,6 +182,7 @@
             class="%ivory_google_map.zoom_control.class%"
             factory-service="ivory_google_map.zoom_control.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.zoom_control.builder" class="%ivory_google_map.zoom_control.builder.class%">

@@ -21,6 +21,7 @@
             class="%ivory_google_map.event_manager.class%"
             factory-service="ivory_google_map.event_manager.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.event_manager.builder" class="%ivory_google_map.event_manager.builder.class%">
@@ -41,6 +42,7 @@
             class="%ivory_google_map.event.class%"
             factory-service="ivory_google_map.event.builder"
             factory-method="build"
+            scope="prototype"
         />
 
         <service id="ivory_google_map.event.builder" class="%ivory_google_map.event.builder.class%">
