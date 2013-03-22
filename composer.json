@@ -16,6 +16,7 @@
         "egeloen/google-map": "*@dev"
     },
     "require-dev": {
+        "phpunit/phpunit": "3.7.*",
         "symfony/yaml": "2.*",
         "twig/twig": "1.*",
         "kriswallsmith/buzz": "*",
@@ -23,6 +24,9 @@
     },
     "autoload": {
         "psr-0": { "Ivory\\GoogleMapBundle": "" }
+    },
+    "config": {
+        "bin-dir": "bin/"
     },
     "target-dir": "Ivory/GoogleMapBundle"
 }
