@@ -1,6 +1,6 @@
 # UPGRADE
 
-### 1.0.0 to 2.0.0
+### 1.0.0 to 1.1.0
 
 The business classes have been moved to a dedicated library for reuasibility purpose. If you're using Symfony 2.0.*,
 you need to update your `deps` file:
