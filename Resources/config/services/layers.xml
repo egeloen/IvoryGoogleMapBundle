@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="ivory_google_map.kml_layer.class">Ivory\GoogleMap\Layers\KMLLayer</parameter>
         <parameter key="ivory_google_map.kml_layer.builder.class">Ivory\GoogleMapBundle\Model\Layers\KMLLayerBuilder</parameter>
-        <parameter key="ivory_google_map.kml_layer.helper.class">Ivory\GoogleMap\Templating\Helper\Layers\KMLLayerHelper</parameter>
+        <parameter key="ivory_google_map.kml_layer.helper.class">Ivory\GoogleMap\Helper\Layers\KMLLayerHelper</parameter>
     </parameters>
 
     <services>

@@ -7,19 +7,19 @@
     <parameters>
         <parameter key="ivory_google_map.coordinate.class">Ivory\GoogleMap\Base\Coordinate</parameter>
         <parameter key="ivory_google_map.coordinate.builder.class">Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder</parameter>
-        <parameter key="ivory_google_map.coordinate.helper.class">Ivory\GoogleMap\Templating\Helper\Base\CoordinateHelper</parameter>
+        <parameter key="ivory_google_map.coordinate.helper.class">Ivory\GoogleMap\Helper\Base\CoordinateHelper</parameter>
 
         <parameter key="ivory_google_map.bound.class">Ivory\GoogleMap\Base\Bound</parameter>
         <parameter key="ivory_google_map.bound.builder.class">Ivory\GoogleMapBundle\Model\Base\BoundBuilder</parameter>
-        <parameter key="ivory_google_map.bound.helper.class">Ivory\GoogleMap\Templating\Helper\Base\BoundHelper</parameter>
+        <parameter key="ivory_google_map.bound.helper.class">Ivory\GoogleMap\Helper\Base\BoundHelper</parameter>
 
         <parameter key="ivory_google_map.point.class">Ivory\GoogleMap\Base\Point</parameter>
         <parameter key="ivory_google_map.point.builder.class">Ivory\GoogleMapBundle\Model\Base\PointBuilder</parameter>
-        <parameter key="ivory_google_map.point.helper.class">Ivory\GoogleMap\Templating\Helper\Base\PointHelper</parameter>
+        <parameter key="ivory_google_map.point.helper.class">Ivory\GoogleMap\Helper\Base\PointHelper</parameter>
 
         <parameter key="ivory_google_map.size.class">Ivory\GoogleMap\Base\Size</parameter>
         <parameter key="ivory_google_map.size.builder.class">Ivory\GoogleMapBundle\Model\Base\SizeBuilder</parameter>
-        <parameter key="ivory_google_map.size.helper.class">Ivory\GoogleMap\Templating\Helper\Base\SizeHelper</parameter>
+        <parameter key="ivory_google_map.size.helper.class">Ivory\GoogleMap\Helper\Base\SizeHelper</parameter>
     </parameters>
 
     <services>

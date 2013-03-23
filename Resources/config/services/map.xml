@@ -7,9 +7,9 @@
     <parameters>
         <parameter key="ivory_google_map.map.class">Ivory\GoogleMap\Map</parameter>
         <parameter key="ivory_google_map.map.builder.class">Ivory\GoogleMapBundle\Model\MapBuilder</parameter>
-        <parameter key="ivory_google_map.map.helper.class">Ivory\GoogleMap\Templating\Helper\MapHelper</parameter>
+        <parameter key="ivory_google_map.map.helper.class">Ivory\GoogleMap\Helper\MapHelper</parameter>
 
-        <parameter key="ivory_google_map.map_type_id.helper.class">Ivory\GoogleMap\Templating\Helper\MapTypeIdHelper</parameter>
+        <parameter key="ivory_google_map.map_type_id.helper.class">Ivory\GoogleMap\Helper\MapTypeIdHelper</parameter>
     </parameters>
 
     <services>

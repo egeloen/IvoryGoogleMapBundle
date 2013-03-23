@@ -26,7 +26,7 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
     /** @var \Ivory\GoogleMapBundle\Twig\GoogleMapExtension */
     protected $googleMapExtension;
 
-    /** @var \Ivory\GoogleMap\Templating\Helper\MapHelper */
+    /** @var \Ivory\GoogleMap\Helper\MapHelper */
     protected $mapHelperMock;
 
     /**
@@ -34,7 +34,7 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->mapHelperMock = $this->getMock('Ivory\GoogleMap\Templating\Helper\MapHelper');
+        $this->mapHelperMock = $this->getMock('Ivory\GoogleMap\Helper\MapHelper');
         $this->googleMapExtension = new GoogleMapExtension($this->mapHelperMock);
     }
 

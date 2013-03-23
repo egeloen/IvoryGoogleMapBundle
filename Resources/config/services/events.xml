@@ -7,11 +7,11 @@
     <parameters>
         <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMap\Events\EventManager</parameter>
         <parameter key="ivory_google_map.event_manager.builder.class">Ivory\GoogleMapBundle\Model\Events\EventManagerBuilder</parameter>
-        <parameter key="ivory_google_map.event_manager.helper.class">Ivory\GoogleMap\Templating\Helper\Events\EventManagerHelper</parameter>
+        <parameter key="ivory_google_map.event_manager.helper.class">Ivory\GoogleMap\Helper\Events\EventManagerHelper</parameter>
 
         <parameter key="ivory_google_map.event.class">Ivory\GoogleMap\Events\Event</parameter>
         <parameter key="ivory_google_map.event.builder.class">Ivory\GoogleMapBundle\Model\Events\EventBuilder</parameter>
-        <parameter key="ivory_google_map.event.helper.class">Ivory\GoogleMap\Templating\Helper\Events\EventHelper</parameter>
+        <parameter key="ivory_google_map.event.helper.class">Ivory\GoogleMap\Helper\Events\EventHelper</parameter>
     </parameters>
 
     <services>

@@ -14,7 +14,7 @@ namespace Ivory\GoogleMapBundle\Twig;
 use \Twig_Function_Method;
 
 use Ivory\GoogleMap\Map,
-    Ivory\GoogleMap\Templating\Helper\MapHelper;
+    Ivory\GoogleMap\Helper\MapHelper;
 
 /**
  * Ivory google map twig extension.
@@ -23,13 +23,13 @@ use Ivory\GoogleMap\Map,
  */
 class GoogleMapExtension extends \Twig_Extension
 {
-    /**@var \Ivory\GoogleMap\Templating\Helper\MapHelper */
+    /**@var \Ivory\GoogleMap\Helper\MapHelper */
     protected $mapHelper;
 
     /**
      * Create the google map twig extension.
      *
-     * @param \Ivory\GoogleMap\Templating\Helper\MapHelper $mapHelper The map helper.
+     * @param \Ivory\GoogleMap\Helper\MapHelper $mapHelper The map helper.
      */
     public function __construct(MapHelper $mapHelper)
     {

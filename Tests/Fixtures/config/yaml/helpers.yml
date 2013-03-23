@@ -1,65 +1,65 @@
 ivory_google_map:
     map:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\MapHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\MapHelper"
     map_type_id:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\MapTypeIdHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\MapTypeIdHelper"
     coordinate:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Base\\CoordinateHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Base\\CoordinateHelper"
     bound:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Base\\BoundHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Base\\BoundHelper"
     point:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Base\\PointHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Base\\PointHelper"
     size:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Base\\SizeHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Base\\SizeHelper"
     control_position:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\ControlPositionHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\ControlPositionHelper"
     map_type_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\MapTypeControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\MapTypeControlHelper"
     map_type_control_style:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\MapTypeControlStyleHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\MapTypeControlStyleHelper"
     overview_map_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\OverviewMapControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\OverviewMapControlHelper"
     pan_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\PanControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\PanControlHelper"
     rotate_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\RotateControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\RotateControlHelper"
     scale_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\ScaleControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\ScaleControlHelper"
     scale_control_style:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\ScaleControlStyleHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\ScaleControlStyleHelper"
     street_view_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\StreetViewControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\StreetViewControlHelper"
     zoom_control:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\ZoomControlHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\ZoomControlHelper"
     zoom_control_style:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Controls\\ZoomControlStyleHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Controls\\ZoomControlStyleHelper"
     animation:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\AnimationHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\AnimationHelper"
     circle:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\CircleHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\CircleHelper"
     encoded_polyline:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\EncodedPolylineHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\EncodedPolylineHelper"
     ground_overlay:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\GroundOverlayHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\GroundOverlayHelper"
     info_window:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\InfoWindowHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\InfoWindowHelper"
     marker:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\MarkerHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\MarkerHelper"
     marker_image:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\MarkerImageHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\MarkerImageHelper"
     marker_shape:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\MarkerShapeHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\MarkerShapeHelper"
     polygon:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\PolygonHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\PolygonHelper"
     polyline:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\PolylineHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\PolylineHelper"
     rectangle:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Overlays\\RectangleHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\RectangleHelper"
     kml_layer:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Layers\\KMLLayerHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Layers\\KMLLayerHelper"
     event_manager:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Events\\EventManagerHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Events\\EventManagerHelper"
     event:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Events\\EventHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Events\\EventHelper"
     encoding:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Templating\\Helper\\Geometry\\EncodingHelper"
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Geometry\\EncodingHelper"
