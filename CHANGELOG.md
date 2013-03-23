@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 2.0.0 (????-??-??)
+
+ * df4265d - Refactor according to helper renaming
+
 ### 1.1.0 (2012-03-13)
 
  * 2c13c5b - Remove prototyped services
