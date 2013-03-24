@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\Base\BoundBuilder,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\GroundOverlayBuilder;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\GroundOverlayBuilder;
 
 /**
  * Ground overlay builder test.
@@ -182,5 +182,4 @@ class GroundOverlayBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEmpty($groundOverlay2->getOptions());
     }
-
 }

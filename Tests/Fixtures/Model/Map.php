@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Map as BaseMap;
  */
 class Map extends BaseMap
 {
-
 }

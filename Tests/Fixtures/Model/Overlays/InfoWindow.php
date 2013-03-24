@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\InfoWindow as BaseInfoWindow;
  */
 class InfoWindow extends BaseInfoWindow
 {
-
 }

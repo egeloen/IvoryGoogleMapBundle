@@ -21,5 +21,4 @@ use Ivory\GoogleMap\Base\Point as BasePoint;
  */
 class Point extends BasePoint
 {
-
 }

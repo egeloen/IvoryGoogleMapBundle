@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Overlays\AnimationHelper as BaseAnimationHelper;
  */
 class AnimationHelper extends BaseAnimationHelper
 {
-
 }

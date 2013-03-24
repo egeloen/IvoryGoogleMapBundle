@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Layers\KMLLayer as BaseKMLLayer;
  */
 class KMLLayer extends BaseKMLLayer
 {
-
 }

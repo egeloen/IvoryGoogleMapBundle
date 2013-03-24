@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\Base\PointBuilder,
-    Ivory\GoogleMapBundle\Model\Base\SizeBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\MarkerImageBuilder;
+use Ivory\GoogleMapBundle\Model\Base\PointBuilder;
+use Ivory\GoogleMapBundle\Model\Base\SizeBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerImageBuilder;
 
 /**
  * Marker image builder test.

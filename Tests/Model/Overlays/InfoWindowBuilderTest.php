@@ -11,10 +11,10 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMap\Events\MouseEvent,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Base\SizeBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\InfoWindowBuilder;
+use Ivory\GoogleMap\Events\MouseEvent;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Base\SizeBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\InfoWindowBuilder;
 
 /**
  * Info window builder test.

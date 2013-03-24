@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Overlays\PolylineHelper as BasePolylineHelper;
  */
 class PolylineHelper extends BasePolylineHelper
 {
-
 }

@@ -11,10 +11,10 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model;
 
-use Ivory\GoogleMap\MapTypeId,
-    Ivory\GoogleMapBundle\Model\Base\BoundBuilder,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\MapBuilder;
+use Ivory\GoogleMap\MapTypeId;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\MapBuilder;
 
 /**
  * Map builder test.

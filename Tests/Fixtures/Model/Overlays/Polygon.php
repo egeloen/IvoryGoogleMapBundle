@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\Polygon as BasePolygon;
  */
 class Polygon extends BasePolygon
 {
-
 }

@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Events\EventManagerHelper as BaseEventManagerHelper;
  */
 class EventManagerHelper extends BaseEventManagerHelper
 {
-
 }

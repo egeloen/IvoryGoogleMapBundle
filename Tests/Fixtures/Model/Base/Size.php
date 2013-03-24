@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Base\Size as BaseSize;
  */
 class Size extends BaseSize
 {
-
 }

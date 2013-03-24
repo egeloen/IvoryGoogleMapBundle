@@ -11,10 +11,10 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Controls;
 
-use Ivory\GoogleMap\Controls\ControlPosition,
-    Ivory\GoogleMap\Controls\MapTypeControlStyle,
-    Ivory\GoogleMap\MapTypeId,
-    Ivory\GoogleMapBundle\Model\Controls\MapTypeControlBuilder;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMap\Controls\MapTypeControlStyle;
+use Ivory\GoogleMap\MapTypeId;
+use Ivory\GoogleMapBundle\Model\Controls\MapTypeControlBuilder;
 
 /**
  * Map type control builder test.

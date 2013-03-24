@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Events\Event as BaseEvent;
  */
 class Event extends BaseEvent
 {
-
 }

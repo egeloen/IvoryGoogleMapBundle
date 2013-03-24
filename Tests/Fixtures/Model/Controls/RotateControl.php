@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Controls\RotateControl as BaseRotateControl;
  */
 class RotateControl extends BaseRotateControl
 {
-
 }

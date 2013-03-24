@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Base\SizeHelper as BaseSizeHelper;
  */
 class SizeHelper extends BaseSizeHelper
 {
-
 }

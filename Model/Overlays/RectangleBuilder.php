@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\AbstractBuilder,
-    Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\AbstractBuilder;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
 
 /**
  * Rectangle builder.
@@ -124,8 +124,7 @@ class RectangleBuilder extends AbstractBuilder
         $northEastLongitude,
         $southWestNoWrap = true,
         $northEastNoWrap = true
-    )
-    {
+    ) {
         $this->bound = array(
             $southWestLatitude,
             $southWestLongitude,

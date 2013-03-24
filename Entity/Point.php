@@ -14,11 +14,10 @@ namespace Ivory\GoogleMapBundle\Entity;
 use Ivory\GoogleMap\Base\Point as BasePoint;
 
 /**
- * Point entity which describes a google map point
+ * {@inheritdoc}
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class Point extends BasePoint
 {
-
 }

@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\EventListener;
 
-use Ivory\GoogleMapBundle\EventListener\FakeRequestListener,
-    Symfony\Component\HttpKernel\HttpKernelInterface;
+use Ivory\GoogleMapBundle\EventListener\FakeRequestListener;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * Fake request listener test.

@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\MapTypeIdHelper as BaseMapTypeIdHelper;
  */
 class MapTypeIdHelper extends BaseMapTypeIdHelper
 {
-
 }

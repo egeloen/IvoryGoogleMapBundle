@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Controls\ScaleControlHelper as BaseScaleControlHelper
  */
 class ScaleControlHelper extends BaseScaleControlHelper
 {
-
 }

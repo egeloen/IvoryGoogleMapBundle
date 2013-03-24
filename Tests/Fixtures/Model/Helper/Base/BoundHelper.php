@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Base\BoundHelper as BaseBoundHelper;
  */
 class BoundHelper extends BaseBoundHelper
 {
-
 }

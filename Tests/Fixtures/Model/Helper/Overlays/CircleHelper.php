@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Overlays\CircleHelper as BaseCircleHelper;
  */
 class CircleHelper extends BaseCircleHelper
 {
-
 }

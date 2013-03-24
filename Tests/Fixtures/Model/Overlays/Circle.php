@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\Circle as BaseCircle;
  */
 class Circle extends BaseCircle
 {
-
 }

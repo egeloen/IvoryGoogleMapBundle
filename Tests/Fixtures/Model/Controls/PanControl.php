@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Controls\PanControl as BasePanControl;
  */
 class PanControl extends BasePanControl
 {
-
 }

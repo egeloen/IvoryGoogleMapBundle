@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Services\Geocoding\GeocoderRequest as BaseGeocoderRequest;
  */
 class GeocoderRequest extends BaseGeocoderRequest
 {
-
 }

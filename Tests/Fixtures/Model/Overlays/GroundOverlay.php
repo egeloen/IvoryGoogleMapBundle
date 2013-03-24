@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\GroundOverlay as BaseGroundOverlay;
  */
 class GroundOverlay extends BaseGroundOverlay
 {
-
 }

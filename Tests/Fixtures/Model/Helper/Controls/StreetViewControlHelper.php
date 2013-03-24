@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Controls\StreetViewControlHelper as BaseStreetViewCon
  */
 class StreetViewControlHelper extends BaseStreetViewControlHelper
 {
-
 }

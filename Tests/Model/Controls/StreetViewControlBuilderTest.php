@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Controls;
 
-use Ivory\GoogleMap\Controls\ControlPosition,
-    Ivory\GoogleMapBundle\Model\Controls\StreetViewControlBuilder;
+use Ivory\GoogleMap\Controls\ControlPosition;
+use Ivory\GoogleMapBundle\Model\Controls\StreetViewControlBuilder;
 
 /**
  * Street view control builder test.

@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Model;
 
-use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
 
 /**
  * Map builder.
@@ -293,8 +293,7 @@ class MapBuilder extends AbstractBuilder
         $northEastLongitude,
         $southWestNoWrap = true,
         $northEastNoWrap = true
-    )
-    {
+    ) {
         $this->bound = array(
             $southWestLatitude,
             $southWestLongitude,

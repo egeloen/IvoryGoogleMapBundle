@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\Rectangle as BaseRectangle;
  */
 class Rectangle extends BaseRectangle
 {
-
 }

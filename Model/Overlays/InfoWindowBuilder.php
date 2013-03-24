@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\AbstractBuilder,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Base\SizeBuilder;
+use Ivory\GoogleMapBundle\Model\AbstractBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Base\SizeBuilder;
 
 /**
  * Info window builder.

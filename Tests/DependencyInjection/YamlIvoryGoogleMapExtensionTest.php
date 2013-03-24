@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * Yaml Ivory Google Map extension test.

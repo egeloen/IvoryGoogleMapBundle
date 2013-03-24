@@ -11,12 +11,12 @@
 
 namespace Ivory\GoogleMapBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor,
-    Symfony\Component\Config\FileLocator,
-    Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\DependencyInjection\Definition,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader,
-    Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Ivory google map extension.
@@ -1344,10 +1344,10 @@ class IvoryGoogleMapExtension extends Extension
                 array($config['geocoder']['fake_ip'])
             );
 
-            $fakeRequestDefinition->addTag('kernel.event_listener', array(
-                'event'  => 'kernel.request',
-                'method' => 'onKernelRequest',
-            ));
+            $fakeRequestDefinition->addTag(
+                'kernel.event_listener',
+                array('event' => 'kernel.request', 'method' => 'onKernelRequest')
+            );
 
             $container->setDefinition('ivory_google_map.geocoder.event_listener.fake_request', $fakeRequestDefinition);
         }

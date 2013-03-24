@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Base\Coordinate as BaseCoordinate;
  */
 class Coordinate extends BaseCoordinate
 {
-
 }

@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
 
-use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension,
-    Symfony\Component\DependencyInjection\ContainerBuilder;
+use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Abstract Ivory Google Map extension test.

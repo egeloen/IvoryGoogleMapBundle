@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Overlays\MarkerShapeHelper as BaseMarkerShapeHelper;
  */
 class MarkerShapeHelper extends BaseMarkerShapeHelper
 {
-
 }

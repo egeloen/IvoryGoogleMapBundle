@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Services\Directions\Directions as BaseDirections;
  */
 class Directions extends BaseDirections
 {
-
 }

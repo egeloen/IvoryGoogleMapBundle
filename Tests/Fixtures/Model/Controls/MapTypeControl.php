@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Controls\MapTypeControl as BaseMapTypeControl;
  */
 class MapTypeControl extends BaseMapTypeControl
 {
-
 }

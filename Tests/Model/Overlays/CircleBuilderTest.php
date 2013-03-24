@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\CircleBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\CircleBuilder;
 
 /**
  * Circle builder test.

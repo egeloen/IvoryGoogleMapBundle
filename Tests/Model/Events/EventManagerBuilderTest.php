@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Events;
 
-use Ivory\GoogleMapBundle\Model\Events\EventBuilder,
-    Ivory\GoogleMapBundle\Model\Events\EventManagerBuilder;
+use Ivory\GoogleMapBundle\Model\Events\EventBuilder;
+use Ivory\GoogleMapBundle\Model\Events\EventManagerBuilder;
 
 /**
  * Event manager builder test.

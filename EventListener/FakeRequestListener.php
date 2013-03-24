@@ -11,10 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\EventListener;
 
-use \InvalidArgumentException;
-
-use Symfony\Component\HttpKernel\Event\GetResponseEvent,
-    Symfony\Component\HttpKernel\HttpKernelInterface;
+use InvalidArgumentException;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * Fake request listener.

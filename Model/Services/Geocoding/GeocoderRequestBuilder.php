@@ -129,8 +129,7 @@ class GeocoderRequestBuilder extends AbstractBuilder
         $northEastLongitude,
         $southWestNoWrap = true,
         $northEastNoWrap = true
-    )
-    {
+    ) {
         $this->bound = array(
             $southWestLatitude,
             $southWestLongitude,

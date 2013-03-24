@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Overlays\EncodedPolyline as BaseEncodedPolyline;
  */
 class EncodedPolyline extends BaseEncodedPolyline
 {
-
 }

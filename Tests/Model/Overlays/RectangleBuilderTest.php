@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Base\BoundBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\RectangleBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\RectangleBuilder;
 
 /**
  * Rectangle builder test.

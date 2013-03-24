@@ -20,5 +20,4 @@ use Geocoder\Geocoder as BaseGeocoder;
  */
 class Geocoder extends BaseGeocoder
 {
-
 }

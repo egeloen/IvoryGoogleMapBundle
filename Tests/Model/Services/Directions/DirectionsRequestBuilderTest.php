@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Services\Directions;
 
-use Ivory\GoogleMap\Services\Directions\TravelMode,
-    Ivory\GoogleMap\Services\Directions\UnitSystem,
-    Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequestBuilder;
+use Ivory\GoogleMap\Services\Directions\TravelMode;
+use Ivory\GoogleMap\Services\Directions\UnitSystem;
+use Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequestBuilder;
 
 /**
  * Directions request builder test.

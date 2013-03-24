@@ -11,10 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Twig;
 
-use \Twig_Environment,
-    \Twig_Loader_String;
-
 use Ivory\GoogleMapBundle\Twig\GoogleMapExtension;
+use Twig_Environment;
+use Twig_Loader_String;
 
 /**
  * Google map extension test.

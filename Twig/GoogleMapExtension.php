@@ -11,10 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Twig;
 
-use \Twig_Function_Method;
-
-use Ivory\GoogleMap\Map,
-    Ivory\GoogleMap\Helper\MapHelper;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Helper\MapHelper;
+use Twig_Function_Method;
 
 /**
  * Ivory google map twig extension.

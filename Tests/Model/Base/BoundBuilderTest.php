@@ -11,8 +11,8 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Base;
 
-use Ivory\GoogleMapBundle\Model\Base\BoundBuilder,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Base\BoundBuilder;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
 
 /**
  * Bound builder test.

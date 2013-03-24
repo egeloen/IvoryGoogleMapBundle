@@ -11,9 +11,9 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Model\Overlays;
 
-use Ivory\GoogleMap\Overlays\Animation,
-    Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder,
-    Ivory\GoogleMapBundle\Model\Overlays\MarkerBuilder;
+use Ivory\GoogleMap\Overlays\Animation;
+use Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder;
+use Ivory\GoogleMapBundle\Model\Overlays\MarkerBuilder;
 
 /**
  * Marker builder test.

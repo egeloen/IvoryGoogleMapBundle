@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Geometry\EncodingHelper as BaseEncodingHelper;
  */
 class EncodingHelper extends BaseEncodingHelper
 {
-
 }

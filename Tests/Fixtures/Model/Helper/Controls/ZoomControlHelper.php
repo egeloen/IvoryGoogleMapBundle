@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Controls\ZoomControlHelper as BaseZoomControlHelper;
  */
 class ZoomControlHelper extends BaseZoomControlHelper
 {
-
 }

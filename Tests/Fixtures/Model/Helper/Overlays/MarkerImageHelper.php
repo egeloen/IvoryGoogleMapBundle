@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Overlays\MarkerImageHelper as BaseMarkerImageHelper;
  */
 class MarkerImageHelper extends BaseMarkerImageHelper
 {
-
 }

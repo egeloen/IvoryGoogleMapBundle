@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Controls\ControlPositionHelper as BaseControlPosition
  */
 class ControlPositionHelper extends BaseControlPositionHelper
 {
-
 }

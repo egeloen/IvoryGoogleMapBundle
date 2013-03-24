@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Services\Directions\DirectionsRequest as BaseDirectionsReque
  */
 class DirectionsRequest extends BaseDirectionsRequest
 {
-
 }

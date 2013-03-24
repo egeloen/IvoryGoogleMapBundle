@@ -20,5 +20,4 @@ use Ivory\GoogleMap\Helper\Controls\OverviewMapControlHelper as BaseOverviewMapC
  */
 class OverviewMapControlHelper extends BaseOverviewMapControlHelper
 {
-
 }
