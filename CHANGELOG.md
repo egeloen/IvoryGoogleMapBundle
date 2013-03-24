@@ -2,6 +2,7 @@
 
 ### 2.0.0 (????-??-??)
 
+ * 54ac124 - PSR2 compatibility
  * df4265d - Refactor according to helper renaming
 
 ### 1.1.0 (2012-03-13)
