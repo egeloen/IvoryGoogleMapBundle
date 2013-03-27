@@ -44,32 +44,5 @@ $kmlLayer = $this->get('ivory_google_map.kml_layer');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map KML layer service
-$kmlLayer = $this->get('ivory_google_map.kml_layer');
-
-// Configure your KML layer options
-$kmlLayer->setPrefixJavascriptVariable('kml_layer_');
-$kmlLayer->setUrl('http://www.domain.com/kml_layer.kml');
-
-$kmlLayer->setOption('clickable', true);
-$kmlLayer->setOption('suppressInfoWindows', false);
-$kmlLayer->setOptions(array(
-    'clickable' => true,
-    'suppressInfoWindows' => false
-));
-```
-
-## Add your KML layer to the map
-
-``` php
-<?php
-
-// Requests the ivory google map KML layer service
-$kmlLayer = $this->get('ivory_google_map.kml_layer');
-
-// Add your KML layer to the map
-$map->addKMLLayer($kmlLayer);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/layers/kml_layer.md).

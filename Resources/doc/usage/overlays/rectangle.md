@@ -54,32 +54,5 @@ $rectangle = $this->get('ivory_google_map.rectangle');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map rectangle service
-$rectangle = $this->get('ivory_google_map.rectangle');
-
-// Configure your rectangle options
-$rectangle->setPrefixJavascriptVariable('rectangle_');
-$rectangle->setBound(-1, -1, 1, 1, true, true);
-
-$rectangle->setOption('clickable', false);
-$rectangle->setOption('strokeColor', '#ffffff');
-$rectangle->setOptions(array(
-    'clickable' => false,
-    'strokeColor' => '#ffffff'
-));
-```
-
-## Add your rectangle to the map
-
-``` php
-<?php
-
-// Requests the ivory google map rectangle service
-$rectangle = $this->get('ivory_google_map.rectangle');
-
-// Add your rectangle to the map
-$map->addRectangle($rectangle);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/rectangle.md).

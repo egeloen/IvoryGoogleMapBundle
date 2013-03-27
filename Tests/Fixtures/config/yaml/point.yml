@@ -1,4 +1,5 @@
 ivory_google_map:
     point:
-        x: 1.1
-        y: -2.1
+        prefix_javascript_variable: "foo"
+        x:                          1.1
+        y:                          -2.1

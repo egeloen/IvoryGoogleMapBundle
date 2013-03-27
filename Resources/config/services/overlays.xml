@@ -71,9 +71,7 @@
             <argument type="service" id="ivory_google_map.coordinate.builder" />
         </service>
 
-        <service id="ivory_google_map.helper.circle" class="%ivory_google_map.circle.helper.class%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
+        <service id="ivory_google_map.helper.circle" class="%ivory_google_map.circle.helper.class%" public="false" />
 
         <!-- Encoded polyline service -->
         <service
@@ -123,9 +121,7 @@
             id="ivory_google_map.helper.ground_overlay"
             class="%ivory_google_map.ground_overlay.helper.class%"
             public="false"
-        >
-            <argument type="service" id="ivory_google_map.helper.bound" />
-        </service>
+        />
 
         <!-- Info window service -->
         <service
@@ -146,10 +142,7 @@
             id="ivory_google_map.helper.info_window"
             class="%ivory_google_map.info_window.helper.class%"
             public="false"
-        >
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-            <argument type="service" id="ivory_google_map.helper.size" />
-        </service>
+        />
 
         <!-- Marker service -->
         <service
@@ -166,11 +159,7 @@
         </service>
 
         <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper.class%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.animation" />
-            <argument type="service" id="ivory_google_map.helper.info_window" />
-            <argument type="service" id="ivory_google_map.helper.marker_image" />
-            <argument type="service" id="ivory_google_map.helper.marker_shape" />
         </service>
 
         <!-- Marker image service -->
@@ -192,10 +181,7 @@
             id="ivory_google_map.helper.marker_image"
             class="%ivory_google_map.marker_image.helper.class%"
             public="false"
-        >
-            <argument type="service" id="ivory_google_map.helper.point" />
-            <argument type="service" id="ivory_google_map.helper.size" />
-        </service>
+        />
 
         <!-- Marker shape service -->
         <service
@@ -229,9 +215,7 @@
             <argument>%ivory_google_map.polygon.class%</argument>
         </service>
 
-        <service id="ivory_google_map.helper.polygon" class="%ivory_google_map.polygon.helper.class%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
+        <service id="ivory_google_map.helper.polygon" class="%ivory_google_map.polygon.helper.class%" public="false" />
 
         <!-- Polyline service -->
         <service
@@ -246,9 +230,11 @@
             <argument>%ivory_google_map.polyline.class%</argument>
         </service>
 
-        <service id="ivory_google_map.helper.polyline" class="%ivory_google_map.polyline.helper.class%" public="false">
-            <argument type="service" id="ivory_google_map.helper.coordinate" />
-        </service>
+        <service
+            id="ivory_google_map.helper.polyline"
+            class="%ivory_google_map.polyline.helper.class%"
+            public="false"
+        />
 
         <!-- Rectangle service -->
         <service
@@ -268,8 +254,6 @@
             id="ivory_google_map.helper.rectangle"
             class="%ivory_google_map.rectangle.helper.class%"
             public="false"
-        >
-            <argument type="service" id="ivory_google_map.helper.bound" />
-        </service>
+        />
     </services>
 </container>

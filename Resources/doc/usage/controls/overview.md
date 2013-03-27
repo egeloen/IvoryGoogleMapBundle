@@ -35,25 +35,5 @@ $overviewMapControl = $this->get('ivory_google_map.overview_map_control');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map overview control service
-$overviewMapControl = $this->get('ivory_google_map.overview_map_control');
-
-// Configure your overview map control
-$overviewMapControl->setOpened(false);
-```
-
-## Add your overview map control to the map
-
-``` php
-<?php
-
-// Requests the ivory google map overview control service
-$overviewMapControl = $this->get('ivory_google_map.overview_map_control');
-
-// Add your overview map control to the map
-$map->setOverviewMapControl($overviewMapControl);
-$map->setOverviewMapControl(false);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/controls/overview.md).

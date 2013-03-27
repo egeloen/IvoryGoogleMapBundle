@@ -20,11 +20,38 @@ use Ivory\GoogleMapBundle\Model\AbstractBuilder;
  */
 class PointBuilder extends AbstractBuilder
 {
+    /** @var string */
+    protected $prefixJavascriptVariable;
+
     /** @var double */
     protected $x;
 
     /** @var double */
     protected $y;
+
+    /**
+     * Gets the prefix javascript variable.
+     *
+     * @return string The prefix javascript variable.
+     */
+    public function getPrefixJavascriptVariable()
+    {
+        return $this->prefixJavascriptVariable;
+    }
+
+    /**
+     * Sets the prefix javascript variable.
+     *
+     * @param string $prefixJavascriptVariable The prefix javascript variable.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Base\PointBuilder The builder.
+     */
+    public function setPrefixJavascriptVariable($prefixJavascriptVariable)
+    {
+        $this->prefixJavascriptVariable = $prefixJavascriptVariable;
+
+        return $this;
+    }
 
     /**
      * Gets the X coordinate.
@@ -79,6 +106,7 @@ class PointBuilder extends AbstractBuilder
      */
     public function reset()
     {
+        $this->prefixJavascriptVariable = null;
         $this->x = null;
         $this->y = null;
 
@@ -93,6 +121,10 @@ class PointBuilder extends AbstractBuilder
     public function build()
     {
         $point = new $this->class();
+
+        if ($this->prefixJavascriptVariable !== null) {
+            $point->setPrefixJavascriptVariable($this->prefixJavascriptVariable);
+        }
 
         if ($this->x !== null) {
             $point->setX($this->x);

@@ -66,45 +66,5 @@ $markerImage = $this->get('ivory_google_map.marker_image');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map marker image service
-$markerImage = $this->get('ivory_google_map.marker_image');
-
-// Configure your marker image options
-$markerImage->setPrefixJavascriptVariable('marker_image_');
-$markerImage->setUrl('http://maps.gstatic.com/mapfiles/markers/marker.png');
-$markerImage->setAnchor(20, 34);
-$markerImage->setOrigin(0, 0);
-$markerImage->setSize(20, 34, "px", "px");
-$markerImage->setScaledSize(20, 34, "px", "px");
-```
-
-## Add your marker image to the marker
-
-Now you have configurated your marker image, you need to add it like an icon or a shadow to your marker.
-
-### Like an icon
-
-``` php
-<?php
-
-// Requests the ivory google map marker image service
-$markerImage = $this->get('ivory_google_map.marker_image');
-
-// Add your marker image to the marker like an icon
-$marker->setIcon($markerImage);
-```
-
-### Like a shadow
-
-``` php
-<?php
-
-// Requests the ivory google map marker image service
-$markerImage = $this->get('ivory_google_map.marker_image');
-
-// Add your marker image to the marker like a shadow
-$marker->setShadow($markerImage);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/marker_image.md).

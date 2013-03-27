@@ -41,47 +41,5 @@ $polyline = $this->get('ivory_google_map.polyline');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map polyline service
-$polyline = $this->get('ivory_google_map.polyline');
-
-// Configure your polyline options
-$polyline->setPrefixJavascriptVariable('polyline_');
-
-$polyline->setOption('geodesic', true);
-$polyline->setOption('strokeColor', '#ffffff');
-$polyline->setOptions(array(
-    'geodesic' => true,
-    'strokeColor' => '#ffffff'
-));
-```
-
-## Add coordinate to your polyline
-
-Like describe in the introduction, a polyline object consists of an array of coordinates. So, you need to add
-coordinate to your polyline.
-
-``` php
-<?php
-
-// Requests the ivory google map polyline service
-$polyline = $this->get('ivory_google_map.polyline');
-
-// Add coordinates to your polyline
-$polyline->addCoordinate(0, 0, true);
-$polyline->addCoordinate(1, 1, true);
-```
-
-## Add your polyline to the map
-
-``` php
-<?php
-
-// Requests the ivory google map polyline service
-$polyline = $this->get('ivory_google_map.polyline');
-
-// Add your polyline to the map
-$map->addPolyline($polyline);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/polyline.md).

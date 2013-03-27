@@ -1,5 +1,10 @@
 # UPGRADE
 
+### 1.1.0 to 2.0.0
+
+ * The event helper service (`ivory_google_map.helper.event`) & configuration parameter
+   (`ivory_google_map.event.helper_class`) has been removed.
+
 ### 1.0.0 to 1.1.0
 
 The business classes have been moved to a dedicated library for reuasibility purpose. If you're using Symfony 2.0.*,

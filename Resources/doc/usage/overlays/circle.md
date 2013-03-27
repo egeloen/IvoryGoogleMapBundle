@@ -52,33 +52,5 @@ $circle = $this->get('ivory_google_map.circle');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map circle service
-$circle = $this->get('ivory_google_map.circle');
-
-// Configure your circle options
-$circle->setPrefixJavascriptVariable('circle_');
-$circle->setCenter(0, 0, true);
-$circle->setRadius(1);
-
-$circle->setOption('clickable', false);
-$circle->setOption('strokeWeight', 2);
-$circle->setOptions(array(
-    'clickable' => false,
-    'strokeWeight' => 2
-));
-```
-
-## Add your circle to the map
-
-``` php
-<?php
-
-// Requests the ivory google map circle service
-$circle = $this->get('ivory_google_map.circle');
-
-// Add your circle to the map
-$map->addCircle($circle);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/circle.md).

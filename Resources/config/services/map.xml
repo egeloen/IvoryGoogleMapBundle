@@ -29,9 +29,10 @@
         </service>
 
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper.class%">
-            <tag name="templating.helper" alias="ivory_google_map" />
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.bound" />
+            <argument type="service" id="ivory_google_map.helper.point" />
+            <argument type="service" id="ivory_google_map.helper.size" />
             <argument type="service" id="ivory_google_map.helper.map_type_id" />
             <argument type="service" id="ivory_google_map.helper.map_type_control" />
             <argument type="service" id="ivory_google_map.helper.overview_map_control" />
@@ -41,6 +42,8 @@
             <argument type="service" id="ivory_google_map.helper.street_view_control" />
             <argument type="service" id="ivory_google_map.helper.zoom_control" />
             <argument type="service" id="ivory_google_map.helper.marker" />
+            <argument type="service" id="ivory_google_map.helper.marker_image" />
+            <argument type="service" id="ivory_google_map.helper.marker_shape" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
             <argument type="service" id="ivory_google_map.helper.polyline" />
             <argument type="service" id="ivory_google_map.helper.encoded_polyline" />

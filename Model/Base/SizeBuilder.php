@@ -20,6 +20,9 @@ use Ivory\GoogleMapBundle\Model\AbstractBuilder;
  */
 class SizeBuilder extends AbstractBuilder
 {
+    /** @var string */
+    protected $prefixJavascriptVariable;
+
     /** @var double */
     protected $width;
 
@@ -31,6 +34,30 @@ class SizeBuilder extends AbstractBuilder
 
     /** @var string */
     protected $heightUnit;
+
+    /**
+     * Gets the prefix javascript variable.
+     *
+     * @return string The prefix javascript variable.
+     */
+    public function getPrefixJavascriptVariable()
+    {
+        return $this->prefixJavascriptVariable;
+    }
+
+    /**
+     * Sets the prefix javascript variable.
+     *
+     * @param string $prefixJavascriptVariable The prefix javascript variable.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Base\SizeBuilder The builder.
+     */
+    public function setPrefixJavascriptVariable($prefixJavascriptVariable)
+    {
+        $this->prefixJavascriptVariable = $prefixJavascriptVariable;
+
+        return $this;
+    }
 
     /**
      * Gets the size width.
@@ -133,6 +160,7 @@ class SizeBuilder extends AbstractBuilder
      */
     public function reset()
     {
+        $this->prefixJavascriptVariable = null;
         $this->height = null;
         $this->width = null;
         $this->heightUnit = null;
@@ -149,6 +177,10 @@ class SizeBuilder extends AbstractBuilder
     public function build()
     {
         $size = new $this->class();
+
+        if ($this->prefixJavascriptVariable !== null) {
+            $size->setPrefixJavascriptVariable($this->prefixJavascriptVariable);
+        }
 
         if ($this->width !== null) {
             $size->setWidth($this->width);
