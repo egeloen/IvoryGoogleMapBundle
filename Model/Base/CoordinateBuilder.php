@@ -20,6 +20,9 @@ use Ivory\GoogleMapBundle\Model\AbstractBuilder;
  */
 class CoordinateBuilder extends AbstractBuilder
 {
+    /** @var string */
+    protected $prefixJavascriptVariable;
+
     /** @var double */
     protected $latitude;
 
@@ -28,6 +31,30 @@ class CoordinateBuilder extends AbstractBuilder
 
     /** @var boolean */
     protected $noWrap;
+
+    /**
+     * Gets the prefix javascript variable.
+     *
+     * @return string The prefix javascript variable.
+     */
+    public function getPrefixJavascriptVariable()
+    {
+        return $this->prefixJavascriptVariable;
+    }
+
+    /**
+     * Sets the prefix javascript variable.
+     *
+     * @param string $prefixJavascriptVariable The prefix javascript variable.
+     *
+     * @return \Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder The builder.
+     */
+    public function setPrefixJavascriptVariable($prefixJavascriptVariable)
+    {
+        $this->prefixJavascriptVariable = $prefixJavascriptVariable;
+
+        return $this;
+    }
 
     /**
      * Gets the coordinate latitude.
@@ -106,6 +133,7 @@ class CoordinateBuilder extends AbstractBuilder
      */
     public function reset()
     {
+        $this->prefixJavascriptVariable = null;
         $this->latitude = null;
         $this->longitude = null;
         $this->noWrap = null;
@@ -121,6 +149,10 @@ class CoordinateBuilder extends AbstractBuilder
     public function build()
     {
         $coordinate = new $this->class();
+
+        if ($this->prefixJavascriptVariable !== null) {
+            $coordinate->setPrefixJavascriptVariable($this->prefixJavascriptVariable);
+        }
 
         if ($this->latitude !== null) {
             $coordinate->setLatitude($this->latitude);

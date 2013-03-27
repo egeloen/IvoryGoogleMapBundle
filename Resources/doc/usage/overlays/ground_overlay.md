@@ -54,31 +54,5 @@ $groundOverlay = $this->get('ivory_google_map.ground_overlay');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map ground overlay service
-$groundOverlay = $this->get('ivory_google_map.ground_overlay');
-
-// Configure your ground overlay options
-$groundOverlay->setPrefixJavascriptVariable('ground_overlay_');
-$groundOverlay->setUrl('url');
-$groundOverlay->setBound(-1, -1, 1, 1, true, true);
-
-$groundOverlay->setOption('clickable', false);
-$groundOverlay->setOptions(array(
-    'clickable' => false
-));
-```
-
-## Add your ground overlay to the map
-
-``` php
-<?php
-
-// Requests the ivory google map ground overlay service
-$groundOverlay = $this->get('ivory_google_map.ground_overlay');
-
-// Add your ground overlay to the map
-$map->addGroundOverlay($groundOverlay);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/ground_overlay.md).

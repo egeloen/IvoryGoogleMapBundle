@@ -42,36 +42,5 @@ $encodedPolyline = $this->get('ivory_google_map.encoded_polyline');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map encoded polyline service
-$encodedPolyline = $this->get('ivory_google_map.polyline');
-
-// Configure your encoded polyline options
-$polyline->setPrefixJavascriptVariable('polyline_');
-
-$encodedPolyline->setValue('encoded_polyline_value');
-
-$polyline->setOption('geodesic', true);
-$polyline->setOption('strokeColor', '#ffffff');
-$polyline->setOptions(array(
-    'geodesic' => true,
-    'strokeColor' => '#ffffff'
-));
-```
-
-## Add your encoded polyline to the map
-
-``` php
-<?php
-
-// Requests the ivory google map encoded polyline service
-$encodedPolyline = $this->get('ivory_google_map.polyline');
-
-// Configure your encoded polyline
-// ...
-
-// Add your encoded polyline to the map
-$map->addEncodedPolyline($encodedPolyline);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/encoded_polyline.md).

@@ -102,6 +102,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Base\Coordinate', $coordinate);
 
+        $this->assertSame('coordinate_', substr($coordinate->getJavascriptVariable(), 0, 11));
         $this->assertSame(0, $coordinate->getLatitude());
         $this->assertSame(0, $coordinate->getLongitude());
         $this->assertTrue($coordinate->isNoWrap());
@@ -114,6 +115,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $coordinate = $this->container->get('ivory_google_map.coordinate');
 
+        $this->assertSame('foo', substr($coordinate->getJavascriptVariable(), 0, 3));
         $this->assertSame(1.1, $coordinate->getLatitude());
         $this->assertSame(-2.1, $coordinate->getLongitude());
         $this->assertFalse($coordinate->isNoWrap());
@@ -138,6 +140,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $point = $this->container->get('ivory_google_map.point');
 
         $this->assertInstanceOf('Ivory\GoogleMap\Base\Point', $point);
+        $this->assertSame('point_', substr($point->getJavascriptVariable(), 0, 6));
         $this->assertSame(0, $point->getX());
         $this->assertSame(0, $point->getY());
     }
@@ -149,6 +152,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $point = $this->container->get('ivory_google_map.point');
 
+        $this->assertSame('foo', substr($point->getJavascriptVariable(), 0, 3));
         $this->assertSame(1.1, $point->getX());
         $this->assertSame(-2.1, $point->getY());
     }
@@ -173,6 +177,8 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf('Ivory\GoogleMap\Base\Size', $size);
 
+        $this->assertSame('size_', substr($size->getJavascriptVariable(), 0, 5));
+
         $this->assertSame(1, $size->getWidth());
         $this->assertSame(1, $size->getHeight());
 
@@ -186,6 +192,8 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->compile();
 
         $size = $this->container->get('ivory_google_map.size');
+
+        $this->assertSame('foo', substr($size->getJavascriptVariable(), 0, 3));
 
         $this->assertEquals($size->getWidth(), 100.1);
         $this->assertEquals($size->getHeight(), 200.2);
@@ -1285,12 +1293,12 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\PointHelper',
-            $mapHelper->getMarkerHelper()->getMarkerImageHelper()->getPointHelper()
+            $mapHelper->getPointHelper()
         );
 
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\SizeHelper',
-            $mapHelper->getMarkerHelper()->getMarkerImageHelper()->getSizeHelper()
+            $mapHelper->getSizeHelper()
         );
 
         $this->assertInstanceOf(
@@ -1380,12 +1388,12 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerImageHelper',
-            $mapHelper->getMarkerHelper()->getMarkerImageHelper()
+            $mapHelper->getMarkerImageHelper()
         );
 
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerShapeHelper',
-            $mapHelper->getMarkerHelper()->getMarkerShapeHelper()
+            $mapHelper->getMarkerShapeHelper()
         );
 
         $this->assertInstanceOf(
@@ -1411,11 +1419,6 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Events\EventManagerHelper',
             $mapHelper->getEventManagerHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Events\EventHelper',
-            $mapHelper->getEventManagerHelper()->getEventHelper()
         );
 
         $this->assertInstanceOf(

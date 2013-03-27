@@ -51,11 +51,11 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->mapHelperMock
             ->expects($this->once())
-            ->method('renderContainer')
+            ->method('renderHtmlContainer')
             ->with($this->equalTo($map))
             ->will($this->returnValue('foo'));
 
-        $this->assertSame('foo', $this->googleMapExtension->renderContainer($map));
+        $this->assertSame('foo', $this->googleMapExtension->renderHtmlContainer($map));
     }
 
     public function testRenderJavascripts()
@@ -93,7 +93,7 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->mapHelperMock
             ->expects($this->once())
-            ->method('renderContainer')
+            ->method('renderHtmlContainer')
             ->with($this->equalTo($map))
             ->will($this->returnValue('foo'));
 

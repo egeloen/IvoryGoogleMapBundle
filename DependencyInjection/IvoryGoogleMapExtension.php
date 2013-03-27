@@ -255,6 +255,13 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['coordinate']['helper_class']);
         }
 
+        if (isset($config['coordinate']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['coordinate']['prefix_javascript_variable'])
+            );
+        }
+
         if (isset($config['coordinate']['latitude'])) {
             $builderDefinition->addMethodCall('setLatitude', array($config['coordinate']['latitude']));
         }
@@ -342,6 +349,13 @@ class IvoryGoogleMapExtension extends Extension
                 ->setClass($config['point']['helper_class']);
         }
 
+        if (isset($config['point']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['point']['prefix_javascript_variable'])
+            );
+        }
+
         if (isset($config['point']['x'])) {
             $builderDefinition->addMethodCall('setX', array($config['point']['x']));
         }
@@ -369,6 +383,13 @@ class IvoryGoogleMapExtension extends Extension
             $container
                 ->getDefinition('ivory_google_map.helper.size')
                 ->setClass($config['size']['helper_class']);
+        }
+
+        if (isset($config['size']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['size']['prefix_javascript_variable'])
+            );
         }
 
         if (isset($config['size']['width'])) {
@@ -1264,12 +1285,6 @@ class IvoryGoogleMapExtension extends Extension
 
         if (isset($config['event']['class'])) {
             $builderDefinition->setArguments(array($config['event']['class']));
-        }
-
-        if (isset($config['event']['helper_class'])) {
-            $container
-                ->getDefinition('ivory_google_map.helper.event')
-                ->setClass($config['event']['helper_class']);
         }
 
         if (isset($config['event']['prefix_javascript_variable'])) {
