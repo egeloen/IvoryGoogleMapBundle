@@ -58,31 +58,5 @@ $markerShape = $this->get('ivory_google_map.marker_shape');
 
 ### By coding
 
-``` php
-<?php
-
-// Requests the ivory google map marker shape service
-$markerShape = $this->get('ivory_google_map.marker_shape');
-
-// Configure your marker shape options
-$markerShape->setPrefixJavascriptVariable('marker_shape_');
-$markerShape->setType('poly');
-$markerShape->setCoordinates(array(1, 1, 1, -1, -1, -1, -1, 1));
-
-// If the marker shape type is "poly", you can add coordinate one by one
-$markerShape->addPolyCoordinates(1, 1);
-```
-
-## Add your marker shape to the marker
-
-Now you have configurated your marker shape, you need to add it to your marker.
-
-``` php
-<?php
-
-// Requests the ivory google map marker shape service
-$markerShape = $this->get('ivory_google_map.marker_shape');
-
-// Add your marker shape to the marker
-$marker->setShape($markerShape);
-```
+If you want to learn more, you can read
+[this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/marker_shape.md).

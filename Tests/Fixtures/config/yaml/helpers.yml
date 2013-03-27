@@ -59,7 +59,5 @@ ivory_google_map:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Layers\\KMLLayerHelper"
     event_manager:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Events\\EventManagerHelper"
-    event:
-        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Events\\EventHelper"
     encoding:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Geometry\\EncodingHelper"

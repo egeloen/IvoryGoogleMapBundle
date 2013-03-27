@@ -34,6 +34,10 @@ your Symfony2 project.
        - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
        - [Directions API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/directions/directions.md)
 
+## Cookbook
+
+  1. [Inject an Ivory service](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/cookbook/dependency_injection.md)
+
 ## Contribute
 
 We love contributors! Ivory is an open source project. If you'd like to contribute, feel free to propose a PR!
