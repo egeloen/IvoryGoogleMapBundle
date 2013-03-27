@@ -2,6 +2,7 @@
 
 ### 2.0.0 (????-??-??)
 
+ * c662180 - [Helper] Add JS container
  * 54ac124 - PSR2 compatibility
  * df4265d - Refactor according to helper renaming
 
