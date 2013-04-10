@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.0 (????-??-??)
+### 1.1.1 (2013-04-10)
 
  * c662180 - [Helper] Add JS container
  * 54ac124 - PSR2 compatibility

@@ -1,6 +1,6 @@
 # UPGRADE
 
-### 1.1.0 to 2.0.0
+### 1.1.0 to 1.1.1
 
  * The event helper service (`ivory_google_map.helper.event`) & configuration parameter
    (`ivory_google_map.event.helper_class`) has been removed.
