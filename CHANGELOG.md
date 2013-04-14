@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 2.0.0 (????-??-??)
+
+ * 83d85e3 - [DI] Use Extension processConfiguration method
+
 ### 1.1.1 (2013-04-10)
 
  * c662180 - [Helper] Add JS container
