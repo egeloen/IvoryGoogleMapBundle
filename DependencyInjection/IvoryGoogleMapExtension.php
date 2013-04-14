@@ -11,7 +11,6 @@
 
 namespace Ivory\GoogleMapBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,10 +29,9 @@ class IvoryGoogleMapExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $processor = new Processor();
         $configuration = new Configuration();
 
-        $config = $processor->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration($configuration, $configs);
 
         $resources = array(
             'base.xml',
@@ -412,7 +410,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads control position configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadControlPosition(array $config, ContainerBuilder $container)
@@ -427,7 +425,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads map type control configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadMapTypeControl(array $config, ContainerBuilder $container)
@@ -687,7 +685,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads animation configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadAnimation(array $config, ContainerBuilder $container)
@@ -702,7 +700,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads marker configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadMarker(array $config, ContainerBuilder $container)
@@ -748,7 +746,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads marker image configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadMarkerImage(array $config, ContainerBuilder $container)
@@ -836,7 +834,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads marker shape configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadMarkerShape(array $config, ContainerBuilder $container)
@@ -872,7 +870,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads info window configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadInfoWindow(array $config, ContainerBuilder $container)
@@ -959,7 +957,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads polyline configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadPolyline(array $config, ContainerBuilder $container)
@@ -991,7 +989,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads encoded polyline configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadEncodedPolyline(array $config, ContainerBuilder $container)
@@ -1023,7 +1021,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads polygon configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadPolygon(array $config, ContainerBuilder $container)
@@ -1055,7 +1053,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads rectangle configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadRectangle(array $config, ContainerBuilder $container)
@@ -1112,7 +1110,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads circle configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadCircle(array $config, ContainerBuilder $container)
@@ -1158,7 +1156,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads ground overlay configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadGroundOverlay(array $config, ContainerBuilder $container)
@@ -1219,7 +1217,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads KML layer configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadKMLLayer(array $config, ContainerBuilder $container)
@@ -1255,7 +1253,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads event manager configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadEventManager(array $config, ContainerBuilder $container)
@@ -1276,7 +1274,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads event configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadEvent(array $config, ContainerBuilder $container)
@@ -1298,7 +1296,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads encoding configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadEncoding(array $config, ContainerBuilder $container)
@@ -1313,7 +1311,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads geocoder provider configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
@@ -1348,7 +1346,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads geocoder fake request configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadGeocoderFakeRequest(array $config, ContainerBuilder $container)
@@ -1371,7 +1369,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads geocoder request configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
@@ -1441,7 +1439,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads directions configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadDirections(array $config, ContainerBuilder $container)
@@ -1468,7 +1466,7 @@ class IvoryGoogleMapExtension extends Extension
     /**
      * Loads directions request configuration.
      *
-     * @param array                                                   $config    The processed condiguration.
+     * @param array                                                   $config    The processed configuration.
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
      */
     protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
