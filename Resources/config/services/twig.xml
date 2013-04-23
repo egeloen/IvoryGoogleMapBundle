@@ -10,7 +10,7 @@
 
     <services>
         <service id="ivory_google_map.twig.extension" class="%ivory_google_map.twig.extension.class%" public="false">
-            <argument type="service" id="ivory_google_map.helper.map" />
+            <argument type="service" id="ivory_google_map.template.helper" />
             <tag name="twig.extension" />
         </service>
     </services>
