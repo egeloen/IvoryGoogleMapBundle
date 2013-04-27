@@ -2,6 +2,7 @@
 
 ### 2.0.0 (????-??-??)
 
+ * d22d5d3 - [Travis] Use --prefer-source to avoid random build fail
  * 83d85e3 - [DI] Use Extension processConfiguration method
 
 ### 1.1.1 (2013-04-10)
