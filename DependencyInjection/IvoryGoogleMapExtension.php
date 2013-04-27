@@ -42,6 +42,7 @@ class IvoryGoogleMapExtension extends Extension
             'services.xml',
             'map.xml',
             'twig.xml',
+            'templating_php.xml',
         );
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));

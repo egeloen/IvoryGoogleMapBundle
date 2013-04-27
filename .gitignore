@@ -4,6 +4,7 @@
 /composer.phar
 /composer.lock
 /vendor
+/.idea
 
 # PHPUnit
 /phpunit.xml

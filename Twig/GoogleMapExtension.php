@@ -12,7 +12,7 @@
 namespace Ivory\GoogleMapBundle\Twig;
 
 use Ivory\GoogleMap\Map;
-use Ivory\GoogleMap\Helper\MapHelper;
+use Ivory\GoogleMapBundle\Templating\Helper\GoogleMapHelper;
 use Twig_Function_Method;
 
 /**
@@ -22,17 +22,17 @@ use Twig_Function_Method;
  */
 class GoogleMapExtension extends \Twig_Extension
 {
-    /**@var \Ivory\GoogleMap\Helper\MapHelper */
-    protected $mapHelper;
+    /**@var \Ivory\GoogleMapBundle\Templating\Helper\GoogleMapHelper */
+    protected $templateHelper;
 
     /**
      * Create the google map twig extension.
      *
-     * @param \Ivory\GoogleMap\Helper\MapHelper $mapHelper The map helper.
+     * @param \Ivory\GoogleMapBundle\Templating\Helper\GoogleMapHelper $templateHelper The php template map helper.
      */
-    public function __construct(MapHelper $mapHelper)
+    public function __construct(GoogleMapHelper $templateHelper)
     {
-        $this->mapHelper = $mapHelper;
+        $this->templateHelper = $templateHelper;
     }
 
     /**
@@ -63,7 +63,7 @@ class GoogleMapExtension extends \Twig_Extension
      */
     public function renderHtmlContainer(Map $map)
     {
-        return $this->mapHelper->renderHtmlContainer($map);
+        return $this->templateHelper->renderHtmlContainer($map);
     }
 
     /**
@@ -75,7 +75,7 @@ class GoogleMapExtension extends \Twig_Extension
      */
     public function renderStylesheets(Map $map)
     {
-        return $this->mapHelper->renderStylesheets($map);
+        return $this->templateHelper->renderStylesheets($map);
     }
 
     /**
@@ -87,7 +87,7 @@ class GoogleMapExtension extends \Twig_Extension
      */
     public function renderJavascripts(Map $map)
     {
-        return $this->mapHelper->renderJavascripts($map);
+        return $this->templateHelper->renderJavascripts($map);
     }
 
     /**
