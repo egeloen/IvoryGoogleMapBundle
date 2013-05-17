@@ -24,6 +24,10 @@
         <parameter key="ivory_google_map.info_window.builder.class">Ivory\GoogleMapBundle\Model\Overlays\InfoWindowBuilder</parameter>
         <parameter key="ivory_google_map.info_window.helper.class">Ivory\GoogleMap\Helper\Overlays\InfoWindowHelper</parameter>
 
+        <parameter key="ivory_google_map.info_box.class">Ivory\GoogleMap\Overlays\InfoBox</parameter>
+        <parameter key="ivory_google_map.info_box.builder.class">Ivory\GoogleMapBundle\Model\Overlays\InfoBoxBuilder</parameter>
+        <parameter key="ivory_google_map.info_box.helper.class">Ivory\GoogleMap\Helper\Overlays\InfoBoxHelper</parameter>
+
         <parameter key="ivory_google_map.marker.class">Ivory\GoogleMap\Overlays\Marker</parameter>
         <parameter key="ivory_google_map.marker.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerBuilder</parameter>
         <parameter key="ivory_google_map.marker.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerHelper</parameter>
@@ -143,6 +147,26 @@
             class="%ivory_google_map.info_window.helper.class%"
             public="false"
         />
+
+        <service
+                id="ivory_google_map.info_box"
+                class="%ivory_google_map.info_box.class%"
+                factory-service="ivory_google_map.info_box.builder"
+                factory-method="build"
+                scope="prototype"
+                />
+
+        <service id="ivory_google_map.info_box.builder" class="%ivory_google_map.info_box.builder.class%">
+            <argument>%ivory_google_map.info_box.class%</argument>
+            <argument type="service" id="ivory_google_map.coordinate.builder" />
+            <argument type="service" id="ivory_google_map.size.builder" />
+        </service>
+
+        <service
+                id="ivory_google_map.helper.info_box"
+                class="%ivory_google_map.info_box.helper.class%"
+                public="false"
+                />
 
         <!-- Marker service -->
         <service
