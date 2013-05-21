@@ -59,6 +59,7 @@ class Configuration implements ConfigurationInterface
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
         $this->addInfoWindowSection($rootNode);
+        $this->addInfoBoxSection($rootNode);
         $this->addPolylineSection($rootNode);
         $this->addPolygonSection($rootNode);
         $this->addEncodedPolylineSection($rootNode);
@@ -627,6 +628,29 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the info window section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addInfoBoxSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('info_box')->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('position')->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('longitude')->end()
+                                ->scalarNode('latitude')->end()
+                                ->scalarNode('no_wrap')->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('content')->end()
+                    ->end()
             ->end();
     }
 

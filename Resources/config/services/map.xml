@@ -45,6 +45,7 @@
             <argument type="service" id="ivory_google_map.helper.marker_image" />
             <argument type="service" id="ivory_google_map.helper.marker_shape" />
             <argument type="service" id="ivory_google_map.helper.info_window" />
+            <argument type="service" id="ivory_google_map.helper.info_box" />
             <argument type="service" id="ivory_google_map.helper.polyline" />
             <argument type="service" id="ivory_google_map.helper.encoded_polyline" />
             <argument type="service" id="ivory_google_map.helper.polygon" />

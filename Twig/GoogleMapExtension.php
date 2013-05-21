@@ -26,6 +26,13 @@ class GoogleMapExtension extends \Twig_Extension
     protected $mapHelper;
 
     /**
+     * @var array
+     */
+    protected $availablePlugins = array(
+        'infobox' => '/bundles/ivorygooglemap/js/infobox.js'
+    );
+
+    /**
      * Create the google map twig extension.
      *
      * @param \Ivory\GoogleMap\Helper\MapHelper $mapHelper The map helper.
@@ -85,9 +92,16 @@ class GoogleMapExtension extends \Twig_Extension
      *
      * @return string The html output.
      */
-    public function renderJavascripts(Map $map)
+    public function renderJavascripts(Map $map, $plugins = array())
     {
-        return $this->mapHelper->renderJavascripts($map);
+        foreach($plugins as $key => $plugin) {
+            if(in_array($plugin, array_keys($this->availablePlugins))) {
+                $plugins[$plugin] = $this->availablePlugins[$plugin];
+                unset($plugins[$key]);
+            }
+        }
+
+        return $this->mapHelper->renderJavascripts($map, $plugins);
     }
 
     /**
