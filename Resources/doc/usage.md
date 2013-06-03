@@ -64,8 +64,16 @@ Warning, the HTML container needs to be rendered before javascript.
 
 ### Render the HTML container
 
+For twig:
+
 ```
 {{ google_map_container(map) }}
+```
+
+For php:
+
+```
+$view['ivory_google_map']->renderHtmlContainer($map);
 ```
 
 This function renders an html div block with the HTML container ID, the width & the height configured.
@@ -76,8 +84,16 @@ This function renders an html div block with the HTML container ID, the width & 
 
 ### Render the javascript
 
+For twig:
+
 ```
 {{ google_map_js(map) }}
+```
+
+For php:
+
+```
+$view['ivory_google_map']->renderJavascripts($map);
 ```
 
 This function renders an html javascript block with all code needed for displaying your map.
@@ -93,8 +109,16 @@ This function renders an html javascript block with all code needed for displayi
 Additionally, you can configure some CSS directly on the map. For rendering it, use the twig function :
 ``google_map_css``.
 
+For twig:
+
 ```
 {{ google_map_css(map) }}
+```
+
+For php:
+
+```
+$view['ivory_google_map']->renderStylesheets($map);
 ```
 
 This function renders an html style block with the CSS configured.
