@@ -55,6 +55,21 @@ you can do nothing and let the Google Maps API handle all control behavior.
 The complete events configuration is available
 [here](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md).
 
+### Configure additional libraries
+
+Sometimes, you want to use the map & other Google Map related libraries. The bundle provides many integrations but not
+all of them. If you need a custom libraries, you can use the following configuration:
+
+```
+ivory_google_map:
+    api:
+        # Your own API helper class
+        helper_class: "My\Fucking\ApiHelper"
+
+        # Your additional libraries
+        libraries: [ "places", "geometry" ]
+```
+
 ## Render your map
 
 The google map API needs at least an html container & some javascript for being able to render a map. For rendering

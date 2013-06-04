@@ -34,6 +34,7 @@ class IvoryGoogleMapExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $resources = array(
+            'api.xml',
             'base.xml',
             'controls.xml',
             'events.xml',
@@ -49,6 +50,9 @@ class IvoryGoogleMapExtension extends Extension
         foreach ($resources as $resource) {
             $loader->load($resource);
         }
+
+        // Api section
+        $this->loadApi($config, $container);
 
         // Map sections
         $this->loadMap($config, $container);
@@ -102,6 +106,27 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadGeocoderRequest($config, $container);
         $this->loadDirections($config, $container);
         $this->loadDirectionsRequest($config, $container);
+    }
+
+    /**
+     * Loads API configuration.
+     *
+     * @param array                                                   $config    The processed condiguration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadApi(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['api']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.api')
+                ->setClass($config['api']['helper_class']);
+        }
+
+        if (isset($config['api']['libraries'])) {
+            $container
+                ->getDefinition('ivory_google_map.map.builder')
+                ->addMethodCall('setLibraries', array($config['api']['libraries']));
+        }
     }
 
     /**
