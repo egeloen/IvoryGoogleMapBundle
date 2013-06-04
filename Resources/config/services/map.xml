@@ -29,6 +29,7 @@
         </service>
 
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper.class%">
+            <argument type="service" id="ivory_google_map.helper.api" />
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.point" />

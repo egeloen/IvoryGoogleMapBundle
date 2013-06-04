@@ -61,6 +61,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->mapBuilder->getHtmlContainerId());
         $this->assertNull($this->mapBuilder->getAsync());
         $this->assertNull($this->mapBuilder->getAutoZoom());
+        $this->assertEmpty($this->mapBuilder->getLibraries());
         $this->assertNull($this->mapBuilder->getLanguage());
         $this->assertEmpty($this->mapBuilder->getCenter());
         $this->assertEmpty($this->mapBuilder->getBound());
@@ -76,6 +77,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('map_canvas', $map->getHtmlContainerId());
         $this->assertFalse($map->isAsync());
         $this->assertFalse($map->isAutoZoom());
+        $this->assertFalse($map->hasLibraries());
         $this->assertSame('en', $map->getLanguage());
 
         $this->assertSame(0, $map->getCenter()->getLatitude());
@@ -94,6 +96,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
             ->setHtmlContainerId('bar')
             ->setAsync(true)
             ->setAutoZoom(true)
+            ->setLibraries(array('foo'))
             ->setLanguage('fr')
             ->setCenter(1, 2, false)
             ->setBound(1, 2, 3, 4, true, false)
@@ -104,6 +107,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $this->mapBuilder->getHtmlContainerId());
         $this->assertTrue($this->mapBuilder->getAsync());
         $this->assertTrue($this->mapBuilder->getAutoZoom());
+        $this->assertSame(array('foo'), $this->mapBuilder->getLibraries());
         $this->assertSame('fr', $this->mapBuilder->getLanguage());
 
         $this->assertSame(array(1, 2, false), $this->mapBuilder->getCenter());
@@ -117,6 +121,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $map->getHtmlContainerId());
         $this->assertTrue($map->isAsync());
         $this->assertTrue($map->isAutoZoom());
+        $this->assertSame(array('foo'), $map->getLibraries());
         $this->assertSame('fr', $map->getLanguage());
 
         $this->assertSame(1, $map->getCenter()->getLatitude());
@@ -149,6 +154,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
             ->setHtmlContainerId('bar')
             ->setAsync(true)
             ->setAutoZoom(true)
+            ->setLibraries(array('foo'))
             ->setLanguage('fr')
             ->setCenter(1, 2, false)
             ->setBound(1, 2, 3, 4, true, false)
@@ -164,6 +170,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $map1->getHtmlContainerId());
         $this->assertTrue($map1->isAsync());
         $this->assertTrue($map1->isAutoZoom());
+        $this->assertSame(array('foo'), $map1->getLibraries());
         $this->assertSame('fr', $map1->getLanguage());
 
         $this->assertSame(1, $map1->getCenter()->getLatitude());
@@ -196,6 +203,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, $map2->getCenter()->getLatitude());
         $this->assertSame(2, $map2->getCenter()->getLongitude());
         $this->assertFalse($map2->getCenter()->isNoWrap());
+        $this->assertSame(array('foo'), $map2->getLibraries());
         $this->assertSame('fr', $map2->getLanguage());
 
         $this->assertSame(1, $map2->getBound()->getSouthWest()->getLatitude());
@@ -224,6 +232,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
             ->setHtmlContainerId('bar')
             ->setAsync(true)
             ->setAutoZoom(true)
+            ->setLibraries(array('foo'))
             ->setLanguage('fr')
             ->setCenter(1, 2, false)
             ->setBound(1, 2, 3, 4, true, false)
@@ -238,6 +247,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $map1->getHtmlContainerId());
         $this->assertTrue($map1->isAsync());
         $this->assertTrue($map1->isAutoZoom());
+        $this->assertSame(array('foo'), $map1->getLibraries());
         $this->assertSame('fr', $map1->getLanguage());
 
         $this->assertSame(1, $map1->getCenter()->getLatitude());
@@ -266,6 +276,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('map_canvas', $map2->getHtmlContainerId());
         $this->assertFalse($map2->isAsync());
         $this->assertFalse($map2->isAutoZoom());
+        $this->assertEmpty($map2->getLibraries());
         $this->assertSame('en', $map2->getLanguage());
 
         $this->assertSame(0, $map2->getCenter()->getLatitude());

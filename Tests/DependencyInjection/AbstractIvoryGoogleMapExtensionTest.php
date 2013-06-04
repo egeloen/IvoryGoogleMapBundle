@@ -987,6 +987,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('map_canvas', $map->getHtmlContainerId());
         $this->assertFalse($map->isAsync());
         $this->assertFalse($map->isAutoZoom());
+        $this->assertFalse($map->hasLibraries());
         $this->assertSame('en', $map->getLanguage());
 
         $this->assertSame(0, $map->getCenter()->getLatitude());
@@ -1009,6 +1010,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('bar', $map->getHtmlContainerId());
         $this->assertTrue($map->isAsync());
         $this->assertTrue($map->isAutoZoom());
+        $this->assertFalse($map->hasLibraries());
         $this->assertSame('en', $map->getLanguage());
 
         $this->assertSame(1, $map->getCenter()->getLatitude());
@@ -1032,6 +1034,16 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
             array('width' => '400px', 'height' => '500px', 'bar' => 'foo'),
             $map->getStylesheetOptions()
         );
+    }
+
+    public function testMapServiceWithApiLibraries()
+    {
+        $this->loadConfiguration($this->container, 'api');
+        $this->container->compile();
+
+        $map = $this->container->get('ivory_google_map.map');
+
+        $this->assertSame(array('places', 'geometry'), $map->getLibraries());
     }
 
     public function testMapInstances()
@@ -1273,6 +1285,11 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->compile();
 
         $mapHelper = $this->container->get('ivory_google_map.helper.map');
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\ApiHelper',
+            $mapHelper->getApiHelper()
+        );
 
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\MapHelper', $mapHelper);
 

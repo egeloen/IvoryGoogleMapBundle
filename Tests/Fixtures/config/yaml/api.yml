@@ -1,0 +1,3 @@
+ivory_google_map:
+    api:
+        libraries: [ "places", "geometry" ]

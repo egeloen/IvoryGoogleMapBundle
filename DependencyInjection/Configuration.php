@@ -30,6 +30,9 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ivory_google_map');
 
+        // Api section
+        $this->addApiSection($rootNode);
+
         // Map sections
         $this->addMapSection($rootNode);
         $this->addMapTypeIdSection($rootNode);
@@ -83,6 +86,26 @@ class Configuration implements ConfigurationInterface
         $this->addDirectionsRequestSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    /**
+     * Adds the API section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addApiSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('api')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('helper_class')->end()
+                        ->arrayNode('libraries')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 
     /**
