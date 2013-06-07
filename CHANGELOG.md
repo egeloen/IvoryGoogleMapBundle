@@ -2,6 +2,7 @@
 
 ### 2.0.0 (????-??-??)
 
+ * db9c9c2 - Add Distance Matrix support
  * b151380 - Add PHP template support
  * d22d5d3 - [Travis] Use --prefer-source to avoid random build fail
  * 83d85e3 - [DI] Use Extension processConfiguration method
