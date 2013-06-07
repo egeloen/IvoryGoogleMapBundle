@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.0 (????-??-??)
+### 2.0.0 (2013-06-07)
 
  * db9c9c2 - Add Distance Matrix support
  * b151380 - Add PHP template support
