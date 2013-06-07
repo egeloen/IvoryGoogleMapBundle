@@ -13,18 +13,20 @@
         <parameter key="ivory_google_map.geocoder_request.builder.class">Ivory\GoogleMapBundle\Model\Services\Geocoding\GeocoderRequestBuilder</parameter>
 
         <parameter key="ivory_google_map.directions.class">Ivory\GoogleMap\Services\Directions\Directions</parameter>
-
         <parameter key="ivory_google_map.directions_request.class">Ivory\GoogleMap\Services\Directions\DirectionsRequest</parameter>
         <parameter key="ivory_google_map.directions_request.builder.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequestBuilder</parameter>
+
+        <parameter key="ivory_google_map.distance_matrix.class">Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix</parameter>
+        <parameter key="ivory_google_map.distance_matrix_request.class">Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrixRequest</parameter>
+        <parameter key="ivory_google_map.distance_matrix_request.builder.class">Ivory\GoogleMapBundle\Model\Services\DistanceMatrix\DistanceMatrixRequestBuilder</parameter>
     </parameters>
 
     <services>
-        <!-- Geocoder service -->
+        <!-- Geocoder services -->
         <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%">
             <argument type="service" id="ivory_google_map.geocoder.provider" />
         </service>
 
-        <!-- Geocoder provider service -->
         <service
             id="ivory_google_map.geocoder.provider"
             class="%ivory_google_map.geocoder.provider.class%"
@@ -33,14 +35,12 @@
             <argument type="service" id="ivory_google_map.geocoder.adapter" />
         </service>
 
-        <!-- Geocoder adapter service -->
         <service
             id="ivory_google_map.geocoder.adapter"
             class="%ivory_google_map.geocoder.adapter.class%"
             public="false"
         />
 
-        <!-- Geocoder request service -->
         <service
             id="ivory_google_map.geocoder_request"
             class="%ivory_google_map.geocoder_request.class%"
@@ -56,10 +56,9 @@
             <argument>%ivory_google_map.geocoder_request.class%</argument>
         </service>
 
-        <!-- Directions service -->
+        <!-- Directions services -->
         <service id="ivory_google_map.directions" class="%ivory_google_map.directions.class%" />
 
-        <!-- Directions request service -->
         <service
             id="ivory_google_map.directions_request"
             class="%ivory_google_map.directions_request.class%"
@@ -73,6 +72,24 @@
             class="%ivory_google_map.directions_request.builder.class%"
         >
             <argument>%ivory_google_map.directions_request.class%</argument>
+        </service>
+
+        <!-- Distance matrix services -->
+        <service id="ivory_google_map.distance_matrix" class="%ivory_google_map.distance_matrix.class%" />
+
+        <service
+            id="ivory_google_map.distance_matrix_request"
+            class="%ivory_google_map.distance_matrix_request.class%"
+            factory-service="ivory_google_map.distance_matrix_request.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.distance_matrix_request.builder"
+            class="%ivory_google_map.distance_matrix_request.builder.class%"
+        >
+            <argument>%ivory_google_map.distance_matrix_request.class%</argument>
         </service>
     </services>
 </container>

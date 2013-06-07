@@ -84,6 +84,8 @@ class Configuration implements ConfigurationInterface
         $this->addGeocoderRequestSection($rootNode);
         $this->addDirectionsSection($rootNode);
         $this->addDirectionsRequestSection($rootNode);
+        $this->addDistanceMatrixSection($rootNode);
+        $this->addDistanceMatrixRequestSection($rootNode);
 
         return $treeBuilder;
     }
@@ -1021,6 +1023,50 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('avoid_tolls')->end()
                         ->scalarNode('optimize_waypoints')->end()
                         ->scalarNode('provide_route_alternatives')->end()
+                        ->scalarNode('region')->end()
+                        ->scalarNode('language')->end()
+                        ->scalarNode('travel_mode')->end()
+                        ->scalarNode('unit_system')->end()
+                        ->booleanNode('sensor')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the distance matrix section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addDistanceMatrixSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('distance_matrix')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('url')->end()
+                        ->booleanNode('https')->end()
+                        ->scalarNode('format')->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the distance matrix request section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addDistanceMatrixRequestSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('distance_matrix_request')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('avoid_highways')->end()
+                        ->scalarNode('avoid_tolls')->end()
                         ->scalarNode('region')->end()
                         ->scalarNode('language')->end()
                         ->scalarNode('travel_mode')->end()

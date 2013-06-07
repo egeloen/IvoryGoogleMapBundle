@@ -57,4 +57,7 @@ ivory_google_map:
         class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Services\\Directions\\Directions"
     directions_request:
         class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Services\\Directions\\DirectionsRequest"
-
+    distance_matrix:
+        class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Services\\DistanceMatrix\\DistanceMatrix"
+    distance_matrix_request:
+        class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Services\\DistanceMatrix\\DistanceMatrixRequest"
