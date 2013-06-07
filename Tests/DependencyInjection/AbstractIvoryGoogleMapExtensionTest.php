@@ -12,6 +12,8 @@
 namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
 
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
+use Ivory\GoogleMap\Services\Base\TravelMode;
+use Ivory\GoogleMap\Services\Base\UnitSystem;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -1268,6 +1270,100 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         );
     }
 
+    public function testDistanceMatrixRequestServiceWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $request = $this->container->get('ivory_google_map.distance_matrix_request');
+
+        $this->assertInstanceOf('Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrixRequest', $request);
+        $this->assertFalse($request->hasAvoidHighWays());
+        $this->assertFalse($request->hasAvoidTolls());
+        $this->assertFalse($request->hasOrigins());
+        $this->assertFalse($request->hasDestinations());
+        $this->assertFalse($request->hasTravelMode());
+        $this->assertFalse($request->hasUnitSystem());
+        $this->assertFalse($request->hasRegion());
+        $this->assertFalse($request->hasLanguage());
+        $this->assertFalse($request->hasSensor());
+    }
+
+    public function testDistanceMatrixRequestServiceWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_request');
+        $this->container->compile();
+
+        $request = $this->container->get('ivory_google_map.distance_matrix_request');
+
+        $this->assertTrue($request->hasAvoidHighways());
+        $this->assertTrue($request->getAvoidHighways());
+
+        $this->assertTrue($request->hasAvoidTolls());
+        $this->assertTrue($request->getAvoidTolls());
+
+        $this->assertTrue($request->hasTravelMode());
+        $this->assertSame(TravelMode::WALKING, $request->getTravelMode());
+
+        $this->assertTrue($request->hasUnitSystem());
+        $this->assertSame(UnitSystem::IMPERIAL, $request->getUnitSystem());
+
+        $this->assertTrue($request->hasRegion());
+        $this->assertSame('es', $request->getRegion());
+
+        $this->assertTrue($request->hasLanguage());
+        $this->assertSame('en', $request->getLanguage());
+
+        $this->assertTrue($request->hasSensor());
+    }
+
+    public function testDistanceMatrixRequestInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.distance_matrix_request'),
+            $this->container->get('ivory_google_map.distance_matrix_request')
+        );
+    }
+
+    public function testDistanceMatrixServiceWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
+
+        $this->assertInstanceOf('Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix', $distanceMatrix);
+        $this->assertSame('http://maps.googleapis.com/maps/api/distancematrix', $distanceMatrix->getUrl());
+        $this->assertFalse($distanceMatrix->isHttps());
+        $this->assertSame('json', $distanceMatrix->getFormat());
+    }
+
+    public function testDistanceMatrixServiceWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix');
+        $this->container->compile();
+
+        $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
+
+        $this->assertSame('https://distance_matrix', $distanceMatrix->getUrl());
+        $this->assertTrue($distanceMatrix->isHttps());
+        $this->assertSame('xml', $distanceMatrix->getFormat());
+    }
+
+    public function testDistanceMatrixInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertSame(
+            $this->container->get('ivory_google_map.distance_matrix'),
+            $this->container->get('ivory_google_map.distance_matrix')
+        );
+    }
+
     public function testHelpersWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -1592,6 +1688,16 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Directions\DirectionsRequest',
             $this->container->get('ivory_google_map.directions_request')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\DistanceMatrix\DistanceMatrix',
+            $this->container->get('ivory_google_map.distance_matrix')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\DistanceMatrix\DistanceMatrixRequest',
+            $this->container->get('ivory_google_map.distance_matrix_request')
         );
     }
 }

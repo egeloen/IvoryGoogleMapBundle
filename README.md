@@ -33,6 +33,7 @@ your Symfony2 project.
     - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
        - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
        - [Directions API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/directions/directions.md)
+       - [Distance Matrix API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/distance_matrix/distance_matrix.md)
 
 ## Cookbook
 

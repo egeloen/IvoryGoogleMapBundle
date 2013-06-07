@@ -106,6 +106,8 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadGeocoderRequest($config, $container);
         $this->loadDirections($config, $container);
         $this->loadDirectionsRequest($config, $container);
+        $this->loadDistanceMatrix($config, $container);
+        $this->loadDistanceMatrixRequest($config, $container);
     }
 
     /**
@@ -1546,6 +1548,79 @@ class IvoryGoogleMapExtension extends Extension
 
         if (isset($config['directions_request']['sensor'])) {
             $builderDefinition->addMethodCall('setSensor', array($config['directions_request']['sensor']));
+        }
+    }
+
+    /**
+     * Loads distance matrix configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadDistanceMatrix(array $config, ContainerBuilder $container)
+    {
+        $distanceMatrixDefinition = $container->getDefinition('ivory_google_map.distance_matrix');
+
+        if (isset($config['distance_matrix']['class'])) {
+            $distanceMatrixDefinition->setClass($config['distance_matrix']['class']);
+        }
+
+        if (isset($config['distance_matrix']['url'])) {
+            $distanceMatrixDefinition->addMethodCall('setUrl', array($config['distance_matrix']['url']));
+        }
+
+        if (isset($config['distance_matrix']['https'])) {
+            $distanceMatrixDefinition->addMethodCall('setHttps', array($config['distance_matrix']['https']));
+        }
+
+        if (isset($config['distance_matrix']['format'])) {
+            $distanceMatrixDefinition->addMethodCall('setFormat', array($config['distance_matrix']['format']));
+        }
+    }
+
+    /**
+     * Loads distance matrix request configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadDistanceMatrixRequest(array $config, ContainerBuilder $container)
+    {
+        $builderDefinition = $container->getDefinition('ivory_google_map.distance_matrix_request.builder');
+
+        if (isset($config['distance_matrix_request']['class'])) {
+            $builderDefinition->replaceArgument(0, $config['distance_matrix_request']['class']);
+        }
+
+        if (isset($config['distance_matrix_request']['avoid_highways'])) {
+            $builderDefinition->addMethodCall(
+                'setAvoidHighways',
+                array($config['distance_matrix_request']['avoid_highways'])
+            );
+        }
+
+        if (isset($config['distance_matrix_request']['avoid_tolls'])) {
+            $builderDefinition->addMethodCall('setAvoidTolls', array($config['distance_matrix_request']['avoid_tolls']));
+        }
+
+        if (isset($config['distance_matrix_request']['region'])) {
+            $builderDefinition->addMethodCall('setRegion', array($config['distance_matrix_request']['region']));
+        }
+
+        if (isset($config['distance_matrix_request']['language'])) {
+            $builderDefinition->addMethodCall('setLanguage', array($config['distance_matrix_request']['language']));
+        }
+
+        if (isset($config['distance_matrix_request']['travel_mode'])) {
+            $builderDefinition->addMethodCall('setTravelMode', array($config['distance_matrix_request']['travel_mode']));
+        }
+
+        if (isset($config['distance_matrix_request']['unit_system'])) {
+            $builderDefinition->addMethodCall('setUnitSystem', array($config['distance_matrix_request']['unit_system']));
+        }
+
+        if (isset($config['distance_matrix_request']['sensor'])) {
+            $builderDefinition->addMethodCall('setSensor', array($config['distance_matrix_request']['sensor']));
         }
     }
 }

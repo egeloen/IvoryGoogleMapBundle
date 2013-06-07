@@ -1,0 +1,5 @@
+ivory_google_map:
+    distance_matrix:
+        url:    "http://distance_matrix"
+        https:  true
+        format: "xml"
