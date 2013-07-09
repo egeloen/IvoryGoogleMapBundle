@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="ivory_google_map.template.helper" class="%ivory_google_map.template.helper.class%" public="true">
+        <service id="ivory_google_map.template.helper" class="%ivory_google_map.template.helper.class%">
             <argument type="service" id="ivory_google_map.helper.map" />
             <tag name="templating.helper" alias="ivory_google_map" />
         </service>
