@@ -37,6 +37,9 @@ your Symfony2 project.
        - [Directions API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/directions/directions.md)
        - [Distance Matrix API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/distance_matrix/distance_matrix.md)
 
+The bundle is compatible with all Symfony2 versions. For BC reasons, you must use the 2.0 branch of the bundle for
+Symfony 2.0 (2.0.* version of the bundle) and the master branch for Symfony >= 2.1 (2.1.* version of the bundle).
+
 ## Cookbook
 
   1. [Inject an Ivory service](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/cookbook/dependency_injection.md)
