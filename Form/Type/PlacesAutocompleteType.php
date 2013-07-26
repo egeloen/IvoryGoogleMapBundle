@@ -14,10 +14,11 @@ namespace Ivory\GoogleMapBundle\Form\Type;
 use Ivory\GoogleMap\Helper\Places\AutocompleteHelper;
 use Ivory\GoogleMap\Places\Autocomplete;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Google Map places autocomplete type.
@@ -87,7 +88,7 @@ class PlacesAutocompleteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $autocomplete = new Autocomplete();
 
@@ -122,27 +123,35 @@ class PlacesAutocompleteType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $autocomplete = $form->getAttribute('autocomplete');
-        $autocomplete->setInputId($view->get('id'));
-        $autocomplete->setValue($view->get('value'));
+        $autocomplete = $form->getConfig()->getAttribute('autocomplete');
+        $autocomplete->setInputId($view->vars['id']);
+        $autocomplete->setValue($view->vars['value']);
 
-        $view->set('html', $this->getAutocompleteHelper()->renderHtmlContainer($autocomplete));
-        $view->set('javascripts', $this->getAutocompleteHelper()->renderJavascripts($autocomplete));
+        $view->vars['html'] = $this->getAutocompleteHelper()->renderHtmlContainer($autocomplete);
+        $view->vars['javascripts'] = $this->getAutocompleteHelper()->renderJavascripts($autocomplete);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array_merge($options, array(
+        $resolver->setDefaults(array(
             'prefix'   => null,
             'bound'    => null,
             'types'    => array(),
             'async'    => false,
             'language' => $this->getRequest()->getLocale(),
+        ));
+
+        $resolver->setAllowedTypes(array(
+            'prefix'   => array('string', 'null'),
+            'bound'    => array('Ivory\GoogleMap\Base\Bound', 'array', 'null'),
+            'types'    => array('array'),
+            'async'    => array('bool'),
+            'language' => array('string'),
         ));
     }
 
