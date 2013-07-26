@@ -15,6 +15,7 @@ use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Ivory\GoogleMap\Services\Base\TravelMode;
 use Ivory\GoogleMap\Services\Base\UnitSystem;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Scope;
 
 /**
  * Abstract Ivory Google Map extension test.
@@ -26,12 +27,20 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     /** @var \Symfony\Component\DependencyInjection\ContainerBuilder */
     protected $container;
 
+    /** @var \Symfony\Component\HttpFoundation\Request */
+    protected $requestMock;
+
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
+        $this->requestMock = $this->getMock('Symfony\Component\HttpFoundation\Request');
+
         $this->container = new ContainerBuilder();
+        $this->container->addScope(new Scope('request'));
+        $this->container->setParameter('templating.engines', array('php', 'twig'));
+        $this->container->set('request', $this->requestMock);
         $this->container->registerExtension(new IvoryGoogleMapExtension());
     }
 
@@ -40,6 +49,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
      */
     protected function tearDown()
     {
+        unset($this->requestMock);
         unset($this->container);
     }
 
@@ -1057,6 +1067,21 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
             $this->container->get('ivory_google_map.map'),
             $this->container->get('ivory_google_map.map')
         );
+    }
+
+    public function testPlacesAutocompleteFormType()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->container->enterScope('request');
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Form\Type\PlacesAutocompleteType',
+            $this->container->get('ivory_google_map.places_autocomplete.form.type')
+        );
+
+        $this->container->leaveScope('request');
     }
 
     public function testFakeRequestListenerWithoutConfiguration()

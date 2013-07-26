@@ -30,6 +30,8 @@ your Symfony2 project.
     - [Layers](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/layers/index.md)
        - [KML Layer](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/layers/kml_layer.md)
     - [Events](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/events.md)
+    - [Places](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/places/index.md)
+         - [Autocomplete](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/places/autocomplete.md)
     - [Services](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/index.md)
        - [Geocoding API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/geocoding/geocoder.md)
        - [Directions API](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/directions/directions.md)
