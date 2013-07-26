@@ -30,7 +30,6 @@ class IvoryGoogleMapExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-
         $config = $this->processConfiguration($configuration, $configs);
 
         $resources = array(
@@ -40,6 +39,7 @@ class IvoryGoogleMapExtension extends Extension
             'events.xml',
             'layers.xml',
             'overlays.xml',
+            'places_autocomplete.xml',
             'services.xml',
             'map.xml',
             'twig.xml',
@@ -99,6 +99,9 @@ class IvoryGoogleMapExtension extends Extension
 
         // Geometry sections
         $this->loadEncoding($config, $container);
+
+        // Places sections
+        $this->loadPlacesAutocomplete($config, $container);
 
         // Services sections
         $this->loadGeocoder($config, $container);
@@ -1333,6 +1336,39 @@ class IvoryGoogleMapExtension extends Extension
             $container
                 ->getDefinition('ivory_google_map.helper.encoding')
                 ->setClass($config['encoding']['helper_class']);
+        }
+    }
+
+    /**
+     * Loads places autocomplete configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadPlacesAutocomplete(array $config, ContainerBuilder $container)
+    {
+        $templatingEngines = $container->getParameter('templating.engines');
+
+        if (in_array('php', $templatingEngines)) {
+            $phpFormResources = $container->hasParameter('templating.helper.form.resources')
+                ? $container->getParameter('templating.helper.form.resources')
+                : array();
+
+            $container->setParameter(
+                'templating.helper.form.resources',
+                array_merge($phpFormResources, array('IvoryGoogleMap:Form'))
+            );
+        }
+
+        if (in_array('twig', $templatingEngines)) {
+            $twigFormResources = $container->hasParameter('twig.form.resources')
+                ? $container->getParameter('twig.form.resources')
+                : array();
+
+            $container->setParameter(
+                'twig.form.resources',
+                array_merge($twigFormResources, array('IvoryGoogleMap:Form:places_autocomplete_widget.html.twig'))
+            );
         }
     }
 
