@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.1 (????-??-??)
+### 2.0.1 - 2.1.1 (????-??-??)
 
  * fe226ae - Add Places autocomplete support
  * a619815 - Fix PHP template service by making it public
