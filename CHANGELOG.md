@@ -2,6 +2,7 @@
 
 ### 2.0.1 (????-??-??)
 
+ * fe226ae - Add Places autocomplete support
  * a619815 - Fix PHP template service by making it public
 
 ### 2.0.0 (2013-06-07)
