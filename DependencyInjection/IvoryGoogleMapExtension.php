@@ -1356,7 +1356,7 @@ class IvoryGoogleMapExtension extends Extension
 
             $container->setParameter(
                 'templating.helper.form.resources',
-                array_merge($phpFormResources, array('IvoryGoogleMap:Form'))
+                array_merge($phpFormResources, array('IvoryGoogleMapBundle:Form'))
             );
         }
 
@@ -1367,7 +1367,7 @@ class IvoryGoogleMapExtension extends Extension
 
             $container->setParameter(
                 'twig.form.resources',
-                array_merge($twigFormResources, array('IvoryGoogleMap:Form:places_autocomplete_widget.html.twig'))
+                array_merge($twigFormResources, array('IvoryGoogleMapBundle:Form:places_autocomplete_widget.html.twig'))
             );
         }
     }
