@@ -1084,6 +1084,29 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->leaveScope('request');
     }
 
+    public function testTwigResources()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertTrue(
+            in_array(
+                'IvoryGoogleMapBundle:Form:places_autocomplete_widget.html.twig',
+                $this->container->getParameter('twig.form.resources')
+            )
+        );
+    }
+
+    public function testPhpResources()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertTrue(
+            in_array('IvoryGoogleMapBundle:Form', $this->container->getParameter('templating.helper.form.resources'))
+        );
+    }
+
     public function testFakeRequestListenerWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
