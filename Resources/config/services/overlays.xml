@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
@@ -23,6 +24,13 @@
         <parameter key="ivory_google_map.info_window.class">Ivory\GoogleMap\Overlays\InfoWindow</parameter>
         <parameter key="ivory_google_map.info_window.builder.class">Ivory\GoogleMapBundle\Model\Overlays\InfoWindowBuilder</parameter>
         <parameter key="ivory_google_map.info_window.helper.class">Ivory\GoogleMap\Helper\Overlays\InfoWindowHelper</parameter>
+
+        <parameter key="ivory_google_map.marker_cluster.class">Ivory\GoogleMap\Overlays\MarkerCluster</parameter>
+        <parameter key="ivory_google_map.marker_cluster.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerClusterBuilder</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\MarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.abstract.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\AbstractMarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.default.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\DefaultMarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.js.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\JsMarkerClusterHelper</parameter>
 
         <parameter key="ivory_google_map.marker.class">Ivory\GoogleMap\Overlays\Marker</parameter>
         <parameter key="ivory_google_map.marker.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerBuilder</parameter>
@@ -141,6 +149,54 @@
         <service
             id="ivory_google_map.helper.info_window"
             class="%ivory_google_map.info_window.helper.class%"
+            public="false"
+        />
+
+        <!-- Marker cluster service -->
+        <service
+            id="ivory_google_map.marker_cluster"
+            class="%ivory_google_map.marker_cluster.class%"
+            factory-service="ivory_google_map.marker_cluster.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.marker_cluster.builder" class="%ivory_google_map.marker_cluster.builder.class%">
+            <argument>%ivory_google_map.marker_cluster.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.marker_cluster"
+            class="%ivory_google_map.marker_cluster.helper.class%"
+            public="false"
+        >
+            <argument type="collection">
+                <argument key="default" type="service" id="ivory_google_map.marker_cluster.helper.default" />
+                <argument key="marker_cluster" type="service" id="ivory_google_map.marker_cluster.helper.js" />
+            </argument>
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.abstract"
+            class="%ivory_google_map.marker_cluster.helper.abstract.class%"
+            abstract="true"
+        >
+            <argument type="service" id="ivory_google_map.helper.marker" />
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.default"
+            class="%ivory_google_map.marker_cluster.helper.default.class%"
+            parent="ivory_google_map.marker_cluster.helper.abstract"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.info_window" />
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.js"
+            class="%ivory_google_map.marker_cluster.helper.js.class%"
+            parent="ivory_google_map.marker_cluster.helper.default"
             public="false"
         />
 

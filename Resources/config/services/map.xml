@@ -42,7 +42,7 @@
             <argument type="service" id="ivory_google_map.helper.scale_control" />
             <argument type="service" id="ivory_google_map.helper.street_view_control" />
             <argument type="service" id="ivory_google_map.helper.zoom_control" />
-            <argument type="service" id="ivory_google_map.helper.marker" />
+            <argument type="service" id="ivory_google_map.helper.marker_cluster" />
             <argument type="service" id="ivory_google_map.helper.marker_image" />
             <argument type="service" id="ivory_google_map.helper.marker_shape" />
             <argument type="service" id="ivory_google_map.helper.info_window" />

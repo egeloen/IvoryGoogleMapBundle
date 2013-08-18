@@ -31,6 +31,8 @@ ivory_google_map:
         class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Overlays\\GroundOverlay"
     info_window:
         class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Overlays\\InfoWindow"
+    marker_cluster:
+        class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Overlays\\MarkerCluster"
     marker:
         class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Overlays\\Marker"
     marker_image:

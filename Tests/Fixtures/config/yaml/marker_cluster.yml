@@ -1,0 +1,6 @@
+ivory_google_map:
+    marker_cluster:
+        prefix_javascript_variable: "mc"
+        type: "marker_cluster"
+        options:
+            option: "value"
