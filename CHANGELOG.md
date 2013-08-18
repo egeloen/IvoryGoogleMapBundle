@@ -2,6 +2,7 @@
 
 ### 2.0.1 - 2.1.1 (????-??-??)
 
+ * 034e312 - [Overlays] Add marker cluster support
  * fe226ae - Add Places autocomplete support
  * a619815 - Fix PHP template service by making it public
 
