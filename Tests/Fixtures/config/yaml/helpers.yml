@@ -45,6 +45,8 @@ ivory_google_map:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\GroundOverlayHelper"
     info_window:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\InfoWindowHelper"
+    marker_cluster:
+        helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\MarkerClusterHelper"
     marker:
         helper_class: "Ivory\\GoogleMapBundle\\Tests\\Fixtures\\Model\\Helper\\Overlays\\MarkerHelper"
     marker_image:

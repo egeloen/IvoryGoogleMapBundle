@@ -11,9 +11,10 @@
 
 namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
 
-use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
+use Ivory\GoogleMap\Overlays\MarkerCluster;
 use Ivory\GoogleMap\Services\Base\TravelMode;
 use Ivory\GoogleMap\Services\Base\UnitSystem;
+use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Scope;
 
@@ -874,6 +875,43 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         );
     }
 
+    public function testMarkerClusterServiceWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $markerCluster = $this->container->get('ivory_google_map.marker_cluster');
+
+        $this->assertSame('marker_cluster_', substr($markerCluster->getJavascriptVariable(), 0, 15));
+        $this->assertSame('default', $markerCluster->getType());
+        $this->assertEmpty($markerCluster->getMarkers());
+        $this->assertEmpty($markerCluster->getOptions());
+    }
+
+    public function testMarkerClusterServiceWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'marker_cluster');
+        $this->container->compile();
+
+        $markerCluster = $this->container->get('ivory_google_map.marker_cluster');
+
+        $this->assertSame('mc', substr($markerCluster->getJavascriptVariable(), 0, 2));
+        $this->assertSame('marker_cluster', $markerCluster->getType());
+        $this->assertEmpty($markerCluster->getMarkers());
+        $this->assertSame(array('option' => 'value'), $markerCluster->getOptions());
+    }
+
+    public function testMakerClusterInstances()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertNotSame(
+            $this->container->get('ivory_google_map.marker_cluster'),
+            $this->container->get('ivory_google_map.marker_cluster')
+        );
+    }
+
     public function testPolygonServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -1518,8 +1556,13 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         );
 
         $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerClusterHelper',
+            $mapHelper->getMarkerClusterHelper()
+        );
+
+        $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\AnimationHelper',
-            $mapHelper->getMarkerHelper()->getAnimationHelper()
+            $mapHelper->getMarkerClusterHelper()->getHelper(MarkerCluster::_DEFAULT)->getMarkerHelper()->getAnimationHelper()
         );
 
         $this->assertInstanceOf(
@@ -1544,7 +1587,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerHelper',
-            $mapHelper->getMarkerHelper()
+            $mapHelper->getMarkerClusterHelper()->getHelper(MarkerCluster::_DEFAULT)->getMarkerHelper()
         );
 
         $this->assertInstanceOf(
@@ -1671,6 +1714,11 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\InfoWindow',
             $this->container->get('ivory_google_map.info_window')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerCluster',
+            $this->container->get('ivory_google_map.marker_cluster')
         );
 
         $this->assertInstanceOf(
