@@ -58,6 +58,7 @@ class Configuration implements ConfigurationInterface
 
         // Overlay sections
         $this->addAnimationSection($rootNode);
+        $this->addMarkerClusterSection($rootNode);
         $this->addMarkerSection($rootNode);
         $this->addMarkerImageSection($rootNode);
         $this->addMarkerShapeSection($rootNode);
@@ -511,6 +512,30 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Adds the marker cluster section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addMarkerClusterSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('marker_cluster')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('helper_class')->end()
+                        ->scalarNode('prefix_javascript_variable')->end()
+                        ->scalarNode('type')->end()
+                        ->arrayNode('options')
+                            ->useAttributeAsKey('options')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
      * Adds the marker section.
      *
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
@@ -533,7 +558,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('animation')->end()
                         ->arrayNode('options')
-                            ->useAttributeAsKey('map_options')
+                            ->useAttributeAsKey('options')
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()

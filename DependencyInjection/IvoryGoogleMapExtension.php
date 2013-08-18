@@ -79,6 +79,7 @@ class IvoryGoogleMapExtension extends Extension
 
         // Overlay sections
         $this->loadAnimation($config, $container);
+        $this->loadMarkerCluster($config, $container);
         $this->loadMarker($config, $container);
         $this->loadMarkerImage($config, $container);
         $this->loadMarkerShape($config, $container);
@@ -725,6 +726,42 @@ class IvoryGoogleMapExtension extends Extension
             $container
                 ->getDefinition('ivory_google_map.helper.animation')
                 ->setClass($config['animation']['helper_class']);
+        }
+    }
+
+    /**
+     * Loads marker cluster configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadMarkerCluster(array $config, ContainerBuilder $container)
+    {
+        $builderDefinition = $container->getDefinition('ivory_google_map.marker_cluster.builder');
+
+        if (isset($config['marker_cluster']['class'])) {
+            $builderDefinition->replaceArgument(0, $config['marker_cluster']['class']);
+        }
+
+        if (isset($config['marker_cluster']['helper_class'])) {
+            $container
+                ->getDefinition('ivory_google_map.helper.marker_cluster')
+                ->setClass($config['marker_cluster']['helper_class']);
+        }
+
+        if (isset($config['marker_cluster']['prefix_javascript_variable'])) {
+            $builderDefinition->addMethodCall(
+                'setPrefixJavascriptVariable',
+                array($config['marker_cluster']['prefix_javascript_variable'])
+            );
+        }
+
+        if (isset($config['marker_cluster']['type'])) {
+            $builderDefinition->addMethodCall('setType', array($config['marker_cluster']['type']));
+        }
+
+        if (isset($config['marker_cluster']['options'])) {
+            $builderDefinition->addMethodCall('setOptions', array($config['marker_cluster']['options']));
         }
     }
 
