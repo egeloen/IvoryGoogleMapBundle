@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.1 - 2.1.1 (????-??-??)
+### 2.0.1 - 2.1.1 (2013-08-22)
 
  * 034e312 - [Overlays] Add marker cluster support
  * fe226ae - Add Places autocomplete support
