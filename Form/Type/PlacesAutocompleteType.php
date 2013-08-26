@@ -128,6 +128,7 @@ class PlacesAutocompleteType extends AbstractType
         $autocomplete = $form->getConfig()->getAttribute('autocomplete');
         $autocomplete->setInputId($view->vars['id']);
         $autocomplete->setValue($view->vars['value']);
+        $autocomplete->setInputAttribute('name', $view->vars['full_name']);
 
         $view->vars['html'] = $this->getAutocompleteHelper()->renderHtmlContainer($autocomplete);
         $view->vars['javascripts'] = $this->getAutocompleteHelper()->renderJavascripts($autocomplete);
@@ -153,6 +154,14 @@ class PlacesAutocompleteType extends AbstractType
             'async'    => array('bool'),
             'language' => array('string'),
         ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'text';
     }
 
     /**

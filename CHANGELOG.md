@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 2.0.2 - 2.1.2 (????-??-??)
+
+ * a871d55 - [PlacesAutocompleteType] Fix missing name html attribute + use text as parent type
+
 ### 2.0.1 - 2.1.1 (2013-08-22)
 
  * 034e312 - [Overlays] Add marker cluster support
