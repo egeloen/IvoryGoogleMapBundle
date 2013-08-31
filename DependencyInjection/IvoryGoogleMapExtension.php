@@ -15,6 +15,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -37,13 +38,14 @@ class IvoryGoogleMapExtension extends Extension
             'base.xml',
             'controls.xml',
             'events.xml',
+            'extension.xml',
+            'helper.xml',
             'layers.xml',
+            'map.xml',
             'overlays.xml',
             'places_autocomplete.xml',
             'services.xml',
-            'map.xml',
             'twig.xml',
-            'helper.xml',
         );
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
@@ -100,6 +102,9 @@ class IvoryGoogleMapExtension extends Extension
 
         // Geometry sections
         $this->loadEncoding($config, $container);
+
+        // Extensions sections
+        $this->loadExtensions($config, $container);
 
         // Places sections
         $this->loadPlacesAutocomplete($config, $container);
@@ -1373,6 +1378,25 @@ class IvoryGoogleMapExtension extends Extension
             $container
                 ->getDefinition('ivory_google_map.helper.encoding')
                 ->setClass($config['encoding']['helper_class']);
+        }
+    }
+
+    /**
+     * Loads extensions configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadExtensions(array $config, ContainerBuilder $container)
+    {
+        if (!empty($config['extensions'])) {
+            $definition = $container->getDefinition('ivory_google_map.helper.map');
+
+            foreach ($config['extensions'] as $name => $service) {
+                $config['extensions'][$name] = new Reference($service);
+            }
+
+            $definition->replaceArgument(24, array_merge($definition->getArgument(24), $config['extensions']));
         }
     }
 
