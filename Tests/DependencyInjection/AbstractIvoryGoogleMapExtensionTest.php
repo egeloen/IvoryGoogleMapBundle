@@ -1468,11 +1468,6 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $mapHelper = $this->container->get('ivory_google_map.helper.map');
 
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\ApiHelper',
-            $mapHelper->getApiHelper()
-        );
-
         $this->assertInstanceOf('Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\MapHelper', $mapHelper);
 
         $this->assertInstanceOf(
@@ -1628,6 +1623,20 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Geometry\EncodingHelper',
             $mapHelper->getEncodedPolylineHelper()->getEncodingHelper()
+        );
+
+        $coreExtensionHelper = $mapHelper->getExtensionHelper('core');
+
+        $this->assertInstanceOf('Ivory\GoogleMap\Helper\Extension\CoreExtensionHelper', $coreExtensionHelper);
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\ApiHelper',
+            $coreExtensionHelper->getApiHelper()
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerClusterHelper',
+            $coreExtensionHelper->getMarkerClusterHelper()
         );
     }
 
@@ -1794,6 +1803,24 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\DistanceMatrix\DistanceMatrixRequest',
             $this->container->get('ivory_google_map.distance_matrix_request')
+        );
+    }
+
+    public function testCustomExtensionHelpers()
+    {
+        $this->loadConfiguration($this->container, 'extension_helpers');
+        $this->container->compile();
+
+        $extensionHelpers = $this->container->get('ivory_google_map.helper.map')->getExtensionHelpers();
+
+        $this->assertCount(2, $extensionHelpers);
+
+        $this->assertArrayHasKey('core', $extensionHelpers);
+        $this->assertArrayHasKey('info_box', $extensionHelpers);
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMap\Helper\Extension\InfoBoxExtensionHelper',
+            $extensionHelpers['info_box']
         );
     }
 }

@@ -29,7 +29,6 @@
         </service>
 
         <service id="ivory_google_map.helper.map" class="%ivory_google_map.map.helper.class%">
-            <argument type="service" id="ivory_google_map.helper.api" />
             <argument type="service" id="ivory_google_map.helper.coordinate" />
             <argument type="service" id="ivory_google_map.helper.bound" />
             <argument type="service" id="ivory_google_map.helper.point" />
@@ -54,6 +53,9 @@
             <argument type="service" id="ivory_google_map.helper.ground_overlay" />
             <argument type="service" id="ivory_google_map.helper.kml_layer" />
             <argument type="service" id="ivory_google_map.helper.event_manager" />
+            <argument type="collection">
+                <argument key="core" type="service" id="ivory_google_map.helper.extension.core" />
+            </argument>
         </service>
 
         <!-- Map type ID service -->

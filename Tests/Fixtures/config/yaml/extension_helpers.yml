@@ -1,0 +1,3 @@
+ivory_google_map:
+    extensions:
+        info_box: ivory_google_map.helper.extension.info_box
