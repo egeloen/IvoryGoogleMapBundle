@@ -80,6 +80,9 @@ class Configuration implements ConfigurationInterface
         // Geometry sections
         $this->addEncodingSection($rootNode);
 
+        // Extensions sections
+        $this->addExtensionsSection($rootNode);
+
         // Services sections
         $this->addGeocoderSection($rootNode);
         $this->addGeocoderRequestSection($rootNode);
@@ -936,6 +939,22 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('helper_class')->end()
                     ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the extensions section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addExtensionsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('extensions')
+                    ->useAttributeAsKey('extensions')
+                    ->prototype('scalar')->end()
                 ->end()
             ->end();
     }
