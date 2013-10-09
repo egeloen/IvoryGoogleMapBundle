@@ -22,17 +22,19 @@ If you want to use Geocoding stuff, you will need [Geocoder](http://github.com/w
 }
 ```
 
-If you want to use Directions stuff, you will need [Buzz](http://github.com/kriswallsmith/Buzz):
+If you want to use Directions or Distance Matrix stuff, you will need an [http adapter](http://github.com/widop/WidopHttpAdapterBundle):
 
 ```
 {
     "require": {
-        "kriswallsmith/buzz": "*"
+        "widop/http-adapter-bundle": "1.1.*"
     }
 }
 ```
 
 Register the bundle:
+
+If you use Directions or Distance Matrix stuff, don't forget to register the Wid'op http adapter bundle too.
 
 ``` php
 // app/AppKernel.php
@@ -94,18 +96,24 @@ $loader->registerNamespaces(array(
 );
 ```
 
-If you want to use Directions stuff, you will need [Buzz](http://github.com/kriswallsmith/Buzz):
+If you want to use Directions or Distance Matrix stuff, you will need an [http adapter](http://github.com/widop/WidopHttpAdapterBundle):
 
 ```
-[buzz]
-    git=http://github.com/kriswallsmith/Buzz.git
+[http-adapter]
+    git=http://github.com/widop/http-adapter.git
+    version=1.0.2
+
+[http-adapter-bundle]
+    git=http://github.com/widop/WidopHttpAdapterBundle.git
+    target=bundles/Widop/HttpAdapterBundle
+    version=1.1.0
 ```
 
 ``` php
 // app/autoload.php
 
 $loader->registerNamespaces(array(
-    'Buzz' => __DIR__.'/../vendor/buzz/src',
+    'Widop\\HttpAdapter' => __DIR__.'/../vendor/http-adapter/src',
     // ...
 );
 ```

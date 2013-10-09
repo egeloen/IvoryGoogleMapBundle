@@ -1,5 +1,6 @@
 ivory_google_map:
     directions:
-        url:    "http://directions"
-        https:  true
-        format: "xml"
+        adapter: "widop_http_adapter.stream"
+        url:     "http://directions"
+        https:   true
+        format:  "xml"
