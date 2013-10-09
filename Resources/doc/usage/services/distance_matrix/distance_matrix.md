@@ -22,6 +22,9 @@ ivory_google_map:
         # Your own directions class
         class: "My\Fucking\DistanceMatrix"
 
+        # The http adapter
+        adapter: "widop_http_adapter.curl"
+
         # The Directions API URL
         url: "http://maps.googleapis.com/maps/api/distancematrix"
 

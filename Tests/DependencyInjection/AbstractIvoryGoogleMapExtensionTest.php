@@ -17,6 +17,7 @@ use Ivory\GoogleMap\Services\Base\UnitSystem;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Scope;
+use Widop\HttpAdapterBundle\DependencyInjection\WidopHttpAdapterExtension;
 
 /**
  * Abstract Ivory Google Map extension test.
@@ -43,6 +44,8 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->setParameter('templating.engines', array('php', 'twig'));
         $this->container->set('request', $this->requestMock);
         $this->container->registerExtension(new IvoryGoogleMapExtension());
+        $this->container->registerExtension($httpAdapterExtension = new WidopHttpAdapterExtension());
+        $this->container->loadFromExtension($httpAdapterExtension->getAlias());
     }
 
     /**
@@ -1328,6 +1331,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $directions = $this->container->get('ivory_google_map.directions');
 
         $this->assertInstanceOf('Ivory\GoogleMap\Services\Directions\Directions', $directions);
+        $this->assertInstanceOf('Widop\HttpAdapter\CurlHttpAdapter', $directions->getHttpAdapter());
         $this->assertSame('http://maps.googleapis.com/maps/api/directions', $directions->getUrl());
         $this->assertFalse($directions->isHttps());
         $this->assertSame('json', $directions->getFormat());
@@ -1340,6 +1344,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $directions = $this->container->get('ivory_google_map.directions');
 
+        $this->assertInstanceOf('Widop\HttpAdapter\StreamHttpAdapter', $directions->getHttpAdapter());
         $this->assertSame('https://directions', $directions->getUrl());
         $this->assertTrue($directions->isHttps());
         $this->assertSame('xml', $directions->getFormat());
@@ -1422,6 +1427,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
 
         $this->assertInstanceOf('Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix', $distanceMatrix);
+        $this->assertInstanceOf('Widop\HttpAdapter\CurlHttpAdapter', $distanceMatrix->getHttpAdapter());
         $this->assertSame('http://maps.googleapis.com/maps/api/distancematrix', $distanceMatrix->getUrl());
         $this->assertFalse($distanceMatrix->isHttps());
         $this->assertSame('json', $distanceMatrix->getFormat());
@@ -1434,6 +1440,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
 
+        $this->assertInstanceOf('Widop\HttpAdapter\StreamHttpAdapter', $distanceMatrix->getHttpAdapter());
         $this->assertSame('https://distance_matrix', $distanceMatrix->getUrl());
         $this->assertTrue($distanceMatrix->isHttps());
         $this->assertSame('xml', $distanceMatrix->getFormat());

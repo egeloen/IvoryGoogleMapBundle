@@ -1,5 +1,6 @@
 ivory_google_map:
     distance_matrix:
-        url:    "http://distance_matrix"
-        https:  true
-        format: "xml"
+        adapter: "widop_http_adapter.stream"
+        url:     "http://distance_matrix"
+        https:   true
+        format:  "xml"
