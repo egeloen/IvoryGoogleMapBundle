@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 2.0.3 - 2.1.3 (????-??-??)
+
+ * 0512906 - [Service] Replace kriswallsmith/buzz by widop/http-adapter
+
 ### 2.0.2 - 2.1.2 (2013-10-09)
 
  * 01d5583 - Add info box support
