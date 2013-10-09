@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.2 - 2.1.2 (????-??-??)
+### 2.0.2 - 2.1.2 (2013-10-09)
 
  * 01d5583 - Add info box support
  * a871d55 - [PlacesAutocompleteType] Fix missing name html attribute + use text as parent type
