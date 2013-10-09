@@ -1571,6 +1571,8 @@ class IvoryGoogleMapExtension extends Extension
     {
         $directionsDefinition = $container->getDefinition('ivory_google_map.directions');
 
+        $directionsDefinition->addArgument(new Reference($config['directions']['adapter']));
+
         if (isset($config['directions']['class'])) {
             $directionsDefinition->setClass($config['directions']['class']);
         }
@@ -1657,6 +1659,8 @@ class IvoryGoogleMapExtension extends Extension
     protected function loadDistanceMatrix(array $config, ContainerBuilder $container)
     {
         $distanceMatrixDefinition = $container->getDefinition('ivory_google_map.distance_matrix');
+
+        $distanceMatrixDefinition->addArgument(new Reference($config['distance_matrix']['adapter']));
 
         if (isset($config['distance_matrix']['class'])) {
             $distanceMatrixDefinition->setClass($config['distance_matrix']['class']);

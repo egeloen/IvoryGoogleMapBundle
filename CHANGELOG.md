@@ -13,7 +13,7 @@
 
 ### 2.0.0 (2013-06-07)
 
- * db9c9c2 - Add Distance Matrix supporta619815 Fix PHP template service by making it public
+ * db9c9c2 - Add Distance Matrix support
  * b151380 - Add PHP template support
  * d22d5d3 - [Travis] Use --prefer-source to avoid random build fail
  * 83d85e3 - [DI] Use Extension processConfiguration method
