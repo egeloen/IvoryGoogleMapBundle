@@ -84,6 +84,7 @@ class Configuration implements ConfigurationInterface
         $this->addExtensionsSection($rootNode);
 
         // Services sections
+        $this->addBusinessAccountSection($rootNode);
         $this->addGeocoderSection($rootNode);
         $this->addGeocoderRequestSection($rootNode);
         $this->addDirectionsSection($rootNode);
@@ -955,6 +956,26 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('extensions')
                     ->useAttributeAsKey('extensions')
                     ->prototype('scalar')->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * Adds the business account section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addBusinessAccountSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('business_account')->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('client_id')->end()
+                        ->scalarNode('secret')->end()
+                        ->scalarNode('channel')->end()
+                    ->end()
                 ->end()
             ->end();
     }

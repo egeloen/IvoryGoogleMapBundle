@@ -44,39 +44,11 @@ ivory_google_map:
 ```
 
 ``` php
-<?php
-
-/**
- * Requests the ivory google map geocoder
- *
- * @var Ivory\GoogleMap\Services\Geocoding\Geocoder $geocoder
- */
 $geocoder = $this->get('ivory_google_map.geocoder');
 ```
 
-The Ivory Google Map Geocoder allows you to build all available geocoder directly by configuration file.
-
-Available geocoder:
-
-   - ``Geocoder\Geocoder``
-   - ``Ivory\GoogleMap\Services\Geocoding\Geocoder``
-
-Available provider:
-
-   - ``Geocoder\Provider\BindMapsProvider``
-   - ``Geocoder\Provider\FreeGeoIpProvider``
-   - ``Geocoder\Provider\GoogleMapsProvider``
-   - ``Geocoder\Provider\HostIpProvider``
-   - ``Geocoder\Provider\IpInfoDbProvider``
-   - ``Geocoder\Provider\YahooProvider``
-   - ``Ivory\GoogleMap\Services\Geocoding\Provider``
-
-Available adapter:
-
-   - ``Geocoder\HttpAdapter\BuzzHttpAdapter``
-   - ``Geocoder\HttpAdapter\CurlHttpAdapter``
-   - ``Geocoder\HttpAdapter\GuzzleHttpAdapter``
-   - ``Geocoder\HttpAdapter\ZendHttpAdapter``
+If you want to learn more, you can read this
+[documentation](http://github.com/egeloen/ivory-google-map/blob/master/doc/usage/services/geocoding/geocoder.md).
 
 ## The standard Geocoder
 
