@@ -2,6 +2,7 @@
 
 ### 2.0.3 - 2.1.3 (????-??-??)
 
+ * df9d815 - [Service] Add business account support
  * 0512906 - [Service] Replace kriswallsmith/buzz by widop/http-adapter
 
 ### 2.0.2 - 2.1.2 (2013-10-09)

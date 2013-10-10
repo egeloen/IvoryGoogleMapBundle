@@ -1148,6 +1148,47 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         );
     }
 
+    public function testBusinessAccountWithoutConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $businessAccount = $this->container->get('ivory_google_map.business_account');
+
+        $this->assertInstanceOf('Ivory\GoogleMap\Services\BusinessAccount', $businessAccount);
+
+        $this->assertNull($businessAccount->getClientId());
+        $this->assertNull($businessAccount->getSecret());
+        $this->assertNull($businessAccount->getChannel());
+
+        $this->assertFalse($this->container->get('ivory_google_map.directions')->hasBusinessAccount());
+        $this->assertFalse($this->container->get('ivory_google_map.distance_matrix')->hasBusinessAccount());
+    }
+
+    public function testBusinessAccountWithConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'business_account');
+        $this->container->compile();
+
+        $businessAccount = $this->container->get('ivory_google_map.business_account');
+
+        $this->assertSame('client_id', $businessAccount->getClientId());
+        $this->assertSame('secret', $businessAccount->getSecret());
+        $this->assertSame('channel', $businessAccount->getChannel());
+
+        $this->assertTrue($this->container->get('ivory_google_map.directions')->hasBusinessAccount());
+        $this->assertSame(
+            $businessAccount,
+            $this->container->get('ivory_google_map.directions')->getBusinessAccount()
+        );
+
+        $this->assertTrue($this->container->get('ivory_google_map.distance_matrix')->hasBusinessAccount());
+        $this->assertSame(
+            $businessAccount,
+            $this->container->get('ivory_google_map.distance_matrix')->getBusinessAccount()
+        );
+    }
+
     public function testFakeRequestListenerWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
@@ -1780,6 +1821,11 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(
             'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Events\Event',
             $this->container->get('ivory_google_map.event')
+        );
+
+        $this->assertInstanceOf(
+            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\BusinessAccount',
+            $this->container->get('ivory_google_map.business_account')
         );
 
         $this->assertInstanceOf(

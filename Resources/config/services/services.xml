@@ -5,6 +5,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <parameters>
+        <parameter key="ivory_google_map.business_account.class">Ivory\GoogleMap\Services\BusinessAccount</parameter>
+
         <parameter key="ivory_google_map.geocoder.class">Ivory\GoogleMap\Services\Geocoding\Geocoder</parameter>
         <parameter key="ivory_google_map.geocoder.provider.class">Ivory\GoogleMap\Services\Geocoding\GeocoderProvider</parameter>
         <parameter key="ivory_google_map.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
@@ -22,6 +24,12 @@
     </parameters>
 
     <services>
+        <!-- Business account service -->
+        <service id="ivory_google_map.business_account" class="%ivory_google_map.business_account.class%">
+            <argument>null</argument>
+            <argument>null</argument>
+        </service>
+
         <!-- Geocoder services -->
         <service id="ivory_google_map.geocoder" class="%ivory_google_map.geocoder.class%">
             <argument type="service" id="ivory_google_map.geocoder.provider" />
