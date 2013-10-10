@@ -1,5 +1,8 @@
 # Distance Matrix API
 
+The Distance Matrix API uses [widop/http-adapter](http://github.com/widop/http-adapter) which is a PHP 5.3 library for
+issuing http requests.
+
 The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and
 destinations. The information returned is based on the recommended route between start and end points, as calculated
 by the Google Maps API, and consists of rows containing duration and distance values for each pair.
@@ -36,18 +39,11 @@ ivory_google_map:
 ```
 
 ``` php
-<?php
-
-/**
- * Requests the ivory google map distance matrix
- *
- * @var Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix $distanceMatrix
- */
 $distanceMatrix = $this->get('ivory_google_map.distance_matrix');
 ```
 
-If you want to learn more about the service, you can read this
-[documentation](http://github.com/egeloen/ivory-google-map/blob/master/doc/usage/services/distance_matrix/distance_matrix.md).
+If you want to use it with a business account, you can read this
+[documentation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/business_account.md).
 
 ## Request a distance matrix
 

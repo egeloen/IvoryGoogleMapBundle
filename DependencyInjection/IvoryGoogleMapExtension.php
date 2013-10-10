@@ -110,6 +110,7 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadPlacesAutocomplete($config, $container);
 
         // Services sections
+        $this->loadBusinessAccount($config, $container);
         $this->loadGeocoder($config, $container);
         $this->loadGeocoderFakeRequest($config, $container);
         $this->loadGeocoderRequest($config, $container);
@@ -1430,6 +1431,48 @@ class IvoryGoogleMapExtension extends Extension
                 'twig.form.resources',
                 array_merge($twigFormResources, array('IvoryGoogleMapBundle:Form:places_autocomplete_widget.html.twig'))
             );
+        }
+    }
+
+    /**
+     * Loads business account configuration.
+     *
+     * @param array                                                   $config    The processed configuration.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container builder.
+     */
+    protected function loadBusinessAccount(array $config, ContainerBuilder $container)
+    {
+        $businessAccountDefinition = $container->getDefinition('ivory_google_map.business_account');
+
+        if (isset($config['business_account']['class'])) {
+            $businessAccountDefinition->setClass($config['business_account']['class']);
+        }
+
+        if (isset($config['business_account']['client_id'])) {
+            $businessAccountDefinition->replaceArgument(0, $config['business_account']['client_id']);
+        }
+
+        if (isset($config['business_account']['secret'])) {
+            $businessAccountDefinition->replaceArgument(1, $config['business_account']['secret']);
+        }
+
+        if (isset($config['business_account']['channel'])) {
+            $businessAccountDefinition->addArgument($config['business_account']['channel']);
+        }
+
+        if (isset($config['business_account']['client_id']) && isset($config['business_account']['secret'])) {
+            $definitions = array(
+                $container->getDefinition('ivory_google_map.geocoder.provider'),
+                $container->getDefinition('ivory_google_map.directions'),
+                $container->getDefinition('ivory_google_map.distance_matrix'),
+            );
+
+            foreach ($definitions as $definition) {
+                $definition->addMethodCall(
+                    'setBusinessAccount',
+                    array(new Reference('ivory_google_map.business_account'))
+                );
+            }
         }
     }
 

@@ -9,6 +9,9 @@ Now you have requested your geocoder, you are able to geocode a position. The bu
 map geocoding API by two different ways. You have the choice between a simple address (IP or street) or an advanced
 geocoder request.
 
+If you want to use it with a business account, you can read this
+[documentation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/services/business_account.md).
+
 ### Simple address
 
 ``` php
