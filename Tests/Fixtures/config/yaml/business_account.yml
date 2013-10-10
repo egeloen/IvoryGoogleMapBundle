@@ -1,0 +1,5 @@
+ivory_google_map:
+    business_account:
+        client_id: "client_id"
+        secret:    "secret"
+        channel:   "channel"
