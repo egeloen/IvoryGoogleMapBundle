@@ -11,7 +11,7 @@ If you're using Services & Symfony >= 2.1, you need to update your `composer.jso
 {
     "require": {
         "egeloen/google-map-bundle": "*",
-        "widop/http-adapter": "1.1.*"
+        "widop/http-adapter-bundle": "1.1.*"
     }
 }
 ```
