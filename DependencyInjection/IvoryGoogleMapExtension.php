@@ -114,10 +114,16 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadGeocoder($config, $container);
         $this->loadGeocoderFakeRequest($config, $container);
         $this->loadGeocoderRequest($config, $container);
-        $this->loadDirections($config, $container);
-        $this->loadDirectionsRequest($config, $container);
-        $this->loadDistanceMatrix($config, $container);
-        $this->loadDistanceMatrixRequest($config, $container);
+
+        if ($config['directions']['enabled']) {
+            $this->loadDirections($config, $container);
+            $this->loadDirectionsRequest($config, $container);
+        }
+
+        if ($config['distance_matrix']['enabled']) {
+            $this->loadDistanceMatrix($config, $container);
+            $this->loadDistanceMatrixRequest($config, $container);
+        }
     }
 
     /**

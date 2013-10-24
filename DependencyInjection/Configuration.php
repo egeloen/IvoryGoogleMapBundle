@@ -1061,7 +1061,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('directions')->addDefaultsIfNotSet()
+                ->arrayNode('directions')->canBeEnabled()
                     ->children()
                         ->scalarNode('class')->end()
                         ->scalarNode('adapter')
@@ -1110,7 +1110,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('distance_matrix')->addDefaultsIfNotSet()
+                ->arrayNode('distance_matrix')->canBeEnabled()
                     ->children()
                         ->scalarNode('class')->end()
                         ->scalarNode('adapter')
