@@ -9,5 +9,10 @@ php:
 before_script: composer install --dev --prefer-source
 script: bin/phpunit
 
+branches:
+    only:
+        - master
+        - 2.0
+
 notifications:
     email: geloen.eric@gmail.com

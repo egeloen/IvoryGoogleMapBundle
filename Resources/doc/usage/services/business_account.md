@@ -18,6 +18,6 @@ ivory_google_map:
         channel: "channel"
 ```
 
-Providing a `client_id` & a `secret` will automatically enable the business account behavior on all services. If you
-want to learn more, you can read this
+Providing a `client_id` & a `secret` will automatically enable the business account behavior on all enabled services.
+If you  want to learn more, you can read this
 [documentation](http://github.com/egeloen/ivory-google-map/blob/master/doc/usage/services/business_account.md).
