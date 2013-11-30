@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.distance_matrix.class">Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix</parameter>
+        <parameter key="ivory_google_map.distance_matrix_request.class">Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrixRequest</parameter>
+        <parameter key="ivory_google_map.distance_matrix_request.builder.class">Ivory\GoogleMapBundle\Model\Services\DistanceMatrix\DistanceMatrixRequestBuilder</parameter>
+    </parameters>
+
+    <services>
+        <service id="ivory_google_map.distance_matrix" class="%ivory_google_map.distance_matrix.class%" />
+
+        <service
+            id="ivory_google_map.distance_matrix_request"
+            class="%ivory_google_map.distance_matrix_request.class%"
+            factory-service="ivory_google_map.distance_matrix_request.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.distance_matrix_request.builder"
+            class="%ivory_google_map.distance_matrix_request.builder.class%"
+        >
+            <argument>%ivory_google_map.distance_matrix_request.class%</argument>
+        </service>
+    </services>
+</container>

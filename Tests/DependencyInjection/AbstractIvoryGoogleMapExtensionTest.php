@@ -1160,9 +1160,6 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertNull($businessAccount->getClientId());
         $this->assertNull($businessAccount->getSecret());
         $this->assertNull($businessAccount->getChannel());
-
-        $this->assertFalse($this->container->get('ivory_google_map.directions')->hasBusinessAccount());
-        $this->assertFalse($this->container->get('ivory_google_map.distance_matrix')->hasBusinessAccount());
     }
 
     public function testBusinessAccountWithConfiguration()
@@ -1212,6 +1209,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->loadConfiguration($this->container, 'empty');
         $this->container->compile();
 
+        $this->assertFalse($this->container->has('ivory_google_map.geocoder_request'));
+    }
+
+    public function testGeocoderRequestServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_enabled');
+        $this->container->compile();
+
         $request = $this->container->get('ivory_google_map.geocoder_request');
 
         $this->assertInstanceOf('Ivory\GoogleMap\Services\Geocoding\GeocoderRequest', $request);
@@ -1257,7 +1262,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testGeocoderRequestInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'geocoder_enabled');
         $this->container->compile();
 
         $this->assertNotSame(
@@ -1269,6 +1274,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testGeocoderServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.geocoder'));
+    }
+
+    public function testGeocoderServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_enabled');
         $this->container->compile();
 
         $geocoder = $this->container->get('ivory_google_map.geocoder');
@@ -1288,7 +1301,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testGeocoderInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'geocoder_enabled');
         $this->container->compile();
 
         $this->assertSame(
@@ -1300,6 +1313,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testDirectionsRequestServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.directions_request'));
+    }
+
+    public function testDirectionsRequestServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'directions_enabled');
         $this->container->compile();
 
         $request = $this->container->get('ivory_google_map.directions_request');
@@ -1355,7 +1376,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testDirectionsRequestInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'directions_enabled');
         $this->container->compile();
 
         $this->assertNotSame(
@@ -1367,6 +1388,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testDirectionsServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.directions'));
+    }
+
+    public function testDirectionsServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'directions_enabled');
         $this->container->compile();
 
         $directions = $this->container->get('ivory_google_map.directions');
@@ -1393,7 +1422,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testDirectionsInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'directions_enabled');
         $this->container->compile();
 
         $this->assertSame(
@@ -1405,6 +1434,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testDistanceMatrixRequestServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.distance_matrix_request'));
+    }
+
+    public function testDistanceMatrixRequestServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
         $this->container->compile();
 
         $request = $this->container->get('ivory_google_map.distance_matrix_request');
@@ -1451,7 +1488,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testDistanceMatrixRequestInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
         $this->container->compile();
 
         $this->assertNotSame(
@@ -1463,6 +1500,14 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testDistanceMatrixServiceWithoutConfiguration()
     {
         $this->loadConfiguration($this->container, 'empty');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->has('ivory_google_map.distance_matrix'));
+    }
+
+    public function testDistanceMatrixServiceWithEnabledConfiguration()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
         $this->container->compile();
 
         $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
@@ -1489,7 +1534,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testDistanceMatrixInstances()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
         $this->container->compile();
 
         $this->assertSame(

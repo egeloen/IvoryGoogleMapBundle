@@ -2,8 +2,24 @@
 
 ### 2.0.2/2.1.2 to 2.0.3/2.1.3
 
-The buzz dependencies has been removed in favor of the Wid'op http adapter one. This library allows us to use
-differents http adapter strategies (including buzz).
+ * The geocoder, directions & distance matrix services have been disabled by default in order to make the
+   `widop/http-adapter` really optional.
+
+If you don't provide at least one configuration value (regardless the configuration) for the service you use, you must
+explicitely enable it in your configuration file:
+
+``` yaml
+ivory_google_map:
+    geocoder:
+        enabled: true
+    directions:
+        enabled: true
+    distance_matrix:
+        enabled: true
+```
+
+ * The buzz dependencies has been removed in favor of the Wid'op http adapter one. This library allows us to use
+   differents http adapter strategies (including buzz).
 
 If you're using Services & Symfony >= 2.1, you need to update your `composer.json` file:
 

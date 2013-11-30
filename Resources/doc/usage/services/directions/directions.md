@@ -11,14 +11,18 @@ or as latitude/longitude coordinates. The Directions API can return multi-part d
 ## Request the directions service
 
 By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
-you to use the given objects like they are. The ``ivory_google_map.geocoder`` service is. The configuration describes
-below is this default configuration.
+you to use the given objects like they are. The ``ivory_google_map.geocoder`` service is not one of them. The
+configuration describes below is this default configuration but if you don't provide at least one value (for the
+`directions` or `directions_request` nodes), the service will not be registered.
 
 ```
 # app/config/config.yml
 
 ivory_google_map:
     directions:
+        # Enable the service
+        enabled: true
+
         # Your own directions class
         class: "My\Fucking\Directions"
 

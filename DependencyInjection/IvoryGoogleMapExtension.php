@@ -30,26 +30,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $resources = array(
-            'api.xml',
-            'base.xml',
-            'controls.xml',
-            'events.xml',
-            'extension.xml',
-            'helper.xml',
-            'layers.xml',
-            'map.xml',
-            'overlays.xml',
-            'places_autocomplete.xml',
-            'services.xml',
-            'twig.xml',
-        );
-
+        $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
-        foreach ($resources as $resource) {
+
+        foreach ($this->getResources($config) as $resource) {
             $loader->load($resource);
         }
 
@@ -118,6 +102,45 @@ class IvoryGoogleMapExtension extends Extension
         $this->loadDirectionsRequest($config, $container);
         $this->loadDistanceMatrix($config, $container);
         $this->loadDistanceMatrixRequest($config, $container);
+    }
+
+    /**
+     * Gets the resources to load.
+     *
+     * @param array $config The configuration.
+     *
+     * @return array The resources.
+     */
+    protected function getResources(array $config)
+    {
+        $resources =  array(
+            'api.xml',
+            'base.xml',
+            'business_account.xml',
+            'controls.xml',
+            'events.xml',
+            'extension.xml',
+            'helper.xml',
+            'layers.xml',
+            'map.xml',
+            'overlays.xml',
+            'places_autocomplete.xml',
+            'twig.xml',
+        );
+
+        if ($config['geocoder']['enabled']) {
+            $resources[] = 'geocoder.xml';
+        }
+
+        if ($config['directions']['enabled']) {
+            $resources[] = 'directions.xml';
+        }
+
+        if ($config['distance_matrix']['enabled']) {
+            $resources[] = 'distance_matrix.xml';
+        }
+
+        return $resources;
     }
 
     /**
@@ -1461,11 +1484,19 @@ class IvoryGoogleMapExtension extends Extension
         }
 
         if (isset($config['business_account']['client_id']) && isset($config['business_account']['secret'])) {
-            $definitions = array(
-                $container->getDefinition('ivory_google_map.geocoder.provider'),
-                $container->getDefinition('ivory_google_map.directions'),
-                $container->getDefinition('ivory_google_map.distance_matrix'),
-            );
+            $definitions = array();
+
+            if ($config['geocoder']['enabled']) {
+                $definitions[] = $container->getDefinition('ivory_google_map.geocoder.provider');
+            }
+
+            if ($config['directions']['enabled']) {
+                $definitions[] = $container->getDefinition('ivory_google_map.directions');
+            }
+
+            if ($config['distance_matrix']['enabled']) {
+                $definitions[] = $container->getDefinition('ivory_google_map.distance_matrix');
+            }
 
             foreach ($definitions as $definition) {
                 $definition->addMethodCall(
@@ -1484,6 +1515,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoder(array $config, ContainerBuilder $container)
     {
+        if (!$config['geocoder']['enabled']) {
+            return;
+        }
+
         $providerDefinition = $container->getDefinition('ivory_google_map.geocoder.provider');
 
         if (isset($config['geocoder']['class'])) {
@@ -1542,6 +1577,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadGeocoderRequest(array $config, ContainerBuilder $container)
     {
+        if (!$config['geocoder']['enabled']) {
+            return;
+        }
+
         $builderDefinition = $container->getDefinition('ivory_google_map.geocoder_request.builder');
 
         if (isset($config['geocoder_request']['class'])) {
@@ -1612,6 +1651,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirections(array $config, ContainerBuilder $container)
     {
+        if (!$config['directions']['enabled']) {
+            return;
+        }
+
         $directionsDefinition = $container->getDefinition('ivory_google_map.directions');
 
         $directionsDefinition->addArgument(new Reference($config['directions']['adapter']));
@@ -1641,6 +1684,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDirectionsRequest(array $config, ContainerBuilder $container)
     {
+        if (!$config['directions']['enabled']) {
+            return;
+        }
+
         $builderDefinition = $container->getDefinition('ivory_google_map.directions_request.builder');
 
         if (isset($config['directions_request']['class'])) {
@@ -1701,6 +1748,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDistanceMatrix(array $config, ContainerBuilder $container)
     {
+        if (!$config['distance_matrix']['enabled']) {
+            return;
+        }
+
         $distanceMatrixDefinition = $container->getDefinition('ivory_google_map.distance_matrix');
 
         $distanceMatrixDefinition->addArgument(new Reference($config['distance_matrix']['adapter']));
@@ -1730,6 +1781,10 @@ class IvoryGoogleMapExtension extends Extension
      */
     protected function loadDistanceMatrixRequest(array $config, ContainerBuilder $container)
     {
+        if (!$config['distance_matrix']['enabled']) {
+            return;
+        }
+
         $builderDefinition = $container->getDefinition('ivory_google_map.distance_matrix_request.builder');
 
         if (isset($config['distance_matrix_request']['class'])) {

@@ -17,5 +17,10 @@ before_script:
 
 script: bin/phpunit
 
+branches:
+    only:
+        - master
+        - 2.0
+
 notifications:
     email: geloen.eric@gmail.com
