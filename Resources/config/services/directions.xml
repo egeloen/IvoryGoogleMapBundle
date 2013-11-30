@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.directions.class">Ivory\GoogleMap\Services\Directions\Directions</parameter>
+        <parameter key="ivory_google_map.directions_request.class">Ivory\GoogleMap\Services\Directions\DirectionsRequest</parameter>
+        <parameter key="ivory_google_map.directions_request.builder.class">Ivory\GoogleMapBundle\Model\Services\Directions\DirectionsRequestBuilder</parameter>
+    </parameters>
+
+    <services>
+        <service id="ivory_google_map.directions" class="%ivory_google_map.directions.class%" />
+
+        <service
+            id="ivory_google_map.directions_request"
+            class="%ivory_google_map.directions_request.class%"
+            factory-service="ivory_google_map.directions_request.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.directions_request.builder"
+            class="%ivory_google_map.directions_request.builder.class%"
+        >
+            <argument>%ivory_google_map.directions_request.class%</argument>
+        </service>
+    </services>
+</container>

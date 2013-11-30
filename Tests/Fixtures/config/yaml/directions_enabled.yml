@@ -1,0 +1,3 @@
+ivory_google_map:
+    directions:
+        enabled: true

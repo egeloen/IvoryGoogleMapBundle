@@ -30,6 +30,9 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ivory_google_map');
 
+        // Normalization section
+        $this->addNormalizationSection($rootNode);
+
         // Api section
         $this->addApiSection($rootNode);
 
@@ -93,6 +96,33 @@ class Configuration implements ConfigurationInterface
         $this->addDistanceMatrixRequestSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    /**
+     * Adds the normalization section.
+     *
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node The root node.
+     */
+    protected function addNormalizationSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->beforeNormalization()
+                ->always(function($value) {
+                    if (!isset($value['geocoder']) && !isset($value['geocoder_request'])) {
+                        $value['geocoder'] = array('enabled' => false);
+                    }
+
+                    if (!isset($value['directions']) && !isset($value['directions_request'])) {
+                        $value['directions'] = array('enabled' => false);
+                    }
+
+                    if (!isset($value['distance_matrix']) && !isset($value['distance_matrix_request'])) {
+                        $value['distance_matrix'] = array('enabled' => false);
+                    }
+
+                    return $value;
+                })
+            ->end();
     }
 
     /**
@@ -991,6 +1021,9 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('geocoder')->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')
+                            ->defaultTrue()
+                        ->end()
                         ->scalarNode('class')->end()
                         ->scalarNode('fake_ip')->end()
                         ->scalarNode('adapter')->end()
@@ -1063,6 +1096,9 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('directions')->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')
+                            ->defaultTrue()
+                        ->end()
                         ->scalarNode('class')->end()
                         ->scalarNode('adapter')
                             ->defaultValue('widop_http_adapter.curl')
@@ -1112,6 +1148,9 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('distance_matrix')->addDefaultsIfNotSet()
                     ->children()
+                        ->booleanNode('enabled')
+                            ->defaultTrue()
+                        ->end()
                         ->scalarNode('class')->end()
                         ->scalarNode('adapter')
                             ->defaultValue('widop_http_adapter.curl')

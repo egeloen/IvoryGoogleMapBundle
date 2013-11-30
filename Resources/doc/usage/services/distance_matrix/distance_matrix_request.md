@@ -5,7 +5,9 @@
 ### By configuration file
 
 By default, the bundle doesn't need any configuration. Most of the service have a default configuration which allows
-you to use the given objects like they are. The ``ivory_google_map.distance_matrix_request`` service is.
+you to use the given objects like they are. The ``ivory_google_map.distance_matrix_request`` service is not one of them.
+The configuration describes below is this default configuration but if you don't provide at least one value (for the
+`distance_matrix` or `distance_matrix_request` nodes), the service will not be registered.
 
 ```
 # app/config/config.yml
