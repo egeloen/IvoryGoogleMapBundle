@@ -2,6 +2,7 @@
 
 ### 2.0.3 - 2.1.3 (????-??-??)
 
+ * 2ffb7cd - [Travis] Simplify matrix + Add Symfony 2.4 to the build
  * 1c161c6 - Make widop/http-adapter-bundle really optional
  * df9d815 - [Service] Add business account support
  * 0512906 - [Service] Replace kriswallsmith/buzz by widop/http-adapter
