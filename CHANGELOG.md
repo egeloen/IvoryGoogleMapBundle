@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.0.3 - 2.1.3 (????-??-??)
+### 2.0.3 - 2.1.3 (2013-12-12)
 
  * 2ffb7cd - [Travis] Simplify matrix + Add Symfony 2.4 to the build
  * 1c161c6 - Make widop/http-adapter-bundle really optional
