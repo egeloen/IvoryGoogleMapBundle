@@ -1,13 +1,13 @@
 # Installation
 
-## Symfony 2.1.*
+## Symfony >= 2.1
 
 Require the bundle in your composer.json file:
 
 ```
 {
     "require": {
-        "egeloen/google-map-bundle": "*",
+        "egeloen/google-map-bundle": "~2.1",
     }
 }
 ```
@@ -62,7 +62,7 @@ Add Ivory Google Map bundle & library to your deps file:
 [IvoryGoogleMapBundle]
     git=http://github.com/egeloen/IvoryGoogleMapBundle.git
     target=bundles/Ivory/GoogleMapBundle
-    version=1.0.0
+    version=2.0.3
 
 [ivory-google-map]
     git=http://github.com/egeloen/ivory-google-map.git
@@ -137,3 +137,5 @@ Run the vendors script:
 ``` bash
 $ php bin/vendors install
 ```
+
+Be aware that the Symfony 2.0 version of the bundle is no longer maintain.
