@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 2.2.0 (????-??-??)
+
+ * e6cf9ce - Update new year
+ * 69e8426 - Deprecate Symfony 2.0
+
 ### 2.0.3 - 2.1.3 (2013-12-12)
 
  * 2ffb7cd - [Travis] Simplify matrix + Add Symfony 2.4 to the build
