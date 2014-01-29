@@ -11,6 +11,7 @@
 
 namespace Ivory\GoogleMapBundle\Tests\Form\Type;
 
+use Ivory\GoogleMap\Places\AutocompleteComponentRestriction;
 use Ivory\GoogleMap\Places\AutocompleteType;
 use Ivory\GoogleMapBundle\Form\Type\PlacesAutocompleteType;
 use Symfony\Component\Form\Forms;
@@ -131,6 +132,22 @@ class PlacesAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
         $autocomplete = $form->getConfig()->getAttribute('autocomplete');
 
         $this->assertSame(array(AutocompleteType::CITIES), $autocomplete->getTypes());
+    }
+
+    public function testComponentRestrictionsConfig()
+    {
+        $form = $this->factory->create(
+            'places_autocomplete',
+            null,
+            array('component_restrictions' => array(AutocompleteComponentRestriction::COUNTRY => 'fr'))
+        );
+
+        $autocomplete = $form->getConfig()->getAttribute('autocomplete');
+
+        $this->assertSame(
+            array(AutocompleteComponentRestriction::COUNTRY => 'fr'),
+            $autocomplete->getComponentRestrictions()
+        );
     }
 
     public function testAsyncConfig()

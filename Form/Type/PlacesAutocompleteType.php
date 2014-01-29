@@ -108,6 +108,10 @@ class PlacesAutocompleteType extends AbstractType
             $autocomplete->setTypes($options['types']);
         }
 
+        if (!empty($options['component_restrictions'])) {
+            $autocomplete->setComponentRestrictions($options['component_restrictions']);
+        }
+
         if ($options['attr']) {
             foreach ($options['attr'] as $name => $value) {
                 $autocomplete->setInputAttribute($name, $value);
@@ -140,19 +144,21 @@ class PlacesAutocompleteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'prefix'   => null,
-            'bound'    => null,
-            'types'    => array(),
-            'async'    => false,
-            'language' => $this->getRequest()->getLocale(),
+            'prefix'                 => null,
+            'bound'                  => null,
+            'types'                  => array(),
+            'component_restrictions' => array(),
+            'async'                  => false,
+            'language'               => $this->getRequest()->getLocale(),
         ));
 
         $resolver->setAllowedTypes(array(
-            'prefix'   => array('string', 'null'),
-            'bound'    => array('Ivory\GoogleMap\Base\Bound', 'array', 'null'),
-            'types'    => array('array'),
-            'async'    => array('bool'),
-            'language' => array('string'),
+            'prefix'                 => array('string', 'null'),
+            'bound'                  => array('Ivory\GoogleMap\Base\Bound', 'array', 'null'),
+            'types'                  => array('array'),
+            'component_restrictions' => array('array'),
+            'async'                  => array('bool'),
+            'language'               => array('string'),
         ));
     }
 

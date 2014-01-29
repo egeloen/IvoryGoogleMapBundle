@@ -13,6 +13,7 @@ of the [Ivory Google Map library](https://github.com/egeloen/ivory-google-map).
 The bundle registers a new form type calles `places_autocomplete` which can be easily configured:
 
 ``` php
+use Ivory\GoogleMap\Places\AutocompleteComponentRestriction;
 use Ivory\GoogleMap\Places\AutocompleteType;
 
 $builder->add('field', 'places_autocomplete', array(
@@ -26,6 +27,12 @@ $builder->add('field', 'places_autocomplete', array(
     // Autocomplete types
     'types'  => array(
         AutocompleteType::CITIES,
+        // ...
+    ),
+
+    // Autocomplete component restrictions
+    'component_restrictions' => array(
+        AutocompleteComponentRestriction::COUNTRY => 'fr',
         // ...
     ),
 
