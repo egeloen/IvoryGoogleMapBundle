@@ -116,6 +116,8 @@ class PlacesAutocompleteType extends AbstractType
 
         $autocomplete->setAsync($options['async']);
         $autocomplete->setLanguage($options['language']);
+        $autocomplete->setComponentRestrictions($options['componentRestrictions']);
+
 
         $builder->setAttribute('autocomplete', $autocomplete);
     }
@@ -144,6 +146,7 @@ class PlacesAutocompleteType extends AbstractType
             'bound'    => null,
             'types'    => array(),
             'async'    => false,
+            'componentRestrictions' => null,
             'language' => $this->getRequest()->getLocale(),
         ));
 
@@ -153,6 +156,7 @@ class PlacesAutocompleteType extends AbstractType
             'types'    => array('array'),
             'async'    => array('bool'),
             'language' => array('string'),
+            'componentRestrictions' => array('array', 'null')
         ));
     }
 
