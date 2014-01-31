@@ -36,6 +36,18 @@ class TemplateHelper extends Helper
     }
 
     /**
+     * Renders the google map.
+     *
+     * @param \Ivory\GoogleMap\Map $map The map.
+     *
+     * @return string The html output.
+     */
+    public function renderMap(Map $map)
+    {
+        return $this->mapHelper->render($map);
+    }
+
+    /**
      * Renders the google map html container.
      *
      * @param \Ivory\GoogleMap\Map $map The map.

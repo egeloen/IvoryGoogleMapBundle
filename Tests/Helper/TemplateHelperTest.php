@@ -50,6 +50,19 @@ class TemplateHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('ivory_google_map', $this->templateHelper->getName());
     }
 
+    public function testRenderMap()
+    {
+        $map = $this->getMock('Ivory\GoogleMap\Map');
+
+        $this->mapHelperMock
+            ->expects($this->once())
+            ->method('render')
+            ->with($map)
+            ->will($this->returnValue('foo'));
+
+        $this->assertSame('foo', $this->templateHelper->renderMap($map));
+    }
+
     public function testRenderHtmlContainer()
     {
         $map = $this->getMock('Ivory\GoogleMap\Map');

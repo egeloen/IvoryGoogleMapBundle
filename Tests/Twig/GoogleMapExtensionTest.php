@@ -12,8 +12,6 @@
 namespace Ivory\GoogleMapBundle\Tests\Twig;
 
 use Ivory\GoogleMapBundle\Twig\GoogleMapExtension;
-use Twig_Environment;
-use Twig_Loader_String;
 
 /**
  * Google map extension test.
@@ -22,8 +20,8 @@ use Twig_Loader_String;
  */
 class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \Ivory\GoogleMapBundle\Twig\GoogleMapExtension */
-    protected $googleMapExtension;
+    /** @var \Twig_Environment */
+    protected $twig;
 
     /** @var \Ivory\GoogleMapBundle\Templating\Helper\TemplateHelper */
     protected $templateHelperMock;
@@ -37,7 +35,8 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->googleMapExtension = new GoogleMapExtension($this->templateHelperMock);
+        $this->twig = new \Twig_Environment(new \Twig_Loader_String());
+        $this->twig->addExtension(new GoogleMapExtension($this->templateHelperMock));
     }
 
     /**
@@ -45,13 +44,26 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->googleMapExtension);
         unset($this->templateHelperMock);
+        unset($this->twig);
     }
 
-    public function testRenderContainer()
+    public function testRenderMap()
     {
-        $map = $this->getMock('Ivory\GoogleMap\Map');
+        $map = $this->createMap();
+
+        $this->templateHelperMock
+            ->expects($this->once())
+            ->method('renderMap')
+            ->with($this->equalTo($map))
+            ->will($this->returnValue('foo'));
+
+        $this->assertSame('foo', $this->twig->render('{{ google_map(map) }}', array('map' => $map)));
+    }
+
+    public function testRenderHtmlContainer()
+    {
+        $map = $this->createMap();
 
         $this->templateHelperMock
             ->expects($this->once())
@@ -59,12 +71,12 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo($map))
             ->will($this->returnValue('foo'));
 
-        $this->assertSame('foo', $this->googleMapExtension->renderHtmlContainer($map));
+        $this->assertSame('foo', $this->twig->render('{{ google_map_container(map) }}', array('map' => $map)));
     }
 
-    public function testRenderJavascripts()
+    public function testRenderJavasripts()
     {
-        $map = $this->getMock('Ivory\GoogleMap\Map');
+        $map = $this->createMap();
 
         $this->templateHelperMock
             ->expects($this->once())
@@ -72,12 +84,12 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo($map))
             ->will($this->returnValue('foo'));
 
-        $this->assertSame('foo', $this->googleMapExtension->renderJavascripts($map));
+        $this->assertSame('foo', $this->twig->render('{{ google_map_js(map) }}', array('map' => $map)));
     }
 
     public function testRenderStylesheets()
     {
-        $map = $this->getMock('Ivory\GoogleMap\Map');
+        $map = $this->createMap();
 
         $this->templateHelperMock
             ->expects($this->once())
@@ -85,54 +97,16 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo($map))
             ->will($this->returnValue('foo'));
 
-        $this->assertSame('foo', $this->googleMapExtension->renderStylesheets($map));
+        $this->assertSame('foo', $this->twig->render('{{ google_map_css(map) }}', array('map' => $map)));
     }
 
-    public function testGoogleMapContainerFunction()
+    /**
+     * Creates a map.
+     *
+     * @return \Ivory\GoogleMap\Map The map.
+     */
+    protected function createMap()
     {
-        $twig = new Twig_Environment(new Twig_Loader_String());
-        $twig->addExtension($this->googleMapExtension);
-
-        $map = $this->getMock('Ivory\GoogleMap\Map');
-
-        $this->templateHelperMock
-            ->expects($this->once())
-            ->method('renderHtmlContainer')
-            ->with($this->equalTo($map))
-            ->will($this->returnValue('foo'));
-
-        $this->assertSame('foo', $twig->render('{{ google_map_container(map) }}', array('map' => $map)));
-    }
-
-    public function testGoogleMapJsFunction()
-    {
-        $twig = new Twig_Environment(new Twig_Loader_String());
-        $twig->addExtension($this->googleMapExtension);
-
-        $map = $this->getMock('Ivory\GoogleMap\Map');
-
-        $this->templateHelperMock
-            ->expects($this->once())
-            ->method('renderJavascripts')
-            ->with($this->equalTo($map))
-            ->will($this->returnValue('foo'));
-
-        $this->assertSame('foo', $twig->render('{{ google_map_js(map) }}', array('map' => $map)));
-    }
-
-    public function testGoogleMapCssFunction()
-    {
-        $twig = new Twig_Environment(new Twig_Loader_String());
-        $twig->addExtension($this->googleMapExtension);
-
-        $map = $this->getMock('Ivory\GoogleMap\Map');
-
-        $this->templateHelperMock
-            ->expects($this->once())
-            ->method('renderStylesheets')
-            ->with($this->equalTo($map))
-            ->will($this->returnValue('foo'));
-
-        $this->assertSame('foo', $twig->render('{{ google_map_css(map) }}', array('map' => $map)));
+        return $this->getMock('Ivory\GoogleMap\Map');
     }
 }
