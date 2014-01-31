@@ -44,6 +44,7 @@ class GoogleMapExtension extends \Twig_Extension
             'google_map_container' => 'renderHtmlContainer',
             'google_map_css'       => 'renderStylesheets',
             'google_map_js'        => 'renderJavascripts',
+            'google_map'           => 'renderMap',
         );
 
         $functions = array();
@@ -88,6 +89,18 @@ class GoogleMapExtension extends \Twig_Extension
     public function renderJavascripts(Map $map)
     {
         return $this->templateHelper->renderJavascripts($map);
+    }
+    
+    /**
+     * Renders the whole google map.
+     *
+     * @param \Ivory\GoogleMap\Map $map The map.
+     *
+     * @return string The html output.
+     */
+    public function renderMap(Map $map)
+    {
+        return $this->templateHelper->renderMap($map);
     }
 
     /**
