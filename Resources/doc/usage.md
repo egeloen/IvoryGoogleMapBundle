@@ -75,7 +75,22 @@ ivory_google_map:
 ## Render your map
 
 The google map API needs at least an html container & some javascript for being able to render a map. For rendering
-them, the bundle delivered two twig functions : ``google_map_container`` & ``google_map_js``.
+them, the bundle delivered two twig functions : ``google_map_container`` & ``google_map_js`` or you can use ``google_map`` for rendering HTML contaiiner, JS and CSS.
+
+### Render the whole map:
+
+For twig:
+
+```
+{{ google_map(map) }}
+```
+
+For php:
+
+```
+$view['ivory_google_map']->renderMap($map);
+```
+
 
 Warning, the HTML container needs to be rendered before javascript.
 
