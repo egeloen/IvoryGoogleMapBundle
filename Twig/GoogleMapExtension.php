@@ -100,7 +100,7 @@ class GoogleMapExtension extends \Twig_Extension
      */
     public function renderMap(Map $map)
     {
-        return $this->templateHelper->render($map);
+        return $this->templateHelper->renderMap($map);
     }
 
     /**
