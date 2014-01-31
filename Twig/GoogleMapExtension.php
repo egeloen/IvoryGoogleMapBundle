@@ -98,7 +98,7 @@ class GoogleMapExtension extends \Twig_Extension
      *
      * @return string The html output.
      */
-    public function renderMap(Map $map)`
+    public function renderMap(Map $map)
     {
         return $this->templateHelper->render($map);
     }
