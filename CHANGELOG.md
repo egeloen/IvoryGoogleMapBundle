@@ -2,6 +2,7 @@
 
 ### 2.2.0 (????-??-??)
 
+ * c2d25a7 - [Helper] Allow to render the map in a single call
  * d69152a - [Places] Add component restrictions support
  * e6cf9ce - Update new year
  * 69e8426 - Deprecate Symfony 2.0
