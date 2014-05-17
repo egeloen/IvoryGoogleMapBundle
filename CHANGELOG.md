@@ -2,6 +2,7 @@
 
 ### 2.2.0 (????-??-??)
 
+ * fdffec8 - Add coveralls support
  * b2569ba - Fix Geocoder provider documentation
  * c2d25a7 - [Helper] Allow to render the map in a single call
  * d69152a - [Places] Add component restrictions support
