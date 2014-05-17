@@ -31,7 +31,7 @@ ivory_google_map:
             fake_ip: "123.345.567.123"
 
             # Provider class
-            class: "Ivory\GoogleMap\Services\Geocoding\\Provider"
+            class: "Ivory\GoogleMap\Services\Geocoding\GeocoderProvider"
 
             # API key used by the provider
             # If you set an API key, this paremeter will be the second parameter provider constructor
