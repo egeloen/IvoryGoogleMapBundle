@@ -2,7 +2,7 @@
 
 ### 2.2.0 (????-??-??)
 
- * b2569ba - Fix Geocoder provider documention
+ * b2569ba - Fix Geocoder provider documentation
  * c2d25a7 - [Helper] Allow to render the map in a single call
  * d69152a - [Places] Add component restrictions support
  * e6cf9ce - Update new year
