@@ -13,7 +13,7 @@ namespace Ivory\GoogleMapBundle\Twig;
 
 use Ivory\GoogleMap\Map;
 use Ivory\GoogleMapBundle\Helper\TemplateHelper;
-use Twig_Function_Method;
+use Twig_SimpleFunction;
 
 /**
  * Ivory google map twig extension.
@@ -22,7 +22,7 @@ use Twig_Function_Method;
  */
 class GoogleMapExtension extends \Twig_Extension
 {
-    /** @var \Ivory\GoogleMapBundle\Templating\Helper\TemplateHelper */
+    /** @var \Ivory\GoogleMapBundle\Helper\TemplateHelper */
     protected $templateHelper;
 
     /**
