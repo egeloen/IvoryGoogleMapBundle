@@ -49,7 +49,7 @@ class GoogleMapExtension extends \Twig_Extension
 
         $functions = array();
         foreach ($mapping as $twig => $local) {
-            $functions[$twig] = new Twig_Function_Method($this, $local, array('is_safe' => array('html')));
+            $functions[$twig] = new Twig_SimpleFunction($this, $local, array('is_safe' => array('html')));
         }
 
         return $functions;
