@@ -16,10 +16,10 @@
         "egeloen/google-map": "~1.4@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7",
+        "phpunit/phpunit": "~4.0",
         "symfony/form": "~2.1",
         "symfony/yaml": "~2.0",
-        "twig/twig": "~1.0",
+        "twig/twig": "~1.12",
         "widop/http-adapter-bundle": "~1.0,<1.2",
         "willdurand/geocoder": "~2.0",
         "satooshi/php-coveralls": "~0.6"
