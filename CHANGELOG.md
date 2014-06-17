@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.2.0 (????-??-??)
+### 2.2.0 (2014-06-17)
 
  * 2599efe - [Travis] Add Symfony 2.5 + Remove 2.0 branch
  * bf48170 - Replace deprecated twig features + Fix PHPDoc + Bump phpunit to ~4.0 + Bump twig to ~1.12
