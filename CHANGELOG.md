@@ -2,6 +2,7 @@
 
 ### 2.2.0 (????-??-??)
 
+ * bf48170 - Replace deprecated twig features + Fix PHPDoc + Bump phpunit to ~4.0 + Bump twig to ~1.12
  * fdffec8 - Add coveralls support
  * b2569ba - Fix Geocoder provider documentation
  * c2d25a7 - [Helper] Allow to render the map in a single call
