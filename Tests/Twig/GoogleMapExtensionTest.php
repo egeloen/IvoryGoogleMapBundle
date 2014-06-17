@@ -23,7 +23,7 @@ class GoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
     /** @var \Twig_Environment */
     protected $twig;
 
-    /** @var \Ivory\GoogleMapBundle\Templating\Helper\TemplateHelper */
+    /** @var \Ivory\GoogleMapBundle\Helper\TemplateHelper */
     protected $templateHelperMock;
 
     /**
