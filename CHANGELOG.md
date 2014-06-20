@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 2.2.1 (????-??-??)
+
+ * 03b0110 - [Composer] Upgrade to PSR-4
+
 ### 2.2.0 (2014-06-17)
 
  * 2599efe - [Travis] Add Symfony 2.5 + Remove 2.0 branch
