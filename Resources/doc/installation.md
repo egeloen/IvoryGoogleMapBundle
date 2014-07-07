@@ -138,4 +138,4 @@ Run the vendors script:
 $ php bin/vendors install
 ```
 
-Be aware that the Symfony 2.0 version of the bundle is no longer maintain.
+Be aware that the Symfony 2.0 version of this bundle is no longer maintained.
