@@ -11,7 +11,7 @@ By default, the bundle doesn't need any configuration. Most of the service have 
 you to use the given objects like they are. The ``ivory_google_map.ground_overlay`` service is. The configuration
 describes below is this default configuration.
 
-```
+```yaml
 # app/config/config.yml
 
 ivory_google_map:

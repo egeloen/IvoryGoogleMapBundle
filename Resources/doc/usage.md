@@ -62,7 +62,7 @@ The complete events configuration is available
 Sometimes, you want to use the map & other Google Map related libraries. The bundle provides many integrations but not
 all of them. If you need a custom libraries, you can use the following configuration:
 
-```
+```yaml
 ivory_google_map:
     api:
         # Your own API helper class
@@ -85,13 +85,13 @@ javascript.**
 
 This helper allows you to render the html container, javascripts and CSS in a single call.
 
-For twig:
+Using twig:
 
 ```
 {{ google_map(map) }}
 ```
 
-For php:
+Using php:
 
 ```
 $view['ivory_google_map']->renderMap($map);
@@ -99,13 +99,13 @@ $view['ivory_google_map']->renderMap($map);
 
 ### Render the HTML container only
 
-For twig:
+Using twig:
 
 ```
 {{ google_map_container(map) }}
 ```
 
-For php:
+Using php:
 
 ```
 $view['ivory_google_map']->renderHtmlContainer($map);
@@ -119,13 +119,13 @@ This function renders an html div block with the HTML container ID, the width & 
 
 ### Render the javascript only
 
-For twig:
+Using twig:
 
 ```
 {{ google_map_js(map) }}
 ```
 
-For php:
+Using php:
 
 ```
 $view['ivory_google_map']->renderJavascripts($map);
@@ -148,13 +148,13 @@ after the generated code through extensions. If you want to learn more about tha
 Additionally, you can configure some CSS directly on the map. For rendering it, use the twig function :
 ``google_map_css``.
 
-For twig:
+Using twig:
 
 ```
 {{ google_map_css(map) }}
 ```
 
-For php:
+Using php:
 
 ```
 $view['ivory_google_map']->renderStylesheets($map);

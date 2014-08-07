@@ -18,7 +18,7 @@ you to use the given objects like they are. The ``ivory_google_map.distance_matr
 configuration describes below is this default configuration but if you don't provide at least one value (for the
 `distance_matrix` or `distance_matrix_request` nodes), the service will not be registered.
 
-```
+```yaml
 # app/config/config.yml
 
 ivory_google_map:
