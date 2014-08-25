@@ -2,6 +2,8 @@
 
 ### 2.2.1 (????-??-??)
 
+ * bd82776 - [Composer] Refine deps
+ * 47fbb10 - Rename MarkerImage.xml to MarkerImage.orm.xml
  * 03b0110 - [Composer] Upgrade to PSR-4
 
 ### 2.2.0 (2014-06-17)
