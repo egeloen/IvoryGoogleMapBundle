@@ -121,6 +121,7 @@ foreach ($results as $result) {
         // ...
     }
 }
+```
 
 #### Geometry informations
 

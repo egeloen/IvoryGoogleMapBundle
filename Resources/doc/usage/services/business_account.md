@@ -3,7 +3,7 @@
 When using a service for business purpose, you will receive a business account from Google. This one allows you to
 bypass Google limitation according to your billing plan. To use it, you need to configure it:
 
-```
+```yaml
 # app/config/config.yml
 
 ivory_google_map:

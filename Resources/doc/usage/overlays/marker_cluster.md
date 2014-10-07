@@ -12,7 +12,7 @@ By default, the bundle doesn't need any configuration. Most of the service have 
 you to use the given objects like they are. The ``ivory_google_map.marker_cluster`` service is. The configuration
 describes below is this default configuration.
 
-```
+```yaml
 # app/config/config.yml
 
 ivory_google_map:
@@ -44,4 +44,3 @@ $markerCluster = $this->get('ivory_google_map.marker_cluster');
 
 If you want to learn more, you can read
 [this documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/usage/overlays/marker_cluster.md).
-```
