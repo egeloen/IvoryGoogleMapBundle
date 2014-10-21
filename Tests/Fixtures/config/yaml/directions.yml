@@ -1,0 +1,6 @@
+ivory_google_map:
+    directions:
+        adapter: "widop_http_adapter.stream"
+        url:     "http://directions"
+        https:   true
+        format:  "xml"

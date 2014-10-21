@@ -1,0 +1,11 @@
+ivory_google_map:
+    directions:
+        enabled: true
+    geocoder:
+        enabled: true
+    distance_matrix:
+        enabled: true
+    business_account:
+        client_id: "client_id"
+        secret:    "secret"
+        channel:   "channel"

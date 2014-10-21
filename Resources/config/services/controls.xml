@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.map_type_control.class">Ivory\GoogleMap\Controls\MapTypeControl</parameter>
+        <parameter key="ivory_google_map.map_type_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\MapTypeControlBuilder</parameter>
+        <parameter key="ivory_google_map.map_type_control.helper.class">Ivory\GoogleMap\Helper\Controls\MapTypeControlHelper</parameter>
+
+        <parameter key="ivory_google_map.overview_map_control.class">Ivory\GoogleMap\Controls\OverviewMapControl</parameter>
+        <parameter key="ivory_google_map.overview_map_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\OverviewMapControlBuilder</parameter>
+        <parameter key="ivory_google_map.overview_map_control.helper.class">Ivory\GoogleMap\Helper\Controls\OverviewMapControlHelper</parameter>
+
+        <parameter key="ivory_google_map.pan_control.class">Ivory\GoogleMap\Controls\PanControl</parameter>
+        <parameter key="ivory_google_map.pan_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\PanControlBuilder</parameter>
+        <parameter key="ivory_google_map.pan_control.helper.class">Ivory\GoogleMap\Helper\Controls\PanControlHelper</parameter>
+
+        <parameter key="ivory_google_map.rotate_control.class">Ivory\GoogleMap\Controls\RotateControl</parameter>
+        <parameter key="ivory_google_map.rotate_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\RotateControlBuilder</parameter>
+        <parameter key="ivory_google_map.rotate_control.helper.class">Ivory\GoogleMap\Helper\Controls\RotateControlHelper</parameter>
+
+        <parameter key="ivory_google_map.scale_control.class">Ivory\GoogleMap\Controls\ScaleControl</parameter>
+        <parameter key="ivory_google_map.scale_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\ScaleControlBuilder</parameter>
+        <parameter key="ivory_google_map.scale_control.helper.class">Ivory\GoogleMap\Helper\Controls\ScaleControlHelper</parameter>
+
+        <parameter key="ivory_google_map.street_view_control.class">Ivory\GoogleMap\Controls\StreetViewControl</parameter>
+        <parameter key="ivory_google_map.street_view_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\StreetViewControlBuilder</parameter>
+        <parameter key="ivory_google_map.street_view_control.helper.class">Ivory\GoogleMap\Helper\Controls\StreetViewControlHelper</parameter>
+
+        <parameter key="ivory_google_map.zoom_control.class">Ivory\GoogleMap\Controls\ZoomControl</parameter>
+        <parameter key="ivory_google_map.zoom_control.builder.class">Ivory\GoogleMapBundle\Model\Controls\ZoomControlBuilder</parameter>
+        <parameter key="ivory_google_map.zoom_control.helper.class">Ivory\GoogleMap\Helper\Controls\ZoomControlHelper</parameter>
+
+        <parameter key="ivory_google_map.control_position.helper.class">Ivory\GoogleMap\Helper\Controls\ControlPositionHelper</parameter>
+        <parameter key="ivory_google_map.map_type_control_style.helper.class">Ivory\GoogleMap\Helper\Controls\MapTypeControlStyleHelper</parameter>
+        <parameter key="ivory_google_map.scale_control_style.helper.class">Ivory\GoogleMap\Helper\Controls\ScaleControlStyleHelper</parameter>
+        <parameter key="ivory_google_map.zoom_control_style.helper.class">Ivory\GoogleMap\Helper\Controls\ZoomControlStyleHelper</parameter>
+    </parameters>
+
+    <services>
+        <!-- Map type control service -->
+        <service
+            id="ivory_google_map.map_type_control"
+            class="%ivory_google_map.map_type_control.class%"
+            factory-service="ivory_google_map.map_type_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.map_type_control.builder"
+            class="%ivory_google_map.map_type_control.builder.class%"
+        >
+            <argument>%ivory_google_map.map_type_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.map_type_control"
+            class="%ivory_google_map.map_type_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.map_type_id" />
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+            <argument type="service" id="ivory_google_map.helper.map_type_control_style" />
+        </service>
+
+        <!-- Overview map control service -->
+        <service
+            id="ivory_google_map.overview_map_control"
+            class="%ivory_google_map.overview_map_control.class%"
+            factory-service="ivory_google_map.overview_map_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.overview_map_control.builder"
+            class="%ivory_google_map.overview_map_control.builder.class%"
+        >
+            <argument>%ivory_google_map.overview_map_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.overview_map_control"
+            class="%ivory_google_map.overview_map_control.helper.class%"
+            public="false"
+        />
+
+        <!-- Pan control service -->
+        <service
+            id="ivory_google_map.pan_control"
+            class="%ivory_google_map.pan_control.class%"
+            factory-service="ivory_google_map.pan_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.pan_control.builder" class="%ivory_google_map.pan_control.builder.class%">
+            <argument>%ivory_google_map.pan_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.pan_control"
+            class="%ivory_google_map.pan_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+        </service>
+
+        <!-- Rotate control service -->
+        <service
+            id="ivory_google_map.rotate_control"
+            class="%ivory_google_map.rotate_control.class%"
+            factory-service="ivory_google_map.rotate_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.rotate_control.builder" class="%ivory_google_map.rotate_control.builder.class%">
+            <argument>%ivory_google_map.rotate_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.rotate_control"
+            class="%ivory_google_map.rotate_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+        </service>
+
+        <!-- Scale control service -->
+        <service
+            id="ivory_google_map.scale_control"
+            class="%ivory_google_map.scale_control.class%"
+            factory-service="ivory_google_map.scale_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.scale_control.builder" class="%ivory_google_map.scale_control.builder.class%">
+            <argument>%ivory_google_map.scale_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.scale_control"
+            class="%ivory_google_map.scale_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+            <argument type="service" id="ivory_google_map.helper.scale_control_style" />
+        </service>
+
+        <!-- Street view control service -->
+        <service
+            id="ivory_google_map.street_view_control"
+            class="%ivory_google_map.street_view_control.class%"
+            factory-service="ivory_google_map.street_view_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.street_view_control.builder"
+            class="%ivory_google_map.street_view_control.builder.class%"
+        >
+            <argument>%ivory_google_map.street_view_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.street_view_control"
+            class="%ivory_google_map.street_view_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+        </service>
+
+        <!-- Zoom control service -->
+        <service
+            id="ivory_google_map.zoom_control"
+            class="%ivory_google_map.zoom_control.class%"
+            factory-service="ivory_google_map.zoom_control.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.zoom_control.builder" class="%ivory_google_map.zoom_control.builder.class%">
+            <argument>%ivory_google_map.zoom_control.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.zoom_control"
+            class="%ivory_google_map.zoom_control.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.control_position" />
+            <argument type="service" id="ivory_google_map.helper.zoom_control_style" />
+        </service>
+
+        <!-- Control Position service -->
+        <service
+            id="ivory_google_map.helper.control_position"
+            class="%ivory_google_map.control_position.helper.class%"
+            public="false"
+        />
+
+        <!-- Map type control style service -->
+        <service
+            id="ivory_google_map.helper.map_type_control_style"
+            class="%ivory_google_map.map_type_control_style.helper.class%"
+            public="false"
+        />
+
+        <!-- Scale control style service -->
+        <service
+            id="ivory_google_map.helper.scale_control_style"
+            class="%ivory_google_map.scale_control_style.helper.class%"
+            public="false"
+        />
+
+        <!-- Zoom control style service -->
+        <service
+            id="ivory_google_map.helper.zoom_control_style"
+            class="%ivory_google_map.zoom_control_style.helper.class%"
+            public="false"
+        />
+    </services>
+</container>

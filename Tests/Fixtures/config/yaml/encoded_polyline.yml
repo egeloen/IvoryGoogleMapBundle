@@ -1,0 +1,5 @@
+ivory_google_map:
+    encoded_polyline:
+        prefix_javascript_variable: "ep"
+        options:
+            option: "value"

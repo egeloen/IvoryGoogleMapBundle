@@ -1,0 +1,5 @@
+ivory_google_map:
+    point:
+        prefix_javascript_variable: "foo"
+        x:                          1.1
+        y:                          -2.1

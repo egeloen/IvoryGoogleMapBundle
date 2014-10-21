@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Map" table="ivory_map">
+        <field name="javascriptVariable" column="javascript_variable" type="string" length="100" />
+        <field name="htmlContainerId" column="html_container_id" type="string" length="255" />
+        <field name="autoZoom" column="auto_zoom" type="boolean" />
+        <field name="mapOptions" column="map_options" type="array" />
+        <field name="stylesheetOptions" column="stylesheet_options" type="array" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+        </lifecycle-callbacks>
+    </mapped-superclass>
+
+</doctrine-mapping>

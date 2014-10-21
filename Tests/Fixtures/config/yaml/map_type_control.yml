@@ -1,0 +1,5 @@
+ivory_google_map:
+    map_type_control:
+        map_type_ids:           [ "hybrid", "terrain" ]
+        control_position:       "top_center"
+        map_type_control_style: "horizontal_bar"

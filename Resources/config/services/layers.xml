@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.kml_layer.class">Ivory\GoogleMap\Layers\KMLLayer</parameter>
+        <parameter key="ivory_google_map.kml_layer.builder.class">Ivory\GoogleMapBundle\Model\Layers\KMLLayerBuilder</parameter>
+        <parameter key="ivory_google_map.kml_layer.helper.class">Ivory\GoogleMap\Helper\Layers\KMLLayerHelper</parameter>
+    </parameters>
+
+    <services>
+        <!-- KML Layer service -->
+        <service
+            id="ivory_google_map.kml_layer"
+            class="%ivory_google_map.kml_layer.class%"
+            factory-service="ivory_google_map.kml_layer.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.kml_layer.builder" class="%ivory_google_map.kml_layer.builder.class%">
+            <argument>%ivory_google_map.kml_layer.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.kml_layer"
+            class="%ivory_google_map.kml_layer.helper.class%"
+            public="false"
+        />
+    </services>
+</container>

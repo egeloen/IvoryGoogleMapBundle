@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.event_manager.class">Ivory\GoogleMap\Events\EventManager</parameter>
+        <parameter key="ivory_google_map.event_manager.builder.class">Ivory\GoogleMapBundle\Model\Events\EventManagerBuilder</parameter>
+        <parameter key="ivory_google_map.event_manager.helper.class">Ivory\GoogleMap\Helper\Events\EventManagerHelper</parameter>
+
+        <parameter key="ivory_google_map.event.class">Ivory\GoogleMap\Events\Event</parameter>
+        <parameter key="ivory_google_map.event.builder.class">Ivory\GoogleMapBundle\Model\Events\EventBuilder</parameter>
+    </parameters>
+
+    <services>
+        <!-- Event manager service -->
+        <service
+            id="ivory_google_map.event_manager"
+            class="%ivory_google_map.event_manager.class%"
+            factory-service="ivory_google_map.event_manager.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.event_manager.builder" class="%ivory_google_map.event_manager.builder.class%">
+            <argument>%ivory_google_map.event_manager.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.event_manager"
+            class="%ivory_google_map.event_manager.helper.class%"
+            public="false"
+        />
+
+        <!-- Event service -->
+        <service
+            id="ivory_google_map.event"
+            class="%ivory_google_map.event.class%"
+            factory-service="ivory_google_map.event.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.event.builder" class="%ivory_google_map.event.builder.class%">
+            <argument>%ivory_google_map.event.class%</argument>
+        </service>
+    </services>
+</container>

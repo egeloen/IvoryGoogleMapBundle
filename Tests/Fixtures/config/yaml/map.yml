@@ -1,0 +1,28 @@
+ivory_google_map:
+    map:
+        prefix_javascript_variable: "foo"
+        html_container:             "bar"
+        async:                      true
+        auto_zoom:                  true
+        type:                       "satellite"
+        zoom:                       6
+        width:                      "400px"
+        height:                     "500px"
+        language:                   "en"
+        center:
+            latitude:  1
+            longitude: 2
+            no_wrap:   false
+        bound:
+            south_west:
+                latitude:  1
+                longitude: 2
+                no_wrap:   true
+            north_east:
+                latitude:  3
+                longitude: 4
+                no_wrap:   false
+        map_options:
+            foo: "bar"
+        stylesheet_options:
+            bar: "foo"

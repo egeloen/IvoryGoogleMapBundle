@@ -1,0 +1,15 @@
+ivory_google_map:
+    ground_overlay:
+        prefix_javascript_variable: "go"
+        url:                        "url"
+        bound:
+            south_west:
+                latitude:  -1.1
+                longitude: -2.1
+                no_wrap:   true
+            north_east:
+                latitude:  1.1
+                longitude: 2.1
+                no_wrap:   false
+        options:
+            option: "value"

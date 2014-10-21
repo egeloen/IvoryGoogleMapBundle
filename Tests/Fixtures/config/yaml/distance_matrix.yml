@@ -1,0 +1,6 @@
+ivory_google_map:
+    distance_matrix:
+        adapter: "widop_http_adapter.stream"
+        url:     "http://distance_matrix"
+        https:   true
+        format:  "xml"

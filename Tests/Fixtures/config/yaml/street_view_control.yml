@@ -1,0 +1,3 @@
+ivory_google_map:
+    street_view_control:
+        control_position: "top_center"

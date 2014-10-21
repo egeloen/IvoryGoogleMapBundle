@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.coordinate.class">Ivory\GoogleMap\Base\Coordinate</parameter>
+        <parameter key="ivory_google_map.coordinate.builder.class">Ivory\GoogleMapBundle\Model\Base\CoordinateBuilder</parameter>
+        <parameter key="ivory_google_map.coordinate.helper.class">Ivory\GoogleMap\Helper\Base\CoordinateHelper</parameter>
+
+        <parameter key="ivory_google_map.bound.class">Ivory\GoogleMap\Base\Bound</parameter>
+        <parameter key="ivory_google_map.bound.builder.class">Ivory\GoogleMapBundle\Model\Base\BoundBuilder</parameter>
+        <parameter key="ivory_google_map.bound.helper.class">Ivory\GoogleMap\Helper\Base\BoundHelper</parameter>
+
+        <parameter key="ivory_google_map.point.class">Ivory\GoogleMap\Base\Point</parameter>
+        <parameter key="ivory_google_map.point.builder.class">Ivory\GoogleMapBundle\Model\Base\PointBuilder</parameter>
+        <parameter key="ivory_google_map.point.helper.class">Ivory\GoogleMap\Helper\Base\PointHelper</parameter>
+
+        <parameter key="ivory_google_map.size.class">Ivory\GoogleMap\Base\Size</parameter>
+        <parameter key="ivory_google_map.size.builder.class">Ivory\GoogleMapBundle\Model\Base\SizeBuilder</parameter>
+        <parameter key="ivory_google_map.size.helper.class">Ivory\GoogleMap\Helper\Base\SizeHelper</parameter>
+    </parameters>
+
+    <services>
+        <!-- Coordinate service -->
+        <service
+            id="ivory_google_map.coordinate"
+            class="%ivory_google_map.coordinate.class%"
+            factory-service="ivory_google_map.coordinate.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.coordinate.builder" class="%ivory_google_map.coordinate.builder.class%">
+            <argument>%ivory_google_map.coordinate.class%</argument>
+        </service>
+
+        <service id="ivory_google_map.helper.coordinate" class="%ivory_google_map.coordinate.helper.class%" public="false" />
+
+        <!-- Bound service -->
+        <service
+            id="ivory_google_map.bound"
+            class="%ivory_google_map.bound.class%"
+            factory-service="ivory_google_map.bound.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.bound.builder" class="%ivory_google_map.bound.builder.class%">
+            <argument>%ivory_google_map.bound.class%</argument>
+            <argument type="service" id="ivory_google_map.coordinate.builder" />
+        </service>
+
+        <service id="ivory_google_map.helper.bound" class="%ivory_google_map.bound.helper.class%" public="false">
+            <argument type="service" id="ivory_google_map.helper.coordinate" />
+        </service>
+
+        <!-- Point service -->
+        <service
+            id="ivory_google_map.point"
+            class="%ivory_google_map.point.class%"
+            factory-service="ivory_google_map.point.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.point.builder" class="%ivory_google_map.point.builder.class%">
+            <argument>%ivory_google_map.point.class%</argument>
+        </service>
+
+        <service id="ivory_google_map.helper.point" class="%ivory_google_map.point.helper.class%" public="false" />
+
+        <!-- Size service -->
+        <service
+            id="ivory_google_map.size"
+            class="%ivory_google_map.size.class%"
+            factory-service="ivory_google_map.size.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.size.builder" class="%ivory_google_map.size.builder.class%">
+            <argument>%ivory_google_map.size.class%</argument>
+        </service>
+
+        <service id="ivory_google_map.helper.size" class="%ivory_google_map.size.helper.class%" public="false" />
+    </services>
+</container>

@@ -1,0 +1,12 @@
+# Composer
+/bin
+/composer.lock
+/vendor
+
+# PHPUnit
+/phpunit.xml
+/clover.xml
+/report
+
+# Coveralls
+/coveralls.json

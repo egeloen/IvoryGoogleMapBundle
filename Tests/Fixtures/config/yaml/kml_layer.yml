@@ -1,0 +1,6 @@
+ivory_google_map:
+    kml_layer:
+        prefix_javascript_variable: "kl"
+        url:                        "url"
+        options:
+            option: "value"

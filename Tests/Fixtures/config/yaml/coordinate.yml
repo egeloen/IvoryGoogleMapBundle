@@ -1,0 +1,6 @@
+ivory_google_map:
+    coordinate:
+        prefix_javascript_variable: "foo"
+        latitude:                   1.1
+        longitude:                  -2.1
+        no_wrap:                    false

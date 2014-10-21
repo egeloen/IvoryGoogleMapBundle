@@ -1,0 +1,9 @@
+ivory_google_map:
+    distance_matrix_request:
+        avoid_highways: true
+        avoid_tolls:    true
+        region:         "es"
+        travel_mode:    "WALKING"
+        unit_system:    "IMPERIAL"
+        language:       "en"
+        sensor:         true

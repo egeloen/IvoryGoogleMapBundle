@@ -1,0 +1,19 @@
+ivory_google_map:
+    geocoder_request:
+        address: "address"
+        coordinate:
+            latitude:  1.1
+            longitude: 2.1
+            no_wrap:   true
+        bound:
+            south_west:
+                latitude:  -3.2
+                longitude: -1.4
+                no_wrap:   true
+            north_east:
+                latitude:  6.3
+                longitude: 2.3
+                no_wrap:   true
+        region:   "es"
+        language: "pl"
+        sensor:   true

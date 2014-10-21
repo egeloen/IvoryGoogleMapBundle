@@ -1,0 +1,10 @@
+ivory_google_map:
+    circle:
+        prefix_javascript_variable: "c"
+        center:
+            latitude:  1.1
+            longitude: 2.1
+            no_wrap:   false
+        radius: 10
+        options:
+            option: "value"

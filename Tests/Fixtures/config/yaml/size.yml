@@ -1,0 +1,7 @@
+ivory_google_map:
+    size:
+        prefix_javascript_variable: "foo"
+        width:                      100.1
+        height:                     200.2
+        width_unit:                 "px"
+        height_unit:                "pt"

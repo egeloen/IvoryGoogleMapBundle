@@ -1,0 +1,14 @@
+ivory_google_map:
+    rectangle:
+        prefix_javascript_variable: "r"
+        bound:
+            south_west:
+                latitude:  -1.1
+                longitude: -2.1
+                no_wrap:   true
+            north_east:
+                latitude:  1.1
+                longitude: 2.1
+                no_wrap:   false
+        options:
+            option: "value"

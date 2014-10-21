@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="ivory_google_map.animation.helper.class">Ivory\GoogleMap\Helper\Overlays\AnimationHelper</parameter>
+
+        <parameter key="ivory_google_map.circle.class">Ivory\GoogleMap\Overlays\Circle</parameter>
+        <parameter key="ivory_google_map.circle.builder.class">Ivory\GoogleMapBundle\Model\Overlays\CircleBuilder</parameter>
+        <parameter key="ivory_google_map.circle.helper.class">Ivory\GoogleMap\Helper\Overlays\CircleHelper</parameter>
+
+        <parameter key="ivory_google_map.encoded_polyline.class">Ivory\GoogleMap\Overlays\EncodedPolyline</parameter>
+        <parameter key="ivory_google_map.encoded_polyline.builder.class">Ivory\GoogleMapBundle\Model\Overlays\EncodedPolylineBuilder</parameter>
+        <parameter key="ivory_google_map.encoded_polyline.helper.class">Ivory\GoogleMap\Helper\Overlays\EncodedPolylineHelper</parameter>
+        <parameter key="ivory_google_map.encoding.helper.class">Ivory\GoogleMap\Helper\Geometry\EncodingHelper</parameter>
+
+        <parameter key="ivory_google_map.ground_overlay.class">Ivory\GoogleMap\Overlays\GroundOverlay</parameter>
+        <parameter key="ivory_google_map.ground_overlay.builder.class">Ivory\GoogleMapBundle\Model\Overlays\GroundOverlayBuilder</parameter>
+        <parameter key="ivory_google_map.ground_overlay.helper.class">Ivory\GoogleMap\Helper\Overlays\GroundOverlayHelper</parameter>
+
+        <parameter key="ivory_google_map.info_window.class">Ivory\GoogleMap\Overlays\InfoWindow</parameter>
+        <parameter key="ivory_google_map.info_window.builder.class">Ivory\GoogleMapBundle\Model\Overlays\InfoWindowBuilder</parameter>
+        <parameter key="ivory_google_map.info_window.helper.class">Ivory\GoogleMap\Helper\Overlays\InfoWindowHelper</parameter>
+
+        <parameter key="ivory_google_map.marker_cluster.class">Ivory\GoogleMap\Overlays\MarkerCluster</parameter>
+        <parameter key="ivory_google_map.marker_cluster.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerClusterBuilder</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\MarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.abstract.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\AbstractMarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.default.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\DefaultMarkerClusterHelper</parameter>
+        <parameter key="ivory_google_map.marker_cluster.helper.js.class">Ivory\GoogleMap\Helper\Overlays\MarkerCluster\JsMarkerClusterHelper</parameter>
+
+        <parameter key="ivory_google_map.marker.class">Ivory\GoogleMap\Overlays\Marker</parameter>
+        <parameter key="ivory_google_map.marker.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerBuilder</parameter>
+        <parameter key="ivory_google_map.marker.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerHelper</parameter>
+
+        <parameter key="ivory_google_map.marker_image.class">Ivory\GoogleMap\Overlays\MarkerImage</parameter>
+        <parameter key="ivory_google_map.marker_image.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerImageBuilder</parameter>
+        <parameter key="ivory_google_map.marker_image.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerImageHelper</parameter>
+
+        <parameter key="ivory_google_map.marker_shape.class">Ivory\GoogleMap\Overlays\MarkerShape</parameter>
+        <parameter key="ivory_google_map.marker_shape.builder.class">Ivory\GoogleMapBundle\Model\Overlays\MarkerShapeBuilder</parameter>
+        <parameter key="ivory_google_map.marker_shape.helper.class">Ivory\GoogleMap\Helper\Overlays\MarkerShapeHelper</parameter>
+
+        <parameter key="ivory_google_map.polygon.class">Ivory\GoogleMap\Overlays\Polygon</parameter>
+        <parameter key="ivory_google_map.polygon.builder.class">Ivory\GoogleMapBundle\Model\Overlays\PolygonBuilder</parameter>
+        <parameter key="ivory_google_map.polygon.helper.class">Ivory\GoogleMap\Helper\Overlays\PolygonHelper</parameter>
+
+        <parameter key="ivory_google_map.polyline.class">Ivory\GoogleMap\Overlays\Polyline</parameter>
+        <parameter key="ivory_google_map.polyline.builder.class">Ivory\GoogleMapBundle\Model\Overlays\PolylineBuilder</parameter>
+        <parameter key="ivory_google_map.polyline.helper.class">Ivory\GoogleMap\Helper\Overlays\PolylineHelper</parameter>
+
+        <parameter key="ivory_google_map.rectangle.class">Ivory\GoogleMap\Overlays\Rectangle</parameter>
+        <parameter key="ivory_google_map.rectangle.builder.class">Ivory\GoogleMapBundle\Model\Overlays\RectangleBuilder</parameter>
+        <parameter key="ivory_google_map.rectangle.helper.class">Ivory\GoogleMap\Helper\Overlays\RectangleHelper</parameter>
+    </parameters>
+
+    <services>
+        <!-- Animation service -->
+        <service
+            id="ivory_google_map.helper.animation"
+            class="%ivory_google_map.animation.helper.class%"
+            public="false"
+        />
+
+        <!-- Circle service -->
+        <service
+            id="ivory_google_map.circle"
+            class="%ivory_google_map.circle.class%"
+            factory-service="ivory_google_map.circle.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.circle.builder" class="%ivory_google_map.circle.builder.class%">
+            <argument>%ivory_google_map.circle.class%</argument>
+            <argument type="service" id="ivory_google_map.coordinate.builder" />
+        </service>
+
+        <service id="ivory_google_map.helper.circle" class="%ivory_google_map.circle.helper.class%" public="false" />
+
+        <!-- Encoded polyline service -->
+        <service
+            id="ivory_google_map.encoded_polyline"
+            class="%ivory_google_map.encoded_polyline.class%"
+            factory-service="ivory_google_map.encoded_polyline.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service
+            id="ivory_google_map.encoded_polyline.builder"
+            class="%ivory_google_map.encoded_polyline.builder.class%"
+        >
+            <argument>%ivory_google_map.encoded_polyline.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.encoded_polyline"
+            class="%ivory_google_map.encoded_polyline.helper.class%"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.encoding" />
+        </service>
+
+        <service
+            id="ivory_google_map.helper.encoding"
+            class="%ivory_google_map.encoding.helper.class%"
+            public="false"
+        />
+
+        <!-- Ground overlay service -->
+        <service
+            id="ivory_google_map.ground_overlay"
+            class="%ivory_google_map.ground_overlay.class%"
+            factory-service="ivory_google_map.ground_overlay.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.ground_overlay.builder" class="%ivory_google_map.ground_overlay.builder.class%">
+            <argument>%ivory_google_map.ground_overlay.class%</argument>
+            <argument type="service" id="ivory_google_map.bound.builder" />
+        </service>
+
+        <service
+            id="ivory_google_map.helper.ground_overlay"
+            class="%ivory_google_map.ground_overlay.helper.class%"
+            public="false"
+        />
+
+        <!-- Info window service -->
+        <service
+            id="ivory_google_map.info_window"
+            class="%ivory_google_map.info_window.class%"
+            factory-service="ivory_google_map.info_window.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.info_window.builder" class="%ivory_google_map.info_window.builder.class%">
+            <argument>%ivory_google_map.info_window.class%</argument>
+            <argument type="service" id="ivory_google_map.coordinate.builder" />
+            <argument type="service" id="ivory_google_map.size.builder" />
+        </service>
+
+        <service
+            id="ivory_google_map.helper.info_window"
+            class="%ivory_google_map.info_window.helper.class%"
+            public="false"
+        />
+
+        <!-- Marker cluster service -->
+        <service
+            id="ivory_google_map.marker_cluster"
+            class="%ivory_google_map.marker_cluster.class%"
+            factory-service="ivory_google_map.marker_cluster.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.marker_cluster.builder" class="%ivory_google_map.marker_cluster.builder.class%">
+            <argument>%ivory_google_map.marker_cluster.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.marker_cluster"
+            class="%ivory_google_map.marker_cluster.helper.class%"
+            public="false"
+        >
+            <argument type="collection">
+                <argument key="default" type="service" id="ivory_google_map.marker_cluster.helper.default" />
+                <argument key="marker_cluster" type="service" id="ivory_google_map.marker_cluster.helper.js" />
+            </argument>
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.abstract"
+            class="%ivory_google_map.marker_cluster.helper.abstract.class%"
+            abstract="true"
+        >
+            <argument type="service" id="ivory_google_map.helper.marker" />
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.default"
+            class="%ivory_google_map.marker_cluster.helper.default.class%"
+            parent="ivory_google_map.marker_cluster.helper.abstract"
+            public="false"
+        >
+            <argument type="service" id="ivory_google_map.helper.info_window" />
+        </service>
+
+        <service
+            id="ivory_google_map.marker_cluster.helper.js"
+            class="%ivory_google_map.marker_cluster.helper.js.class%"
+            parent="ivory_google_map.marker_cluster.helper.default"
+            public="false"
+        />
+
+        <!-- Marker service -->
+        <service
+            id="ivory_google_map.marker"
+            class="%ivory_google_map.marker.class%"
+            factory-service="ivory_google_map.marker.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.marker.builder" class="%ivory_google_map.marker.builder.class%">
+            <argument>%ivory_google_map.marker.class%</argument>
+            <argument type="service" id="ivory_google_map.coordinate.builder" />
+        </service>
+
+        <service id="ivory_google_map.helper.marker" class="%ivory_google_map.marker.helper.class%" public="false">
+            <argument type="service" id="ivory_google_map.helper.animation" />
+        </service>
+
+        <!-- Marker image service -->
+        <service
+            id="ivory_google_map.marker_image"
+            class="%ivory_google_map.marker_image.class%"
+            factory-service="ivory_google_map.marker_image.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.marker_image.builder" class="%ivory_google_map.marker_image.builder.class%">
+            <argument>%ivory_google_map.marker_image.class%</argument>
+            <argument type="service" id="ivory_google_map.point.builder" />
+            <argument type="service" id="ivory_google_map.size.builder" />
+        </service>
+
+        <service
+            id="ivory_google_map.helper.marker_image"
+            class="%ivory_google_map.marker_image.helper.class%"
+            public="false"
+        />
+
+        <!-- Marker shape service -->
+        <service
+            id="ivory_google_map.marker_shape"
+            class="%ivory_google_map.marker_shape.class%"
+            factory-service="ivory_google_map.marker_shape.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.marker_shape.builder" class="%ivory_google_map.marker_shape.builder.class%">
+            <argument>%ivory_google_map.marker_shape.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.marker_shape"
+            class="%ivory_google_map.marker_shape.helper.class%"
+            public="false"
+        />
+
+        <!-- Polygon service -->
+        <service
+            id="ivory_google_map.polygon"
+            class="%ivory_google_map.polygon.class%"
+            factory-service="ivory_google_map.polygon.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.polygon.builder" class="%ivory_google_map.polygon.builder.class%">
+            <argument>%ivory_google_map.polygon.class%</argument>
+        </service>
+
+        <service id="ivory_google_map.helper.polygon" class="%ivory_google_map.polygon.helper.class%" public="false" />
+
+        <!-- Polyline service -->
+        <service
+            id="ivory_google_map.polyline"
+            class="%ivory_google_map.polyline.class%"
+            factory-service="ivory_google_map.polyline.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.polyline.builder" class="%ivory_google_map.polyline.builder.class%">
+            <argument>%ivory_google_map.polyline.class%</argument>
+        </service>
+
+        <service
+            id="ivory_google_map.helper.polyline"
+            class="%ivory_google_map.polyline.helper.class%"
+            public="false"
+        />
+
+        <!-- Rectangle service -->
+        <service
+            id="ivory_google_map.rectangle"
+            class="%ivory_google_map.rectangle.class%"
+            factory-service="ivory_google_map.rectangle.builder"
+            factory-method="build"
+            scope="prototype"
+        />
+
+        <service id="ivory_google_map.rectangle.builder" class="%ivory_google_map.rectangle.builder.class%">
+            <argument>%ivory_google_map.rectangle.class%</argument>
+            <argument type="service" id="ivory_google_map.bound.builder" />
+        </service>
+
+        <service
+            id="ivory_google_map.helper.rectangle"
+            class="%ivory_google_map.rectangle.helper.class%"
+            public="false"
+        />
+    </services>
+</container>

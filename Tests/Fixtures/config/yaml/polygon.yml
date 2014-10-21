@@ -1,0 +1,5 @@
+ivory_google_map:
+    polygon:
+        prefix_javascript_variable: "p"
+        options:
+            option: "value"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Ivory\GoogleMapBundle\Entity\Circle" table="ivory_circle">
+        <field name="javascriptVariable" column="javascript_variable" type="string" length="100" />
+        <field name="radius" type="float" />
+        <field name="options" type="array" />
+    </mapped-superclass>
+
+</doctrine-mapping>

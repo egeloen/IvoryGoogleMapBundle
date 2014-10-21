@@ -1,0 +1,10 @@
+ivory_google_map:
+    marker:
+        prefix_javascript_variable: "m"
+        position:
+            latitude:  1.1
+            longitude: -2.1
+            no_wrap:   false
+        animation: "drop"
+        options:
+            option: "value"

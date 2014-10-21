@@ -1,0 +1,11 @@
+ivory_google_map:
+    directions_request:
+        avoid_highways:             true
+        avoid_tolls:                true
+        optimize_waypoints:         true
+        provide_route_alternatives: true
+        region:                     "es"
+        travel_mode:                "WALKING"
+        language:                   "en"
+        unit_system:                "IMPERIAL"
+        sensor:                     true
