@@ -160,8 +160,6 @@ class PlacesAutocompleteType extends AbstractType
         $autocomplete->setInputId($view->vars['id']);
         $autocomplete->setValue($view->vars['value']);
         $autocomplete->setInputAttribute('name', $view->vars['full_name']);
-
-
         $autocomplete->setInputAttribute('placeholder',
             $this->getTranslator()->trans($view->vars['attr']['placeholder'],
             array(),

@@ -17,7 +17,6 @@
             <argument type="service" id="ivory_google_map.places_autocomplete.helper" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="translator" />
-
             <tag name="form.type" alias="places_autocomplete" />
         </service>
 

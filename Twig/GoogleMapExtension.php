@@ -23,7 +23,7 @@ use Twig_SimpleFunction;
 class GoogleMapExtension extends \Twig_Extension
 {
     /** @var \Ivory\GoogleMapBundle\Helper\TemplateHelper */
-    protected $templatßeHelper;
+    protected $templateHelper;
 
     /**
      * Create the google map twig extension.
