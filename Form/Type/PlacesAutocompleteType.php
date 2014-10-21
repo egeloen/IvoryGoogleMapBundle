@@ -160,11 +160,17 @@ class PlacesAutocompleteType extends AbstractType
         $autocomplete->setInputId($view->vars['id']);
         $autocomplete->setValue($view->vars['value']);
         $autocomplete->setInputAttribute('name', $view->vars['full_name']);
-        $autocomplete->setInputAttribute('placeholder',
-            $this->getTranslator()->trans($view->vars['attr']['placeholder'],
-            array(),
-            $view->vars['translation_domain']
-        ));
+
+        if(isset($view->vars['attr']['placeholder'])) {
+            $autocomplete->setInputAttribute('placeholder',
+                $this->getTranslator()->trans($view->vars['attr']['placeholder'],
+                array(),
+                $view->vars['translation_domain']
+            ));
+        } else {
+            $autocomplete->setInputAttribute('placeholder', null);
+        }
+
         $view->vars['html'] = $this->getAutocompleteHelper()->renderHtmlContainer($autocomplete);
         $view->vars['javascripts'] = $this->getAutocompleteHelper()->renderJavascripts($autocomplete);
     }
