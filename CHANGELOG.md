@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 2.2.1 (????-??-??)
+### 2.2.1 (2014-10-30)
 
  * bd82776 - [Composer] Refine deps
  * 47fbb10 - Rename MarkerImage.xml to MarkerImage.orm.xml
