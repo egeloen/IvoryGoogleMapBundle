@@ -4,32 +4,20 @@
 
 Require the bundle in your composer.json file:
 
-```
-{
-    "require": {
-        "egeloen/google-map-bundle": "~2.1",
-    }
-}
+```sh
+composer require egeloen/google-map-bundle: ~2.1
 ```
 
 If you want to use Geocoding stuff, you will need [Geocoder](http://github.com/willdurand/Geocoder):
 
-```
-{
-    "require": {
-        "willdurand/geocoder": "*"
-    }
-}
+```sh
+composer require willdurand/geocoder
 ```
 
 If you want to use Directions or Distance Matrix stuff, you will need an [http adapter](http://github.com/widop/WidopHttpAdapterBundle):
 
-```
-{
-    "require": {
-        "widop/http-adapter-bundle": "1.1.*"
-    }
-}
+```sh
+composer require widop/http-adapter-bundle
 ```
 
 Register the bundle:
