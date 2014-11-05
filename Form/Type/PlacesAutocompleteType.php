@@ -17,8 +17,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 
 /**
  * Google Map places autocomplete type.
@@ -30,19 +31,44 @@ class PlacesAutocompleteType extends AbstractType
     /** @var \Ivory\GoogleMap\Helper\Places\AutocompleteHelper */
     protected $autocompleteHelper;
 
-    /** @var \Symfony\Component\HttpFoundation\Request */
-    protected $request;
+    /** @var \Symfony\Component\HttpFoundation\RequestStack */
+    protected $requestStack;
+
+    /** @var \Symfony\Bundle\FrameworkBundle\Translation\Translator */
+    protected $translator;
 
     /**
      * Creates a places autocomplete form type.
      *
      * @param \Ivory\GoogleMap\Helper\Places\AutocompleteHelper $autocompleteHelper The autocomplete helper.
-     * @param \Ivory\GoogleMapBundle\Form\Type\Request          $request            The http request.
+     * @param \Ivory\GoogleMapBundle\Form\Type\RequestStack     $requestStack       The http request stack.
+     * @param \Symfony\Bundle\FrameworkBundle\Translation\Translator         $translator         the translator component.
      */
-    public function __construct(AutocompleteHelper $autocompleteHelper, Request $request)
+    public function __construct(AutocompleteHelper $autocompleteHelper, RequestStack $requestStack, Translator $translator)
     {
         $this->setAutocompleteHelper($autocompleteHelper);
-        $this->setRequest($request);
+        $this->setRequestStack($requestStack);
+        $this->setTranslator($translator);
+    }
+
+    /**
+     * Gets the translator
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator the translator compoment
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * Sets the translator
+     *
+     * @param \Symfony\Bundle\FrameworkBundle\Translation\Translator $translator the translator
+     */
+    public function setTranslator($translator)
+    {
+        $this->translator = $translator;
     }
 
     /**
@@ -66,23 +92,23 @@ class PlacesAutocompleteType extends AbstractType
     }
 
     /**
-     * Gets the http request.
+     * Gets the http request stack.
      *
-     * @return \Symfony\Component\HttpFoundation\Request The http request.
+     * @return \Symfony\Component\HttpFoundation\RequestStack The http request stack.
      */
-    public function getRequest()
+    public function getRequestStack()
     {
-        return $this->request;
+        return $this->requestStack;
     }
 
     /**
-     * Sets the http request.
+     * Sets the http request stack.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request The http request.
+     * @param \Symfony\Component\HttpFoundation\Request $requestStack The http request stack.
      */
-    public function setRequest(Request $request)
+    public function setRequestStack(RequestStack $requestStack)
     {
-        $this->request = $request;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -129,10 +155,21 @@ class PlacesAutocompleteType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+
         $autocomplete = $form->getConfig()->getAttribute('autocomplete');
         $autocomplete->setInputId($view->vars['id']);
         $autocomplete->setValue($view->vars['value']);
         $autocomplete->setInputAttribute('name', $view->vars['full_name']);
+
+        if(isset($view->vars['attr']['placeholder'])) {
+            $autocomplete->setInputAttribute('placeholder',
+                $this->getTranslator()->trans($view->vars['attr']['placeholder'],
+                array(),
+                $view->vars['translation_domain']
+            ));
+        } else {
+            $autocomplete->setInputAttribute('placeholder', null);
+        }
 
         $view->vars['html'] = $this->getAutocompleteHelper()->renderHtmlContainer($autocomplete);
         $view->vars['javascripts'] = $this->getAutocompleteHelper()->renderJavascripts($autocomplete);
@@ -149,7 +186,7 @@ class PlacesAutocompleteType extends AbstractType
             'types'                  => array(),
             'component_restrictions' => array(),
             'async'                  => false,
-            'language'               => $this->getRequest()->getLocale(),
+            'language'               => $this->getRequestStack()->getMasterRequest()->getLocale(),
         ));
 
         $resolver->setAllowedTypes(array(

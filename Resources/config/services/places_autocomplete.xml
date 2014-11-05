@@ -13,11 +13,10 @@
         <service
             id="ivory_google_map.places_autocomplete.form.type"
             class="%ivory_google_map.places_autocomplete.form.type.class%"
-            scope="request"
         >
             <argument type="service" id="ivory_google_map.places_autocomplete.helper" />
-            <argument type="service" id="request" />
-
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="translator" />
             <tag name="form.type" alias="places_autocomplete" />
         </service>
 
