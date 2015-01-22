@@ -5,7 +5,7 @@
 Require the bundle in your composer.json file:
 
 ```sh
-composer require egeloen/google-map-bundle: ~2.1
+composer require egeloen/google-map-bundle ~2.1
 ```
 
 If you want to use Geocoding stuff, you will need [Geocoder](http://github.com/willdurand/Geocoder):
