@@ -139,7 +139,7 @@ This function renders an html javascript block with all code needed for displayi
 </script>
 ```
 
-Additionally, the bundle allows you to add/render your own javascript libraires and append some code just before or
+Additionally, the bundle allows you to add/render your own javascript libraries and append some code just before or
 after the generated code through extensions. If you want to learn more about that, you can read this
 [documentation](http://github.com/egeloen/IvoryGoogleMapBundle/blob/master/Resources/doc/usage/helper/extension.md).
 
