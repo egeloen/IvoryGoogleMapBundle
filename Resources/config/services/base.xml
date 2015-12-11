@@ -27,10 +27,10 @@
         <service
             id="ivory_google_map.coordinate"
             class="%ivory_google_map.coordinate.class%"
-            factory-service="ivory_google_map.coordinate.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.coordinate.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.coordinate.builder" class="%ivory_google_map.coordinate.builder.class%">
             <argument>%ivory_google_map.coordinate.class%</argument>
@@ -42,10 +42,10 @@
         <service
             id="ivory_google_map.bound"
             class="%ivory_google_map.bound.class%"
-            factory-service="ivory_google_map.bound.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.bound.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.bound.builder" class="%ivory_google_map.bound.builder.class%">
             <argument>%ivory_google_map.bound.class%</argument>
@@ -60,10 +60,10 @@
         <service
             id="ivory_google_map.point"
             class="%ivory_google_map.point.class%"
-            factory-service="ivory_google_map.point.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.point.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.point.builder" class="%ivory_google_map.point.builder.class%">
             <argument>%ivory_google_map.point.class%</argument>
@@ -75,10 +75,10 @@
         <service
             id="ivory_google_map.size"
             class="%ivory_google_map.size.class%"
-            factory-service="ivory_google_map.size.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.size.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.size.builder" class="%ivory_google_map.size.builder.class%">
             <argument>%ivory_google_map.size.class%</argument>

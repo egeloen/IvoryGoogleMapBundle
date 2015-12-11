@@ -16,10 +16,10 @@
         <service
             id="ivory_google_map.distance_matrix_request"
             class="%ivory_google_map.distance_matrix_request.class%"
-            factory-service="ivory_google_map.distance_matrix_request.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.distance_matrix_request.builder" method="build" />
+        </service>
 
         <service
             id="ivory_google_map.distance_matrix_request.builder"
