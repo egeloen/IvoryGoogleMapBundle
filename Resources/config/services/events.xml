@@ -18,10 +18,10 @@
         <service
             id="ivory_google_map.event_manager"
             class="%ivory_google_map.event_manager.class%"
-            factory-service="ivory_google_map.event_manager.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.event_manager.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.event_manager.builder" class="%ivory_google_map.event_manager.builder.class%">
             <argument>%ivory_google_map.event_manager.class%</argument>
@@ -37,10 +37,10 @@
         <service
             id="ivory_google_map.event"
             class="%ivory_google_map.event.class%"
-            factory-service="ivory_google_map.event.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.event.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.event.builder" class="%ivory_google_map.event.builder.class%">
             <argument>%ivory_google_map.event.class%</argument>

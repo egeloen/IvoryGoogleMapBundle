@@ -17,10 +17,10 @@
         <service
             id="ivory_google_map.map"
             class="%ivory_google_map.map.class%"
-            factory-service="ivory_google_map.map.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.map.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.map.builder" class="%ivory_google_map.map.builder.class%">
             <argument>%ivory_google_map.map.class%</argument>

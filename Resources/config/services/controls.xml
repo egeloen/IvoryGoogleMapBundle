@@ -44,10 +44,10 @@
         <service
             id="ivory_google_map.map_type_control"
             class="%ivory_google_map.map_type_control.class%"
-            factory-service="ivory_google_map.map_type_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.map_type_control.builder" method="build" />
+        </service>
 
         <service
             id="ivory_google_map.map_type_control.builder"
@@ -70,10 +70,10 @@
         <service
             id="ivory_google_map.overview_map_control"
             class="%ivory_google_map.overview_map_control.class%"
-            factory-service="ivory_google_map.overview_map_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.overview_map_control.builder" method="build" />
+        </service>
 
         <service
             id="ivory_google_map.overview_map_control.builder"
@@ -92,10 +92,10 @@
         <service
             id="ivory_google_map.pan_control"
             class="%ivory_google_map.pan_control.class%"
-            factory-service="ivory_google_map.pan_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.pan_control.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.pan_control.builder" class="%ivory_google_map.pan_control.builder.class%">
             <argument>%ivory_google_map.pan_control.class%</argument>
@@ -113,10 +113,10 @@
         <service
             id="ivory_google_map.rotate_control"
             class="%ivory_google_map.rotate_control.class%"
-            factory-service="ivory_google_map.rotate_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.rotate_control.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.rotate_control.builder" class="%ivory_google_map.rotate_control.builder.class%">
             <argument>%ivory_google_map.rotate_control.class%</argument>
@@ -134,10 +134,10 @@
         <service
             id="ivory_google_map.scale_control"
             class="%ivory_google_map.scale_control.class%"
-            factory-service="ivory_google_map.scale_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.scale_control.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.scale_control.builder" class="%ivory_google_map.scale_control.builder.class%">
             <argument>%ivory_google_map.scale_control.class%</argument>
@@ -156,10 +156,10 @@
         <service
             id="ivory_google_map.street_view_control"
             class="%ivory_google_map.street_view_control.class%"
-            factory-service="ivory_google_map.street_view_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.street_view_control.builder" method="build" />
+        </service>
 
         <service
             id="ivory_google_map.street_view_control.builder"
@@ -180,10 +180,10 @@
         <service
             id="ivory_google_map.zoom_control"
             class="%ivory_google_map.zoom_control.class%"
-            factory-service="ivory_google_map.zoom_control.builder"
-            factory-method="build"
-            scope="prototype"
-        />
+            shared="false"
+        >
+            <factory service="ivory_google_map.zoom_control.builder" method="build" />
+        </service>
 
         <service id="ivory_google_map.zoom_control.builder" class="%ivory_google_map.zoom_control.builder.class%">
             <argument>%ivory_google_map.zoom_control.class%</argument>
