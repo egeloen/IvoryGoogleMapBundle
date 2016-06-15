@@ -57,6 +57,9 @@ class MapBuilder extends AbstractBuilder
     /** @var array */
     protected $stylesheetOptions;
 
+    /** @var string */
+    protected $apiKey;
+
     /**
      * Creates a map builder.
      *
@@ -382,6 +385,24 @@ class MapBuilder extends AbstractBuilder
     }
 
     /**
+     * Gets the Browser API Key
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * Sets the Browser API Key
+     * @param string $apiKey
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function reset()
@@ -396,6 +417,7 @@ class MapBuilder extends AbstractBuilder
         $this->bound = array();
         $this->mapOptions = array();
         $this->stylesheetOptions = array();
+        $this->apiKey = null;
 
         return $this;
     }
@@ -454,6 +476,10 @@ class MapBuilder extends AbstractBuilder
 
         if (!empty($this->stylesheetOptions)) {
             $map->setStylesheetOptions($this->stylesheetOptions);
+        }
+
+        if ($this->apiKey !== null) {
+            $map->setApiKey($this->apiKey);
         }
 
         return $map;
