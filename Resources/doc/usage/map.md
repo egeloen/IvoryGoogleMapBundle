@@ -80,6 +80,9 @@ ivory_google_map:
 
         # google map Api language, default en
         language: en
+
+        # google map Browser Api Key
+        api_key: ~
 ```
 
 ``` php

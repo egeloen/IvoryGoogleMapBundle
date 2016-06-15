@@ -192,6 +192,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('width')->end()
                         ->scalarNode('height')->end()
                         ->scalarNode('language')->end()
+                        ->scalarNode('api_key')->end()
                         ->arrayNode('map_options')
                             ->useAttributeAsKey('map_options')
                             ->prototype('scalar')->end()
