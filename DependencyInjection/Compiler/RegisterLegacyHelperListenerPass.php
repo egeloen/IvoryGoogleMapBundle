@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\RegisterListenersPass;
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class LegacyRegisterHelperListenerPass extends RegisterListenersPass
+class RegisterLegacyHelperListenerPass extends RegisterListenersPass
 {
     public function __construct()
     {

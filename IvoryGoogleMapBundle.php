@@ -12,7 +12,8 @@
 namespace Ivory\GoogleMapBundle;
 
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\CleanTemplatingPass;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\LegacyRegisterHelperListenerPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterFormResourcePass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterLegacyHelperListenerPass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterControlRendererPass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterExtendableRendererPass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterHelperListenerPass;
@@ -33,12 +34,13 @@ class IvoryGoogleMapBundle extends Bundle
         $container
             ->addCompilerPass(new CleanTemplatingPass())
             ->addCompilerPass(new RegisterControlRendererPass())
-            ->addCompilerPass(new RegisterExtendableRendererPass());
+            ->addCompilerPass(new RegisterExtendableRendererPass())
+            ->addCompilerPass(new RegisterFormResourcePass());
 
         if (class_exists(RegisterListenersPass::class)) {
             $container->addCompilerPass(new RegisterHelperListenerPass());
         } else {
-            $container->addCompilerPass(new LegacyRegisterHelperListenerPass());
+            $container->addCompilerPass(new RegisterLegacyHelperListenerPass());
         }
     }
 }

@@ -95,6 +95,16 @@ class PlacesAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($components, $autocomplete->getComponents());
     }
 
+    public function testLibraries()
+    {
+        $form = $this->createForm(null, ['libraries' => $libraries = ['drawing']]);
+        $view = $form->createView();
+
+        $this->assertArrayHasKey('autocomplete', $view->vars);
+        $this->assertInstanceOf(Autocomplete::class, $autocomplete = $view->vars['autocomplete']);
+        $this->assertSame($libraries, $autocomplete->getLibraries());
+    }
+
     public function testInitialValue()
     {
         $form = $this->createForm($value = 'foo');
