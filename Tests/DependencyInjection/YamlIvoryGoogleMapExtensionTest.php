@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
- * Yaml Ivory Google Map extension test.
- *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class YamlIvoryGoogleMapExtensionTest extends AbstractIvoryGoogleMapExtensionTest
@@ -27,7 +25,7 @@ class YamlIvoryGoogleMapExtensionTest extends AbstractIvoryGoogleMapExtensionTes
      */
     protected function loadConfiguration(ContainerBuilder $container, $configuration)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Fixtures/config/yaml/'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Fixtures/Config/Yaml'));
         $loader->load($configuration.'.yml');
     }
 }

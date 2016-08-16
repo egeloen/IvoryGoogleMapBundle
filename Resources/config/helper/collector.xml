@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="ivory.google_map.helper.collector.base.bound"
+            class="Ivory\GoogleMap\Helper\Collector\Base\BoundCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.ground_overlay" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.rectangle" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.base.coordinate"
+            class="Ivory\GoogleMap\Helper\Collector\Base\CoordinateCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.base.bound" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.circle" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.polygon" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.polyline" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.base.point"
+            class="Ivory\GoogleMap\Helper\Collector\Base\PointCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.base.size"
+            class="Ivory\GoogleMap\Helper\Collector\Base\SizeCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.icon" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.event.dom_event"
+            class="Ivory\GoogleMap\Helper\Collector\Event\DomEventCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.event.dom_event_once"
+            class="Ivory\GoogleMap\Helper\Collector\Event\DomEventOnceCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.event.event"
+            class="Ivory\GoogleMap\Helper\Collector\Event\EventCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.event.event_once"
+            class="Ivory\GoogleMap\Helper\Collector\Event\EventOnceCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.layer.geo_json"
+            class="Ivory\GoogleMap\Helper\Collector\Layer\GeoJsonLayerCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.layer.kml"
+            class="Ivory\GoogleMap\Helper\Collector\Layer\KmlLayerCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.circle"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\CircleCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.encoded_polyline"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\EncodedPolylineCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.extendable"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\ExtendableCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.ground_overlay"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\GroundOverlayCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.icon"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\IconCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.info_box"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\InfoBoxCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.info_window"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\InfoWindowCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.info_window.default"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\DefaultInfoWindowCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.marker"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\MarkerCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.polygon"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\PolygonCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.polyline"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\PolylineCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.rectangle"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\RectangleCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.base.bound"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Base\AutocompleteBoundCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.base.coordinate"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Base\AutocompleteCoordinateCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.base.bound" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteDomEventCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event_once"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteDomEventOnceCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.event.event"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteEventCollector"
+        />
+
+        <service
+            id="ivory.google_map.helper.collector.place.autocomplete.event.event_once"
+            class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteEventOnceCollector"
+        />
+    </services>
+</container>

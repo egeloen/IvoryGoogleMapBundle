@@ -1,129 +1,63 @@
 # Installation
 
-## Symfony >= 2.1
+To install the Ivory Google Map bundle, you will need [Composer](http://getcomposer.org).  It's a PHP 5.3+ dependency 
+manager which allows you to declare the dependent libraries your project needs and it will install & autoload them for 
+you.
 
-Require the bundle in your composer.json file:
+## Set up Composer
 
-```sh
-composer require egeloen/google-map-bundle: ~2.1
-```
-
-If you want to use Geocoding stuff, you will need [Geocoder](http://github.com/willdurand/Geocoder):
-
-```sh
-composer require willdurand/geocoder
-```
-
-If you want to use Directions or Distance Matrix stuff, you will need an [http adapter](http://github.com/widop/WidopHttpAdapterBundle):
-
-```sh
-composer require widop/http-adapter-bundle
-```
-
-Register the bundle:
-
-If you use Directions or Distance Matrix stuff, don't forget to register the Wid'op http adapter bundle too.
-
-``` php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    return array(
-        new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-        // ...
-    );
-}
-```
-
-Install the bundle:
-
-```
-$ composer update
-```
-
-## Symfony 2.0.*
-
-Add Ivory Google Map bundle & library to your deps file:
-
-```
-[IvoryGoogleMapBundle]
-    git=http://github.com/egeloen/IvoryGoogleMapBundle.git
-    target=bundles/Ivory/GoogleMapBundle
-    version=2.0.3
-
-[ivory-google-map]
-    git=http://github.com/egeloen/ivory-google-map.git
-```
-
-Autoload the Ivory Google Map bundle & library namespaces:
-
-``` php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    'Ivory\\GoogleMap'       => __DIR__.'/../vendor/ivory-google-map/src',
-    'Ivory\\GoogleMapBundle' => __DIR__.'/../vendor/bundles',
-    // ...
-);
-```
-
-If you want to use Geocoding stuff, you will need [Geocoder](http://github.com/willdurand/Geocoder):
-
-```
-[geocoder]
-    git=http://github.com/willdurand/Geocoder.git
-```
-
-``` php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    'Geocoder' => __DIR__.'/../vendor/geocoder/src',
-    // ...
-);
-```
-
-If you want to use Directions or Distance Matrix stuff, you will need an [http adapter](http://github.com/widop/WidopHttpAdapterBundle):
-
-```
-[http-adapter]
-    git=http://github.com/widop/http-adapter.git
-    version=1.0.2
-
-[http-adapter-bundle]
-    git=http://github.com/widop/WidopHttpAdapterBundle.git
-    target=bundles/Widop/HttpAdapterBundle
-    version=1.1.0
-```
-
-``` php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    'Widop\\HttpAdapter' => __DIR__.'/../vendor/http-adapter/src',
-    // ...
-);
-```
-
-Register the bundle:
-
-``` php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    return array(
-        new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-        // ...
-    );
-}
-```
-
-Run the vendors script:
+Composer comes with a simple phar file. To easily access it from anywhere on your system, you can execute:
 
 ``` bash
-$ php bin/vendors install
+$ curl -s https://getcomposer.org/installer | php
+$ sudo mv composer.phar /usr/local/bin/composer
 ```
 
-Be aware that the Symfony 2.0 version of this bundle is no longer maintained.
+## Download the bundle
+
+Require the library in your `composer.json` file:
+
+``` bash
+$ composer require egeloen/google-map-bundle
+```
+
+## Download additional libraries
+
+If you want to use the Geocoder service, you will need [Geocoder](http://github.com/willdurand/Geocoder):
+
+``` bash
+$ composer require willdurand/geocoder
+```
+
+If you want to use the [Directions](/doc/service/geocoder/directions.md), 
+[Distance Matrix](/doc/service/geocoder/distance-matrix.md) or 
+[Geocoder](/doc/service/geocoder/geocoder.md) services, you will need an http client and message factory via 
+[Httplug](http://httplug.io/) which is an http client abstraction library. It also provides a bundle, so let's install 
+it to ease our life:
+
+``` bash
+$ composer require php-http/guzzle6-adapter
+$ composer require php-http/message
+```
+
+Here, I have chosen to use [Guzzle6](http://docs.guzzlephp.org/en/latest/psr7.html) but since Httplug supports the 
+most popular http clients, you can install your preferred one instead.
+
+## Register the bundle
+
+Add the bundle in your `AppKernel`:
+
+``` php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    return [
+        // ...
+        new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+        
+        // Optionally
+        new Http\HttplugBundle\HttplugBundle(),
+    ];
+}
+```

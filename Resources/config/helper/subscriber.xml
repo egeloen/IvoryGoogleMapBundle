@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="ivory.google_map.helper.subscriber.abstract"
+            class="Ivory\GoogleMap\Helper\Subscriber\AbstractSubscriber"
+            abstract="true"
+        >
+            <argument type="service" id="ivory.google_map.helper.formatter" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.api_javascript"
+            class="Ivory\GoogleMap\Helper\Subscriber\ApiJavascriptSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.api" />
+            <argument type="service" id="ivory.google_map.helper.renderer.html.javascript_tag" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.base"
+            class="Ivory\GoogleMap\Helper\Subscriber\Base\BaseSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.base.bound"
+            class="Ivory\GoogleMap\Helper\Subscriber\Base\BoundSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.base.bound" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.bound" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.base.coordinate"
+            class="Ivory\GoogleMap\Helper\Subscriber\Base\CoordinateSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.base.coordinate" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.coordinate" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.base.point"
+            class="Ivory\GoogleMap\Helper\Subscriber\Base\PointSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.base.point" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.point" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.base.size"
+            class="Ivory\GoogleMap\Helper\Subscriber\Base\SizeSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.base.size" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.size" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Event\EventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.event.dom_event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Event\DomEventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.event.dom_event" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.dom_event" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.event.dom_event_once"
+            class="Ivory\GoogleMap\Helper\Subscriber\Event\DomEventOnceSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.event.dom_event_once" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.dom_event_once" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.event.event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Event\SimpleEventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.event.event" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.event" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.event.event_once"
+            class="Ivory\GoogleMap\Helper\Subscriber\Event\EventOnceSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.event.event_once" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.event_once" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.layer"
+            class="Ivory\GoogleMap\Helper\Subscriber\Layer\LayerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.layer.geo_json"
+            class="Ivory\GoogleMap\Helper\Subscriber\Layer\GeoJsonLayerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.layer.geo_json" />
+            <argument type="service" id="ivory.google_map.helper.renderer.layer.geo_json" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.layer.kml"
+            class="Ivory\GoogleMap\Helper\Subscriber\Layer\KmlLayerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.layer.kml" />
+            <argument type="service" id="ivory.google_map.helper.renderer.layer.kml" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_bound"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapBoundSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_bound" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_center"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapCenterSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_center" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_container"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapContainerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_container" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_html"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapHtmlSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_html" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_init"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapInitSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_javascript"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapJavascriptSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map" />
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.callback" />
+            <argument type="service" id="ivory.google_map.helper.renderer.html.javascript_tag" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.map_stylehseet"
+            class="Ivory\GoogleMap\Helper\Subscriber\MapStylesheetSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.stylesheet_tag" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\OverlaySubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.circle"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\CircleSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.circle" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.circle" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.encoded_polyline"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\EncodedPolylineSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.encoded_polyline" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.encoded_polyline" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.extendable"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\ExtendableSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.extendable" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.extendable" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.ground_overlay"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\GroundOverlaySubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.ground_overlay" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.ground_overlay" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.info_box"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\InfoBoxSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_box" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.info_box" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.info_window.close"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\InfoWindowCloseSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.info_window.close" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.info_window.open"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\InfoWindowOpenSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.info_window.open" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.info_window.default"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\DefaultInfoWindowSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window.default" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.info_window.default" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.marker"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\MarkerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.marker" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.marker_clusterer"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\MarkerClustererSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.marker_clusterer" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.polygon"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\PolygonSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.polygon" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.polygon" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.polyline"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\PolylineSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.polyline" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.polyline" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.rectangle"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\RectangleSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.rectangle" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.rectangle" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\AutocompleteSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.place.autocomplete" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete_container"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\AutocompleteContainerSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.place.autocomplete_container" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete_html"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\AutocompleteHtmlSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.place.autocomplete_html" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete_init"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\AutocompleteInitSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete_javascript"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\AutocompleteJavascriptSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.place.autocomplete" />
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.callback" />
+            <argument type="service" id="ivory.google_map.helper.renderer.html.javascript_tag" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.base"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Base\AutocompleteBaseSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.base.bound"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Base\AutocompleteBoundSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.base.bound" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.bound" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.base.coordinate"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Base\AutocompleteCoordinateSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.base.coordinate" />
+            <argument type="service" id="ivory.google_map.helper.renderer.base.coordinate" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Event\AutocompleteEventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.event.dom_event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Event\AutocompleteDomEventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.dom_event" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.event.dom_event_once"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Event\AutocompleteDomEventOnceSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event_once" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.dom_event_once" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.event.event"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Event\AutocompleteSimpleEventSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.event.event" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.event" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.place.autocomplete.event.event_once"
+            class="Ivory\GoogleMap\Helper\Subscriber\Place\Event\AutocompleteEventOnceSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.event.event_once" />
+            <argument type="service" id="ivory.google_map.helper.renderer.event.event_once" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.utility.object_to_array"
+            class="Ivory\GoogleMap\Helper\Subscriber\Utility\ObjectToArraySubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.object_to_array" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+    </services>
+</container>

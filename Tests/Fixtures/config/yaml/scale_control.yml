@@ -1,4 +1,0 @@
-ivory_google_map:
-    scale_control:
-        control_position:    "top_center"
-        scale_control_style: "default"

@@ -11,14 +11,34 @@
 
 namespace Ivory\GoogleMapBundle;
 
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\CleanTemplatingPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\LegacyRegisterHelperListenerPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterControlRendererPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterExtendableRendererPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterHelperListenerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Ivory Google Map bundle.
- *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class IvoryGoogleMapBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container
+            ->addCompilerPass(new CleanTemplatingPass())
+            ->addCompilerPass(new RegisterControlRendererPass())
+            ->addCompilerPass(new RegisterExtendableRendererPass());
 
+        if (class_exists(RegisterListenersPass::class)) {
+            $container->addCompilerPass(new RegisterHelperListenerPass());
+        } else {
+            $container->addCompilerPass(new LegacyRegisterHelperListenerPass());
+        }
+    }
 }
