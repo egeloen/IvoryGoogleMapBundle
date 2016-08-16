@@ -1,24 +1,53 @@
 language: php
 
-php: 5.3.3
+php:
+    - 5.6
+    - 7.0
+    - hhvm
 
 env:
-    - SYMFONY_VERSION="2.1.*"
-    - SYMFONY_VERSION="2.2.*"
-    - SYMFONY_VERSION="2.3.*"
-    - SYMFONY_VERSION="2.4.*"
-    - SYMFONY_VERSION="2.5.*"
+    global:
+        - COMPOSER_PREFER_LOWEST=false
+        - SYMFONY_DEPRECATIONS_HELPER=weak
+        - SYMFONY_VERSION=2.3.*
 
 before_script:
+    - export DISPLAY=:99
+    - /sbin/start-stop-daemon -Sbmq -p /tmp/xvfb_99.pid -x /usr/bin/Xvfb -- ${DISPLAY} -ac -screen 0, 1600x1200x24
+    - curl http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.0.jar > selenium.jar
+    - curl http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip > chromedriver.zip
+    - unzip chromedriver.zip
+    - java -jar selenium.jar -Dwebdriver.chrome.driver=./chromedriver > /dev/null 2>&1 &
+    - composer self-update
     - composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}
-    - composer install --prefer-source
+    - composer require --no-update --dev symfony/form:${SYMFONY_VERSION}
+    - composer require --no-update --dev symfony/yaml:${SYMFONY_VERSION}
+    - if [[ "$SYMFONY_VERSION" = *dev* ]]; then sed -i "s/\"MIT\"/\"MIT\",\"minimum-stability\":\"dev\"/g" composer.json; fi
+    - composer update --prefer-source `if [[ $COMPOSER_PREFER_LOWEST = true ]]; then echo "--prefer-lowest --prefer-stable"; fi`
 
-script: bin/phpunit --coverage-clover clover.xml
+script: vendor/bin/phpunit --configuration phpunit.travis.xml
 
-after_script: bin/coveralls
-
-branches:
-    only: master
-
-notifications:
-    email: geloen.eric@gmail.com
+matrix:
+    include:
+        - php: 5.6
+          env: SYMFONY_VERSION=2.3.* COMPOSER_PREFER_LOWEST=true
+        - php: 5.6
+          env: SYMFONY_VERSION=3.0.* COMPOSER_PREFER_LOWEST=true
+        - php: 5.6
+          env: SYMFONY_VERSION=2.4.*
+        - php: 5.6
+          env: SYMFONY_VERSION=2.5.*
+        - php: 5.6
+          env: SYMFONY_VERSION=2.6.*
+        - php: 5.6
+          env: SYMFONY_VERSION=2.7.*
+        - php: 5.6
+          env: SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=strict
+        - php: 5.6
+          env: SYMFONY_VERSION=3.0.* SYMFONY_DEPRECATIONS_HELPER=strict
+        - php: 5.6
+          env: SYMFONY_VERSION=3.1.* SYMFONY_DEPRECATIONS_HELPER=strict
+        - php: 5.6
+          env: SYMFONY_VERSION=3.2.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+    allow_failures:
+        - env: SYMFONY_VERSION=3.2.*@dev SYMFONY_DEPRECATIONS_HELPER=strict

@@ -1,5 +1,0 @@
-ivory_google_map:
-    polyline:
-        prefix_javascript_variable: "p"
-        options:
-            option: "value"

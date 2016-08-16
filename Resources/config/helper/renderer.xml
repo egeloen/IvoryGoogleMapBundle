@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="ivory.google_map.helper.renderer.abstract"
+            class="Ivory\GoogleMap\Helper\Renderer\AbstractRenderer"
+            abstract="true"
+        >
+            <argument type="service" id="ivory.google_map.helper.formatter" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.json"
+            class="Ivory\GoogleMap\Helper\Renderer\AbstractJsonRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+            abstract="true"
+        >
+            <argument type="service" id="ivory.google_map.helper.json_builder" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.api"
+            class="Ivory\GoogleMap\Helper\Renderer\ApiRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.api_init" />
+            <argument type="service" id="ivory.google_map.helper.renderer.loader" />
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.requirement_loader" />
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.source" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.api_init"
+            class="Ivory\GoogleMap\Helper\Renderer\ApiInitRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.base.bound"
+            class="Ivory\GoogleMap\Helper\Renderer\Base\BoundRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.base.coordinate"
+            class="Ivory\GoogleMap\Helper\Renderer\Base\CoordinateRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.base.point"
+            class="Ivory\GoogleMap\Helper\Renderer\Base\PointRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.base.size"
+            class="Ivory\GoogleMap\Helper\Renderer\Base\SizeRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.control.manager"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ControlManagerRenderer"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.control.position"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ControlPositionRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.control.map_type"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\MapTypeControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_type_id" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.map_type_style" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.map_type_style"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\MapTypeControlStyleRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.control.rotate"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\RotateControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.scale"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ScaleControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.scale_style" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.scale_style"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ScaleControlStyleRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.control.street_view"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\StreetViewControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.zoom"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ZoomControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.zoom_style" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.zoom_style"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\ZoomControlStyleRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.event.dom_event"
+            class="Ivory\GoogleMap\Helper\Renderer\Event\DomEventRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.event.dom_event_once"
+            class="Ivory\GoogleMap\Helper\Renderer\Event\DomEventOnceRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.event.event"
+            class="Ivory\GoogleMap\Helper\Renderer\Event\EventRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.event.event_once"
+            class="Ivory\GoogleMap\Helper\Renderer\Event\EventOnceRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.geometry.encoding"
+            class="Ivory\GoogleMap\Helper\Renderer\Geometry\EncodingRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.html.tag"
+            class="Ivory\GoogleMap\Helper\Renderer\Html\TagRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.html.javascript_tag"
+            class="Ivory\GoogleMap\Helper\Renderer\Html\JavascriptTagRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.tag" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.html.stylesheet"
+            class="Ivory\GoogleMap\Helper\Renderer\Html\StylesheetRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.html.stylesheet_tag"
+            class="Ivory\GoogleMap\Helper\Renderer\Html\StylesheetTagRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.tag" />
+            <argument type="service" id="ivory.google_map.helper.renderer.html.stylesheet" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.layer.geo_json"
+            class="Ivory\GoogleMap\Helper\Renderer\Layer\GeoJsonLayerRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.layer.kml"
+            class="Ivory\GoogleMap\Helper\Renderer\Layer\KmlLayerRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.loader"
+            class="Ivory\GoogleMap\Helper\Renderer\LoaderRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.map"
+            class="Ivory\GoogleMap\Helper\Renderer\MapRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.map_type_id" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.manager" />
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.requirement" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.map_bound"
+            class="Ivory\GoogleMap\Helper\Renderer\MapBoundRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.map_center"
+            class="Ivory\GoogleMap\Helper\Renderer\MapCenterRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.map_container"
+            class="Ivory\GoogleMap\Helper\Renderer\MapContainerRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.map_html"
+            class="Ivory\GoogleMap\Helper\Renderer\MapHtmlRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.tag" />
+            <argument type="service" id="ivory.google_map.helper.renderer.html.stylesheet" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.map_type_id"
+            class="Ivory\GoogleMap\Helper\Renderer\MapTypeIdRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.animation"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\AnimationRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.circle"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\CircleRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.encoded_polyline"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\EncodedPolylineRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.geometry.encoding" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.extendable"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\Extendable\ExtendableRenderer"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.extendable.path"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\Extendable\PathExtendableRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\EncodedPolyline" />
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\Polyline" />
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\Polygon" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.extendable.position"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\Extendable\PositionExtendableRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\InfoWindow" />
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\Marker" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.extendable.union"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\Extendable\UnionExtendableRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\Circle" />
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\GroundOverlay" />
+            <tag name="ivory.google_map.helper.renderer.extendable" class="Ivory\GoogleMap\Overlay\Rectangle" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.ground_overlay"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\GroundOverlayRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.icon"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\IconRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.info_box"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\InfoBoxRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.requirement" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.info_window.close"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\InfoWindowCloseRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.info_window.open"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\InfoWindowOpenRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.info_window.default"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\DefaultInfoWindowRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.marker"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\MarkerRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.animation" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.icon" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.marker_shape" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.marker_clusterer"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\MarkerClustererRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.requirement" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.marker_shape"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\MarkerShapeRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.polygon"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\PolygonRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.polyline"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\PolylineRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.rectangle"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\RectangleRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.place.autocomplete"
+            class="Ivory\GoogleMap\Helper\Renderer\Place\AutocompleteRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.utility.requirement" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.place.autocomplete_container"
+            class="Ivory\GoogleMap\Helper\Renderer\Place\AutocompleteContainerRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.tag" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.place.autocomplete_html"
+            class="Ivory\GoogleMap\Helper\Renderer\Place\AutocompleteHtmlRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.html.tag" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.utility.callback"
+            class="Ivory\GoogleMap\Helper\Renderer\Utility\CallbackRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.utility.object_to_array"
+            class="Ivory\GoogleMap\Helper\Renderer\Utility\ObjectToArrayRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.utility.requirement_loader"
+            class="Ivory\GoogleMap\Helper\Renderer\Utility\RequirementLoaderRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.utility.requirement"
+            class="Ivory\GoogleMap\Helper\Renderer\Utility\RequirementRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.utility.source"
+            class="Ivory\GoogleMap\Helper\Renderer\Utility\SourceRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        />
+    </services>
+</container>

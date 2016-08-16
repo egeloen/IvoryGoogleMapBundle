@@ -12,16 +12,28 @@
 namespace Ivory\GoogleMapBundle\Tests;
 
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Ivory Google Map bundle test.
- *
  * @author GeLo <geloen.eric@gmail.com>
  */
 class IvoryGoogleMapBundleTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var IvoryGoogleMapBundle
+     */
+    private $bundle;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
+    {
+        $this->bundle = new IvoryGoogleMapBundle();
+    }
+
     public function testBundle()
     {
-        $this->assertInstanceOf('Symfony\Component\HttpKernel\Bundle\Bundle', new IvoryGoogleMapBundle());
+        $this->assertInstanceOf(Bundle::class, $this->bundle);
     }
 }

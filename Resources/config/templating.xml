@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="ivory.google_map.templating.api"
+            class="Ivory\GoogleMapBundle\Templating\ApiHelper"
+        >
+            <argument type="service" id="ivory.google_map.helper.api" />
+            <tag name="templating.helper" />
+        </service>
+
+        <service
+            id="ivory.google_map.templating.map"
+            class="Ivory\GoogleMapBundle\Templating\MapHelper"
+        >
+            <argument type="service" id="ivory.google_map.helper.map" />
+            <tag name="templating.helper" />
+        </service>
+
+        <service
+            id="ivory.google_map.templating.place_autocomplete"
+            class="Ivory\GoogleMapBundle\Templating\PlaceAutocompleteHelper"
+        >
+            <argument type="service" id="ivory.google_map.helper.place_autocomplete" />
+            <tag name="templating.helper" />
+        </service>
+    </services>
+</container>

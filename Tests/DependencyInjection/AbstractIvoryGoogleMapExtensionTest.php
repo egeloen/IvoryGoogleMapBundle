@@ -11,1914 +11,518 @@
 
 namespace Ivory\GoogleMapBundle\Tests\DependencyInjection;
 
-use Ivory\GoogleMap\Overlays\MarkerCluster;
-use Ivory\GoogleMap\Services\Base\TravelMode;
-use Ivory\GoogleMap\Services\Base\UnitSystem;
+use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
+use Ivory\GoogleMap\Helper\ApiHelper;
+use Ivory\GoogleMap\Helper\Formatter\Formatter;
+use Ivory\GoogleMap\Helper\MapHelper;
+use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
+use Ivory\GoogleMap\Service\Directions\Directions;
+use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrix;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderProvider;
+use Ivory\GoogleMap\Service\TimeZone\TimeZone;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
+use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Scope;
-use Widop\HttpAdapterBundle\DependencyInjection\WidopHttpAdapterExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * Abstract Ivory Google Map extension test.
- *
  * @author GeLo <geloen.eric@gmail.com>
  */
 abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var \Symfony\Component\DependencyInjection\ContainerBuilder */
-    protected $container;
+    /**
+     * @var ContainerBuilder
+     */
+    private $container;
 
-    /** @var \Symfony\Component\HttpFoundation\Request */
-    protected $requestMock;
+    /**
+     * @var bool
+     */
+    private $debug;
+
+    /**
+     * @var string
+     */
+    private $locale;
+
+    /**
+     * @var HttpClient|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $client;
+
+    /**
+     * @var MessageFactory|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $messageFactory;
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->requestMock = $this->getMock('Symfony\Component\HttpFoundation\Request');
-
         $this->container = new ContainerBuilder();
-        $this->container->addScope(new Scope('request'));
-        $this->container->setParameter('templating.engines', array('php', 'twig'));
-        $this->container->set('request', $this->requestMock);
-        $this->container->registerExtension(new IvoryGoogleMapExtension());
-        $this->container->registerExtension($httpAdapterExtension = new WidopHttpAdapterExtension());
-        $this->container->loadFromExtension($httpAdapterExtension->getAlias());
+        $this->container->setParameter('kernel.debug', $this->debug = false);
+        $this->container->setParameter('locale', $this->locale = 'en');
+        $this->container->set('httplug.client', $this->client = $this->createClientMock());
+        $this->container->set('httplug.message_factory', $this->messageFactory = $this->createMessageFactoryMock());
+        $this->container->registerExtension($extension = new IvoryGoogleMapExtension());
+        $this->container->loadFromExtension($extension->getAlias());
+        (new IvoryGoogleMapBundle())->build($this->container);
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function tearDown()
-    {
-        unset($this->requestMock);
-        unset($this->container);
-    }
-
-    /**
-     * Loads a configuration.
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container     The container.
-     * @param string                                                  $configuration The configuration.
+     * @param ContainerBuilder $container
+     * @param string           $configuration
      */
     abstract protected function loadConfiguration(ContainerBuilder $container, $configuration);
 
-    public function testBoundServiceWithoutConfiguration()
+    public function testDefaultState()
     {
-        $this->loadConfiguration($this->container, 'empty');
         $this->container->compile();
 
-        $bound = $this->container->get('ivory_google_map.bound');
+        $apiHelper = $this->container->get('ivory.google_map.helper.api');
+        $mapHelper = $this->container->get('ivory.google_map.helper.map');
+        $placeAutocompleteHelper = $this->container->get('ivory.google_map.helper.place_autocomplete');
 
-        $this->assertInstanceOf('Ivory\GoogleMap\Base\Bound', $bound);
-        $this->assertSame('bound_', substr($bound->getJavascriptVariable(), 0, 6));
-        $this->assertNull($bound->getSouthWest());
-        $this->assertNull($bound->getNorthEast());
-    }
-
-    public function testBoundServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'bound');
-        $this->container->compile();
-
-        $bound = $this->container->get('ivory_google_map.bound');
-
-        $this->assertSame('b', substr($bound->getJavascriptVariable(), 0, 1));
-
-        $this->assertTrue($bound->hasCoordinates());
-
-        $this->assertSame(-1.1, $bound->getSouthWest()->getLatitude());
-        $this->assertSame(-2.1, $bound->getSouthWest()->getLongitude());
-        $this->assertTrue($bound->getSouthWest()->isNoWrap());
-
-        $this->assertSame(2.1, $bound->getNorthEast()->getLatitude());
-        $this->assertSame(1.1, $bound->getNorthEast()->getLongitude());
-        $this->assertFalse($bound->getNorthEast()->isNoWrap());
-    }
-
-    public function testBoundInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.bound'),
-            $this->container->get('ivory_google_map.bound')
-        );
-    }
-
-    public function testCoordinateServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $coordinate = $this->container->get('ivory_google_map.coordinate');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Base\Coordinate', $coordinate);
-
-        $this->assertSame('coordinate_', substr($coordinate->getJavascriptVariable(), 0, 11));
-        $this->assertSame(0, $coordinate->getLatitude());
-        $this->assertSame(0, $coordinate->getLongitude());
-        $this->assertTrue($coordinate->isNoWrap());
-    }
-
-    public function testCoordinateServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'coordinate');
-        $this->container->compile();
-
-        $coordinate = $this->container->get('ivory_google_map.coordinate');
-
-        $this->assertSame('foo', substr($coordinate->getJavascriptVariable(), 0, 3));
-        $this->assertSame(1.1, $coordinate->getLatitude());
-        $this->assertSame(-2.1, $coordinate->getLongitude());
-        $this->assertFalse($coordinate->isNoWrap());
-    }
-
-    public function testCoordinateInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.coordinate'),
-            $this->container->get('ivory_google_map.coordinate')
-        );
-    }
-
-    public function testPointServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $point = $this->container->get('ivory_google_map.point');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Base\Point', $point);
-        $this->assertSame('point_', substr($point->getJavascriptVariable(), 0, 6));
-        $this->assertSame(0, $point->getX());
-        $this->assertSame(0, $point->getY());
-    }
-
-    public function testPointServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'point');
-        $this->container->compile();
-
-        $point = $this->container->get('ivory_google_map.point');
-
-        $this->assertSame('foo', substr($point->getJavascriptVariable(), 0, 3));
-        $this->assertSame(1.1, $point->getX());
-        $this->assertSame(-2.1, $point->getY());
-    }
-
-    public function testPointInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.point'),
-            $this->container->get('ivory_google_map.point')
-        );
-    }
-
-    public function testSizeServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $size = $this->container->get('ivory_google_map.size');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Base\Size', $size);
-
-        $this->assertSame('size_', substr($size->getJavascriptVariable(), 0, 5));
-
-        $this->assertSame(1, $size->getWidth());
-        $this->assertSame(1, $size->getHeight());
-
-        $this->assertNull($size->getWidthUnit());
-        $this->assertNull($size->getHeightUnit());
-    }
-
-    public function testSizeServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'size');
-        $this->container->compile();
-
-        $size = $this->container->get('ivory_google_map.size');
-
-        $this->assertSame('foo', substr($size->getJavascriptVariable(), 0, 3));
-
-        $this->assertEquals($size->getWidth(), 100.1);
-        $this->assertEquals($size->getHeight(), 200.2);
-
-        $this->assertEquals($size->getWidthUnit(), 'px');
-        $this->assertEquals($size->getHeightUnit(), 'pt');
-    }
-
-    public function testSizeInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.size'),
-            $this->container->get('ivory_google_map.size')
-        );
-    }
-
-    public function testMapTypeControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $mapTypeControl = $this->container->get('ivory_google_map.map_type_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\MapTypeControl', $mapTypeControl);
-        $this->assertSame(array('roadmap', 'satellite'), $mapTypeControl->getMapTypeIds());
-        $this->assertSame('top_right', $mapTypeControl->getControlPosition());
-        $this->assertSame('default', $mapTypeControl->getMapTypeControlStyle());
-    }
-
-    public function testMapTypeControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'map_type_control');
-        $this->container->compile();
-
-        $mapTypeControl = $this->container->get('ivory_google_map.map_type_control');
-
-        $this->assertEquals(array('hybrid', 'terrain'), $mapTypeControl->getMapTypeIds());
-        $this->assertEquals('top_center', $mapTypeControl->getControlPosition());
-        $this->assertEquals('horizontal_bar', $mapTypeControl->getMapTypeControlStyle());
-    }
-
-    public function testMapTypeControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.map_type_control'),
-            $this->container->get('ivory_google_map.map_type_control')
-        );
-    }
-
-    public function testOverviewMapControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $overviewMapControl = $this->container->get('ivory_google_map.overview_map_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\OverviewMapControl', $overviewMapControl);
-        $this->assertFalse($overviewMapControl->isOpened());
-    }
-
-    public function testOverviewMapControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'overview_map_control');
-        $this->container->compile();
-
-        $overviewMapControl = $this->container->get('ivory_google_map.overview_map_control');
-
-        $this->assertTrue($overviewMapControl->isOpened());
-    }
-
-    public function testOverviewMapControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.overview_map_control'),
-            $this->container->get('ivory_google_map.overview_map_control')
-        );
-    }
-
-    public function testPanControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $panControl = $this->container->get('ivory_google_map.pan_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\PanControl', $panControl);
-        $this->assertSame('top_left', $panControl->getControlPosition());
-    }
-
-    public function testPanControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'pan_control');
-        $this->container->compile();
-
-        $panControl = $this->container->get('ivory_google_map.pan_control');
-
-        $this->assertSame('top_center', $panControl->getControlPosition());
-    }
-
-    public function testPanControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.pan_control'),
-            $this->container->get('ivory_google_map.pan_control')
-        );
-    }
-
-    public function testRotateControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $rotateControl = $this->container->get('ivory_google_map.rotate_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\RotateControl', $rotateControl);
-        $this->assertSame('top_left', $rotateControl->getControlPosition());
-    }
-
-    public function testRotateControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'rotate_control');
-        $this->container->compile();
-
-        $rotateControl = $this->container->get('ivory_google_map.rotate_control');
-
-        $this->assertSame('top_center', $rotateControl->getControlPosition());
-    }
-
-    public function testRotateControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.rotate_control'),
-            $this->container->get('ivory_google_map.rotate_control')
-        );
-    }
-
-    public function testScaleControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $scaleControl = $this->container->get('ivory_google_map.scale_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\ScaleControl', $scaleControl);
-        $this->assertSame('bottom_left', $scaleControl->getControlPosition());
-        $this->assertSame('default', $scaleControl->getScaleControlStyle());
-    }
-
-    public function testScaleControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'scale_control');
-        $this->container->compile();
-
-        $scaleControl = $this->container->get('ivory_google_map.scale_control');
-
-        $this->assertSame('top_center', $scaleControl->getControlPosition());
-        $this->assertSame('default', $scaleControl->getScaleControlStyle());
-    }
-
-    public function testScaleControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.scale_control'),
-            $this->container->get('ivory_google_map.scale_control')
-        );
-    }
-
-    public function testStreetViewControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $streetViewControl = $this->container->get('ivory_google_map.street_view_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\StreetViewControl', $streetViewControl);
-        $this->assertSame('top_left', $streetViewControl->getControlPosition());
-    }
-
-    public function testStreetViewControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'street_view_control');
-        $this->container->compile();
-
-        $streetViewControl = $this->container->get('ivory_google_map.street_view_control');
-
-        $this->assertSame('top_center', $streetViewControl->getControlPosition());
-    }
-
-    public function testStreetViewControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.street_view_control'),
-            $this->container->get('ivory_google_map.street_view_control')
-        );
-    }
-
-    public function testZoomControlServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $zoomControl = $this->container->get('ivory_google_map.zoom_control');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Controls\ZoomControl', $zoomControl);
-        $this->assertSame('top_left', $zoomControl->getControlPosition());
-        $this->assertSame('default', $zoomControl->getZoomControlStyle());
-    }
-
-    public function testZoomControlServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'zoom_control');
-        $this->container->compile();
-
-        $zoomControl = $this->container->get('ivory_google_map.zoom_control');
-
-        $this->assertSame('top_center', $zoomControl->getControlPosition());
-        $this->assertSame('default', $zoomControl->getZoomControlStyle());
-    }
-
-    public function testZoomControlInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.zoom_control'),
-            $this->container->get('ivory_google_map.zoom_control')
-        );
-    }
-
-    public function testEventServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $event = $this->container->get('ivory_google_map.event');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Events\Event', $event);
-        $this->assertSame('event_', substr($event->getJavascriptVariable(), 0, 6));
-    }
-
-    public function testEventServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'event');
-        $this->container->compile();
-
-        $event = $this->container->get('ivory_google_map.event');
-
-        $this->assertSame('e', substr($event->getJavascriptVariable(), 0, 1));
-    }
-
-    public function testEventInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.event'),
-            $this->container->get('ivory_google_map.event')
-        );
-    }
-
-    public function testEventManagerInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.event_manager'),
-            $this->container->get('ivory_google_map.event_manager')
-        );
-    }
-
-    public function testKmlLayerServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $kmlLayer = $this->container->get('ivory_google_map.kml_layer');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Layers\KMLLayer', $kmlLayer);
-        $this->assertSame('kml_layer_', substr($kmlLayer->getJavascriptVariable(), 0, 10));
-        $this->assertNull($kmlLayer->getUrl());
-        $this->assertEmpty($kmlLayer->getOptions());
-    }
-
-    public function testKmlLayerServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'kml_layer');
-        $this->container->compile();
-
-        $kmlLayer = $this->container->get('ivory_google_map.kml_layer');
-
-        $this->assertSame('kl', substr($kmlLayer->getJavascriptVariable(), 0, 2));
-        $this->assertSame('url', $kmlLayer->getUrl());
-        $this->assertSame(array('option' => 'value'), $kmlLayer->getOptions());
-    }
-
-    public function testKmlLayerInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.kml_layer'),
-            $this->container->get('ivory_google_map.kml_layer')
-        );
-    }
-
-    public function testCircleServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $circle = $this->container->get('ivory_google_map.circle');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Circle', $circle);
-        $this->assertEquals(substr($circle->getJavascriptVariable(), 0, 7), 'circle_');
-        $this->assertEquals($circle->getCenter()->getLatitude(), 0);
-        $this->assertEquals($circle->getCenter()->getLongitude(), 0);
-        $this->assertTrue($circle->getCenter()->isNoWrap());
-        $this->assertEquals($circle->getRadius(), 1);
-    }
-
-    public function testCircleServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'circle');
-        $this->container->compile();
-
-        $circle = $this->container->get('ivory_google_map.circle');
-
-        $this->assertSame('c', substr($circle->getJavascriptVariable(), 0, 1));
-
-        $this->assertSame(1.1, $circle->getCenter()->getLatitude());
-        $this->assertSame(2.1, $circle->getCenter()->getLongitude());
-        $this->assertFalse($circle->getCenter()->isNoWrap());
-
-        $this->assertSame(10, $circle->getRadius());
-        $this->assertSame(array('option' => 'value'), $circle->getOptions());
-    }
-
-    public function testCircleInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.circle'),
-            $this->container->get('ivory_google_map.circle')
-        );
-    }
-
-    public function testEncodedPolylineServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $encodedPolyline = $this->container->get('ivory_google_map.encoded_polyline');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\EncodedPolyline', $encodedPolyline);
-        $this->assertSame('encoded_polyline_', substr($encodedPolyline->getJavascriptVariable(), 0, 17));
-    }
-
-    public function testEncodedPolylineServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'encoded_polyline');
-        $this->container->compile();
-
-        $encodedPolyline = $this->container->get('ivory_google_map.encoded_polyline');
-
-        $this->assertSame('ep', substr($encodedPolyline->getJavascriptVariable(), 0, 2));
-        $this->assertSame(array('option' => 'value'), $encodedPolyline->getOptions());
-    }
-
-    public function testEncodedPolylineInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.encoded_polyline'),
-            $this->container->get('ivory_google_map.encoded_polyline')
-        );
-    }
-
-    public function testGroundOverlayServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $groundOverlay = $this->container->get('ivory_google_map.ground_overlay');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\GroundOverlay', $groundOverlay);
-
-        $this->assertSame('ground_overlay_', substr($groundOverlay->getJavascriptVariable(), 0, 15));
-        $this->assertSame('', $groundOverlay->getUrl());
-
-        $this->assertSame(1, $groundOverlay->getBound()->getNorthEast()->getLatitude());
-        $this->assertSame(1, $groundOverlay->getBound()->getNorthEast()->getLongitude());
-        $this->assertTrue($groundOverlay->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertSame(-1, $groundOverlay->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(-1, $groundOverlay->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($groundOverlay->getBound()->getSouthWest()->isNoWrap());
-    }
-
-    public function testGroundOverlayServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'ground_overlay');
-        $this->container->compile();
-
-        $groundOverlay = $this->container->get('ivory_google_map.ground_overlay');
-
-        $this->assertEquals('go', substr($groundOverlay->getJavascriptVariable(), 0, 2));
-        $this->assertEquals('url', $groundOverlay->getUrl());
-
-        $this->assertEquals(1.1, $groundOverlay->getBound()->getNorthEast()->getLatitude());
-        $this->assertEquals(2.1, $groundOverlay->getBound()->getNorthEast()->getLongitude());
-        $this->assertFalse($groundOverlay->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertSame(-1.1, $groundOverlay->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(-2.1, $groundOverlay->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($groundOverlay->getBound()->getSouthWest()->isNoWrap());
-    }
-
-    public function testGroundOverlayInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.ground_overlay'),
-            $this->container->get('ivory_google_map.ground_overlay')
-        );
-    }
-
-    public function testInfoWindowServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $infoWindow = $this->container->get('ivory_google_map.info_window');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\InfoWindow', $infoWindow);
-        $this->assertEquals('info_window_', substr($infoWindow->getJavascriptVariable(), 0, 12));
-
-        $this->assertNull($infoWindow->getPosition());
-        $this->assertSame($infoWindow->getContent(), '<p>Default content</p>');
-        $this->assertFalse($infoWindow->hasPixelOffset());
-        $this->assertNull($infoWindow->getPixelOffset());
-        $this->assertFalse($infoWindow->isOpen());
-        $this->assertTrue($infoWindow->isAutoOpen());
-        $this->assertSame('click', $infoWindow->getOpenEvent());
-        $this->assertFalse($infoWindow->isAutoClose());
-        $this->assertEmpty($infoWindow->getOptions());
-    }
-
-    public function testInfoWindowServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'info_window');
-        $this->container->compile();
-
-        $infoWindow = $this->container->get('ivory_google_map.info_window');
-
-        $this->assertSame('iw', substr($infoWindow->getJavascriptVariable(), 0, 2));
-
-        $this->assertSame(1.1, $infoWindow->getPosition()->getLatitude());
-        $this->assertSame(-2.1, $infoWindow->getPosition()->getLongitude());
-        $this->assertFalse($infoWindow->getPosition()->isNoWrap());
-
-        $this->assertSame('<div class="info_window"></div>', $infoWindow->getContent());
-
-        $this->assertTrue($infoWindow->hasPixelOffset());
-        $this->assertSame(1.1, $infoWindow->getPixelOffset()->getWidth());
-        $this->assertSame(2.1, $infoWindow->getPixelOffset()->getHeight());
-        $this->assertSame('px', $infoWindow->getPixelOffset()->getWidthUnit());
-        $this->assertSame('pt', $infoWindow->getPixelOffset()->getHeightUnit());
-
-        $this->assertTrue($infoWindow->isOpen());
-        $this->assertFalse($infoWindow->isAutoOpen());
-        $this->assertSame('dblclick', $infoWindow->getOpenEvent());
-        $this->assertTrue($infoWindow->isAutoClose());
-
-        $this->assertSame(array('option' => 'value'), $infoWindow->getOptions());
-    }
-
-    public function testInfoWindowInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.info_window'),
-            $this->container->get('ivory_google_map.info_window')
-        );
-    }
-
-    public function testMarkerImageServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $markerImage = $this->container->get('ivory_google_map.marker_image');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\MarkerImage', $markerImage);
-        $this->assertSame('marker_image_', substr($markerImage->getJavascriptVariable(), 0, 13));
-        $this->assertSame('//maps.gstatic.com/mapfiles/markers/marker.png', $markerImage->getUrl());
-
-        $this->assertFalse($markerImage->hasAnchor());
-        $this->assertNull($markerImage->getAnchor());
-
-        $this->assertFalse($markerImage->hasOrigin());
-        $this->assertNull($markerImage->getOrigin());
-
-        $this->assertFalse($markerImage->hasScaledSize());
-        $this->assertNull($markerImage->getScaledSize());
-
-        $this->assertFalse($markerImage->hasSize());
-        $this->assertNull($markerImage->getSize());
-    }
-
-    public function testMarkerImageServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'marker_image');
-        $this->container->compile();
-
-        $markerImage = $this->container->get('ivory_google_map.marker_image');
-
-        $this->assertSame('mi', substr($markerImage->getJavascriptVariable(), 0, 2));
-        $this->assertSame('url', $markerImage->getUrl());
-
-        $this->assertTrue($markerImage->hasAnchor());
-        $this->assertSame(1.1, $markerImage->getAnchor()->getX());
-        $this->assertSame(2.1, $markerImage->getAnchor()->getY());
-
-        $this->assertTrue($markerImage->hasOrigin());
-        $this->assertSame(2.1, $markerImage->getOrigin()->getX());
-        $this->assertSame(1.1, $markerImage->getOrigin()->getY());
-
-        $this->assertTrue($markerImage->hasScaledSize());
-        $this->assertSame(16, $markerImage->getScaledSize()->getWidth());
-        $this->assertSame(19, $markerImage->getScaledSize()->getHeight());
-        $this->assertSame("px", $markerImage->getScaledSize()->getWidthUnit());
-        $this->assertSame("pt", $markerImage->getScaledSize()->getHeightUnit());
-
-        $this->assertTrue($markerImage->hasSize());
-        $this->assertSame(20, $markerImage->getSize()->getWidth());
-        $this->assertSame(22, $markerImage->getSize()->getHeight());
-        $this->assertSame("px", $markerImage->getSize()->getWidthUnit());
-        $this->assertSame("pt", $markerImage->getSize()->getHeightUnit());
-    }
-
-    public function testMarkerImageInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.marker_image'),
-            $this->container->get('ivory_google_map.marker_image')
-        );
-    }
-
-    public function testMarkerServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $marker = $this->container->get('ivory_google_map.marker');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Marker', $marker);
-        $this->assertSame('marker_', substr($marker->getJavascriptVariable(), 0, 7));
-
-        $this->assertSame(0, $marker->getPosition()->getLatitude());
-        $this->assertSame(0, $marker->getPosition()->getLongitude());
-        $this->assertTrue($marker->getPosition()->isNoWrap());
-
-        $this->assertFalse($marker->hasAnimation());
-        $this->assertEmpty($marker->getOptions());
-    }
-
-    public function testMarkerServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'marker');
-        $this->container->compile();
-
-        $marker = $this->container->get('ivory_google_map.marker');
-
-        $this->assertSame('m', substr($marker->getJavascriptVariable(), 0, 1));
-
-        $this->assertSame(1.1, $marker->getPosition()->getLatitude());
-        $this->assertSame(-2.1, $marker->getPosition()->getLongitude());
-        $this->assertFalse($marker->getPosition()->isNoWrap());
-
-        $this->assertTrue($marker->hasAnimation());
-        $this->assertEquals(array('option' => 'value'), $marker->getOptions());
-    }
-
-    public function testMarkerInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.marker'),
-            $this->container->get('ivory_google_map.marker')
-        );
-    }
-
-    public function testMarkerShapeServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $markerShape = $this->container->get('ivory_google_map.marker_shape');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\MarkerShape', $markerShape);
-        $this->assertSame('marker_shape_', substr($markerShape->getJavascriptVariable(), 0, 13));
-        $this->assertSame('poly', $markerShape->getType());
-        $this->assertTrue($markerShape->hasCoordinates());
-        $this->assertSame(array(1, 1, 1, -1, -1, -1, -1, 1), $markerShape->getCoordinates());
-    }
-
-    public function testMarkerShapeServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'marker_shape');
-        $this->container->compile();
-
-        $markerShape = $this->container->get('ivory_google_map.marker_shape');
-
-        $this->assertSame('ms', substr($markerShape->getJavascriptVariable(), 0, 2));
-        $this->assertSame('rect', $markerShape->getType());
-        $this->assertTrue($markerShape->hasCoordinates());
-        $this->assertSame(array(-1.1, -2.1, 2.1, 1.1), $markerShape->getCoordinates());
-    }
-
-    public function testMarkerShapeInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.marker_shape'),
-            $this->container->get('ivory_google_map.marker_shape')
-        );
-    }
-
-    public function testMarkerClusterServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $markerCluster = $this->container->get('ivory_google_map.marker_cluster');
-
-        $this->assertSame('marker_cluster_', substr($markerCluster->getJavascriptVariable(), 0, 15));
-        $this->assertSame('default', $markerCluster->getType());
-        $this->assertEmpty($markerCluster->getMarkers());
-        $this->assertEmpty($markerCluster->getOptions());
-    }
-
-    public function testMarkerClusterServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'marker_cluster');
-        $this->container->compile();
-
-        $markerCluster = $this->container->get('ivory_google_map.marker_cluster');
-
-        $this->assertSame('mc', substr($markerCluster->getJavascriptVariable(), 0, 2));
-        $this->assertSame('marker_cluster', $markerCluster->getType());
-        $this->assertEmpty($markerCluster->getMarkers());
-        $this->assertSame(array('option' => 'value'), $markerCluster->getOptions());
-    }
-
-    public function testMakerClusterInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.marker_cluster'),
-            $this->container->get('ivory_google_map.marker_cluster')
-        );
-    }
-
-    public function testPolygonServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $polygon = $this->container->get('ivory_google_map.polygon');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Polygon', $polygon);
-        $this->assertSame('polygon_', substr($polygon->getJavascriptVariable(), 0, 8));
-    }
-
-    public function testPolygonServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'polygon');
-        $this->container->compile();
-
-        $polygon = $this->container->get('ivory_google_map.polygon');
-
-        $this->assertSame('p', substr($polygon->getJavascriptVariable(), 0, 1));
-        $this->assertSame(array('option' => 'value'), $polygon->getOptions());
-    }
-
-    public function testPolygonInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.polygon'),
-            $this->container->get('ivory_google_map.polygon')
-        );
-    }
-
-    public function testPolylineServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $polyline = $this->container->get('ivory_google_map.polyline');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Polyline', $polyline);
-        $this->assertSame('polyline_', substr($polyline->getJavascriptVariable(), 0, 9));
-    }
-
-    public function testPolylineServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'polyline');
-        $this->container->compile();
-
-        $polyline = $this->container->get('ivory_google_map.polyline');
-
-        $this->assertSame('p', substr($polyline->getJavascriptVariable(), 0, 1));
-        $this->assertSame(array('option' => 'value'), $polyline->getOptions());
-    }
-
-    public function testPolylineInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.polyline'),
-            $this->container->get('ivory_google_map.polyline')
-        );
-    }
-
-    public function testRectangleServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $rectangle = $this->container->get('ivory_google_map.rectangle');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Overlays\Rectangle', $rectangle);
-        $this->assertSame('rectangle_', substr($rectangle->getJavascriptVariable(), 0, 10));
-
-        $this->assertSame(1, $rectangle->getBound()->getNorthEast()->getLatitude());
-        $this->assertSame(1, $rectangle->getBound()->getNorthEast()->getLongitude());
-        $this->assertTrue($rectangle->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertSame(-1, $rectangle->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(-1, $rectangle->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($rectangle->getBound()->getSouthWest()->isNoWrap());
-    }
-
-    public function testRectangleServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'rectangle');
-        $this->container->compile();
-
-        $rectangle = $this->container->get('ivory_google_map.rectangle');
-
-        $this->assertSame('r', substr($rectangle->getJavascriptVariable(), 0, 1));
-
-        $this->assertSame(1.1, $rectangle->getBound()->getNorthEast()->getLatitude());
-        $this->assertSame(2.1, $rectangle->getBound()->getNorthEast()->getLongitude());
-        $this->assertFalse($rectangle->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertSame(-1.1, $rectangle->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(-2.1, $rectangle->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($rectangle->getBound()->getSouthWest()->isNoWrap());
-    }
-
-    public function testRectangeInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.rectangle'),
-            $this->container->get('ivory_google_map.rectangle')
-        );
-    }
-
-    public function testMapServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $map = $this->container->get('ivory_google_map.map');
-
-        $this->assertSame('map_', substr($map->getJavascriptVariable(), 0, 4));
-        $this->assertSame('map_canvas', $map->getHtmlContainerId());
-        $this->assertFalse($map->isAsync());
-        $this->assertFalse($map->isAutoZoom());
-        $this->assertFalse($map->hasLibraries());
-        $this->assertSame('en', $map->getLanguage());
-
-        $this->assertSame(0, $map->getCenter()->getLatitude());
-        $this->assertSame(0, $map->getCenter()->getLongitude());
-        $this->assertTrue($map->getCenter()->isNoWrap());
-
-        $this->assertFalse($map->getBound()->hasCoordinates());
-        $this->assertSame(array('mapTypeId' => 'roadmap', 'zoom' => 3), $map->getMapOptions());
-        $this->assertSame(array('width' => '300px', 'height' => '300px'), $map->getStylesheetOptions());
-    }
-
-    public function testMapServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'map');
-        $this->container->compile();
-
-        $map = $this->container->get('ivory_google_map.map');
-
-        $this->assertSame('foo', substr($map->getJavascriptVariable(), 0, 3));
-        $this->assertSame('bar', $map->getHtmlContainerId());
-        $this->assertTrue($map->isAsync());
-        $this->assertTrue($map->isAutoZoom());
-        $this->assertFalse($map->hasLibraries());
-        $this->assertSame('en', $map->getLanguage());
-
-        $this->assertSame(1, $map->getCenter()->getLatitude());
-        $this->assertSame(2, $map->getCenter()->getLongitude());
-        $this->assertFalse($map->getCenter()->isNoWrap());
-
-        $this->assertSame(1, $map->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(2, $map->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($map->getBound()->getSouthWest()->isNoWrap());
-
-        $this->assertSame(3, $map->getBound()->getNorthEast()->getLatitude());
-        $this->assertSame(4, $map->getBound()->getNorthEast()->getLongitude());
-        $this->assertFalse($map->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertSame(
-            array('mapTypeId' => 'satellite', 'zoom' => 6, 'foo' => 'bar'),
-            $map->getMapOptions()
-        );
-
-        $this->assertSame(
-            array('width' => '400px', 'height' => '500px', 'bar' => 'foo'),
-            $map->getStylesheetOptions()
-        );
-    }
-
-    public function testMapServiceWithApiLibraries()
-    {
-        $this->loadConfiguration($this->container, 'api');
-        $this->container->compile();
-
-        $map = $this->container->get('ivory_google_map.map');
-
-        $this->assertSame(array('places', 'geometry'), $map->getLibraries());
-    }
-
-    public function testMapInstances()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.map'),
-            $this->container->get('ivory_google_map.map')
-        );
-    }
-
-    public function testPlacesAutocompleteFormType()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->container->enterScope('request');
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Form\Type\PlacesAutocompleteType',
-            $this->container->get('ivory_google_map.places_autocomplete.form.type')
-        );
-
-        $this->container->leaveScope('request');
-    }
-
-    public function testTwigResources()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertTrue(
-            in_array(
-                'IvoryGoogleMapBundle:Form:places_autocomplete_widget.html.twig',
-                $this->container->getParameter('twig.form.resources')
-            )
-        );
-    }
-
-    public function testPhpResources()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertTrue(
-            in_array('IvoryGoogleMapBundle:Form', $this->container->getParameter('templating.helper.form.resources'))
-        );
-    }
-
-    public function testBusinessAccountWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $businessAccount = $this->container->get('ivory_google_map.business_account');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\BusinessAccount', $businessAccount);
-
-        $this->assertNull($businessAccount->getClientId());
-        $this->assertNull($businessAccount->getSecret());
-        $this->assertNull($businessAccount->getChannel());
-    }
-
-    public function testBusinessAccountWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'business_account');
-        $this->container->compile();
-
-        $businessAccount = $this->container->get('ivory_google_map.business_account');
-
-        $this->assertSame('client_id', $businessAccount->getClientId());
-        $this->assertSame('secret', $businessAccount->getSecret());
-        $this->assertSame('channel', $businessAccount->getChannel());
-
-        $this->assertTrue($this->container->get('ivory_google_map.directions')->hasBusinessAccount());
-        $this->assertSame(
-            $businessAccount,
-            $this->container->get('ivory_google_map.directions')->getBusinessAccount()
-        );
-
-        $this->assertTrue($this->container->get('ivory_google_map.distance_matrix')->hasBusinessAccount());
-        $this->assertSame(
-            $businessAccount,
-            $this->container->get('ivory_google_map.distance_matrix')->getBusinessAccount()
-        );
-    }
-
-    public function testFakeRequestListenerWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->has('ivory_google_map.geocoder.event_listener.fake_request'));
-    }
-
-    public function testFakeRequestListenerWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'fake_request');
-        $this->container->compile();
-
-        $fakeRequestListener = $this->container->get('ivory_google_map.geocoder.event_listener.fake_request');
-
-        $this->assertSame('222.222.222.222', $fakeRequestListener->getFakeIp());
-    }
-
-    public function testGeocoderRequestServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->has('ivory_google_map.geocoder_request'));
-    }
-
-    public function testGeocoderRequestServiceWithEnabledConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_enabled');
-        $this->container->compile();
-
-        $request = $this->container->get('ivory_google_map.geocoder_request');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\Geocoding\GeocoderRequest', $request);
-        $this->assertFalse($request->hasAddress());
-        $this->assertFalse($request->hasCoordinate());
-        $this->assertFalse($request->hasBound());
-        $this->assertFalse($request->hasRegion());
-        $this->assertFalse($request->hasLanguage());
-        $this->assertFalse($request->hasSensor());
-    }
-
-    public function testGeocoderRequestServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_request');
-        $this->container->compile();
-
-        $request = $this->container->get('ivory_google_map.geocoder_request');
-
-        $this->assertTrue($request->hasAddress());
-        $this->assertSame('address', $request->getAddress());
-
-        $this->assertTrue($request->hasCoordinate());
-        $this->assertSame(1.1, $request->getCoordinate()->getLatitude());
-        $this->assertSame(2.1, $request->getCoordinate()->getLongitude());
-        $this->assertTrue($request->getCoordinate()->isNoWrap());
-
-        $this->assertTrue($request->hasBound());
-        $this->assertSame(-3.2, $request->getBound()->getSouthWest()->getLatitude());
-        $this->assertSame(-1.4, $request->getBound()->getSouthWest()->getLongitude());
-        $this->assertTrue($request->getBound()->getSouthWest()->isNoWrap());
-        $this->assertSame(6.3, $request->getBound()->getNorthEast()->getLatitude());
-        $this->assertSame(2.3, $request->getBound()->getNorthEast()->getLongitude());
-        $this->assertTrue($request->getBound()->getNorthEast()->isNoWrap());
-
-        $this->assertTrue($request->hasRegion());
-        $this->assertSame('es', $request->getRegion());
-
-        $this->assertTrue($request->hasLanguage());
-        $this->assertSame('pl', $request->getLanguage());
-
-        $this->assertTrue($request->hasSensor());
-    }
-
-    public function testGeocoderRequestInstances()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_enabled');
-        $this->container->compile();
+        $this->assertInstanceOf(ApiHelper::class, $apiHelper);
+        $this->assertInstanceOf(MapHelper::class, $mapHelper);
+        $this->assertInstanceOf(PlaceAutocompleteHelper::class, $placeAutocompleteHelper);
 
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.geocoder_request'),
-            $this->container->get('ivory_google_map.geocoder_request')
-        );
-    }
-
-    public function testGeocoderServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->has('ivory_google_map.geocoder'));
-    }
-
-    public function testGeocoderServiceWithEnabledConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_enabled');
-        $this->container->compile();
-
-        $geocoder = $this->container->get('ivory_google_map.geocoder');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\Geocoding\Geocoder', $geocoder);
-    }
-
-    public function testGeocoderServiceWithConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'geocoder');
-        $this->container->compile();
-
-        $geocoder = $this->container->get('ivory_google_map.geocoder');
+        $formatter = $this->container->get('ivory.google_map.helper.formatter');
+        $loaderRenderer = $this->container->get('ivory.google_map.helper.renderer.loader');;
 
-        $this->assertInstanceOf('Geocoder\Geocoder', $geocoder);
-    }
+        $this->assertSame($this->debug, $formatter->isDebug());
+        $this->assertSame($this->locale, $loaderRenderer->getLanguage());
+        $this->assertFalse($loaderRenderer->hasKey());
 
-    public function testGeocoderInstances()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_enabled');
-        $this->container->compile();
+        $this->assertTrue($this->container->get('ivory.google_map.helper.renderer.control.manager')->hasRenderers());
+        $this->assertTrue($this->container->get('ivory.google_map.helper.renderer.overlay.extendable')->hasRenderers());
+        $this->assertTrue($this->container->get('ivory.google_map.helper.event_dispatcher')->hasListeners());
 
-        $this->assertSame(
-            $this->container->get('ivory_google_map.geocoder'),
-            $this->container->get('ivory_google_map.geocoder')
-        );
-    }
+        $this->assertFalse($this->container->has('ivory.google_map.directions'));
+        $this->assertFalse($this->container->has('ivory.google_map.distance_matrix'));
+        $this->assertFalse($this->container->has('ivory.google_map.geocoder'));
+        $this->assertFalse($this->container->has('ivory.google_map.time_zone'));
 
-    public function testDirectionsRequestServiceWithoutConfiguration()
-    {
-        $this->loadConfiguration($this->container, 'empty');
-        $this->container->compile();
+        $this->assertFalse($this->container->has('ivory.google_map.templating.api'));
+        $this->assertFalse($this->container->has('ivory.google_map.templating.map'));
+        $this->assertFalse($this->container->has('ivory.google_map.templating.place_autocomplete'));
 
-        $this->assertFalse($this->container->has('ivory_google_map.directions_request'));
+        $this->assertFalse($this->container->has('ivory.google_map.twig.extension.api'));
+        $this->assertFalse($this->container->has('ivory.google_map.twig.extension.map'));
+        $this->assertFalse($this->container->has('ivory.google_map.twig.extension.place_autocomplete'));
     }
 
-    public function testDirectionsRequestServiceWithEnabledConfiguration()
+    public function testTemplatingHelpers()
     {
-        $this->loadConfiguration($this->container, 'directions_enabled');
+        $this->container->setDefinition('templating.engine.php', new Definition(\stdClass::class));
         $this->container->compile();
 
-        $request = $this->container->get('ivory_google_map.directions_request');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\Directions\DirectionsRequest', $request);
-        $this->assertFalse($request->hasAvoidHighWays());
-        $this->assertFalse($request->hasAvoidTolls());
-        $this->assertFalse($request->hasDestination());
-        $this->assertFalse($request->hasOptimizeWaypoints());
-        $this->assertFalse($request->hasOrigin());
-        $this->assertFalse($request->hasProvideRouteAlternatives());
-        $this->assertFalse($request->hasRegion());
-        $this->assertFalse($request->hasLanguage());
-        $this->assertFalse($request->hasTravelMode());
-        $this->assertFalse($request->hasUnitSystem());
-        $this->assertFalse($request->hasWaypoints());
-        $this->assertFalse($request->hasSensor());
+        $this->assertTrue($this->container->has('ivory.google_map.templating.api'));
+        $this->assertTrue($this->container->has('ivory.google_map.templating.map'));
+        $this->assertTrue($this->container->has('ivory.google_map.templating.place_autocomplete'));
     }
 
-    public function testDirectionsRequestServiceWithConfiguration()
+    public function testTwigExtensions()
     {
-        $this->loadConfiguration($this->container, 'directions_request');
+        $this->container->setDefinition('twig', new Definition(\stdClass::class));
         $this->container->compile();
-
-        $request = $this->container->get('ivory_google_map.directions_request');
 
-        $this->assertTrue($request->hasAvoidHighways());
-        $this->assertTrue($request->getAvoidHighways());
-
-        $this->assertTrue($request->hasAvoidTolls());
-        $this->assertTrue($request->getAvoidTolls());
-
-        $this->assertTrue($request->hasOptimizeWaypoints());
-        $this->assertTrue($request->getOptimizeWaypoints());
-
-        $this->assertTrue($request->hasProvideRouteAlternatives());
-        $this->assertTrue($request->getProvideRouteAlternatives());
-
-        $this->assertTrue($request->hasRegion());
-        $this->assertSame('es', $request->getRegion());
-
-        $this->assertTrue($request->hasLanguage());
-        $this->assertSame('en', $request->getLanguage());
-
-        $this->assertTrue($request->hasTravelMode());
-        $this->assertSame('WALKING', $request->getTravelMode());
-
-        $this->assertTrue($request->hasUnitSystem());
-        $this->assertSame('IMPERIAL', $request->getUnitSystem());
-
-        $this->assertTrue($request->hasSensor());
+        $this->assertTrue($this->container->has('ivory.google_map.twig.extension.api'));
+        $this->assertTrue($this->container->has('ivory.google_map.twig.extension.map'));
+        $this->assertTrue($this->container->has('ivory.google_map.twig.extension.place_autocomplete'));
     }
 
-    public function testDirectionsRequestInstances()
+    public function testFormatterDebug()
     {
-        $this->loadConfiguration($this->container, 'directions_enabled');
+        $this->loadConfiguration($this->container, 'debug');
         $this->container->compile();
 
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.directions_request'),
-            $this->container->get('ivory_google_map.directions_request')
-        );
+        $this->assertTrue($this->container->get('ivory.google_map.helper.formatter')->isDebug());
     }
 
-    public function testDirectionsServiceWithoutConfiguration()
+    public function testMapLanguage()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'language');
         $this->container->compile();
 
-        $this->assertFalse($this->container->has('ivory_google_map.directions'));
+        $this->assertSame('fr', $this->container->get('ivory.google_map.helper.renderer.loader')->getLanguage());
     }
 
-    public function testDirectionsServiceWithEnabledConfiguration()
+    public function testMapApiKey()
     {
-        $this->loadConfiguration($this->container, 'directions_enabled');
+        $this->loadConfiguration($this->container, 'api_key');
         $this->container->compile();
-
-        $directions = $this->container->get('ivory_google_map.directions');
 
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\Directions\Directions', $directions);
-        $this->assertInstanceOf('Widop\HttpAdapter\CurlHttpAdapter', $directions->getHttpAdapter());
-        $this->assertSame('http://maps.googleapis.com/maps/api/directions', $directions->getUrl());
-        $this->assertFalse($directions->isHttps());
-        $this->assertSame('json', $directions->getFormat());
+        $this->assertSame('key', $this->container->get('ivory.google_map.helper.renderer.loader')->getKey());
     }
 
-    public function testDirectionsServiceWithConfiguration()
+    public function testDirections()
     {
         $this->loadConfiguration($this->container, 'directions');
         $this->container->compile();
 
-        $directions = $this->container->get('ivory_google_map.directions');
+        $directions = $this->container->get('ivory.google_map.directions');
 
-        $this->assertInstanceOf('Widop\HttpAdapter\StreamHttpAdapter', $directions->getHttpAdapter());
-        $this->assertSame('https://directions', $directions->getUrl());
+        $this->assertInstanceOf(Directions::class, $directions);
+        $this->assertSame($this->client, $directions->getClient());
+        $this->assertSame($this->messageFactory, $directions->getMessageFactory());
         $this->assertTrue($directions->isHttps());
-        $this->assertSame('xml', $directions->getFormat());
+        $this->assertSame(Directions::FORMAT_JSON, $directions->getFormat());
+        $this->assertFalse($directions->hasBusinessAccount());
     }
 
-    public function testDirectionsInstances()
+    public function testDirectionsHttps()
     {
-        $this->loadConfiguration($this->container, 'directions_enabled');
+        $this->loadConfiguration($this->container, 'directions_https');
         $this->container->compile();
 
-        $this->assertSame(
-            $this->container->get('ivory_google_map.directions'),
-            $this->container->get('ivory_google_map.directions')
-        );
+        $this->assertFalse($this->container->get('ivory.google_map.directions')->isHttps());
     }
 
-    public function testDistanceMatrixRequestServiceWithoutConfiguration()
+    public function testDirectionsFormat()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'directions_format');
         $this->container->compile();
 
-        $this->assertFalse($this->container->has('ivory_google_map.distance_matrix_request'));
+        $this->assertSame(Directions::FORMAT_XML, $this->container->get('ivory.google_map.directions')->getFormat());
     }
 
-    public function testDistanceMatrixRequestServiceWithEnabledConfiguration()
+    public function testDirectionsApiKey()
     {
-        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
+        $this->loadConfiguration($this->container, 'directions_api_key');
         $this->container->compile();
 
-        $request = $this->container->get('ivory_google_map.distance_matrix_request');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrixRequest', $request);
-        $this->assertFalse($request->hasAvoidHighWays());
-        $this->assertFalse($request->hasAvoidTolls());
-        $this->assertFalse($request->hasOrigins());
-        $this->assertFalse($request->hasDestinations());
-        $this->assertFalse($request->hasTravelMode());
-        $this->assertFalse($request->hasUnitSystem());
-        $this->assertFalse($request->hasRegion());
-        $this->assertFalse($request->hasLanguage());
-        $this->assertFalse($request->hasSensor());
+        $this->assertSame('key', $this->container->get('ivory.google_map.directions')->getKey());
     }
 
-    public function testDistanceMatrixRequestServiceWithConfiguration()
+    public function testDirectionsBusinessAccount()
     {
-        $this->loadConfiguration($this->container, 'distance_matrix_request');
+        $this->loadConfiguration($this->container, 'directions_business_account');
         $this->container->compile();
 
-        $request = $this->container->get('ivory_google_map.distance_matrix_request');
+        $directions = $this->container->get('ivory.google_map.directions');
 
-        $this->assertTrue($request->hasAvoidHighways());
-        $this->assertTrue($request->getAvoidHighways());
-
-        $this->assertTrue($request->hasAvoidTolls());
-        $this->assertTrue($request->getAvoidTolls());
-
-        $this->assertTrue($request->hasTravelMode());
-        $this->assertSame(TravelMode::WALKING, $request->getTravelMode());
-
-        $this->assertTrue($request->hasUnitSystem());
-        $this->assertSame(UnitSystem::IMPERIAL, $request->getUnitSystem());
-
-        $this->assertTrue($request->hasRegion());
-        $this->assertSame('es', $request->getRegion());
-
-        $this->assertTrue($request->hasLanguage());
-        $this->assertSame('en', $request->getLanguage());
-
-        $this->assertTrue($request->hasSensor());
+        $this->assertTrue($directions->hasBusinessAccount());
+        $this->assertSame('my-client', $directions->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $directions->getBusinessAccount()->getSecret());
+        $this->assertFalse($directions->getBusinessAccount()->hasChannel());
     }
 
-    public function testDistanceMatrixRequestInstances()
+    public function testDirectionsBusinessAccountChannel()
     {
-        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
+        $this->loadConfiguration($this->container, 'directions_business_account_channel');
         $this->container->compile();
 
-        $this->assertNotSame(
-            $this->container->get('ivory_google_map.distance_matrix_request'),
-            $this->container->get('ivory_google_map.distance_matrix_request')
-        );
+        $directions = $this->container->get('ivory.google_map.directions');
+
+        $this->assertTrue($directions->hasBusinessAccount());
+        $this->assertSame('my-client', $directions->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $directions->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $directions->getBusinessAccount()->getChannel());
     }
 
-    public function testDistanceMatrixServiceWithoutConfiguration()
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testDirectionsBusinessAccountInvalid()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'directions_business_account_invalid');
         $this->container->compile();
-
-        $this->assertFalse($this->container->has('ivory_google_map.distance_matrix'));
     }
 
-    public function testDistanceMatrixServiceWithEnabledConfiguration()
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testDirectionsInvalid()
     {
-        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
+        $this->loadConfiguration($this->container, 'directions_invalid');
         $this->container->compile();
-
-        $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Services\DistanceMatrix\DistanceMatrix', $distanceMatrix);
-        $this->assertInstanceOf('Widop\HttpAdapter\CurlHttpAdapter', $distanceMatrix->getHttpAdapter());
-        $this->assertSame('http://maps.googleapis.com/maps/api/distancematrix', $distanceMatrix->getUrl());
-        $this->assertFalse($distanceMatrix->isHttps());
-        $this->assertSame('json', $distanceMatrix->getFormat());
     }
 
-    public function testDistanceMatrixServiceWithConfiguration()
+    public function testDistanceMatrix()
     {
         $this->loadConfiguration($this->container, 'distance_matrix');
         $this->container->compile();
 
-        $distanceMatrix = $this->container->get('ivory_google_map.distance_matrix');
+        $distanceMatrix = $this->container->get('ivory.google_map.distance_matrix');
 
-        $this->assertInstanceOf('Widop\HttpAdapter\StreamHttpAdapter', $distanceMatrix->getHttpAdapter());
-        $this->assertSame('https://distance_matrix', $distanceMatrix->getUrl());
+        $this->assertInstanceOf(DistanceMatrix::class, $distanceMatrix);
+        $this->assertSame($this->client, $distanceMatrix->getClient());
+        $this->assertSame($this->messageFactory, $distanceMatrix->getMessageFactory());
         $this->assertTrue($distanceMatrix->isHttps());
-        $this->assertSame('xml', $distanceMatrix->getFormat());
+        $this->assertSame(DistanceMatrix::FORMAT_JSON, $distanceMatrix->getFormat());
+        $this->assertFalse($distanceMatrix->hasBusinessAccount());
     }
 
-    public function testDistanceMatrixInstances()
+    public function testDistanceMatrixHttps()
     {
-        $this->loadConfiguration($this->container, 'distance_matrix_enabled');
+        $this->loadConfiguration($this->container, 'distance_matrix_https');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->get('ivory.google_map.distance_matrix')->isHttps());
+    }
+
+    public function testDistanceMatrixFormat()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_format');
         $this->container->compile();
 
         $this->assertSame(
-            $this->container->get('ivory_google_map.distance_matrix'),
-            $this->container->get('ivory_google_map.distance_matrix')
+            DistanceMatrix::FORMAT_XML,
+            $this->container->get('ivory.google_map.distance_matrix')->getFormat()
         );
     }
 
-    public function testHelpersWithoutConfiguration()
+    public function testDistanceMatrixApiKey()
     {
-        $this->loadConfiguration($this->container, 'empty');
+        $this->loadConfiguration($this->container, 'distance_matrix_api_key');
         $this->container->compile();
 
-        $this->assertInstanceOf(
-            'Ivory\GoogleMap\Helper\MapHelper',
-            $this->container->get('ivory_google_map.helper.map')
+        $this->assertSame('key', $this->container->get('ivory.google_map.distance_matrix')->getKey());
+    }
+
+    public function testDistanceMatrixBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_business_account');
+        $this->container->compile();
+
+        $distanceMatrix = $this->container->get('ivory.google_map.distance_matrix');
+
+        $this->assertTrue($distanceMatrix->hasBusinessAccount());
+        $this->assertSame('my-client', $distanceMatrix->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $distanceMatrix->getBusinessAccount()->getSecret());
+        $this->assertFalse($distanceMatrix->getBusinessAccount()->hasChannel());
+    }
+
+    public function testDistanceMatrixBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_business_account_channel');
+        $this->container->compile();
+
+        $distanceMatrix = $this->container->get('ivory.google_map.distance_matrix');
+
+        $this->assertTrue($distanceMatrix->hasBusinessAccount());
+        $this->assertSame('my-client', $distanceMatrix->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $distanceMatrix->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $distanceMatrix->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testDistanceMatrixBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testDistanceMatrixInvalid()
+    {
+        $this->loadConfiguration($this->container, 'distance_matrix_invalid');
+        $this->container->compile();
+    }
+
+    public function testGeocoder()
+    {
+        $this->loadConfiguration($this->container, 'geocoder');
+        $this->container->compile();
+
+        $geocoder = $this->container->get('ivory.google_map.geocoder');
+
+        $this->assertInstanceOf(GeocoderProvider::class, $geocoder);
+        $this->assertSame($this->client, $geocoder->getClient());
+        $this->assertSame($this->messageFactory, $geocoder->getMessageFactory());
+        $this->assertTrue($geocoder->isHttps());
+        $this->assertSame(GeocoderProvider::FORMAT_JSON, $geocoder->getFormat());
+        $this->assertFalse($geocoder->hasBusinessAccount());
+    }
+
+    public function testGeocoderHttps()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_https');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->get('ivory.google_map.geocoder')->isHttps());
+    }
+
+    public function testGeocoderFormat()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_format');
+        $this->container->compile();
+
+        $this->assertSame(
+            GeocoderProvider::FORMAT_XML,
+            $this->container->get('ivory.google_map.geocoder')->getFormat()
         );
     }
 
-    public function testHelpersWithConfiguration()
+    public function testGeocoderApiKey()
     {
-        $this->loadConfiguration($this->container, 'helpers');
+        $this->loadConfiguration($this->container, 'geocoder_api_key');
         $this->container->compile();
 
-        $mapHelper = $this->container->get('ivory_google_map.helper.map');
-
-        $this->assertInstanceOf('Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\MapHelper', $mapHelper);
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\MapTypeIdHelper',
-            $mapHelper->getMapTypeIdHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\CoordinateHelper',
-            $mapHelper->getCoordinateHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\BoundHelper',
-            $mapHelper->getBoundHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\PointHelper',
-            $mapHelper->getPointHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Base\SizeHelper',
-            $mapHelper->getSizeHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\ControlPositionHelper',
-            $mapHelper->getMapTypeControlHelper()->getControlPositionHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\MapTypeControlHelper',
-            $mapHelper->getMapTypeControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\MapTypeControlStyleHelper',
-            $mapHelper->getMapTypeControlHelper()->getMapTypeControlStyleHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\OverviewMapControlHelper',
-            $mapHelper->getOverviewMapControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\PanControlHelper',
-            $mapHelper->getPanControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\RotateControlHelper',
-            $mapHelper->getRotateControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\ScaleControlHelper',
-            $mapHelper->getScaleControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\ScaleControlStyleHelper',
-            $mapHelper->getScaleControlHelper()->getScaleControlStyleHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\StreetViewControlHelper',
-            $mapHelper->getStreetViewControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\ZoomControlHelper',
-            $mapHelper->getZoomControlHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Controls\ZoomControlStyleHelper',
-            $mapHelper->getZoomControlHelper()->getZoomControlStyleHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerClusterHelper',
-            $mapHelper->getMarkerClusterHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\AnimationHelper',
-            $mapHelper->getMarkerClusterHelper()->getHelper(MarkerCluster::_DEFAULT)->getMarkerHelper()->getAnimationHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\CircleHelper',
-            $mapHelper->getCircleHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\EncodedPolylineHelper',
-            $mapHelper->getEncodedPolylineHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\GroundOverlayHelper',
-            $mapHelper->getGroundOverlayHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\InfoWindowHelper',
-            $mapHelper->getInfoWindowHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerHelper',
-            $mapHelper->getMarkerClusterHelper()->getHelper(MarkerCluster::_DEFAULT)->getMarkerHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerImageHelper',
-            $mapHelper->getMarkerImageHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerShapeHelper',
-            $mapHelper->getMarkerShapeHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\PolygonHelper',
-            $mapHelper->getPolygonHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\PolylineHelper',
-            $mapHelper->getPolylineHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\RectangleHelper',
-            $mapHelper->getRectangleHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Layers\KMLLayerHelper',
-            $mapHelper->getKmlLayerHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Events\EventManagerHelper',
-            $mapHelper->getEventManagerHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Geometry\EncodingHelper',
-            $mapHelper->getEncodedPolylineHelper()->getEncodingHelper()
-        );
-
-        $coreExtensionHelper = $mapHelper->getExtensionHelper('core');
-
-        $this->assertInstanceOf('Ivory\GoogleMap\Helper\Extension\CoreExtensionHelper', $coreExtensionHelper);
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\ApiHelper',
-            $coreExtensionHelper->getApiHelper()
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Helper\Overlays\MarkerClusterHelper',
-            $coreExtensionHelper->getMarkerClusterHelper()
-        );
+        $this->assertSame('key', $this->container->get('ivory.google_map.geocoder')->getKey());
     }
 
-    public function testClassesWithConfiguration()
+    public function testGeocoderBusinessAccount()
     {
-        $this->loadConfiguration($this->container, 'classes');
+        $this->loadConfiguration($this->container, 'geocoder_business_account');
         $this->container->compile();
 
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Map',
-            $this->container->get('ivory_google_map.map')
-        );
+        $geocoder = $this->container->get('ivory.google_map.geocoder');
 
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Coordinate',
-            $this->container->get('ivory_google_map.coordinate')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Bound',
-            $this->container->get('ivory_google_map.bound')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Point',
-            $this->container->get('ivory_google_map.point')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Base\Size',
-            $this->container->get('ivory_google_map.size')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\MapTypeControl',
-            $this->container->get('ivory_google_map.map_type_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\OverviewMapControl',
-            $this->container->get('ivory_google_map.overview_map_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\PanControl',
-            $this->container->get('ivory_google_map.pan_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\RotateControl',
-            $this->container->get('ivory_google_map.rotate_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\ScaleControl',
-            $this->container->get('ivory_google_map.scale_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\StreetViewControl',
-            $this->container->get('ivory_google_map.street_view_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Controls\ZoomControl',
-            $this->container->get('ivory_google_map.zoom_control')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Circle',
-            $this->container->get('ivory_google_map.circle')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\EncodedPolyline',
-            $this->container->get('ivory_google_map.encoded_polyline')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\GroundOverlay',
-            $this->container->get('ivory_google_map.ground_overlay')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\InfoWindow',
-            $this->container->get('ivory_google_map.info_window')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerCluster',
-            $this->container->get('ivory_google_map.marker_cluster')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Marker',
-            $this->container->get('ivory_google_map.marker')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerImage',
-            $this->container->get('ivory_google_map.marker_image')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\MarkerShape',
-            $this->container->get('ivory_google_map.marker_shape')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Polygon',
-            $this->container->get('ivory_google_map.polygon')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Polyline',
-            $this->container->get('ivory_google_map.polyline')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Overlays\Rectangle',
-            $this->container->get('ivory_google_map.rectangle')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Layers\KMLLayer',
-            $this->container->get('ivory_google_map.kml_layer')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Events\EventManager',
-            $this->container->get('ivory_google_map.event_manager')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Events\Event',
-            $this->container->get('ivory_google_map.event')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\BusinessAccount',
-            $this->container->get('ivory_google_map.business_account')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Geocoding\Geocoder',
-            $this->container->get('ivory_google_map.geocoder')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Geocoding\GeocoderRequest',
-            $this->container->get('ivory_google_map.geocoder_request')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Directions\Directions',
-            $this->container->get('ivory_google_map.directions')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\Directions\DirectionsRequest',
-            $this->container->get('ivory_google_map.directions_request')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\DistanceMatrix\DistanceMatrix',
-            $this->container->get('ivory_google_map.distance_matrix')
-        );
-
-        $this->assertInstanceOf(
-            'Ivory\GoogleMapBundle\Tests\Fixtures\Model\Services\DistanceMatrix\DistanceMatrixRequest',
-            $this->container->get('ivory_google_map.distance_matrix_request')
-        );
+        $this->assertTrue($geocoder->hasBusinessAccount());
+        $this->assertSame('my-client', $geocoder->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $geocoder->getBusinessAccount()->getSecret());
+        $this->assertFalse($geocoder->getBusinessAccount()->hasChannel());
     }
 
-    public function testCustomExtensionHelpers()
+    public function testGeocoderBusinessAccountChannel()
     {
-        $this->loadConfiguration($this->container, 'extension_helpers');
+        $this->loadConfiguration($this->container, 'geocoder_business_account_channel');
         $this->container->compile();
 
-        $extensionHelpers = $this->container->get('ivory_google_map.helper.map')->getExtensionHelpers();
+        $geocoder = $this->container->get('ivory.google_map.geocoder');
 
-        $this->assertCount(2, $extensionHelpers);
+        $this->assertTrue($geocoder->hasBusinessAccount());
+        $this->assertSame('my-client', $geocoder->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $geocoder->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $geocoder->getBusinessAccount()->getChannel());
+    }
 
-        $this->assertArrayHasKey('core', $extensionHelpers);
-        $this->assertArrayHasKey('info_box', $extensionHelpers);
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testGeocoderBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_business_account_invalid');
+        $this->container->compile();
+    }
 
-        $this->assertInstanceOf(
-            'Ivory\GoogleMap\Helper\Extension\InfoBoxExtensionHelper',
-            $extensionHelpers['info_box']
-        );
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testGeocoderInvalid()
+    {
+        $this->loadConfiguration($this->container, 'geocoder_invalid');
+        $this->container->compile();
+    }
+
+    public function testTimeZone()
+    {
+        $this->loadConfiguration($this->container, 'time_zone');
+        $this->container->compile();
+
+        $timeZone = $this->container->get('ivory.google_map.time_zone');
+
+        $this->assertInstanceOf(TimeZone::class, $timeZone);
+        $this->assertSame($this->client, $timeZone->getClient());
+        $this->assertSame($this->messageFactory, $timeZone->getMessageFactory());
+        $this->assertTrue($timeZone->isHttps());
+        $this->assertSame(TimeZone::FORMAT_JSON, $timeZone->getFormat());
+        $this->assertFalse($timeZone->hasBusinessAccount());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage The http scheme is not supported.
+     */
+    public function testTimeZoneHttps()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_https');
+        $this->container->compile();
+
+        $this->container->get('ivory.google_map.time_zone');
+    }
+
+    public function testTimeZoneFormat()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_format');
+        $this->container->compile();
+
+        $this->assertSame(TimeZone::FORMAT_XML, $this->container->get('ivory.google_map.time_zone')->getFormat());
+    }
+
+    public function testTimeZoneApiKey()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.time_zone')->getKey());
+    }
+
+    public function testTimeZoneBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_business_account');
+        $this->container->compile();
+
+        $timeZone = $this->container->get('ivory.google_map.time_zone');
+
+        $this->assertTrue($timeZone->hasBusinessAccount());
+        $this->assertSame('my-client', $timeZone->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $timeZone->getBusinessAccount()->getSecret());
+        $this->assertFalse($timeZone->getBusinessAccount()->hasChannel());
+    }
+
+    public function testTimeZoneBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_business_account_channel');
+        $this->container->compile();
+
+        $timeZone = $this->container->get('ivory.google_map.time_zone');
+
+        $this->assertTrue($timeZone->hasBusinessAccount());
+        $this->assertSame('my-client', $timeZone->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $timeZone->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $timeZone->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testTimeZoneBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testTimeZoneInvalid()
+    {
+        $this->loadConfiguration($this->container, 'time_zone_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage No "class" attribute found for the tag "ivory.google_map.helper.renderer.extendable" on the service "acme.map.helper.renderer.extendable".
+     */
+    public function testMissingExtendableRendererClassTagAttribute()
+    {
+        $this->loadConfiguration($this->container, 'extendable');
+        $this->container->compile();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|HttpClient
+     */
+    private function createClientMock()
+    {
+        return $this->createMock(HttpClient::class);
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|MessageFactory
+     */
+    private function createMessageFactoryMock()
+    {
+        return $this->createMock(MessageFactory::class);
     }
 }

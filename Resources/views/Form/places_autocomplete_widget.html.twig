@@ -1,4 +1,6 @@
 {% block places_autocomplete_widget %}
-    {{ html | raw }}
-    {{ javascripts | raw }}
+    {{ ivory_google_place_autocomplete(autocomplete) }}
+    {% if api %}
+        {{ ivory_google_api([autocomplete]) }}
+    {% endif %}
 {% endblock %}
