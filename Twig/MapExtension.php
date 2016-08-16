@@ -47,22 +47,28 @@ class MapExtension extends \Twig_Extension
     }
 
     /**
-     * @param Map $map
+     * @param Map      $map
+     * @param string[] $attributes
      *
      * @return string
      */
-    public function render(Map $map)
+    public function render(Map $map, array $attributes = [])
     {
+        $map->addHtmlAttributes($attributes);
+
         return $this->mapHelper->render($map);
     }
 
     /**
-     * @param Map $map
+     * @param Map      $map
+     * @param string[] $attributes
      *
      * @return string
      */
-    public function renderHtml(Map $map)
+    public function renderHtml(Map $map, array $attributes = [])
     {
+        $map->addHtmlAttributes($attributes);
+
         return $this->mapHelper->renderHtml($map);
     }
 

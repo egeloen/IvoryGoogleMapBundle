@@ -70,7 +70,6 @@ class PlaceAutocompleteType extends AbstractType
         $autocomplete = $form->getConfig()->getAttribute('autocomplete');
         $autocomplete->setInputId($view->vars['id']);
         $autocomplete->setValue(!empty($view->vars['value']) ? $view->vars['value'] : null);
-        $autocomplete->addInputAttributes($view->vars['attr']);
         $autocomplete->setInputAttribute('name', $view->vars['full_name']);
 
         $view->vars['api'] = $options['api'];

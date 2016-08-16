@@ -48,21 +48,27 @@ class PlaceAutocompleteExtension extends \Twig_Extension
 
     /**
      * @param Autocomplete $autocomplete
+     * @param string[]     $attributes
      *
      * @return string
      */
-    public function render(Autocomplete $autocomplete)
+    public function render(Autocomplete $autocomplete, array $attributes = [])
     {
+        $autocomplete->addInputAttributes($attributes);
+
         return $this->placeAutocompleteHelper->render($autocomplete);
     }
 
     /**
      * @param Autocomplete $autocomplete
+     * @param string[]     $attributes
      *
      * @return string
      */
-    public function renderHtml(Autocomplete $autocomplete)
+    public function renderHtml(Autocomplete $autocomplete, array $attributes = [])
     {
+        $autocomplete->addInputAttributes($attributes);
+
         return $this->placeAutocompleteHelper->renderHtml($autocomplete);
     }
 
