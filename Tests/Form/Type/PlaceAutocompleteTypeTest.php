@@ -24,7 +24,7 @@ use Symfony\Component\Form\Forms;
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class PlacesAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
+class PlaceAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FormFactoryInterface
@@ -113,19 +113,6 @@ class PlacesAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('autocomplete', $view->vars);
         $this->assertInstanceOf(Autocomplete::class, $autocomplete = $view->vars['autocomplete']);
         $this->assertSame($value, $autocomplete->getValue());
-    }
-
-    public function testInputAttributes()
-    {
-        $form = $this->createForm(null, ['attr' => $inputAttributes = ['foo' => 'bar']]);
-        $view = $form->createView();
-
-        $this->assertArrayHasKey('autocomplete', $view->vars);
-        $this->assertInstanceOf(Autocomplete::class, $autocomplete = $view->vars['autocomplete']);
-        $this->assertSame(
-            array_merge($inputAttributes, ['name' => 'place_autocomplete']),
-            $autocomplete->getInputAttributes()
-        );
     }
 
     public function testSubmit()
