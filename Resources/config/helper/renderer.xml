@@ -76,6 +76,23 @@
         />
 
         <service
+            id="ivory.google_map.helper.renderer.control.custom"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\CustomControlRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.control.fullscreen"
+            class="Ivory\GoogleMap\Helper\Renderer\Control\FullscreenControlRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.control.position" />
+            <tag name="ivory.google_map.helper.renderer.control" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.renderer.control.map_type"
             class="Ivory\GoogleMap\Helper\Renderer\Control\MapTypeControlRenderer"
             parent="ivory.google_map.helper.renderer.json"
