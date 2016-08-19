@@ -73,6 +73,24 @@
         </service>
 
         <service
+            id="ivory.google_map.helper.subscriber.control"
+            class="Ivory\GoogleMap\Helper\Subscriber\Control\ControlSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.control.custom"
+            class="Ivory\GoogleMap\Helper\Subscriber\Control\CustomControlSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.control.custom" />
+            <argument type="service" id="ivory.google_map.helper.renderer.control.custom" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.subscriber.event"
             class="Ivory\GoogleMap\Helper\Subscriber\Event\EventSubscriber"
             parent="ivory.google_map.helper.subscriber.abstract"
