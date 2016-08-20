@@ -19,6 +19,7 @@ use Ivory\GoogleMap\Helper\MapHelper;
 use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
 use Ivory\GoogleMap\Service\Directions\Directions;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrix;
+use Ivory\GoogleMap\Service\Elevation\Elevation;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderProvider;
 use Ivory\GoogleMap\Service\TimeZone\TimeZone;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
@@ -102,6 +103,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertFalse($this->container->has('ivory.google_map.directions'));
         $this->assertFalse($this->container->has('ivory.google_map.distance_matrix'));
+        $this->assertFalse($this->container->has('ivory.google_map.elevation'));
         $this->assertFalse($this->container->has('ivory.google_map.geocoder'));
         $this->assertFalse($this->container->has('ivory.google_map.time_zone'));
 
@@ -346,6 +348,89 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     public function testDistanceMatrixInvalid()
     {
         $this->loadConfiguration($this->container, 'distance_matrix_invalid');
+        $this->container->compile();
+    }
+
+    public function testElevation()
+    {
+        $this->loadConfiguration($this->container, 'elevation');
+        $this->container->compile();
+
+        $elevation = $this->container->get('ivory.google_map.elevation');
+
+        $this->assertInstanceOf(Elevation::class, $elevation);
+        $this->assertSame($this->client, $elevation->getClient());
+        $this->assertSame($this->messageFactory, $elevation->getMessageFactory());
+        $this->assertTrue($elevation->isHttps());
+        $this->assertSame(Elevation::FORMAT_JSON, $elevation->getFormat());
+        $this->assertFalse($elevation->hasBusinessAccount());
+    }
+
+    public function testElevationHttps()
+    {
+        $this->loadConfiguration($this->container, 'elevation_https');
+        $this->container->compile();
+
+        $this->assertFalse($this->container->get('ivory.google_map.elevation')->isHttps());
+    }
+
+    public function testElevationFormat()
+    {
+        $this->loadConfiguration($this->container, 'elevation_format');
+        $this->container->compile();
+
+        $this->assertSame(Elevation::FORMAT_XML, $this->container->get('ivory.google_map.elevation')->getFormat());
+    }
+
+    public function testElevationApiKey()
+    {
+        $this->loadConfiguration($this->container, 'elevation_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.elevation')->getKey());
+    }
+
+    public function testElevationBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'elevation_business_account');
+        $this->container->compile();
+
+        $elevation = $this->container->get('ivory.google_map.elevation');
+
+        $this->assertTrue($elevation->hasBusinessAccount());
+        $this->assertSame('my-client', $elevation->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $elevation->getBusinessAccount()->getSecret());
+        $this->assertFalse($elevation->getBusinessAccount()->hasChannel());
+    }
+
+    public function testElevationBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'elevation_business_account_channel');
+        $this->container->compile();
+
+        $elevation = $this->container->get('ivory.google_map.elevation');
+
+        $this->assertTrue($elevation->hasBusinessAccount());
+        $this->assertSame('my-client', $elevation->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $elevation->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $elevation->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testElevationBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'elevation_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testElevationInvalid()
+    {
+        $this->loadConfiguration($this->container, 'elevation_invalid');
         $this->container->compile();
     }
 

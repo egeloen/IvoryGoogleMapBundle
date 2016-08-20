@@ -10,5 +10,6 @@ Once you're familiar with the library, you can learn more about the following in
  - [Services](/Resources/doc/service/index.md)
      - [Directions](/Resources/doc/service/directions.md)
      - [Distance Matrix](/Resources/doc/service/distance_matrix.md)
+     - [Elevation](/Resources/doc/service/elevation.md)
      - [Geocoder](/Resources/doc/service/geocoder.md)
      - [Time Zone](/Resources/doc/service/time_zone.md)

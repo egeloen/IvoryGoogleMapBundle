@@ -1,18 +1,17 @@
-# Directions
+# Elevation
 
-The Google Directions API is a service that calculates directions between locations using an HTTP request. You can
-search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions
-may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia")
-or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
+The Google Maps Elevation API provides a simple interface to query locations on the earth for elevation data. 
+Additionally, you may request sampled elevation data along paths, allowing you to calculate elevation changes along 
+routes.
 
 ## Dependencies
 
-The Directions API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
+The Elevation API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
 client abstraction library. To install it, read this [documentation](/Resources/doc/installation.md).
 
 ## Configuration
 
-In order to use the directions service, you need to configure it.
+In order to use the elevation service, you need to configure it.
 
 ### Http client and message factory
 
@@ -35,7 +34,7 @@ Then, configure the Google Map bundle:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    elevation:
         client: httplug.client.default
         message_factory: httplug.message_factory.default
 ```
@@ -46,7 +45,7 @@ The https flag allows you to enable/disable https for your http request:
 
 ``` yaml
 ivory_google_map:
-    directions: 
+    elevation: 
         https: true
 ```
 
@@ -56,7 +55,7 @@ The format allows you to use json/xml format for your http request:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    elevation:
         format: json
 ```
 
@@ -66,7 +65,7 @@ The API key allows you to bypass Google limitation according to your account pla
 
 ``` yaml
 ivory_google_map:
-    directions:
+    elevation:
         api_key: ~
 ```
 
@@ -76,7 +75,7 @@ The business account allows you to use Google Premium account:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    elevation:
         business_account:
             client_id: ~
             secret: ~
@@ -85,17 +84,18 @@ ivory_google_map:
 
 ## Usage
 
-Once you have configured your directions service, you can fetch it from the container and use it as explained in the 
-[documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/directions/directions.md)
+Once you have configured your elevation service, you can fetch it from the container and use it as explained in the 
+[documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/elevation/elevation.md)
 
 ``` php
-use Ivory\GoogleMap\Service\Base\Location\AddressLocation;
-use Ivory\GoogleMap\Service\Directions\Request\DirectionsRequest;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Service\Base\Location\CoordinateLocation;
+use Ivory\GoogleMap\Service\ELevation\PositionalElevationRequest;
 
-$request = new DirectionsRequest(
-   new AddressLocation('New York'), 
-   new AddressLocation('Washington')
-);
+$request = new PositionalElevationRequest([
+   new CoordinateLocation(new Coordinate(40.714728, -73.998672)),
+   new CoordinateLocation(new Coordinate(-34.397, 150.644)),
+]);
 
 $response = $this->container->get('ivory.google_map.directions')->route($request);
 ```
