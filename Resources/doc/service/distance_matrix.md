@@ -91,8 +91,13 @@ Once you have configured your distance matrix service, you can fetch it from the
 the [documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/distance_matrix/distance_matrix.md)
 
 ``` php
+use Ivory\GoogleMap\Service\Base\Location\AddressLocation;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrixRequest;
 
-$request = new DistanceMatrixRequest(['Vancouver BC'], ['San Francisco']);
+$request = new DistanceMatrixRequest(
+   [new AddressLocation('Vancouver BC')], 
+   [new AddressLocation('San Francisco')]
+);
+
 $response = $this->container->get('ivory.google_map.distance_matrix')->process($request);
 ```

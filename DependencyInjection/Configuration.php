@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('language')->defaultValue('%locale%')->end()
             ->scalarNode('api_key')->end();
 
-        foreach (['directions', 'distance_matrix', 'geocoder', 'time_zone'] as $service) {
+        foreach (['directions', 'distance_matrix', 'elevation', 'geocoder', 'time_zone'] as $service) {
             $children->append($this->createServiceNode($service));
         }
 

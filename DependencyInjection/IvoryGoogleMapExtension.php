@@ -75,7 +75,7 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
      */
     private function loadServices(array $config, ContainerBuilder $container, LoaderInterface $loader)
     {
-        foreach (['directions', 'distance_matrix', 'geocoder', 'time_zone'] as $service) {
+        foreach (['directions', 'distance_matrix', 'elevation', 'geocoder', 'time_zone'] as $service) {
             if (isset($config[$service]) && !empty($config[$service])) {
                 $this->loadService($service, $config[$service], $container, $loader);
             }

@@ -92,5 +92,6 @@ Once you have configured your geocoder service, you can fetch it from the contai
 [documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/geocoder/geocoder.md)
 
 ``` php
-$response = $this->container->get('ivory.google_map.geocoder')->geocode('1600 Amphitheatre Parkway, Mountain View, CA');
+$request = '1600 Amphitheatre Parkway, Mountain View, CA';
+$response = $this->container->get('ivory.google_map.geocoder')->geocode($request);
 ```
