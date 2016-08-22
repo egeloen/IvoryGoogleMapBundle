@@ -15,7 +15,7 @@ In order to use the elevation service, you need to configure it.
 
 ### Http client and message factory
 
-The http client and message factory are mandatory. They define which http client and message factory the directions 
+The http client and message factory are mandatory. They define which http client and message factory the direction 
 service will use for issuing http requests.
  
 First, configure the [Httplug](http://httplug.io/) bundle.
@@ -97,5 +97,5 @@ $request = new PositionalElevationRequest([
    new CoordinateLocation(new Coordinate(-34.397, 150.644)),
 ]);
 
-$response = $this->container->get('ivory.google_map.directions')->route($request);
+$response = $this->container->get('ivory.google_map.direction')->route($request);
 ```

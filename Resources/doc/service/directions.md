@@ -1,22 +1,22 @@
-# Directions
+# Direction
 
-The Google Directions API is a service that calculates directions between locations using an HTTP request. You can
-search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions
+The Google Direction API is a service that calculates direction between locations using an HTTP request. You can
+search for direction for several modes of transportation, include transit, driving, walking or cycling. Direction
 may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia")
-or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
+or as latitude/longitude coordinates. The Direction API can return multi-part direction using a series of waypoints.
 
 ## Dependencies
 
-The Directions API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
+The Direction API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
 client abstraction library. To install it, read this [documentation](/Resources/doc/installation.md).
 
 ## Configuration
 
-In order to use the directions service, you need to configure it.
+In order to use the direction service, you need to configure it.
 
 ### Http client and message factory
 
-The http client and message factory are mandatory. They define which http client and message factory the directions 
+The http client and message factory are mandatory. They define which http client and message factory the direction 
 service will use for issuing http requests.
  
 First, configure the [Httplug](http://httplug.io/) bundle.
@@ -35,7 +35,7 @@ Then, configure the Google Map bundle:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    direction:
         client: httplug.client.default
         message_factory: httplug.message_factory.default
 ```
@@ -46,7 +46,7 @@ The https flag allows you to enable/disable https for your http request:
 
 ``` yaml
 ivory_google_map:
-    directions: 
+    direction: 
         https: true
 ```
 
@@ -56,7 +56,7 @@ The format allows you to use json/xml format for your http request:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    direction:
         format: json
 ```
 
@@ -66,7 +66,7 @@ The API key allows you to bypass Google limitation according to your account pla
 
 ``` yaml
 ivory_google_map:
-    directions:
+    direction:
         api_key: ~
 ```
 
@@ -76,7 +76,7 @@ The business account allows you to use Google Premium account:
 
 ``` yaml
 ivory_google_map:
-    directions:
+    direction:
         business_account:
             client_id: ~
             secret: ~
@@ -85,17 +85,17 @@ ivory_google_map:
 
 ## Usage
 
-Once you have configured your directions service, you can fetch it from the container and use it as explained in the 
-[documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/directions/directions.md)
+Once you have configured your direction service, you can fetch it from the container and use it as explained in the 
+[documentation](https://github.com/egeloen/ivory-google-map/blob/master/doc/service/direction/direction.md)
 
 ``` php
 use Ivory\GoogleMap\Service\Base\Location\AddressLocation;
-use Ivory\GoogleMap\Service\Directions\Request\DirectionsRequest;
+use Ivory\GoogleMap\Service\Direction\Request\DirectionRequest;
 
-$request = new DirectionsRequest(
+$request = new DirectionRequest(
    new AddressLocation('New York'), 
    new AddressLocation('Washington')
 );
 
-$response = $this->container->get('ivory.google_map.directions')->route($request);
+$response = $this->container->get('ivory.google_map.direction')->route($request);
 ```

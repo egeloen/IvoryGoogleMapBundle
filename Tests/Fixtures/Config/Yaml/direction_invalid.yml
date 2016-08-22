@@ -6,7 +6,4 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    directions:
-        client: httplug.client
-        message_factory: httplug.message_factory
-        business_account: ~
+    direction: ~
