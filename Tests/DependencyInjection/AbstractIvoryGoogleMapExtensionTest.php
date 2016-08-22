@@ -17,7 +17,7 @@ use Ivory\GoogleMap\Helper\ApiHelper;
 use Ivory\GoogleMap\Helper\Formatter\Formatter;
 use Ivory\GoogleMap\Helper\MapHelper;
 use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
-use Ivory\GoogleMap\Service\Directions\Directions;
+use Ivory\GoogleMap\Service\Direction\Direction;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrix;
 use Ivory\GoogleMap\Service\Elevation\Elevation;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderProvider;
@@ -101,7 +101,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertTrue($this->container->get('ivory.google_map.helper.renderer.overlay.extendable')->hasRenderers());
         $this->assertTrue($this->container->get('ivory.google_map.helper.event_dispatcher')->hasListeners());
 
-        $this->assertFalse($this->container->has('ivory.google_map.directions'));
+        $this->assertFalse($this->container->has('ivory.google_map.direction'));
         $this->assertFalse($this->container->has('ivory.google_map.distance_matrix'));
         $this->assertFalse($this->container->has('ivory.google_map.elevation'));
         $this->assertFalse($this->container->has('ivory.google_map.geocoder'));
@@ -182,86 +182,86 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertSame('key', $this->container->get('ivory.google_map.helper.renderer.loader')->getKey());
     }
 
-    public function testDirections()
+    public function testDirection()
     {
-        $this->loadConfiguration($this->container, 'directions');
+        $this->loadConfiguration($this->container, 'direction');
         $this->container->compile();
 
-        $directions = $this->container->get('ivory.google_map.directions');
+        $direction = $this->container->get('ivory.google_map.direction');
 
-        $this->assertInstanceOf(Directions::class, $directions);
-        $this->assertSame($this->client, $directions->getClient());
-        $this->assertSame($this->messageFactory, $directions->getMessageFactory());
-        $this->assertTrue($directions->isHttps());
-        $this->assertSame(Directions::FORMAT_JSON, $directions->getFormat());
-        $this->assertFalse($directions->hasBusinessAccount());
+        $this->assertInstanceOf(Direction::class, $direction);
+        $this->assertSame($this->client, $direction->getClient());
+        $this->assertSame($this->messageFactory, $direction->getMessageFactory());
+        $this->assertTrue($direction->isHttps());
+        $this->assertSame(Direction::FORMAT_JSON, $direction->getFormat());
+        $this->assertFalse($direction->hasBusinessAccount());
     }
 
-    public function testDirectionsHttps()
+    public function testDirectionHttps()
     {
-        $this->loadConfiguration($this->container, 'directions_https');
+        $this->loadConfiguration($this->container, 'direction_https');
         $this->container->compile();
 
-        $this->assertFalse($this->container->get('ivory.google_map.directions')->isHttps());
+        $this->assertFalse($this->container->get('ivory.google_map.direction')->isHttps());
     }
 
-    public function testDirectionsFormat()
+    public function testDirectionFormat()
     {
-        $this->loadConfiguration($this->container, 'directions_format');
+        $this->loadConfiguration($this->container, 'direction_format');
         $this->container->compile();
 
-        $this->assertSame(Directions::FORMAT_XML, $this->container->get('ivory.google_map.directions')->getFormat());
+        $this->assertSame(Direction::FORMAT_XML, $this->container->get('ivory.google_map.direction')->getFormat());
     }
 
-    public function testDirectionsApiKey()
+    public function testDirectionApiKey()
     {
-        $this->loadConfiguration($this->container, 'directions_api_key');
+        $this->loadConfiguration($this->container, 'direction_api_key');
         $this->container->compile();
 
-        $this->assertSame('key', $this->container->get('ivory.google_map.directions')->getKey());
+        $this->assertSame('key', $this->container->get('ivory.google_map.direction')->getKey());
     }
 
-    public function testDirectionsBusinessAccount()
+    public function testDirectionBusinessAccount()
     {
-        $this->loadConfiguration($this->container, 'directions_business_account');
+        $this->loadConfiguration($this->container, 'direction_business_account');
         $this->container->compile();
 
-        $directions = $this->container->get('ivory.google_map.directions');
+        $direction = $this->container->get('ivory.google_map.direction');
 
-        $this->assertTrue($directions->hasBusinessAccount());
-        $this->assertSame('my-client', $directions->getBusinessAccount()->getClientId());
-        $this->assertSame('my-secret', $directions->getBusinessAccount()->getSecret());
-        $this->assertFalse($directions->getBusinessAccount()->hasChannel());
+        $this->assertTrue($direction->hasBusinessAccount());
+        $this->assertSame('my-client', $direction->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $direction->getBusinessAccount()->getSecret());
+        $this->assertFalse($direction->getBusinessAccount()->hasChannel());
     }
 
-    public function testDirectionsBusinessAccountChannel()
+    public function testDirectionBusinessAccountChannel()
     {
-        $this->loadConfiguration($this->container, 'directions_business_account_channel');
+        $this->loadConfiguration($this->container, 'direction_business_account_channel');
         $this->container->compile();
 
-        $directions = $this->container->get('ivory.google_map.directions');
+        $direction = $this->container->get('ivory.google_map.direction');
 
-        $this->assertTrue($directions->hasBusinessAccount());
-        $this->assertSame('my-client', $directions->getBusinessAccount()->getClientId());
-        $this->assertSame('my-secret', $directions->getBusinessAccount()->getSecret());
-        $this->assertSame('my-channel', $directions->getBusinessAccount()->getChannel());
-    }
-
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
-    public function testDirectionsBusinessAccountInvalid()
-    {
-        $this->loadConfiguration($this->container, 'directions_business_account_invalid');
-        $this->container->compile();
+        $this->assertTrue($direction->hasBusinessAccount());
+        $this->assertSame('my-client', $direction->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $direction->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $direction->getBusinessAccount()->getChannel());
     }
 
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testDirectionsInvalid()
+    public function testDirectionBusinessAccountInvalid()
     {
-        $this->loadConfiguration($this->container, 'directions_invalid');
+        $this->loadConfiguration($this->container, 'direction_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testDirectionInvalid()
+    {
+        $this->loadConfiguration($this->container, 'direction_invalid');
         $this->container->compile();
     }
 

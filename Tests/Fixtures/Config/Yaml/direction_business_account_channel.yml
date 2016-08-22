@@ -6,7 +6,10 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    directions:
+    direction:
         client: httplug.client
         message_factory: httplug.message_factory
-        api_key: key
+        business_account:
+            client_id: my-client
+            secret: my-secret
+            channel: my-channel

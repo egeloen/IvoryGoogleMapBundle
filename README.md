@@ -20,7 +20,7 @@ your Symfony2 project.
     - [Map](/Resources/doc/map.md)
     - [Place Autocomplete](/Resources/doc/place_autocomplete.md)
     - [Services](/Resources/doc/service/index.md)
-        - [Directions](/Resources/doc/service/directions.md)
+        - [Direction](/Resources/doc/service/direction.md)
         - [Distance Matrix](/Resources/doc/service/distance_matrix.md)
         - [Geocoder](/Resources/doc/service/geocoder.md)
         - [Time Zone](/Resources/doc/service/time_zone.md)

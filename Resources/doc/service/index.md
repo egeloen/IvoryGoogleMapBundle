@@ -1,6 +1,6 @@
 # Google Map API Services
 
- - [Directions](/Resources/doc/service/directions.md)
+ - [Direction](/Resources/doc/service/direction.md)
  - [Distance Matrix](/Resources/doc/service/distance_matrix.md)
  - [Elevation](/Resources/doc/service/elevation.md)
  - [Geocoder](/Resources/doc/service/geocoder.md)

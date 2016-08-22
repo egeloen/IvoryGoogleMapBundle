@@ -15,7 +15,7 @@ client abstraction library. To install it, read this [documentation](/Resources/
 
 ## Configuration
 
-In order to use the directions service, you need to configure it.
+In order to use the direction service, you need to configure it.
 
 ### Http client and message factory
 
