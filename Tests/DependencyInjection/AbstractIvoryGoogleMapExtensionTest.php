@@ -20,7 +20,7 @@ use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
 use Ivory\GoogleMap\Service\Direction\Direction;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrix;
 use Ivory\GoogleMap\Service\Elevation\Elevation;
-use Ivory\GoogleMap\Service\Geocoder\GeocoderProvider;
+use Ivory\GoogleMap\Service\Geocoder\Geocoder;
 use Ivory\GoogleMap\Service\TimeZone\TimeZone;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
@@ -441,11 +441,11 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $geocoder = $this->container->get('ivory.google_map.geocoder');
 
-        $this->assertInstanceOf(GeocoderProvider::class, $geocoder);
+        $this->assertInstanceOf(Geocoder::class, $geocoder);
         $this->assertSame($this->client, $geocoder->getClient());
         $this->assertSame($this->messageFactory, $geocoder->getMessageFactory());
         $this->assertTrue($geocoder->isHttps());
-        $this->assertSame(GeocoderProvider::FORMAT_JSON, $geocoder->getFormat());
+        $this->assertSame(Geocoder::FORMAT_JSON, $geocoder->getFormat());
         $this->assertFalse($geocoder->hasBusinessAccount());
     }
 
@@ -463,7 +463,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->compile();
 
         $this->assertSame(
-            GeocoderProvider::FORMAT_XML,
+            Geocoder::FORMAT_XML,
             $this->container->get('ivory.google_map.geocoder')->getFormat()
         );
     }

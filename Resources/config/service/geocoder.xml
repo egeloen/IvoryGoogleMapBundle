@@ -8,7 +8,7 @@
     <services>
         <service
             id="ivory.google_map.geocoder"
-            class="Ivory\GoogleMap\Service\Geocoder\GeocoderProvider"
+            class="Ivory\GoogleMap\Service\Geocoder\Geocoder"
         />
     </services>
 </container>
