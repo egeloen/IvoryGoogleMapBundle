@@ -8,7 +8,7 @@
     <services>
         <service
             id="ivory.google_map.distance_matrix"
-            class="Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrix"
+            class="Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrixService"
         />
     </services>
 </container>
