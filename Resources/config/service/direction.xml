@@ -8,7 +8,7 @@
     <services>
         <service
             id="ivory.google_map.direction"
-            class="Ivory\GoogleMap\Service\Direction\Direction"
+            class="Ivory\GoogleMap\Service\Direction\DirectionService"
         />
     </services>
 </container>

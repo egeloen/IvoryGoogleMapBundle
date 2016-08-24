@@ -24,8 +24,7 @@
         "symfony/form": "^2.3|^3.0",
         "symfony/phpunit-bridge": "^3.0",
         "symfony/yaml": "^2.3|^3.0",
-        "twig/twig": "^1.18",
-        "willdurand/geocoder": "^3.0"
+        "twig/twig": "^1.18"
     },
     "autoload": {
         "psr-4": { "Ivory\\GoogleMapBundle\\": "" }
