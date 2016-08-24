@@ -7,10 +7,7 @@ process is known as "reverse geocoding".
 
 ## Dependencies
 
-The Geocoder API uses [Geocoder](http://github.com/willdurand/Geocoder) which is the most popular PHP Geocoder. So, 
-first, I recommend you to read its documentation. To install it, read this [documentation](/Resources/doc/installation.md).
-
-It also requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
+The Geocoder API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
 client abstraction library. To install it, read this [documentation](/Resources/doc/installation.md).
 
 ## Configuration
