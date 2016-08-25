@@ -91,11 +91,13 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
     private function loadService($service, array $config, ContainerBuilder $container, LoaderInterface $loader)
     {
         $loader->load('service/'.$service.'.xml');
+        $loader->load('service/utility.xml');
 
         $definition = $container
             ->getDefinition($serviceName = 'ivory.google_map.'.$service)
             ->addArgument(new Reference($config['client']))
-            ->addArgument(new Reference($config['message_factory']));
+            ->addArgument(new Reference($config['message_factory']))
+            ->addArgument(new Reference('ivory.google_map.utility.parser'));
 
         if (isset($config['https'])) {
             $definition->addMethodCall('setHttps', [$config['https']]);
