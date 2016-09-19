@@ -15,7 +15,7 @@ Then, you can manipulate it as explained in the library [documentation](https://
 ## Configuration
 
 You can configure some global options related to the API in order to update its behavior. Be aware these options are 
-shared with the [Place autocomplete](/Resources/doc/places_autocomplete.md).
+shared with the [Place autocomplete](/Resources/doc/place_autocomplete.md).
 
 ### Debug
 
