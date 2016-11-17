@@ -137,14 +137,31 @@ $builder->add('field', PlaceAutocompleteType::class, [
 
 ## Configure api
 
-In order to make everything automatic, the bundle autmatically renders the Google API loading when rendering a place 
+In order to make everything automatic, the bundle automatically renders the Google API loading when rendering a place 
 autocomplete. If you want to disable this behavior, you can use:
 
 ``` php
 use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 
-$builder->add('field', PlaceAutocompleteType::class, [
-    'api' => false,
-]);
+$builder
+    ->add('field1', PlaceAutocompleteType::class, [
+        'api' => false,
+    ])
+    ->add('field2', PlaceAutocompleteType::class, [
+        'api' => false,
+    ]);
+```
+
+Disabling the API loading is also very useful if you want to render multiple autocompletes since the API loading can 
+only be triggered once. In order to load it once, you can use the following:
+
+``` twig
+{% block javascripts %}
+    {{ parent() }}
+    {{ ivory_google_api([
+        form.field1.vars['autocomplete'], 
+        form.field2.vars['autocomplete']
+    ]) }}
+{% endblock %}
 ```
