@@ -3,6 +3,7 @@ language: php
 php:
     - 5.6
     - 7.0
+    - 7.1
     - hhvm
 
 branches:
@@ -24,11 +25,16 @@ before_script:
     - composer self-update
     - composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}
     - composer require --no-update --dev symfony/form:${SYMFONY_VERSION}
+    - composer require --no-update --dev symfony/templating:${SYMFONY_VERSION}
     - composer require --no-update --dev symfony/yaml:${SYMFONY_VERSION}
     - if [[ "$SYMFONY_VERSION" = *dev* ]]; then sed -i "s/\"MIT\"/\"MIT\",\"minimum-stability\":\"dev\"/g" composer.json; fi
     - composer update --prefer-source `if [[ $COMPOSER_PREFER_LOWEST = true ]]; then echo "--prefer-lowest --prefer-stable"; fi`
 
-script: vendor/bin/phpunit --configuration phpunit.travis.xml
+script: vendor/bin/phpunit --configuration phpunit.travis.xml --coverage-clover build/clover.xml
+
+after_success:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover build/clover.xml
 
 matrix:
     include:
@@ -51,6 +57,11 @@ matrix:
         - php: 5.6
           env: SYMFONY_VERSION=3.1.* SYMFONY_DEPRECATIONS_HELPER=strict
         - php: 5.6
-          env: SYMFONY_VERSION=3.2.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=3.2.* SYMFONY_DEPRECATIONS_HELPER=strict
+        - php: 5.6
+          env: SYMFONY_VERSION=3.3.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
     allow_failures:
-        - env: SYMFONY_VERSION=3.2.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+        - env: SYMFONY_VERSION=3.3.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+
+notifications:
+    email: geloen.eric@gmail.com
