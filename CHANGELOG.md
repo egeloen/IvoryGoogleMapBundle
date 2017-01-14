@@ -2,6 +2,7 @@
 
 ### 3.0.0 (????-??-??)
 
+ * dd1c427 - [README] Add note about doc versions
  * 11b86cb - [Composer] Upgrade deps
  * fd7bba1 - [Scrutinizer] Add configuration file
  * f6182ff - [Gitignore] Reorganize by section
