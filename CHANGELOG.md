@@ -1,5 +1,30 @@
 # CHANGELOG
 
+### 3.0.0 (????-??-??)
+
+ * 11b86cb - [Composer] Upgrade deps
+ * fd7bba1 - [Scrutinizer] Add configuration file
+ * f6182ff - [Gitignore] Reorganize by section
+ * 1f37fed - Add .gitattributes file
+ * 8c277d9 - Add CONTRIBUTING file
+ * abbe3c7 - [License] Happy new year
+ * 9367774 - [Doc] Render multiple place autocompletes
+ * da0ef82 - Fix info window auto open rendering
+ * b664856 - Updated link that wasn't working properly
+ * 4324386 - [Service] Use the same parser for all services
+ * 5f88711 - [Service] Add suffix to all services
+ * fc8cc98 - [Doc] Drop 'willdurand/geocoder' dependency
+ * 85866db - [Direction] Fix according to last egeloen/google-map changes
+ * 19855f7 - Change bad place autocomplete widget name
+ * c078775 - [Service] Add elevation support
+ * 5bd545f - [Map] Add custom/fullscreen control support
+ * 9587e91 - [Layer] Add auto-zoom support
+ * 4b0f67f - [Layer] Add heatmap support
+ * b049e76 - [PlaceAutocomplete] Fix template attributes handling
+ * 50b3f13 - [Form] Fix place autocomplete resources
+ * 2ab3cb1 - [3.0] Sync with egeloen/google-map library
+ * 6e49219 - Update installation.md
+ 
 ### 2.2.1 (2014-10-30)
 
  * bd82776 - [Composer] Refine deps
