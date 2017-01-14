@@ -15,6 +15,9 @@ your Symfony2 project.
 
 ## Documentation
 
+**You're currently browsing the 3.x documentation, if you're using the 2.x, read 
+[this documentation](https://github.com/egeloen/IvoryGoogleMapBundle/tree/2.2.1) instead.**
+
  - [Installation](/Resources/doc/installation.md)
  - [Usage](/Resources/doc/usage.md)
     - [Map](/Resources/doc/map.md)
