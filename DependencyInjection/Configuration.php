@@ -60,16 +60,14 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('https')->end()
                 ->scalarNode('format')->end()
                 ->scalarNode('api_key')->end()
-                ->append($this->createBusinessAccountNode($service))
+                ->append($this->createBusinessAccountNode())
             ->end();
     }
 
     /**
-     * @param string $service
-     *
      * @return ArrayNodeDefinition
      */
-    private function createBusinessAccountNode($service)
+    private function createBusinessAccountNode()
     {
         return $this->createNode('business_account')
             ->children()

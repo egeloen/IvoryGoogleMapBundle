@@ -91,7 +91,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(PlaceAutocompleteHelper::class, $placeAutocompleteHelper);
 
         $formatter = $this->container->get('ivory.google_map.helper.formatter');
-        $loaderRenderer = $this->container->get('ivory.google_map.helper.renderer.loader');;
+        $loaderRenderer = $this->container->get('ivory.google_map.helper.renderer.loader');
 
         $this->assertSame($this->debug, $formatter->isDebug());
         $this->assertSame($this->locale, $loaderRenderer->getLanguage());

@@ -12,9 +12,6 @@
 namespace Ivory\GoogleMapBundle\Tests\Helper;
 
 use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\CleanTemplatingPass;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterExtendableRendererPass;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterHelperListenerPass;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
 use Ivory\GoogleMapBundle\Templating\ApiHelper;

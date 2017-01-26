@@ -30,7 +30,7 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
      */
     protected function loadInternal(array $config, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('form.xml');
         $loader->load('helper/collector.xml');

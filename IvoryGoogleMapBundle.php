@@ -12,11 +12,11 @@
 namespace Ivory\GoogleMapBundle;
 
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\CleanTemplatingPass;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterFormResourcePass;
-use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterLegacyHelperListenerPass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterControlRendererPass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterExtendableRendererPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterFormResourcePass;
 use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterHelperListenerPass;
+use Ivory\GoogleMapBundle\DependencyInjection\Compiler\RegisterLegacyHelperListenerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

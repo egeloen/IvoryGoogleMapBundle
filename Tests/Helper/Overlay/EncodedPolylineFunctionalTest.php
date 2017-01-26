@@ -13,6 +13,7 @@ namespace Ivory\GoogleMapBundle\Tests\Helper\Overlay;
 
 use Ivory\GoogleMapBundle\Tests\Helper\HelperFactory;
 use Ivory\Tests\GoogleMap\Helper\Functional\Overlay\EncodedPolylineFunctionalTest as BaseEncodedPolylineFunctionalTest;
+
 /**
  * @author GeLo <geloen.eric@gmail.com>
  *

@@ -16,7 +16,7 @@
         "egeloen/google-map": "^2.0@dev"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^1.11",
+        "friendsofphp/php-cs-fixer": "^2.0",
         "php-http/httplug": "^1.0",
         "php-http/message": "^1.3",
         "phpunit/phpunit": "^5.4",

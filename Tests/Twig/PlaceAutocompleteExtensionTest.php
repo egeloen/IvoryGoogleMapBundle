@@ -31,7 +31,7 @@ class PlaceAutocompleteExtensionTest extends AbstractExtensionTest
     protected function createExtension()
     {
         $this->placeAutocompleteHelper = $this->createPlaceAutocompleteHelperMock();
-        
+
         return new PlaceAutocompleteExtension($this->placeAutocompleteHelper);
     }
 
