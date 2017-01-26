@@ -2,6 +2,7 @@
 
 ### 3.0.0 (????-??-??)
 
+ * 3efa819 - [Composer] Upgrade friendsofphp/php-cs-fixer to 2.x
  * dd1c427 - [README] Add note about doc versions
  * 11b86cb - [Composer] Upgrade deps
  * fd7bba1 - [Scrutinizer] Add configuration file
