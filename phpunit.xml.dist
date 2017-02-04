@@ -8,6 +8,7 @@
     </testsuites>
     <php>
         <server name="BROWSER_NAME" value="chrome" />
+        <server name="SELENIUM_HOST" value="selenium" />
     </php>
     <groups>
         <exclude>
