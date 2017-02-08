@@ -2,6 +2,10 @@
 
 ### 3.0.0 (????-??-??)
 
+ * 5896f97 - [Docker] Add HHVM container
+ * 4a2dbe8 - [Docker] Rely directly on the selenium image
+ * f113779 - [Git] Fix gitattributes
+ * e79c4b6 - Add docker support
  * 3efa819 - [Composer] Upgrade friendsofphp/php-cs-fixer to 2.x
  * dd1c427 - [README] Add note about doc versions
  * 11b86cb - [Composer] Upgrade deps
