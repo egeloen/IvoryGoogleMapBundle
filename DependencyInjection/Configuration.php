@@ -33,8 +33,20 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('language')->defaultValue('%locale%')->end()
             ->scalarNode('api_key')->end();
 
-        foreach (['direction', 'distance_matrix', 'elevation', 'geocoder', 'time_zone'] as $service) {
-            $children->append($this->createServiceNode($service));
+        $services = [
+            'direction'          => true,
+            'distance_matrix'    => true,
+            'elevation'          => true,
+            'geocoder'           => true,
+            'place_autocomplete' => true,
+            'place_detail'       => true,
+            'place_photo'        => false,
+            'place_search'       => true,
+            'time_zone'          => true,
+        ];
+
+        foreach ($services as $service => $http) {
+            $children->append($this->createServiceNode($service, $http));
         }
 
         return $treeBuilder;
@@ -42,13 +54,20 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @param string $service
+     * @param bool   $http
      *
      * @return ArrayNodeDefinition
      */
-    private function createServiceNode($service)
+    private function createServiceNode($service, $http)
     {
-        return $this->createNode($service)
+        $node = $this->createNode($service);
+        $children = $node
             ->children()
+            ->scalarNode('api_key')->end()
+            ->append($this->createBusinessAccountNode());
+
+        if ($http) {
+            $children
                 ->scalarNode('client')
                     ->isRequired()
                     ->cannotBeEmpty()
@@ -57,11 +76,16 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
-                ->booleanNode('https')->end()
-                ->scalarNode('format')->end()
-                ->scalarNode('api_key')->end()
-                ->append($this->createBusinessAccountNode())
-            ->end();
+                ->scalarNode('format')->end();
+        } else {
+            $node
+                ->beforeNormalization()
+                    ->ifNull()
+                    ->then(function () { return []; })
+                ->end();
+        }
+
+        return $node;
     }
 
     /**

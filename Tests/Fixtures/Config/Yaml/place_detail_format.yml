@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    direction:
+    place_detail:
         client: httplug.client
         message_factory: httplug.message_factory
-        https: false
+        format: xml

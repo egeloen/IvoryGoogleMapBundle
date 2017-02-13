@@ -5,12 +5,15 @@ as that location's time offset from UTC.
 
 ## Dependencies
 
-The TimeZone API requires an http client and so, the library relies on [Httplug](http://httplug.io/) which is an http 
-client abstraction library. To install it, read this [documentation](/Resources/doc/installation.md).
+The Time Zone API requires an http client and a serializer. The library relies respectively on 
+[Httplug](http://httplug.io/) which is an http client abstraction library and the 
+[Ivory Serializer](https://github.com/egeloen/ivory-serializer) which is an advanced (de)-serialization library.
+
+To install them, read this [documentation](/Resources/doc/installation.md).
 
 ## Configuration
 
-In order to use the direction service, you need to configure it.
+By default, the time zone service is disabled. In order to enable the service, you need to configure it.
 
 ### Http client and message factory
 
@@ -36,16 +39,6 @@ ivory_google_map:
     time_zone:
         client: httplug.client.default
         message_factory: httplug.message_factory.default
-```
-
-### Https
-
-The https flag allows you to enable/disable https for your http request:
-
-``` yaml
-ivory_google_map:
-    time_zone: 
-        https: true
 ```
 
 ### Format

@@ -16,6 +16,8 @@
         "egeloen/google-map": "^2.0@dev"
     },
     "require-dev": {
+        "egeloen/serializer-bundle": "^1.0@dev",
+        "egeloen/serializer": "^1.0@dev",
         "friendsofphp/php-cs-fixer": "^2.0",
         "php-http/httplug": "^1.0",
         "php-http/message": "^1.3",

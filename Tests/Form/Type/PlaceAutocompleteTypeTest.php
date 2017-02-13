@@ -48,7 +48,7 @@ class PlaceAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('autocomplete', $view->vars);
         $this->assertInstanceOf(Autocomplete::class, $autocomplete = $view->vars['autocomplete']);
-        $this->assertStringStartsWith('place_autocomplete', $autocomplete->getVariable());
+        $this->assertStringStartsWith('autocomplete', $autocomplete->getVariable());
         $this->assertSame('place_autocomplete', $autocomplete->getHtmlId());
         $this->assertFalse($autocomplete->hasBound());
         $this->assertFalse($autocomplete->hasValue());

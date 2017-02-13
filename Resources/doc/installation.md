@@ -25,11 +25,16 @@ $ composer require egeloen/google-map-bundle
 
 If you want to use the [Direction](/Resources/doc/service/direction.md), 
 [Distance Matrix](/Resources//doc/service/distance_matrix.md), [Elevation](/Resources/doc/service/elevation.md), 
-[Geocoder](/Resources//doc/service/geocoder.md) or [Time Zone](/Resources/doc/service/time_zone.md) services, you will 
-need an http client and message factory via [Httplug](http://httplug.io/) which is an http client abstraction library. 
-It also provides a bundle, so let's install it to ease our life:
+[Geocoder](/Resources//doc/service/geocoder.md), [Place](/Resources//doc/service/place.md) or 
+[Time Zone](/Resources/doc/service/time_zone.md) services, you will need an http client and message factory via 
+[Httplug](http://httplug.io/) which is an http client abstraction library as well as the 
+[Ivory Serializer](https://github.com/egeloen/ivory-serializer) which is an advanced (de)-serialization library. 
+
+[Httplug](http://httplug.io/) and [Ivory Serializer](https://github.com/egeloen/ivory-serializer) provide bundles, so 
+let's install them to ease our life:
 
 ``` bash
+$ composer require egeloen/serializer-bundle
 $ composer require php-http/httplug-bundle
 $ composer require php-http/guzzle6-adapter
 ```
@@ -51,6 +56,7 @@ public function registerBundles()
         new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         
         // Optionally
+        new Ivory\SerializerBundle\IvorySerializerBundle(),
         new Http\HttplugBundle\HttplugBundle(),
     ];
 }

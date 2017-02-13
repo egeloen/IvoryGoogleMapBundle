@@ -32,14 +32,20 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('form.xml');
-        $loader->load('helper/collector.xml');
-        $loader->load('helper/helper.xml');
-        $loader->load('helper/renderer.xml');
-        $loader->load('helper/subscriber.xml');
-        $loader->load('helper/utility.xml');
-        $loader->load('templating.xml');
-        $loader->load('twig.xml');
+        $resources = [
+            'form',
+            'helper/collector',
+            'helper/helper',
+            'helper/renderer',
+            'helper/subscriber',
+            'helper/utility',
+            'templating',
+            'twig',
+        ];
+
+        foreach ($resources as $resource) {
+            $loader->load($resource.'.xml');
+        }
 
         $this->loadConfig($config, $container);
         $this->loadServices($config, $container, $loader);
@@ -75,9 +81,21 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
      */
     private function loadServices(array $config, ContainerBuilder $container, LoaderInterface $loader)
     {
-        foreach (['direction', 'distance_matrix', 'elevation', 'geocoder', 'time_zone'] as $service) {
-            if (isset($config[$service]) && !empty($config[$service])) {
-                $this->loadService($service, $config[$service], $container, $loader);
+        $services = [
+            'direction'          => true,
+            'distance_matrix'    => true,
+            'elevation'          => true,
+            'geocoder'           => true,
+            'place_autocomplete' => true,
+            'place_detail'       => true,
+            'place_photo'        => false,
+            'place_search'       => true,
+            'time_zone'          => true,
+        ];
+
+        foreach ($services as $service => $http) {
+            if (isset($config[$service])) {
+                $this->loadService($service, $config[$service], $container, $loader, $http);
             }
         }
     }
@@ -87,23 +105,28 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
      * @param mixed[]          $config
      * @param ContainerBuilder $container
      * @param LoaderInterface  $loader
+     * @param bool             $http
      */
-    private function loadService($service, array $config, ContainerBuilder $container, LoaderInterface $loader)
-    {
+    private function loadService(
+        $service,
+        array $config,
+        ContainerBuilder $container,
+        LoaderInterface $loader,
+        $http = true
+    ) {
         $loader->load('service/'.$service.'.xml');
-        $loader->load('service/utility.xml');
+        $definition = $container->getDefinition($serviceName = 'ivory.google_map.'.$service);
 
-        $definition = $container
-            ->getDefinition($serviceName = 'ivory.google_map.'.$service)
-            ->addArgument(new Reference($config['client']))
-            ->addArgument(new Reference($config['message_factory']))
-            ->addArgument(new Reference('ivory.google_map.utility.parser'));
+        if ($http) {
+            $loader->load('service/serializer.xml');
 
-        if (isset($config['https'])) {
-            $definition->addMethodCall('setHttps', [$config['https']]);
+            $definition
+                ->addArgument(new Reference($config['client']))
+                ->addArgument(new Reference($config['message_factory']))
+                ->addArgument(new Reference('ivory.serializer'));
         }
 
-        if (isset($config['format'])) {
+        if ($http && isset($config['format'])) {
             $definition->addMethodCall('setFormat', [$config['format']]);
         }
 
