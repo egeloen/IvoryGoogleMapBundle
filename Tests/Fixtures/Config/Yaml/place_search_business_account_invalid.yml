@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    geocoder:
+    place_search:
         client: httplug.client
         message_factory: httplug.message_factory
-        https: false
+        business_account: ~

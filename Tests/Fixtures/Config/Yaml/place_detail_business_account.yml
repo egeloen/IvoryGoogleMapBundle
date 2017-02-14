@@ -6,7 +6,9 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    distance_matrix:
+    place_detail:
         client: httplug.client
         message_factory: httplug.message_factory
-        https: false
+        business_account:
+            client_id: my-client
+            secret: my-secret

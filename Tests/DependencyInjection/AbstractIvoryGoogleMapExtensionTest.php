@@ -21,9 +21,14 @@ use Ivory\GoogleMap\Service\Direction\DirectionService;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrixService;
 use Ivory\GoogleMap\Service\Elevation\ElevationService;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Ivory\GoogleMap\Service\Place\Autocomplete\PlaceAutocompleteService;
+use Ivory\GoogleMap\Service\Place\Detail\PlaceDetailService;
+use Ivory\GoogleMap\Service\Place\Photo\PlacePhotoService;
+use Ivory\GoogleMap\Service\Place\Search\PlaceSearchService;
 use Ivory\GoogleMap\Service\TimeZone\TimeZoneService;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
+use Ivory\Serializer\SerializerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -58,15 +63,22 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     private $messageFactory;
 
     /**
+     * @var SerializerInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $serializer;
+
+    /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
         $this->container = new ContainerBuilder();
+        $this->container->setParameter('kernel.root_dir', __DIR__.'/..');
         $this->container->setParameter('kernel.debug', $this->debug = false);
         $this->container->setParameter('locale', $this->locale = 'en');
         $this->container->set('httplug.client', $this->client = $this->createClientMock());
         $this->container->set('httplug.message_factory', $this->messageFactory = $this->createMessageFactoryMock());
+        $this->container->set('ivory.serializer', $this->serializer = $this->createSerializerMock());
         $this->container->registerExtension($extension = new IvoryGoogleMapExtension());
         $this->container->loadFromExtension($extension->getAlias());
         (new IvoryGoogleMapBundle())->build($this->container);
@@ -192,17 +204,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(DirectionService::class, $direction);
         $this->assertSame($this->client, $direction->getClient());
         $this->assertSame($this->messageFactory, $direction->getMessageFactory());
-        $this->assertTrue($direction->isHttps());
+        $this->assertSame($this->serializer, $direction->getSerializer());
         $this->assertSame(DirectionService::FORMAT_JSON, $direction->getFormat());
         $this->assertFalse($direction->hasBusinessAccount());
-    }
-
-    public function testDirectionHttps()
-    {
-        $this->loadConfiguration($this->container, 'direction_https');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->get('ivory.google_map.direction')->isHttps());
     }
 
     public function testDirectionFormat()
@@ -275,17 +279,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(DistanceMatrixService::class, $distanceMatrix);
         $this->assertSame($this->client, $distanceMatrix->getClient());
         $this->assertSame($this->messageFactory, $distanceMatrix->getMessageFactory());
-        $this->assertTrue($distanceMatrix->isHttps());
+        $this->assertSame($this->serializer, $distanceMatrix->getSerializer());
         $this->assertSame(DistanceMatrixService::FORMAT_JSON, $distanceMatrix->getFormat());
         $this->assertFalse($distanceMatrix->hasBusinessAccount());
-    }
-
-    public function testDistanceMatrixHttps()
-    {
-        $this->loadConfiguration($this->container, 'distance_matrix_https');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->get('ivory.google_map.distance_matrix')->isHttps());
     }
 
     public function testDistanceMatrixFormat()
@@ -361,17 +357,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(ElevationService::class, $elevation);
         $this->assertSame($this->client, $elevation->getClient());
         $this->assertSame($this->messageFactory, $elevation->getMessageFactory());
-        $this->assertTrue($elevation->isHttps());
+        $this->assertSame($this->serializer, $elevation->getSerializer());
         $this->assertSame(ElevationService::FORMAT_JSON, $elevation->getFormat());
         $this->assertFalse($elevation->hasBusinessAccount());
-    }
-
-    public function testElevationHttps()
-    {
-        $this->loadConfiguration($this->container, 'elevation_https');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->get('ivory.google_map.elevation')->isHttps());
     }
 
     public function testElevationFormat()
@@ -444,17 +432,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(GeocoderService::class, $geocoder);
         $this->assertSame($this->client, $geocoder->getClient());
         $this->assertSame($this->messageFactory, $geocoder->getMessageFactory());
-        $this->assertTrue($geocoder->isHttps());
+        $this->assertSame($this->serializer, $geocoder->getSerializer());
         $this->assertSame(GeocoderService::FORMAT_JSON, $geocoder->getFormat());
         $this->assertFalse($geocoder->hasBusinessAccount());
-    }
-
-    public function testGeocoderHttps()
-    {
-        $this->loadConfiguration($this->container, 'geocoder_https');
-        $this->container->compile();
-
-        $this->assertFalse($this->container->get('ivory.google_map.geocoder')->isHttps());
     }
 
     public function testGeocoderFormat()
@@ -520,6 +500,295 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->container->compile();
     }
 
+    public function testPlaceAutocomplete()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete');
+        $this->container->compile();
+
+        $placeAutocomplete = $this->container->get('ivory.google_map.place_autocomplete');
+
+        $this->assertInstanceOf(PlaceAutocompleteService::class, $placeAutocomplete);
+        $this->assertSame($this->client, $placeAutocomplete->getClient());
+        $this->assertSame($this->messageFactory, $placeAutocomplete->getMessageFactory());
+        $this->assertSame($this->serializer, $placeAutocomplete->getSerializer());
+        $this->assertSame(PlaceAutocompleteService::FORMAT_JSON, $placeAutocomplete->getFormat());
+        $this->assertFalse($placeAutocomplete->hasBusinessAccount());
+    }
+
+    public function testPlaceAutocompleteFormat()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_format');
+        $this->container->compile();
+
+        $this->assertSame(
+            PlaceAutocompleteService::FORMAT_XML,
+            $this->container->get('ivory.google_map.place_autocomplete')->getFormat()
+        );
+    }
+
+    public function testPlaceAutocompleteApiKey()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.place_autocomplete')->getKey());
+    }
+
+    public function testPlaceAutocompleteBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_business_account');
+        $this->container->compile();
+
+        $placeAutocomplete = $this->container->get('ivory.google_map.place_autocomplete');
+
+        $this->assertTrue($placeAutocomplete->hasBusinessAccount());
+        $this->assertSame('my-client', $placeAutocomplete->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeAutocomplete->getBusinessAccount()->getSecret());
+        $this->assertFalse($placeAutocomplete->getBusinessAccount()->hasChannel());
+    }
+
+    public function testPlaceAutocompleteBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_business_account_channel');
+        $this->container->compile();
+
+        $placeAutocomplete = $this->container->get('ivory.google_map.place_autocomplete');
+
+        $this->assertTrue($placeAutocomplete->hasBusinessAccount());
+        $this->assertSame('my-client', $placeAutocomplete->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeAutocomplete->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $placeAutocomplete->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceAutocompleteBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceAutocompleteInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_autocomplete_invalid');
+        $this->container->compile();
+    }
+
+    public function testPlaceDetail()
+    {
+        $this->loadConfiguration($this->container, 'place_detail');
+        $this->container->compile();
+
+        $placeDetail = $this->container->get('ivory.google_map.place_detail');
+
+        $this->assertInstanceOf(PlaceDetailService::class, $placeDetail);
+        $this->assertSame($this->client, $placeDetail->getClient());
+        $this->assertSame($this->messageFactory, $placeDetail->getMessageFactory());
+        $this->assertSame($this->serializer, $placeDetail->getSerializer());
+        $this->assertSame(PlaceDetailService::FORMAT_JSON, $placeDetail->getFormat());
+        $this->assertFalse($placeDetail->hasBusinessAccount());
+    }
+
+    public function testPlaceDetailFormat()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_format');
+        $this->container->compile();
+
+        $this->assertSame(
+            PlaceDetailService::FORMAT_XML,
+            $this->container->get('ivory.google_map.place_detail')->getFormat()
+        );
+    }
+
+    public function testPlaceDetailApiKey()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.place_detail')->getKey());
+    }
+
+    public function testPlaceDetailBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_business_account');
+        $this->container->compile();
+
+        $placeDetail = $this->container->get('ivory.google_map.place_detail');
+
+        $this->assertTrue($placeDetail->hasBusinessAccount());
+        $this->assertSame('my-client', $placeDetail->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeDetail->getBusinessAccount()->getSecret());
+        $this->assertFalse($placeDetail->getBusinessAccount()->hasChannel());
+    }
+
+    public function testPlaceDetailBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_business_account_channel');
+        $this->container->compile();
+
+        $placeDetail = $this->container->get('ivory.google_map.place_detail');
+
+        $this->assertTrue($placeDetail->hasBusinessAccount());
+        $this->assertSame('my-client', $placeDetail->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeDetail->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $placeDetail->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceDetailBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceDetailInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_detail_invalid');
+        $this->container->compile();
+    }
+
+    public function testPlacePhoto()
+    {
+        $this->loadConfiguration($this->container, 'place_photo');
+        $this->container->compile();
+
+        $placePhoto = $this->container->get('ivory.google_map.place_photo');
+
+        $this->assertInstanceOf(PlacePhotoService::class, $placePhoto);
+        $this->assertFalse($placePhoto->hasKey());
+        $this->assertFalse($placePhoto->hasBusinessAccount());
+    }
+
+    public function testPlacePhotoApiKey()
+    {
+        $this->loadConfiguration($this->container, 'place_photo_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.place_photo')->getKey());
+    }
+
+    public function testPlacePhotoBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'place_photo_business_account');
+        $this->container->compile();
+
+        $placePhoto = $this->container->get('ivory.google_map.place_photo');
+
+        $this->assertTrue($placePhoto->hasBusinessAccount());
+        $this->assertSame('my-client', $placePhoto->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placePhoto->getBusinessAccount()->getSecret());
+        $this->assertFalse($placePhoto->getBusinessAccount()->hasChannel());
+    }
+
+    public function testPlacePhotoBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'place_photo_business_account_channel');
+        $this->container->compile();
+
+        $placePhoto = $this->container->get('ivory.google_map.place_photo');
+
+        $this->assertTrue($placePhoto->hasBusinessAccount());
+        $this->assertSame('my-client', $placePhoto->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placePhoto->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $placePhoto->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlacePhotoBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_photo_business_account_invalid');
+        $this->container->compile();
+    }
+
+    public function testPlaceSearch()
+    {
+        $this->loadConfiguration($this->container, 'place_search');
+        $this->container->compile();
+
+        $placeSearch = $this->container->get('ivory.google_map.place_search');
+
+        $this->assertInstanceOf(PlaceSearchService::class, $placeSearch);
+        $this->assertSame($this->client, $placeSearch->getClient());
+        $this->assertSame($this->messageFactory, $placeSearch->getMessageFactory());
+        $this->assertSame($this->serializer, $placeSearch->getSerializer());
+        $this->assertSame(PlaceSearchService::FORMAT_JSON, $placeSearch->getFormat());
+        $this->assertFalse($placeSearch->hasBusinessAccount());
+    }
+
+    public function testPlaceSearchFormat()
+    {
+        $this->loadConfiguration($this->container, 'place_search_format');
+        $this->container->compile();
+
+        $this->assertSame(
+            PlaceSearchService::FORMAT_XML,
+            $this->container->get('ivory.google_map.place_search')->getFormat()
+        );
+    }
+
+    public function testPlaceSearchApiKey()
+    {
+        $this->loadConfiguration($this->container, 'place_search_api_key');
+        $this->container->compile();
+
+        $this->assertSame('key', $this->container->get('ivory.google_map.place_search')->getKey());
+    }
+
+    public function testPlaceSearchBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'place_search_business_account');
+        $this->container->compile();
+
+        $placeSearch = $this->container->get('ivory.google_map.place_search');
+
+        $this->assertTrue($placeSearch->hasBusinessAccount());
+        $this->assertSame('my-client', $placeSearch->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeSearch->getBusinessAccount()->getSecret());
+        $this->assertFalse($placeSearch->getBusinessAccount()->hasChannel());
+    }
+
+    public function testPlaceSearchBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'place_search_business_account_channel');
+        $this->container->compile();
+
+        $placeSearch = $this->container->get('ivory.google_map.place_search');
+
+        $this->assertTrue($placeSearch->hasBusinessAccount());
+        $this->assertSame('my-client', $placeSearch->getBusinessAccount()->getClientId());
+        $this->assertSame('my-secret', $placeSearch->getBusinessAccount()->getSecret());
+        $this->assertSame('my-channel', $placeSearch->getBusinessAccount()->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceSearchBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_search_business_account_invalid');
+        $this->container->compile();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testPlaceSearchInvalid()
+    {
+        $this->loadConfiguration($this->container, 'place_search_invalid');
+        $this->container->compile();
+    }
+
     public function testTimeZone()
     {
         $this->loadConfiguration($this->container, 'time_zone');
@@ -530,21 +799,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         $this->assertInstanceOf(TimeZoneService::class, $timeZone);
         $this->assertSame($this->client, $timeZone->getClient());
         $this->assertSame($this->messageFactory, $timeZone->getMessageFactory());
-        $this->assertTrue($timeZone->isHttps());
+        $this->assertSame($this->serializer, $timeZone->getSerializer());
         $this->assertSame(TimeZoneService::FORMAT_JSON, $timeZone->getFormat());
         $this->assertFalse($timeZone->hasBusinessAccount());
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The http scheme is not supported.
-     */
-    public function testTimeZoneHttps()
-    {
-        $this->loadConfiguration($this->container, 'time_zone_https');
-        $this->container->compile();
-
-        $this->container->get('ivory.google_map.time_zone');
     }
 
     public function testTimeZoneFormat()
@@ -631,5 +888,13 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
     private function createMessageFactoryMock()
     {
         return $this->createMock(MessageFactory::class);
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|SerializerInterface
+     */
+    private function createSerializerMock()
+    {
+        return $this->createMock(SerializerInterface::class);
     }
 }
