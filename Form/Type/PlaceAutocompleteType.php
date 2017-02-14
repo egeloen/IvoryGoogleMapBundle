@@ -81,47 +81,29 @@ class PlaceAutocompleteType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'variable'        => null,
-            'components'      => [],
-            'bound'           => null,
-            'dom_events'      => [],
-            'dom_events_once' => [],
-            'events'          => [],
-            'events_once'     => [],
-            'types'           => [],
-            'libraries'       => [],
-            'api'             => true,
-        ]);
-
-        $allowedTypesMap = [
-            'variable'        => ['string', 'null'],
-            'bound'           => [Bound::class, 'null'],
-            'components'      => 'array',
-            'dom_events'      => 'array',
-            'dom_events_once' => 'array',
-            'events'          => 'array',
-            'events_once'     => 'array',
-            'types'           => 'array',
-            'libraries'       => 'array',
-            'api'             => 'bool',
-        ];
-
-        if (Kernel::VERSION_ID >= 20600) {
-            foreach ($allowedTypesMap as $option => $allowedTypes) {
-                $resolver->addAllowedTypes($option, $allowedTypes);
-            }
-        } else {
-            $resolver->addAllowedTypes($allowedTypesMap);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
+        $resolver
+            ->setDefaults([
+                'variable'        => null,
+                'components'      => [],
+                'bound'           => null,
+                'dom_events'      => [],
+                'dom_events_once' => [],
+                'events'          => [],
+                'events_once'     => [],
+                'types'           => [],
+                'libraries'       => [],
+                'api'             => true,
+            ])
+            ->addAllowedTypes('variable', ['string', 'null'])
+            ->addAllowedTypes('bound', [Bound::class, 'null'])
+            ->addAllowedTypes('components', 'array')
+            ->addAllowedTypes('dom_events', 'array')
+            ->addAllowedTypes('dom_events_once', 'array')
+            ->addAllowedTypes('events', 'array')
+            ->addAllowedTypes('events_once', 'array')
+            ->addAllowedTypes('types', 'array')
+            ->addAllowedTypes('libraries', 'array')
+            ->addAllowedTypes('api', 'bool');
     }
 
     /**
@@ -129,11 +111,7 @@ class PlaceAutocompleteType extends AbstractType
      */
     public function getParent()
     {
-        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
-            return TextType::class;
-        }
-
-        return 'text';
+        return method_exists(AbstractType::class, 'getBlockPrefix') ? TextType::class : 'text';
     }
 
     /**
