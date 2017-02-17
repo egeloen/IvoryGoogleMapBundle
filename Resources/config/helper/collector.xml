@@ -110,6 +110,13 @@
         </service>
 
         <service
+            id="ivory.google_map.helper.collector.overlay.icon_sequence"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\IconSequenceCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.polyline" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.collector.overlay.info_box"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\InfoBoxCollector"
         >
@@ -136,6 +143,13 @@
         />
 
         <service
+            id="ivory.google_map.helper.collector.overlay.marker_shape"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\MarkerShapeCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.collector.overlay.polygon"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\PolygonCollector"
         />
@@ -149,6 +163,14 @@
             id="ivory.google_map.helper.collector.overlay.rectangle"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\RectangleCollector"
         />
+
+        <service
+            id="ivory.google_map.helper.collector.overlay.symbol"
+            class="Ivory\GoogleMap\Helper\Collector\Overlay\SymbolCollector"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.icon_sequence" />
+        </service>
 
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.base.bound"

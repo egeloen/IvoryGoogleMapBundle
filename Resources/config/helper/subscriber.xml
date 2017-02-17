@@ -298,6 +298,26 @@
         </service>
 
         <service
+            id="ivory.google_map.helper.subscriber.overlay.icon"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\IconSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.icon" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.icon" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.icon_sequence"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\IconSequenceSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.icon_sequence" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.icon_sequence" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.subscriber.overlay.info_box"
             class="Ivory\GoogleMap\Helper\Subscriber\Overlay\InfoBoxSubscriber"
             parent="ivory.google_map.helper.subscriber.abstract"
@@ -357,6 +377,16 @@
         </service>
 
         <service
+            id="ivory.google_map.helper.subscriber.overlay.marker_shape"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\MarkerShapeSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.marker_shape" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.marker_shape" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
             id="ivory.google_map.helper.subscriber.overlay.marker.info_window.open"
             class="Ivory\GoogleMap\Helper\Subscriber\Overlay\MarkerInfoWindowOpenSubscriber"
             parent="ivory.google_map.helper.subscriber.abstract"
@@ -394,6 +424,16 @@
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.rectangle" />
             <argument type="service" id="ivory.google_map.helper.renderer.overlay.rectangle" />
+            <tag name="ivory.google_map.helper.subscriber" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.subscriber.overlay.symbol"
+            class="Ivory\GoogleMap\Helper\Subscriber\Overlay\SymbolSubscriber"
+            parent="ivory.google_map.helper.subscriber.abstract"
+        >
+            <argument type="service" id="ivory.google_map.helper.collector.overlay.symbol" />
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.symbol" />
             <tag name="ivory.google_map.helper.subscriber" />
         </service>
 

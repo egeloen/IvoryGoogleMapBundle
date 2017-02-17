@@ -368,6 +368,12 @@
         />
 
         <service
+            id="ivory.google_map.helper.renderer.overlay.icon_sequence"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\IconSequenceRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
             id="ivory.google_map.helper.renderer.overlay.info_box"
             class="Ivory\GoogleMap\Helper\Renderer\Overlay\InfoBoxRenderer"
             parent="ivory.google_map.helper.renderer.json"
@@ -399,8 +405,6 @@
             parent="ivory.google_map.helper.renderer.json"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.overlay.animation" />
-            <argument type="service" id="ivory.google_map.helper.renderer.overlay.icon" />
-            <argument type="service" id="ivory.google_map.helper.renderer.overlay.marker_shape" />
         </service>
 
         <service
@@ -433,6 +437,20 @@
             id="ivory.google_map.helper.renderer.overlay.rectangle"
             class="Ivory\GoogleMap\Helper\Renderer\Overlay\RectangleRenderer"
             parent="ivory.google_map.helper.renderer.json"
+        />
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.symbol"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\SymbolRenderer"
+            parent="ivory.google_map.helper.renderer.json"
+        >
+            <argument type="service" id="ivory.google_map.helper.renderer.overlay.symbol_path" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.renderer.overlay.symbol_path"
+            class="Ivory\GoogleMap\Helper\Renderer\Overlay\SymbolPathRenderer"
+            parent="ivory.google_map.helper.renderer.abstract"
         />
 
         <service
