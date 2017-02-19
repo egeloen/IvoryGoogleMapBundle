@@ -6,4 +6,5 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    language: fr
+    static_map:
+        api_key: key

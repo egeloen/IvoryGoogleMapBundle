@@ -23,7 +23,8 @@ The `debug` option allows to get a nicely formatted output instead of the defaul
 
 ``` yaml
 ivory_google_map:
-    debug: "%kernel.debug%"
+    map:
+        debug: "%kernel.debug%"
 ```
 
 ### Language
@@ -32,7 +33,8 @@ The language allows you to configure your map language:
 
 ``` yaml
 ivory_google_map:
-    language: "%locale%"
+    map:
+        language: "%locale%"
 ```
 
 ### API key
@@ -41,7 +43,8 @@ The API key allows you to bypass Google limitation according to your account pla
 
 ``` yaml
 ivory_google_map:
-    api_key: ~
+    map:
+        api_key: ~
 ```
 
 ## Render
@@ -73,8 +76,8 @@ The available Twig functions are:
 If you're using the PHP templating engine, then, the most easy way to render a map is:
 
 ``` php
-<?php $view['ivory_google_map']->render($map) ?>
-<?php $view['ivory_google_api']->render([$map]) ?>
+<?php echo $view['ivory_google_map']->render($map) ?>
+<?php echo $view['ivory_google_api']->render([$map]) ?>
 ```
 
 The available helper methods are:

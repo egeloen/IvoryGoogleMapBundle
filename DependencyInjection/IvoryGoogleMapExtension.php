@@ -47,15 +47,16 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
             $loader->load($resource.'.xml');
         }
 
-        $this->loadConfig($config, $container);
-        $this->loadServices($config, $container, $loader);
+        $this->loadMapConfig($config['map'], $container);
+        $this->loadStaticMapConfig($config['static_map'], $container);
+        $this->loadServicesConfig($config, $container, $loader);
     }
 
     /**
      * @param mixed[]          $config
      * @param ContainerBuilder $container
      */
-    private function loadConfig(array $config, ContainerBuilder $container)
+    private function loadMapConfig(array $config, ContainerBuilder $container)
     {
         $container
             ->getDefinition('ivory.google_map.helper.renderer.loader')
@@ -77,9 +78,32 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
     /**
      * @param mixed[]          $config
      * @param ContainerBuilder $container
+     */
+    private function loadStaticMapConfig(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['api_key'])) {
+            $container
+                ->getDefinition('ivory.google_map.helper.subscriber.static.key')
+                ->addArgument($config['api_key']);
+        }
+
+        if (isset($config['business_account'])) {
+            $businessAccount = $config['business_account'];
+
+            $container
+                ->getDefinition('ivory.google_map.helper.map.static')
+                ->addArgument(isset($businessAccount['secret']) ? $businessAccount['secret'] : null)
+                ->addArgument(isset($businessAccount['client_id']) ? $businessAccount['client_id'] : null)
+                ->addArgument(isset($businessAccount['channel']) ? $businessAccount['channel'] : null);
+        }
+    }
+
+    /**
+     * @param mixed[]          $config
+     * @param ContainerBuilder $container
      * @param LoaderInterface  $loader
      */
-    private function loadServices(array $config, ContainerBuilder $container, LoaderInterface $loader)
+    private function loadServicesConfig(array $config, ContainerBuilder $container, LoaderInterface $loader)
     {
         $services = [
             'direction'          => true,
@@ -95,7 +119,7 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
 
         foreach ($services as $service => $http) {
             if (isset($config[$service])) {
-                $this->loadService($service, $config[$service], $container, $loader, $http);
+                $this->loadServiceConfig($service, $config[$service], $container, $loader, $http);
             }
         }
     }
@@ -107,7 +131,7 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
      * @param LoaderInterface  $loader
      * @param bool             $http
      */
-    private function loadService(
+    private function loadServiceConfig(
         $service,
         array $config,
         ContainerBuilder $container,

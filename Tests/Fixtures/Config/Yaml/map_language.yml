@@ -6,4 +6,5 @@
 # file that was distributed with this source code.
 
 ivory_google_map:
-    debug: true
+    map:
+        language: fr

@@ -19,6 +19,7 @@ RUN chsh -s /bin/bash www-data
 
 # Permissions
 RUN chown www-data:www-data /var/www
+RUN mkdir /tmp/ivory-google-map && chmod 777 /tmp/ivory-google-map
 
 # Workdir
 WORKDIR /var/www/html

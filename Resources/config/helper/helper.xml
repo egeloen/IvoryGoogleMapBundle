@@ -6,30 +6,48 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="ivory.google_map.helper.abstract" class="Ivory\GoogleMap\Helper\AbstractHelper" abstract="true">
-            <argument type="service" id="ivory.google_map.helper.event_dispatcher" />
+        <service id="ivory.google_map.helper.api" class="Ivory\GoogleMap\Helper\ApiHelper">
+            <argument type="service" id="ivory.google_map.helper.api.event_dispatcher" />
         </service>
 
         <service
-            id="ivory.google_map.helper.api"
-            class="Ivory\GoogleMap\Helper\ApiHelper"
-            parent="ivory.google_map.helper.abstract"
-        />
+            id="ivory.google_map.helper.api.event_dispatcher"
+            class="Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher"
+        >
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="ivory.google_map.helper.map" class="Ivory\GoogleMap\Helper\MapHelper">
+            <argument type="service" id="ivory.google_map.helper.map.event_dispatcher" />
+        </service>
 
         <service
-            id="ivory.google_map.helper.map"
-            class="Ivory\GoogleMap\Helper\MapHelper"
-            parent="ivory.google_map.helper.abstract"
-        />
+            id="ivory.google_map.helper.map.event_dispatcher"
+            class="Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher"
+        >
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="ivory.google_map.helper.map.static" class="Ivory\GoogleMap\Helper\StaticMapHelper">
+            <argument type="service" id="ivory.google_map.helper.map.static.event_dispatcher" />
+        </service>
+
+        <service
+            id="ivory.google_map.helper.map.static.event_dispatcher"
+            class="Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher"
+        >
+            <argument type="service" id="service_container" />
+        </service>
 
         <service
             id="ivory.google_map.helper.place_autocomplete"
             class="Ivory\GoogleMap\Helper\PlaceAutocompleteHelper"
-            parent="ivory.google_map.helper.abstract"
-        />
+        >
+            <argument type="service" id="ivory.google_map.helper.place_autocomplete.event_dispatcher" />
+        </service>
 
         <service
-            id="ivory.google_map.helper.event_dispatcher"
+            id="ivory.google_map.helper.place_autocomplete.event_dispatcher"
             class="Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher"
         >
             <argument type="service" id="service_container" />
