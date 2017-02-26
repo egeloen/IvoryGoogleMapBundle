@@ -1,6 +1,7 @@
 # README
 
-[![Build Status](https://travis-ci.org/egeloen/IvoryGoogleMapBundle.svg?branch=master)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
+[![Travis Build Status](https://travis-ci.org/egeloen/IvoryGoogleMapBundle.svg?branch=master)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/im2gvivits9qghtk/branch/master?svg=true)](https://ci.appveyor.com/project/egeloen/ivorygooglemapbundle/branch/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/?branch=master)
 [![Dependency Status](http://www.versioneye.com/php/egeloen:google-map-bundle/badge.svg)](http://www.versioneye.com/php/egeloen:google-map-bundle)
