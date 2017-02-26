@@ -2,6 +2,9 @@
 
 ### 3.0.0 (????-??-??)
 
+ * 9452d96 - Add AppVeyor support
+ * 1c0bb34 - [Overlay] Add symbol support
+ * 4a3249e - [Service] Add Place support
  * 5896f97 - [Docker] Add HHVM container
  * 4a2dbe8 - [Docker] Rely directly on the selenium image
  * f113779 - [Git] Fix gitattributes
