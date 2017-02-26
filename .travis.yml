@@ -30,17 +30,17 @@ matrix:
         - php: 5.6
           env: SYMFONY_VERSION=3.0.* COMPOSER_PREFER_LOWEST=true
         - php: 5.6
-          env: SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=2.8.*
         - php: 5.6
-          env: SYMFONY_VERSION=3.0.* SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=3.0.*
         - php: 5.6
-          env: SYMFONY_VERSION=3.1.* SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=3.1.*
         - php: 5.6
-          env: SYMFONY_VERSION=3.2.* SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=3.2.*
         - php: 5.6
-          env: SYMFONY_VERSION=3.3.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+          env: SYMFONY_VERSION=3.3.*@dev
     allow_failures:
-        - env: SYMFONY_VERSION=3.3.*@dev SYMFONY_DEPRECATIONS_HELPER=strict
+        - env: SYMFONY_VERSION=3.3.*@dev
 
 notifications:
     email: geloen.eric@gmail.com
