@@ -13,11 +13,10 @@
     "require": {
         "php": "^5.6|^7.0",
         "symfony/framework-bundle": "^2.7|^3.0",
-        "egeloen/google-map": "^2.0@dev"
+        "egeloen/google-map": "^2.0"
     },
     "require-dev": {
-        "egeloen/serializer-bundle": "^1.0@dev",
-        "egeloen/serializer": "^1.0@dev",
+        "egeloen/serializer-bundle": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.0",
         "php-http/cache-plugin": "^1.2",
         "php-http/guzzle6-adapter": "^1.0",
