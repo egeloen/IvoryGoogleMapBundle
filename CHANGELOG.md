@@ -2,6 +2,8 @@
 
 ### 3.0.0 (????-??-??)
 
+ * b7cd248 - [Composer] Rely on stable versions
+ * e136bdc - [Helper] Add static map support 
  * 9452d96 - Add AppVeyor support
  * 1c0bb34 - [Overlay] Add symbol support
  * 4a3249e - [Service] Add Place support
