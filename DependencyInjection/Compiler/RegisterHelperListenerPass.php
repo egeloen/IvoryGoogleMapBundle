@@ -11,19 +11,41 @@
 
 namespace Ivory\GoogleMapBundle\DependencyInjection\Compiler;
 
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class RegisterHelperListenerPass extends RegisterListenersPass
+class RegisterHelperListenerPass implements CompilerPassInterface
 {
+    /**
+     * @var RegisterListenersPass[]
+     */
+    private $passes = [];
+
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
-        parent::__construct(
-            'ivory.google_map.helper.event_dispatcher',
-            'ivory.google_map.helper.listener',
-            'ivory.google_map.helper.subscriber'
-        );
+        foreach (['api', 'map', 'map.static', 'place_autocomplete'] as $helper) {
+            $this->passes[] = new RegisterListenersPass(
+                'ivory.google_map.helper.'.$helper.'.event_dispatcher',
+                'ivory.google_map.helper.'.$helper.'.listener',
+                'ivory.google_map.helper.'.$helper.'.subscriber'
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function process(ContainerBuilder $container)
+    {
+        foreach ($this->passes as $pass) {
+            $pass->process($container);
+        }
     }
 }

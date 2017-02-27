@@ -22,6 +22,7 @@ your Symfony2 project.
  - [Installation](/Resources/doc/installation.md)
  - [Usage](/Resources/doc/usage.md)
     - [Map](/Resources/doc/map.md)
+    - [Static Map](/Resources/doc/static_map.md)
     - [Place Autocomplete](/Resources/doc/place_autocomplete.md)
     - [Services](/Resources/doc/service/index.md)
         - [Direction](/Resources/doc/service/direction.md)

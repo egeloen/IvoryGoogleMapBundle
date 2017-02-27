@@ -37,4 +37,9 @@ if [[ "$SYMFONY_VERSION" = *dev* ]]; then
     composer config minimum-stability dev
 fi
 
+# Hackery since https://github.com/composer/composer/issues/5355 is fixed
+if [ "$COMPOSER_PREFER_LOWEST" = true ]; then
+    composer update --prefer-source
+fi
+
 composer update --prefer-source `if [ "$COMPOSER_PREFER_LOWEST" = true ]; then echo "--prefer-lowest --prefer-stable"; fi`

@@ -17,6 +17,7 @@ use Ivory\GoogleMap\Helper\ApiHelper;
 use Ivory\GoogleMap\Helper\Formatter\Formatter;
 use Ivory\GoogleMap\Helper\MapHelper;
 use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper;
+use Ivory\GoogleMap\Helper\StaticMapHelper;
 use Ivory\GoogleMap\Service\Direction\DirectionService;
 use Ivory\GoogleMap\Service\DistanceMatrix\DistanceMatrixService;
 use Ivory\GoogleMap\Service\Elevation\ElevationService;
@@ -96,10 +97,12 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $apiHelper = $this->container->get('ivory.google_map.helper.api');
         $mapHelper = $this->container->get('ivory.google_map.helper.map');
+        $staticMapHelper = $this->container->get('ivory.google_map.helper.map.static');
         $placeAutocompleteHelper = $this->container->get('ivory.google_map.helper.place_autocomplete');
 
         $this->assertInstanceOf(ApiHelper::class, $apiHelper);
         $this->assertInstanceOf(MapHelper::class, $mapHelper);
+        $this->assertInstanceOf(StaticMapHelper::class, $staticMapHelper);
         $this->assertInstanceOf(PlaceAutocompleteHelper::class, $placeAutocompleteHelper);
 
         $formatter = $this->container->get('ivory.google_map.helper.formatter');
@@ -111,7 +114,13 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertTrue($this->container->get('ivory.google_map.helper.renderer.control.manager')->hasRenderers());
         $this->assertTrue($this->container->get('ivory.google_map.helper.renderer.overlay.extendable')->hasRenderers());
-        $this->assertTrue($this->container->get('ivory.google_map.helper.event_dispatcher')->hasListeners());
+
+        $this->assertTrue($this->container->get('ivory.google_map.helper.api.event_dispatcher')->hasListeners());
+        $this->assertTrue($this->container->get('ivory.google_map.helper.map.event_dispatcher')->hasListeners());
+        $this->assertTrue($this->container->get('ivory.google_map.helper.map.static.event_dispatcher')->hasListeners());
+        $this->assertTrue(
+            $this->container->get('ivory.google_map.helper.place_autocomplete.event_dispatcher')->hasListeners()
+        );
 
         $this->assertFalse($this->container->has('ivory.google_map.direction'));
         $this->assertFalse($this->container->has('ivory.google_map.distance_matrix'));
@@ -135,6 +144,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertTrue($this->container->has('ivory.google_map.templating.api'));
         $this->assertTrue($this->container->has('ivory.google_map.templating.map'));
+        $this->assertTrue($this->container->has('ivory.google_map.templating.map.static'));
         $this->assertTrue($this->container->has('ivory.google_map.templating.place_autocomplete'));
     }
 
@@ -145,6 +155,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
         $this->assertTrue($this->container->has('ivory.google_map.twig.extension.api'));
         $this->assertTrue($this->container->has('ivory.google_map.twig.extension.map'));
+        $this->assertTrue($this->container->has('ivory.google_map.twig.extension.map.static'));
         $this->assertTrue($this->container->has('ivory.google_map.twig.extension.place_autocomplete'));
     }
 
@@ -170,9 +181,9 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
         );
     }
 
-    public function testFormatterDebug()
+    public function testMapDebug()
     {
-        $this->loadConfiguration($this->container, 'debug');
+        $this->loadConfiguration($this->container, 'map_debug');
         $this->container->compile();
 
         $this->assertTrue($this->container->get('ivory.google_map.helper.formatter')->isDebug());
@@ -180,7 +191,7 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testMapLanguage()
     {
-        $this->loadConfiguration($this->container, 'language');
+        $this->loadConfiguration($this->container, 'map_language');
         $this->container->compile();
 
         $this->assertSame('fr', $this->container->get('ivory.google_map.helper.renderer.loader')->getLanguage());
@@ -188,10 +199,66 @@ abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_Te
 
     public function testMapApiKey()
     {
-        $this->loadConfiguration($this->container, 'api_key');
+        $this->loadConfiguration($this->container, 'map_api_key');
         $this->container->compile();
 
         $this->assertSame('key', $this->container->get('ivory.google_map.helper.renderer.loader')->getKey());
+    }
+
+    public function testStaticMapApiKey()
+    {
+        $this->loadConfiguration($this->container, 'static_map_api_key');
+        $this->container->compile();
+
+        $this->assertSame(
+            'key',
+            $this->container->getDefinition('ivory.google_map.helper.subscriber.static.key')->getArgument(0)
+        );
+    }
+
+    public function testStaticMapApiSecret()
+    {
+        $this->loadConfiguration($this->container, 'static_map_api_secret');
+        $this->container->compile();
+
+        $staticMapHelper = $this->container->get('ivory.google_map.helper.map.static');
+
+        $this->assertSame('my-secret', $staticMapHelper->getSecret());
+        $this->assertFalse($staticMapHelper->hasClientId());
+        $this->assertFalse($staticMapHelper->hasChannel());
+    }
+
+    public function testStaticMapBusinessAccount()
+    {
+        $this->loadConfiguration($this->container, 'static_map_business_account');
+        $this->container->compile();
+
+        $staticMapHelper = $this->container->get('ivory.google_map.helper.map.static');
+
+        $this->assertSame('my-client', $staticMapHelper->getClientId());
+        $this->assertSame('my-secret', $staticMapHelper->getSecret());
+        $this->assertFalse($staticMapHelper->hasChannel());
+    }
+
+    public function testStaticMapBusinessAccountChannel()
+    {
+        $this->loadConfiguration($this->container, 'static_map_business_account_channel');
+        $this->container->compile();
+
+        $staticMapHelper = $this->container->get('ivory.google_map.helper.map.static');
+
+        $this->assertSame('my-client', $staticMapHelper->getClientId());
+        $this->assertSame('my-secret', $staticMapHelper->getSecret());
+        $this->assertSame('my-channel', $staticMapHelper->getChannel());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testStaticMapBusinessAccountInvalid()
+    {
+        $this->loadConfiguration($this->container, 'static_map_business_account_invalid');
+        $this->container->compile();
     }
 
     public function testDirection()

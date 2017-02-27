@@ -29,9 +29,8 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = $this->createTreeBuilder();
         $children = $treeBuilder->root('ivory_google_map')
             ->children()
-            ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
-            ->scalarNode('language')->defaultValue('%locale%')->end()
-            ->scalarNode('api_key')->end();
+            ->append($this->createMapNode())
+            ->append($this->createStaticMapNode());
 
         $services = [
             'direction'          => true,
@@ -53,6 +52,33 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * @return ArrayNodeDefinition
+     */
+    private function createMapNode()
+    {
+        return $this->createNode('map')
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
+                ->scalarNode('language')->defaultValue('%locale%')->end()
+                ->scalarNode('api_key')->end()
+            ->end();
+    }
+
+    /**
+     * @return ArrayNodeDefinition
+     */
+    private function createStaticMapNode()
+    {
+        return $this->createNode('static_map')
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('api_key')->end()
+                ->append($this->createBusinessAccountNode(false))
+            ->end();
+    }
+
+    /**
      * @param string $service
      * @param bool   $http
      *
@@ -64,7 +90,7 @@ class Configuration implements ConfigurationInterface
         $children = $node
             ->children()
             ->scalarNode('api_key')->end()
-            ->append($this->createBusinessAccountNode());
+            ->append($this->createBusinessAccountNode(true));
 
         if ($http) {
             $children
@@ -81,7 +107,9 @@ class Configuration implements ConfigurationInterface
             $node
                 ->beforeNormalization()
                     ->ifNull()
-                    ->then(function () { return []; })
+                    ->then(function () {
+                        return [];
+                    })
                 ->end();
         }
 
@@ -89,22 +117,28 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * @param bool $service
+     *
      * @return ArrayNodeDefinition
      */
-    private function createBusinessAccountNode()
+    private function createBusinessAccountNode($service)
     {
-        return $this->createNode('business_account')
-            ->children()
-                ->scalarNode('client_id')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                ->end()
-                ->scalarNode('secret')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                ->end()
-                ->scalarNode('channel')->end()
-            ->end();
+        $node = $this->createNode('business_account');
+        $clientIdNode = $node->children()
+            ->scalarNode('secret')
+                ->isRequired()
+                ->cannotBeEmpty()
+            ->end()
+            ->scalarNode('channel')->end()
+            ->scalarNode('client_id');
+
+        if ($service) {
+            $clientIdNode
+                ->isRequired()
+                ->cannotBeEmpty();
+        }
+
+        return $node;
     }
 
     /**
