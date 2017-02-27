@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 3.0.0 (????-??-??)
+### 3.0.0 (2017-02-27)
 
  * b7cd248 - [Composer] Rely on stable versions
  * e136bdc - [Helper] Add static map support 
