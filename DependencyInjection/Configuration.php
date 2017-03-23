@@ -1094,7 +1094,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('directions')->addDefaultsIfNotSet()
+                ->arrayNode('directions')
                     ->children()
                         ->booleanNode('enabled')
                             ->defaultTrue()
@@ -1146,7 +1146,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('distance_matrix')->addDefaultsIfNotSet()
+                ->arrayNode('distance_matrix')
                     ->children()
                         ->booleanNode('enabled')
                             ->defaultTrue()
