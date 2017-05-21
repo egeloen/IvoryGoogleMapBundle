@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.0.1 (????-??-??)
+
+ * 3410476 - [Doc] Fix place auutocomplete components restriction example
+
 ### 3.0.0 (2017-02-27)
 
  * b7cd248 - [Composer] Rely on stable versions
