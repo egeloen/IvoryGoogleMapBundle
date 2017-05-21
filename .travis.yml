@@ -26,9 +26,9 @@ matrix:
           services: [docker]
           env: DOCKER_BUILD=true
         - php: 5.6
-          env: SYMFONY_VERSION=2.7.* COMPOSER_PREFER_LOWEST=true
+          env: SYMFONY_VERSION=2.7.* COMPOSER_PREFER_LOWEST=true SYMFONY_DEPRECATIONS_HELPER=weak
         - php: 5.6
-          env: SYMFONY_VERSION=3.0.* COMPOSER_PREFER_LOWEST=true
+          env: SYMFONY_VERSION=3.0.* COMPOSER_PREFER_LOWEST=true SYMFONY_DEPRECATIONS_HELPER=weak
         - php: 5.6
           env: SYMFONY_VERSION=2.8.*
         - php: 5.6
