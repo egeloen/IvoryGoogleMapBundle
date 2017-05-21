@@ -28,11 +28,11 @@ $builder->add('field', PlaceAutocompleteType::class, [
 If you want to restrict the autocomplete to components, you can use:
 
 ``` php
-use Ivory\GoogleMap\Place\AutocompleteType;
+use Ivory\GoogleMap\Place\AutocompleteComponentType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 
 $builder->add('field', PlaceAutocompleteType::class, [
-    AutocompleteComponentType::COUNTRY => 'fr'
+    'components' => [AutocompleteComponentType::COUNTRY => 'fr'],
 ]);
 ```
 
