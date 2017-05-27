@@ -11,8 +11,11 @@
 
 namespace Ivory\GoogleMapBundle\DependencyInjection\Compiler;
 
+use Symfony\Component\DependencyInjection\Argument\ClosureProxyArgument;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 
 /**
@@ -20,6 +23,16 @@ use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
  */
 class RegisterHelperListenerPass implements CompilerPassInterface
 {
+    /**
+     * @var string[]
+     */
+    private static $helpers = [
+        'api',
+        'map',
+        'map.static',
+        'place_autocomplete',
+    ];
+
     /**
      * @var RegisterListenersPass[]
      */
@@ -30,7 +43,7 @@ class RegisterHelperListenerPass implements CompilerPassInterface
      */
     public function __construct()
     {
-        foreach (['api', 'map', 'map.static', 'place_autocomplete'] as $helper) {
+        foreach (self::$helpers as $helper) {
             $this->passes[] = new RegisterListenersPass(
                 'ivory.google_map.helper.'.$helper.'.event_dispatcher',
                 'ivory.google_map.helper.'.$helper.'.listener',
@@ -44,6 +57,15 @@ class RegisterHelperListenerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        if (!class_exists(ClosureProxyArgument::class)) {
+            foreach (self::$helpers as $helper) {
+                $container
+                    ->getDefinition('ivory.google_map.helper.'.$helper.'.event_dispatcher')
+                    ->setClass(ContainerAwareEventDispatcher::class)
+                    ->addArgument(new Reference('service_container'));
+            }
+        }
+
         foreach ($this->passes as $pass) {
             $pass->process($container);
         }
