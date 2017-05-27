@@ -2,6 +2,8 @@
 
 ### 3.0.1 (????-??-??)
 
+ * f3fc045 - Remove deprecations triggered with Symfony 3.3
+ * 7bf61dd - [Tests] Rely on the new library cache system
  * 3410476 - [Doc] Fix place auutocomplete components restriction example
 
 ### 3.0.0 (2017-02-27)
