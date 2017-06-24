@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.0.2 (????-??-??)
+
+ * 8945515 - [Tests] Drop deprecations
+ * 941f676 - [Travis] Fix tests
+ * 3deb0c4 - Rename directions.md to direction.md
+   
 ### 3.0.1 (2017-05-27)
 
  * f3fc045 - Remove deprecations triggered with Symfony 3.3
