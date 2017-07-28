@@ -35,8 +35,8 @@ let's install them to ease our life:
 
 ``` bash
 $ composer require egeloen/serializer-bundle
-$ composer require php-http/httplug-bundle
 $ composer require php-http/guzzle6-adapter
+$ composer require php-http/httplug-bundle
 ```
 
 Here, I have chosen to use [Guzzle6](http://docs.guzzlephp.org/en/latest/psr7.html) but since Httplug supports the 
