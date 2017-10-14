@@ -117,7 +117,7 @@ use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
 
 $builder->add('field', PlaceAutocompleteType::class, [
-    'types' => PlaceAutocompleteType::ESTABLISMENT,
+    'types' => [AutocompleteType::ESTABLISMENT],
 ]);
 ```
 
