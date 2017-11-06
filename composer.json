@@ -10,10 +10,13 @@
             "email": "geloen.eric@gmail.com"
         }
     ],
+    "repositories": [
+        {"type": "vcs", "url": "http://github.com/TeLiXj/ivory-google-map"}
+    ],
     "require": {
         "php": "^5.6|^7.0",
         "symfony/framework-bundle": "^2.7|^3.0",
-        "egeloen/google-map": "^2.0.2"
+        "egeloen/google-map": "dev-add_place_service"
     },
     "require-dev": {
         "egeloen/serializer-bundle": "^1.0",
