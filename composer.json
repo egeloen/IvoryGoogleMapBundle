@@ -11,7 +11,7 @@
         }
     ],
     "repositories": [
-        {"type": "vcs", "url": "http://github.com/TeLiXj/ivory-google-map"}
+        {"type": "vcs", "url": "http://github.com/TeLiXj/google-map"}
     ],
     "require": {
         "php": "^5.6|^7.0",
