@@ -46,6 +46,8 @@ matrix:
     allow_failures:
         - env: SYMFONY_VERSION=3.3.*@dev
 
+before_script: sudo apt-get install php7.0-mbstring
+
 before_install:
    - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
 
