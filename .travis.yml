@@ -51,7 +51,7 @@ matrix:
 jobs:
   include:
     - stage: Test
-      env: global
+      env: DEPENDENCIES=beta
       php: 7.1
       before_script:
         - sudo apt-get install php-mbstring php7.0-mbstring
