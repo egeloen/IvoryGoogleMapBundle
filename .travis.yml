@@ -54,7 +54,7 @@ jobs:
       env: DEPENDENCIES=beta
       php: 7.1
       before_install:
-        - sudo apt-get install php-mbstring php7.0-mbstring
+        - sudo apt-get update && sudo apt-get install php-mbstring php7.0-mbstring
       sudo: required
 
 before_install:
