@@ -41,8 +41,13 @@ matrix:
           env: SYMFONY_VERSION=3.2.*
         - php: 5.6
           env: SYMFONY_VERSION=3.3.*@dev
+        - php: 7.1
+          env: DEPENDENCIES=beta  
     allow_failures:
         - env: SYMFONY_VERSION=3.3.*@dev
+
+before_install:
+   - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
 
 notifications:
     email: geloen.eric@gmail.com
