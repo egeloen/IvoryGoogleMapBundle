@@ -53,7 +53,7 @@ jobs:
     - stage: Test
       env: DEPENDENCIES=beta
       php: 7.1
-      before_script:
+      before_install:
         - sudo apt-get install php-mbstring php7.0-mbstring
       sudo: required
 
