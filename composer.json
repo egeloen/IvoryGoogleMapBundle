@@ -25,7 +25,8 @@
         "symfony/cache": "^3.2|^4.0",
         "symfony/form": "^3.0|^4.0",
         "symfony/phpunit-bridge": "^3.0|^4.0",
-        "symfony/templating": "^2.7|^3.0|^4.0",
+        "symfony/templating": "^3.0|^4.0",
+        "symfony/translation": "^3.0|^4.0",
         "symfony/yaml": "^3.0|^4.0",
         "twig/twig": "^1.18|^2.0"
     },
