@@ -9,6 +9,7 @@
         <service
             id="ivory.google_map.twig.extension.api"
             class="Ivory\GoogleMapBundle\Twig\ApiExtension"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.api" />
             <tag name="twig.extension" />
@@ -17,6 +18,7 @@
         <service
             id="ivory.google_map.twig.extension.map"
             class="Ivory\GoogleMapBundle\Twig\MapExtension"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.map" />
             <tag name="twig.extension" />
@@ -25,6 +27,7 @@
         <service
             id="ivory.google_map.twig.extension.map.static"
             class="Ivory\GoogleMapBundle\Twig\StaticMapExtension"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.map.static" />
             <tag name="twig.extension" />
@@ -33,6 +36,7 @@
         <service
             id="ivory.google_map.twig.extension.place_autocomplete"
             class="Ivory\GoogleMapBundle\Twig\PlaceAutocompleteExtension"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.place_autocomplete" />
             <tag name="twig.extension" />

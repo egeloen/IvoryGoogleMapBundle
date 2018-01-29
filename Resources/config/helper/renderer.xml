@@ -10,6 +10,7 @@
             id="ivory.google_map.helper.renderer.abstract"
             class="Ivory\GoogleMap\Helper\Renderer\AbstractRenderer"
             abstract="true"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.formatter" />
         </service>
@@ -480,16 +481,19 @@
         <service
             id="ivory.google_map.helper.renderer.static.base.coordinate"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Base\CoordinateRenderer"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.renderer.static.base.point"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Base\PointRenderer"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.renderer.static.overlay.encoded_polyline"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\EncodedPolylineRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.encoded_polyline.style" />
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.encoded_polyline.value" />
@@ -498,16 +502,19 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.encoded_polyline.style"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\EncodedPolylineStyleRenderer"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.renderer.static.overlay.encoded_polyline.value"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\EncodedPolylineValueRenderer"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.renderer.static.overlay.extendable"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\ExtendableRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.base.coordinate" />
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.marker.location" />
@@ -517,6 +524,7 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.marker"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\MarkerRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.marker.style" />
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.marker.location" />
@@ -525,6 +533,7 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.marker.style"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\MarkerStyleRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.base.point" />
         </service>
@@ -532,6 +541,7 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.marker.location"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\MarkerLocationRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.base.coordinate" />
         </service>
@@ -539,6 +549,7 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.polyline"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\PolylineRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.polyline.style" />
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.polyline.location" />
@@ -547,11 +558,13 @@
         <service
             id="ivory.google_map.helper.renderer.static.overlay.polyline.style"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\PolylineStyleRenderer"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.renderer.static.overlay.polyline.location"
             class="Ivory\GoogleMap\Helper\Renderer\Image\Overlay\PolylineLocationRenderer"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.base.coordinate"/>
         </service>
@@ -559,6 +572,7 @@
         <service
             id="ivory.google_map.helper.renderer.static.size"
             class="Ivory\GoogleMap\Helper\Renderer\Image\SizeRenderer"
+            public="true"
         />
 
         <service

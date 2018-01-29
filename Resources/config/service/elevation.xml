@@ -9,6 +9,7 @@
         <service
             id="ivory.google_map.elevation"
             class="Ivory\GoogleMap\Service\Elevation\ElevationService"
+            public="true"
         />
     </services>
 </container>
