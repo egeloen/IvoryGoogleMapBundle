@@ -16,6 +16,7 @@ use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMap\Place\AutocompleteComponentType;
 use Ivory\GoogleMap\Place\AutocompleteType;
 use Ivory\GoogleMapBundle\Form\Type\PlaceAutocompleteType;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\Form\Forms;
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class PlaceAutocompleteTypeTest extends \PHPUnit_Framework_TestCase
+class PlaceAutocompleteTypeTest extends TestCase
 {
     /**
      * @var FormFactoryInterface

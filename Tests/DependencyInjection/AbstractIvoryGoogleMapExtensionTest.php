@@ -30,13 +30,14 @@ use Ivory\GoogleMap\Service\TimeZone\TimeZoneService;
 use Ivory\GoogleMapBundle\DependencyInjection\IvoryGoogleMapExtension;
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
 use Ivory\Serializer\SerializerInterface;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-abstract class AbstractIvoryGoogleMapExtensionTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractIvoryGoogleMapExtensionTest extends TestCase
 {
     /**
      * @var ContainerBuilder
