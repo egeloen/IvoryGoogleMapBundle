@@ -38,7 +38,7 @@ class RegisterFormResourcePass implements CompilerPassInterface
             $container->setParameter(
                 $parameter,
                 array_merge(
-                    ['IvoryGoogleMapBundle:Form:place_autocomplete_widget.html.twig'],
+                    ['@IvoryGoogleMap/Form/place_autocomplete_widget.html.twig'],
                     $container->getParameter($parameter)
                 )
             );
