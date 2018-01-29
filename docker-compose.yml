@@ -2,7 +2,7 @@ version: '2'
 
 services:
     php: &php
-        build: docker/php:7.1
+        build: docker/php
         env_file:
             - .env
         environment:
