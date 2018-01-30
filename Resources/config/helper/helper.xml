@@ -6,36 +6,40 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="ivory.google_map.helper.api" class="Ivory\GoogleMap\Helper\ApiHelper">
+        <service id="ivory.google_map.helper.api" class="Ivory\GoogleMap\Helper\ApiHelper" public="true">
             <argument type="service" id="ivory.google_map.helper.api.event_dispatcher" />
         </service>
 
         <service
             id="ivory.google_map.helper.api.event_dispatcher"
             class="Symfony\Component\EventDispatcher\EventDispatcher"
+            public="true"
         />
 
-        <service id="ivory.google_map.helper.map" class="Ivory\GoogleMap\Helper\MapHelper">
+        <service id="ivory.google_map.helper.map" class="Ivory\GoogleMap\Helper\MapHelper" public="true">
             <argument type="service" id="ivory.google_map.helper.map.event_dispatcher" />
         </service>
 
         <service
             id="ivory.google_map.helper.map.event_dispatcher"
             class="Symfony\Component\EventDispatcher\EventDispatcher"
+            public="true"
         />
 
-        <service id="ivory.google_map.helper.map.static" class="Ivory\GoogleMap\Helper\StaticMapHelper">
+        <service id="ivory.google_map.helper.map.static" class="Ivory\GoogleMap\Helper\StaticMapHelper" public="true">
             <argument type="service" id="ivory.google_map.helper.map.static.event_dispatcher" />
         </service>
 
         <service
             id="ivory.google_map.helper.map.static.event_dispatcher"
             class="Symfony\Component\EventDispatcher\EventDispatcher"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.place_autocomplete"
             class="Ivory\GoogleMap\Helper\PlaceAutocompleteHelper"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.place_autocomplete.event_dispatcher" />
         </service>
@@ -43,6 +47,7 @@
         <service
             id="ivory.google_map.helper.place_autocomplete.event_dispatcher"
             class="Symfony\Component\EventDispatcher\EventDispatcher"
+            public="true"
         />
     </services>
 </container>

@@ -9,6 +9,7 @@
         <service
             id="ivory.google_map.direction"
             class="Ivory\GoogleMap\Service\Direction\DirectionService"
+            public="true"
         />
     </services>
 </container>

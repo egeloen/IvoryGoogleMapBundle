@@ -9,6 +9,7 @@
         <service
             id="ivory.google_map.helper.collector.base.bound"
             class="Ivory\GoogleMap\Helper\Collector\Base\BoundCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.ground_overlay" />
             <argument type="service" id="ivory.google_map.helper.collector.overlay.rectangle" />
@@ -17,6 +18,7 @@
         <service
             id="ivory.google_map.helper.collector.base.coordinate"
             class="Ivory\GoogleMap\Helper\Collector\Base\CoordinateCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.base.bound" />
             <argument type="service" id="ivory.google_map.helper.collector.overlay.circle" />
@@ -30,6 +32,7 @@
         <service
             id="ivory.google_map.helper.collector.base.point"
             class="Ivory\GoogleMap\Helper\Collector\Base\PointCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -37,6 +40,7 @@
         <service
             id="ivory.google_map.helper.collector.base.size"
             class="Ivory\GoogleMap\Helper\Collector\Base\SizeCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.info_window" />
             <argument type="service" id="ivory.google_map.helper.collector.overlay.icon" />
@@ -45,66 +49,79 @@
         <service
             id="ivory.google_map.helper.collector.control.custom"
             class="Ivory\GoogleMap\Helper\Collector\Control\CustomControlCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.event.dom_event"
             class="Ivory\GoogleMap\Helper\Collector\Event\DomEventCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.event.dom_event_once"
             class="Ivory\GoogleMap\Helper\Collector\Event\DomEventOnceCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.event.event"
             class="Ivory\GoogleMap\Helper\Collector\Event\EventCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.event.event_once"
             class="Ivory\GoogleMap\Helper\Collector\Event\EventOnceCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.layer.geo_json"
             class="Ivory\GoogleMap\Helper\Collector\Layer\GeoJsonLayerCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.layer.heatmap"
             class="Ivory\GoogleMap\Helper\Collector\Layer\HeatmapLayerCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.layer.kml"
             class="Ivory\GoogleMap\Helper\Collector\Layer\KmlLayerCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.circle"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\CircleCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.encoded_polyline"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\EncodedPolylineCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.extendable"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\ExtendableCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.ground_overlay"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\GroundOverlayCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.icon"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\IconCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -112,6 +129,7 @@
         <service
             id="ivory.google_map.helper.collector.overlay.icon_sequence"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\IconSequenceCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.polyline" />
         </service>
@@ -119,6 +137,7 @@
         <service
             id="ivory.google_map.helper.collector.overlay.info_box"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\InfoBoxCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -126,6 +145,7 @@
         <service
             id="ivory.google_map.helper.collector.overlay.info_window"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\InfoWindowCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -133,6 +153,7 @@
         <service
             id="ivory.google_map.helper.collector.overlay.info_window.default"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\DefaultInfoWindowCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -140,11 +161,13 @@
         <service
             id="ivory.google_map.helper.collector.overlay.marker"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\MarkerCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.marker_shape"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\MarkerShapeCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
         </service>
@@ -152,21 +175,25 @@
         <service
             id="ivory.google_map.helper.collector.overlay.polygon"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\PolygonCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.polyline"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\PolylineCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.rectangle"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\RectangleCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.overlay.symbol"
             class="Ivory\GoogleMap\Helper\Collector\Overlay\SymbolCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.overlay.marker" />
             <argument type="service" id="ivory.google_map.helper.collector.overlay.icon_sequence" />
@@ -175,11 +202,13 @@
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.base.bound"
             class="Ivory\GoogleMap\Helper\Collector\Place\Base\AutocompleteBoundCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.base.coordinate"
             class="Ivory\GoogleMap\Helper\Collector\Place\Base\AutocompleteCoordinateCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.collector.place.autocomplete.base.bound" />
         </service>
@@ -187,36 +216,43 @@
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event"
             class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteDomEventCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.event.dom_event_once"
             class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteDomEventOnceCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.event.event"
             class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteEventCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.place.autocomplete.event.event_once"
             class="Ivory\GoogleMap\Helper\Collector\Place\Event\AutocompleteEventOnceCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.static.encoded_polyline"
             class="Ivory\GoogleMap\Helper\Collector\Image\EncodedPolylineCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.static.extendable"
             class="Ivory\GoogleMap\Helper\Collector\Image\ExtendableCollector"
+            public="true"
         />
 
         <service
             id="ivory.google_map.helper.collector.static.marker"
             class="Ivory\GoogleMap\Helper\Collector\Image\MarkerCollector"
+            public="true"
         >
             <argument type="service" id="ivory.google_map.helper.renderer.static.overlay.marker.style" />
         </service>
@@ -224,6 +260,7 @@
         <service
             id="ivory.google_map.helper.collector.static.polyline"
             class="Ivory\GoogleMap\Helper\Collector\Image\PolylineCollector"
+            public="true"
         />
     </services>
 </container>

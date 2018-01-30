@@ -9,6 +9,7 @@
         <service
             id="ivory.google_map.place_search"
             class="Ivory\GoogleMap\Service\Place\Search\PlaceSearchService"
+            public="true"
         />
     </services>
 </container>
