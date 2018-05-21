@@ -110,6 +110,7 @@ class IvoryGoogleMapExtension extends ConfigurableExtension
             'distance_matrix'    => true,
             'elevation'          => true,
             'geocoder'           => true,
+            'place_add'          => true,
             'place_autocomplete' => true,
             'place_detail'       => true,
             'place_photo'        => false,
