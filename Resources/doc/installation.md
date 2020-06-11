@@ -18,7 +18,7 @@ $ sudo mv composer.phar /usr/local/bin/composer
 Require the library in your `composer.json` file:
 
 ``` bash
-$ composer require egeloen/google-map-bundle
+$ composer require ivory/google-map-bundle
 ```
 
 ## Download additional libraries
