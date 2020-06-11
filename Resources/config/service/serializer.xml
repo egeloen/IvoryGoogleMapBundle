@@ -10,7 +10,7 @@
             id="ivory.google_map.serializer.loader"
             class="Ivory\Serializer\Mapping\Loader\DirectoryClassMetadataLoader"
         >
-            <argument>%kernel.root_dir%/../vendor/egeloen/google-map/src/Service/Serializer</argument>
+            <argument>%kernel.root_dir%/../vendor/ivory/google-map/src/Service/Serializer</argument>
             <tag name="ivory.serializer.loader" />
         </service>
     </services>
