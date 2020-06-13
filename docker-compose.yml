@@ -1,8 +1,9 @@
-version: '2'
+version: '3.5'
 
 services:
-    php: &php
-        build: docker/php
+    php:
+        build:
+            context: docker/php
         env_file:
             - .env
         environment:
@@ -11,16 +12,18 @@ services:
         volumes:
             - ~/.composer:/var/www/.composer
             - .:/var/www/html
-            - tmp:/tmp/ivory-google-map
-    hhvm:
-        <<: *php
-        build: docker/hhvm
-    selenium:
-        build: docker/selenium
-        env_file:
-            - .env
+            - shared-tmp:/tmp/ivory-google-map
+        depends_on:
+            - selenium-chrome
+        links:
+            - selenium-chrome:selenium-chrome
+
+    selenium-chrome:
+        image: selenium/standalone-chrome-debug
+        ports:
+            - "5900:5900"
         volumes:
-            - tmp:/tmp/ivory-google-map
+            - shared-tmp:/tmp/ivory-google-map
 
 volumes:
-    tmp: {}
+    shared-tmp:

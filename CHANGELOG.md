@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### 3.0.4 (2020-06-13)
+
+ * updated documentation
+ * updated fixed development environment
+ * updated integrated travis and scrutinizer
+
+### 3.0.3 (2020-06-10)
+
+ * Quickfix to use ivory/google-map
+
 ### 3.0.2 (????-??-??)
 
  * 8945515 - [Tests] Drop deprecations

@@ -1,22 +1,24 @@
 {
     "name": "ivory/google-map-bundle",
     "type": "symfony-bundle",
-    "description": "Provides a google map integration for your Symfony",
+    "description": "Provides a google map integration for Symfony",
     "keywords": [ "google", "map" ],
     "license": "MIT",
     "authors": [
         {
             "name": "Samuel Breu",
-            "email": "samuel.breu@bresam.ch"
+            "email": "samuel.breu@bresam.ch",
+            "role": "Developer/Maintainer"
         },
         {
             "name": "Eric GELOEN",
-            "email": "geloen.eric@gmail.com"
+            "email": "geloen.eric@gmail.com",
+            "role": "Creator/Inactive"
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
-        "symfony/framework-bundle": "^2.7|^3.0",
+        "php": "^7.0",
+        "symfony/framework-bundle": "^3.0 || ^4.0",
         "ivory/google-map": "^3.0.0"
     },
     "require-dev": {
@@ -24,8 +26,8 @@
         "friendsofphp/php-cs-fixer": "^2.0",
         "php-http/cache-plugin": "^1.4",
         "php-http/guzzle6-adapter": "^1.0",
-        "phpunit/phpunit": "^5.4",
-        "phpunit/phpunit-selenium": "dev-master",
+        "phpunit/phpunit": "^6.5.14",
+        "phpunit/phpunit-selenium": "^4.1.0",
         "symfony/cache": "^3.2",
         "symfony/form": "^2.7|^3.0",
         "symfony/phpunit-bridge": "^2.7|^3.0",

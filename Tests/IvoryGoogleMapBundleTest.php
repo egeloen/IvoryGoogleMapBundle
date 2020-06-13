@@ -13,11 +13,12 @@ namespace Ivory\GoogleMapBundle\Tests;
 
 use Ivory\GoogleMapBundle\IvoryGoogleMapBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class IvoryGoogleMapBundleTest extends \PHPUnit_Framework_TestCase
+class IvoryGoogleMapBundleTest extends TestCase
 {
     /**
      * @var IvoryGoogleMapBundle

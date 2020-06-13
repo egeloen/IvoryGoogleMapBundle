@@ -1,23 +1,13 @@
 # README
 
-[![Travis Build Status](https://travis-ci.org/egeloen/IvoryGoogleMapBundle.svg?branch=master)](http://travis-ci.org/egeloen/IvoryGoogleMapBundle)
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/im2gvivits9qghtk/branch/master?svg=true)](https://ci.appveyor.com/project/egeloen/ivorygooglemapbundle/branch/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/egeloen/IvoryGoogleMapBundle/?branch=master)
-[![Dependency Status](http://www.versioneye.com/php/egeloen:google-map-bundle/badge.svg)](http://www.versioneye.com/php/egeloen:google-map-bundle)
+[![Travis Build Status](https://api.travis-ci.com/bresam/ivory-google-map-bundle.svg?branch=master)](https://travis-ci.com/github/bresam/ivory-google-map-bundle)
+[![Code Coverage](https://scrutinizer-ci.com/g/bresam/ivory-google-map-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bresam/ivory-google-map-bundle/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bresam/ivory-google-map-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bresam/ivory-google-map-bundle/?branch=master)
 
-[![Latest Stable Version](https://poser.pugx.org/egeloen/google-map-bundle/v/stable.svg)](https://packagist.org/packages/egeloen/google-map-bundle)
-[![Latest Unstable Version](https://poser.pugx.org/egeloen/google-map-bundle/v/unstable.svg)](https://packagist.org/packages/egeloen/google-map-bundle)
-[![Total Downloads](https://poser.pugx.org/egeloen/google-map-bundle/downloads.svg)](https://packagist.org/packages/egeloen/google-map-bundle)
-[![License](https://poser.pugx.org/egeloen/google-map-bundle/license.svg)](https://packagist.org/packages/egeloen/google-map-bundle)
-
-The bundle provides an integration of the [Ivory Google Map](https://github.com/egeloen/ivory-google-map) library for
-your Symfony2 project.
+The bundle provides an integration of the [Ivory Google Map](https://github.com/bresam/ivory-google-map) library for
+your Symfony project.
 
 ## Documentation
-
-**You're currently browsing the 3.x documentation, if you're using the 2.x, read 
-[this documentation](https://github.com/egeloen/IvoryGoogleMapBundle/tree/2.2.1) instead.**
 
  - [Installation](/Resources/doc/installation.md)
  - [Usage](/Resources/doc/usage.md)
@@ -34,6 +24,7 @@ your Symfony2 project.
             - [Photo](/Resources/doc/service/place/photo.md)
             - [Search](/Resources/doc/service/place/search.md)
         - [Time Zone](/Resources/doc/service/time_zone.md)
+ - [Development Environment](/Resources/doc/development_environment.md)
 
 ## Testing
 

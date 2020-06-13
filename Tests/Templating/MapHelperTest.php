@@ -14,11 +14,12 @@ namespace Ivory\GoogleMapBundle\Tests\Templating;
 use Ivory\GoogleMap\Helper\MapHelper as BaseMapHelper;
 use Ivory\GoogleMap\Map;
 use Ivory\GoogleMapBundle\Templating\MapHelper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class MapHelperTest extends \PHPUnit_Framework_TestCase
+class MapHelperTest extends TestCase
 {
     /**
      * @var MapHelper

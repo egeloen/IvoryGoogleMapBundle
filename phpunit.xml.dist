@@ -10,7 +10,7 @@
         <server name="API_KEY" value="AIzaSyAbfXoOk_L4Ryk6aFvdqeAJvbg1ShYiqAE" />
         <server name="API_SECRET" value="78BBhyDNOeFG_PWqHi6XUJ3woJE=" />
         <server name="BROWSER_NAME" value="chrome" />
-        <server name="SELENIUM_HOST" value="selenium" />
+        <server name="SELENIUM_HOST" value="selenium-chrome" />
         <server name="CACHE_PATH" value="Tests/.cache" />
         <server name="CACHE_RESET" value="false" />
     </php>

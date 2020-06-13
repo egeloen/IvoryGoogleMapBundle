@@ -7,8 +7,10 @@ checks:
     php:
         code_rating: true
         duplication: true
+        excluded_dependencies:
+            - friendsofphp/php-cs-fixer
 
 tools:
     external_code_coverage:
-        timeout: 3600
-        runs: 9
+        timeout: 1800
+        runs: 1

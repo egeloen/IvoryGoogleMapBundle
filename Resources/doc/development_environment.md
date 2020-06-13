@@ -1,4 +1,4 @@
-# Docker
+# Development Environment
 
 The most easy way to set up the project is to install [Docker](https://www.docker.com) and
 [Docker Composer](https://docs.docker.com/compose/) and build the project.
@@ -35,19 +35,19 @@ $ docker-compose run --rm php composer install
 To run the test suite, you can use:
 
 ``` bash
-$ docker-compose run --rm php vendor/bin/phpunit
-```
-
-If you want to run the test suite against [HHVM](http://hhvm.com/), you can use:
-
-``` bash
-$ docker-compose run --rm hhvm vendor/bin/phpunit
-```
-
-Some tests requires a [Selenium Server](http://www.seleniumhq.org/), you can start it with:
-
-``` bash
 $ docker-compose up -d
+```
+
+Composer install:
+
+``` bash
+$ docker-compose run --rm php composer install
+```
+
+To run phpunit:
+
+``` bash
+$ docker-compose run --rm php vendor/bin/phpunit
 ```
 
 ## XDebug
@@ -57,3 +57,44 @@ If you want to use XDebug, make sure you have fully configured your `.env` file 
 ``` bash
 $ docker-compose run --rm -e XDEBUG=1 php vendor/bin/phpunit
 ```
+## Tests with PHP Storm integration
+
+Configure PHP Storm for Docker (just create your config):
+
+![alt text](./docker/docker-config.png)
+
+
+Create a Docker Compose Remote CLI Interpreter:
+
+Preferences > Language & Frameworks > PHP 
+
+![alt text](./docker/remote-php-interpreter.png)
+
+
+Your Config should look like this:
+
+![alt text](./docker/cli-interpreter.png)
+
+
+You are ready to start testing:
+
+![alt text](./docker/start-test.png)
+
+
+At first time it takes some time to build containers
+
+![alt text](./docker/first-docker-compose.png)
+
+
+Test results
+
+![alt text](./docker/test-result.png)
+
+
+## Observe Selenium Tests
+
+Get a VNC Client like [VNC Viewer](https://www.realvnc.com/de/connect/download/viewer/)
+
+Start yout Test Environment and connect the viewer to `localhost:5900`
+
+If you get asked for a password it's `secret`

@@ -14,11 +14,12 @@ namespace Ivory\GoogleMapBundle\Tests\Templating;
 use Ivory\GoogleMap\Helper\PlaceAutocompleteHelper as BasePlaceAutocompleteHelper;
 use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMapBundle\Templating\PlaceAutocompleteHelper;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class PlaceAutocompleteHelperTest extends \PHPUnit_Framework_TestCase
+class PlaceAutocompleteHelperTest extends TestCase
 {
     /**
      * @var PlaceAutocompleteHelper

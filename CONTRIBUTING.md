@@ -34,7 +34,7 @@ $ git clone git@github.com:your-name/IvoryGoogleMapBundle.git
 $ git checkout -b bug-fix-description
 ```
 
-Then, we recommend to use [Docker](https://www.docker.com) and follow this [instructions](/Resources/doc/docker.md) in 
+Then, we recommend to use [Docker](https://www.docker.com) and follow this [instructions](/Resources/doc/development_environment.md) in 
 order to set up the project.
 
 When you're on the new branch with the dependencies, code as much as you want and when the fix is ready, don't commit
