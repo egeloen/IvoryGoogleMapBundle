@@ -1,5 +1,5 @@
 {
-    "name": "egeloen/google-map-bundle",
+    "name": "muzhkevych/google-map-bundle",
     "type": "symfony-bundle",
     "description": "Provides a google map integration for your Symfony2 Project.",
     "keywords": [ "google", "map" ],
@@ -13,7 +13,7 @@
     "require": {
         "php": "^5.6|^7.0",
         "symfony/framework-bundle": "^2.7|^3.0",
-        "egeloen/google-map": "^2.0.2"
+        "muzhkevych/google-map": "^2.0.2"
     },
     "require-dev": {
         "egeloen/serializer-bundle": "^1.0",
