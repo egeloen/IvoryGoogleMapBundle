@@ -10,6 +10,12 @@
             "email": "geloen.eric@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/muzhkevych/ivory-google-map.git"
+        }
+    ],
     "require": {
         "php": "^5.6|^7.0",
         "symfony/framework-bundle": "^2.7|^3.0",
